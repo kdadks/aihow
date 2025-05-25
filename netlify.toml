@@ -8,16 +8,10 @@
   port = 3000
   publish = "dist"
 
-# Edge Functions - trying primary implementation
+# Edge Functions for SPA routing
 [[edge_functions]]
   path = "/*"
   function = "netlify"
-
-# Edge Functions - fallback implementation
-[[edge_functions]]
-  path = "/*"
-  function = "spa-fallback"
-  included_files = ["dist/index.html"]
 
 # Primary redirect for SPA - this will be used if the edge function fails
 [[redirects]]

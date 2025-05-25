@@ -1,12 +1,11 @@
 // This file is used by Netlify to handle server-side redirects for SPAs
 // See: https://docs.netlify.com/routing/redirects/redirect-options/
-// 
-// IMPORTANT: If this edge function causes errors, the spa-fallback.js edge function
-// will be used as a fallback, and if that also fails, the [[redirects]] rule in netlify.toml
-// will handle the SPA routes.
+//
+// IMPORTANT: If this edge function causes errors, the [[redirects]] rule in netlify.toml
+// will handle the SPA routes as a fallback.
 
-export default async function handler(request, context) {
-  // For non-asset paths, return the index.html
+export default async function handler(request) {
+  // Parse the URL to get the path
   const url = new URL(request.url);
   const path = url.pathname;
   
@@ -15,11 +14,18 @@ export default async function handler(request, context) {
       path.includes('.') ||
       path === '/' || 
       path === '/index.html') {
-    return; // Let the default handling work
+    // Let the default handling work
+    return;
   }
   
-  // Return the index.html for all other paths (SPA routes)
-  return await context.next({
-    path: '/index.html',
+  // For SPA routes, redirect to index.html
+  // Using Response directly rather than context methods which may vary
+  return new Response(null, {
+    status: 200,
+    headers: {
+      'Content-Type': 'text/html',
+      'X-Redirected-By': 'Netlify Edge Function',
+      'Location': '/index.html'
+    }
   });
 }
