@@ -74,7 +74,7 @@ export const ComparisonGrid: React.FC<ComparisonGridProps> = ({ tools, onRemoveT
     allFeatures: tools.length === 0 ? [] : Array.from(new Set(tools.flatMap(tool => {
       // Use both feature details and basic features
       const detailFeatures = tool.featureDetails ? Object.keys(tool.featureDetails) : [];
-      return [...detailFeatures, ...tool.features];
+      return [...detailFeatures, ...(tool.features || [])];
     }))),
     allCertifications: Array.from(new Set(tools.flatMap(tool => tool.certifications || []))),
     allSupportOptions: Array.from(new Set(tools.flatMap(tool =>
@@ -85,7 +85,9 @@ export const ComparisonGrid: React.FC<ComparisonGridProps> = ({ tools, onRemoveT
         : []
     ))),
     allPricingTiers: Array.from(new Set(tools.flatMap(tool =>
-      tool.pricing.tiers.map(tier => tier.name)
+      tool.pricing && tool.pricing.tiers ? 
+      tool.pricing.tiers.map(tier => tier.name) : 
+      []
     )))
   }), [tools]);
 
@@ -96,7 +98,7 @@ export const ComparisonGrid: React.FC<ComparisonGridProps> = ({ tools, onRemoveT
     // Apply filters
     if (filters.features.length > 0) {
       result = result.filter(tool =>
-        filters.features.every((feature: string) => tool.features.includes(feature))
+        tool.features && filters.features.every((feature: string) => tool.features.includes(feature))
       );
     }
     if (filters.certifications.length > 0) {
@@ -111,6 +113,7 @@ export const ComparisonGrid: React.FC<ComparisonGridProps> = ({ tools, onRemoveT
     }
     if (filters.pricing.length > 0) {
       result = result.filter(tool =>
+        tool.pricing && tool.pricing.tiers &&
         filters.pricing.some((price: string) =>
           tool.pricing.tiers.some(tier => tier.name === price)
         )
@@ -361,13 +364,15 @@ export const ComparisonGrid: React.FC<ComparisonGridProps> = ({ tools, onRemoveT
               {tools.map(tool => (
                 <td key={tool.id} className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                   <div className="space-y-1">
-                    {tool.pricing.tiers.map(tier => (
-                      <Tooltip key={tier.name} content={tier.features.join(', ')}>
+                    {tool.pricing && tool.pricing.tiers ? tool.pricing.tiers.map(tier => (
+                      <Tooltip key={tier.name} content={(tier.features || []).join(', ')}>
                         <Badge variant={tier.isPopular ? 'secondary' : 'outline'} className="mr-1">
-                          {tier.name} - {tier.price}/{tier.billingPeriod}
+                          {tier.name} - {tier.price || 'Free'}/{tier.billingPeriod || 'month'}
                         </Badge>
                       </Tooltip>
-                    ))}
+                    )) : (
+                      <span className="text-gray-400">No pricing information available</span>
+                    )}
                   </div>
                 </td>
               ))}
@@ -429,7 +434,7 @@ export const ComparisonGrid: React.FC<ComparisonGridProps> = ({ tools, onRemoveT
                 </td>
                 {tools.map(tool => (
                   <td key={tool.id} className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {tool.features.includes(feature) ? (
+                    {tool.features && tool.features.includes(feature) ? (
                       tool.featureDetails?.[feature] ? (
                         <Tooltip content={
                           `Available in ${tool.featureDetails[feature].availability || 'all'} plan`
