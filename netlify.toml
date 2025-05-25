@@ -8,10 +8,10 @@
   port = 3000
   publish = "dist"
 
-# Edge Functions for SPA routing
-[[edge_functions]]
-  path = "/*"
-  function = "netlify"
+# Disable edge functions for now and rely on standard redirects
+# [[edge_functions]]
+#   path = "/*"
+#   function = "netlify"
 
 # Primary redirect for SPA - this will be used if the edge function fails
 [[redirects]]
