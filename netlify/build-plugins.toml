@@ -1,0 +1,20 @@
+[build]
+  ## Optional build plugins
+  ## Learn more: https://docs.netlify.com/configure-builds/build-plugins/
+  plugins = [
+    { package = "@netlify/plugin-lighthouse" },
+    { package = "@netlify/plugin-sitemap" }
+  ]
+
+[[plugins]]
+package = "@netlify/plugin-lighthouse"
+
+  [plugins.inputs]
+  output_path = "reports/lighthouse.html"
+
+[[plugins]]
+package = "@netlify/plugin-sitemap"
+
+  [plugins.inputs]
+  buildDir = "dist"
+  baseUrl = "https://aihow.netlify.app"
