@@ -10,7 +10,10 @@
     "preview": "vite preview",
     "test": "vitest",
     "netlify-deploy": "netlify deploy",
-    "netlify-deploy-prod": "netlify deploy --prod"
+    "netlify-deploy-prod": "netlify deploy --prod",
+    "build-preview": "./scripts/build-preview.sh",
+    "build:netlify": "vite build",
+    "postbuild": "cp _redirects dist/ 2>/dev/null || :"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.39.7",
