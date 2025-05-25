@@ -8,7 +8,9 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "test": "vitest"
+    "test": "vitest",
+    "netlify-deploy": "netlify deploy",
+    "netlify-deploy-prod": "netlify deploy --prod"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.39.7",
@@ -41,6 +43,7 @@
     "eslint-plugin-react-refresh": "^0.4.11",
     "globals": "^15.9.0",
     "jsdom": "^24.0.0",
+    "netlify-cli": "^21.5.0",
     "postcss": "^8.4.35",
     "tailwindcss": "^3.4.1",
     "typescript": "^5.5.3",
