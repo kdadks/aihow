@@ -7,17 +7,24 @@
   command = "npm run dev"
   port = 3000
   publish = "dist"
-  
-# Handle SPA routing - Always return index.html for all routes
+
+# Edge Functions - trying primary implementation
+[[edge_functions]]
+  path = "/*"
+  function = "netlify"
+
+# Edge Functions - fallback implementation
+[[edge_functions]]
+  path = "/*"
+  function = "spa-fallback"
+  included_files = ["dist/index.html"]
+
+# Primary redirect for SPA - this will be used if the edge function fails
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
-
-# Edge function for handling SPA routes
-[[edge_functions]]
-  path = "/*"
-  function = "netlify"
+  force = true
 
 # Set cache headers for assets
 [[headers]]
