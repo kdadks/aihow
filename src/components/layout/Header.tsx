@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Search, Menu, X, Zap } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
+import { Search, Menu, X, Zap, Scale } from 'lucide-react';
 import { Button } from '../ui/Button';
+import { useComparisonStore } from '../../stores/comparisonStore';
 
 export const Header: React.FC = () => {
+  const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  const { selectedTools } = useComparisonStore();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -39,6 +42,15 @@ export const Header: React.FC = () => {
               <Link to="/community" className="text-gray-500 hover:text-gray-900 px-3 py-2 text-sm font-medium">
                 Community
               </Link>
+              {selectedTools.length > 0 && (
+                <Link
+                  to="/compare"
+                  className="text-blue-600 hover:text-blue-800 px-3 py-2 text-sm font-medium flex items-center"
+                >
+                  <Scale className="h-4 w-4 mr-1" />
+                  Compare <span className="ml-1 bg-blue-100 text-blue-800 px-2 py-0.5 rounded-full text-xs">{selectedTools.length}</span>
+                </Link>
+              )}
             </nav>
           </div>
           <div className="flex items-center">
@@ -81,10 +93,12 @@ export const Header: React.FC = () => {
       {isMenuOpen && (
         <div className="md:hidden">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            <Link to="/directory" className="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-50">
+            <Link to="/directory" className="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-50 flex items-center">
+              <Search className="h-4 w-4 mr-2" />
               Directory
             </Link>
-            <Link to="/recommendation" className="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-50">
+            <Link to="/recommendation" className="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-50 flex items-center">
+              <Zap className="h-4 w-4 mr-2" />
               Find Tools
             </Link>
             <Link to="/workflows" className="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-50">
@@ -93,6 +107,12 @@ export const Header: React.FC = () => {
             <Link to="/community" className="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-50">
               Community
             </Link>
+            {selectedTools.length > 0 && (
+              <Link to="/compare" className="flex items-center px-3 py-2 rounded-md text-base font-medium text-blue-600 hover:bg-blue-50">
+                <Scale className="h-4 w-4 mr-2" />
+                Compare Tools ({selectedTools.length})
+              </Link>
+            )}
           </div>
           <div className="px-4 py-3 border-t border-gray-200">
             <form onSubmit={handleSearchSubmit} className="relative mb-3">

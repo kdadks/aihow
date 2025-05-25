@@ -8,6 +8,7 @@ import ToolDetailPage from './pages/ToolDetailPage';
 import WorkflowsPage from './pages/WorkflowsPage';
 import ComparisonPage from './pages/ComparisonPage';
 import BundlePage from './pages/BundlePage';
+import CategoriesPage from './pages/CategoriesPage';
 import ContactPage from './pages/ContactPage';
 import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
 import TermsPage from './pages/TermsPage';
@@ -21,6 +22,7 @@ function App() {
         <Route path="/" element={<MainLayout />}>
           <Route index element={<HomePage />} />
           <Route path="directory" element={<DirectoryPage />} />
+          <Route path="categories" element={<CategoriesPage />} />
           <Route path="recommendation" element={<RecommendationPage />} />
           <Route path="tool/:slug" element={<ToolDetailPage />} />
           <Route path="workflows" element={<WorkflowsPage />} />

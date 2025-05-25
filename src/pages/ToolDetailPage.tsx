@@ -1,15 +1,31 @@
 import React from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import { tools } from '../data/tools';
 import { reviews } from '../data/reviews';
 import { categories } from '../data/categories';
-import { ArrowLeft, Star, ExternalLink, ThumbsUp, ThumbsDown, Save, Share, MessageSquare, Calendar } from 'lucide-react';
+import { ArrowLeft, Star, ExternalLink, ThumbsUp, ThumbsDown, Save, Share, MessageSquare, Calendar, Scale } from 'lucide-react';
+import { useComparisonStore } from '../stores/comparisonStore';
 import { Button } from '../components/ui/Button';
 import { Badge } from '../components/ui/Badge';
 
 const ToolDetailPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
+  const navigate = useNavigate();
   const tool = tools.find(t => t.slug === slug);
+  const { selectedTools, addTool, isToolSelectable } = useComparisonStore();
+  
+  const isToolSelected = tool ? selectedTools.some(t => t.id === tool.id) : false;
+  
+  const handleCompare = () => {
+    if (!tool) return;
+    
+    if (isToolSelected) {
+      navigate('/compare');
+    } else if (isToolSelectable(tool)) {
+      addTool(tool);
+      navigate('/compare');
+    }
+  };
   
   if (!tool) {
     return (
@@ -247,9 +263,24 @@ const ToolDetailPage: React.FC = () => {
                       Visit Website
                     </Button>
                   </a>
-                  <Button variant="outline" fullWidth className="mt-3" leftIcon={<Save className="h-4 w-4" />}>
-                    Save to Collection
-                  </Button>
+                  <div className="grid grid-cols-2 gap-3 mt-3">
+                    <Button
+                      variant="outline"
+                      fullWidth
+                      leftIcon={<Save className="h-4 w-4" />}
+                    >
+                      Save
+                    </Button>
+                    <Button
+                      variant={isToolSelected ? "secondary" : "outline"}
+                      fullWidth
+                      leftIcon={<Scale className="h-4 w-4" />}
+                      onClick={handleCompare}
+                      disabled={!isToolSelected && !isToolSelectable(tool)}
+                    >
+                      {isToolSelected ? 'View Comparison' : 'Compare'}
+                    </Button>
+                  </div>
                   <div className="mt-4 pt-4 border-t border-gray-100">
                     <h4 className="font-medium text-gray-900 mb-2">Share this tool</h4>
                     <div className="flex space-x-3">
