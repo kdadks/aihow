@@ -14,7 +14,21 @@ export const tools: Tool[] = [
     pricing: {
       type: 'subscription',
       startingPrice: '$10/month',
-      hasFreeOption: false
+      hasFreeOption: false,
+      tiers: [
+        {
+          name: 'Basic',
+          price: '$10/month',
+          billingPeriod: 'monthly',
+          features: ['Basic image generation', 'Community support']
+        },
+        {
+          name: 'Pro',
+          price: '$30/month',
+          billingPeriod: 'monthly',
+          features: ['Advanced image generation', 'Priority support', 'Higher resolution']
+        }
+      ]
     },
     features: [
       'High-quality image generation',
@@ -47,7 +61,21 @@ export const tools: Tool[] = [
     pricing: {
       type: 'freemium',
       startingPrice: '$20/month for Plus',
-      hasFreeOption: true
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['Basic chat functionality', 'Limited requests']
+        },
+        {
+          name: 'Plus',
+          price: '$20/month',
+          billingPeriod: 'monthly',
+          features: ['Priority access', 'Advanced features', 'Faster response times']
+        }
+      ]
     },
     features: [
       'Natural language conversation',
@@ -82,7 +110,15 @@ export const tools: Tool[] = [
     pricing: {
       type: 'subscription',
       startingPrice: '$8/month per member',
-      hasFreeOption: false
+      hasFreeOption: false,
+      tiers: [
+        {
+          name: 'Team',
+          price: '$8/month',
+          billingPeriod: 'monthly',
+          features: ['AI writing assistance', 'Workspace integration']
+        }
+      ]
     },
     features: [
       'Content drafting',
@@ -116,7 +152,15 @@ export const tools: Tool[] = [
     pricing: {
       type: 'subscription',
       startingPrice: '$10/month',
-      hasFreeOption: false
+      hasFreeOption: false,
+      tiers: [
+        {
+          name: 'Individual',
+          price: '$10/month',
+          billingPeriod: 'monthly',
+          features: ['AI code completion', 'Multi-language support']
+        }
+      ]
     },
     features: [
       'Real-time code suggestions',
@@ -148,9 +192,23 @@ export const tools: Tool[] = [
     categoryId: 'media-creation',
     subcategoryIds: ['image-generation'],
     pricing: {
-      type: 'credit-based',
+      type: 'freemium',
       startingPrice: 'Credits system, varies by usage',
-      hasFreeOption: true
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['Basic image generation', 'Limited credits']
+        },
+        {
+          name: 'Pro',
+          price: '$15/month',
+          billingPeriod: 'monthly',
+          features: ['More credits', 'Priority generation']
+        }
+      ]
     },
     features: [
       'Photorealistic image generation',
@@ -182,9 +240,23 @@ export const tools: Tool[] = [
     categoryId: 'workflow-automation',
     subcategoryIds: ['business-automation'],
     pricing: {
-      type: 'subscription',
+      type: 'freemium',
       startingPrice: '$19.99/month',
-      hasFreeOption: true
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['Basic automation', 'Limited tasks']
+        },
+        {
+          name: 'Professional',
+          price: '$19.99/month',
+          billingPeriod: 'monthly',
+          features: ['Unlimited tasks', 'Advanced automation', 'Priority support']
+        }
+      ]
     },
     features: [
       'Natural language workflow creation',
@@ -218,7 +290,15 @@ export const tools: Tool[] = [
     pricing: {
       type: 'subscription',
       startingPrice: '$30/month',
-      hasFreeOption: false
+      hasFreeOption: false,
+      tiers: [
+        {
+          name: 'Professional',
+          price: '$30/month',
+          billingPeriod: 'monthly',
+          features: ['AI video generation', 'Multiple avatars', '120+ languages', 'Custom backgrounds']
+        }
+      ]
     },
     features: [
       'AI video generation',
@@ -252,7 +332,21 @@ export const tools: Tool[] = [
     pricing: {
       type: 'freemium',
       startingPrice: '$20/month for Pro',
-      hasFreeOption: true
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['Basic chat functionality', 'Standard response time']
+        },
+        {
+          name: 'Pro',
+          price: '$20/month',
+          billingPeriod: 'monthly',
+          features: ['Priority access', 'Longer context window', 'Advanced features']
+        }
+      ]
     },
     features: [
       'Long context window (100K tokens)',
@@ -284,9 +378,23 @@ export const tools: Tool[] = [
     categoryId: 'prompt-engineering',
     subcategoryIds: ['prompt-libraries'],
     pricing: {
-      type: 'marketplace',
+      type: 'freemium',
       startingPrice: 'Varies by prompt',
-      hasFreeOption: true
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['Browse prompts', 'Basic access']
+        },
+        {
+          name: 'Pro',
+          price: '$10/month',
+          billingPeriod: 'monthly',
+          features: ['Premium prompts', 'Early access', 'Seller features']
+        }
+      ]
     },
     features: [
       'Curated prompt marketplace',
@@ -318,9 +426,23 @@ export const tools: Tool[] = [
     categoryId: 'presentation-tools',
     subcategoryIds: ['slide-generation'],
     pricing: {
-      type: 'subscription',
+      type: 'freemium',
       startingPrice: '$12/month',
-      hasFreeOption: true
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['Basic templates', 'Limited presentations']
+        },
+        {
+          name: 'Pro',
+          price: '$12/month',
+          billingPeriod: 'monthly',
+          features: ['Smart templates', 'Team collaboration', 'Advanced features']
+        }
+      ]
     },
     features: [
       'Smart templates',

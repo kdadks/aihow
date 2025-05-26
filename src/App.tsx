@@ -32,7 +32,6 @@ function App() {
           <Route path="tool/:slug" element={<ToolDetailPage />} />
           <Route path="workflows" element={<WorkflowsPage />} />
           <Route path="compare" element={<ComparisonPage />} />
-          <Route path="bundles" element={<BundlePage />} />
           <Route path="contact" element={<ContactPage />} />
           <Route path="privacy" element={<PrivacyPolicyPage />} />
           <Route path="terms" element={<TermsPage />} />

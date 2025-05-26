@@ -27,8 +27,8 @@ export const Button: React.FC<ButtonProps> = ({
   const baseStyle = 'inline-flex items-center justify-center rounded-md font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none';
   
   const variantStyles: Record<ButtonVariant, string> = {
-    primary: 'bg-blue-600 text-white hover:bg-blue-700 focus-visible:ring-blue-500',
-    secondary: 'bg-purple-600 text-white hover:bg-purple-700 focus-visible:ring-purple-500',
+    primary: 'bg-blue-600 text-hover:bg-blue-700 focus-visible:ring-blue-500',
+    secondary: 'bg-purple-600 text-hover:bg-purple-800 focus-visible:ring-purple-500',
     outline: 'border border-purple-300 bg-transparent text-purple-600 hover:bg-purple-50 hover:border-purple-400 focus-visible:ring-purple-400',
     ghost: 'bg-transparent hover:bg-gray-100 focus-visible:ring-gray-400',
     link: 'bg-transparent underline-offset-4 hover:underline text-blue-600 hover:text-blue-700 p-0 h-auto',

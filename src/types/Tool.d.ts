@@ -11,13 +11,13 @@ export interface Tool {
   categoryId: string;
   subcategoryIds: string[];
   pricing: {
-    type: 'free' | 'freemium' | 'paid' | 'subscription';
+    type: string;
     startingPrice?: string;
     hasFreeOption: boolean;
-    tiers: PricingTier[];
+    tiers?: PricingTier[];
   };
   features: string[];
-  featureDetails: {
+  featureDetails?: {
     [key: string]: {
       description: string;
       availability: 'all' | 'premium' | 'enterprise';
@@ -33,9 +33,9 @@ export interface Tool {
   technicalSpecs?: {
     [key: string]: string;
   };
-  supportOptions: Record<SupportOptionKey, boolean>;
-  certifications: string[];
-  complianceStandards: string[];
+  supportOptions?: Record<SupportOptionKey, boolean>;
+  certifications?: string[];
+  complianceStandards?: string[];
 }
 
 export interface PricingTier {
