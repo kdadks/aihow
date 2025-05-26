@@ -8,22 +8,39 @@ export const categories: Category[] = [
     icon: 'image',
     subcategories: [
       {
-        id: 'image-generation',
-        name: 'Image Generation',
-        description: 'Create images from text prompts',
-        parentCategoryId: 'media-creation'
-      },
-      {
         id: 'video-generation',
         name: 'Video Generation',
-        description: 'Create videos from text or image prompts',
-        parentCategoryId: 'media-creation'
+        description: 'Create and edit videos using AI with text prompts, images, or rough video input',
+        parentCategoryId: 'media-creation',
+        tools: ['Runway Gen-2', 'Pika', 'Sora', 'Synthesia', 'Colossyan', 'Lumen5']
+      },
+      {
+        id: 'image-generation',
+        name: 'Image Generation',
+        description: 'Generate or edit images from text prompts, other images, or sketches',
+        parentCategoryId: 'media-creation',
+        tools: ['DALL·E 3', 'Midjourney', 'Stable Diffusion', 'Adobe Firefly', 'Leonardo.ai', 'ClipDrop']
       },
       {
         id: 'audio-generation',
-        name: 'Audio Generation',
-        description: 'Generate music, voice, and sound effects',
-        parentCategoryId: 'media-creation'
+        name: 'Audio & Music Generation',
+        description: 'Create voice, music, and sound effects using AI',
+        parentCategoryId: 'media-creation',
+        tools: ['ElevenLabs', 'Voicemod', 'Suno.ai', 'Aiva', 'Soundraw', 'Mubert']
+      },
+      {
+        id: 'interactive-media',
+        name: 'Interactive & Game Media',
+        description: 'Create games, interactive characters, and 3D assets using AI',
+        parentCategoryId: 'media-creation',
+        tools: ['Inworld AI', 'Scenario.gg', 'Luma AI', 'Unity Muse', 'Character.ai', 'NovelAI']
+      },
+      {
+        id: 'media-editing',
+        name: 'AI-Powered Media Editing',
+        description: 'Enhanced editing tools for video, audio, and images',
+        parentCategoryId: 'media-creation',
+        tools: ['Descript', 'Runway', 'Adobe Photoshop & Premiere', 'Kapwing', 'Otter.ai', 'Pictory']
       }
     ]
   },
@@ -34,16 +51,39 @@ export const categories: Category[] = [
     icon: 'file-text',
     subcategories: [
       {
-        id: 'text-generation',
-        name: 'Text Generation',
-        description: 'Generate written content from prompts',
-        parentCategoryId: 'document-creation'
+        id: 'general-documents',
+        name: 'General-Purpose Documents',
+        description: 'Create various types of documents including essays, reports, and creative writing',
+        parentCategoryId: 'document-creation',
+        tools: ['chatgpt-document', 'notion-ai', 'grammarly-go', 'canva-docs', 'otter-ai']
       },
       {
-        id: 'document-formatting',
-        name: 'Document Formatting',
-        description: 'Format and style documents',
-        parentCategoryId: 'document-creation'
+        id: 'business-documents',
+        name: 'Professional & Business Documents',
+        description: 'Create business plans, proposals, reports, and other professional documents',
+        parentCategoryId: 'document-creation',
+        tools: ['microsoft-copilot', 'tome', 'copy-ai', 'jasper-ai', 'clickup-ai', 'canva-docs']
+      },
+      {
+        id: 'academic-research',
+        name: 'Academic & Research Documents',
+        description: 'Create academic papers, literature reviews, and research documents',
+        parentCategoryId: 'document-creation',
+        tools: ['scite', 'consensus']
+      },
+      {
+        id: 'legal-documents',
+        name: 'Legal & Contract Documents',
+        description: 'Create and analyze legal documents, contracts, and compliance materials',
+        parentCategoryId: 'document-creation',
+        tools: ['lawgeex', 'donotpay']
+      },
+      {
+        id: 'resume-documents',
+        name: 'Resume & Cover Letters',
+        description: 'Create professional resumes, CVs, and cover letters',
+        parentCategoryId: 'document-creation',
+        tools: ['resume-io', 'teal']
       }
     ]
   },

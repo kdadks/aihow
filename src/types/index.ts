@@ -16,6 +16,7 @@ export type Subcategory = {
   name: string;
   description: string;
   parentCategoryId: string;
+  tools?: string[];
 };
 
 export type Review = {

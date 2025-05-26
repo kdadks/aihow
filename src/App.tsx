@@ -7,7 +7,6 @@ import RecommendationPage from './pages/RecommendationPage';
 import ToolDetailPage from './pages/ToolDetailPage';
 import WorkflowsPage from './pages/WorkflowsPage';
 import ComparisonPage from './pages/ComparisonPage';
-import BundlePage from './pages/BundlePage';
 import CategoriesPage from './pages/CategoriesPage';
 import ContactPage from './pages/ContactPage';
 import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
