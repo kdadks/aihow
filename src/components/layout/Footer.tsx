@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Zap, Twitter, Facebook, Instagram, Github as GitHub } from 'lucide-react';
+import { Twitter, Facebook, Instagram, Github as GitHub } from 'lucide-react';
+import { Logo } from '../ui/Logo';
 
 export const Footer: React.FC = () => {
   return (
@@ -9,8 +10,8 @@ export const Footer: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="mb-8 md:mb-0">
             <Link to="/" className="flex items-center">
-              <Zap className="h-8 w-8 text-blue-600" />
-              <span className="ml-2 text-xl font-bold text-gray-900">how2AI</span>
+              <Logo className="h-8 w-auto" />
+              <span className="ml-2 text-xl font-bold text-gray-900">How2AI</span>
             </Link>
             <p className="mt-4 text-sm text-gray-600">
               Discover and compare the best AI tools for your workflow. Our platform helps you find the perfect AI solutions for your specific needs.
@@ -63,8 +64,8 @@ export const Footer: React.FC = () => {
             <h3 className="text-sm font-semibold text-gray-900 tracking-wider uppercase">Community</h3>
             <ul className="mt-4 space-y-2">
               <li>
-                <Link to="/reviews" className="text-sm text-gray-600 hover:text-gray-900">
-                  Reviews
+                <Link to="/community" className="text-sm text-gray-600 hover:text-gray-900 font-medium text-blue-600">
+                  Community Hub
                 </Link>
               </li>
               <li>
@@ -78,8 +79,13 @@ export const Footer: React.FC = () => {
                 </Link>
               </li>
               <li>
+                <Link to="/reviews" className="text-sm text-gray-600 hover:text-gray-900">
+                  Reviews
+                </Link>
+              </li>
+              <li>
                 <Link to="/testimonials" className="text-sm text-gray-600 hover:text-gray-900">
-                  Testimonials
+                  Success Stories
                 </Link>
               </li>
             </ul>
@@ -112,7 +118,7 @@ export const Footer: React.FC = () => {
         </div>
         <div className="mt-12 border-t border-gray-200 pt-8">
           <p className="text-sm text-gray-500 text-center">
-            &copy; {new Date().getFullYear()} how2AI. All rights reserved.
+            &copy; 2025 kdadks service private ltd. All rights reserved.
           </p>
         </div>
       </div>

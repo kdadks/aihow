@@ -1,0 +1,29 @@
+import React from 'react';
+
+export const Logo: React.FC<{ className?: string }> = ({ className }) => {
+  return (
+    <div className={`inline-flex items-center ${className}`}>
+      <svg
+        viewBox="0 0 40 40"
+        className="h-full w-auto"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <circle cx="20" cy="20" r="18" fill="url(#gradient)" />
+        <path
+          d="M12 30V10M12 20H28M28 30V10"
+          stroke="white"
+          strokeWidth="3"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <defs>
+          <linearGradient id="gradient" x1="2" y1="2" x2="38" y2="38">
+            <stop offset="0%" stopColor="#3B82F6" />
+            <stop offset="100%" stopColor="#1D4ED8" />
+          </linearGradient>
+        </defs>
+      </svg>
+    </div>
+  );
+};
