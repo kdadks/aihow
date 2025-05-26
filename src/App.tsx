@@ -14,6 +14,11 @@ import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
 import TermsPage from './pages/TermsPage';
 import NotFoundPage from './pages/NotFoundPage';
 import AboutPage from './pages/AboutPage';
+import CommunityPage from './pages/CommunityPage';
+import ReviewsPage from './pages/ReviewsPage';
+import BlogPage from './pages/BlogPage';
+import ForumPage from './pages/ForumPage';
+import TestimonialsPage from './pages/TestimonialsPage';
 
 function App() {
   return (
@@ -32,6 +37,11 @@ function App() {
           <Route path="privacy" element={<PrivacyPolicyPage />} />
           <Route path="terms" element={<TermsPage />} />
           <Route path="about" element={<AboutPage />} />
+          <Route path="community" element={<CommunityPage />} />
+          <Route path="reviews" element={<ReviewsPage />} />
+          <Route path="blog" element={<BlogPage />} />
+          <Route path="forum" element={<ForumPage />} />
+          <Route path="testimonials" element={<TestimonialsPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>

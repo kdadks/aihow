@@ -1,0 +1,103 @@
+import React, { useState } from 'react';
+import { BlogCard } from '../components/blog/BlogCard';
+import { Search, Mail } from 'lucide-react';
+import { blogPosts } from '../data/community';
+
+const CATEGORIES = [
+  "All",
+  "Tools Roundup",
+  "Industry News",
+  "Tutorials",
+  "Comparison",
+  "Case Studies",
+  "Updates"
+];
+
+const BlogPage: React.FC = () => {
+  const [selectedCategory, setSelectedCategory] = useState("All");
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const filteredPosts = blogPosts.filter(post => 
+    (selectedCategory === "All" || post.category === selectedCategory) &&
+    (post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+     post.excerpt.toLowerCase().includes(searchQuery.toLowerCase()))
+  );
+
+  return (
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="text-center mb-12">
+        <h1 className="text-4xl font-bold text-gray-900 mb-4">
+          The AI Tools Blog
+        </h1>
+        <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          Stay updated with the latest AI tools, industry news, and expert guides.
+        </p>
+      </div>
+
+      {/* Search and Categories */}
+      <div className="mb-8 space-y-4">
+        <div className="relative max-w-xl mx-auto">
+          <input
+            type="search"
+            placeholder="Search articles..."
+            className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+          <Search className="absolute left-3 top-2.5 h-5 w-5 text-gray-400" />
+        </div>
+
+        <div className="flex flex-wrap gap-2 justify-center">
+          {CATEGORIES.map((category) => (
+            <button
+              key={category}
+              onClick={() => setSelectedCategory(category)}
+              className={`px-4 py-2 rounded-full text-sm font-medium ${
+                selectedCategory === category
+                  ? 'bg-blue-600 text-white'
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+              }`}
+            >
+              {category}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Blog Posts Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+        {filteredPosts.map((post, index) => (
+          <BlogCard key={index} {...post} />
+        ))}
+      </div>
+
+      {/* Newsletter Signup */}
+      <div className="bg-blue-50 rounded-2xl p-8 text-center">
+        <div className="max-w-2xl mx-auto">
+          <Mail className="w-12 h-12 text-blue-600 mx-auto mb-4" />
+          <h2 className="text-2xl font-bold text-gray-900 mb-4">
+            Subscribe to Our Newsletter
+          </h2>
+          <p className="text-gray-600 mb-6">
+            Get the latest AI tools news and updates delivered straight to your inbox.
+          </p>
+          <form className="flex max-w-md mx-auto">
+            <input
+              type="email"
+              placeholder="Enter your email"
+              className="flex-1 rounded-l-lg border-gray-300 focus:ring-blue-500 focus:border-blue-500"
+            />
+            <button
+              type="submit"
+              className="px-6 py-2 bg-blue-600 text-white rounded-r-lg hover:bg-blue-700"
+            >
+              Subscribe
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default BlogPage;

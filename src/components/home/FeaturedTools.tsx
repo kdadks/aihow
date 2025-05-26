@@ -1,11 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Star } from 'lucide-react';
+import { ArrowRight, Star, Scale } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from '../ui/Card';
 import { Badge } from '../ui/Badge';
 import { Button } from '../ui/Button';
 import { Tool } from '../../types';
 import { tools } from '../../data/tools';
+import { useComparisonStore } from '../../stores/comparisonStore';
 
 export const FeaturedTools: React.FC = () => {
   const featuredTools = tools.filter(tool => tool.featured);
@@ -43,6 +44,8 @@ interface FeaturedToolCardProps {
 }
 
 const FeaturedToolCard: React.FC<FeaturedToolCardProps> = ({ tool }) => {
+  const { selectedTools, addTool, removeTool, isToolSelectable } = useComparisonStore();
+  const isSelected = selectedTools.some(t => t.id === tool.id);
   return (
     <Card className="h-full flex flex-col">
       <CardHeader>
@@ -83,13 +86,47 @@ const FeaturedToolCard: React.FC<FeaturedToolCardProps> = ({ tool }) => {
         </div>
       </CardContent>
       <CardFooter className="border-t border-gray-100 pt-4">
-        <div className="w-full flex justify-between items-center">
-          <span className="text-sm font-medium text-gray-700">
-            {tool.pricing.startingPrice ? `From ${tool.pricing.startingPrice}` : 'Free'}
-          </span>
-          <Link to={`/tool/${tool.slug}`}>
-            <Button size="sm" variant="outline">View Details</Button>
-          </Link>
+        <div className="w-full flex flex-col gap-4">
+          <div className="flex items-center justify-between border-b border-gray-100 pb-3">
+            <div>
+              <span className="text-sm text-gray-500">Starting from</span>
+              <p className="font-medium text-gray-900">
+                {tool.pricing.startingPrice ? tool.pricing.startingPrice : 'Free'}
+              </p>
+            </div>
+            <Button
+              size="sm"
+              variant={isSelected ? "primary" : "secondary"}
+              onClick={() => isSelected ? removeTool(tool.id) : addTool(tool)}
+              disabled={!isSelected && !isToolSelectable(tool)}
+              leftIcon={<Scale className="h-4 w-4" />}
+              className="min-w-[100px] justify-center shadow-sm"
+            >
+              {isSelected ? 'Selected' : 'Compare'}
+            </Button>
+          </div>
+          <div className="flex items-center justify-between gap-3">
+            <Link to={`/tool/${tool.slug}`} className="flex-1">
+              <Button size="sm" variant="primary" className="w-full">
+                View Details
+              </Button>
+            </Link>
+            <a
+              href={tool.website}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex-1"
+            >
+              <Button
+                size="sm"
+                variant="secondary"
+                rightIcon={<ArrowRight className="h-4 w-4" />}
+                className="w-full"
+              >
+                Visit Site
+              </Button>
+            </a>
+          </div>
         </div>
       </CardFooter>
     </Card>
