@@ -17,7 +17,7 @@ export const HeroSection: React.FC = () => {
           </p>
           <div className="mt-10 flex flex-wrap justify-center gap-4">
             <Link to="/directory">
-              <Button size="lg" rightIcon={<Search className="h-5 w-5" />}>
+              <Button size="lg" variant="outline" className="border-white text:bg-blue-500" rightIcon={<Search className="h-5 w-5" />}>
                 Explore Tools
               </Button>
             </Link>

@@ -24,7 +24,7 @@ export const CategorySection: React.FC = () => {
           {categories.map((category) => (
             <Link 
               key={category.id} 
-              to={`/category/${category.id}`}
+              to={`/directory?category=${category.id}`}
               className="flex flex-col items-center p-6 bg-white rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow duration-200"
             >
               <div className="h-12 w-12 flex items-center justify-center rounded-full bg-blue-100 text-blue-600 mb-4">

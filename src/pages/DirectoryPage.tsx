@@ -12,7 +12,11 @@ import { toast } from 'react-hot-toast';
 const DirectoryPage: React.FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const [filters, setFilters] = useState<SearchFiltersType>({});
+  const [filters, setFilters] = useState<SearchFiltersType>(() => {
+    const params = new URLSearchParams(location.search);
+    const categoryParam = params.get('category');
+    return categoryParam ? { category: categoryParam } : {};
+  });
   const [filteredTools, setFilteredTools] = useState<Tool[]>(tools);
   const { selectedTools, addTool, isToolSelectable } = useComparisonStore();
 
@@ -25,6 +29,20 @@ const DirectoryPage: React.FC = () => {
       });
     }
   }, [location.state]);
+
+  // Update filters when URL changes
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const categoryParam = params.get('category');
+    if (categoryParam) {
+      setFilters(prev => ({ ...prev, category: categoryParam }));
+    } else if (filters.category) {
+      setFilters(prev => {
+        const { category, ...rest } = prev;
+        return rest;
+      });
+    }
+  }, [location.search]);
 
   useEffect(() => {
     let result = [...tools];
