@@ -110,20 +110,43 @@ export const categories: Category[] = [
   {
     id: 'general-ai',
     name: 'General AI',
-    description: 'Multipurpose AI tools for various tasks',
+    description: 'Versatile AI tools and models for a wide range of tasks including conversation, code generation, research, and multimodal processing',
     icon: 'brain',
     subcategories: [
       {
         id: 'chatbots',
         name: 'Chatbots',
-        description: 'Conversational AI assistants',
-        parentCategoryId: 'general-ai'
+        description: 'Conversational AI assistants for general-purpose tasks and everyday use',
+        parentCategoryId: 'general-ai',
+        tools: ['chatgpt', 'claude', 'gpt-4o', 'gemini', 'deepseek', 'perplexity-ai', 'you-ai', 'llama-3', 'anthropic-claude-for-teams', 'hugging-chat']
       },
       {
         id: 'multimodal-ai',
         name: 'Multimodal AI',
-        description: 'AI that can understand multiple types of input',
-        parentCategoryId: 'general-ai'
+        description: 'Advanced AI models capable of understanding and processing multiple input types including text, images, audio, and video',
+        parentCategoryId: 'general-ai',
+        tools: ['gpt-4o', 'claude-3-opus', 'gemini', 'llama-3', 'deepseek', 'groq']
+      },
+      {
+        id: 'coding-assistants',
+        name: 'Coding Assistants',
+        description: 'AI tools specifically designed to help developers write, understand, debug, and optimize code across various programming languages',
+        parentCategoryId: 'general-ai',
+        tools: ['github-copilot', 'codeium', 'cursor-ai', 'deepseek', 'tabnine', 'aws-codewhisperer']
+      },
+      {
+        id: 'search-augmentation',
+        name: 'Search & Research',
+        description: 'AI-enhanced search engines and research tools that provide contextual answers, citations, and intelligent information retrieval',
+        parentCategoryId: 'general-ai',
+        tools: ['perplexity-ai', 'you-ai', 'bing-copilot', 'kagi', 'elicit', 'google-search']
+      },
+      {
+        id: 'specialized-assistants',
+        name: 'Specialized Assistants',
+        description: 'Purpose-built AI assistants optimized for specific domains, industries, or enterprise use cases with enhanced security and collaboration features',
+        parentCategoryId: 'general-ai',
+        tools: ['anthropic-claude-for-teams', 'microsoft-copilot', 'notion-ai', 'jasper-ai', 'google-duet-ai', 'claude-3-opus']
       }
     ]
   },

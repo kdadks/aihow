@@ -2,6 +2,535 @@ import { Tool } from '../types';
 
 export const tools: Tool[] = [
   {
+    id: 'llama-3',
+    name: 'Llama 3',
+    slug: 'llama-3',
+    description: 'Llama 3 is Meta\'s open-source large language model that offers strong performance across various tasks. Available in different sizes with the ability to be run locally or via API, it provides developers with flexibility for building AI applications while maintaining strong reasoning capabilities.',
+    shortDescription: 'Meta\'s open-source AI model for local and cloud deployment',
+    logo: 'https://images.pexels.com/photos/7048043/pexels-photo-7048043.jpeg',
+    website: 'https://llama.meta.com',
+    categoryId: 'general-ai',
+    subcategoryIds: ['multimodal-ai', 'chatbots'],
+    pricing: {
+      type: 'free',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Open Source',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['Free to use', 'Local deployment possible', 'Commercial usage allowed', 'Different model sizes']
+        }
+      ]
+    },
+    features: [
+      'Open-source foundation model',
+      'Multiple model sizes (8B to 70B parameters)',
+      'Local deployment capabilities',
+      'Strong reasoning and coding abilities',
+      'Community-driven improvements'
+    ],
+    limitations: [
+      'Requires substantial computing resources for larger models',
+      'Less powerful than some proprietary models',
+      'Knowledge cutoff date limitations',
+      'Requires technical expertise to deploy locally'
+    ],
+    rating: 4.6,
+    reviewCount: 1450,
+    trending: true,
+    featured: false,
+    integrations: ['Hugging Face', 'Local deployment', 'Various frameworks'],
+    lastVerified: new Date('2025-05-15')
+  },
+  {
+    id: 'codeium',
+    name: 'Codeium',
+    slug: 'codeium',
+    description: 'Codeium is a free AI-powered coding assistant that provides intelligent code completions, explanations, and refactoring suggestions across multiple languages and IDEs. It offers a compelling alternative to paid coding assistants with enterprise-grade security features.',
+    shortDescription: 'Free AI coding assistant with enterprise features',
+    logo: 'https://images.pexels.com/photos/546819/pexels-photo-546819.jpeg',
+    website: 'https://codeium.com',
+    categoryId: 'general-ai',
+    subcategoryIds: ['coding-assistants'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: 'Enterprise pricing available',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['AI code completions', 'Multiple language support', 'IDE integrations', 'Unlimited usage']
+        },
+        {
+          name: 'Enterprise',
+          price: 'Custom',
+          billingPeriod: 'monthly',
+          features: ['All free features', 'Enhanced security', 'Team management', 'Priority support', 'Custom models']
+        }
+      ]
+    },
+    features: [
+      'AI-powered code completions',
+      'Support for 70+ programming languages',
+      'IDE integrations (VS Code, JetBrains, Vim, etc.)',
+      'Code explanation and documentation',
+      'Natural language to code translation'
+    ],
+    limitations: [
+      'May occasionally suggest incorrect code',
+      'Less advanced than some paid alternatives for complex tasks',
+      'Limited context window in free version'
+    ],
+    rating: 4.6,
+    reviewCount: 950,
+    trending: true,
+    featured: false,
+    integrations: ['VS Code', 'JetBrains IDEs', 'Vim/Neovim', 'Jupyter', 'Web browsers'],
+    lastVerified: new Date('2025-05-18')
+  },
+  {
+    id: 'you-ai',
+    name: 'You.com AI',
+    slug: 'you-ai',
+    description: 'You.com AI is an advanced search engine with integrated AI capabilities that provides summarized search results, chat functionality, and specialized modes for different tasks. It focuses on delivering real-time information with source citations while maintaining user privacy.',
+    shortDescription: 'AI-first search engine with privacy focus',
+    logo: 'https://images.pexels.com/photos/5473302/pexels-photo-5473302.jpeg',
+    website: 'https://you.com',
+    categoryId: 'general-ai',
+    subcategoryIds: ['search-augmentation', 'chatbots'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$20/month for Pro',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['Basic search & AI chat', 'Source citations', 'Privacy-focused']
+        },
+        {
+          name: 'Pro',
+          price: '$20/month',
+          billingPeriod: 'monthly',
+          features: ['All free features', 'Priority access', 'Advanced AI models', 'Higher usage limits', 'No ads']
+        }
+      ]
+    },
+    features: [
+      'AI-powered search summaries',
+      'Chat mode with internet access',
+      'Privacy-focused approach',
+      'Source citations for verification',
+      'Specialized search modes (code, shopping, etc.)'
+    ],
+    limitations: [
+      'Search depth sometimes limited compared to traditional search engines',
+      'May occasionally provide outdated information',
+      'Pro subscription required for premium features'
+    ],
+    rating: 4.5,
+    reviewCount: 1100,
+    trending: true,
+    featured: false,
+    integrations: ['Web browser', 'Mobile app', 'Chrome extension'],
+    lastVerified: new Date('2025-05-12')
+  },
+  {
+    id: 'deepseek',
+    name: 'DeepSeek AI',
+    slug: 'deepseek',
+    description: 'DeepSeek AI offers powerful language models for various tasks with its family of models including DeepSeek Chat and DeepSeek Coder, providing advanced capabilities for both general conversation and specialized code generation.',
+    shortDescription: 'Advanced AI models for conversation and coding',
+    logo: 'https://images.pexels.com/photos/7709019/pexels-photo-7709019.jpeg',
+    website: 'https://deepseek.ai',
+    categoryId: 'general-ai',
+    subcategoryIds: ['chatbots', 'coding-assistants'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$20/month for Pro',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['Basic chat functionality', 'Limited usage']
+        },
+        {
+          name: 'Pro',
+          price: '$20/month',
+          billingPeriod: 'monthly',
+          features: ['Unlimited usage', 'Advanced features', 'Priority access']
+        }
+      ]
+    },
+    features: [
+      'Advanced language understanding',
+      'Code generation and explanation',
+      'Specialized coding capabilities',
+      'Context-aware responses',
+      'Multi-turn conversations'
+    ],
+    limitations: [
+      'May occasionally generate incorrect information',
+      'Limited to knowledge available during training',
+      'Less detailed understanding of specialized domains'
+    ],
+    rating: 4.7,
+    reviewCount: 850,
+    trending: true,
+    featured: false,
+    integrations: ['API access', 'Web interface'],
+    lastVerified: new Date('2025-04-20')
+  },
+  {
+    id: 'github-copilot',
+    name: 'GitHub Copilot',
+    slug: 'github-copilot',
+    description: 'GitHub Copilot is an AI pair programmer that helps developers write code faster with suggestions based on comments and existing code. Powered by advanced language models, it integrates with popular editors and understands dozens of programming languages.',
+    shortDescription: 'AI pair programmer for developers',
+    logo: 'https://images.pexels.com/photos/4164418/pexels-photo-4164418.jpeg',
+    website: 'https://github.com/features/copilot',
+    categoryId: 'general-ai',
+    subcategoryIds: ['coding-assistants'],
+    pricing: {
+      type: 'subscription',
+      startingPrice: '$10/month',
+      hasFreeOption: false,
+      tiers: [
+        {
+          name: 'Individual',
+          price: '$10/month',
+          billingPeriod: 'monthly',
+          features: ['Code suggestions', 'Editor integration', 'Multiple programming languages']
+        },
+        {
+          name: 'Business',
+          price: '$19/user/month',
+          billingPeriod: 'monthly',
+          features: ['All individual features', 'Admin controls', 'Organization-wide management']
+        }
+      ]
+    },
+    features: [
+      'Real-time code suggestions',
+      'Support for dozens of programming languages',
+      'IDE integration (VS Code, Visual Studio, JetBrains IDEs)',
+      'Auto-completion of repetitive code',
+      'Natural language to code translation'
+    ],
+    limitations: [
+      'May suggest code with bugs or security vulnerabilities',
+      'Performance varies by programming language',
+      'Requires internet connection',
+      'Occasional irrelevant suggestions'
+    ],
+    rating: 4.8,
+    reviewCount: 2250,
+    trending: true,
+    featured: true,
+    integrations: ['VS Code', 'Visual Studio', 'JetBrains IDEs', 'GitHub'],
+    lastVerified: new Date('2025-05-15')
+  },
+  {
+    id: 'perplexity-ai',
+    name: 'Perplexity AI',
+    slug: 'perplexity-ai',
+    description: 'Perplexity AI is an AI-powered search engine that provides accurate answers with real-time information from the internet. It combines large language models with search capabilities to deliver cited, up-to-date responses to complex queries.',
+    shortDescription: 'AI search engine with real-time information',
+    logo: 'https://images.pexels.com/photos/9420595/pexels-photo-9420595.jpeg',
+    website: 'https://www.perplexity.ai',
+    categoryId: 'general-ai',
+    subcategoryIds: ['search-augmentation', 'chatbots'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$20/month for Pro',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['Basic search features', 'Limited daily queries']
+        },
+        {
+          name: 'Pro',
+          price: '$20/month',
+          billingPeriod: 'monthly',
+          features: ['Unlimited searches', 'Advanced models', 'Custom sources', 'Collections']
+        }
+      ]
+    },
+    features: [
+      'Real-time internet search',
+      'Cited sources for verification',
+      'Multi-modal search capabilities',
+      'Conversational interface',
+      'Complex query understanding'
+    ],
+    limitations: [
+      'Search depth limited in free tier',
+      'Citation quality can vary',
+      'May occasionally misunderstand complex queries'
+    ],
+    rating: 4.7,
+    reviewCount: 1850,
+    trending: true,
+    featured: false,
+    integrations: ['Mobile app', 'Web interface', 'API (Pro+)'],
+    lastVerified: new Date('2025-05-10')
+  },
+  {
+    id: 'claude-3-opus',
+    name: 'Claude 3 Opus',
+    slug: 'claude-3-opus',
+    description: 'Claude 3 Opus is Anthropic\'s most powerful AI assistant, capable of sophisticated reasoning, nuanced conversation, and handling complex tasks across text, vision, and code. It excels at detailed analysis and creative content generation with exceptional accuracy.',
+    shortDescription: 'Anthropic\'s most capable multimodal AI assistant',
+    logo: 'https://images.pexels.com/photos/8438922/pexels-photo-8438922.jpeg',
+    website: 'https://www.anthropic.com/claude',
+    categoryId: 'general-ai',
+    subcategoryIds: ['multimodal-ai', 'chatbots'],
+    pricing: {
+      type: 'api-usage',
+      startingPrice: 'Starts at $15/million tokens',
+      hasFreeOption: false,
+      tiers: [
+        {
+          name: 'API Usage',
+          price: 'Starts at $15/million input tokens, $75/million output tokens',
+          billingPeriod: 'monthly',
+          features: ['Full model capabilities', 'Pay-as-you-go pricing', 'Enterprise options available']
+        }
+      ]
+    },
+    features: [
+      'Advanced reasoning capabilities',
+      'Multimodal understanding (text, images)',
+      'Detailed analysis of complex information',
+      'Code generation and interpretation',
+      'Nuanced conversation with long context windows'
+    ],
+    limitations: [
+      'Higher cost than simpler models',
+      'Knowledge cutoff date',
+      'Occasional hallucinations in complex scenarios'
+    ],
+    rating: 4.9,
+    reviewCount: 1200,
+    trending: true,
+    featured: true,
+    integrations: ['Claude web interface', 'API access', 'AWS Bedrock', 'Slack'],
+    lastVerified: new Date('2025-05-01')
+  },
+  {
+    id: 'anthropic-claude-for-teams',
+    name: 'Claude for Teams',
+    slug: 'anthropic-claude-for-teams',
+    description: 'Claude for Teams is Anthropic\'s enterprise solution that provides teams with collaborative access to Claude AI capabilities. It offers enhanced security, admin controls, and specialized features designed for business use cases while maintaining Claude\'s reasoning abilities and safety focus.',
+    shortDescription: 'Enterprise-focused Claude AI for team collaboration',
+    logo: 'https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg',
+    website: 'https://www.anthropic.com/claude/teams',
+    categoryId: 'general-ai',
+    subcategoryIds: ['specialized-assistants', 'chatbots'],
+    pricing: {
+      type: 'subscription',
+      startingPrice: '$30/user/month',
+      hasFreeOption: false,
+      tiers: [
+        {
+          name: 'Teams',
+          price: '$30/user/month',
+          billingPeriod: 'monthly',
+          features: ['Full Claude capabilities', 'Team workspaces', 'Conversation sharing', 'Basic admin controls']
+        },
+        {
+          name: 'Enterprise',
+          price: 'Custom',
+          billingPeriod: 'monthly',
+          features: ['All Teams features', 'Enhanced security', 'Advanced admin controls', 'Custom deployment options', 'Priority support']
+        }
+      ]
+    },
+    features: [
+      'Team collaboration features',
+      'Enhanced security and privacy',
+      'Administrative controls and user management',
+      'Conversation history and sharing',
+      'Claude\'s advanced reasoning capabilities'
+    ],
+    limitations: [
+      'Higher cost than consumer options',
+      'Knowledge cutoff date',
+      'Limited customization in base tier'
+    ],
+    rating: 4.8,
+    reviewCount: 780,
+    trending: false,
+    featured: false,
+    integrations: ['SSO', 'Slack', 'API access', 'Web interface'],
+    lastVerified: new Date('2025-05-05')
+  },
+  {
+    id: 'cursor-ai',
+    name: 'Cursor AI',
+    slug: 'cursor-ai',
+    description: 'Cursor AI is an intelligent code editor built specifically for AI-assisted development. It features advanced code generation, debugging assistance, and codebase explanation capabilities while maintaining the familiar feel of VS Code with specialized features for AI programming.',
+    shortDescription: 'AI-native code editor for developers',
+    logo: 'https://images.pexels.com/photos/4709285/pexels-photo-4709285.jpeg',
+    website: 'https://cursor.sh',
+    categoryId: 'general-ai',
+    subcategoryIds: ['coding-assistants'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$20/month for Pro',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['Basic code generation', 'Limited GPT-4 access', 'VS Code integration']
+        },
+        {
+          name: 'Pro',
+          price: '$20/month',
+          billingPeriod: 'monthly',
+          features: ['Unlimited GPT-4 usage', 'Advanced code tools', 'Larger context window', 'Code search capabilities']
+        }
+      ]
+    },
+    features: [
+      'AI code generation and editing',
+      'Codebase understanding and navigation',
+      'Bug detection and fixing assistance',
+      'VS Code-like editor experience',
+      'Natural language code commands'
+    ],
+    limitations: [
+      'Limited GPT-4 access in free tier',
+      'Still evolving platform',
+      'Some language limitations'
+    ],
+    rating: 4.7,
+    reviewCount: 920,
+    trending: true,
+    featured: false,
+    integrations: ['GitHub', 'VS Code extensions', 'Various language servers'],
+    lastVerified: new Date('2025-05-10')
+  },
+  {
+    id: 'gpt-4o',
+    name: 'GPT-4o',
+    slug: 'gpt-4o',
+    description: 'GPT-4o is OpenAI\'s most advanced multimodal model, capable of handling text, images, and audio in real-time with dramatically improved speed and cost efficiency. It represents a significant advancement in AI assistants with near-human level performance across many tasks.',
+    shortDescription: 'OpenAI\'s fastest and most capable multimodal AI',
+    logo: 'https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg',
+    website: 'https://openai.com/gpt-4o',
+    categoryId: 'general-ai',
+    subcategoryIds: ['multimodal-ai', 'chatbots'],
+    pricing: {
+      type: 'api-usage',
+      startingPrice: 'Starts at $5/million tokens',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'ChatGPT Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['Limited access to GPT-4o', 'Basic capabilities']
+        },
+        {
+          name: 'ChatGPT Plus',
+          price: '$20/month',
+          billingPeriod: 'monthly',
+          features: ['Priority access to GPT-4o', 'Higher usage limits']
+        },
+        {
+          name: 'API Usage',
+          price: 'Starts at $5/million tokens',
+          billingPeriod: 'monthly',
+          features: ['Full model capabilities', 'Pay-as-you-go pricing', 'Volume discounts']
+        }
+      ]
+    },
+    features: [
+      'Real-time multimodal capabilities (text, images, audio)',
+      'Enhanced reasoning and problem-solving',
+      'Significantly faster response times',
+      'Improved accuracy across tasks',
+      'Seamless conversation with context awareness'
+    ],
+    limitations: [
+      'Knowledge cutoff date limitations',
+      'Occasional hallucinations',
+      'May struggle with highly specialized domain knowledge'
+    ],
+    rating: 4.9,
+    reviewCount: 3200,
+    trending: true,
+    featured: true,
+    integrations: ['ChatGPT interface', 'API access', 'Various platforms and applications'],
+    lastVerified: new Date('2025-05-20')
+  },
+  {
+    id: 'gemini',
+    name: 'Gemini',
+    slug: 'gemini',
+    description: 'Gemini is Google\'s most capable AI model family, offering multimodal capabilities across text, code, images, and audio. Available in different sizes including Ultra, Pro, and Nano versions, it powers various Google products and offers strong reasoning and understanding capabilities.',
+    shortDescription: 'Google\'s multimodal AI model for versatile applications',
+    logo: 'https://images.pexels.com/photos/11035471/pexels-photo-11035471.jpeg',
+    website: 'https://gemini.google.com',
+    categoryId: 'general-ai',
+    subcategoryIds: ['multimodal-ai', 'chatbots'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$20/month for Advanced',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['Basic Gemini capabilities', 'Limited usage', 'Google account integration']
+        },
+        {
+          name: 'Advanced',
+          price: '$20/month',
+          billingPeriod: 'monthly',
+          features: ['Access to Gemini Advanced (Ultra model)', 'Higher usage limits', 'Priority access', 'Google One benefits']
+        },
+        {
+          name: 'API',
+          price: 'Pay-as-you-go',
+          billingPeriod: 'monthly',
+          features: ['All Gemini models', 'Usage-based pricing', 'Integration with Google Cloud']
+        }
+      ]
+    },
+    features: [
+      'Multimodal understanding (text, images, code, audio)',
+      'Multiple model sizes for different needs',
+      'Integration with Google ecosystem',
+      'Strong reasoning capabilities',
+      'Multilingual support'
+    ],
+    limitations: [
+      'Knowledge cutoff date',
+      'Less specialized than some domain-specific models',
+      'Advanced features require subscription'
+    ],
+    rating: 4.7,
+    reviewCount: 2100,
+    trending: true,
+    featured: false,
+    integrations: ['Google Workspace', 'Google Cloud', 'Android', 'API access'],
+    lastVerified: new Date('2025-05-22')
+  },
+  {
     id: '1',
     name: 'MidJourney',
     slug: 'midjourney',

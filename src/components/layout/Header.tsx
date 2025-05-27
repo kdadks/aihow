@@ -110,9 +110,6 @@ export const Header: React.FC = () => {
                   </div>
                 )}
               </div>
-              <Link to="/recommendation" className="text-gray-500 hover:text-gray-900 text-sm font-medium">
-                Find Tools
-              </Link>
               <Link to="/workflows" className="text-gray-500 hover:text-gray-900 text-sm font-medium">
                 Workflows
               </Link>
@@ -231,12 +228,8 @@ export const Header: React.FC = () => {
                   ))}
                 </div>
               </div>
-              <Link to="/recommendation" className="flex items-center px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-50">
-                <Logo className="h-5 mr-3" />
-                Find Tools
-              </Link>
               <Link to="/workflows" className="flex items-center px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-50">
-                <span className="w-5 mr-3" />
+                <Logo className="h-5 mr-3" />
                 Workflows
               </Link>
               <Link to="/community" className="flex items-center px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-50">
