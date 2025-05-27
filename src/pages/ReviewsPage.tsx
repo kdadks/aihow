@@ -1,19 +1,41 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { ReviewCard } from '../components/reviews/ReviewCard';
 import { reviews } from '../data/community';
+import { Pagination } from '../components/ui/Pagination';
+
+const ITEMS_PER_PAGE = 12;
 
 const ReviewsPage: React.FC = () => {
   const [sortBy, setSortBy] = useState<'recent' | 'rating'>('recent');
   const [filterRating, setFilterRating] = useState<number | null>(null);
+  const [currentPage, setCurrentPage] = useState(1);
 
-  const filteredReviews = reviews
-    .filter(review => filterRating ? review.rating >= filterRating : true)
-    .sort((a, b) => {
-      if (sortBy === 'recent') {
-        return new Date(b.date).getTime() - new Date(a.date).getTime();
-      }
-      return b.rating - a.rating;
-    });
+  const filteredReviews = useMemo(() => {
+    return reviews
+      .filter(review => filterRating ? review.rating >= filterRating : true)
+      .sort((a, b) => {
+        if (sortBy === 'recent') {
+          return new Date(b.date).getTime() - new Date(a.date).getTime();
+        }
+        return b.rating - a.rating;
+      });
+  }, [filterRating, sortBy]);
+
+  // Calculate total pages
+  const totalPages = useMemo(() => {
+    return Math.ceil(filteredReviews.length / ITEMS_PER_PAGE);
+  }, [filteredReviews.length]);
+
+  // Get current page items
+  const currentReviews = useMemo(() => {
+    const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+    return filteredReviews.slice(startIndex, startIndex + ITEMS_PER_PAGE);
+  }, [filteredReviews, currentPage]);
+
+  // Reset to first page when filters change
+  React.useEffect(() => {
+    setCurrentPage(1);
+  }, [filterRating, sortBy]);
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -54,16 +76,28 @@ const ReviewsPage: React.FC = () => {
           </span>
           <span className="text-gray-500">•</span>
           <span className="text-gray-700">
-            {(filteredReviews.reduce((acc, review) => acc + review.rating, 0) / filteredReviews.length).toFixed(1)} average rating
+            {filteredReviews.length > 0 ? (filteredReviews.reduce((acc, review) => acc + review.rating, 0) / filteredReviews.length).toFixed(1) : '0'} average rating
           </span>
         </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {filteredReviews.map((review, index) => (
+        {currentReviews.map((review, index) => (
           <ReviewCard key={index} {...review} />
         ))}
       </div>
+
+      {/* Pagination */}
+      {totalPages > 1 && (
+        <div className="mt-12 flex justify-center">
+          <Pagination 
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={setCurrentPage}
+            className="mb-6"
+          />
+        </div>
+      )}
     </div>
   );
 };

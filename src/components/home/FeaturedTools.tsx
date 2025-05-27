@@ -1,15 +1,26 @@
-import React from 'react';
+import React, { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Star, Scale } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from '../ui/Card';
 import { Badge } from '../ui/Badge';
 import { Button } from '../ui/Button';
+import { Pagination } from '../ui/Pagination';
 import { Tool } from '../../types';
 import { tools } from '../../data/tools';
 import { useComparisonStore } from '../../stores/comparisonStore';
 
 export const FeaturedTools: React.FC = () => {
-  const featuredTools = tools.filter(tool => tool.featured);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 9;
+  
+  const featuredTools = useMemo(() => tools.filter(tool => tool.featured), []);
+  const totalPages = Math.ceil(featuredTools.length / itemsPerPage);
+  
+  // Get current page items
+  const currentTools = useMemo(() => {
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    return featuredTools.slice(startIndex, startIndex + itemsPerPage);
+  }, [featuredTools, currentPage, itemsPerPage]);
 
   return (
     <section className="py-16 bg-white">
@@ -22,12 +33,23 @@ export const FeaturedTools: React.FC = () => {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {featuredTools.map((tool) => (
+          {currentTools.map((tool) => (
             <FeaturedToolCard key={tool.id} tool={tool} />
           ))}
         </div>
+        
+        {totalPages > 1 && (
+          <div className="mt-12 flex justify-center">
+            <Pagination 
+              currentPage={currentPage}
+              totalPages={totalPages}
+              onPageChange={setCurrentPage}
+              className="mb-6"
+            />
+          </div>
+        )}
 
-        <div className="mt-12 text-center">
+        <div className="mt-8 text-center">
           <Link to="/directory">
             <Button variant="outline" rightIcon={<ArrowRight className="h-4 w-4" />}>
               View all tools

@@ -1,14 +1,16 @@
-import React, { useState } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { categories } from '../data/categories';
-import { Category, SearchFilters } from '../types';
 import { Card } from '../components/ui/Card';
 import { Badge } from '../components/ui/Badge';
+import { Pagination } from '../components/ui/Pagination';
+
+const ITEMS_PER_PAGE = 12;
 
 const CategoriesPage = () => {
   const [searchTerm, setSearchTerm] = useState('');
-  const [filters, setFilters] = useState<SearchFilters>({});
+  const [currentPage, setCurrentPage] = useState(1);
 
   const filteredCategories = categories.filter(category => {
     const matchesSearch = category.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -16,6 +18,22 @@ const CategoriesPage = () => {
 
     return matchesSearch;
   });
+
+  // Calculate total pages
+  const totalPages = useMemo(() => {
+    return Math.ceil(filteredCategories.length / ITEMS_PER_PAGE);
+  }, [filteredCategories.length]);
+
+  // Get current page items
+  const currentCategories = useMemo(() => {
+    const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+    return filteredCategories.slice(startIndex, startIndex + ITEMS_PER_PAGE);
+  }, [filteredCategories, currentPage]);
+
+  // Reset to first page when search term changes
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchTerm]);
 
   return (
     <>
@@ -71,7 +89,7 @@ const CategoriesPage = () => {
 
         {/* Categories Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredCategories.map((category) => (
+          {currentCategories.map((category) => (
             <Card key={category.id} className="flex flex-col p-6 hover:shadow-lg transition-shadow">
               <div className="flex items-start gap-4 mb-4">
                 <div className="p-3 bg-blue-100 rounded-lg">
@@ -116,6 +134,18 @@ const CategoriesPage = () => {
             </Card>
           ))}
         </div>
+
+        {/* Pagination */}
+        {totalPages > 1 && (
+          <div className="mt-12 flex justify-center">
+            <Pagination 
+              currentPage={currentPage}
+              totalPages={totalPages}
+              onPageChange={setCurrentPage}
+              className="mb-6"
+            />
+          </div>
+        )}
 
         {/* Empty State */}
         {filteredCategories.length === 0 && (

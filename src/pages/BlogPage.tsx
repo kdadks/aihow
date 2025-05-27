@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { BlogCard } from '../components/blog/BlogCard';
 import { Search, Mail } from 'lucide-react';
 import { blogPosts } from '../data/community';
+import { Pagination } from '../components/ui/Pagination';
 
 const CATEGORIES = [
   "All",
@@ -13,15 +14,36 @@ const CATEGORIES = [
   "Updates"
 ];
 
+const ITEMS_PER_PAGE = 12;
+
 const BlogPage: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [searchQuery, setSearchQuery] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
 
-  const filteredPosts = blogPosts.filter(post => 
-    (selectedCategory === "All" || post.category === selectedCategory) &&
-    (post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-     post.excerpt.toLowerCase().includes(searchQuery.toLowerCase()))
-  );
+  const filteredPosts = useMemo(() => {
+    return blogPosts.filter(post => 
+      (selectedCategory === "All" || post.category === selectedCategory) &&
+      (post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+       post.excerpt.toLowerCase().includes(searchQuery.toLowerCase()))
+    );
+  }, [selectedCategory, searchQuery]);
+
+  // Calculate total pages
+  const totalPages = useMemo(() => {
+    return Math.ceil(filteredPosts.length / ITEMS_PER_PAGE);
+  }, [filteredPosts.length]);
+
+  // Get current page items
+  const currentPosts = useMemo(() => {
+    const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+    return filteredPosts.slice(startIndex, startIndex + ITEMS_PER_PAGE);
+  }, [filteredPosts, currentPage]);
+
+  // Reset to first page when filters change
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [selectedCategory, searchQuery]);
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -66,10 +88,22 @@ const BlogPage: React.FC = () => {
 
       {/* Blog Posts Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-        {filteredPosts.map((post, index) => (
+        {currentPosts.map((post, index) => (
           <BlogCard key={index} {...post} />
         ))}
       </div>
+
+      {/* Pagination */}
+      {totalPages > 1 && (
+        <div className="mt-8 flex justify-center mb-12">
+          <Pagination 
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={setCurrentPage}
+            className="mb-6"
+          />
+        </div>
+      )}
 
       {/* Newsletter Signup */}
       <div className="bg-blue-50 rounded-2xl p-8 text-center">

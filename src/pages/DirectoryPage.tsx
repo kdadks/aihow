@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { SearchFilters } from '../components/directory/SearchFilters';
 import { ToolCard } from '../components/directory/ToolCard';
@@ -7,6 +7,7 @@ import { categories } from '../data/categories';
 import { SearchFilters as SearchFiltersType, Tool, Category, Subcategory } from '../types';
 import { useComparisonStore } from '../stores/comparisonStore';
 import { Button } from '../components/ui';
+import { Pagination } from '../components/ui/Pagination';
 import { Scale } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 
@@ -16,7 +17,6 @@ const DirectoryPage: React.FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(1);
-  const [hasMore, setHasMore] = useState(true);
   const { categoryId, subcategoryId } = useParams();
   const [filters, setFilters] = useState<SearchFiltersType>(() => ({
     category: categoryId,
@@ -24,6 +24,17 @@ const DirectoryPage: React.FC = () => {
   }));
   const [filteredTools, setFilteredTools] = useState<Tool[]>(tools);
   const { selectedTools, addTool, isToolSelectable } = useComparisonStore();
+
+  // Calculate total pages
+  const totalPages = useMemo(() => {
+    return Math.ceil(filteredTools.length / ITEMS_PER_PAGE);
+  }, [filteredTools.length]);
+
+  // Get current page items
+  const currentTools = useMemo(() => {
+    const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+    return filteredTools.slice(startIndex, startIndex + ITEMS_PER_PAGE);
+  }, [filteredTools, currentPage]);
 
   useEffect(() => {
     // Check if we should show the comparison prompt
@@ -69,15 +80,9 @@ const DirectoryPage: React.FC = () => {
       result = result.filter(tool => tool.rating >= filters.rating!);
     }
 
-    // Update filtered results and check if there are more items
+    // Update filtered results
     setFilteredTools(result);
-    setHasMore(result.length > ITEMS_PER_PAGE);
   }, [filters]);
-
-  // Update hasMore when currentPage changes
-  useEffect(() => {
-    setHasMore(filteredTools.length > currentPage * ITEMS_PER_PAGE);
-  }, [currentPage, filteredTools.length]);
 
   const handleCompare = () => {
     if (selectedTools.length < 2) {
@@ -142,7 +147,7 @@ const DirectoryPage: React.FC = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredTools.length > 0 ? (
-          filteredTools.slice(0, currentPage * ITEMS_PER_PAGE).map(tool => (
+          currentTools.map(tool => (
             <ToolCard
               key={tool.id}
               tool={tool}
@@ -161,15 +166,14 @@ const DirectoryPage: React.FC = () => {
         )}
       </div>
       
-      {hasMore && filteredTools.length > 0 && (
-        <div className="mt-8 text-center">
-          <Button
-            variant="outline"
-            onClick={() => setCurrentPage(prev => prev + 1)}
-            className="px-8"
-          >
-            Show More
-          </Button>
+      {totalPages > 1 && (
+        <div className="mt-12 flex justify-center">
+          <Pagination 
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={setCurrentPage}
+            className="mb-6"
+          />
         </div>
       )}
     </div>
