@@ -24,14 +24,14 @@ export const Button: React.FC<ButtonProps> = ({
   disabled,
   ...props
 }) => {
-  const baseStyle = 'inline-flex items-center justify-center rounded-md font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none';
+  const baseStyle = 'inline-flex items-center justify-center rounded-md font-medium transition-all duration-200 ease-in-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none';
   
   const variantStyles: Record<ButtonVariant, string> = {
-    primary: 'bg-blue-600 text-hover:bg-blue-700 focus-visible:ring-blue-500',
-    secondary: 'bg-purple-600 text-hover:bg-purple-800 focus-visible:ring-purple-500',
-    outline: 'border border-purple-300 bg-transparent text-purple-600 hover:bg-purple-50 hover:border-purple-400 focus-visible:ring-purple-400',
-    ghost: 'bg-transparent hover:bg-gray-100 focus-visible:ring-gray-400',
-    link: 'bg-transparent underline-offset-4 hover:underline text-blue-600 hover:text-blue-700 p-0 h-auto',
+    primary: 'bg-primary text-white hover:bg-primary-hover focus-visible:ring-primary/30',
+    secondary: 'bg-secondary text-gray-800 hover:bg-secondary-hover hover:text-gray-900 focus-visible:ring-secondary/30',
+    outline: 'border border-primary bg-transparent text-primary hover:bg-accent hover:text-primary-hover focus-visible:ring-primary/20',
+    ghost: 'bg-transparent text-primary hover:bg-accent hover:text-primary-hover focus-visible:ring-accent/30',
+    link: 'bg-transparent underline-offset-4 hover:underline text-primary hover:text-primary-hover p-0 h-auto',
   };
 
   const sizeStyles: Record<ButtonSize, string> = {
