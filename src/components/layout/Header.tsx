@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Search, Menu, X, Scale, ChevronRight } from 'lucide-react';
+import { Search, Menu, X, Scale } from 'lucide-react';
 import { categories } from '../../data/categories';
 import { tools } from '../../data/tools';
 import { Button } from '../ui/Button';
@@ -64,51 +64,45 @@ export const Header: React.FC = () => {
                   </svg>
                 </button>
                 {isDropdownOpen && (
-                  <div className="absolute left-0 mt-2 w-72 bg-white border border-gray-200 rounded-md shadow-lg z-50">
-                    <div className="py-2">
+                  <div className="absolute left-0 mt-2 w-[900px] bg-white border border-gray-200 rounded-md shadow-lg z-50">
+                    <div className="py-4 px-4 grid grid-cols-3 gap-6">
                       {categories.map(category => (
-                        <div key={category.id} className="group/category">
+                        <div key={category.id} className="space-y-2">
                           <Link
                             to={`/directory/${category.id}`}
-                            className="flex items-center justify-between px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+                            className="block text-sm font-semibold text-gray-800 hover:text-blue-600"
                           >
-                            <span>{category.name}</span>
-                            <ChevronRight className="w-4 h-4 text-gray-400" />
+                            {category.name}
                           </Link>
-                          <div className="hidden group-hover/category:block absolute left-full top-0 ml-1 w-72 bg-white border border-gray-200 rounded-md shadow-lg">
-                            <div className="py-2">
-                              {category.subcategories?.map(subcategory => (
-                                <div key={subcategory.id} className="group/subcategory">
-                                  <Link
-                                    to={`/directory/${category.id}/${subcategory.id}`}
-                                    className="flex items-center justify-between px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
-                                  >
-                                    <span>{subcategory.name}</span>
-                                    <ChevronRight className="w-4 h-4 text-gray-400" />
-                                  </Link>
-                                  <div className="hidden group-hover/subcategory:block absolute left-full top-0 ml-1 w-80 bg-white border border-gray-200 rounded-md shadow-lg">
-                                    <div className="py-2">
-                                      <div className="px-4 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wider">
-                                        Popular Tools
-                                      </div>
-                                      {tools.filter(tool =>
-                                        tool.categoryId === category.id &&
-                                        tool.subcategoryIds?.includes(subcategory.id)
-                                      ).slice(0, 5).map(tool => (
-                                        <Link
-                                          key={tool.id}
-                                          to={`/directory/${category.id}/${subcategory.id}/${tool.slug}`}
-                                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
-                                        >
-                                          {tool.name}
-                                          <div className="text-xs text-gray-500">{tool.shortDescription}</div>
-                                        </Link>
-                                      ))}
-                                    </div>
+                          <div className="space-y-1 mt-2">
+                            {category.subcategories?.map(subcategory => (
+                              <div key={subcategory.id} className="group/subcategory relative">
+                                <Link
+                                  to={`/directory/${category.id}/${subcategory.id}`}
+                                  className="block text-sm text-gray-600 hover:text-blue-600 py-1"
+                                >
+                                  {subcategory.name}
+                                </Link>
+                                <div className="hidden group-hover/subcategory:block absolute left-full top-0 -ml-2 w-64 bg-white border border-gray-200 rounded-md shadow-lg z-50 p-3">
+                                  <div className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">
+                                    Popular Tools
                                   </div>
+                                  {tools.filter(tool =>
+                                    tool.categoryId === category.id &&
+                                    tool.subcategoryIds?.includes(subcategory.id)
+                                  ).slice(0, 5).map(tool => (
+                                    <Link
+                                      key={tool.id}
+                                      to={`/directory/${category.id}/${subcategory.id}/${tool.slug}`}
+                                      className="block py-1.5 text-sm text-gray-700 hover:text-blue-600"
+                                    >
+                                      {tool.name}
+                                      <div className="text-xs text-gray-500">{tool.shortDescription}</div>
+                                    </Link>
+                                  ))}
                                 </div>
-                              ))}
-                            </div>
+                              </div>
+                            ))}
                           </div>
                         </div>
                       ))}
@@ -191,49 +185,51 @@ export const Header: React.FC = () => {
               />
             </form>
 
-            <nav className="space-y-2">
-              <div className="space-y-1">
+            <nav className="space-y-2">                <div>
                 <div className="px-3 py-2 text-base font-medium text-gray-900">
                   AI HUB
                 </div>
-                {categories.map(category => (
-                  <div key={category.id}>
-                    <Link
-                      to={`/directory/${category.id}`}
-                      className="block px-6 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
-                    >
-                      {category.name}
-                    </Link>
-                    {category.subcategories?.map(subcategory => (
-                      <div key={subcategory.id} className="ml-8">
-                        <Link
-                          to={`/directory/${category.id}/${subcategory.id}`}
-                          className="block py-2 text-sm text-gray-600 hover:text-gray-900"
-                        >
-                          {subcategory.name}
-                        </Link>
-                        <div className="pl-4 space-y-1">
-                          {tools
-                            .filter(tool =>
-                              tool.categoryId === category.id &&
-                              tool.subcategoryIds?.includes(subcategory.id)
-                            )
-                            .slice(0, 3)
-                            .map(tool => (
-                              <Link
-                                key={tool.id}
-                                to={`/directory/${category.id}/${subcategory.id}/${tool.slug}`}
-                                className="block py-1 text-xs text-gray-500 hover:text-gray-900"
-                              >
-                                {tool.name}
-                              </Link>
-                            ))
-                          }
-                        </div>
+                <div className="divide-y divide-gray-100">
+                  {categories.map(category => (
+                    <div key={category.id} className="py-3">
+                      <Link
+                        to={`/directory/${category.id}`}
+                        className="block px-4 py-1 text-sm font-bold text-gray-800 hover:text-blue-600"
+                      >
+                        {category.name}
+                      </Link>
+                      <div className="grid grid-cols-2 mt-1 gap-x-2">
+                        {category.subcategories?.map(subcategory => (
+                          <div key={subcategory.id} className="py-1.5">
+                            <Link
+                              to={`/directory/${category.id}/${subcategory.id}`}
+                              className="block px-6 text-sm text-gray-600 hover:text-blue-600"
+                            >
+                              {subcategory.name}
+                            </Link>
+                            {/* Show only the first tool as an example */}
+                            {tools
+                              .filter(tool =>
+                                tool.categoryId === category.id &&
+                                tool.subcategoryIds?.includes(subcategory.id)
+                              )
+                              .slice(0, 1)
+                              .map(tool => (
+                                <Link
+                                  key={tool.id}
+                                  to={`/directory/${category.id}/${subcategory.id}/${tool.slug}`}
+                                  className="block px-6 mt-0.5 text-xs text-gray-500 hover:text-blue-600"
+                                >
+                                  {tool.name}
+                                </Link>
+                              ))
+                            }
+                          </div>
+                        ))}
                       </div>
-                    ))}
-                  </div>
-                ))}
+                    </div>
+                  ))}
+                </div>
               </div>
               <Link to="/recommendation" className="flex items-center px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-50">
                 <Logo className="h-5 mr-3" />
