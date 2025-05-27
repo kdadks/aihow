@@ -25,7 +25,11 @@ function App() {
       <Routes>
         <Route path="/" element={<MainLayout />}>
           <Route index element={<HomePage />} />
-          <Route path="directory" element={<DirectoryPage />} />
+          <Route path="directory">
+            <Route index element={<DirectoryPage />} />
+            <Route path=":categoryId" element={<DirectoryPage />} />
+            <Route path=":categoryId/:subcategoryId" element={<DirectoryPage />} />
+          </Route>
           <Route path="categories" element={<CategoriesPage />} />
           <Route path="recommendation" element={<RecommendationPage />} />
           <Route path="tool/:slug" element={<ToolDetailPage />} />

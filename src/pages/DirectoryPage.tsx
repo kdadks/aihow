@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { SearchFilters } from '../components/directory/SearchFilters';
 import { ToolCard } from '../components/directory/ToolCard';
 import { tools } from '../data/tools';
-import { SearchFilters as SearchFiltersType, Tool } from '../types';
+import { categories } from '../data/categories';
+import { SearchFilters as SearchFiltersType, Tool, Category, Subcategory } from '../types';
 import { useComparisonStore } from '../stores/comparisonStore';
 import { Button } from '../components/ui';
 import { Scale } from 'lucide-react';
@@ -16,11 +17,11 @@ const DirectoryPage: React.FC = () => {
   const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
-  const [filters, setFilters] = useState<SearchFiltersType>(() => {
-    const params = new URLSearchParams(location.search);
-    const categoryParam = params.get('category');
-    return categoryParam ? { category: categoryParam } : {};
-  });
+  const { categoryId, subcategoryId } = useParams();
+  const [filters, setFilters] = useState<SearchFiltersType>(() => ({
+    category: categoryId,
+    subcategory: subcategoryId
+  }));
   const [filteredTools, setFilteredTools] = useState<Tool[]>(tools);
   const { selectedTools, addTool, isToolSelectable } = useComparisonStore();
 
@@ -34,20 +35,15 @@ const DirectoryPage: React.FC = () => {
     }
   }, [location.state]);
 
-  // Update filters when URL changes
+  // Update filters when URL params change
   useEffect(() => {
-    const params = new URLSearchParams(location.search);
-    const categoryParam = params.get('category');
-    if (categoryParam) {
-      setCurrentPage(1); // Reset pagination when category changes
-    setFilters(prev => ({ ...prev, category: categoryParam }));
-    } else if (filters.category) {
-      setFilters(prev => {
-        const { category, ...rest } = prev;
-        return rest;
-      });
-    }
-  }, [location.search]);
+    setCurrentPage(1); // Reset pagination when category/subcategory changes
+    setFilters(prev => ({
+      ...prev,
+      category: categoryId,
+      subcategory: subcategoryId
+    }));
+  }, [categoryId, subcategoryId]);
 
   useEffect(() => {
     setCurrentPage(1); // Reset to first page when filters change
@@ -122,9 +118,23 @@ const DirectoryPage: React.FC = () => {
         </div>
       )}
       <div className="text-center mb-10">
-        <h1 className="text-3xl font-bold text-gray-900 sm:text-4xl">AI Tools Directory</h1>
+        <h1 className="text-3xl font-bold text-gray-900 sm:text-4xl">
+          {filters.subcategory ? (
+            categories.find((c: Category) => c.id === filters.category)?.subcategories?.find((s: Subcategory) => s.id === filters.subcategory)?.name
+          ) : filters.category ? (
+            categories.find((c: Category) => c.id === filters.category)?.name
+          ) : (
+            'AI Tools Directory'
+          )}
+        </h1>
         <p className="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">
-          Browse and filter through our comprehensive collection of AI tools to find the perfect solutions for your needs.
+          {filters.subcategory ? (
+            categories.find((c: Category) => c.id === filters.category)?.subcategories?.find((s: Subcategory) => s.id === filters.subcategory)?.description
+          ) : filters.category ? (
+            categories.find((c: Category) => c.id === filters.category)?.description
+          ) : (
+            'Browse and filter through our comprehensive collection of AI tools to find the perfect solutions for your needs.'
+          )}
         </p>
       </div>
 
