@@ -9,9 +9,13 @@ import { Button } from '../components/ui';
 import { Scale } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 
+const ITEMS_PER_PAGE = 12;
+
 const DirectoryPage: React.FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const [currentPage, setCurrentPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
   const [filters, setFilters] = useState<SearchFiltersType>(() => {
     const params = new URLSearchParams(location.search);
     const categoryParam = params.get('category');
@@ -35,7 +39,8 @@ const DirectoryPage: React.FC = () => {
     const params = new URLSearchParams(location.search);
     const categoryParam = params.get('category');
     if (categoryParam) {
-      setFilters(prev => ({ ...prev, category: categoryParam }));
+      setCurrentPage(1); // Reset pagination when category changes
+    setFilters(prev => ({ ...prev, category: categoryParam }));
     } else if (filters.category) {
       setFilters(prev => {
         const { category, ...rest } = prev;
@@ -45,6 +50,7 @@ const DirectoryPage: React.FC = () => {
   }, [location.search]);
 
   useEffect(() => {
+    setCurrentPage(1); // Reset to first page when filters change
     let result = [...tools];
 
     // Apply category filter
@@ -67,8 +73,15 @@ const DirectoryPage: React.FC = () => {
       result = result.filter(tool => tool.rating >= filters.rating!);
     }
 
+    // Update filtered results and check if there are more items
     setFilteredTools(result);
+    setHasMore(result.length > ITEMS_PER_PAGE);
   }, [filters]);
+
+  // Update hasMore when currentPage changes
+  useEffect(() => {
+    setHasMore(filteredTools.length > currentPage * ITEMS_PER_PAGE);
+  }, [currentPage, filteredTools.length]);
 
   const handleCompare = () => {
     if (selectedTools.length < 2) {
@@ -119,7 +132,7 @@ const DirectoryPage: React.FC = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredTools.length > 0 ? (
-          filteredTools.map(tool => (
+          filteredTools.slice(0, currentPage * ITEMS_PER_PAGE).map(tool => (
             <ToolCard
               key={tool.id}
               tool={tool}
@@ -137,6 +150,18 @@ const DirectoryPage: React.FC = () => {
           </div>
         )}
       </div>
+      
+      {hasMore && filteredTools.length > 0 && (
+        <div className="mt-8 text-center">
+          <Button
+            variant="outline"
+            onClick={() => setCurrentPage(prev => prev + 1)}
+            className="px-8"
+          >
+            Show More
+          </Button>
+        </div>
+      )}
     </div>
   );
 };
