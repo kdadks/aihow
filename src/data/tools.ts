@@ -3023,5 +3023,1139 @@ export const tools: Tool[] = [
     featured: true,
     integrations: ['Zoom', 'Teams', 'Google Meet', 'Slack'],
     lastVerified: new Date('2025-05-24')
+  },
+  
+  // Prompt Management Platforms
+  {
+    id: 'promptlayer',
+    name: 'PromptLayer',
+    slug: 'promptlayer',
+    description: 'PromptLayer is the first platform built for prompt engineers that enables management, versioning, and analytics for prompts in LLM applications. It functions as a middleware between applications and LLM providers, providing detailed insights and tracking of prompt performance.',
+    shortDescription: 'Version control and analytics for LLM prompts',
+    logo: 'https://images.pexels.com/photos/11134135/pexels-photo-11134135.jpeg',
+    website: 'https://promptlayer.com',
+    categoryId: 'prompt-engineering',
+    subcategoryIds: ['prompt-management'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$29/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['Basic prompt tracking', 'Limited requests', 'Core features']
+        },
+        {
+          name: 'Pro',
+          price: '$29/month',
+          billingPeriod: 'monthly',
+          features: ['Unlimited requests', 'Advanced analytics', 'Prompt versioning', 'Team collaboration']
+        }
+      ]
+    },
+    features: [
+      'Prompt versioning and management',
+      'Performance analytics',
+      'A/B testing for prompts',
+      'Integration with major LLM providers',
+      'API access',
+      'Prompt templates'
+    ],
+    limitations: [
+      'Free tier has limited requests',
+      'Learning curve for advanced features',
+      'Limited model support in free tier'
+    ],
+    rating: 4.7,
+    reviewCount: 215,
+    trending: true
+  },
+  {
+    id: 'langchain',
+    name: 'LangChain',
+    slug: 'langchain',
+    description: 'LangChain is a framework for developing applications powered by language models. It provides tools for prompt management, chaining multiple components together, and integrating with external sources like APIs and databases to build context-aware applications.',
+    shortDescription: 'Framework for building LLM-powered applications',
+    logo: 'https://images.pexels.com/photos/11134134/pexels-photo-11134134.jpeg',
+    website: 'https://langchain.com',
+    categoryId: 'prompt-engineering',
+    subcategoryIds: ['prompt-management'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$49/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Open Source',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['Core framework', 'Basic documentation', 'Community support']
+        },
+        {
+          name: 'Cloud',
+          price: '$49/month',
+          billingPeriod: 'monthly',
+          features: ['Hosted infrastructure', 'Enhanced monitoring', 'Production support', 'Advanced features']
+        }
+      ]
+    },
+    features: [
+      'Prompt templating and management',
+      'Chains and sequences',
+      'Memory for conversational contexts',
+      'Integration with external data sources',
+      'Document loading and indexing',
+      'Agent frameworks'
+    ],
+    limitations: [
+      'Steep learning curve',
+      'Requires programming knowledge',
+      'Documentation can be complex',
+      'Rapid development pace leads to frequent changes'
+    ],
+    rating: 4.8,
+    reviewCount: 845,
+    trending: true
+  },
+  {
+    id: 'flowise',
+    name: 'Flowise',
+    slug: 'flowise',
+    description: 'Flowise is a visual drag-and-drop interface for building LLM workflows and chatbots. It simplifies the process of creating complex LangChain flows without needing to write code, making prompt engineering and LLM application development more accessible.',
+    shortDescription: 'Visual builder for LLM workflows',
+    logo: 'https://images.pexels.com/photos/11134133/pexels-photo-11134133.jpeg',
+    website: 'https://flowiseai.com',
+    categoryId: 'prompt-engineering',
+    subcategoryIds: ['prompt-management'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$19/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Community',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['Self-hosted option', 'Basic flows', 'Core components']
+        },
+        {
+          name: 'Pro',
+          price: '$19/month',
+          billingPeriod: 'monthly',
+          features: ['Cloud hosting', 'Advanced components', 'Team collaboration', 'API access']
+        }
+      ]
+    },
+    features: [
+      'Drag-and-drop flow builder',
+      'Visual prompt engineering',
+      'Integration with LangChain',
+      'Multiple LLM provider support',
+      'No-code chatbot creation',
+      'Custom API endpoints'
+    ],
+    limitations: [
+      'Limited customization compared to coding',
+      'Some advanced features require technical knowledge',
+      'Self-hosted version requires setup expertise'
+    ],
+    rating: 4.5,
+    reviewCount: 186,
+    trending: true
+  },
+  {
+    id: 'promptable-ai',
+    name: 'Promptable.ai',
+    slug: 'promptable-ai',
+    description: 'Promptable.ai is a comprehensive platform for collaborative prompt engineering, allowing teams to create, test, and deploy prompts at scale. It focuses on enterprise-grade prompt management with features like versioning, collaboration, and performance metrics.',
+    shortDescription: 'Enterprise prompt engineering platform',
+    logo: 'https://images.pexels.com/photos/11134132/pexels-photo-11134132.jpeg',
+    website: 'https://promptable.ai',
+    categoryId: 'prompt-engineering',
+    subcategoryIds: ['prompt-management'],
+    pricing: {
+      type: 'subscription',
+      startingPrice: '$49/month',
+      hasFreeOption: false,
+      tiers: [
+        {
+          name: 'Team',
+          price: '$49/month',
+          billingPeriod: 'monthly',
+          features: ['Collaborative workspace', 'Prompt versioning', 'Basic analytics', 'Multi-user access']
+        },
+        {
+          name: 'Enterprise',
+          price: 'Custom',
+          billingPeriod: 'monthly',
+          features: ['Advanced analytics', 'SSO integration', 'Priority support', 'Custom integrations', 'SLA guarantees']
+        }
+      ]
+    },
+    features: [
+      'Collaborative prompt management',
+      'Version control',
+      'Prompt testing and evaluation',
+      'Performance monitoring',
+      'Role-based access control',
+      'Enterprise integrations'
+    ],
+    limitations: [
+      'No free tier available',
+      'More expensive than some alternatives',
+      'Best suited for larger teams'
+    ],
+    rating: 4.6,
+    reviewCount: 125
+  },
+  {
+    id: 'promptops',
+    name: 'PromptOps',
+    slug: 'promptops',
+    description: 'PromptOps is a DevOps-inspired platform for prompt engineering that focuses on the operational aspects of managing prompts in production. It provides tools for versioning, deployment pipelines, monitoring, and continuous improvement of prompts.',
+    shortDescription: 'DevOps for LLM prompts',
+    logo: 'https://images.pexels.com/photos/11134131/pexels-photo-11134131.jpeg',
+    website: 'https://promptops.ai',
+    categoryId: 'prompt-engineering',
+    subcategoryIds: ['prompt-management'],
+    pricing: {
+      type: 'subscription',
+      startingPrice: '$39/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['Basic version control', 'Limited requests', 'Single user']
+        },
+        {
+          name: 'Standard',
+          price: '$39/month',
+          billingPeriod: 'monthly',
+          features: ['Full version control', 'CI/CD for prompts', 'Analytics dashboard', 'Team collaboration']
+        },
+        {
+          name: 'Enterprise',
+          price: 'Custom',
+          billingPeriod: 'monthly',
+          features: ['Advanced monitoring', 'Custom integrations', 'Priority support', 'SSO and security features']
+        }
+      ]
+    },
+    features: [
+      'Prompt version control',
+      'CI/CD pipelines for prompts',
+      'Performance monitoring',
+      'A/B testing',
+      'Automatic prompt optimization',
+      'Rollback capabilities'
+    ],
+    limitations: [
+      'Complex for beginners',
+      'Requires DevOps knowledge for full benefit',
+      'Free tier has significant limitations'
+    ],
+    rating: 4.5,
+    reviewCount: 98,
+    trending: true
+  },
+
+  // Prompt Testing & Optimization
+  {
+    id: 'promptperfect',
+    name: 'PromptPerfect',
+    slug: 'promptperfect',
+    description: 'PromptPerfect is an AI-powered tool that helps optimize prompts for better results with language models. It automatically improves prompts to be more effective, clear, and economical, while providing insights on performance and potential issues.',
+    shortDescription: 'AI-powered prompt optimizer',
+    logo: 'https://images.pexels.com/photos/11134130/pexels-photo-11134130.jpeg',
+    website: 'https://promptperfect.com',
+    categoryId: 'prompt-engineering',
+    subcategoryIds: ['prompt-testing'],
+    pricing: {
+      type: 'subscription',
+      startingPrice: '$14.99/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['Limited optimizations per day', 'Basic optimization features', 'Single user']
+        },
+        {
+          name: 'Pro',
+          price: '$14.99/month',
+          billingPeriod: 'monthly',
+          features: ['Unlimited optimizations', 'Advanced optimization features', 'Performance analytics']
+        },
+        {
+          name: 'Enterprise',
+          price: 'Custom',
+          billingPeriod: 'monthly',
+          features: ['Team collaboration', 'Custom optimization rules', 'API access', 'Priority support']
+        }
+      ]
+    },
+    features: [
+      'Automatic prompt optimization',
+      'Performance comparison',
+      'Token usage reduction',
+      'Formatting improvements',
+      'Context enhancement',
+      'Bias detection'
+    ],
+    limitations: [
+      'May not always preserve exact intent',
+      'Limited customization in free tier',
+      'Works best with certain types of prompts'
+    ],
+    rating: 4.7,
+    reviewCount: 312
+  },
+  {
+    id: 'promptstorm',
+    name: 'PromptStorm',
+    slug: 'promptstorm',
+    description: 'PromptStorm is a prompt testing platform that helps users generate and evaluate multiple prompt variations at once. It provides statistical analysis of prompt performance across different models and parameters, enabling data-driven prompt optimization.',
+    shortDescription: 'Multi-variant prompt testing platform',
+    logo: 'https://images.pexels.com/photos/11134129/pexels-photo-11134129.jpeg',
+    website: 'https://promptstorm.ai',
+    categoryId: 'prompt-engineering',
+    subcategoryIds: ['prompt-testing'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$29/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Basic',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['5 tests per day', 'Basic analytics', 'Limited model support']
+        },
+        {
+          name: 'Professional',
+          price: '$29/month',
+          billingPeriod: 'monthly',
+          features: ['Unlimited testing', 'Advanced analytics', 'All model support', 'Export capabilities']
+        }
+      ]
+    },
+    features: [
+      'Simultaneous multi-variant testing',
+      'Statistical performance analysis',
+      'Visual result comparison',
+      'Parameter optimization',
+      'Export and sharing options',
+      'Custom evaluation metrics'
+    ],
+    limitations: [
+      'Free tier very limited',
+      'Can be token-intensive',
+      'Requires baseline knowledge of prompt engineering'
+    ],
+    rating: 4.4,
+    reviewCount: 156
+  },
+  {
+    id: 'chainforge',
+    name: 'ChainForge',
+    slug: 'chainforge',
+    description: 'ChainForge is an open-source tool for prompt evaluation and development that enables systematic testing of prompt-model combinations. It provides a visual interface for comparing responses across multiple prompts and models, with built-in evaluation methods.',
+    shortDescription: 'Visual prompt evaluation workbench',
+    logo: 'https://images.pexels.com/photos/11134128/pexels-photo-11134128.jpeg',
+    website: 'https://github.com/ianarawjo/ChainForge',
+    categoryId: 'prompt-engineering',
+    subcategoryIds: ['prompt-testing'],
+    pricing: {
+      type: 'free',
+      hasFreeOption: true
+    },
+    features: [
+      'Visual prompt comparison',
+      'Multi-model testing',
+      'Built-in evaluation methods',
+      'Parameter sweeping',
+      'Batch processing',
+      'Customizable evaluation metrics'
+    ],
+    limitations: [
+      'Requires local setup',
+      'Technical expertise needed',
+      'No cloud hosting option',
+      'Limited support options'
+    ],
+    rating: 4.3,
+    reviewCount: 87
+  },
+  {
+    id: 'lmql',
+    name: 'LMQL (Language Model Query Language)',
+    slug: 'lmql',
+    description: 'LMQL is a programming language designed specifically for interacting with large language models. It allows for precise control over LLM outputs through constraints, validation, and structured queries, making it ideal for advanced prompt engineering and testing.',
+    shortDescription: 'Programming language for LLM interaction',
+    logo: 'https://images.pexels.com/photos/11134127/pexels-photo-11134127.jpeg',
+    website: 'https://lmql.ai',
+    categoryId: 'prompt-engineering',
+    subcategoryIds: ['prompt-testing'],
+    pricing: {
+      type: 'free',
+      hasFreeOption: true
+    },
+    features: [
+      'Declarative query language',
+      'Output validation',
+      'Structured response formatting',
+      'Constraint-based generation',
+      'Integration with Python',
+      'Local and API model support'
+    ],
+    limitations: [
+      'Steep learning curve',
+      'Requires programming knowledge',
+      'Limited educational resources',
+      'Early-stage technology'
+    ],
+    rating: 4.6,
+    reviewCount: 124
+  },
+  {
+    id: 'openprompt',
+    name: 'OpenPrompt',
+    slug: 'openprompt',
+    description: 'OpenPrompt is an open-source framework designed for prompt engineering research and development. It provides a toolkit for creating, testing, and optimizing prompts across different prompting techniques and language models.',
+    shortDescription: 'Open-source prompt engineering framework',
+    logo: 'https://images.pexels.com/photos/11134126/pexels-photo-11134126.jpeg',
+    website: 'https://thunlp.github.io/OpenPrompt/',
+    categoryId: 'prompt-engineering',
+    subcategoryIds: ['prompt-testing'],
+    pricing: {
+      type: 'free',
+      hasFreeOption: true
+    },
+    features: [
+      'Multiple prompting strategies',
+      'Template system',
+      'Evaluation toolkit',
+      'Model integration',
+      'Research-focused features',
+      'Extensible architecture'
+    ],
+    limitations: [
+      'More academic than commercial',
+      'Requires technical expertise',
+      'Limited documentation for beginners',
+      'Primarily for research use'
+    ],
+    rating: 4.2,
+    reviewCount: 78
+  },
+
+  // Prompt Discovery & Templates
+  {
+    id: 'aiprm-for-chatgpt',
+    name: 'AIPRM for ChatGPT',
+    slug: 'aiprm-for-chatgpt',
+    description: 'AIPRM for ChatGPT is a browser extension that enhances ChatGPT with thousands of templates and prompts for various use cases. It allows users to save, categorize, and share prompts, creating a community-driven repository of effective prompts.',
+    shortDescription: 'Community prompt library for ChatGPT',
+    logo: 'https://images.pexels.com/photos/11134125/pexels-photo-11134125.jpeg',
+    website: 'https://www.aiprm.com',
+    categoryId: 'prompt-engineering',
+    subcategoryIds: ['prompt-discovery'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$10/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['Access to public prompts', 'Basic prompt saving', 'Limited categories']
+        },
+        {
+          name: 'Plus',
+          price: '$10/month',
+          billingPeriod: 'monthly',
+          features: ['Private prompts', 'All categories', 'Custom collections', 'Priority support']
+        }
+      ]
+    },
+    features: [
+      'Thousands of ready-to-use prompts',
+      'Category-based organization',
+      'Community ratings and reviews',
+      'Prompt favoriting and saving',
+      'Custom prompt creation',
+      'Prompt sharing'
+    ],
+    limitations: [
+      'ChatGPT specific',
+      'Requires browser extension',
+      'Variable quality of community prompts',
+      'Some features require paid subscription'
+    ],
+    rating: 4.8,
+    reviewCount: 1245,
+    trending: true
+  },
+  {
+    id: 'flowgpt',
+    name: 'FlowGPT',
+    slug: 'flowgpt',
+    description: 'FlowGPT is a community-driven platform for discovering, sharing, and using ChatGPT prompts. It features thousands of user-submitted prompts organized by categories, with ratings and comments to help users find the most effective prompts for their needs.',
+    shortDescription: 'Social platform for prompt sharing',
+    logo: 'https://images.pexels.com/photos/11134124/pexels-photo-11134124.jpeg',
+    website: 'https://flowgpt.com',
+    categoryId: 'prompt-engineering',
+    subcategoryIds: ['prompt-discovery'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$15/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['Browse prompts', 'Limited usage', 'Basic features']
+        },
+        {
+          name: 'Pro',
+          price: '$15/month',
+          billingPeriod: 'monthly',
+          features: ['Unlimited usage', 'Advanced features', 'Priority support', 'Early access']
+        }
+      ]
+    },
+    features: [
+      'Extensive prompt library',
+      'User ratings and reviews',
+      'Category browsing',
+      'Trending prompts section',
+      'Personal prompt collections',
+      'Direct prompt execution'
+    ],
+    limitations: [
+      'Quality varies by prompt',
+      'Popular prompts may become overused',
+      'Limited moderation of content',
+      'Some limitations without paid account'
+    ],
+    rating: 4.7,
+    reviewCount: 980,
+    trending: true
+  },
+  {
+    id: 'prompthero',
+    name: 'PromptHero',
+    slug: 'prompthero',
+    description: 'PromptHero is a platform focused on discovering and sharing effective prompts for both text and image generation AI models. It features a searchable database of prompts with examples, allowing users to find inspiration and techniques for various creative and practical applications.',
+    shortDescription: 'Prompt discovery for text and image AI',
+    logo: 'https://images.pexels.com/photos/11134123/pexels-photo-11134123.jpeg',
+    website: 'https://prompthero.com',
+    categoryId: 'prompt-engineering',
+    subcategoryIds: ['prompt-discovery'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$9.99/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Basic',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['Browse prompts', 'View examples', 'Basic search']
+        },
+        {
+          name: 'Premium',
+          price: '$9.99/month',
+          billingPeriod: 'monthly',
+          features: ['Advanced search', 'Bookmark favorites', 'No ads', 'Early access']
+        }
+      ]
+    },
+    features: [
+      'Text and image prompt discovery',
+      'Example outputs for each prompt',
+      'Searchable database',
+      'Trending and featured sections',
+      'User collections',
+      'Community engagement'
+    ],
+    limitations: [
+      'More focused on image generation',
+      'Limited advanced filtering in free tier',
+      'Some premium content restrictions',
+      'Varying quality of user submissions'
+    ],
+    rating: 4.5,
+    reviewCount: 730
+  },
+  {
+    id: 'promptvibes',
+    name: 'PromptVibes',
+    slug: 'promptvibes',
+    description: 'PromptVibes is a curated marketplace of premium prompts designed by expert prompt engineers. It focuses on high-quality, tested prompts for specific use cases, particularly for business, marketing, and professional applications.',
+    shortDescription: 'Premium curated prompt marketplace',
+    logo: 'https://images.pexels.com/photos/11134122/pexels-photo-11134122.jpeg',
+    website: 'https://promptvibes.com',
+    categoryId: 'prompt-engineering',
+    subcategoryIds: ['prompt-discovery'],
+    pricing: {
+      type: 'marketplace',
+      hasFreeOption: true,
+      startingPrice: 'Varies'
+    },
+    features: [
+      'Expert-crafted prompts',
+      'Quality assurance',
+      'Business-focused templates',
+      'Regular updates',
+      'Usage instructions',
+      'Category organization'
+    ],
+    limitations: [
+      'Most premium prompts require payment',
+      'No guarantee of results',
+      'Limited free options',
+      'May require customization for specific needs'
+    ],
+    rating: 4.4,
+    reviewCount: 385
+  },
+  
+  // Additional Prompt Engineering Tools
+  {
+    id: 'anthropic-prompt-guide',
+    name: 'Anthropic Claude Prompt Guide',
+    slug: 'anthropic-prompt-guide',
+    description: 'A comprehensive guide to effective prompting strategies for Anthropic\'s Claude model, with detailed examples and best practices for different use cases. Includes methods for improving reasoning, accuracy, and output formatting.',
+    shortDescription: 'Official Claude prompting best practices',
+    logo: 'https://images.pexels.com/photos/11134140/pexels-photo-11134140.jpeg',
+    website: 'https://docs.anthropic.com/claude/docs/guide-to-claude-prompting',
+    categoryId: 'prompt-engineering',
+    subcategoryIds: ['prompt-discovery'],
+    pricing: {
+      type: 'free',
+      hasFreeOption: true
+    },
+    features: [
+      'System prompt strategies',
+      'Structured output techniques',
+      'Few-shot learning examples',
+      'Tool use guidance',
+      'Reasoning optimization',
+      'Official documentation'
+    ],
+    limitations: [
+      'Specific to Claude models',
+      'Requires manual implementation',
+      'No automated testing tools'
+    ],
+    rating: 4.8,
+    reviewCount: 420
+  },
+  {
+    id: 'gpt-prompt-engineering',
+    name: 'OpenAI GPT Prompt Engineering Guide',
+    slug: 'gpt-prompt-engineering',
+    description: 'OpenAI\'s comprehensive resource for crafting effective prompts for GPT models, covering techniques like few-shot learning, system message optimization, function calling, and structured output formatting through JSON mode.',
+    shortDescription: 'OpenAI\'s official prompting guide',
+    logo: 'https://images.pexels.com/photos/11134141/pexels-photo-11134141.jpeg',
+    website: 'https://platform.openai.com/docs/guides/prompt-engineering',
+    categoryId: 'prompt-engineering',
+    subcategoryIds: ['prompt-discovery'],
+    pricing: {
+      type: 'free',
+      hasFreeOption: true
+    },
+    features: [
+      'Task decomposition techniques',
+      'System message optimization',
+      'JSON output formatting',
+      'Few-shot learning examples',
+      'Function calling guidance',
+      'Best practices from OpenAI'
+    ],
+    limitations: [
+      'Focused on OpenAI models only',
+      'Requires manual implementation',
+      'No interactive testing environment'
+    ],
+    rating: 4.9,
+    reviewCount: 650
+  },
+  {
+    id: 'promptingguide',
+    name: 'Prompting Guide',
+    slug: 'promptingguide',
+    description: 'An open-source guide to prompt engineering with comprehensive techniques, strategies, and examples covering various prompting methods for diverse applications. Includes research-backed approaches and practical implementations.',
+    shortDescription: 'Open-source prompt engineering guide',
+    logo: 'https://images.pexels.com/photos/11134142/pexels-photo-11134142.jpeg',
+    website: 'https://www.promptingguide.ai',
+    categoryId: 'prompt-engineering',
+    subcategoryIds: ['prompt-discovery'],
+    pricing: {
+      type: 'free',
+      hasFreeOption: true
+    },
+    features: [
+      'Research-backed techniques',
+      'Chain-of-thought examples',
+      'Model-agnostic strategies',
+      'Application-specific guides',
+      'Regular updates with latest research',
+      'Multi-language support'
+    ],
+    limitations: [
+      'No interactive elements',
+      'Requires manual implementation',
+      'Academic focus may be complex for beginners'
+    ],
+    rating: 4.7,
+    reviewCount: 310
+  },
+  {
+    id: 'prompttools',
+    name: 'PromptTools',
+    slug: 'prompttools',
+    description: 'An open-source Python library for testing and experimenting with prompts across multiple models. It provides tools for systematic experimentation, evaluation, and visualization of prompt performance across different parameters and models.',
+    shortDescription: 'Open-source prompt experimentation toolkit',
+    logo: 'https://images.pexels.com/photos/11134143/pexels-photo-11134143.jpeg',
+    website: 'https://github.com/prompttools/prompttools',
+    categoryId: 'prompt-engineering',
+    subcategoryIds: ['prompt-testing'],
+    pricing: {
+      type: 'free',
+      hasFreeOption: true
+    },
+    features: [
+      'Multi-model testing',
+      'Parameter sweeping',
+      'Performance visualization',
+      'Evaluation metrics',
+      'Jupyter notebook integration',
+      'Extensible architecture'
+    ],
+    limitations: [
+      'Requires Python knowledge',
+      'Command-line focused',
+      'No cloud hosting option',
+      'Manual setup required'
+    ],
+    rating: 4.5,
+    reviewCount: 178
+  },
+  {
+    id: 'dyno',
+    name: 'Dyno',
+    slug: 'dyno',
+    description: 'Dyno is a modern prompt engineering IDE that provides a visual interface for creating, testing, and refining prompts with real-time feedback. It includes version control, collaboration features, and integration with multiple LLM providers.',
+    shortDescription: 'Visual prompt engineering IDE',
+    logo: 'https://images.pexels.com/photos/11134144/pexels-photo-11134144.jpeg',
+    website: 'https://trydyno.com',
+    categoryId: 'prompt-engineering',
+    subcategoryIds: ['prompt-testing', 'prompt-management'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$19/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['Basic prompt testing', 'Limited experiments', 'Single user']
+        },
+        {
+          name: 'Pro',
+          price: '$19/month',
+          billingPeriod: 'monthly',
+          features: ['Unlimited experiments', 'Version history', 'Advanced analytics', 'Export capabilities']
+        }
+      ]
+    },
+    features: [
+      'Visual interface',
+      'Side-by-side comparisons',
+      'Version control',
+      'Multiple model testing',
+      'Template variables',
+      'Export and sharing'
+    ],
+    limitations: [
+      'Limited model support in free tier',
+      'Some advanced features require subscription',
+      'No on-premises deployment option'
+    ],
+    rating: 4.6,
+    reviewCount: 215
+  },
+  {
+    id: 'everyprompt',
+    name: 'EveryPrompt',
+    slug: 'everyprompt',
+    description: 'EveryPrompt is a prompt engineering workspace designed for professionals who work with language models. It provides comprehensive tools for prompt creation, testing, version control, and collaboration, with advanced features for large-scale prompt management.',
+    shortDescription: 'Professional prompt engineering workspace',
+    logo: 'https://images.pexels.com/photos/11134145/pexels-photo-11134145.jpeg',
+    website: 'https://everyprompt.com',
+    categoryId: 'prompt-engineering',
+    subcategoryIds: ['prompt-management', 'prompt-testing'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$24/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['Basic prompt creation', 'Limited testing', 'Personal use']
+        },
+        {
+          name: 'Pro',
+          price: '$24/month',
+          billingPeriod: 'monthly',
+          features: ['Advanced features', 'Collaboration tools', 'Version history', 'API access']
+        }
+      ]
+    },
+    features: [
+      'Advanced prompt editor',
+      'Model comparison',
+      'Collaborative workspaces',
+      'Version control',
+      'Template libraries',
+      'Performance analytics'
+    ],
+    limitations: [
+      'Limited features in free tier',
+      'Storage limitations',
+      'Team features require paid plan'
+    ],
+    rating: 4.7,
+    reviewCount: 280
+  },
+  {
+    id: 'snorkel',
+    name: 'Snorkel Flow',
+    slug: 'snorkel-flow',
+    description: 'Snorkel Flow is an enterprise-grade platform for data-centric AI development with specialized features for LLM prompt optimization. It enables teams to systematically develop, test, and deploy prompts at scale with robust evaluation frameworks.',
+    shortDescription: 'Enterprise prompt optimization platform',
+    logo: 'https://images.pexels.com/photos/11134146/pexels-photo-11134146.jpeg',
+    website: 'https://snorkel.ai/platform',
+    categoryId: 'prompt-engineering',
+    subcategoryIds: ['prompt-testing'],
+    pricing: {
+      type: 'enterprise',
+      startingPrice: 'Custom pricing',
+      hasFreeOption: false
+    },
+    features: [
+      'Data-centric prompt optimization',
+      'Large-scale evaluation',
+      'Collaborative workflows',
+      'Structured testing frameworks',
+      'Enterprise integration',
+      'Robust security features'
+    ],
+    limitations: [
+      'Enterprise focus only',
+      'Significant investment required',
+      'Complex setup and onboarding'
+    ],
+    rating: 4.5,
+    reviewCount: 95
+  },
+  {
+    id: 'prompster',
+    name: 'Prompster',
+    slug: 'prompster',
+    description: 'Prompster is a desktop application for managing, organizing and using AI prompts across different applications. It features a quick-access interface, template system, and history tracking to make prompt reuse and iteration efficient.',
+    shortDescription: 'Desktop prompt management tool',
+    logo: 'https://images.pexels.com/photos/11134147/pexels-photo-11134147.jpeg',
+    website: 'https://prompster.com',
+    categoryId: 'prompt-engineering',
+    subcategoryIds: ['prompt-management'],
+    pricing: {
+      type: 'paid',
+      startingPrice: '$9.99',
+      hasFreeOption: false
+    },
+    features: [
+      'Quick-access interface',
+      'Prompt organization system',
+      'Template variables',
+      'History tracking',
+      'Cross-application support',
+      'Keyboard shortcuts'
+    ],
+    limitations: [
+      'Desktop only (no web version)',
+      'One-time purchase required',
+      'Limited collaboration features'
+    ],
+    rating: 4.3,
+    reviewCount: 167
+  },
+  {
+    id: 'promptfoo',
+    name: 'PromptFoo',
+    slug: 'promptfoo',
+    description: 'PromptFoo is an open-source evaluation framework for testing and evaluating prompts across different models and configurations. It provides command-line and programmatic tools for large-scale prompt testing and quality assurance.',
+    shortDescription: 'Open-source prompt evaluation framework',
+    logo: 'https://images.pexels.com/photos/11134148/pexels-photo-11134148.jpeg',
+    website: 'https://github.com/promptfoo/promptfoo',
+    categoryId: 'prompt-engineering',
+    subcategoryIds: ['prompt-testing'],
+    pricing: {
+      type: 'free',
+      hasFreeOption: true
+    },
+    features: [
+      'Automated testing',
+      'Model comparison',
+      'Evaluation metrics',
+      'Configuration as code',
+      'CI/CD integration',
+      'Extensible architecture'
+    ],
+    limitations: [
+      'Technical expertise required',
+      'Command-line focused',
+      'Self-hosted only',
+      'Limited visualization tools'
+    ],
+    rating: 4.4,
+    reviewCount: 132
+  },
+  {
+    id: 'taxonomist',
+    name: 'Taxonomist.ai',
+    slug: 'taxonomist-ai',
+    description: 'Taxonomist.ai is a specialized tool for organizing and structuring prompt libraries with semantic categorization. It helps teams build and maintain organized prompt taxonomies with metadata, tags, and search capabilities.',
+    shortDescription: 'AI prompt library organizer',
+    logo: 'https://images.pexels.com/photos/11134149/pexels-photo-11134149.jpeg',
+    website: 'https://taxonomist.ai',
+    categoryId: 'prompt-engineering',
+    subcategoryIds: ['prompt-management'],
+    pricing: {
+      type: 'subscription',
+      startingPrice: '$29/month',
+      hasFreeOption: false,
+      tiers: [
+        {
+          name: 'Starter',
+          price: '$29/month',
+          billingPeriod: 'monthly',
+          features: ['Basic organization', 'Search functionality', 'Limited library size']
+        },
+        {
+          name: 'Professional',
+          price: '$79/month',
+          billingPeriod: 'monthly',
+          features: ['Advanced categorization', 'Unlimited prompts', 'Team collaboration', 'API access']
+        }
+      ]
+    },
+    features: [
+      'Semantic categorization',
+      'Metadata management',
+      'Search and discovery',
+      'Tag system',
+      'Version tracking',
+      'Export capabilities'
+    ],
+    limitations: [
+      'No free tier',
+      'Learning curve for taxonomy setup',
+      'Limited integrations'
+    ],
+    rating: 4.2,
+    reviewCount: 86
+  },
+  {
+    id: 'humanloop',
+    name: 'Humanloop',
+    slug: 'humanloop',
+    description: 'Humanloop is a platform for prompt engineering and LLM application management that enables teams to build, evaluate and deploy AI applications with robust measurement and improvement capabilities. It focuses on production-ready systems with human feedback integration.',
+    shortDescription: 'LLM application development platform',
+    logo: 'https://images.pexels.com/photos/11134150/pexels-photo-11134150.jpeg',
+    website: 'https://humanloop.com',
+    categoryId: 'prompt-engineering',
+    subcategoryIds: ['prompt-management', 'prompt-testing'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: 'Contact for pricing',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['Basic prompt engineering', 'Limited evaluations', 'Single user']
+        },
+        {
+          name: 'Team',
+          price: 'Custom',
+          billingPeriod: 'monthly',
+          features: ['Advanced features', 'Collaboration tools', 'Production deployment', 'Priority support']
+        }
+      ]
+    },
+    features: [
+      'Prompt version control',
+      'Human feedback integration',
+      'Evaluation frameworks',
+      'Production monitoring',
+      'Team collaboration',
+      'Model comparison'
+    ],
+    limitations: [
+      'Enterprise focus for advanced features',
+      'Limited free tier capabilities',
+      'Team pricing not transparent'
+    ],
+    rating: 4.7,
+    reviewCount: 145
+  },
+  {
+    id: 'promptknit',
+    name: 'PromptKnit',
+    slug: 'promptknit',
+    description: 'PromptKnit is a collaborative platform for teams to create, test, and deploy AI prompts with an emphasis on knowledge sharing and best practices. It includes features for template development and organizational prompt libraries.',
+    shortDescription: 'Team-oriented prompt collaboration',
+    logo: 'https://images.pexels.com/photos/11134151/pexels-photo-11134151.jpeg',
+    website: 'https://promptknit.com',
+    categoryId: 'prompt-engineering',
+    subcategoryIds: ['prompt-management', 'prompt-discovery'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$15/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Basic',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['Personal library', 'Basic templates', 'Limited sharing']
+        },
+        {
+          name: 'Team',
+          price: '$15/user/month',
+          billingPeriod: 'monthly',
+          features: ['Team libraries', 'Advanced templating', 'Knowledge sharing', 'Analytics dashboard']
+        }
+      ]
+    },
+    features: [
+      'Collaborative workspaces',
+      'Template system',
+      'Best practice sharing',
+      'Versioning capabilities',
+      'Knowledge base integration',
+      'Export options'
+    ],
+    limitations: [
+      'Limited individual features',
+      'Team-focused pricing model',
+      'Basic analytics in free tier'
+    ],
+    rating: 4.3,
+    reviewCount: 112
+  },
+  {
+    id: 'langsmith',
+    name: 'LangSmith',
+    slug: 'langsmith',
+    description: 'LangSmith is a developer platform for debugging, testing, evaluating, and monitoring LLM applications, with robust tools for prompt management and optimization. It integrates with LangChain and provides comprehensive analytics on prompt performance.',
+    shortDescription: 'LLM development and monitoring platform',
+    logo: 'https://images.pexels.com/photos/11134152/pexels-photo-11134152.jpeg',
+    website: 'https://smith.langchain.com',
+    categoryId: 'prompt-engineering',
+    subcategoryIds: ['prompt-management', 'prompt-testing'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: 'Enterprise pricing',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['Basic debugging', 'Limited runs', 'Core features']
+        },
+        {
+          name: 'Enterprise',
+          price: 'Custom',
+          billingPeriod: 'monthly',
+          features: ['Advanced analytics', 'Team collaboration', 'Production monitoring', 'Custom integrations']
+        }
+      ]
+    },
+    features: [
+      'Prompt debugging',
+      'Performance evaluation',
+      'A/B testing',
+      'Chain visualization',
+      'Monitoring dashboard',
+      'LangChain integration'
+    ],
+    limitations: [
+      'Advanced features require enterprise tier',
+      'Primarily designed for LangChain users',
+      'Complex setup for non-technical users'
+    ],
+    rating: 4.8,
+    reviewCount: 230
+  },
+  {
+    id: 'goose-ai',
+    name: 'Goose AI Prompt Analytics',
+    slug: 'goose-ai-analytics',
+    description: 'Goose AI Prompt Analytics provides detailed performance analytics for prompt optimization across various models. It features insights on token usage, response quality metrics, and pattern analysis to help identify and implement the most effective prompting strategies.',
+    shortDescription: 'Prompt performance analytics platform',
+    logo: 'https://images.pexels.com/photos/11134153/pexels-photo-11134153.jpeg',
+    website: 'https://goose.ai/analytics',
+    categoryId: 'prompt-engineering',
+    subcategoryIds: ['prompt-testing'],
+    pricing: {
+      type: 'subscription',
+      startingPrice: '$25/month',
+      hasFreeOption: false,
+      tiers: [
+        {
+          name: 'Standard',
+          price: '$25/month',
+          billingPeriod: 'monthly',
+          features: ['Basic analytics', 'Limited prompt volume', 'Standard metrics']
+        },
+        {
+          name: 'Pro',
+          price: '$75/month',
+          billingPeriod: 'monthly',
+          features: ['Advanced analytics', 'Higher volume', 'Custom metrics', 'API access']
+        }
+      ]
+    },
+    features: [
+      'Token usage analysis',
+      'Response quality metrics',
+      'Pattern recognition',
+      'Cost optimization insights',
+      'Comparative reporting',
+      'Performance dashboards'
+    ],
+    limitations: [
+      'No free tier available',
+      'Limited model support',
+      'Requires data sharing'
+    ],
+    rating: 4.4,
+    reviewCount: 98
   }
 ];

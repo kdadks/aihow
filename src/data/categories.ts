@@ -153,20 +153,29 @@ export const categories: Category[] = [
   {
     id: 'prompt-engineering',
     name: 'Prompt Engineering',
-    description: 'Tools for creating and optimizing prompts',
+    description: 'Advanced tools for crafting, optimizing, managing, and discovering AI prompts to enhance output quality, ensure consistency, and maximize the capabilities of large language models',
     icon: 'message-square',
     subcategories: [
       {
-        id: 'prompt-generators',
-        name: 'Prompt Generators',
-        description: 'Generate effective prompts for AI tools',
-        parentCategoryId: 'prompt-engineering'
+        id: 'prompt-management',
+        name: 'Prompt Management Platforms',
+        description: 'Comprehensive platforms for organizing, versioning, tracking, and collaborating on AI prompts across teams and applications with analytics and monitoring capabilities',
+        parentCategoryId: 'prompt-engineering',
+        tools: ['promptlayer', 'langchain', 'flowise', 'promptable-ai', 'promptops', 'langsmith', 'everyprompt', 'prompster', 'taxonomist', 'humanloop']
       },
       {
-        id: 'prompt-libraries',
-        name: 'Prompt Libraries',
-        description: 'Collections of prompts for various use cases',
-        parentCategoryId: 'prompt-engineering'
+        id: 'prompt-testing',
+        name: 'Prompt Testing & Optimization',
+        description: 'Specialized tools for systematically testing, evaluating, refining and optimizing prompts to improve response quality, reduce token usage, and enhance performance across different models',
+        parentCategoryId: 'prompt-engineering',
+        tools: ['promptperfect', 'promptstorm', 'chainforge', 'lmql', 'openprompt', 'prompttools', 'dyno', 'snorkel', 'promptfoo', 'goose-ai']
+      },
+      {
+        id: 'prompt-discovery',
+        name: 'Prompt Discovery & Templates',
+        description: 'Extensive libraries, marketplaces and repositories of pre-built prompts, templates and patterns organized by use case, enabling discovery of effective prompting techniques for various applications',
+        parentCategoryId: 'prompt-engineering',
+        tools: ['aiprm-for-chatgpt', 'flowgpt', 'prompthero', 'promptvibes', 'anthropic-prompt-guide', 'gpt-prompt-engineering', 'promptingguide', 'promptknit']
       }
     ]
   },
