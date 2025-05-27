@@ -16,8 +16,13 @@ export const HeroSection: React.FC = () => {
             Discover, compare, and integrate the best AI tools to enhance your productivity and creative potential.
           </p>
           <div className="mt-10 flex flex-wrap justify-center gap-4">
+            <Link to="/recommendation">
+              <Button size="lg" rightIcon={<ArrowRight className="h-5 w-5" />}>
+                Find Tools
+              </Button>
+            </Link>
             <Link to="/directory">
-              <Button size="lg" variant="outline" rightIcon={<Search className="h-5 w-5" />}>
+              <Button size="lg" variant="secondary" rightIcon={<Search className="h-5 w-5" />}>
                 Explore Tools
               </Button>
             </Link>
