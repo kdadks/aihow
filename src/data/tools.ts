@@ -2,6 +2,472 @@ import { Tool } from '../types';
 
 export const tools: Tool[] = [
   {
+    id: 'zapier-ai',
+    name: 'Zapier AI',
+    slug: 'zapier-ai',
+    description: 'Zapier AI combines natural language processing with workflow automation, allowing users to create complex automations by simply describing what they want to accomplish. It connects with 5,000+ apps and services, making it easy to automate tasks across different platforms without coding.',
+    shortDescription: 'Natural language workflow automation for 5,000+ apps',
+    logo: 'https://images.pexels.com/photos/11035386/pexels-photo-11035386.jpeg',
+    website: 'https://zapier.com/ai',
+    categoryId: 'workflow-automation',
+    subcategoryIds: ['business-automation'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$19.99/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['5 single-step Zaps', 'Basic AI suggestions', '100 tasks/month']
+        },
+        {
+          name: 'Starter',
+          price: '$19.99/month',
+          billingPeriod: 'monthly',
+          features: ['20 multi-step Zaps', 'Standard AI capabilities', '750 tasks/month']
+        },
+        {
+          name: 'Professional',
+          price: '$49/month',
+          billingPeriod: 'monthly',
+          features: ['Unlimited Zaps', 'Advanced AI automation', '2,000 tasks/month', 'Custom logic']
+        },
+        {
+          name: 'Team & Company',
+          price: '$69+/month',
+          billingPeriod: 'monthly',
+          features: ['Unlimited Zaps', 'Premium AI features', 'Team sharing', 'Role-based access']
+        }
+      ]
+    },
+    features: [
+      'Natural language automation creation',
+      'Integration with 5,000+ apps',
+      'AI-assisted workflow recommendations',
+      'Multi-step automation sequences',
+      'Conditional logic and branching',
+      'Error handling and notifications'
+    ],
+    limitations: [
+      'Complex custom logic may still require manual setup',
+      'Free plan has significant limitations',
+      'May require setup time for optimal workflows',
+      'Some third-party app integrations require paid plans'
+    ],
+    rating: 4.8,
+    reviewCount: 1560,
+    trending: true,
+    featured: true,
+    integrations: ['Google Workspace', 'Microsoft 365', 'Slack', 'CRM systems', 'Email services', '5,000+ apps'],
+    lastVerified: new Date('2025-05-20')
+  },
+  {
+    id: 'notion-ai',
+    name: 'Notion AI',
+    slug: 'notion-ai',
+    description: 'Notion AI transforms your workspace by adding powerful AI capabilities to the popular productivity platform. It can write, edit, summarize, and organize content while seamlessly integrating with Notion\'s powerful database and document management features to enhance team productivity and collaboration.',
+    shortDescription: 'AI-powered writing and organization within Notion workspaces',
+    logo: 'https://images.pexels.com/photos/11035469/pexels-photo-11035469.jpeg',
+    website: 'https://www.notion.so/product/ai',
+    categoryId: 'workflow-automation',
+    subcategoryIds: ['productivity-ai', 'document-creation'],
+    pricing: {
+      type: 'add-on',
+      startingPrice: '$8/member/month for Notion AI',
+      hasFreeOption: false,
+      tiers: [
+        {
+          name: 'Notion Personal',
+          price: '$0 + $8/month for AI',
+          billingPeriod: 'monthly',
+          features: ['Basic Notion features', 'Limited AI usage', 'Personal projects']
+        },
+        {
+          name: 'Notion Personal Pro',
+          price: '$8/month + $8/month for AI',
+          billingPeriod: 'monthly',
+          features: ['Unlimited blocks', 'Full AI capabilities', 'Advanced page analytics']
+        },
+        {
+          name: 'Notion Team',
+          price: '$10/member/month + $8/member/month for AI',
+          billingPeriod: 'monthly',
+          features: ['Team collaboration', 'Unlimited team members', 'Shared AI capabilities', 'Advanced permissions']
+        }
+      ]
+    },
+    features: [
+      'AI-powered content creation and editing',
+      'Content summarization and extraction',
+      'Meeting notes generation',
+      'Multiple writing styles and tones',
+      'Translation capabilities',
+      'Seamless integration with Notion databases'
+    ],
+    limitations: [
+      'Requires Notion subscription for full functionality',
+      'Additional cost on top of base Notion pricing',
+      'Occasional inaccuracies in complex content generation',
+      'Network connectivity required for AI functions'
+    ],
+    rating: 4.7,
+    reviewCount: 1280,
+    trending: true,
+    featured: true,
+    integrations: ['Notion workspace', 'Web Clipper', 'API access', 'Import/export tools'],
+    lastVerified: new Date('2025-05-18')
+  },
+  {
+    id: 'reclaim-ai',
+    name: 'Reclaim AI',
+    slug: 'reclaim-ai',
+    description: 'Reclaim AI is an intelligent calendar assistant that automatically schedules your tasks, habits, and meetings to optimize your time. Using AI to understand your priorities and work patterns, it finds the perfect time slots, protects your focus time, and adapts to changes in real-time.',
+    shortDescription: 'AI calendar assistant for time optimization and scheduling',
+    logo: 'https://images.pexels.com/photos/3760810/pexels-photo-3760810.jpeg',
+    website: 'https://reclaim.ai',
+    categoryId: 'workflow-automation',
+    subcategoryIds: ['scheduling-automation', 'personal-automation'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$8/user/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Basic',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['Smart scheduling', 'Calendar sync', '1:1 scheduling', 'Basic habits']
+        },
+        {
+          name: 'Pro',
+          price: '$8/user/month',
+          billingPeriod: 'monthly',
+          features: ['All basic features', 'Time analytics', 'Advanced task scheduling', 'Calendar defense', 'Smart 1:1s']
+        },
+        {
+          name: 'Team',
+          price: '$12/user/month',
+          billingPeriod: 'monthly',
+          features: ['All Pro features', 'Team analytics', 'Priority support', 'Admin controls', 'API access']
+        }
+      ]
+    },
+    features: [
+      'AI-powered smart scheduling',
+      'Automatic task prioritization',
+      'Focus time protection',
+      'Time analytics and insights',
+      'Calendar defense mechanisms',
+      'Multiple calendar integration'
+    ],
+    limitations: [
+      'Limited customization in free tier',
+      'Learning curve to optimize AI scheduling',
+      'Requires calendar data access',
+      'Some features only available on paid plans'
+    ],
+    rating: 4.7,
+    reviewCount: 890,
+    trending: true,
+    featured: false,
+    integrations: ['Google Calendar', 'Microsoft Outlook', 'Slack', 'Asana', 'Todoist', 'Zoom'],
+    lastVerified: new Date('2025-05-16')
+  },
+  {
+    id: 'motion',
+    name: 'Motion',
+    slug: 'motion',
+    description: 'Motion combines AI-powered project management with intelligent calendar scheduling to automatically organize your tasks and meetings for optimal productivity. It adapts to your work style, reschedules around new commitments, and ensures you stay focused on high-priority work.',
+    shortDescription: 'AI project manager and calendar optimizer in one platform',
+    logo: 'https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg',
+    website: 'https://www.usemotion.com',
+    categoryId: 'workflow-automation',
+    subcategoryIds: ['scheduling-automation', 'personal-automation', 'productivity-ai'],
+    pricing: {
+      type: 'subscription',
+      startingPrice: '$19/month',
+      hasFreeOption: false,
+      tiers: [
+        {
+          name: 'Individual',
+          price: '$19/month',
+          billingPeriod: 'monthly',
+          features: ['AI schedule optimization', 'Task management', 'Calendar integration', 'Personal projects']
+        },
+        {
+          name: 'Professional',
+          price: '$34/month',
+          billingPeriod: 'monthly',
+          features: ['All Individual features', 'Advanced project management', 'Custom workflows', 'Priority support']
+        },
+        {
+          name: 'Team',
+          price: '$12/user/month',
+          billingPeriod: 'monthly',
+          features: ['All Professional features', 'Team collaboration', 'Workload balancing', 'Team analytics']
+        }
+      ]
+    },
+    features: [
+      'AI calendar optimization',
+      'Automated task scheduling',
+      'Project management integration',
+      'Smart meeting scheduling',
+      'Focus time protection',
+      'Real-time schedule adaptation'
+    ],
+    limitations: [
+      'No free tier available',
+      'Higher price point than some competitors',
+      'Requires consistent task input for optimal results',
+      'Learning curve for full feature utilization'
+    ],
+    rating: 4.6,
+    reviewCount: 760,
+    trending: true,
+    featured: false,
+    integrations: ['Google Calendar', 'Microsoft Outlook', 'Slack', 'Zoom', 'Google Meet', 'Asana'],
+    lastVerified: new Date('2025-05-15')
+  },
+  {
+    id: 'clockwise',
+    name: 'Clockwise',
+    slug: 'clockwise',
+    description: 'Clockwise uses AI to optimize your calendar automatically, creating Focus Time by intelligently moving meetings to the optimal times. It analyzes everyone\'s schedule patterns to find the best time slots, minimizes context switching, and ensures teams have coordinated blocks of uninterrupted time.',
+    shortDescription: 'AI calendar optimization for creating focus time',
+    logo: 'https://images.pexels.com/photos/3760778/pexels-photo-3760778.jpeg',
+    website: 'https://www.getclockwise.com',
+    categoryId: 'workflow-automation',
+    subcategoryIds: ['scheduling-automation', 'productivity-ai'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$6.75/user/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['Focus Time creation', 'Calendar analytics', 'Basic integrations']
+        },
+        {
+          name: 'Teams',
+          price: '$6.75/user/month',
+          billingPeriod: 'monthly',
+          features: ['All free features', 'Team scheduling', 'No-meeting days', 'Team analytics']
+        },
+        {
+          name: 'Business',
+          price: 'Custom',
+          billingPeriod: 'monthly',
+          features: ['All Teams features', 'Enterprise SSO', 'Advanced analytics', 'Dedicated support']
+        }
+      ]
+    },
+    features: [
+      'AI-driven Focus Time creation',
+      'Smart meeting scheduling',
+      'Calendar analytics and insights',
+      'Team schedule coordination',
+      'Flexible working hours support',
+      'No-meeting days facilitation'
+    ],
+    limitations: [
+      'Primarily focused on Google Calendar',
+      'Limited customization in free tier',
+      'Requires team adoption for best results',
+      'Some organizations may have policy restrictions'
+    ],
+    rating: 4.6,
+    reviewCount: 850,
+    trending: false,
+    featured: false,
+    integrations: ['Google Calendar', 'Microsoft Outlook (beta)', 'Slack', 'Zoom', 'Asana', 'GitHub'],
+    lastVerified: new Date('2025-05-08')
+  },
+  {
+    id: 'tana',
+    name: 'Tana AI',
+    slug: 'tana',
+    description: 'Tana is an AI-enhanced workspace that combines the flexibility of a notes app with the structure of a database. With its unique supertags and AI capabilities, it helps organize your thoughts, manage projects, and automate workflows in a highly customizable and interconnected environment.',
+    shortDescription: 'AI-powered personal knowledge management system',
+    logo: 'https://images.pexels.com/photos/5473955/pexels-photo-5473955.jpeg',
+    website: 'https://tana.inc',
+    categoryId: 'workflow-automation',
+    subcategoryIds: ['productivity-ai', 'personal-automation'],
+    pricing: {
+      type: 'subscription',
+      startingPrice: '$10/month',
+      hasFreeOption: false,
+      tiers: [
+        {
+          name: 'Personal',
+          price: '$10/month',
+          billingPeriod: 'monthly',
+          features: ['Core Tana features', 'AI assistance', 'Unlimited nodes', 'Public templates']
+        },
+        {
+          name: 'Pro',
+          price: '$20/month',
+          billingPeriod: 'monthly',
+          features: ['All Personal features', 'Advanced AI capabilities', 'API access', 'Priority support']
+        },
+        {
+          name: 'Team',
+          price: '$15/user/month',
+          billingPeriod: 'monthly',
+          features: ['All Pro features', 'Team collaboration', 'Shared workspaces', 'Admin controls']
+        }
+      ]
+    },
+    features: [
+      'AI content generation and summarization',
+      'Structured notes with supertags',
+      'Dynamic views and filters',
+      'Cross-reference linking and backlinks',
+      'Customizable templates and workflows',
+      'Natural language processing'
+    ],
+    limitations: [
+      'No free tier available',
+      'Learning curve for advanced features',
+      'Limited third-party integrations compared to competitors',
+      'Relatively new product still in development'
+    ],
+    rating: 4.7,
+    reviewCount: 620,
+    trending: true,
+    featured: false,
+    integrations: ['API access', 'Web Clipper', 'Limited third-party integrations'],
+    lastVerified: new Date('2025-05-14')
+  },
+  {
+    id: 'mem-ai',
+    name: 'Mem AI',
+    slug: 'mem-ai',
+    description: 'Mem AI is a self-organizing workspace powered by AI that captures, organizes and connects your information automatically. With its powerful search, knowledge generation, and collaboration features, it helps individuals and teams turn scattered notes into structured knowledge.',
+    shortDescription: 'AI-powered self-organizing workspace and knowledge assistant',
+    logo: 'https://images.pexels.com/photos/7567434/pexels-photo-7567434.jpeg',
+    website: 'https://mem.ai',
+    categoryId: 'workflow-automation',
+    subcategoryIds: ['productivity-ai', 'personal-automation'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$8/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['Basic notes', 'Limited AI features', 'Search functionality', '100MB storage']
+        },
+        {
+          name: 'Personal',
+          price: '$8/month',
+          billingPeriod: 'monthly',
+          features: ['Unlimited notes', 'Full AI capabilities', 'Advanced search', '5GB storage']
+        },
+        {
+          name: 'Pro',
+          price: '$20/month',
+          billingPeriod: 'monthly',
+          features: ['All Personal features', 'Premium AI features', 'API access', '20GB storage', 'Priority support']
+        },
+        {
+          name: 'Team',
+          price: '$15/user/month',
+          billingPeriod: 'monthly',
+          features: ['All Pro features', 'Team workspaces', 'Collaborative editing', 'Admin controls']
+        }
+      ]
+    },
+    features: [
+      'AI-generated summaries and insights',
+      'Automatic note organization',
+      'Natural language search',
+      'Knowledge connections and recommendations',
+      'Document embedding and analysis',
+      'Multi-platform synchronization'
+    ],
+    limitations: [
+      'Limited storage in free tier',
+      'Full feature set requires paid plan',
+      'Advanced AI features can be resource-intensive',
+      'Some users may prefer more manual organization'
+    ],
+    rating: 4.6,
+    reviewCount: 710,
+    trending: true,
+    featured: false,
+    integrations: ['Web clipper', 'Mobile apps', 'Email integration', 'API access', 'Calendar connections'],
+    lastVerified: new Date('2025-05-12')
+  },
+  {
+    id: 'make-ai',
+    name: 'Make AI',
+    slug: 'make-ai',
+    description: 'Make AI (formerly Integromat) enhances its powerful visual automation platform with AI capabilities, allowing users to create complex workflows with natural language instructions. The platform connects 1,000+ services and apps while providing advanced logic, transformations, and error handling.',
+    shortDescription: 'Visual workflow automation platform enhanced with AI',
+    logo: 'https://images.pexels.com/photos/5926393/pexels-photo-5926393.jpeg',
+    website: 'https://www.make.com',
+    categoryId: 'workflow-automation',
+    subcategoryIds: ['business-automation'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$9/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['1,000 operations', 'Basic integrations', 'Limited AI features', '2 active scenarios']
+        },
+        {
+          name: 'Core',
+          price: '$9/month',
+          billingPeriod: 'monthly',
+          features: ['10,000 operations', 'Standard AI capabilities', '3 active scenarios']
+        },
+        {
+          name: 'Pro',
+          price: '$16/month',
+          billingPeriod: 'monthly',
+          features: ['10,000 operations', 'Advanced AI features', '10 active scenarios', 'On-premises execution']
+        },
+        {
+          name: 'Teams & Enterprise',
+          price: '$29+/month',
+          billingPeriod: 'monthly',
+          features: ['Custom operations', 'Premium AI assistance', 'Team collaboration', 'Enterprise support']
+        }
+      ]
+    },
+    features: [
+      'Visual workflow builder',
+      'AI-powered automation suggestions',
+      'Real-time execution',
+      'Data mapping and transformation',
+      'Error handling and retries',
+      'Connections to 1,000+ apps and services'
+    ],
+    limitations: [
+      'More technical learning curve than some alternatives',
+      'Limited operations in free tier',
+      'Complex scenarios require paid plans',
+      'Some integrations require premium subscriptions'
+    ],
+    rating: 4.7,
+    reviewCount: 1100,
+    trending: false,
+    featured: false,
+    integrations: ['Google Workspace', 'Microsoft 365', 'CRM systems', 'Marketing platforms', 'Payment processors', '1,000+ apps'],
+    lastVerified: new Date('2025-05-10')
+  },
+  {
     id: 'llama-3',
     name: 'Llama 3',
     slug: 'llama-3',
@@ -146,12 +612,12 @@ export const tools: Tool[] = [
     description: 'DeepSeek AI offers powerful language models for various tasks with its family of models including DeepSeek Chat and DeepSeek Coder, providing advanced capabilities for both general conversation and specialized code generation.',
     shortDescription: 'Advanced AI models for conversation and coding',
     logo: 'https://images.pexels.com/photos/7709019/pexels-photo-7709019.jpeg',
-    website: 'https://deepseek.ai',
+    website: 'https://deepseek.com',
     categoryId: 'general-ai',
     subcategoryIds: ['chatbots', 'coding-assistants'],
     pricing: {
-      type: 'freemium',
-      startingPrice: '$20/month for Pro',
+      type: 'free',
+      startingPrice: 'Free',
       hasFreeOption: true,
       tiers: [
         {

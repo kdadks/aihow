@@ -193,20 +193,43 @@ export const categories: Category[] = [
   {
     id: 'workflow-automation',
     name: 'Workflow Automation',
-    description: 'Tools for automating workflows and processes',
+    description: 'AI-powered tools for automating workflows, managing schedules, and optimizing productivity',
     icon: 'git-branch',
     subcategories: [
       {
         id: 'business-automation',
         name: 'Business Automation',
-        description: 'Automate business processes',
-        parentCategoryId: 'workflow-automation'
+        description: 'AI-powered tools to streamline and automate business processes, workflows, and operations',
+        parentCategoryId: 'workflow-automation',
+        tools: ['zapier-ai', 'make-ai', 'microsoft-power-automate', 'integromat', 'n8n', 'activepieces']
       },
       {
         id: 'personal-automation',
         name: 'Personal Automation',
-        description: 'Automate personal tasks',
-        parentCategoryId: 'workflow-automation'
+        description: 'Tools to automate personal tasks, schedules, and daily routines',
+        parentCategoryId: 'workflow-automation',
+        tools: ['reclaim-ai', 'motion', 'todoist', 'ifttt', 'automate-io']
+      },
+      {
+        id: 'productivity-ai',
+        name: 'Productivity AI',
+        description: 'AI assistants for enhancing productivity, managing projects, and organizing workspaces',
+        parentCategoryId: 'workflow-automation',
+        tools: ['notion-ai', 'tana', 'mem-ai', 'coda-ai', 'clickup-ai']
+      },
+      {
+        id: 'scheduling-automation',
+        name: 'Scheduling & Calendar AI',
+        description: 'AI tools for intelligent scheduling, calendar management, and time optimization',
+        parentCategoryId: 'workflow-automation',
+        tools: ['reclaim-ai', 'motion', 'clockwise', 'cal-ai', 'zcal']
+      },
+      {
+        id: 'data-workflow',
+        name: 'Data & Analytics Automation',
+        description: 'Tools that automate data processing, analytics, and reporting workflows',
+        parentCategoryId: 'workflow-automation',
+        tools: ['alteryx', 'hex', 'mode', 'obviously-ai', 'anakin-ai']
       }
     ]
   },
