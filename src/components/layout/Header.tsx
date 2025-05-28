@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Search, Menu, X, Scale, ChevronDown, ChevronRight } from 'lucide-react';
+import { Search, Menu, X, Scale, ChevronDown, ChevronRight, Users } from 'lucide-react';
 import { categories } from '../../data/categories';
 import { tools } from '../../data/tools';
 import { Button } from '../ui/Button';
@@ -246,7 +246,7 @@ export const Header: React.FC = () => {
       {/* Mobile Menu */}
       {isMenuOpen && (
         <div className="md:hidden border-t border-gray-200">
-          <div className="px-4 pt-4 pb-6 space-y-4">
+          <div className="px-4 pt-4 pb-6 space-y-5">
             {/* Mobile Search */}
             <form onSubmit={handleSearchSubmit} className="relative">
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -261,110 +261,186 @@ export const Header: React.FC = () => {
               />
             </form>
 
+            {/* Quick Access Cards */}
+            <div className="grid grid-cols-2 gap-3">
+              <Link 
+                to="/directory" 
+                onClick={() => setIsMenuOpen(false)}
+                className="flex flex-col items-center justify-center bg-gradient-to-r from-blue-50 to-blue-100 rounded-lg p-3 shadow-sm"
+              >
+                <Search className="h-6 w-6 text-blue-600 mb-1" />
+                <span className="text-sm font-medium text-gray-800">Tools Directory</span>
+              </Link>
+              <Link 
+                to="/workflows" 
+                onClick={() => setIsMenuOpen(false)}
+                className="flex flex-col items-center justify-center bg-gradient-to-r from-green-50 to-green-100 rounded-lg p-3 shadow-sm"
+              >
+                <ChevronRight className="h-6 w-6 text-green-600 mb-1" />
+                <span className="text-sm font-medium text-gray-800">Workflows</span>
+              </Link>
+              <Link 
+                to="/recommendation" 
+                onClick={() => setIsMenuOpen(false)}
+                className="flex flex-col items-center justify-center bg-gradient-to-r from-purple-50 to-purple-100 rounded-lg p-3 shadow-sm"
+              >
+                <Search className="h-6 w-6 text-purple-600 mb-1" />
+                <span className="text-sm font-medium text-gray-800">Get Recommendations</span>
+              </Link>
+              <Link 
+                to="/community" 
+                onClick={() => setIsMenuOpen(false)}
+                className="flex flex-col items-center justify-center bg-gradient-to-r from-yellow-50 to-yellow-100 rounded-lg p-3 shadow-sm"
+              >
+                <Users className="h-6 w-6 text-yellow-600 mb-1" />
+                <span className="text-sm font-medium text-gray-800">Community</span>
+              </Link>
+            </div>
+
+            {/* Compare Tools Link */}
+            {selectedTools.length > 0 && (
+              <Link 
+                to="/compare" 
+                className="flex items-center justify-center px-4 py-3 rounded-md text-base font-semibold text-blue-600 bg-blue-50 hover:bg-blue-100 transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                <Scale className="h-5 w-5 mr-3" />
+                Compare Selected Tools ({selectedTools.length})
+              </Link>
+            )}
+
             {/* Mobile Navigation */}
-            <nav className="space-y-3">
-              {/* AI HUB Section - Collapsible Accordion */}
-              <div className="border border-gray-100 rounded-lg overflow-hidden">
-                <div className="px-4 py-3 text-base font-medium text-gray-900 bg-gray-50">
-                  AI HUB
-                </div>
-                
-                <div className="divide-y divide-gray-100">
-                  {categories.map(category => (
-                    <details key={category.id} className="group">
-                      <summary className="flex items-center justify-between px-4 py-3 cursor-pointer focus:outline-none">
+            <div className="rounded-lg border border-gray-200 overflow-hidden">
+              <div className="px-4 py-3 bg-gray-50 border-b border-gray-200 flex justify-between items-center">
+                <span className="text-base font-semibold text-gray-900">AI Categories</span>
+                <Link 
+                  to="/directory" 
+                  className="text-xs font-medium text-blue-600"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  View All
+                </Link>
+              </div>
+              
+              <nav className="divide-y divide-gray-100 max-h-[40vh] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent">
+                {categories.map(category => (
+                  <details key={category.id} className="group">
+                    <summary className="flex items-center justify-between px-4 py-3 cursor-pointer focus:outline-none hover:bg-gray-50">
+                      <div className="flex items-center">
+                        {/* Display category icon if available */}
+                        {category.icon && (
+                          <span className="mr-2 text-gray-500 flex items-center justify-center w-6 h-6 rounded-md bg-white shadow-sm">
+                            <i className={`icon-${category.icon}`}></i>
+                          </span>
+                        )}
                         <span className="text-sm font-medium text-gray-900">{category.name}</span>
-                        <ChevronDown className="h-5 w-5 text-gray-400 group-open:rotate-180 transition-transform" />
-                      </summary>
-                      <div className="px-4 py-2 bg-gray-50">
+                      </div>
+                      <ChevronDown className="h-5 w-5 text-gray-400 group-open:rotate-180 transition-transform" />
+                    </summary>
+                    <div className="px-4 py-2 bg-gray-50 space-y-2">
+                      <div className="mb-2 flex justify-between items-center">
                         <Link
                           to={`/directory/${category.id}`}
-                          className="block py-1 mb-2 text-xs font-medium text-blue-600 hover:underline"
+                          className="text-xs font-medium text-blue-600 hover:underline"
                           onClick={() => setIsMenuOpen(false)}
                         >
                           View all in {category.name}
                         </Link>
-                        <div className="divide-y divide-gray-100">
-                          {category.subcategories?.map(subcategory => (
-                            <div key={subcategory.id} className="py-2">
-                              <Link
-                                to={`/directory/${category.id}/${subcategory.id}`}
-                                className="block text-sm font-medium text-gray-800 hover:text-blue-600"
-                                onClick={() => setIsMenuOpen(false)}
-                              >
-                                {subcategory.name}
-                              </Link>
-                              {subcategory.tools && subcategory.tools.length > 0 && (
-                                <div className="ml-3 mt-1 space-y-1">
-                                  {subcategory.tools.slice(0, 3).map((toolId, idx) => {
-                                    const tool = tools.find(t => t.id === toolId || t.slug === toolId);
-                                    return tool ? (
-                                      <Link
-                                        key={idx}
-                                        to={`/directory/${category.id}/${subcategory.id}/${tool.slug}`}
-                                        className="block py-1 text-xs text-gray-600 hover:text-blue-600"
-                                        onClick={() => setIsMenuOpen(false)}
-                                      >
-                                        • {tool.name}
-                                      </Link>
-                                    ) : null;
-                                  })}
-                                  {subcategory.tools.length > 3 && (
+                      </div>
+                      
+                      <div className="space-y-3">
+                        {category.subcategories?.map(subcategory => (
+                          <div key={subcategory.id} className="py-1">
+                            <Link
+                              to={`/directory/${category.id}/${subcategory.id}`}
+                              className="block text-sm font-medium text-gray-800 hover:text-blue-600"
+                              onClick={() => setIsMenuOpen(false)}
+                            >
+                              {subcategory.name}
+                            </Link>
+                            {subcategory.tools && subcategory.tools.length > 0 && (
+                              <div className="ml-3 mt-1 grid grid-cols-2 gap-y-1 gap-x-2">
+                                {subcategory.tools.slice(0, 4).map((toolId, idx) => {
+                                  const tool = tools.find(t => t.id === toolId || t.slug === toolId);
+                                  return tool ? (
                                     <Link
-                                      to={`/directory/${category.id}/${subcategory.id}`}
-                                      className="block py-1 text-xs text-blue-600 hover:text-blue-800"
+                                      key={idx}
+                                      to={`/directory/${category.id}/${subcategory.id}/${tool.slug}`}
+                                      className="block py-1 text-xs text-gray-600 hover:text-blue-600 truncate"
                                       onClick={() => setIsMenuOpen(false)}
                                     >
-                                      + {subcategory.tools.length - 3} more tools
+                                      • {tool.name}
                                     </Link>
-                                  )}
-                                </div>
-                              )}
-                            </div>
-                          ))}
-                        </div>
+                                  ) : null;
+                                })}
+                              </div>
+                            )}
+                            {subcategory.tools && subcategory.tools.length > 4 && (
+                              <Link
+                                to={`/directory/${category.id}/${subcategory.id}`}
+                                className="block mt-1 ml-3 text-xs text-blue-600 hover:text-blue-800 font-medium"
+                                onClick={() => setIsMenuOpen(false)}
+                              >
+                                View all {subcategory.tools.length} tools →
+                              </Link>
+                            )}
+                          </div>
+                        ))}
                       </div>
-                    </details>
-                  ))}
-                </div>
+                    </div>
+                  </details>
+                ))}
+              </nav>
+            </div>
+            
+            {/* Secondary Navigation Links */}
+            <div className="rounded-lg border border-gray-200 overflow-hidden bg-gray-50">
+              <div className="px-4 py-3 border-b border-gray-200 flex justify-between items-center">
+                <span className="text-base font-semibold text-gray-900">More Resources</span>
               </div>
-              
-              {/* Other Mobile Navigation Links */}
-              <Link 
-                to="/workflows" 
-                className="flex items-center px-4 py-3 rounded-md text-base font-medium text-gray-900 hover:bg-gray-50"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Workflows
-              </Link>
-              <Link 
-                to="/community" 
-                className="flex items-center px-4 py-3 rounded-md text-base font-medium text-gray-900 hover:bg-gray-50"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Community
-              </Link>
-              
-              {/* Compare Tools Link */}
-              {selectedTools.length > 0 && (
+              <div className="grid grid-cols-2 divide-y divide-x divide-gray-100">
                 <Link 
-                  to="/compare" 
-                  className="flex items-center px-4 py-3 rounded-md text-base font-medium text-blue-600 hover:bg-blue-50"
+                  to="/blog" 
+                  className="flex flex-col items-center justify-center p-4 text-center hover:bg-gray-100"
                   onClick={() => setIsMenuOpen(false)}
                 >
-                  <Scale className="h-5 w-5 mr-3" />
-                  Compare Tools ({selectedTools.length})
+                  <ChevronRight className="h-5 w-5 text-gray-500 mb-1" />
+                  <span className="text-sm font-medium text-gray-900">AI Blog</span>
                 </Link>
-              )}
-            </nav>
+                <Link 
+                  to="/testimonials" 
+                  className="flex flex-col items-center justify-center p-4 text-center hover:bg-gray-100"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  <ChevronRight className="h-5 w-5 text-gray-500 mb-1" />
+                  <span className="text-sm font-medium text-gray-900">Reviews</span>
+                </Link>
+                <Link 
+                  to="/about" 
+                  className="flex flex-col items-center justify-center p-4 text-center hover:bg-gray-100 border-t"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  <ChevronRight className="h-5 w-5 text-gray-500 mb-1" />
+                  <span className="text-sm font-medium text-gray-900">About Us</span>
+                </Link>
+                <Link 
+                  to="/contact" 
+                  className="flex flex-col items-center justify-center p-4 text-center hover:bg-gray-100 border-t"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  <ChevronRight className="h-5 w-5 text-gray-500 mb-1" />
+                  <span className="text-sm font-medium text-gray-900">Contact</span>
+                </Link>
+              </div>
+            </div>
 
             {/* Mobile Auth Buttons */}
-            <div className="pt-4 border-t border-gray-200">
-              <div className="space-y-2">
-                <Button variant="outline" fullWidth className="justify-center">
+            <div className="pt-4 mt-2 border-t border-gray-200">
+              <div className="grid grid-cols-2 gap-3">
+                <Button variant="outline" fullWidth className="justify-center py-2 shadow-sm">
                   Log in
                 </Button>
-                <Button fullWidth className="justify-center">
+                <Button fullWidth className="justify-center py-2 shadow-sm">
                   Sign up
                 </Button>
               </div>
