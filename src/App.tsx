@@ -1,6 +1,8 @@
-import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { MainLayout } from './components/layout/MainLayout';
+import { Providers } from './providers/Providers';
+import { LoginForm } from './auth/components/LoginForm';
+import { RegisterForm } from './auth/components/RegisterForm';
 import HomePage from './pages/HomePage';
 import DirectoryPage from './pages/DirectoryPage';
 import RecommendationPage from './pages/RecommendationPage';
@@ -21,7 +23,8 @@ import TestimonialsPage from './pages/TestimonialsPage';
 
 function App() {
   return (
-    <Router>
+    <Providers>
+      <Router>
       <Routes>
         <Route path="/" element={<MainLayout />}>
           <Route index element={<HomePage />} />
@@ -44,10 +47,13 @@ function App() {
           <Route path="blog" element={<BlogPage />} />
           <Route path="forum" element={<ForumPage />} />
           <Route path="testimonials" element={<TestimonialsPage />} />
+          <Route path="login" element={<LoginForm />} />
+          <Route path="signup" element={<RegisterForm />} />
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>
-    </Router>
+      </Router>
+    </Providers>
   );
 }
 

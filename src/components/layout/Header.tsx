@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../../auth/hooks/useAuth';
 import { Search, Menu, X, Scale, ChevronDown, ChevronRight, Users } from 'lucide-react';
 import { categories } from '../../data/categories';
 import { tools } from '../../data/tools';
@@ -9,6 +10,7 @@ import { useComparisonStore } from '../../stores/comparisonStore';
 
 export const Header: React.FC = () => {
   const navigate = useNavigate();
+  const { } = useAuth();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [activeCategoryId, setActiveCategoryId] = useState<string | null>(null);
@@ -219,8 +221,8 @@ export const Header: React.FC = () => {
               </form>
               
               <div className="flex items-center space-x-3">
-                <Button variant="ghost" size="sm">Log in</Button>
-                <Button size="sm">Sign up</Button>
+                <Button variant="ghost" size="sm" onClick={() => navigate('/login')}>Log in</Button>
+                <Button size="sm" onClick={() => navigate('/signup')}>Sign up</Button>
               </div>
             </div>
           </div>
@@ -437,10 +439,19 @@ export const Header: React.FC = () => {
             {/* Mobile Auth Buttons */}
             <div className="pt-4 mt-2 border-t border-gray-200">
               <div className="grid grid-cols-2 gap-3">
-                <Button variant="outline" fullWidth className="justify-center py-2 shadow-sm">
+                <Button
+                  variant="outline"
+                  fullWidth
+                  className="justify-center py-2 shadow-sm"
+                  onClick={() => navigate('/login')}
+                >
                   Log in
                 </Button>
-                <Button fullWidth className="justify-center py-2 shadow-sm">
+                <Button
+                  fullWidth
+                  className="justify-center py-2 shadow-sm"
+                  onClick={() => navigate('/signup')}
+                >
                   Sign up
                 </Button>
               </div>

@@ -2,6 +2,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { ErrorBoundary } from 'react-error-boundary';
 import { ErrorFallback } from '../components/error/ErrorFallback';
+import { AuthProvider } from '../auth/providers/AuthProvider';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -20,8 +21,10 @@ export function Providers({ children }: ProvidersProps) {
   return (
     <ErrorBoundary FallbackComponent={ErrorFallback}>
       <QueryClientProvider client={queryClient}>
-        {children}
-        <ReactQueryDevtools />
+        <AuthProvider>
+          {children}
+          <ReactQueryDevtools />
+        </AuthProvider>
       </QueryClientProvider>
     </ErrorBoundary>
   );
