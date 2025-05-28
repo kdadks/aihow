@@ -4157,5 +4157,622 @@ export const tools: Tool[] = [
     ],
     rating: 4.4,
     reviewCount: 98
+  },
+  {
+    id: 'replit-ghost-writer',
+    name: 'Replit Ghost Writer',
+    slug: 'replit-ghost-writer',
+    description: 'Replit Ghost Writer is an AI coding assistant integrated into the Replit IDE that can generate whole functions, explain code, provide examples, and help solve coding problems. It offers contextual suggestions and supports real-time collaborative coding.',
+    shortDescription: 'AI coding in the Replit environment',
+    logo: 'https://images.pexels.com/photos/2115217/pexels-photo-2115217.jpeg',
+    website: 'https://replit.com/ghostwriter',
+    categoryId: 'code-creation',
+    subcategoryIds: ['code-generation', 'code-completion'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$10/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['Basic code completion', 'Limited AI assistance', 'Community access']
+        },
+        {
+          name: 'Pro',
+          price: '$10/month',
+          billingPeriod: 'monthly',
+          features: ['Full AI assistance', 'Advanced code generation', 'Priority compute', 'Unlimited usage']
+        }
+      ]
+    },
+    features: [
+      'AI code generation',
+      'Context-aware completions',
+      'Code explanation',
+      'Built-in IDE',
+      'Full web-based development',
+      'Collaborative coding'
+    ],
+    limitations: [
+      'Limited free tier capabilities',
+      'Web-based only',
+      'Some languages have better support than others',
+      'Internet connection required'
+    ],
+    rating: 4.7,
+    reviewCount: 1240,
+    trending: true,
+    featured: true,
+    integrations: ['GitHub', 'GitLab', 'Connected databases', 'API integrations'],
+    lastVerified: new Date('2025-05-20')
+  },
+  {
+    id: 'amazon-codewhisperer',
+    name: 'Amazon CodeWhisperer',
+    slug: 'amazon-codewhisperer',
+    description: 'Amazon CodeWhisperer is an AI coding companion that generates code recommendations based on developers\' comments and existing code. It supports multiple programming languages and frameworks, integrating security scanning to help identify vulnerabilities early in the development process.',
+    shortDescription: 'AWS-powered coding assistant',
+    logo: 'https://images.pexels.com/photos/1181271/pexels-photo-1181271.jpeg',
+    website: 'https://aws.amazon.com/codewhisperer/',
+    categoryId: 'code-creation',
+    subcategoryIds: ['code-completion', 'code-optimization'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$19/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Individual',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['Code suggestions', 'Basic completions', 'Personal use']
+        },
+        {
+          name: 'Professional',
+          price: '$19/user/month',
+          billingPeriod: 'monthly',
+          features: ['Security scanning', 'Enterprise admin', 'Custom policies', 'IP ownership']
+        }
+      ]
+    },
+    features: [
+      'Real-time code suggestions',
+      'Built-in security scanning',
+      'AWS service integration',
+      'Multi-language support',
+      'Reference tracking',
+      'Code customization'
+    ],
+    limitations: [
+      'Limited AWS optimization for free tier',
+      'Not as comprehensive as some competitors',
+      'Requires IDE plugin installation',
+      'Better with AWS-related code'
+    ],
+    rating: 4.6,
+    reviewCount: 820,
+    trending: true,
+    featured: false,
+    integrations: ['VS Code', 'JetBrains IDEs', 'AWS Cloud9', 'Lambda Console', 'AWS services'],
+    lastVerified: new Date('2025-05-22')
+  },
+  {
+    id: 'kite-ai',
+    name: 'Kite AI',
+    slug: 'kite-ai',
+    description: 'Kite AI is a sophisticated coding assistant that leverages machine learning to provide intelligent code completions with line-of-code and full-function suggestions. It features offline processing capabilities and seamlessly integrates with most popular code editors.',
+    shortDescription: 'ML-powered coding completions',
+    logo: 'https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg',
+    website: 'https://kite.com',
+    categoryId: 'code-creation',
+    subcategoryIds: ['code-completion'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$16.60/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['Basic completions', 'Popular language support', 'Editor integrations']
+        },
+        {
+          name: 'Pro',
+          price: '$16.60/month',
+          billingPeriod: 'monthly',
+          features: ['Advanced completions', 'More language support', 'Function patterns', 'Team functionality']
+        }
+      ]
+    },
+    features: [
+      'Smart code completions',
+      'Local processing option',
+      'Multi-editor support',
+      'Function pattern analysis',
+      'Python expert modes',
+      'Documentation lookup'
+    ],
+    limitations: [
+      'Python-focused (other languages have less support)',
+      'Resource intensive for local processing',
+      'Free tier has limited capability',
+      'Internet required for some features'
+    ],
+    rating: 4.5,
+    reviewCount: 1050,
+    trending: false,
+    featured: false,
+    integrations: ['VS Code', 'JetBrains IDEs', 'Atom', 'Sublime Text', 'Vim/NeoVim'],
+    lastVerified: new Date('2025-05-15')
+  },
+  {
+    id: 'sourcegraph-cody',
+    name: 'Sourcegraph Cody',
+    slug: 'sourcegraph-cody',
+    description: 'Sourcegraph Cody is an AI coding assistant that understands your entire codebase, providing context-aware answers, generating relevant code, and enabling natural language code search across repositories. It specializes in large codebase understanding and multi-repository context.',
+    shortDescription: 'Context-aware codebase AI assistant',
+    logo: 'https://images.pexels.com/photos/7988079/pexels-photo-7988079.jpeg',
+    website: 'https://sourcegraph.com/cody',
+    categoryId: 'code-creation',
+    subcategoryIds: ['code-generation', 'code-optimization'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$19/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['Basic code assistance', 'Single repository context', 'Limited completions']
+        },
+        {
+          name: 'Pro',
+          price: '$19/month',
+          billingPeriod: 'monthly',
+          features: ['Full codebase context', 'Multi-repository search', 'Advanced completions', 'Custom models']
+        },
+        {
+          name: 'Enterprise',
+          price: 'Custom',
+          billingPeriod: 'monthly',
+          features: ['SSO', 'Self-hosting option', 'Organization controls', 'Custom embeddings', 'Compliance features']
+        }
+      ]
+    },
+    features: [
+      'Whole codebase understanding',
+      'Context-aware code generation',
+      'Natural language code search',
+      'Multi-repository awareness',
+      'Code explanations',
+      'Code refactoring assistance'
+    ],
+    limitations: [
+      'Initial indexing time for large codebases',
+      'Free tier limited to smaller codebases',
+      'Enterprise features require subscription',
+      'Some language limitations'
+    ],
+    rating: 4.7,
+    reviewCount: 780,
+    trending: true,
+    featured: false,
+    integrations: ['VS Code', 'JetBrains', 'GitHub', 'GitLab', 'Bitbucket'],
+    lastVerified: new Date('2025-05-18')
+  },
+  {
+    id: 'codiumai',
+    name: 'CodiumAI',
+    slug: 'codiumai',
+    description: 'CodiumAI is an AI-powered code testing assistant that analyzes code to automatically generate meaningful tests, detect bugs, and provide test coverage metrics. It supports multiple programming languages and emphasizes code quality through intelligent testing.',
+    shortDescription: 'AI-powered test generation',
+    logo: 'https://images.pexels.com/photos/5483071/pexels-photo-5483071.jpeg',
+    website: 'https://codium.ai',
+    categoryId: 'code-creation',
+    subcategoryIds: ['code-optimization'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$14/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Community',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['Basic test generation', 'Limited analyses', 'Personal projects']
+        },
+        {
+          name: 'Pro',
+          price: '$14/month',
+          billingPeriod: 'monthly',
+          features: ['Advanced test generation', 'Full code analysis', 'Edge case discovery', 'Priority support']
+        },
+        {
+          name: 'Team',
+          price: '$39/user/month',
+          billingPeriod: 'monthly',
+          features: ['Team collaboration', 'Test management', 'Custom rules', 'Advanced coverage metrics']
+        }
+      ]
+    },
+    features: [
+      'Automated test generation',
+      'Bug prediction and detection',
+      'Edge case identification',
+      'Code quality metrics',
+      'Multi-language support',
+      'Test explanation'
+    ],
+    limitations: [
+      'Complex code may require manual review',
+      'Limited free tier usage',
+      'Some languages have better support than others',
+      'Integration setup required'
+    ],
+    rating: 4.6,
+    reviewCount: 580,
+    trending: false,
+    featured: false,
+    integrations: ['VS Code', 'JetBrains', 'GitHub', 'GitLab', 'CI/CD pipelines'],
+    lastVerified: new Date('2025-05-19')
+  },
+  {
+    id: 'mutable-ai',
+    name: 'Mutable AI',
+    slug: 'mutable-ai',
+    description: 'Mutable AI is an AI-powered software development platform that helps developers build production-ready applications from scratch by generating entire codebases, handling full-stack implementation, and allowing natural language-driven development with continuous improvements.',
+    shortDescription: 'Full application generation platform',
+    logo: 'https://images.pexels.com/photos/4065615/pexels-photo-4065615.jpeg',
+    website: 'https://mutable.ai',
+    categoryId: 'code-creation',
+    subcategoryIds: ['code-generation'],
+    pricing: {
+      type: 'subscription',
+      startingPrice: '$24/month',
+      hasFreeOption: false,
+      tiers: [
+        {
+          name: 'Developer',
+          price: '$24/month',
+          billingPeriod: 'monthly',
+          features: ['App generation', 'Full-stack support', 'Code explanations', 'Expert guidance']
+        },
+        {
+          name: 'Team',
+          price: '$49/user/month',
+          billingPeriod: 'monthly',
+          features: ['Collaborative workspace', 'Team libraries', 'Shared projects', 'Priority generation']
+        }
+      ]
+    },
+    features: [
+      'Full application generation',
+      'Natural language requirements',
+      'Production-quality code',
+      'Full-stack development',
+      'Architecture design',
+      'Interactive revisions'
+    ],
+    limitations: [
+      'No free tier',
+      'Complex app limitations',
+      'Custom framework challenges',
+      'May need manual adjustments'
+    ],
+    rating: 4.5,
+    reviewCount: 410,
+    trending: true,
+    featured: false,
+    integrations: ['GitHub', 'GitLab', 'Bitbucket', 'AWS', 'Google Cloud', 'Azure'],
+    lastVerified: new Date('2025-05-17')
+  },
+  {
+    id: 'codegeex',
+    name: 'CodeGeeX',
+    slug: 'codegeex',
+    description: 'CodeGeeX is an open-source, multilingual code generation model supporting 20+ programming languages. It features code translation between languages, intelligent code completion, and customizable input-output patterns while maintaining the ability to run locally for privacy.',
+    shortDescription: 'Open-source multilingual code generation',
+    logo: 'https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg',
+    website: 'https://codegeex.ai',
+    categoryId: 'code-creation',
+    subcategoryIds: ['code-generation', 'code-completion'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$11/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Community',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['Basic code generation', 'IDE plugins', 'Local execution', 'Open-source model']
+        },
+        {
+          name: 'Pro',
+          price: '$11/month',
+          billingPeriod: 'monthly',
+          features: ['Enhanced models', 'Priority compute', 'Advanced features', 'Professional support']
+        }
+      ]
+    },
+    features: [
+      'Multi-language support (20+ languages)',
+      'Code translation between languages',
+      'Local execution option',
+      'Privacy-focused',
+      'Open-source model',
+      'Customizable patterns'
+    ],
+    limitations: [
+      'Requires good hardware for local execution',
+      'Less polished than some commercial alternatives',
+      'Community support for free tier',
+      'Advanced features need subscription'
+    ],
+    rating: 4.4,
+    reviewCount: 640,
+    trending: false,
+    featured: false,
+    integrations: ['VS Code', 'JetBrains IDEs', 'GitHub', 'Jupyter Notebooks'],
+    lastVerified: new Date('2025-05-21')
+  },
+  {
+    id: 'devin-ai',
+    name: 'Devin AI',
+    slug: 'devin-ai',
+    description: 'Devin is an autonomous AI software engineer that can understand complex requirements, create project plans, write and debug code, and collaborate with human developers through natural language conversations. It maintains context across extensive coding sessions and can independently build complete applications.',
+    shortDescription: 'Autonomous AI software engineer',
+    logo: 'https://images.pexels.com/photos/546819/pexels-photo-546819.jpeg',
+    website: 'https://devin.ai',
+    categoryId: 'code-creation',
+    subcategoryIds: ['code-generation', 'code-optimization'],
+    pricing: {
+      type: 'subscription',
+      startingPrice: '$39/month',
+      hasFreeOption: false,
+      tiers: [
+        {
+          name: 'Professional',
+          price: '$39/month',
+          billingPeriod: 'monthly',
+          features: ['Complete project automation', 'Continuous learning', 'Project planning', 'Multi-language support']
+        },
+        {
+          name: 'Enterprise',
+          price: 'Custom',
+          billingPeriod: 'monthly',
+          features: ['Team collaboration', 'Custom integration', 'Advanced security', 'Dedicated support']
+        }
+      ]
+    },
+    features: [
+      'Autonomous code generation',
+      'Project planning and execution',
+      'Debugging and testing',
+      'Long-context retention',
+      'Version control integration',
+      'Natural language collaboration'
+    ],
+    limitations: [
+      'Limited availability (waitlist)',
+      'Complex deployments may require human review',
+      'Subscription required for all features',
+      'Internet connection needed for operation'
+    ],
+    rating: 4.9,
+    reviewCount: 580,
+    trending: true,
+    featured: true,
+    integrations: ['GitHub', 'GitLab', 'BitBucket', 'VS Code', 'Terminal'],
+    lastVerified: new Date('2025-05-25')
+  },
+  {
+    id: 'mintlify',
+    name: 'Mintlify',
+    slug: 'mintlify',
+    description: 'Mintlify is an AI-powered documentation generator that automatically creates and maintains high-quality documentation from code. It analyzes code structure, comments, and usage patterns to produce comprehensive, well-organized documentation with minimal developer input.',
+    shortDescription: 'AI documentation generator',
+    logo: 'https://images.pexels.com/photos/1181677/pexels-photo-1181677.jpeg',
+    website: 'https://mintlify.com',
+    categoryId: 'code-creation',
+    subcategoryIds: ['code-optimization'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$24/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Community',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['Basic documentation', 'Open-source projects', 'Community support']
+        },
+        {
+          name: 'Pro',
+          price: '$24/month',
+          billingPeriod: 'monthly',
+          features: ['Advanced customization', 'API documentation', 'Analytics', 'Custom domain']
+        },
+        {
+          name: 'Team',
+          price: '$99/month',
+          billingPeriod: 'monthly',
+          features: ['Team collaboration', 'Role-based access', 'Priority support', 'Enterprise SSO']
+        }
+      ]
+    },
+    features: [
+      'Automatic documentation generation',
+      'Beautiful documentation UI',
+      'Code change detection',
+      'Multiple language support',
+      'Search functionality',
+      'Version control'
+    ],
+    limitations: [
+      'Complex code may need manual review',
+      'Limited customization in free tier',
+      'Best for well-commented code',
+      'Some language limitations'
+    ],
+    rating: 4.7,
+    reviewCount: 640,
+    trending: true,
+    featured: false,
+    integrations: ['GitHub', 'GitLab', 'Bitbucket', 'VS Code', 'NPM', 'Docker'],
+    lastVerified: new Date('2025-05-24')
+  },
+  {
+    id: 'aider-ai',
+    name: 'Aider',
+    slug: 'aider-ai',
+    description: 'Aider is an AI pair programming tool that works directly in your terminal, allowing you to make code changes through natural language conversations. It can understand, edit, and create code across multiple files while maintaining project context and working with git repositories.',
+    shortDescription: 'Terminal-based AI pair programmer',
+    logo: 'https://images.pexels.com/photos/4709286/pexels-photo-4709286.jpeg',
+    website: 'https://aider.chat',
+    categoryId: 'code-creation',
+    subcategoryIds: ['coding-assistants', 'code-optimization'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$15/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Open Source',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['Core features', 'Self-hosted', 'BYOK (Bring Your Own Key)', 'Community support']
+        },
+        {
+          name: 'Pro',
+          price: '$15/month',
+          billingPeriod: 'monthly',
+          features: ['Advanced models', 'Enhanced context', 'Priority support', 'Extended history']
+        }
+      ]
+    },
+    features: [
+      'Terminal-based coding assistant',
+      'Multi-file code editing',
+      'Git integration',
+      'Project context awareness',
+      'Direct implementation of changes',
+      'Open source foundation'
+    ],
+    limitations: [
+      'Command-line interface learning curve',
+      'Requires API keys for LLMs',
+      'Simple UI compared to IDE plugins',
+      'Performance depends on LLM quality'
+    ],
+    rating: 4.6,
+    reviewCount: 410,
+    trending: true,
+    featured: false,
+    integrations: ['Git', 'GitHub', 'GPT-4', 'Claude', 'Terminal', 'Linux/macOS/Windows'],
+    lastVerified: new Date('2025-05-23')
+  },
+  {
+    id: 'safurai',
+    name: 'Safurai',
+    slug: 'safurai',
+    description: 'Safurai is an AI coding assistant that focuses on security and best practices while helping developers write, refactor, and optimize code. It can identify potential vulnerabilities, suggest improvements, and generate documentation with an emphasis on producing secure, production-ready code.',
+    shortDescription: 'Security-focused AI coding assistant',
+    logo: 'https://images.pexels.com/photos/5380642/pexels-photo-5380642.jpeg',
+    website: 'https://safurai.com',
+    categoryId: 'code-creation',
+    subcategoryIds: ['coding-assistants', 'code-optimization'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$18/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['Basic security checks', 'Limited completions', 'Standard IDE integration']
+        },
+        {
+          name: 'Pro',
+          price: '$18/month',
+          billingPeriod: 'monthly',
+          features: ['Advanced security analysis', 'Unlimited completions', 'Priority support', 'Custom rules']
+        },
+        {
+          name: 'Enterprise',
+          price: 'Custom',
+          billingPeriod: 'monthly',
+          features: ['Custom security policies', 'Team management', 'Compliance features', 'Dedicated support']
+        }
+      ]
+    },
+    features: [
+      'Security-focused code suggestions',
+      'Vulnerability detection',
+      'Best practice enforcement',
+      'Code refactoring',
+      'Documentation generation',
+      'Performance optimization'
+    ],
+    limitations: [
+      'Free tier has limited security checks',
+      'IDE plugin required',
+      'Some language limitations',
+      'Deep security analysis requires Pro tier'
+    ],
+    rating: 4.7,
+    reviewCount: 520,
+    trending: true,
+    featured: false,
+    integrations: ['VS Code', 'JetBrains IDEs', 'GitHub', 'GitLab', 'CI/CD pipelines'],
+    lastVerified: new Date('2025-05-22')
+  },
+  {
+    id: 'gpt-pilot',
+    name: 'GPT Pilot',
+    slug: 'gpt-pilot',
+    description: 'GPT Pilot is an open-source dev tool that leverages AI to generate entire codebases based on high-level descriptions. It guides you through project specification and development steps, writes tests, handles errors, and provides a conversational interface for collaborative coding.',
+    shortDescription: 'Open-source AI application generator',
+    logo: 'https://images.pexels.com/photos/2004161/pexels-photo-2004161.jpeg',
+    website: 'https://github.com/Pythagora-io/gpt-pilot',
+    categoryId: 'code-creation',
+    subcategoryIds: ['code-generation'],
+    pricing: {
+      type: 'free',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Open Source',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['Full code generation', 'Project scaffolding', 'Test writing', 'BYOK (API keys)']
+        }
+      ]
+    },
+    features: [
+      'Complete application generation',
+      'Interactive development process',
+      'Test creation',
+      'Error handling',
+      'Project management',
+      'Open source flexibility'
+    ],
+    limitations: [
+      'Requires LLM API keys (cost)',
+      'Complex setup process',
+      'Best for small to medium projects',
+      'May require developer oversight'
+    ],
+    rating: 4.5,
+    reviewCount: 780,
+    trending: true,
+    featured: false,
+    integrations: ['GitHub', 'GPT-4', 'Claude', 'Terminal', 'Docker'],
+    lastVerified: new Date('2025-05-26')
   }
 ];

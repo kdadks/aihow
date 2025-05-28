@@ -97,13 +97,22 @@ export const categories: Category[] = [
         id: 'coding-assistants',
         name: 'Coding Assistants',
         description: 'Get help with writing and debugging code',
-        parentCategoryId: 'code-creation'
+        parentCategoryId: 'code-creation',
+        tools: ['github-copilot', 'codeium', 'cursor-ai', 'tabnine', 'aider-ai', 'safurai']
       },
       {
         id: 'code-optimization',
         name: 'Code Optimization',
         description: 'Optimize and refactor code',
-        parentCategoryId: 'code-creation'
+        parentCategoryId: 'code-creation',
+        tools: ['mintlify', 'aider-ai', 'safurai', 'sourcegraph-cody', 'codiumai']
+      },
+      {
+        id: 'code-generation',
+        name: 'Code Generation',
+        description: 'Generate complete code snippets or applications from descriptions',
+        parentCategoryId: 'code-creation',
+        tools: ['claude-code', 'gemini-code', 'gpt-pilot', 'devin-ai', 'mutable-ai', 'replit-ghost-writer']
       }
     ]
   },
