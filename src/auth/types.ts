@@ -10,6 +10,8 @@ export type AuthErrorType =
   | 'PROFILE_CREATE_ERROR'
   | 'UNAUTHORIZED'
   | 'RATE_LIMIT'
+  | 'ROLE_ASSIGN_ERROR'
+  | 'ROLE_NOT_FOUND'
   | 'UNKNOWN';
 
 export interface AuthError {
@@ -32,6 +34,12 @@ export interface UserRole {
   id: string;
   name: string;
   description?: string;
+}
+
+export interface UserRoleRelation {
+  user_id: string;
+  role_id: string;
+  role: UserRole;
 }
 
 export interface UserProfile {

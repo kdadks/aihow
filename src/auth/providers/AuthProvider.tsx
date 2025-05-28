@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
 import { AuthContext, AUTH_ERRORS } from '../context/AuthContext';
-import { 
-  AuthState, 
-  AuthError, 
-  AuthErrorType, 
-  User, 
+import {
+  AuthState,
+  AuthError,
+  AuthErrorType,
+  User,
   UserProfile,
+  UserRoleRelation,
   AuthResponse,
   isAuthError
 } from '../types';
@@ -33,8 +34,31 @@ export function AuthProvider({ children }: AuthProviderProps) {
   const createUserProfile = (userId: string, username?: string): UserProfile => ({
     id: userId,
     username: username || userId,
-    roles: []
+    roles: [] // Initialize with empty roles array
   });
+
+  const assignDefaultRole = async (userId: string) => {
+    try {
+      // Get the default user role ID
+      const { data: roleData, error: roleError } = await supabase
+        .from('roles')
+        .select('id')
+        .eq('name', 'user')
+        .single();
+
+      if (roleError) throw createAuthError('ROLE_ASSIGN_ERROR', roleError.message);
+      if (!roleData) throw createAuthError('ROLE_NOT_FOUND', 'Default user role not found');
+
+      // Assign the role to the user
+      const { error: assignError } = await supabase
+        .from('user_roles')
+        .insert([{ user_id: userId, role_id: roleData.id }]);
+
+      if (assignError) throw createAuthError('ROLE_ASSIGN_ERROR', assignError.message);
+    } catch (error) {
+      throw createAuthError('ROLE_ASSIGN_ERROR', error instanceof Error ? error.message : 'Failed to assign default role');
+    }
+  };
 
   useEffect(() => {
     const initAuth = async () => {
@@ -47,13 +71,21 @@ export function AuthProvider({ children }: AuthProviderProps) {
           // Fetch user profile
           const { data: profileData } = await supabase
             .from('profiles')
-            .select('*')
+            .select(`
+              *,
+              user_roles (
+                role:roles (
+                  id,
+                  name
+                )
+              )
+            `)
             .eq('id', session.user.id)
             .single();
 
           const profile = profileData ? {
             ...profileData,
-            roles: profileData.roles || []
+            roles: profileData.user_roles?.map((ur: UserRoleRelation) => ur.role) || []
           } : createUserProfile(session.user.id);
 
           const user: User = {
@@ -108,13 +140,21 @@ export function AuthProvider({ children }: AuthProviderProps) {
       // Fetch user profile
       const { data: profileData } = await supabase
         .from('profiles')
-        .select('*')
+        .select(`
+          *,
+          user_roles (
+            role:roles (
+              id,
+              name
+            )
+          )
+        `)
         .eq('id', data.user.id)
         .single();
 
       const profile = profileData ? {
         ...profileData,
-        roles: profileData.roles || []
+        roles: profileData.user_roles?.map((ur: UserRoleRelation) => ur.role) || []
       } : createUserProfile(data.user.id);
 
       const user: User = {
@@ -155,13 +195,35 @@ export function AuthProvider({ children }: AuthProviderProps) {
       if (authError) throw createAuthError('EMAIL_EXISTS', authError.message);
       if (!data?.user) throw createAuthError('UNKNOWN', 'Registration failed - no user data');
 
-      // Create user profile
+      // Create user profile and assign default role
       const profile = createUserProfile(data.user.id, username);
       const { error: profileError } = await supabase
         .from('profiles')
         .insert([profile]);
 
       if (profileError) throw createAuthError('PROFILE_CREATE_ERROR', profileError.message);
+
+      // Assign default role
+      await assignDefaultRole(data.user.id);
+
+      // Fetch the profile with roles
+      const { data: updatedProfileData } = await supabase
+        .from('profiles')
+        .select(`
+          *,
+          user_roles (
+            role:roles (
+              id,
+              name
+            )
+          )
+        `)
+        .eq('id', data.user.id)
+        .single();
+
+      if (updatedProfileData) {
+        profile.roles = updatedProfileData.user_roles?.map((ur: UserRoleRelation) => ur.role) || [];
+      }
 
       const user: User = {
         ...data.user,

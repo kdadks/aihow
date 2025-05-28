@@ -3,6 +3,8 @@ import { MainLayout } from './components/layout/MainLayout';
 import { Providers } from './providers/Providers';
 import { LoginForm } from './auth/components/LoginForm';
 import { RegisterForm } from './auth/components/RegisterForm';
+import { ForgotPassword } from './auth/components/ForgotPassword';
+import { ResetPassword } from './auth/components/ResetPassword';
 import HomePage from './pages/HomePage';
 import DirectoryPage from './pages/DirectoryPage';
 import RecommendationPage from './pages/RecommendationPage';
@@ -49,6 +51,8 @@ function App() {
           <Route path="testimonials" element={<TestimonialsPage />} />
           <Route path="login" element={<LoginForm />} />
           <Route path="signup" element={<RegisterForm />} />
+          <Route path="forgot-password" element={<ForgotPassword />} />
+          <Route path="reset-password" element={<ResetPassword />} />
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>

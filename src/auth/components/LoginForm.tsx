@@ -98,12 +98,13 @@ export function LoginForm({ onSuccess }: LoginFormProps) {
 
         <div className="text-center text-sm text-gray-600">
           Don't have an account?{' '}
-          <a 
-            href="/register" 
+          <button
+            onClick={() => navigate('/signup')}
             className="text-blue-600 hover:text-blue-800"
+            type="button"
           >
             Sign up
-          </a>
+          </button>
         </div>
       </form>
     </div>

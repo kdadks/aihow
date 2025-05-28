@@ -11,6 +11,8 @@ export const AUTH_ERRORS: Record<AuthErrorType, string> = {
   PROFILE_CREATE_ERROR: 'Failed to create user profile',
   UNAUTHORIZED: 'User not authenticated',
   RATE_LIMIT: 'Too many attempts, please try again later',
+  ROLE_ASSIGN_ERROR: 'Failed to assign user role',
+  ROLE_NOT_FOUND: 'Role not found',
   UNKNOWN: 'An unexpected error occurred'
 };
 
