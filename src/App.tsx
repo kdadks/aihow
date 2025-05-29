@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { MainLayout } from './components/layout/MainLayout';
 import { Providers } from './providers/Providers';
+import { adminRoutes } from './admin/routes';
 import { LoginForm } from './auth/components/LoginForm';
 import { RegisterForm } from './auth/components/RegisterForm';
 import { ForgotPassword } from './auth/components/ForgotPassword';
@@ -28,6 +29,22 @@ function App() {
     <Providers>
       <Router>
       <Routes>
+        {adminRoutes.map((route) => (
+          <Route
+            key={route.path}
+            path={route.path}
+            element={route.element}
+          >
+            {route.children?.map((child) => (
+              <Route
+                key={child.path}
+                path={child.path}
+                element={child.element}
+                index={child.index}
+              />
+            ))}
+          </Route>
+        ))}
         <Route path="/" element={<MainLayout />}>
           <Route index element={<HomePage />} />
           <Route path="directory">

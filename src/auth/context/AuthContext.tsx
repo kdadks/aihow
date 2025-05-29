@@ -1,5 +1,6 @@
 import { createContext, useContext } from 'react';
 import { AuthContextType, AuthState, AuthError, AuthErrorType } from '../types';
+import { supabase } from '../../lib/supabase';
 
 // Define specific auth error types
 export const AUTH_ERRORS: Record<AuthErrorType, string> = {
@@ -48,7 +49,18 @@ const defaultContext: AuthContextType = {
   checkAuth: async () => {
     throw createAuthError('NOT_INITIALIZED');
   },
-  hasRole: () => false,
+  hasRole: (role: string) => {
+    // Check user metadata from current session for role
+    if (!initialState.session?.user?.app_metadata) return false;
+    
+    const userRoles = initialState.session.user.app_metadata.roles || [];
+    if (!userRoles) return false;
+
+    // Support both array and string role formats
+    return Array.isArray(userRoles)
+      ? userRoles.includes(role)
+      : userRoles === role;
+  },
   hasPermission: () => false,
   clearError: () => {}
 };

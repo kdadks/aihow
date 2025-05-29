@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Login Test</title>
+  <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    h1 {
+      color: #333;
+    }
+    
+    .card {
+      background: #f5f5f5;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+    
+    button {
+      background: #4f46e5;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    
+    input {
+      padding: 8px;
+      margin-right: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      width: 200px;
+    }
+    
+    .result {
+      margin-top: 20px;
+      background: #eee;
+      padding: 15px;
+      border-radius: 4px;
+      white-space: pre-wrap;
+      font-family: monospace;
+    }
+    
+    .error {
+      color: #e53935;
+      margin-top: 10px;
+    }
+    
+    .success {
+      color: #43a047;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Admin Login Test</h1>
+  
+  <div class="card">
+    <h2>Connection Info</h2>
+    <div>
+      <strong>Supabase URL:</strong> <span id="supabaseUrl"></span>
+    </div>
+  </div>
+  
+  <div class="card">
+    <h2>Admin Login</h2>
+    <div>
+      <input type="email" id="emailInput" placeholder="Email" value="admin@aihow.org">
+      <input type="password" id="passwordInput" placeholder="Password" value="AIhow@Admin2025">
+      <button id="loginBtn">Login</button>
+      <div id="loginResult" class="result" style="display: none;"></div>
+    </div>
+  </div>
+  
+  <div class="card">
+    <h2>Verify Database Status</h2>
+    <button id="checkProfilesBtn">Check Profiles Table</button>
+    <div id="profilesResult" class="result" style="display: none;"></div>
+    
+    <button id="checkRolesBtn">Check Roles Table</button>
+    <div id="rolesResult" class="result" style="display: none;"></div>
+  </div>
+  
+  <div class="card">
+    <h2>SQL Fix</h2>
+    <p>Copy and run this in the Supabase SQL Editor:</p>
+    <div class="result">
+-- Ensure required extensions
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+CREATE EXTENSION IF NOT EXISTS pgcrypto;
+
+-- Manually create admin user if doesn't exist
+INSERT INTO auth.users (
+  id, 
+  email,
+  encrypted_password,
+  email_confirmed_at,
+  raw_user_meta_data,
+  created_at,
+  updated_at
+)
+SELECT 
+  uuid_generate_v4(), 
+  'admin@aihow.org',
+  crypt('AIhow@Admin2025', gen_salt('bf')),
+  now(),
+  '{"full_name":"System Administrator"}'::jsonb,
+  now(),
+  now()
+WHERE NOT EXISTS (
+  SELECT 1 FROM auth.users WHERE email = 'admin@aihow.org'
+)
+RETURNING id;
+
+-- Get admin user ID
+DO $$ 
+DECLARE
+  admin_user_id uuid;
+  admin_role_id uuid;
+BEGIN
+  -- Get admin user id
+  SELECT id INTO admin_user_id FROM auth.users 
+  WHERE email = 'admin@aihow.org';
+  
+  -- Ensure admin role exists
+  INSERT INTO public.roles (name, description)
+  SELECT 'admin', 'Full system access'
+  WHERE NOT EXISTS (
+    SELECT 1 FROM public.roles WHERE name = 'admin'
+  );
+  
+  -- Get admin role id
+  SELECT id INTO admin_role_id FROM public.roles 
+  WHERE name = 'admin';
+  
+  -- Ensure profile exists
+  INSERT INTO public.profiles (id, username, full_name)
+  SELECT admin_user_id, 'admin@aihow.org', 'System Administrator'
+  WHERE NOT EXISTS (
+    SELECT 1 FROM public.profiles WHERE id = admin_user_id
+  );
+  
+  -- Ensure role assignment exists
+  INSERT INTO public.user_roles (user_id, role_id)
+  SELECT admin_user_id, admin_role_id
+  WHERE NOT EXISTS (
+    SELECT 1 FROM public.user_roles 
+    WHERE user_id = admin_user_id AND role_id = admin_role_id
+  );
+END $$;
+    </div>
+  </div>
+  
+  <script>
+    // Get URL parameters
+    const urlParams = new URLSearchParams(window.location.search);
+    const supabaseUrl = urlParams.get('url') || 'https://bynlkphjpmxskoqiahow.supabase.co';
+    const supabaseAnonKey = urlParams.get('key') || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ5bmxrcGhqcG14c2tvcWlhaG93Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDgxOTAxMjQsImV4cCI6MjA2Mzc2NjEyNH0.KVrcmJiDxRoyp4zNnqr-C50KlRfNguTuH6F3tICNsJM';
+    
+    // Show Supabase URL
+    document.getElementById('supabaseUrl').textContent = supabaseUrl;
+    
+    // Initialize Supabase client
+    const supabase = supabase.createClient(supabaseUrl, supabaseAnonKey);
+    
+    // Test login
+    document.getElementById('loginBtn').addEventListener('click', async () => {
+      const email = document.getElementById('emailInput').value;
+      const password = document.getElementById('passwordInput').value;
+      const resultEl = document.getElementById('loginResult');
+      
+      resultEl.style.display = 'block';
+      resultEl.textContent = 'Logging in...';
+      
+      try {
+        const { data, error } = await supabase.auth.signInWithPassword({
+          email,
+          password
+        });
+        
+        if (error) {
+          resultEl.className = 'result error';
+          resultEl.textContent = `Login failed: ${error.message}\n\nCode: ${error.code || 'unknown'}\nStatus: ${error.status || 'unknown'}`;
+        } else {
+          resultEl.className = 'result success';
+          resultEl.textContent = `Login successful!\n\nUser: ${data.user.email}\n\nSession: ${data.session.access_token ? 'Created (has token)' : 'No token'}`;
+        }
+      } catch (err) {
+        resultEl.className = 'result error';
+        resultEl.textContent = `Error: ${err.message}`;
+      }
+    });
+    
+    // Check profiles
+    document.getElementById('checkProfilesBtn').addEventListener('click', async () => {
+      const resultEl = document.getElementById('profilesResult');
+      
+      resultEl.style.display = 'block';
+      resultEl.textContent = 'Checking profiles...';
+      
+      try {
+        const { data, error } = await supabase
+          .from('profiles')
+          .select('*')
+          .limit(5);
+        
+        if (error) {
+          resultEl.className = 'result error';
+          resultEl.textContent = `Error fetching profiles: ${error.message}`;
+        } else {
+          resultEl.className = 'result';
+          resultEl.textContent = `Found ${data.length} profiles:\n\n${JSON.stringify(data, null, 2)}`;
+        }
+      } catch (err) {
+        resultEl.className = 'result error';
+        resultEl.textContent = `Error: ${err.message}`;
+      }
+    });
+    
+    // Check roles
+    document.getElementById('checkRolesBtn').addEventListener('click', async () => {
+      const resultEl = document.getElementById('rolesResult');
+      
+      resultEl.style.display = 'block';
+      resultEl.textContent = 'Checking roles...';
+      
+      try {
+        const { data, error } = await supabase
+          .from('roles')
+          .select('*');
+        
+        if (error) {
+          resultEl.className = 'result error';
+          resultEl.textContent = `Error fetching roles: ${error.message}`;
+        } else {
+          resultEl.className = 'result';
+          resultEl.textContent = `Found ${data.length} roles:\n\n${JSON.stringify(data, null, 2)}`;
+        }
+      } catch (err) {
+        resultEl.className = 'result error';
+        resultEl.textContent = `Error: ${err.message}`;
+      }
+    });
+  </script>
+</body>
+</html>

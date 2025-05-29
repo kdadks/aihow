@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Direct Supabase Login Test</title>
+  <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', sans-serif;
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      line-height: 1.6;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    input {
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+    button {
+      padding: 10px;
+      background-color: #4f46e5;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #4338ca;
+    }
+    .result {
+      margin-top: 20px;
+      padding: 15px;
+      background-color: #f3f4f6;
+      border-radius: 4px;
+      white-space: pre-wrap;
+      font-family: monospace;
+    }
+  </style>
+</head>
+<body>
+  <h1>Supabase Auth Test</h1>
+  
+  <div>
+    <p>This page tests direct connection to Supabase authentication, bypassing React and other frameworks.</p>
+    <p>Check the detailed logs in the browser console.</p>
+  </div>
+  
+  <form id="loginForm">
+    <input type="email" id="email" placeholder="Email" value="admin@aihow.org">
+    <input type="password" id="password" placeholder="Password" value="AIhow@Admin2025">
+    <button type="submit">Login</button>
+  </form>
+
+  <button id="createTestUser">Create Test User</button>
+  <button id="testConnection">Test API Connection</button>
+  
+  <div class="result" id="result">Results will appear here...</div>
+  
+  <script>
+    // Get Supabase URL and key from URL parameters or environment
+    const supabaseUrl = 'https://bynlkphjpmxskoqiahow.supabase.co';
+    const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ5bmxrcGhqcG14c2tvcWlhaG93Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDgxOTAxMjQsImV4cCI6MjA2Mzc2NjEyNH0.KVrcmJiDxRoyp4zNnqr-C50KlRfNguTuH6F3tICNsJM';
+    
+    // Initialize Supabase client
+    const supabase = supabase.createClient(supabaseUrl, supabaseAnonKey, {
+      auth: {
+        autoRefreshToken: true,
+        persistSession: true,
+        // Debug options
+        debug: true,
+        detectSessionInUrl: false
+      }
+    });
+    
+    // Display result in the UI
+    function showResult(message, isError = false) {
+      const resultEl = document.getElementById('result');
+      resultEl.textContent = message;
+      resultEl.style.backgroundColor = isError ? '#fee2e2' : '#f0fdf4';
+      resultEl.style.color = isError ? '#b91c1c' : '#166534';
+    }
+    
+    // Login form handler
+    document.getElementById('loginForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      
+      showResult('Logging in...');
+      
+      try {
+        console.log('Attempting login with email:', email);
+        
+        const { data, error } = await supabase.auth.signInWithPassword({
+          email,
+          password,
+        });
+        
+        if (error) {
+          console.error('Login error:', error);
+          showResult(`Login failed: ${error.message}`, true);
+        } else {
+          console.log('Login successful:', data);
+          showResult(`Login successful!\n\nUser: ${data.user.email}\nSession: ${data.session ? 'Valid' : 'None'}`);
+        }
+      } catch (err) {
+        console.error('Unexpected error:', err);
+        showResult(`Error: ${err.message}`, true);
+      }
+    });
+    
+    // Create test user
+    document.getElementById('createTestUser').addEventListener('click', async () => {
+      const testEmail = `test${Date.now()}@example.com`;
+      const testPassword = 'TestPassword123!';
+      
+      showResult('Creating test user...');
+      
+      try {
+        const { data, error } = await supabase.auth.signUp({
+          email: testEmail,
+          password: testPassword,
+        });
+        
+        if (error) {
+          console.error('Error creating user:', error);
+          showResult(`Failed to create test user: ${error.message}`, true);
+        } else {
+          console.log('User created:', data);
+          showResult(`Test user created successfully!\n\nEmail: ${testEmail}\nPassword: ${testPassword}\n\nTry logging in with these credentials.`);
+        }
+      } catch (err) {
+        console.error('Unexpected error:', err);
+        showResult(`Error: ${err.message}`, true);
+      }
+    });
+    
+    // Test API connection
+    document.getElementById('testConnection').addEventListener('click', async () => {
+      showResult('Testing connection...');
+      
+      try {
+        // Test general connection
+        const { data: versionData, error: versionError } = await supabase
+          .from('roles') // This table should exist in your schema
+          .select('name')
+          .limit(1);
+        
+        if (versionError) {
+          console.error('Connection error:', versionError);
+          showResult(`API connection failed: ${versionError.message}`, true);
+        } else {
+          console.log('Connection successful:', versionData);
+          showResult(`API connection successful!\nRole found: ${versionData[0]?.name || 'none'}`);
+        }
+      } catch (err) {
+        console.error('Unexpected error:', err);
+        showResult(`Error: ${err.message}`, true);
+      }
+    });
+    
+    // Check for existing session on page load
+    async function checkSession() {
+      try {
+        const { data: { session } } = await supabase.auth.getSession();
+        
+        if (session) {
+          console.log('Existing session found:', session);
+          showResult(`Already logged in as: ${session.user.email}`);
+        } else {
+          console.log('No session found');
+          showResult('No active session. Please log in.');
+        }
+      } catch (err) {
+        console.error('Session check error:', err);
+      }
+    }
+    
+    // Run session check on page load
+    checkSession();
+  </script>
+</body>
+</html>
