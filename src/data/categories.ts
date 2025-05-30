@@ -284,20 +284,78 @@ export const categories: Category[] = [
   {
     id: 'agentic-ai',
     name: 'Agentic AI',
-    description: 'AI agents that can perform tasks autonomously',
+    description: 'Autonomous AI agents that can plan, reason, and execute complex tasks independently with minimal human supervision',
     icon: 'bot',
     subcategories: [
       {
-        id: 'task-agents',
-        name: 'Task Agents',
-        description: 'AI agents for specific tasks',
-        parentCategoryId: 'agentic-ai'
-      },
-      {
         id: 'autonomous-agents',
         name: 'Autonomous Agents',
-        description: 'Fully autonomous AI agents',
-        parentCategoryId: 'agentic-ai'
+        description: 'Fully autonomous AI agents that can operate independently to achieve complex goals through self-directed planning and execution',
+        parentCategoryId: 'agentic-ai',
+        tools: ['autogpt', 'babyagi', 'agent-gpt', 'devika-ai']
+      },
+      {
+        id: 'task-automation',
+        name: 'Task Automation Agents',
+        description: 'AI agents specialized in automating specific tasks and workflows with intelligent decision-making capabilities',
+        parentCategoryId: 'agentic-ai',
+        tools: ['autogpt', 'babyagi', 'agent-gpt', 'superagent']
+      },
+      {
+        id: 'multi-agent-systems',
+        name: 'Multi-Agent Systems',
+        description: 'Frameworks and platforms for coordinating multiple AI agents to work together on complex collaborative tasks',
+        parentCategoryId: 'agentic-ai',
+        tools: ['crew-ai', 'langchain-agents']
+      },
+      {
+        id: 'business-agents',
+        name: 'Business Process Agents',
+        description: 'Enterprise-focused AI agents for automating business processes, customer service, and organizational workflows',
+        parentCategoryId: 'agentic-ai',
+        tools: ['superagent', 'microsoft-copilot-studio', 'apollo-ai-agent']
+      },
+      {
+        id: 'development-agents',
+        name: 'Development & Code Agents',
+        description: 'AI agents specialized in software development, code generation, and engineering tasks with autonomous problem-solving',
+        parentCategoryId: 'agentic-ai',
+        tools: ['devika-ai', 'gpt-engineer']
+      },
+      {
+        id: 'research-agents',
+        name: 'Research & Analysis Agents',
+        description: 'AI agents focused on conducting research, data analysis, and information synthesis across multiple sources',
+        parentCategoryId: 'agentic-ai',
+        tools: ['research-agent-gpt', 'dataiku-ai-agents']
+      },
+      {
+        id: 'sales-agents',
+        name: 'Sales & Marketing Agents',
+        description: 'AI agents for automating sales prospecting, lead generation, and marketing campaign management',
+        parentCategoryId: 'agentic-ai',
+        tools: ['apollo-ai-agent', 'jasper-ai-agent']
+      },
+      {
+        id: 'agent-frameworks',
+        name: 'Agent Development Frameworks',
+        description: 'Comprehensive frameworks and platforms for building, deploying, and managing custom AI agents',
+        parentCategoryId: 'agentic-ai',
+        tools: ['langchain-agents', 'crew-ai', 'superagent']
+      },
+      {
+        id: 'personal-agents',
+        name: 'Personal Assistant Agents',
+        description: 'AI agents designed for individual productivity, personal task management, and lifestyle automation',
+        parentCategoryId: 'agentic-ai',
+        tools: ['agent-gpt', 'microsoft-copilot-studio']
+      },
+      {
+        id: 'enterprise-agents',
+        name: 'Enterprise AI Agents',
+        description: 'Large-scale AI agents designed for enterprise environments with advanced security, compliance, and integration capabilities',
+        parentCategoryId: 'agentic-ai',
+        tools: ['microsoft-copilot-studio', 'dataiku-ai-agents']
       }
     ]
   },

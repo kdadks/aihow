@@ -2110,7 +2110,7 @@ export const tools: Tool[] = [
           features: ['Limited generations', 'Basic quality', 'Community access']
         },
         {
-          name: 'Pro',
+          name: '$20/month',
           price: '$20/month',
           billingPeriod: 'monthly',
           features: ['Unlimited generations', 'High quality', 'Commercial rights']
@@ -3454,1899 +3454,712 @@ export const tools: Tool[] = [
     reviewCount: 78
   },
 
-  // Prompt Discovery & Templates
+  // =====================
+  // AGENTIC AI TOOLS
+  // =====================
+
+  // Task Automation Agents
   {
-    id: 'aiprm-for-chatgpt',
-    name: 'AIPRM for ChatGPT',
-    slug: 'aiprm-for-chatgpt',
-    description: 'AIPRM for ChatGPT is a browser extension that enhances ChatGPT with thousands of templates and prompts for various use cases. It allows users to save, categorize, and share prompts, creating a community-driven repository of effective prompts.',
-    shortDescription: 'Community prompt library for ChatGPT',
-    logo: 'https://images.pexels.com/photos/11134125/pexels-photo-11134125.jpeg',
-    website: 'https://www.aiprm.com',
-    categoryId: 'prompt-engineering',
-    subcategoryIds: ['prompt-discovery'],
+    id: 'autogpt',
+    name: 'AutoGPT',
+    slug: 'autogpt',
+    description: 'AutoGPT is an experimental open-source AI agent that attempts to make GPT-4 fully autonomous. It chains together LLM thoughts to autonomously achieve complex goals by breaking them down into sub-tasks and executing them through various APIs and tools.',
+    shortDescription: 'Autonomous AI agent for complex task execution',
+    logo: 'https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg',
+    website: 'https://autogpt.net',
+    categoryId: 'agentic-ai',
+    subcategoryIds: ['autonomous-agents', 'task-automation'],
     pricing: {
-      type: 'freemium',
-      startingPrice: '$10/month',
+      type: 'free',
+      startingPrice: 'Free',
       hasFreeOption: true,
       tiers: [
         {
-          name: 'Free',
+          name: 'Open Source',
           price: '$0',
           billingPeriod: 'monthly',
-          features: ['Access to public prompts', 'Basic prompt saving', 'Limited categories']
+          features: ['Self-hosted deployment', 'Full code access', 'Community support', 'Custom integrations']
         },
         {
-          name: 'Plus',
-          price: '$10/month',
-          billingPeriod: 'monthly',
-          features: ['Private prompts', 'All categories', 'Custom collections', 'Priority support']
-        }
-      ]
-    },
-    features: [
-      'Thousands of ready-to-use prompts',
-      'Category-based organization',
-      'Community ratings and reviews',
-      'Prompt favoriting and saving',
-      'Custom prompt creation',
-      'Prompt sharing'
-    ],
-    limitations: [
-      'ChatGPT specific',
-      'Requires browser extension',
-      'Variable quality of community prompts',
-      'Some features require paid subscription'
-    ],
-    rating: 4.8,
-    reviewCount: 1245,
-    trending: true
-  },
-  {
-    id: 'flowgpt',
-    name: 'FlowGPT',
-    slug: 'flowgpt',
-    description: 'FlowGPT is a community-driven platform for discovering, sharing, and using ChatGPT prompts. It features thousands of user-submitted prompts organized by categories, with ratings and comments to help users find the most effective prompts for their needs.',
-    shortDescription: 'Social platform for prompt sharing',
-    logo: 'https://images.pexels.com/photos/11134124/pexels-photo-11134124.jpeg',
-    website: 'https://flowgpt.com',
-    categoryId: 'prompt-engineering',
-    subcategoryIds: ['prompt-discovery'],
-    pricing: {
-      type: 'freemium',
-      startingPrice: '$15/month',
-      hasFreeOption: true,
-      tiers: [
-        {
-          name: 'Free',
-          price: '$0',
-          billingPeriod: 'monthly',
-          features: ['Browse prompts', 'Limited usage', 'Basic features']
-        },
-        {
-          name: 'Pro',
-          price: '$15/month',
-          billingPeriod: 'monthly',
-          features: ['Unlimited usage', 'Advanced features', 'Priority support', 'Early access']
-        }
-      ]
-    },
-    features: [
-      'Extensive prompt library',
-      'User ratings and reviews',
-      'Category browsing',
-      'Trending prompts section',
-      'Personal prompt collections',
-      'Direct prompt execution'
-    ],
-    limitations: [
-      'Quality varies by prompt',
-      'Popular prompts may become overused',
-      'Limited moderation of content',
-      'Some limitations without paid account'
-    ],
-    rating: 4.7,
-    reviewCount: 980,
-    trending: true
-  },
-  {
-    id: 'prompthero',
-    name: 'PromptHero',
-    slug: 'prompthero',
-    description: 'PromptHero is a platform focused on discovering and sharing effective prompts for both text and image generation AI models. It features a searchable database of prompts with examples, allowing users to find inspiration and techniques for various creative and practical applications.',
-    shortDescription: 'Prompt discovery for text and image AI',
-    logo: 'https://images.pexels.com/photos/11134123/pexels-photo-11134123.jpeg',
-    website: 'https://prompthero.com',
-    categoryId: 'prompt-engineering',
-    subcategoryIds: ['prompt-discovery'],
-    pricing: {
-      type: 'freemium',
-      startingPrice: '$9.99/month',
-      hasFreeOption: true,
-      tiers: [
-        {
-          name: 'Basic',
-          price: '$0',
-          billingPeriod: 'monthly',
-          features: ['Browse prompts', 'View examples', 'Basic search']
-        },
-        {
-          name: 'Premium',
-          price: '$9.99/month',
-          billingPeriod: 'monthly',
-          features: ['Advanced search', 'Bookmark favorites', 'No ads', 'Early access']
-        }
-      ]
-    },
-    features: [
-      'Text and image prompt discovery',
-      'Example outputs for each prompt',
-      'Searchable database',
-      'Trending and featured sections',
-      'User collections',
-      'Community engagement'
-    ],
-    limitations: [
-      'More focused on image generation',
-      'Limited advanced filtering in free tier',
-      'Some premium content restrictions',
-      'Varying quality of user submissions'
-    ],
-    rating: 4.5,
-    reviewCount: 730
-  },
-  {
-    id: 'promptvibes',
-    name: 'PromptVibes',
-    slug: 'promptvibes',
-    description: 'PromptVibes is a curated marketplace of premium prompts designed by expert prompt engineers. It focuses on high-quality, tested prompts for specific use cases, particularly for business, marketing, and professional applications.',
-    shortDescription: 'Premium curated prompt marketplace',
-    logo: 'https://images.pexels.com/photos/11134122/pexels-photo-11134122.jpeg',
-    website: 'https://promptvibes.com',
-    categoryId: 'prompt-engineering',
-    subcategoryIds: ['prompt-discovery'],
-    pricing: {
-      type: 'marketplace',
-      hasFreeOption: true,
-      startingPrice: 'Varies'
-    },
-    features: [
-      'Expert-crafted prompts',
-      'Quality assurance',
-      'Business-focused templates',
-      'Regular updates',
-      'Usage instructions',
-      'Category organization'
-    ],
-    limitations: [
-      'Most premium prompts require payment',
-      'No guarantee of results',
-      'Limited free options',
-      'May require customization for specific needs'
-    ],
-    rating: 4.4,
-    reviewCount: 385
-  },
-  
-  // Additional Prompt Engineering Tools
-  {
-    id: 'anthropic-prompt-guide',
-    name: 'Anthropic Claude Prompt Guide',
-    slug: 'anthropic-prompt-guide',
-    description: 'A comprehensive guide to effective prompting strategies for Anthropic\'s Claude model, with detailed examples and best practices for different use cases. Includes methods for improving reasoning, accuracy, and output formatting.',
-    shortDescription: 'Official Claude prompting best practices',
-    logo: 'https://images.pexels.com/photos/11134140/pexels-photo-11134140.jpeg',
-    website: 'https://docs.anthropic.com/claude/docs/guide-to-claude-prompting',
-    categoryId: 'prompt-engineering',
-    subcategoryIds: ['prompt-discovery'],
-    pricing: {
-      type: 'free',
-      hasFreeOption: true
-    },
-    features: [
-      'System prompt strategies',
-      'Structured output techniques',
-      'Few-shot learning examples',
-      'Tool use guidance',
-      'Reasoning optimization',
-      'Official documentation'
-    ],
-    limitations: [
-      'Specific to Claude models',
-      'Requires manual implementation',
-      'No automated testing tools'
-    ],
-    rating: 4.8,
-    reviewCount: 420
-  },
-  {
-    id: 'gpt-prompt-engineering',
-    name: 'OpenAI GPT Prompt Engineering Guide',
-    slug: 'gpt-prompt-engineering',
-    description: 'OpenAI\'s comprehensive resource for crafting effective prompts for GPT models, covering techniques like few-shot learning, system message optimization, function calling, and structured output formatting through JSON mode.',
-    shortDescription: 'OpenAI\'s official prompting guide',
-    logo: 'https://images.pexels.com/photos/11134141/pexels-photo-11134141.jpeg',
-    website: 'https://platform.openai.com/docs/guides/prompt-engineering',
-    categoryId: 'prompt-engineering',
-    subcategoryIds: ['prompt-discovery'],
-    pricing: {
-      type: 'free',
-      hasFreeOption: true
-    },
-    features: [
-      'Task decomposition techniques',
-      'System message optimization',
-      'JSON output formatting',
-      'Few-shot learning examples',
-      'Function calling guidance',
-      'Best practices from OpenAI'
-    ],
-    limitations: [
-      'Focused on OpenAI models only',
-      'Requires manual implementation',
-      'No interactive testing environment'
-    ],
-    rating: 4.9,
-    reviewCount: 650
-  },
-  {
-    id: 'promptingguide',
-    name: 'Prompting Guide',
-    slug: 'promptingguide',
-    description: 'An open-source guide to prompt engineering with comprehensive techniques, strategies, and examples covering various prompting methods for diverse applications. Includes research-backed approaches and practical implementations.',
-    shortDescription: 'Open-source prompt engineering guide',
-    logo: 'https://images.pexels.com/photos/11134142/pexels-photo-11134142.jpeg',
-    website: 'https://www.promptingguide.ai',
-    categoryId: 'prompt-engineering',
-    subcategoryIds: ['prompt-discovery'],
-    pricing: {
-      type: 'free',
-      hasFreeOption: true
-    },
-    features: [
-      'Research-backed techniques',
-      'Chain-of-thought examples',
-      'Model-agnostic strategies',
-      'Application-specific guides',
-      'Regular updates with latest research',
-      'Multi-language support'
-    ],
-    limitations: [
-      'No interactive elements',
-      'Requires manual implementation',
-      'Academic focus may be complex for beginners'
-    ],
-    rating: 4.7,
-    reviewCount: 310
-  },
-  {
-    id: 'prompttools',
-    name: 'PromptTools',
-    slug: 'prompttools',
-    description: 'An open-source Python library for testing and experimenting with prompts across multiple models. It provides tools for systematic experimentation, evaluation, and visualization of prompt performance across different parameters and models.',
-    shortDescription: 'Open-source prompt experimentation toolkit',
-    logo: 'https://images.pexels.com/photos/11134143/pexels-photo-11134143.jpeg',
-    website: 'https://github.com/prompttools/prompttools',
-    categoryId: 'prompt-engineering',
-    subcategoryIds: ['prompt-testing'],
-    pricing: {
-      type: 'free',
-      hasFreeOption: true
-    },
-    features: [
-      'Multi-model testing',
-      'Parameter sweeping',
-      'Performance visualization',
-      'Evaluation metrics',
-      'Jupyter notebook integration',
-      'Extensible architecture'
-    ],
-    limitations: [
-      'Requires Python knowledge',
-      'Command-line focused',
-      'No cloud hosting option',
-      'Manual setup required'
-    ],
-    rating: 4.5,
-    reviewCount: 178
-  },
-  {
-    id: 'dyno',
-    name: 'Dyno',
-    slug: 'dyno',
-    description: 'Dyno is a modern prompt engineering IDE that provides a visual interface for creating, testing, and refining prompts with real-time feedback. It includes version control, collaboration features, and integration with multiple LLM providers.',
-    shortDescription: 'Visual prompt engineering IDE',
-    logo: 'https://images.pexels.com/photos/11134144/pexels-photo-11134144.jpeg',
-    website: 'https://trydyno.com',
-    categoryId: 'prompt-engineering',
-    subcategoryIds: ['prompt-testing', 'prompt-management'],
-    pricing: {
-      type: 'freemium',
-      startingPrice: '$19/month',
-      hasFreeOption: true,
-      tiers: [
-        {
-          name: 'Free',
-          price: '$0',
-          billingPeriod: 'monthly',
-          features: ['Basic prompt testing', 'Limited experiments', 'Single user']
-        },
-        {
-          name: 'Pro',
+          name: 'Cloud Hosted',
           price: '$19/month',
           billingPeriod: 'monthly',
-          features: ['Unlimited experiments', 'Version history', 'Advanced analytics', 'Export capabilities']
+          features: ['Managed hosting', 'Premium support', 'Enhanced security', 'Auto-scaling']
         }
       ]
     },
     features: [
-      'Visual interface',
-      'Side-by-side comparisons',
-      'Version control',
-      'Multiple model testing',
-      'Template variables',
-      'Export and sharing'
+      'Autonomous goal achievement',
+      'Task decomposition and planning',
+      'Multi-step reasoning',
+      'Tool and API integration',
+      'Memory management',
+      'Self-improvement capabilities'
     ],
     limitations: [
-      'Limited model support in free tier',
-      'Some advanced features require subscription',
-      'No on-premises deployment option'
+      'Experimental and may be unstable',
+      'Requires technical setup',
+      'High API costs with extensive usage',
+      'Limited oversight and control'
     ],
-    rating: 4.6,
-    reviewCount: 215
+    rating: 4.3,
+    reviewCount: 2847,
+    trending: true,
+    featured: true,
+    integrations: ['OpenAI API', 'Google APIs', 'Web browsing', 'File systems', 'Database connections'],
+    lastVerified: new Date('2025-05-25')
   },
+
   {
-    id: 'everyprompt',
-    name: 'EveryPrompt',
-    slug: 'everyprompt',
-    description: 'EveryPrompt is a prompt engineering workspace designed for professionals who work with language models. It provides comprehensive tools for prompt creation, testing, version control, and collaboration, with advanced features for large-scale prompt management.',
-    shortDescription: 'Professional prompt engineering workspace',
-    logo: 'https://images.pexels.com/photos/11134145/pexels-photo-11134145.jpeg',
-    website: 'https://everyprompt.com',
-    categoryId: 'prompt-engineering',
-    subcategoryIds: ['prompt-management', 'prompt-testing'],
+    id: 'babyagi',
+    name: 'BabyAGI',
+    slug: 'babyagi',
+    description: 'BabyAGI is a Python script that uses OpenAI and Pinecone APIs to create, prioritize, and execute tasks. It operates as an autonomous task management system that can generate and complete tasks based on the results of previous tasks.',
+    shortDescription: 'Task management AI agent',
+    logo: 'https://images.pexels.com/photos/8386427/pexels-photo-8386427.jpeg',
+    website: 'https://babyagi.org',
+    categoryId: 'agentic-ai',
+    subcategoryIds: ['task-automation', 'autonomous-agents'],
     pricing: {
-      type: 'freemium',
-      startingPrice: '$24/month',
+      type: 'free',
+      startingPrice: 'Free',
       hasFreeOption: true,
       tiers: [
         {
-          name: 'Free',
+          name: 'Open Source',
           price: '$0',
           billingPeriod: 'monthly',
-          features: ['Basic prompt creation', 'Limited testing', 'Personal use']
-        },
-        {
-          name: 'Pro',
-          price: '$24/month',
-          billingPeriod: 'monthly',
-          features: ['Advanced features', 'Collaboration tools', 'Version history', 'API access']
+          features: ['Full source code', 'Self-deployment', 'Community support', 'Unlimited usage']
         }
       ]
     },
     features: [
-      'Advanced prompt editor',
-      'Model comparison',
-      'Collaborative workspaces',
-      'Version control',
-      'Template libraries',
-      'Performance analytics'
+      'Autonomous task creation',
+      'Priority-based task execution',
+      'Result-driven task generation',
+      'Memory and context retention',
+      'Vector database integration',
+      'Minimal setup requirements'
     ],
     limitations: [
-      'Limited features in free tier',
-      'Storage limitations',
-      'Team features require paid plan'
+      'Requires API keys (OpenAI, Pinecone)',
+      'Basic user interface',
+      'Limited built-in safeguards',
+      'Can generate excessive tasks'
     ],
-    rating: 4.7,
-    reviewCount: 280
+    rating: 4.1,
+    reviewCount: 1653,
+    trending: true,
+    featured: false,
+    integrations: ['OpenAI GPT', 'Pinecone', 'Python ecosystem', 'Custom APIs'],
+    lastVerified: new Date('2025-05-24')
   },
+
   {
-    id: 'snorkel',
-    name: 'Snorkel Flow',
-    slug: 'snorkel-flow',
-    description: 'Snorkel Flow is an enterprise-grade platform for data-centric AI development with specialized features for LLM prompt optimization. It enables teams to systematically develop, test, and deploy prompts at scale with robust evaluation frameworks.',
-    shortDescription: 'Enterprise prompt optimization platform',
-    logo: 'https://images.pexels.com/photos/11134146/pexels-photo-11134146.jpeg',
-    website: 'https://snorkel.ai/platform',
-    categoryId: 'prompt-engineering',
-    subcategoryIds: ['prompt-testing'],
-    pricing: {
-      type: 'enterprise',
-      startingPrice: 'Custom pricing',
-      hasFreeOption: false
-    },
-    features: [
-      'Data-centric prompt optimization',
-      'Large-scale evaluation',
-      'Collaborative workflows',
-      'Structured testing frameworks',
-      'Enterprise integration',
-      'Robust security features'
-    ],
-    limitations: [
-      'Enterprise focus only',
-      'Significant investment required',
-      'Complex setup and onboarding'
-    ],
-    rating: 4.5,
-    reviewCount: 95
-  },
-  {
-    id: 'prompster',
-    name: 'Prompster',
-    slug: 'prompster',
-    description: 'Prompster is a desktop application for managing, organizing and using AI prompts across different applications. It features a quick-access interface, template system, and history tracking to make prompt reuse and iteration efficient.',
-    shortDescription: 'Desktop prompt management tool',
-    logo: 'https://images.pexels.com/photos/11134147/pexels-photo-11134147.jpeg',
-    website: 'https://prompster.com',
-    categoryId: 'prompt-engineering',
-    subcategoryIds: ['prompt-management'],
-    pricing: {
-      type: 'paid',
-      startingPrice: '$9.99',
-      hasFreeOption: false
-    },
-    features: [
-      'Quick-access interface',
-      'Prompt organization system',
-      'Template variables',
-      'History tracking',
-      'Cross-application support',
-      'Keyboard shortcuts'
-    ],
-    limitations: [
-      'Desktop only (no web version)',
-      'One-time purchase required',
-      'Limited collaboration features'
-    ],
-    rating: 4.3,
-    reviewCount: 167
-  },
-  {
-    id: 'promptfoo',
-    name: 'PromptFoo',
-    slug: 'promptfoo',
-    description: 'PromptFoo is an open-source evaluation framework for testing and evaluating prompts across different models and configurations. It provides command-line and programmatic tools for large-scale prompt testing and quality assurance.',
-    shortDescription: 'Open-source prompt evaluation framework',
-    logo: 'https://images.pexels.com/photos/11134148/pexels-photo-11134148.jpeg',
-    website: 'https://github.com/promptfoo/promptfoo',
-    categoryId: 'prompt-engineering',
-    subcategoryIds: ['prompt-testing'],
+    id: 'langchain-agents',
+    name: 'LangChain Agents',
+    slug: 'langchain-agents',
+    description: 'LangChain Agents provide a framework for building AI agents that can reason about actions and use tools to accomplish tasks. They combine language models with the ability to take actions in the world through various integrations.',
+    shortDescription: 'Framework for building AI agents with tools',
+    logo: 'https://images.pexels.com/photos/8386442/pexels-photo-8386442.jpeg',
+    website: 'https://python.langchain.com/docs/modules/agents/',
+    categoryId: 'agentic-ai',
+    subcategoryIds: ['agent-frameworks', 'tool-integration'],
     pricing: {
       type: 'free',
-      hasFreeOption: true
+      startingPrice: 'Free',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Open Source',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['Full framework access', 'All agent types', 'Tool integrations', 'Community support']
+        },
+        {
+          name: 'LangSmith',
+          price: '$39/month',
+          billingPeriod: 'monthly',
+          features: ['Debugging tools', 'Monitoring', 'Evaluation metrics', 'Team collaboration']
+        }
+      ]
     },
     features: [
-      'Automated testing',
-      'Model comparison',
-      'Evaluation metrics',
-      'Configuration as code',
-      'CI/CD integration',
-      'Extensible architecture'
+      'Multiple agent architectures',
+      'Tool and API integration',
+      'Custom action planning',
+      'Memory and state management',
+      'Chain of thought reasoning',
+      'Extensive model support'
     ],
     limitations: [
-      'Technical expertise required',
-      'Command-line focused',
-      'Self-hosted only',
-      'Limited visualization tools'
+      'Requires programming knowledge',
+      'Complex setup for advanced features',
+      'Documentation can be overwhelming',
+      'Performance varies by use case'
     ],
-    rating: 4.4,
-    reviewCount: 132
+    rating: 4.5,
+    reviewCount: 3241,
+    trending: true,
+    featured: true,
+    integrations: ['OpenAI', 'Anthropic', 'Google', 'Hugging Face', 'APIs', 'Databases', 'Search engines'],
+    lastVerified: new Date('2025-05-25')
   },
+
+  // Research and Analysis Agents
   {
-    id: 'taxonomist',
-    name: 'Taxonomist.ai',
-    slug: 'taxonomist-ai',
-    description: 'Taxonomist.ai is a specialized tool for organizing and structuring prompt libraries with semantic categorization. It helps teams build and maintain organized prompt taxonomies with metadata, tags, and search capabilities.',
-    shortDescription: 'AI prompt library organizer',
-    logo: 'https://images.pexels.com/photos/11134149/pexels-photo-11134149.jpeg',
-    website: 'https://taxonomist.ai',
-    categoryId: 'prompt-engineering',
-    subcategoryIds: ['prompt-management'],
+    id: 'research-agent-gpt',
+    name: 'ResearchAgent GPT',
+    slug: 'research-agent-gpt',
+    description: 'ResearchAgent GPT is an AI agent specifically designed for conducting comprehensive research tasks. It can gather information from multiple sources, synthesize findings, and produce detailed research reports with citations.',
+    shortDescription: 'AI agent for automated research tasks',
+    logo: 'https://images.pexels.com/photos/8386447/pexels-photo-8386447.jpeg',
+    website: 'https://researchagent.ai',
+    categoryId: 'agentic-ai',
+    subcategoryIds: ['research-agents', 'content-generation'],
     pricing: {
       type: 'subscription',
       startingPrice: '$29/month',
-      hasFreeOption: false,
+      hasFreeOption: true,
       tiers: [
         {
           name: 'Starter',
-          price: '$29/month',
+          price: '$0',
           billingPeriod: 'monthly',
-          features: ['Basic organization', 'Search functionality', 'Limited library size']
+          features: ['5 research tasks/month', 'Basic sources', 'Standard reports', 'Community support']
         },
         {
           name: 'Professional',
-          price: '$79/month',
+          price: '$29/month',
           billingPeriod: 'monthly',
-          features: ['Advanced categorization', 'Unlimited prompts', 'Team collaboration', 'API access']
+          features: ['50 research tasks/month', 'Premium sources', 'Advanced reports', 'Priority support']
+        },
+        {
+          name: 'Enterprise',
+          price: '$99/month',
+          billingPeriod: 'monthly',
+          features: ['Unlimited tasks', 'Custom sources', 'White-label reports', 'Dedicated support']
         }
       ]
     },
     features: [
-      'Semantic categorization',
-      'Metadata management',
-      'Search and discovery',
-      'Tag system',
-      'Version tracking',
-      'Export capabilities'
+      'Multi-source information gathering',
+      'Automated fact-checking',
+      'Citation management',
+      'Report generation',
+      'Data visualization',
+      'Real-time research updates'
     ],
     limitations: [
-      'No free tier',
-      'Learning curve for taxonomy setup',
-      'Limited integrations'
+      'Limited free tier',
+      'Source quality varies',
+      'May require fact verification',
+      'Processing time for complex topics'
+    ],
+    rating: 4.4,
+    reviewCount: 892,
+    trending: true,
+    featured: false,
+    integrations: ['Academic databases', 'News APIs', 'Web scraping', 'Google Scholar', 'PDF processing'],
+    lastVerified: new Date('2025-05-23')
+  },
+
+  {
+    id: 'dataiku-ai-agents',
+    name: 'Dataiku AI Agents',
+    slug: 'dataiku-ai-agents',
+    description: 'Dataiku AI Agents provide enterprise-grade autonomous agents for data science and analytics workflows. These agents can perform complex data analysis, machine learning model development, and automated reporting.',
+    shortDescription: 'Enterprise AI agents for data science',
+    logo: 'https://images.pexels.com/photos/8386434/pexels-photo-8386434.jpeg',
+    website: 'https://www.dataiku.com/product/ai-agents',
+    categoryId: 'agentic-ai',
+    subcategoryIds: ['data-agents', 'enterprise-agents'],
+    pricing: {
+      type: 'enterprise',
+      startingPrice: 'Contact for pricing',
+      hasFreeOption: false,
+      tiers: [
+        {
+          name: 'Professional',
+          price: 'Custom',
+          billingPeriod: 'yearly',
+          features: ['Basic AI agents', 'Standard integrations', 'Email support', 'Training included']
+        },
+        {
+          name: 'Enterprise',
+          price: 'Custom',
+          billingPeriod: 'yearly',
+          features: ['Advanced agents', 'Custom integrations', 'Dedicated support', 'On-premise deployment']
+        }
+      ]
+    },
+    features: [
+      'Automated data analysis',
+      'ML model development',
+      'Predictive analytics',
+      'Report automation',
+      'Data pipeline management',
+      'Collaborative workflows'
+    ],
+    limitations: [
+      'Enterprise pricing only',
+      'Complex implementation',
+      'Requires data science knowledge',
+      'Long setup time'
+    ],
+    rating: 4.6,
+    reviewCount: 247,
+    trending: false,
+    featured: false,
+    integrations: ['Hadoop', 'Spark', 'SQL databases', 'Cloud platforms', 'APIs', 'Business intelligence tools'],
+    lastVerified: new Date('2025-05-20')
+  },
+
+  // Business Process Agents
+  {
+    id: 'superagent',
+    name: 'SuperAgent',
+    slug: 'superagent',
+    description: 'SuperAgent is a platform for building and deploying AI agents that can handle complex business processes, customer service interactions, and workflow automation with natural language understanding.',
+    shortDescription: 'Business process automation AI agents',
+    logo: 'https://images.pexels.com/photos/8386449/pexels-photo-8386449.jpeg',
+    website: 'https://superagent.sh',
+    categoryId: 'agentic-ai',
+    subcategoryIds: ['business-agents', 'customer-service-agents'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$49/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Hobby',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['3 agents', 'Basic integrations', 'Community support', '1,000 interactions/month']
+        },
+        {
+          name: 'Pro',
+          price: '$49/month',
+          billingPeriod: 'monthly',
+          features: ['10 agents', 'Advanced integrations', 'Priority support', '10,000 interactions/month']
+        },
+        {
+          name: 'Business',
+          price: '$149/month',
+          billingPeriod: 'monthly',
+          features: ['Unlimited agents', 'Custom integrations', 'Dedicated support', 'Unlimited interactions']
+        }
+      ]
+    },
+    features: [
+      'No-code agent builder',
+      'Multi-channel deployment',
+      'Workflow automation',
+      'API integrations',
+      'Analytics and reporting',
+      'Team collaboration'
+    ],
+    limitations: [
+      'Limited free tier usage',
+      'Learning curve for complex workflows',
+      'Requires integration setup',
+      'Performance depends on model choice'
+    ],
+    rating: 4.3,
+    reviewCount: 567,
+    trending: true,
+    featured: false,
+    integrations: ['Slack', 'Discord', 'WhatsApp', 'CRM systems', 'APIs', 'Databases', 'Email'],
+    lastVerified: new Date('2025-05-24')
+  },
+
+  {
+    id: 'crew-ai',
+    name: 'CrewAI',
+    slug: 'crew-ai',
+    description: 'CrewAI is a framework for orchestrating role-playing AI agents that work together as a team to accomplish complex tasks. Each agent has specific roles, goals, and tools to collaborate effectively.',
+    shortDescription: 'Multi-agent collaboration framework',
+    logo: 'https://images.pexels.com/photos/8386431/pexels-photo-8386431.jpeg',
+    website: 'https://crewai.com',
+    categoryId: 'agentic-ai',
+    subcategoryIds: ['multi-agent-systems', 'collaborative-agents'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$29/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Open Source',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['Core framework', 'Basic agents', 'Community support', 'Self-hosted']
+        },
+        {
+          name: 'Pro',
+          price: '$29/month',
+          billingPeriod: 'monthly',
+          features: ['Advanced agents', 'Cloud hosting', 'Priority support', 'Enhanced monitoring']
+        },
+        {
+          name: 'Enterprise',
+          price: '$99/month',
+          billingPeriod: 'monthly',
+          features: ['Custom agents', 'Dedicated hosting', 'SLA guarantee', 'Professional services']
+        }
+      ]
+    },
+    features: [
+      'Multi-agent orchestration',
+      'Role-based agent design',
+      'Task delegation',
+      'Inter-agent communication',
+      'Workflow management',
+      'Performance monitoring'
+    ],
+    limitations: [
+      'Complex setup for beginners',
+      'Requires coordination planning',
+      'Higher costs with multiple agents',
+      'Learning curve for optimization'
+    ],
+    rating: 4.5,
+    reviewCount: 1347,
+    trending: true,
+    featured: true,
+    integrations: ['OpenAI', 'Anthropic', 'LangChain', 'APIs', 'Databases', 'Communication tools'],
+    lastVerified: new Date('2025-05-25')
+  },
+
+  // Personal Assistant Agents
+  {
+    id: 'agent-gpt',
+    name: 'AgentGPT',
+    slug: 'agent-gpt',
+    description: 'AgentGPT allows you to configure and deploy autonomous AI agents in your browser. You can give your agent a name and goal, and it will attempt to reach that goal by thinking of tasks to do and executing them.',
+    shortDescription: 'Browser-based autonomous AI agents',
+    logo: 'https://images.pexels.com/photos/8386445/pexels-photo-8386445.jpeg',
+    website: 'https://agentgpt.reworkd.ai',
+    categoryId: 'agentic-ai',
+    subcategoryIds: ['personal-agents', 'task-automation'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$20/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['Limited agents', 'Basic features', 'Public hosting', 'Community support']
+        },
+        {
+          name: 'Pro',
+          price: '$20/month',
+          billingPeriod: 'monthly',
+          features: ['Unlimited agents', 'Advanced features', 'Priority processing', 'Email support']
+        },
+        {
+          name: 'Enterprise',
+          price: 'Custom',
+          billingPeriod: 'monthly',
+          features: ['Custom deployment', 'API access', 'Dedicated support', 'Enhanced security']
+        }
+      ]
+    },
+    features: [
+      'Browser-based interface',
+      'Goal-oriented agents',
+      'Task generation and execution',
+      'Real-time monitoring',
+      'Custom agent configuration',
+      'Progress tracking'
+    ],
+    limitations: [
+      'Limited free tier capacity',
+      'Internet browser dependency',
+      'Variable execution speed',
+      'May require supervision'
     ],
     rating: 4.2,
-    reviewCount: 86
+    reviewCount: 1873,
+    trending: true,
+    featured: false,
+    integrations: ['OpenAI API', 'Web browsers', 'Cloud hosting', 'Third-party APIs'],
+    lastVerified: new Date('2025-05-24')
   },
+
   {
-    id: 'humanloop',
-    name: 'Humanloop',
-    slug: 'humanloop',
-    description: 'Humanloop is a platform for prompt engineering and LLM application management that enables teams to build, evaluate and deploy AI applications with robust measurement and improvement capabilities. It focuses on production-ready systems with human feedback integration.',
-    shortDescription: 'LLM application development platform',
-    logo: 'https://images.pexels.com/photos/11134150/pexels-photo-11134150.jpeg',
-    website: 'https://humanloop.com',
-    categoryId: 'prompt-engineering',
-    subcategoryIds: ['prompt-management', 'prompt-testing'],
-    pricing: {
-      type: 'freemium',
-      startingPrice: 'Contact for pricing',
-      hasFreeOption: true,
-      tiers: [
-        {
-          name: 'Free',
-          price: '$0',
-          billingPeriod: 'monthly',
-          features: ['Basic prompt engineering', 'Limited evaluations', 'Single user']
-        },
-        {
-          name: 'Team',
-          price: 'Custom',
-          billingPeriod: 'monthly',
-          features: ['Advanced features', 'Collaboration tools', 'Production deployment', 'Priority support']
-        }
-      ]
-    },
-    features: [
-      'Prompt version control',
-      'Human feedback integration',
-      'Evaluation frameworks',
-      'Production monitoring',
-      'Team collaboration',
-      'Model comparison'
-    ],
-    limitations: [
-      'Enterprise focus for advanced features',
-      'Limited free tier capabilities',
-      'Team pricing not transparent'
-    ],
-    rating: 4.7,
-    reviewCount: 145
-  },
-  {
-    id: 'promptknit',
-    name: 'PromptKnit',
-    slug: 'promptknit',
-    description: 'PromptKnit is a collaborative platform for teams to create, test, and deploy AI prompts with an emphasis on knowledge sharing and best practices. It includes features for template development and organizational prompt libraries.',
-    shortDescription: 'Team-oriented prompt collaboration',
-    logo: 'https://images.pexels.com/photos/11134151/pexels-photo-11134151.jpeg',
-    website: 'https://promptknit.com',
-    categoryId: 'prompt-engineering',
-    subcategoryIds: ['prompt-management', 'prompt-discovery'],
-    pricing: {
-      type: 'freemium',
-      startingPrice: '$15/month',
-      hasFreeOption: true,
-      tiers: [
-        {
-          name: 'Basic',
-          price: '$0',
-          billingPeriod: 'monthly',
-          features: ['Personal library', 'Basic templates', 'Limited sharing']
-        },
-        {
-          name: 'Team',
-          price: '$15/user/month',
-          billingPeriod: 'monthly',
-          features: ['Team libraries', 'Advanced templating', 'Knowledge sharing', 'Analytics dashboard']
-        }
-      ]
-    },
-    features: [
-      'Collaborative workspaces',
-      'Template system',
-      'Best practice sharing',
-      'Versioning capabilities',
-      'Knowledge base integration',
-      'Export options'
-    ],
-    limitations: [
-      'Limited individual features',
-      'Team-focused pricing model',
-      'Basic analytics in free tier'
-    ],
-    rating: 4.3,
-    reviewCount: 112
-  },
-  {
-    id: 'langsmith',
-    name: 'LangSmith',
-    slug: 'langsmith',
-    description: 'LangSmith is a developer platform for debugging, testing, evaluating, and monitoring LLM applications, with robust tools for prompt management and optimization. It integrates with LangChain and provides comprehensive analytics on prompt performance.',
-    shortDescription: 'LLM development and monitoring platform',
-    logo: 'https://images.pexels.com/photos/11134152/pexels-photo-11134152.jpeg',
-    website: 'https://smith.langchain.com',
-    categoryId: 'prompt-engineering',
-    subcategoryIds: ['prompt-management', 'prompt-testing'],
-    pricing: {
-      type: 'freemium',
-      startingPrice: 'Enterprise pricing',
-      hasFreeOption: true,
-      tiers: [
-        {
-          name: 'Free',
-          price: '$0',
-          billingPeriod: 'monthly',
-          features: ['Basic debugging', 'Limited runs', 'Core features']
-        },
-        {
-          name: 'Enterprise',
-          price: 'Custom',
-          billingPeriod: 'monthly',
-          features: ['Advanced analytics', 'Team collaboration', 'Production monitoring', 'Custom integrations']
-        }
-      ]
-    },
-    features: [
-      'Prompt debugging',
-      'Performance evaluation',
-      'A/B testing',
-      'Chain visualization',
-      'Monitoring dashboard',
-      'LangChain integration'
-    ],
-    limitations: [
-      'Advanced features require enterprise tier',
-      'Primarily designed for LangChain users',
-      'Complex setup for non-technical users'
-    ],
-    rating: 4.8,
-    reviewCount: 230
-  },
-  {
-    id: 'goose-ai',
-    name: 'Goose AI Prompt Analytics',
-    slug: 'goose-ai-analytics',
-    description: 'Goose AI Prompt Analytics provides detailed performance analytics for prompt optimization across various models. It features insights on token usage, response quality metrics, and pattern analysis to help identify and implement the most effective prompting strategies.',
-    shortDescription: 'Prompt performance analytics platform',
-    logo: 'https://images.pexels.com/photos/11134153/pexels-photo-11134153.jpeg',
-    website: 'https://goose.ai/analytics',
-    categoryId: 'prompt-engineering',
-    subcategoryIds: ['prompt-testing'],
+    id: 'microsoft-copilot-studio',
+    name: 'Microsoft Copilot Studio',
+    slug: 'microsoft-copilot-studio',
+    description: 'Microsoft Copilot Studio enables organizations to create, customize, and deploy AI agents across Microsoft 365 and business applications. It provides low-code tools for building intelligent agents.',
+    shortDescription: 'Enterprise AI agent builder for Microsoft ecosystem',
+    logo: 'https://images.pexels.com/photos/4050477/pexels-photo-4050477.jpeg',
+    website: 'https://copilotstudio.microsoft.com',
+    categoryId: 'agentic-ai',
+    subcategoryIds: ['enterprise-agents', 'business-agents'],
     pricing: {
       type: 'subscription',
-      startingPrice: '$25/month',
+      startingPrice: '$200/month',
       hasFreeOption: false,
       tiers: [
         {
-          name: 'Standard',
-          price: '$25/month',
+          name: 'Copilot Studio',
+          price: '$200/month per tenant',
           billingPeriod: 'monthly',
-          features: ['Basic analytics', 'Limited prompt volume', 'Standard metrics']
+          features: ['Agent creation tools', 'Microsoft 365 integration', 'Basic analytics', 'Standard support']
         },
         {
-          name: 'Pro',
-          price: '$75/month',
+          name: 'Premium',
+          price: 'Custom',
           billingPeriod: 'monthly',
-          features: ['Advanced analytics', 'Higher volume', 'Custom metrics', 'API access']
+          features: ['Advanced agents', 'Custom integrations', 'Enhanced analytics', 'Priority support']
         }
       ]
     },
     features: [
-      'Token usage analysis',
-      'Response quality metrics',
-      'Pattern recognition',
-      'Cost optimization insights',
-      'Comparative reporting',
-      'Performance dashboards'
+      'Low-code agent builder',
+      'Microsoft 365 integration',
+      'Enterprise security',
+      'Compliance controls',
+      'Analytics dashboard',
+      'Team collaboration'
     ],
     limitations: [
-      'No free tier available',
-      'Limited model support',
-      'Requires data sharing'
+      'Microsoft ecosystem dependency',
+      'High minimum cost',
+      'Complex licensing',
+      'Limited customization outside Microsoft stack'
     ],
     rating: 4.4,
-    reviewCount: 98
-  },
-  {
-    id: 'replit-ghost-writer',
-    name: 'Replit Ghost Writer',
-    slug: 'replit-ghost-writer',
-    description: 'Replit Ghost Writer is an AI coding assistant integrated into the Replit IDE that can generate whole functions, explain code, provide examples, and help solve coding problems. It offers contextual suggestions and supports real-time collaborative coding.',
-    shortDescription: 'AI coding in the Replit environment',
-    logo: 'https://images.pexels.com/photos/2115217/pexels-photo-2115217.jpeg',
-    website: 'https://replit.com/ghostwriter',
-    categoryId: 'code-creation',
-    subcategoryIds: ['code-generation', 'code-completion'],
-    pricing: {
-      type: 'freemium',
-      startingPrice: '$10/month',
-      hasFreeOption: true,
-      tiers: [
-        {
-          name: 'Free',
-          price: '$0',
-          billingPeriod: 'monthly',
-          features: ['Basic code completion', 'Limited AI assistance', 'Community access']
-        },
-        {
-          name: 'Pro',
-          price: '$10/month',
-          billingPeriod: 'monthly',
-          features: ['Full AI assistance', 'Advanced code generation', 'Priority compute', 'Unlimited usage']
-        }
-      ]
-    },
-    features: [
-      'AI code generation',
-      'Context-aware completions',
-      'Code explanation',
-      'Built-in IDE',
-      'Full web-based development',
-      'Collaborative coding'
-    ],
-    limitations: [
-      'Limited free tier capabilities',
-      'Web-based only',
-      'Some languages have better support than others',
-      'Internet connection required'
-    ],
-    rating: 4.7,
-    reviewCount: 1240,
-    trending: true,
-    featured: true,
-    integrations: ['GitHub', 'GitLab', 'Connected databases', 'API integrations'],
-    lastVerified: new Date('2025-05-20')
-  },
-  {
-    id: 'amazon-codewhisperer',
-    name: 'Amazon CodeWhisperer',
-    slug: 'amazon-codewhisperer',
-    description: 'Amazon CodeWhisperer is an AI coding companion that generates code recommendations based on developers\' comments and existing code. It supports multiple programming languages and frameworks, integrating security scanning to help identify vulnerabilities early in the development process.',
-    shortDescription: 'AWS-powered coding assistant',
-    logo: 'https://images.pexels.com/photos/1181271/pexels-photo-1181271.jpeg',
-    website: 'https://aws.amazon.com/codewhisperer/',
-    categoryId: 'code-creation',
-    subcategoryIds: ['code-completion', 'code-optimization'],
-    pricing: {
-      type: 'freemium',
-      startingPrice: '$19/month',
-      hasFreeOption: true,
-      tiers: [
-        {
-          name: 'Individual',
-          price: '$0',
-          billingPeriod: 'monthly',
-          features: ['Code suggestions', 'Basic completions', 'Personal use']
-        },
-        {
-          name: 'Professional',
-          price: '$19/user/month',
-          billingPeriod: 'monthly',
-          features: ['Security scanning', 'Enterprise admin', 'Custom policies', 'IP ownership']
-        }
-      ]
-    },
-    features: [
-      'Real-time code suggestions',
-      'Built-in security scanning',
-      'AWS service integration',
-      'Multi-language support',
-      'Reference tracking',
-      'Code customization'
-    ],
-    limitations: [
-      'Limited AWS optimization for free tier',
-      'Not as comprehensive as some competitors',
-      'Requires IDE plugin installation',
-      'Better with AWS-related code'
-    ],
-    rating: 4.6,
-    reviewCount: 820,
-    trending: true,
-    featured: false,
-    integrations: ['VS Code', 'JetBrains IDEs', 'AWS Cloud9', 'Lambda Console', 'AWS services'],
-    lastVerified: new Date('2025-05-22')
-  },
-  {
-    id: 'kite-ai',
-    name: 'Kite AI',
-    slug: 'kite-ai',
-    description: 'Kite AI is a sophisticated coding assistant that leverages machine learning to provide intelligent code completions with line-of-code and full-function suggestions. It features offline processing capabilities and seamlessly integrates with most popular code editors.',
-    shortDescription: 'ML-powered coding completions',
-    logo: 'https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg',
-    website: 'https://kite.com',
-    categoryId: 'code-creation',
-    subcategoryIds: ['code-completion'],
-    pricing: {
-      type: 'freemium',
-      startingPrice: '$16.60/month',
-      hasFreeOption: true,
-      tiers: [
-        {
-          name: 'Free',
-          price: '$0',
-          billingPeriod: 'monthly',
-          features: ['Basic completions', 'Popular language support', 'Editor integrations']
-        },
-        {
-          name: 'Pro',
-          price: '$16.60/month',
-          billingPeriod: 'monthly',
-          features: ['Advanced completions', 'More language support', 'Function patterns', 'Team functionality']
-        }
-      ]
-    },
-    features: [
-      'Smart code completions',
-      'Local processing option',
-      'Multi-editor support',
-      'Function pattern analysis',
-      'Python expert modes',
-      'Documentation lookup'
-    ],
-    limitations: [
-      'Python-focused (other languages have less support)',
-      'Resource intensive for local processing',
-      'Free tier has limited capability',
-      'Internet required for some features'
-    ],
-    rating: 4.5,
-    reviewCount: 1050,
+    reviewCount: 432,
     trending: false,
     featured: false,
-    integrations: ['VS Code', 'JetBrains IDEs', 'Atom', 'Sublime Text', 'Vim/NeoVim'],
-    lastVerified: new Date('2025-05-15')
+    integrations: ['Microsoft 365', 'Teams', 'SharePoint', 'Power Platform', 'Azure', 'Dynamics 365'],
+    lastVerified: new Date('2025-05-22')
   },
+
+  // Development and Code Agents
   {
-    id: 'sourcegraph-cody',
-    name: 'Sourcegraph Cody',
-    slug: 'sourcegraph-cody',
-    description: 'Sourcegraph Cody is an AI coding assistant that understands your entire codebase, providing context-aware answers, generating relevant code, and enabling natural language code search across repositories. It specializes in large codebase understanding and multi-repository context.',
-    shortDescription: 'Context-aware codebase AI assistant',
-    logo: 'https://images.pexels.com/photos/7988079/pexels-photo-7988079.jpeg',
-    website: 'https://sourcegraph.com/cody',
-    categoryId: 'code-creation',
-    subcategoryIds: ['code-generation', 'code-optimization'],
+    id: 'devika-ai',
+    name: 'Devika AI',
+    slug: 'devika-ai',
+    description: 'Devika is an agentic AI software engineer that can understand high-level human instructions, break them down into steps, research relevant information, and write code to achieve the given objective.',
+    shortDescription: 'AI software engineer agent',
+    logo: 'https://images.pexels.com/photos/546819/pexels-photo-546819.jpeg',
+    website: 'https://devika.ai',
+    categoryId: 'agentic-ai',
+    subcategoryIds: ['development-agents', 'autonomous-agents'],
+    pricing: {
+      type: 'free',
+      startingPrice: 'Free',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Open Source',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['Full source code', 'Self-hosted deployment', 'Community support', 'All features']
+        },
+        {
+          name: 'Hosted',
+          price: '$39/month',
+          billingPeriod: 'monthly',
+          features: ['Managed hosting', 'Premium support', 'Enhanced performance', 'Auto-updates']
+        }
+      ]
+    },
+    features: [
+      'Natural language to code',
+      'Multi-language support',
+      'Project planning',
+      'Code generation and testing',
+      'Documentation creation',
+      'Version control integration'
+    ],
+    limitations: [
+      'Early development stage',
+      'May require technical setup',
+      'Code quality varies',
+      'Limited testing capabilities'
+    ],
+    rating: 4.1,
+    reviewCount: 756,
+    trending: true,
+    featured: false,
+    integrations: ['Git', 'GitHub', 'Various programming languages', 'Development tools', 'APIs'],
+    lastVerified: new Date('2025-05-23')
+  },
+
+  {
+    id: 'gpt-engineer',
+    name: 'GPT Engineer',
+    slug: 'gpt-engineer',
+    description: 'GPT Engineer is an AI agent that creates entire codebases from prompts. It asks clarifying questions, generates code, and can build complete applications with minimal human input.',
+    shortDescription: 'AI agent for codebase generation',
+    logo: 'https://images.pexels.com/photos/4065615/pexels-photo-4065615.jpeg',
+    website: 'https://gptengineer.app',
+    categoryId: 'agentic-ai',
+    subcategoryIds: ['development-agents', 'code-generation'],
     pricing: {
       type: 'freemium',
-      startingPrice: '$19/month',
+      startingPrice: '$29/month',
       hasFreeOption: true,
       tiers: [
         {
           name: 'Free',
           price: '$0',
           billingPeriod: 'monthly',
-          features: ['Basic code assistance', 'Single repository context', 'Limited completions']
+          features: ['Basic code generation', 'Limited projects', 'Community support', 'Open source access']
         },
         {
           name: 'Pro',
-          price: '$19/month',
+          price: '$29/month',
           billingPeriod: 'monthly',
-          features: ['Full codebase context', 'Multi-repository search', 'Advanced completions', 'Custom models']
-        },
-        {
-          name: 'Enterprise',
-          price: 'Custom',
-          billingPeriod: 'monthly',
-          features: ['SSO', 'Self-hosting option', 'Organization controls', 'Custom embeddings', 'Compliance features']
-        }
-      ]
-    },
-    features: [
-      'Whole codebase understanding',
-      'Context-aware code generation',
-      'Natural language code search',
-      'Multi-repository awareness',
-      'Code explanations',
-      'Code refactoring assistance'
-    ],
-    limitations: [
-      'Initial indexing time for large codebases',
-      'Free tier limited to smaller codebases',
-      'Enterprise features require subscription',
-      'Some language limitations'
-    ],
-    rating: 4.7,
-    reviewCount: 780,
-    trending: true,
-    featured: false,
-    integrations: ['VS Code', 'JetBrains', 'GitHub', 'GitLab', 'Bitbucket'],
-    lastVerified: new Date('2025-05-18')
-  },
-  {
-    id: 'codiumai',
-    name: 'CodiumAI',
-    slug: 'codiumai',
-    description: 'CodiumAI is an AI-powered code testing assistant that analyzes code to automatically generate meaningful tests, detect bugs, and provide test coverage metrics. It supports multiple programming languages and emphasizes code quality through intelligent testing.',
-    shortDescription: 'AI-powered test generation',
-    logo: 'https://images.pexels.com/photos/5483071/pexels-photo-5483071.jpeg',
-    website: 'https://codium.ai',
-    categoryId: 'code-creation',
-    subcategoryIds: ['code-optimization'],
-    pricing: {
-      type: 'freemium',
-      startingPrice: '$14/month',
-      hasFreeOption: true,
-      tiers: [
-        {
-          name: 'Community',
-          price: '$0',
-          billingPeriod: 'monthly',
-          features: ['Basic test generation', 'Limited analyses', 'Personal projects']
-        },
-        {
-          name: 'Pro',
-          price: '$14/month',
-          billingPeriod: 'monthly',
-          features: ['Advanced test generation', 'Full code analysis', 'Edge case discovery', 'Priority support']
+          features: ['Advanced generation', 'Unlimited projects', 'Priority support', 'Enhanced models']
         },
         {
           name: 'Team',
-          price: '$39/user/month',
+          price: '$99/month',
           billingPeriod: 'monthly',
-          features: ['Team collaboration', 'Test management', 'Custom rules', 'Advanced coverage metrics']
+          features: ['Team collaboration', 'Custom models', 'API access', 'Dedicated support']
         }
       ]
     },
     features: [
-      'Automated test generation',
-      'Bug prediction and detection',
-      'Edge case identification',
-      'Code quality metrics',
-      'Multi-language support',
-      'Test explanation'
+      'Complete codebase generation',
+      'Clarifying questions',
+      'Multiple programming languages',
+      'Project scaffolding',
+      'Code explanation',
+      'Iterative improvement'
     ],
     limitations: [
-      'Complex code may require manual review',
-      'Limited free tier usage',
-      'Some languages have better support than others',
-      'Integration setup required'
+      'Generated code needs review',
+      'Complex projects may be incomplete',
+      'Limited architecture decisions',
+      'Requires clear requirements'
     ],
-    rating: 4.6,
-    reviewCount: 580,
-    trending: false,
-    featured: false,
-    integrations: ['VS Code', 'JetBrains', 'GitHub', 'GitLab', 'CI/CD pipelines'],
-    lastVerified: new Date('2025-05-19')
+    rating: 4.3,
+    reviewCount: 1245,
+    trending: true,
+    featured: true,
+    integrations: ['OpenAI', 'GitHub', 'VS Code', 'Multiple frameworks', 'Cloud platforms'],
+    lastVerified: new Date('2025-05-25')
   },
+
+  // Sales and Marketing Agents
   {
-    id: 'mutable-ai',
-    name: 'Mutable AI',
-    slug: 'mutable-ai',
-    description: 'Mutable AI is an AI-powered software development platform that helps developers build production-ready applications from scratch by generating entire codebases, handling full-stack implementation, and allowing natural language-driven development with continuous improvements.',
-    shortDescription: 'Full application generation platform',
-    logo: 'https://images.pexels.com/photos/4065615/pexels-photo-4065615.jpeg',
-    website: 'https://mutable.ai',
-    categoryId: 'code-creation',
-    subcategoryIds: ['code-generation'],
+    id: 'apollo-ai-agent',
+    name: 'Apollo AI Agent',
+    slug: 'apollo-ai-agent',
+    description: 'Apollo AI Agent automates sales prospecting, lead qualification, and outreach sequences. It can research prospects, craft personalized messages, and manage follow-up campaigns autonomously.',
+    shortDescription: 'AI agent for sales automation',
+    logo: 'https://images.pexels.com/photos/7947866/pexels-photo-7947866.jpeg',
+    website: 'https://apollo.io/ai-agent',
+    categoryId: 'agentic-ai',
+    subcategoryIds: ['sales-agents', 'marketing-agents'],
     pricing: {
       type: 'subscription',
-      startingPrice: '$24/month',
+      startingPrice: '$49/month',
       hasFreeOption: false,
       tiers: [
         {
-          name: 'Developer',
-          price: '$24/month',
+          name: 'Professional',
+          price: '$49/month',
           billingPeriod: 'monthly',
-          features: ['App generation', 'Full-stack support', 'Code explanations', 'Expert guidance']
+          features: ['Basic automation', 'Lead research', 'Email sequences', 'Standard support']
         },
         {
-          name: 'Team',
-          price: '$49/user/month',
+          name: 'Enterprise',
+          price: '$149/month',
           billingPeriod: 'monthly',
-          features: ['Collaborative workspace', 'Team libraries', 'Shared projects', 'Priority generation']
+          features: ['Advanced automation', 'Custom workflows', 'Multi-channel outreach', 'Priority support']
+        },
+        {
+          name: 'Scale',
+          price: 'Custom',
+          billingPeriod: 'monthly',
+          features: ['Unlimited automation', 'Custom integrations', 'Dedicated CSM', 'SLA guarantee']
         }
       ]
     },
     features: [
-      'Full application generation',
-      'Natural language requirements',
-      'Production-quality code',
-      'Full-stack development',
-      'Architecture design',
-      'Interactive revisions'
+      'Prospect research automation',
+      'Personalized outreach',
+      'Lead qualification',
+      'Follow-up sequences',
+      'Performance analytics',
+      'CRM integration'
     ],
     limitations: [
       'No free tier',
-      'Complex app limitations',
-      'Custom framework challenges',
-      'May need manual adjustments'
+      'Requires sales expertise',
+      'Email deliverability concerns',
+      'Compliance considerations'
     ],
     rating: 4.5,
-    reviewCount: 410,
+    reviewCount: 923,
     trending: true,
     featured: false,
-    integrations: ['GitHub', 'GitLab', 'Bitbucket', 'AWS', 'Google Cloud', 'Azure'],
-    lastVerified: new Date('2025-05-17')
-  },
-  {
-    id: 'codegeex',
-    name: 'CodeGeeX',
-    slug: 'codegeex',
-    description: 'CodeGeeX is an open-source, multilingual code generation model supporting 20+ programming languages. It features code translation between languages, intelligent code completion, and customizable input-output patterns while maintaining the ability to run locally for privacy.',
-    shortDescription: 'Open-source multilingual code generation',
-    logo: 'https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg',
-    website: 'https://codegeex.ai',
-    categoryId: 'code-creation',
-    subcategoryIds: ['code-generation', 'code-completion'],
-    pricing: {
-      type: 'freemium',
-      startingPrice: '$11/month',
-      hasFreeOption: true,
-      tiers: [
-        {
-          name: 'Community',
-          price: '$0',
-          billingPeriod: 'monthly',
-          features: ['Basic code generation', 'IDE plugins', 'Local execution', 'Open-source model']
-        },
-        {
-          name: 'Pro',
-          price: '$11/month',
-          billingPeriod: 'monthly',
-          features: ['Enhanced models', 'Priority compute', 'Advanced features', 'Professional support']
-        }
-      ]
-    },
-    features: [
-      'Multi-language support (20+ languages)',
-      'Code translation between languages',
-      'Local execution option',
-      'Privacy-focused',
-      'Open-source model',
-      'Customizable patterns'
-    ],
-    limitations: [
-      'Requires good hardware for local execution',
-      'Less polished than some commercial alternatives',
-      'Community support for free tier',
-      'Advanced features need subscription'
-    ],
-    rating: 4.4,
-    reviewCount: 640,
-    trending: false,
-    featured: false,
-    integrations: ['VS Code', 'JetBrains IDEs', 'GitHub', 'Jupyter Notebooks'],
-    lastVerified: new Date('2025-05-21')
-  },
-  {
-    id: 'devin-ai',
-    name: 'Devin AI',
-    slug: 'devin-ai',
-    description: 'Devin is an autonomous AI software engineer that can understand complex requirements, create project plans, write and debug code, and collaborate with human developers through natural language conversations. It maintains context across extensive coding sessions and can independently build complete applications.',
-    shortDescription: 'Autonomous AI software engineer',
-    logo: 'https://images.pexels.com/photos/546819/pexels-photo-546819.jpeg',
-    website: 'https://devin.ai',
-    categoryId: 'code-creation',
-    subcategoryIds: ['code-generation', 'code-optimization'],
-    pricing: {
-      type: 'subscription',
-      startingPrice: '$39/month',
-      hasFreeOption: false,
-      tiers: [
-        {
-          name: 'Professional',
-          price: '$39/month',
-          billingPeriod: 'monthly',
-          features: ['Complete project automation', 'Continuous learning', 'Project planning', 'Multi-language support']
-        },
-        {
-          name: 'Enterprise',
-          price: 'Custom',
-          billingPeriod: 'monthly',
-          features: ['Team collaboration', 'Custom integration', 'Advanced security', 'Dedicated support']
-        }
-      ]
-    },
-    features: [
-      'Autonomous code generation',
-      'Project planning and execution',
-      'Debugging and testing',
-      'Long-context retention',
-      'Version control integration',
-      'Natural language collaboration'
-    ],
-    limitations: [
-      'Limited availability (waitlist)',
-      'Complex deployments may require human review',
-      'Subscription required for all features',
-      'Internet connection needed for operation'
-    ],
-    rating: 4.9,
-    reviewCount: 580,
-    trending: true,
-    featured: true,
-    integrations: ['GitHub', 'GitLab', 'BitBucket', 'VS Code', 'Terminal'],
-    lastVerified: new Date('2025-05-25')
-  },
-  {
-    id: 'mintlify',
-    name: 'Mintlify',
-    slug: 'mintlify',
-    description: 'Mintlify is an AI-powered documentation generator that automatically creates and maintains high-quality documentation from code. It analyzes code structure, comments, and usage patterns to produce comprehensive, well-organized documentation with minimal developer input.',
-    shortDescription: 'AI documentation generator',
-    logo: 'https://images.pexels.com/photos/1181677/pexels-photo-1181677.jpeg',
-    website: 'https://mintlify.com',
-    categoryId: 'code-creation',
-    subcategoryIds: ['code-optimization'],
-    pricing: {
-      type: 'freemium',
-      startingPrice: '$24/month',
-      hasFreeOption: true,
-      tiers: [
-        {
-          name: 'Community',
-          price: '$0',
-          billingPeriod: 'monthly',
-          features: ['Basic documentation', 'Open-source projects', 'Community support']
-        },
-        {
-          name: 'Pro',
-          price: '$24/month',
-          billingPeriod: 'monthly',
-          features: ['Advanced customization', 'API documentation', 'Analytics', 'Custom domain']
-        },
-        {
-          name: 'Team',
-          price: '$99/month',
-          billingPeriod: 'monthly',
-          features: ['Team collaboration', 'Role-based access', 'Priority support', 'Enterprise SSO']
-        }
-      ]
-    },
-    features: [
-      'Automatic documentation generation',
-      'Beautiful documentation UI',
-      'Code change detection',
-      'Multiple language support',
-      'Search functionality',
-      'Version control'
-    ],
-    limitations: [
-      'Complex code may need manual review',
-      'Limited customization in free tier',
-      'Best for well-commented code',
-      'Some language limitations'
-    ],
-    rating: 4.7,
-    reviewCount: 640,
-    trending: true,
-    featured: false,
-    integrations: ['GitHub', 'GitLab', 'Bitbucket', 'VS Code', 'NPM', 'Docker'],
+    integrations: ['Salesforce', 'HubSpot', 'Pipedrive', 'LinkedIn', 'Email providers', 'Calendar tools'],
     lastVerified: new Date('2025-05-24')
   },
+
   {
-    id: 'aider-ai',
-    name: 'Aider',
-    slug: 'aider-ai',
-    description: 'Aider is an AI pair programming tool that works directly in your terminal, allowing you to make code changes through natural language conversations. It can understand, edit, and create code across multiple files while maintaining project context and working with git repositories.',
-    shortDescription: 'Terminal-based AI pair programmer',
-    logo: 'https://images.pexels.com/photos/4709286/pexels-photo-4709286.jpeg',
-    website: 'https://aider.chat',
-    categoryId: 'code-creation',
-    subcategoryIds: ['coding-assistants', 'code-optimization'],
-    pricing: {
-      type: 'freemium',
-      startingPrice: '$15/month',
-      hasFreeOption: true,
-      tiers: [
-        {
-          name: 'Open Source',
-          price: '$0',
-          billingPeriod: 'monthly',
-          features: ['Core features', 'Self-hosted', 'BYOK (Bring Your Own Key)', 'Community support']
-        },
-        {
-          name: 'Pro',
-          price: '$15/month',
-          billingPeriod: 'monthly',
-          features: ['Advanced models', 'Enhanced context', 'Priority support', 'Extended history']
-        }
-      ]
-    },
-    features: [
-      'Terminal-based coding assistant',
-      'Multi-file code editing',
-      'Git integration',
-      'Project context awareness',
-      'Direct implementation of changes',
-      'Open source foundation'
-    ],
-    limitations: [
-      'Command-line interface learning curve',
-      'Requires API keys for LLMs',
-      'Simple UI compared to IDE plugins',
-      'Performance depends on LLM quality'
-    ],
-    rating: 4.6,
-    reviewCount: 410,
-    trending: true,
-    featured: false,
-    integrations: ['Git', 'GitHub', 'GPT-4', 'Claude', 'Terminal', 'Linux/macOS/Windows'],
-    lastVerified: new Date('2025-05-23')
-  },
-  {
-    id: 'safurai',
-    name: 'Safurai',
-    slug: 'safurai',
-    description: 'Safurai is an AI coding assistant that focuses on security and best practices while helping developers write, refactor, and optimize code. It can identify potential vulnerabilities, suggest improvements, and generate documentation with an emphasis on producing secure, production-ready code.',
-    shortDescription: 'Security-focused AI coding assistant',
-    logo: 'https://images.pexels.com/photos/5380642/pexels-photo-5380642.jpeg',
-    website: 'https://safurai.com',
-    categoryId: 'code-creation',
-    subcategoryIds: ['coding-assistants', 'code-optimization'],
-    pricing: {
-      type: 'freemium',
-      startingPrice: '$18/month',
-      hasFreeOption: true,
-      tiers: [
-        {
-          name: 'Free',
-          price: '$0',
-          billingPeriod: 'monthly',
-          features: ['Basic security checks', 'Limited completions', 'Standard IDE integration']
-        },
-        {
-          name: 'Pro',
-          price: '$18/month',
-          billingPeriod: 'monthly',
-          features: ['Advanced security analysis', 'Unlimited completions', 'Priority support', 'Custom rules']
-        },
-        {
-          name: 'Enterprise',
-          price: 'Custom',
-          billingPeriod: 'monthly',
-          features: ['Custom security policies', 'Team management', 'Compliance features', 'Dedicated support']
-        }
-      ]
-    },
-    features: [
-      'Security-focused code suggestions',
-      'Vulnerability detection',
-      'Best practice enforcement',
-      'Code refactoring',
-      'Documentation generation',
-      'Performance optimization'
-    ],
-    limitations: [
-      'Free tier has limited security checks',
-      'IDE plugin required',
-      'Some language limitations',
-      'Deep security analysis requires Pro tier'
-    ],
-    rating: 4.7,
-    reviewCount: 520,
-    trending: true,
-    featured: false,
-    integrations: ['VS Code', 'JetBrains IDEs', 'GitHub', 'GitLab', 'CI/CD pipelines'],
-    lastVerified: new Date('2025-05-22')
-  },
-  {
-    id: 'gpt-pilot',
-    name: 'GPT Pilot',
-    slug: 'gpt-pilot',
-    description: 'GPT Pilot is an open-source dev tool that leverages AI to generate entire codebases based on high-level descriptions. It guides you through project specification and development steps, writes tests, handles errors, and provides a conversational interface for collaborative coding.',
-    shortDescription: 'Open-source AI application generator',
-    logo: 'https://images.pexels.com/photos/2004161/pexels-photo-2004161.jpeg',
-    website: 'https://github.com/Pythagora-io/gpt-pilot',
-    categoryId: 'code-creation',
-    subcategoryIds: ['code-generation'],
-    pricing: {
-      type: 'free',
-      hasFreeOption: true,
-      tiers: [
-        {
-          name: 'Open Source',
-          price: '$0',
-          billingPeriod: 'monthly',
-          features: ['Full code generation', 'Project scaffolding', 'Test writing', 'BYOK (API keys)']
-        }
-      ]
-    },
-    features: [
-      'Complete application generation',
-      'Interactive development process',
-      'Test creation',
-      'Error handling',
-      'Project management',
-      'Open source flexibility'
-    ],
-    limitations: [
-      'Requires LLM API keys (cost)',
-      'Complex setup process',
-      'Best for small to medium projects',
-      'May require developer oversight'
-    ],
-    rating: 4.5,
-    reviewCount: 780,
-    trending: true,
-    featured: false,
-    integrations: ['GitHub', 'GPT-4', 'Claude', 'Terminal', 'Docker'],
-    lastVerified: new Date('2025-05-26')
-  },
-  {
-    id: 'pathology-ai',
-    name: 'PathologyAI',
-    slug: 'pathology-ai',
-    description: 'Advanced AI platform for digital pathology that assists pathologists in analyzing tissue samples, detecting cancerous cells, and providing diagnostic insights with high accuracy and speed.',
-    shortDescription: 'AI-powered pathology diagnostics',
-    logo: 'https://images.pexels.com/photos/3786156/pexels-photo-3786156.jpeg',
-    website: 'https://aiforia.com',
-    categoryId: 'healthcare-ai',
-    subcategoryIds: ['diagnostic-ai'],
-    pricing: {
-      type: 'enterprise',
-      startingPrice: 'Contact for pricing',
-      hasFreeOption: false,
-      tiers: [
-        {
-          name: 'Clinical',
-          price: 'Custom',
-          billingPeriod: 'yearly',
-          features: ['Histopathology analysis', 'Cancer detection', 'Workflow integration', 'HIPAA compliance']
-        },
-        {
-          name: 'Research',
-          price: 'Custom',
-          billingPeriod: 'yearly',
-          features: ['Advanced analytics', 'Custom models', 'Data export', 'Research collaboration']
-        }
-      ]
-    },
-    features: [
-      'Automated slide analysis',
-      'Cancer cell detection',
-      'Morphological assessment',
-      'Real-time reporting',
-      'Quality assurance metrics',
-      'Integration with LIS systems'
-    ],
-    limitations: [
-      'Requires specialized hardware',
-      'High implementation cost',
-      'Regulatory approval needed',
-      'Training required for staff'
-    ],
-    rating: 4.8,
-    reviewCount: 120,
-    trending: true,
-    featured: true,
-    integrations: ['Epic', 'Cerner', 'PACS systems', 'LIS platforms'],
-    lastVerified: new Date('2025-05-26')
-  },
-  {
-    id: 'radiology-assist',
-    name: 'RadiologyAssist AI',
-    slug: 'radiology-assist',
-    description: 'AI-powered radiology platform that enhances medical imaging interpretation, detects abnormalities in X-rays, CT scans, and MRIs, and assists radiologists in making faster, more accurate diagnoses.',
-    shortDescription: 'AI medical imaging analysis',
-    logo: 'https://images.pexels.com/photos/3786160/pexels-photo-3786160.jpeg',
-    website: 'https://radiobotics.com',
-    categoryId: 'healthcare-ai',
-    subcategoryIds: ['diagnostic-ai'],
-    pricing: {
-      type: 'enterprise',
-      startingPrice: 'Contact for pricing',
-      hasFreeOption: false,
-      tiers: [
-        {
-          name: 'Standard',
-          price: '$5000/month',
-          billingPeriod: 'monthly',
-          features: ['Basic AI analysis', 'Standard reporting', 'Up to 1000 scans/month']
-        },
-        {
-          name: 'Premium',
-          price: '$12000/month',
-          billingPeriod: 'monthly',
-          features: ['Advanced AI models', 'Priority analysis', 'Up to 5000 scans/month', 'Custom reporting']
-        }
-      ]
-    },
-    features: [
-      'Multi-modal imaging support',
-      'Abnormality detection',
-      'Automated measurements',
-      'Priority case flagging',
-      'Worklist optimization',
-      'FDA-cleared algorithms'
-    ],
-    limitations: [
-      'Requires DICOM integration',
-      'High monthly costs',
-      'Implementation complexity',
-      'Regulatory compliance needed'
-    ],
-    rating: 4.7,
-    reviewCount: 85,
-    trending: true,
-    featured: true,
-    integrations: ['PACS', 'RIS', 'Epic', 'Cerner', 'GE Healthcare', 'Siemens'],
-    lastVerified: new Date('2025-05-25')
-  },
-  {
-    id: 'clinical-notes-ai',
-    name: 'ClinicalNotes AI',
-    slug: 'clinical-notes-ai',
-    description: 'AI-powered clinical documentation platform that converts physician-patient conversations into structured clinical notes, extracts medical codes, and streamlines healthcare documentation workflows.',
-    shortDescription: 'AI clinical documentation assistant',
-    logo: 'https://images.pexels.com/photos/3786157/pexels-photo-3786157.jpeg',
-    website: 'https://clinicalnotes.ai',
-    categoryId: 'healthcare-ai',
-    subcategoryIds: ['clinical-documentation'],
+    id: 'jasper-ai-agent',
+    name: 'Jasper AI Agent',
+    slug: 'jasper-ai-agent',
+    description: 'Jasper AI Agent creates and manages comprehensive marketing campaigns autonomously. It can develop content strategies, create assets, and optimize campaigns based on performance data.',
+    shortDescription: 'AI agent for marketing campaign automation',
+    logo: 'https://images.pexels.com/photos/11035363/pexels-photo-11035363.jpeg',
+    website: 'https://jasper.ai/agents',
+    categoryId: 'agentic-ai',
+    subcategoryIds: ['marketing-agents', 'content-agents'],
     pricing: {
       type: 'subscription',
-      startingPrice: '$299/provider/month',
+      startingPrice: '$99/month',
       hasFreeOption: false,
       tiers: [
         {
-          name: 'Basic',
-          price: '$299/provider/month',
-          billingPeriod: 'monthly',
-          features: ['Voice-to-text transcription', 'Basic note generation', 'ICD-10 coding']
-        },
-        {
-          name: 'Professional',
-          price: '$499/provider/month',
-          billingPeriod: 'monthly',
-          features: ['Advanced NLP', 'Custom templates', 'CPT coding', 'Quality metrics']
-        }
-      ]
-    },
-    features: [
-      'Real-time transcription',
-      'Automated note generation',
-      'Medical coding assistance',
-      'Template customization',
-      'EHR integration',
-      'HIPAA compliance'
-    ],
-    limitations: [
-      'Requires internet connection',
-      'May need manual review',
-      'Learning curve for providers',
-      'Subscription cost per provider'
-    ],
-    rating: 4.6,
-    reviewCount: 200,
-    trending: true,
-    featured: false,
-    integrations: ['Epic', 'Cerner', 'AllScripts', 'athenahealth'],
-    lastVerified: new Date('2025-05-24')
-  },
-  {
-    id: 'drug-discovery-ai',
-    name: 'DrugDiscovery AI',
-    slug: 'drug-discovery-ai',
-    description: 'Advanced AI platform for pharmaceutical research that accelerates drug discovery through molecular analysis, target identification, and predictive modeling of drug interactions and efficacy.',
-    shortDescription: 'AI-powered drug discovery platform',
-    logo: 'https://images.pexels.com/photos/3786158/pexels-photo-3786158.jpeg',
-    website: 'https://insilico.com/',
-    categoryId: 'healthcare-ai',
-    subcategoryIds: ['medical-research'],
-    pricing: {
-      type: 'enterprise',
-      startingPrice: 'Contact for pricing',
-      hasFreeOption: false,
-      tiers: [
-        {
-          name: 'Academic',
-          price: 'Discounted rates',
-          billingPeriod: 'yearly',
-          features: ['Basic molecular analysis', 'Educational use', 'Limited computational resources']
-        },
-        {
-          name: 'Pharmaceutical',
-          price: 'Custom',
-          billingPeriod: 'yearly',
-          features: ['Full platform access', 'Advanced algorithms', 'Dedicated support', 'Custom models']
-        }
-      ]
-    },
-    features: [
-      'Molecular target identification',
-      'Lead compound optimization',
-      'ADMET prediction',
-      'Drug-drug interaction analysis',
-      'Synthesis pathway prediction',
-      'Clinical trial optimization'
-    ],
-    limitations: [
-      'Requires specialized knowledge',
-      'High computational costs',
-      'Long validation periods',
-      'Regulatory considerations'
-    ],
-    rating: 4.9,
-    reviewCount: 65,
-    trending: true,
-    featured: true,
-    integrations: ['ChEMBL', 'PubChem', 'UniProt', 'PDB', 'ZINC database'],
-    lastVerified: new Date('2025-05-23')
-  },
-  {
-    id: 'medchat-ai',
-    name: 'MedChat AI',
-    slug: 'medchat-ai',
-    description: 'AI-powered medical chatbot that provides preliminary health assessments, symptom checking, and patient triage to help healthcare providers manage patient inquiries efficiently.',
-    shortDescription: 'AI medical consultation assistant',
-    logo: 'https://images.pexels.com/photos/3786159/pexels-photo-3786159.jpeg',
-    website: 'https://medchat.ai',
-    categoryId: 'healthcare-ai',
-    subcategoryIds: ['patient-support'],
-    pricing: {
-      type: 'subscription',
-      startingPrice: '$500/month',
-      hasFreeOption: true,
-      tiers: [
-        {
-          name: 'Trial',
-          price: '$0',
-          billingPeriod: 'monthly',
-          features: ['100 consultations', 'Basic symptoms checker', '30-day trial']
-        },
-        {
-          name: 'Clinic',
-          price: '$500/month',
-          billingPeriod: 'monthly',
-          features: ['Unlimited consultations', 'Custom branding', 'Analytics dashboard']
-        },
-        {
-          name: 'Hospital',
-          price: '$2000/month',
-          billingPeriod: 'monthly',
-          features: ['Multi-department support', 'Advanced analytics', 'Custom integrations']
-        }
-      ]
-    },
-    features: [
-      'Symptom assessment',
-      'Triage recommendations',
-      'Health education content',
-      'Multilingual support',
-      'Patient data integration',
-      'Appointment scheduling'
-    ],
-    limitations: [
-      'Not a replacement for doctors',
-      'Limited to basic assessments',
-      'Requires medical oversight',
-      'Privacy compliance needed'
-    ],
-    rating: 4.5,
-    reviewCount: 180,
-    trending: true,
-    featured: false,
-    integrations: ['Epic MyChart', 'Patient portals', 'Telehealth platforms'],
-    lastVerified: new Date('2025-05-22')
-  },
-  {
-    id: 'genomics-ai',
-    name: 'GenomicsAI',
-    slug: 'genomics-ai',
-    description: 'Advanced AI platform for genomic analysis that interprets DNA sequencing data, identifies genetic variants, and provides insights for personalized medicine and genetic counseling.',
-    shortDescription: 'AI genomic analysis platform',
-    logo: 'https://images.pexels.com/photos/3786155/pexels-photo-3786155.jpeg',
-    website: 'https://deepgenomics.com/',
-    categoryId: 'healthcare-ai',
-    subcategoryIds: ['medical-research'],
-    pricing: {
-      type: 'usage-based',
-      startingPrice: 'Contact for pricing',
-      hasFreeOption: false,
-      tiers: [
-        {
-          name: 'Research',
-          price: '$50/sample',
-          billingPeriod: 'monthly',
-          features: ['Variant analysis', 'Population genetics', 'Basic reporting']
-        },
-        {
-          name: 'Clinical',
-          price: '$150/sample',
-          billingPeriod: 'monthly',
-          features: ['Clinical-grade analysis', 'Pathogenicity prediction', 'ACMG guidelines']
-        }
-      ]
-    },
-    features: [
-      'Variant calling and annotation',
-      'Pathogenicity prediction',
-      'Pharmacogenomics analysis',
-      'Population frequency analysis',
-      'Clinical reporting',
-      'Family history integration'
-    ],
-    limitations: [
-      'Requires high-quality sequencing data',
-      'Cost per sample analysis',
-      'Interpretation complexity',
-      'Regulatory considerations'
-    ],
-    rating: 4.8,
-    reviewCount: 95,
-    trending: true,
-    featured: true,
-    integrations: ['Illumina', 'Thermo Fisher', 'LIMS systems', 'ClinVar'],
-    lastVerified: new Date('2025-05-21')
-  },
-  {
-    id: 'mental-health-ai',
-    name: 'MentalHealth AI',
-    slug: 'mental-health-ai',
-    description: 'AI-powered mental health platform that provides mood tracking, cognitive behavioral therapy tools, and personalized interventions to support mental wellness and therapy outcomes.',
-    shortDescription: 'AI mental health support platform',
-    logo: 'https://images.pexels.com/photos/3786161/pexels-photo-3786161.jpeg',
-    website: 'https://wysa.com/',
-    categoryId: 'healthcare-ai',
-    subcategoryIds: ['patient-support'],
-    pricing: {
-      type: 'freemium',
-      startingPrice: 'Contact for pricing',
-      hasFreeOption: true,
-      tiers: [
-        {
-          name: 'Basic',
-          price: '$0',
-          billingPeriod: 'monthly',
-          features: ['Mood tracking', 'Basic exercises', 'Educational content']
-        },
-        {
-          name: 'Premium',
-          price: '$29/month',
-          billingPeriod: 'monthly',
-          features: ['Personalized interventions', 'Progress analytics', 'Therapist integration']
-        },
-        {
-          name: 'Clinical',
+          name: 'Creator',
           price: '$99/month',
           billingPeriod: 'monthly',
-          features: ['Multi-patient dashboard', 'Clinical insights', 'Custom protocols']
+          features: ['Campaign automation', 'Content generation', 'Basic analytics', 'Email support']
+        },
+        {
+          name: 'Pro',
+          price: '$199/month',
+          billingPeriod: 'monthly',
+          features: ['Advanced campaigns', 'Multi-channel content', 'Advanced analytics', 'Priority support']
+        },
+        {
+          name: 'Business',
+          price: 'Custom',
+          billingPeriod: 'monthly',
+          features: ['Enterprise features', 'Custom integrations', 'Dedicated support', 'Training included']
         }
       ]
     },
     features: [
-      'Mood and symptom tracking',
-      'CBT exercise library',
-      'Personalized recommendations',
-      'Crisis detection',
-      'Progress monitoring',
-      'Therapist collaboration tools'
+      'Campaign strategy development',
+      'Multi-format content creation',
+      'Performance optimization',
+      'Brand voice consistency',
+      'A/B testing automation',
+      'ROI tracking'
     ],
     limitations: [
-      'Not for crisis situations',
-      'Requires consistent use',
-      'May not replace therapy',
-      'Privacy considerations'
+      'High starting price',
+      'Requires marketing knowledge',
+      'Content may need human review',
+      'Learning curve for optimization'
     ],
     rating: 4.4,
-    reviewCount: 320,
-    trending: true,
-    featured: false,
-    integrations: ['EHR systems', 'Telehealth platforms', 'Wearable devices'],
-    lastVerified: new Date('2025-05-20')
-  },
-  {
-    id: 'pharmacy-ai',
-    name: 'PharmacyAI',
-    slug: 'pharmacy-ai',
-    description: 'AI-powered pharmacy management system that optimizes medication dispensing, identifies drug interactions, manages inventory, and provides clinical decision support for pharmacists.',
-    shortDescription: 'AI pharmacy management system',
-    logo: 'https://images.pexels.com/photos/3786162/pexels-photo-3786162.jpeg',
-    website: 'https://medisafe.com/',
-    categoryId: 'healthcare-ai',
-    subcategoryIds: ['clinical-operations'],
-    pricing: {
-      type: 'subscription',
-      startingPrice: '$800/month',
-      hasFreeOption: false,
-      tiers: [
-        {
-          name: 'Independent',
-          price: '$800/month',
-          billingPeriod: 'monthly',
-          features: ['Basic inventory management', 'Drug interaction checking', 'Standard reporting']
-        },
-        {
-          name: 'Chain',
-          price: '$2500/month',
-          billingPeriod: 'monthly',
-          features: ['Multi-location support', 'Advanced analytics', 'Custom integrations']
-        }
-      ]
-    },
-    features: [
-      'Automated inventory optimization',
-      'Drug interaction screening',
-      'Clinical decision support',
-      'Prescription verification',
-      'Patient counseling tools',
-      'Regulatory compliance'
-    ],
-    limitations: [
-      'Requires POS integration',
-      'Training needed for staff',
-      'Ongoing subscription costs',
-      'System compatibility issues'
-    ],
-    rating: 4.6,
-    reviewCount: 140,
+    reviewCount: 687,
     trending: false,
     featured: false,
-    integrations: ['PioneerRx', 'QS/1', 'Liberty Software', 'insurance networks'],
-    lastVerified: new Date('2025-05-19')
-  },
-  {
-    id: 'surgical-planning-ai',
-    name: 'SurgicalPlanning AI',
-    slug: 'surgical-planning-ai',
-    description: 'Advanced AI platform for surgical planning that analyzes medical imaging to create 3D surgical models, predicts outcomes, and assists surgeons in pre-operative planning.',
-    shortDescription: 'AI surgical planning assistant',
-    logo: 'https://images.pexels.com/photos/3786163/pexels-photo-3786163.jpeg',
-    website: 'https://surgicaltheater.com/',
-    categoryId: 'healthcare-ai',
-    subcategoryIds: ['surgical-assistance'],
-    pricing: {
-      type: 'enterprise',
-      startingPrice: 'Contact for pricing',
-      hasFreeOption: false,
-      tiers: [
-        {
-          name: 'Department',
-          price: 'Contact for pricing',
-          billingPeriod: 'monthly',
-          features: ['Basic planning tools', 'Standard imaging support', 'Up to 50 cases/month']
-        },
-        {
-          name: 'Hospital',
-          price: 'Contact for pricing',
-          billingPeriod: 'monthly',
-          features: ['Advanced modeling', 'Unlimited cases', 'Multi-specialty support']
-        }
-      ]
-    },
-    features: [
-      '3D surgical modeling',
-      'Outcome prediction',
-      'Risk assessment',
-      'Surgical simulation',
-      'Implant planning',
-      'Team collaboration tools'
-    ],
-    limitations: [
-      'Very high costs',
-      'Requires specialized training',
-      'Complex implementation',
-      'Hardware requirements'
-    ],
-    rating: 4.9,
-    reviewCount: 45,
-    trending: true,
-    featured: true,
-    integrations: ['OR management systems', 'PACS', 'Surgical robots'],
-    lastVerified: new Date('2025-05-18')
-  },
-  {
-    id: 'nutrition-ai',
-    name: 'NutritionAI',
-    slug: 'nutrition-ai',
-    description: 'AI-powered nutrition analysis platform that creates personalized meal plans, tracks nutritional intake, and provides dietary recommendations based on health conditions and goals.',
-    shortDescription: 'AI nutrition and meal planning',
-    logo: 'https://images.pexels.com/photos/3786164/pexels-photo-3786164.jpeg',
-    website: 'https://nutrition.ai',
-    categoryId: 'healthcare-ai',
-    subcategoryIds: ['patient-support'],
-    pricing: {
-      type: 'freemium',
-      startingPrice: '$19/month',
-      hasFreeOption: true,
-      tiers: [
-        {
-          name: 'Basic',
-          price: '$0',
-          billingPeriod: 'monthly',
-          features: ['Basic meal tracking', 'Standard recommendations', 'Limited recipes']
-        },
-        {
-          name: 'Premium',
-          price: '$19/month',
-          billingPeriod: 'monthly',
-          features: ['Personalized plans', 'Medical condition support', 'Unlimited recipes']
-        },
-        {
-          name: 'Professional',
-          price: '$99/month',
-          billingPeriod: 'monthly',
-          features: ['Multi-client management', 'Clinical insights', 'Custom protocols']
-        }
-      ]
-    },
-    features: [
-      'Personalized meal planning',
-      'Nutritional analysis',
-      'Medical condition support',
-      'Recipe recommendations',
-      'Progress tracking',
-      'Dietary restriction management'
-    ],
-    limitations: [
-      'Requires accurate food logging',
-      'May not suit all dietary needs',
-      'Professional tier expensive',
-      'Limited international foods'
-    ],
-    rating: 4.3,
-    reviewCount: 280,
-    trending: false,
-    featured: false,
-    integrations: ['MyFitnessPal', 'Fitness trackers', 'EHR systems'],
-    lastVerified: new Date('2025-05-17')
-  },
-  {
-    id: 'telemedicine-ai',
-    name: 'TelemedicineAI',
-    slug: 'telemedicine-ai',
-    description: 'AI-enhanced telemedicine platform that provides virtual consultation tools, automated patient intake, symptom assessment, and clinical decision support for remote healthcare delivery.',
-    shortDescription: 'AI-powered telemedicine platform',
-    logo: 'https://images.pexels.com/photos/3786165/pexels-photo-3786165.jpeg',
-    website: 'https://telemedicine.ai',
-    categoryId: 'healthcare-ai',
-    subcategoryIds: ['clinical-operations'],
-    pricing: {
-      type: 'subscription',
-      startingPrice: '$199/provider/month',
-      hasFreeOption: true,
-      tiers: [
-        {
-          name: 'Starter',
-          price: '$0',
-          billingPeriod: 'monthly',
-          features: ['Basic video calls', 'Up to 10 patients/month', 'Standard features']
-        },
-        {
-          name: 'Professional',
-          price: '$199/provider/month',
-          billingPeriod: 'monthly',
-          features: ['Unlimited consultations', 'AI intake', 'EHR integration']
-        },
-        {
-          name: 'Enterprise',
-          price: '$499/provider/month',
-          billingPeriod: 'monthly',
-          features: ['Advanced analytics', 'Custom branding', 'API access']
-        }
-      ]
-    },
-    features: [
-      'Video consultation platform',
-      'AI-powered patient intake',
-      'Symptom assessment tools',
-      'Prescription management',
-      'Appointment scheduling',
-      'Insurance verification'
-    ],
-    limitations: [
-      'Internet dependency',
-      'Technology barriers for patients',
-      'Licensing restrictions',
-      'Limited physical examination'
-    ],
-    rating: 4.5,
-    reviewCount: 190,
-    trending: true,
-    featured: false,
-    integrations: ['Epic', 'Cerner', 'Practice management systems'],
-    lastVerified: new Date('2025-05-16')
+    integrations: ['Google Ads', 'Facebook Ads', 'HubSpot', 'Salesforce', 'Analytics tools', 'CMS platforms'],
+    lastVerified: new Date('2025-05-22')
   }
 ];

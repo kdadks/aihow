@@ -14,34 +14,34 @@ export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
     detectSessionInUrl: true,
     // Enable role claims in JWT payload
     storageKey: 'auth',
-    storage: {
-      getItem: (key) => {
-        const item = localStorage.getItem(key);
-        if (item) {
-          const data = JSON.parse(item);
-          // Ensure role claim is included in session
-          if (data.session?.user?.app_metadata) {
-            data.session.user.app_metadata.claims_admin = true;
-          }
-          return JSON.stringify(data);
-        }
-        return null;
-      },
-      setItem: (key, value) => localStorage.setItem(key, value),
-      removeItem: (key) => localStorage.removeItem(key)
-    }
+    // storage: {
+    //   getItem: (key) => {
+    //     const item = localStorage.getItem(key);
+    //     if (item) {
+    //       const data = JSON.parse(item);
+    //       // Ensure role claim is included in session
+    //       if (data.session?.user?.app_metadata) {
+    //         data.session.user.app_metadata.claims_admin = true;
+    //       }
+    //       return JSON.stringify(data);
+    //     }
+    //     return null;
+    //   },
+    //   setItem: (key, value) => localStorage.setItem(key, value),
+    //   removeItem: (key) => localStorage.removeItem(key)
+    // }
   },
-  global: {
-    fetch: (...args) => {
-      // Add role claim headers to all requests
-      const [url, config] = args;
-      return fetch(url, {
-        ...config,
-        headers: {
-          ...config?.headers,
-          'x-claims-roles': 'true'
-        }
-      });
-    }
-  }
+  // global: {
+  //   fetch: (...args) => {
+  //     // Add role claim headers to all requests
+  //     const [url, config] = args;
+  //     return fetch(url, {
+  //       ...config,
+  //       headers: {
+  //         ...config?.headers,
+  //         'x-claims-roles': 'true'
+  //       }
+  //     });
+  //   }
+  // }
 });

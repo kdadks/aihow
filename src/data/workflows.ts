@@ -78,5 +78,90 @@ export const workflowBundles: WorkflowBundle[] = [
       'Create custom review prompts with PromptBase Pro',
       'Implement automated quality checks'
     ]
+  },
+  {
+    id: '5',
+    name: 'Autonomous Agent Workflow',
+    description: 'Complete autonomous AI agent setup for complex task execution and process automation.',
+    tools: [
+      findTool('autogpt'), // AutoGPT
+      findTool('langchain-agents'), // LangChain Agents
+      findTool('crew-ai')  // CrewAI
+    ],
+    totalCost: '$68/month',
+    implementationSteps: [
+      'Deploy AutoGPT for autonomous goal achievement',
+      'Set up LangChain Agents framework for tool integration',
+      'Configure CrewAI for multi-agent collaboration',
+      'Establish monitoring and safety protocols'
+    ]
+  },
+  {
+    id: '6',
+    name: 'AI Research Assistant',
+    description: 'Comprehensive research automation using AI agents for data gathering, analysis, and report generation.',
+    tools: [
+      findTool('research-agent-gpt'), // ResearchAgent GPT
+      findTool('babyagi'), // BabyAGI
+      findTool('dataiku-ai-agents')  // Dataiku AI Agents
+    ],
+    totalCost: '$29+/month',
+    implementationSteps: [
+      'Configure ResearchAgent GPT for automated research tasks',
+      'Set up BabyAGI for task management and prioritization',
+      'Integrate Dataiku AI Agents for advanced data analysis',
+      'Create research workflows and quality checks'
+    ]
+  },
+  {
+    id: '7',
+    name: 'Business Process Automation',
+    description: 'Enterprise-grade AI agents for automating customer service, sales, and business operations.',
+    tools: [
+      findTool('superagent'), // SuperAgent
+      findTool('microsoft-copilot-studio'), // Microsoft Copilot Studio
+      findTool('apollo-ai-agent')  // Apollo AI Agent
+    ],
+    totalCost: '$398/month',
+    implementationSteps: [
+      'Deploy SuperAgent for customer service automation',
+      'Set up Microsoft Copilot Studio for enterprise workflows',
+      'Configure Apollo AI Agent for sales automation',
+      'Integrate with existing business systems and CRM'
+    ]
+  },
+  {
+    id: '8',
+    name: 'AI Development Team',
+    description: 'AI-powered software development agents for code generation, review, and project management.',
+    tools: [
+      findTool('devika-ai'), // Devika AI
+      findTool('gpt-engineer'), // GPT Engineer
+      findTool('agent-gpt')  // AgentGPT
+    ],
+    totalCost: '$88/month',
+    implementationSteps: [
+      'Set up Devika AI for software engineering tasks',
+      'Configure GPT Engineer for codebase generation',
+      'Deploy AgentGPT for project coordination',
+      'Establish code review and quality assurance processes'
+    ]
+  },
+  {
+    id: '9',
+    name: 'Marketing Automation Agents',
+    description: 'AI agents for content creation, campaign management, and marketing process automation.',
+    tools: [
+      findTool('jasper-ai-agent'), // Jasper AI Agent
+      findTool('crew-ai'), // CrewAI
+      findTool('superagent')  // SuperAgent
+    ],
+    totalCost: '$247/month',
+    implementationSteps: [
+      'Deploy Jasper AI Agent for marketing campaign automation',
+      'Set up CrewAI for collaborative content creation',
+      'Configure SuperAgent for lead nurturing workflows',
+      'Integrate with marketing tools and analytics platforms'
+    ]
   }
 ];
