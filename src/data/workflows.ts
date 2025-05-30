@@ -16,15 +16,15 @@ export const workflowBundles: WorkflowBundle[] = [
     name: 'Advanced Code Development Suite',
     description: 'Comprehensive AI-powered development environment combining multiple code assistants for enhanced productivity.',
     tools: [
-      findTool('20'), // GitHub Copilot
-      findTool('21'), // Claude Code Assistant
-      findTool('22')  // Google Gemini Code
+      findTool('github-copilot'), // GitHub Copilot
+      findTool('claude-code-assistant'), // Claude Code Assistant  
+      findTool('cursor-ai')  // Cursor AI
     ],
-    totalCost: '$45/month',
+    totalCost: '$50/month',
     implementationSteps: [
       'Set up GitHub Copilot in your IDE for real-time code suggestions',
       'Use Claude Code Assistant for complex code generation and refactoring',
-      'Leverage Gemini Code for additional insights and code optimization',
+      'Leverage Cursor AI for additional insights and code optimization',
       'Integrate tools into your development workflow'
     ]
   },
@@ -50,14 +50,14 @@ export const workflowBundles: WorkflowBundle[] = [
     name: 'Full-Stack Development Bundle',
     description: 'Complete toolkit for modern software development, combining code generation with workflow automation.',
     tools: [
-      findTool('20'), // GitHub Copilot
-      findTool('16'), // Tabnine
-      findTool('19')  // WorkflowGPT
+      findTool('github-copilot'), // GitHub Copilot
+      findTool('codeium'), // Codeium
+      findTool('zapier-ai')  // Zapier AI
     ],
-    totalCost: '$61/month',
+    totalCost: '$40/month',
     implementationSteps: [
-      'Integrate Copilot and Tabnine for comprehensive code assistance',
-      'Set up automated workflows with WorkflowGPT',
+      'Integrate Copilot and Codeium for comprehensive code assistance',
+      'Set up automated workflows with Zapier AI',
       'Configure IDE extensions and integrations',
       'Establish efficient development processes'
     ]
@@ -67,11 +67,11 @@ export const workflowBundles: WorkflowBundle[] = [
     name: 'AI Code Review & Quality',
     description: 'Advanced toolkit for code review, optimization, and quality assurance using multiple AI assistants.',
     tools: [
-      findTool('21'), // Claude Code Assistant
-      findTool('22'), // Google Gemini Code
+      findTool('claude-code-assistant'), // Claude Code Assistant
+      findTool('google-gemini-code'), // Google Gemini Code
       findTool('17')  // PromptBase Pro
     ],
-    totalCost: '$55/month',
+    totalCost: '$65/month',
     implementationSteps: [
       'Use Claude Code Assistant for detailed code reviews',
       'Optimize code quality with Gemini Code',

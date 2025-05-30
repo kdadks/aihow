@@ -1285,7 +1285,7 @@ export const tools: Tool[] = [
     lastVerified: new Date('2025-05-10')
   },
   {
-    id: '20',
+    id: 'github-copilot',
     name: 'GitHub Copilot',
     slug: 'github-copilot',
     description: 'AI pair programmer that suggests code completions in real-time, helping developers write better code faster with context-aware suggestions across multiple programming languages.',
@@ -1333,7 +1333,7 @@ export const tools: Tool[] = [
     lastVerified: new Date('2025-05-20')
   },
   {
-    id: '21',
+    id: 'claude-code-assistant',
     name: 'Claude Code Assistant',
     slug: 'claude-code',
     description: 'Advanced AI coding assistant powered by Anthropic\'s Claude model, specializing in complex code generation, refactoring, and detailed code explanations.',
@@ -1381,7 +1381,7 @@ export const tools: Tool[] = [
     lastVerified: new Date('2025-05-19')
   },
   {
-    id: '22',
+    id: 'google-gemini-code',
     name: 'Google Gemini Code',
     slug: 'gemini-code',
     description: 'Google\'s advanced code generation and assistance tool powered by the Gemini model, offering seamless integration with Google\'s development ecosystem.',
@@ -1429,7 +1429,7 @@ export const tools: Tool[] = [
     lastVerified: new Date('2025-05-18')
   },
   {
-    id: '23',
+    id: 'runway-gen-2',
     name: 'Runway Gen-2',
     slug: 'runway-gen2',
     description: 'Advanced AI video generation platform that creates high-quality videos from text prompts or images, with powerful editing and customization capabilities.',
@@ -1477,7 +1477,7 @@ export const tools: Tool[] = [
     lastVerified: new Date('2025-05-20')
   },
   {
-    id: '24',
+    id: 'elevenlabs',
     name: 'ElevenLabs',
     slug: 'elevenlabs',
     description: 'State-of-the-art AI voice synthesis platform offering ultra-realistic voice generation and cloning capabilities with emotional expression control.',
@@ -1525,7 +1525,7 @@ export const tools: Tool[] = [
     lastVerified: new Date('2025-05-15')
   },
   {
-    id: '25',
+    id: 'inworld-ai',
     name: 'Inworld AI',
     slug: 'inworld-ai',
     description: 'Advanced AI character creation platform for games and interactive experiences, featuring dynamic NPC personalities and natural conversations.',
@@ -1573,7 +1573,7 @@ export const tools: Tool[] = [
     lastVerified: new Date('2025-05-18')
   },
   {
-    id: '26',
+    id: 'descript',
     name: 'Descript',
     slug: 'descript',
     description: 'All-in-one AI-powered video and audio editing platform with transcription, voice cloning, and seamless content editing capabilities.',
@@ -1621,7 +1621,7 @@ export const tools: Tool[] = [
     lastVerified: new Date('2025-05-19')
   },
   {
-    id: '29',
+    id: 'pika',
     name: 'Pika',
     slug: 'pika',
     description: 'Next-generation AI video creation platform that specializes in dynamic scene transitions, camera movements, and high-quality video generation from both text and image inputs.',
@@ -1669,7 +1669,7 @@ export const tools: Tool[] = [
     lastVerified: new Date('2025-05-23')
   },
   {
-    id: '30',
+    id: 'character.ai',
     name: 'Character.ai',
     slug: 'character-ai',
     description: 'Advanced AI platform for creating and interacting with customized AI characters, featuring natural conversations, personality development, and integration capabilities.',
@@ -1717,7 +1717,7 @@ export const tools: Tool[] = [
     lastVerified: new Date('2025-05-22')
   },
   {
-    id: '27',
+    id: 'dalle3',
     name: 'DALL·E 3',
     slug: 'dalle3',
     description: 'OpenAI\'s advanced image generation AI that creates highly detailed and accurate images from natural language descriptions, with improved understanding of spatial relationships and artistic styles.',
@@ -1765,7 +1765,7 @@ export const tools: Tool[] = [
     lastVerified: new Date('2025-05-25')
   },
   {
-    id: '28',
+    id: 'sora',
     name: 'Sora',
     slug: 'sora',
     description: 'OpenAI\'s groundbreaking text-to-video AI model that generates highly realistic, coherent videos with complex scenes, camera movements, and multiple characters.',
@@ -1807,7 +1807,7 @@ export const tools: Tool[] = [
     lastVerified: new Date('2025-05-24')
   },
   {
-    id: '31',
+    id: 'synthesia',
     name: 'Synthesia',
     slug: 'synthesia',
     description: 'AI platform that creates professional video content with customizable AI avatars speaking your script, ideal for training, marketing, and educational content.',
@@ -1855,7 +1855,7 @@ export const tools: Tool[] = [
     lastVerified: new Date('2025-05-24')
   },
   {
-    id: '32',
+    id: 'colossyan',
     name: 'Colossyan',
     slug: 'colossyan',
     description: 'Enterprise-focused AI video creation platform specializing in professional training and corporate communications with realistic AI presenters.',
@@ -1897,7 +1897,7 @@ export const tools: Tool[] = [
     lastVerified: new Date('2025-05-24')
   },
   {
-    id: '33',
+    id: 'lumen5',
     name: 'Lumen5',
     slug: 'lumen5',
     description: 'AI-powered video creation platform that transforms blog posts, articles, and text content into engaging social media videos with automated scene generation.',
@@ -1945,7 +1945,7 @@ export const tools: Tool[] = [
     lastVerified: new Date('2025-05-24')
   },
   {
-    id: '34',
+    id: 'stable-diffusion',
     name: 'Stable Diffusion',
     slug: 'stable-diffusion',
     description: 'Open-source AI image generation model known for its flexibility, customization options, and ability to run locally, supporting various creative workflows.',
@@ -1993,7 +1993,7 @@ export const tools: Tool[] = [
     lastVerified: new Date('2025-05-24')
   },
   {
-    id: '35',
+    id: 'adobe-firefly',
     name: 'Adobe Firefly',
     slug: 'adobe-firefly',
     description: 'Adobe\'s AI creative suite for generating and editing images, with seamless integration into Creative Cloud apps and focus on commercial-safe content.',
@@ -2041,7 +2041,7 @@ export const tools: Tool[] = [
     lastVerified: new Date('2025-05-24')
   },
   {
-    id: '36',
+    id: 'voicemod-ai',
     name: 'Voicemod AI',
     slug: 'voicemod-ai',
     description: 'Real-time voice changing and synthesis platform using AI to create custom voices and sound effects for streaming, gaming, and content creation.',
@@ -2089,7 +2089,7 @@ export const tools: Tool[] = [
     lastVerified: new Date('2025-05-24')
   },
   {
-    id: '37',
+    id: 'suno-ai',
     name: 'Suno AI',
     slug: 'suno-ai',
     description: 'Advanced AI music generation platform that creates complete songs with vocals, instruments, and arrangements from text prompts.',
@@ -2137,7 +2137,7 @@ export const tools: Tool[] = [
     lastVerified: new Date('2025-05-24')
   },
   {
-    id: '38',
+    id: 'aiva',
     name: 'Aiva',
     slug: 'aiva',
     description: 'Professional AI music composition platform specializing in creating original soundtracks and background music for various media projects.',
@@ -2185,7 +2185,7 @@ export const tools: Tool[] = [
     lastVerified: new Date('2025-05-24')
   },
   {
-    id: '39',
+    id: 'scenario-gg',
     name: 'Scenario.gg',
     slug: 'scenario-gg',
     description: 'AI-powered game asset generation platform that creates high-quality 3D models, textures, and environments from text descriptions or concept sketches.',
@@ -2281,7 +2281,7 @@ export const tools: Tool[] = [
     lastVerified: new Date('2025-05-24')
   },
   {
-    id: '41',
+    id: 'unity-muse',
     name: 'Unity Muse',
     slug: 'unity-muse',
     description: 'Unity\'s integrated AI toolset for game development, offering automated content generation, code assistance, and game testing capabilities.',
@@ -2323,7 +2323,7 @@ export const tools: Tool[] = [
     lastVerified: new Date('2025-05-24')
   },
   {
-    id: '42',
+    id: 'adobe-creative-suite-ai',
     name: 'Adobe Creative Suite AI',
     slug: 'adobe-creative-suite-ai',
     description: 'Comprehensive AI tools integrated across Adobe\'s Creative Suite, enhancing photo editing, video production, and creative workflows.',
@@ -2371,7 +2371,7 @@ export const tools: Tool[] = [
     lastVerified: new Date('2025-05-24')
   },
   {
-    id: '43',
+    id: 'chatgpt-document',
     name: 'ChatGPT (Document Mode)',
     slug: 'chatgpt-document',
     description: 'OpenAI\'s ChatGPT optimized for document creation, offering multi-format writing capabilities from essays to business plans with real-time collaboration features.',
@@ -2419,7 +2419,7 @@ export const tools: Tool[] = [
     lastVerified: new Date('2025-05-24')
   },
   {
-    id: '44',
+    id: 'notion-ai',
     name: 'Notion AI',
     slug: 'notion-ai',
     description: 'Integrated AI writing assistant within Notion\'s workspace, specializing in document drafting, meeting notes, and knowledge base creation.',
@@ -2461,7 +2461,7 @@ export const tools: Tool[] = [
     lastVerified: new Date('2025-05-24')
   },
   {
-    id: '45',
+    id: 'microsoft-copilot',
     name: 'Microsoft Copilot',
     slug: 'microsoft-copilot',
     description: 'AI assistant integrated into Microsoft Word for document creation, summarization, and improvement, with advanced writing and formatting capabilities.',
@@ -2503,7 +2503,7 @@ export const tools: Tool[] = [
     lastVerified: new Date('2025-05-24')
   },
   {
-    id: '46',
+    id: 'grammarly-go',
     name: 'GrammarlyGO',
     slug: 'grammarly-go',
     description: 'AI-powered writing assistant that helps refine tone, improve clarity, and generate content across various platforms and document types.',
@@ -2551,7 +2551,7 @@ export const tools: Tool[] = [
     lastVerified: new Date('2025-05-24')
   },
   {
-    id: '47',
+    id: 'tome',
     name: 'Tome',
     slug: 'tome',
     description: 'AI-powered storytelling platform that creates visually rich documents and presentations with minimal input, ideal for pitch decks and visual narratives.',
@@ -2599,7 +2599,7 @@ export const tools: Tool[] = [
     lastVerified: new Date('2025-05-24')
   },
   {
-    id: '48',
+    id: 'copy-ai',
     name: 'Copy.ai',
     slug: 'copy-ai',
     description: 'AI-powered writing platform focused on business content creation, featuring templates for marketing materials, sales copy, and professional documents.',
@@ -2647,7 +2647,7 @@ export const tools: Tool[] = [
     lastVerified: new Date('2025-05-24')
   },
   {
-    id: '49',
+    id: 'lawgeex',
     name: 'LawGeex',
     slug: 'lawgeex',
     description: 'Enterprise-grade AI platform for legal document review and analysis, specializing in contract review, risk assessment, and compliance checking.',
@@ -2689,7 +2689,7 @@ export const tools: Tool[] = [
     lastVerified: new Date('2025-05-24')
   },
   {
-    id: '50',
+    id: 'resume-io',
     name: 'Resume.io',
     slug: 'resume-io',
     description: 'AI-powered resume builder with smart content suggestions, ATS optimization, and professional templates for creating job-winning resumes and cover letters.',
@@ -2737,7 +2737,7 @@ export const tools: Tool[] = [
     lastVerified: new Date('2025-05-24')
   },
   {
-    id: '51',
+    id: 'scite',
     name: 'Scite',
     slug: 'scite',
     description: 'AI research assistant that analyzes scientific papers, provides citation context, and helps create literature reviews with smart summarization.',
@@ -2785,7 +2785,7 @@ export const tools: Tool[] = [
     lastVerified: new Date('2025-05-24')
   },
   {
-    id: '52',
+    id: 'consensus',
     name: 'Consensus',
     slug: 'consensus',
     description: 'AI-powered academic search engine that synthesizes research findings, generates literature reviews, and provides evidence-based insights.',
@@ -2833,7 +2833,7 @@ export const tools: Tool[] = [
     lastVerified: new Date('2025-05-24')
   },
   {
-    id: '53',
+    id: 'jasper-ai',
     name: 'Jasper AI',
     slug: 'jasper-ai',
     description: 'Advanced AI writing platform specializing in marketing content, blog posts, and business documents with brand voice customization.',
@@ -2881,7 +2881,7 @@ export const tools: Tool[] = [
     lastVerified: new Date('2025-05-24')
   },
   {
-    id: '54',
+    id: 'canva-docs',
     name: 'Canva Docs',
     slug: 'canva-docs',
     description: 'Visual document creation platform with AI assistance for creating beautiful, design-rich documents and presentations.',
@@ -2929,7 +2929,7 @@ export const tools: Tool[] = [
     lastVerified: new Date('2025-05-24')
   },
   {
-    id: '55',
+    id: 'clickup-ai',
     name: 'ClickUp AI',
     slug: 'clickup-ai',
     description: 'Integrated AI writing assistant for project documentation, team wikis, and collaborative documents within the ClickUp workspace.',
@@ -2977,7 +2977,7 @@ export const tools: Tool[] = [
     lastVerified: new Date('2025-05-24')
   },
   {
-    id: '56',
+    id: 'otter-ai',
     name: 'Otter.ai',
     slug: 'otter-ai',
     description: 'AI-powered meeting transcription and note-taking platform that converts conversations into searchable, shareable documents with smart summaries.',
@@ -4774,5 +4774,579 @@ export const tools: Tool[] = [
     featured: false,
     integrations: ['GitHub', 'GPT-4', 'Claude', 'Terminal', 'Docker'],
     lastVerified: new Date('2025-05-26')
+  },
+  {
+    id: 'pathology-ai',
+    name: 'PathologyAI',
+    slug: 'pathology-ai',
+    description: 'Advanced AI platform for digital pathology that assists pathologists in analyzing tissue samples, detecting cancerous cells, and providing diagnostic insights with high accuracy and speed.',
+    shortDescription: 'AI-powered pathology diagnostics',
+    logo: 'https://images.pexels.com/photos/3786156/pexels-photo-3786156.jpeg',
+    website: 'https://aiforia.com',
+    categoryId: 'healthcare-ai',
+    subcategoryIds: ['diagnostic-ai'],
+    pricing: {
+      type: 'enterprise',
+      startingPrice: 'Contact for pricing',
+      hasFreeOption: false,
+      tiers: [
+        {
+          name: 'Clinical',
+          price: 'Custom',
+          billingPeriod: 'yearly',
+          features: ['Histopathology analysis', 'Cancer detection', 'Workflow integration', 'HIPAA compliance']
+        },
+        {
+          name: 'Research',
+          price: 'Custom',
+          billingPeriod: 'yearly',
+          features: ['Advanced analytics', 'Custom models', 'Data export', 'Research collaboration']
+        }
+      ]
+    },
+    features: [
+      'Automated slide analysis',
+      'Cancer cell detection',
+      'Morphological assessment',
+      'Real-time reporting',
+      'Quality assurance metrics',
+      'Integration with LIS systems'
+    ],
+    limitations: [
+      'Requires specialized hardware',
+      'High implementation cost',
+      'Regulatory approval needed',
+      'Training required for staff'
+    ],
+    rating: 4.8,
+    reviewCount: 120,
+    trending: true,
+    featured: true,
+    integrations: ['Epic', 'Cerner', 'PACS systems', 'LIS platforms'],
+    lastVerified: new Date('2025-05-26')
+  },
+  {
+    id: 'radiology-assist',
+    name: 'RadiologyAssist AI',
+    slug: 'radiology-assist',
+    description: 'AI-powered radiology platform that enhances medical imaging interpretation, detects abnormalities in X-rays, CT scans, and MRIs, and assists radiologists in making faster, more accurate diagnoses.',
+    shortDescription: 'AI medical imaging analysis',
+    logo: 'https://images.pexels.com/photos/3786160/pexels-photo-3786160.jpeg',
+    website: 'https://radiobotics.com',
+    categoryId: 'healthcare-ai',
+    subcategoryIds: ['diagnostic-ai'],
+    pricing: {
+      type: 'enterprise',
+      startingPrice: 'Contact for pricing',
+      hasFreeOption: false,
+      tiers: [
+        {
+          name: 'Standard',
+          price: '$5000/month',
+          billingPeriod: 'monthly',
+          features: ['Basic AI analysis', 'Standard reporting', 'Up to 1000 scans/month']
+        },
+        {
+          name: 'Premium',
+          price: '$12000/month',
+          billingPeriod: 'monthly',
+          features: ['Advanced AI models', 'Priority analysis', 'Up to 5000 scans/month', 'Custom reporting']
+        }
+      ]
+    },
+    features: [
+      'Multi-modal imaging support',
+      'Abnormality detection',
+      'Automated measurements',
+      'Priority case flagging',
+      'Worklist optimization',
+      'FDA-cleared algorithms'
+    ],
+    limitations: [
+      'Requires DICOM integration',
+      'High monthly costs',
+      'Implementation complexity',
+      'Regulatory compliance needed'
+    ],
+    rating: 4.7,
+    reviewCount: 85,
+    trending: true,
+    featured: true,
+    integrations: ['PACS', 'RIS', 'Epic', 'Cerner', 'GE Healthcare', 'Siemens'],
+    lastVerified: new Date('2025-05-25')
+  },
+  {
+    id: 'clinical-notes-ai',
+    name: 'ClinicalNotes AI',
+    slug: 'clinical-notes-ai',
+    description: 'AI-powered clinical documentation platform that converts physician-patient conversations into structured clinical notes, extracts medical codes, and streamlines healthcare documentation workflows.',
+    shortDescription: 'AI clinical documentation assistant',
+    logo: 'https://images.pexels.com/photos/3786157/pexels-photo-3786157.jpeg',
+    website: 'https://clinicalnotes.ai',
+    categoryId: 'healthcare-ai',
+    subcategoryIds: ['clinical-documentation'],
+    pricing: {
+      type: 'subscription',
+      startingPrice: '$299/provider/month',
+      hasFreeOption: false,
+      tiers: [
+        {
+          name: 'Basic',
+          price: '$299/provider/month',
+          billingPeriod: 'monthly',
+          features: ['Voice-to-text transcription', 'Basic note generation', 'ICD-10 coding']
+        },
+        {
+          name: 'Professional',
+          price: '$499/provider/month',
+          billingPeriod: 'monthly',
+          features: ['Advanced NLP', 'Custom templates', 'CPT coding', 'Quality metrics']
+        }
+      ]
+    },
+    features: [
+      'Real-time transcription',
+      'Automated note generation',
+      'Medical coding assistance',
+      'Template customization',
+      'EHR integration',
+      'HIPAA compliance'
+    ],
+    limitations: [
+      'Requires internet connection',
+      'May need manual review',
+      'Learning curve for providers',
+      'Subscription cost per provider'
+    ],
+    rating: 4.6,
+    reviewCount: 200,
+    trending: true,
+    featured: false,
+    integrations: ['Epic', 'Cerner', 'AllScripts', 'athenahealth'],
+    lastVerified: new Date('2025-05-24')
+  },
+  {
+    id: 'drug-discovery-ai',
+    name: 'DrugDiscovery AI',
+    slug: 'drug-discovery-ai',
+    description: 'Advanced AI platform for pharmaceutical research that accelerates drug discovery through molecular analysis, target identification, and predictive modeling of drug interactions and efficacy.',
+    shortDescription: 'AI-powered drug discovery platform',
+    logo: 'https://images.pexels.com/photos/3786158/pexels-photo-3786158.jpeg',
+    website: 'https://insilico.com/',
+    categoryId: 'healthcare-ai',
+    subcategoryIds: ['medical-research'],
+    pricing: {
+      type: 'enterprise',
+      startingPrice: 'Contact for pricing',
+      hasFreeOption: false,
+      tiers: [
+        {
+          name: 'Academic',
+          price: 'Discounted rates',
+          billingPeriod: 'yearly',
+          features: ['Basic molecular analysis', 'Educational use', 'Limited computational resources']
+        },
+        {
+          name: 'Pharmaceutical',
+          price: 'Custom',
+          billingPeriod: 'yearly',
+          features: ['Full platform access', 'Advanced algorithms', 'Dedicated support', 'Custom models']
+        }
+      ]
+    },
+    features: [
+      'Molecular target identification',
+      'Lead compound optimization',
+      'ADMET prediction',
+      'Drug-drug interaction analysis',
+      'Synthesis pathway prediction',
+      'Clinical trial optimization'
+    ],
+    limitations: [
+      'Requires specialized knowledge',
+      'High computational costs',
+      'Long validation periods',
+      'Regulatory considerations'
+    ],
+    rating: 4.9,
+    reviewCount: 65,
+    trending: true,
+    featured: true,
+    integrations: ['ChEMBL', 'PubChem', 'UniProt', 'PDB', 'ZINC database'],
+    lastVerified: new Date('2025-05-23')
+  },
+  {
+    id: 'medchat-ai',
+    name: 'MedChat AI',
+    slug: 'medchat-ai',
+    description: 'AI-powered medical chatbot that provides preliminary health assessments, symptom checking, and patient triage to help healthcare providers manage patient inquiries efficiently.',
+    shortDescription: 'AI medical consultation assistant',
+    logo: 'https://images.pexels.com/photos/3786159/pexels-photo-3786159.jpeg',
+    website: 'https://medchat.ai',
+    categoryId: 'healthcare-ai',
+    subcategoryIds: ['patient-support'],
+    pricing: {
+      type: 'subscription',
+      startingPrice: '$500/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Trial',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['100 consultations', 'Basic symptoms checker', '30-day trial']
+        },
+        {
+          name: 'Clinic',
+          price: '$500/month',
+          billingPeriod: 'monthly',
+          features: ['Unlimited consultations', 'Custom branding', 'Analytics dashboard']
+        },
+        {
+          name: 'Hospital',
+          price: '$2000/month',
+          billingPeriod: 'monthly',
+          features: ['Multi-department support', 'Advanced analytics', 'Custom integrations']
+        }
+      ]
+    },
+    features: [
+      'Symptom assessment',
+      'Triage recommendations',
+      'Health education content',
+      'Multilingual support',
+      'Patient data integration',
+      'Appointment scheduling'
+    ],
+    limitations: [
+      'Not a replacement for doctors',
+      'Limited to basic assessments',
+      'Requires medical oversight',
+      'Privacy compliance needed'
+    ],
+    rating: 4.5,
+    reviewCount: 180,
+    trending: true,
+    featured: false,
+    integrations: ['Epic MyChart', 'Patient portals', 'Telehealth platforms'],
+    lastVerified: new Date('2025-05-22')
+  },
+  {
+    id: 'genomics-ai',
+    name: 'GenomicsAI',
+    slug: 'genomics-ai',
+    description: 'Advanced AI platform for genomic analysis that interprets DNA sequencing data, identifies genetic variants, and provides insights for personalized medicine and genetic counseling.',
+    shortDescription: 'AI genomic analysis platform',
+    logo: 'https://images.pexels.com/photos/3786155/pexels-photo-3786155.jpeg',
+    website: 'https://deepgenomics.com/',
+    categoryId: 'healthcare-ai',
+    subcategoryIds: ['medical-research'],
+    pricing: {
+      type: 'usage-based',
+      startingPrice: 'Contact for pricing',
+      hasFreeOption: false,
+      tiers: [
+        {
+          name: 'Research',
+          price: '$50/sample',
+          billingPeriod: 'monthly',
+          features: ['Variant analysis', 'Population genetics', 'Basic reporting']
+        },
+        {
+          name: 'Clinical',
+          price: '$150/sample',
+          billingPeriod: 'monthly',
+          features: ['Clinical-grade analysis', 'Pathogenicity prediction', 'ACMG guidelines']
+        }
+      ]
+    },
+    features: [
+      'Variant calling and annotation',
+      'Pathogenicity prediction',
+      'Pharmacogenomics analysis',
+      'Population frequency analysis',
+      'Clinical reporting',
+      'Family history integration'
+    ],
+    limitations: [
+      'Requires high-quality sequencing data',
+      'Cost per sample analysis',
+      'Interpretation complexity',
+      'Regulatory considerations'
+    ],
+    rating: 4.8,
+    reviewCount: 95,
+    trending: true,
+    featured: true,
+    integrations: ['Illumina', 'Thermo Fisher', 'LIMS systems', 'ClinVar'],
+    lastVerified: new Date('2025-05-21')
+  },
+  {
+    id: 'mental-health-ai',
+    name: 'MentalHealth AI',
+    slug: 'mental-health-ai',
+    description: 'AI-powered mental health platform that provides mood tracking, cognitive behavioral therapy tools, and personalized interventions to support mental wellness and therapy outcomes.',
+    shortDescription: 'AI mental health support platform',
+    logo: 'https://images.pexels.com/photos/3786161/pexels-photo-3786161.jpeg',
+    website: 'https://wysa.com/',
+    categoryId: 'healthcare-ai',
+    subcategoryIds: ['patient-support'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: 'Contact for pricing',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Basic',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['Mood tracking', 'Basic exercises', 'Educational content']
+        },
+        {
+          name: 'Premium',
+          price: '$29/month',
+          billingPeriod: 'monthly',
+          features: ['Personalized interventions', 'Progress analytics', 'Therapist integration']
+        },
+        {
+          name: 'Clinical',
+          price: '$99/month',
+          billingPeriod: 'monthly',
+          features: ['Multi-patient dashboard', 'Clinical insights', 'Custom protocols']
+        }
+      ]
+    },
+    features: [
+      'Mood and symptom tracking',
+      'CBT exercise library',
+      'Personalized recommendations',
+      'Crisis detection',
+      'Progress monitoring',
+      'Therapist collaboration tools'
+    ],
+    limitations: [
+      'Not for crisis situations',
+      'Requires consistent use',
+      'May not replace therapy',
+      'Privacy considerations'
+    ],
+    rating: 4.4,
+    reviewCount: 320,
+    trending: true,
+    featured: false,
+    integrations: ['EHR systems', 'Telehealth platforms', 'Wearable devices'],
+    lastVerified: new Date('2025-05-20')
+  },
+  {
+    id: 'pharmacy-ai',
+    name: 'PharmacyAI',
+    slug: 'pharmacy-ai',
+    description: 'AI-powered pharmacy management system that optimizes medication dispensing, identifies drug interactions, manages inventory, and provides clinical decision support for pharmacists.',
+    shortDescription: 'AI pharmacy management system',
+    logo: 'https://images.pexels.com/photos/3786162/pexels-photo-3786162.jpeg',
+    website: 'https://medisafe.com/',
+    categoryId: 'healthcare-ai',
+    subcategoryIds: ['clinical-operations'],
+    pricing: {
+      type: 'subscription',
+      startingPrice: '$800/month',
+      hasFreeOption: false,
+      tiers: [
+        {
+          name: 'Independent',
+          price: '$800/month',
+          billingPeriod: 'monthly',
+          features: ['Basic inventory management', 'Drug interaction checking', 'Standard reporting']
+        },
+        {
+          name: 'Chain',
+          price: '$2500/month',
+          billingPeriod: 'monthly',
+          features: ['Multi-location support', 'Advanced analytics', 'Custom integrations']
+        }
+      ]
+    },
+    features: [
+      'Automated inventory optimization',
+      'Drug interaction screening',
+      'Clinical decision support',
+      'Prescription verification',
+      'Patient counseling tools',
+      'Regulatory compliance'
+    ],
+    limitations: [
+      'Requires POS integration',
+      'Training needed for staff',
+      'Ongoing subscription costs',
+      'System compatibility issues'
+    ],
+    rating: 4.6,
+    reviewCount: 140,
+    trending: false,
+    featured: false,
+    integrations: ['PioneerRx', 'QS/1', 'Liberty Software', 'insurance networks'],
+    lastVerified: new Date('2025-05-19')
+  },
+  {
+    id: 'surgical-planning-ai',
+    name: 'SurgicalPlanning AI',
+    slug: 'surgical-planning-ai',
+    description: 'Advanced AI platform for surgical planning that analyzes medical imaging to create 3D surgical models, predicts outcomes, and assists surgeons in pre-operative planning.',
+    shortDescription: 'AI surgical planning assistant',
+    logo: 'https://images.pexels.com/photos/3786163/pexels-photo-3786163.jpeg',
+    website: 'https://surgicaltheater.com/',
+    categoryId: 'healthcare-ai',
+    subcategoryIds: ['surgical-assistance'],
+    pricing: {
+      type: 'enterprise',
+      startingPrice: 'Contact for pricing',
+      hasFreeOption: false,
+      tiers: [
+        {
+          name: 'Department',
+          price: 'Contact for pricing',
+          billingPeriod: 'monthly',
+          features: ['Basic planning tools', 'Standard imaging support', 'Up to 50 cases/month']
+        },
+        {
+          name: 'Hospital',
+          price: 'Contact for pricing',
+          billingPeriod: 'monthly',
+          features: ['Advanced modeling', 'Unlimited cases', 'Multi-specialty support']
+        }
+      ]
+    },
+    features: [
+      '3D surgical modeling',
+      'Outcome prediction',
+      'Risk assessment',
+      'Surgical simulation',
+      'Implant planning',
+      'Team collaboration tools'
+    ],
+    limitations: [
+      'Very high costs',
+      'Requires specialized training',
+      'Complex implementation',
+      'Hardware requirements'
+    ],
+    rating: 4.9,
+    reviewCount: 45,
+    trending: true,
+    featured: true,
+    integrations: ['OR management systems', 'PACS', 'Surgical robots'],
+    lastVerified: new Date('2025-05-18')
+  },
+  {
+    id: 'nutrition-ai',
+    name: 'NutritionAI',
+    slug: 'nutrition-ai',
+    description: 'AI-powered nutrition analysis platform that creates personalized meal plans, tracks nutritional intake, and provides dietary recommendations based on health conditions and goals.',
+    shortDescription: 'AI nutrition and meal planning',
+    logo: 'https://images.pexels.com/photos/3786164/pexels-photo-3786164.jpeg',
+    website: 'https://nutrition.ai',
+    categoryId: 'healthcare-ai',
+    subcategoryIds: ['patient-support'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$19/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Basic',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['Basic meal tracking', 'Standard recommendations', 'Limited recipes']
+        },
+        {
+          name: 'Premium',
+          price: '$19/month',
+          billingPeriod: 'monthly',
+          features: ['Personalized plans', 'Medical condition support', 'Unlimited recipes']
+        },
+        {
+          name: 'Professional',
+          price: '$99/month',
+          billingPeriod: 'monthly',
+          features: ['Multi-client management', 'Clinical insights', 'Custom protocols']
+        }
+      ]
+    },
+    features: [
+      'Personalized meal planning',
+      'Nutritional analysis',
+      'Medical condition support',
+      'Recipe recommendations',
+      'Progress tracking',
+      'Dietary restriction management'
+    ],
+    limitations: [
+      'Requires accurate food logging',
+      'May not suit all dietary needs',
+      'Professional tier expensive',
+      'Limited international foods'
+    ],
+    rating: 4.3,
+    reviewCount: 280,
+    trending: false,
+    featured: false,
+    integrations: ['MyFitnessPal', 'Fitness trackers', 'EHR systems'],
+    lastVerified: new Date('2025-05-17')
+  },
+  {
+    id: 'telemedicine-ai',
+    name: 'TelemedicineAI',
+    slug: 'telemedicine-ai',
+    description: 'AI-enhanced telemedicine platform that provides virtual consultation tools, automated patient intake, symptom assessment, and clinical decision support for remote healthcare delivery.',
+    shortDescription: 'AI-powered telemedicine platform',
+    logo: 'https://images.pexels.com/photos/3786165/pexels-photo-3786165.jpeg',
+    website: 'https://telemedicine.ai',
+    categoryId: 'healthcare-ai',
+    subcategoryIds: ['clinical-operations'],
+    pricing: {
+      type: 'subscription',
+      startingPrice: '$199/provider/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Starter',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['Basic video calls', 'Up to 10 patients/month', 'Standard features']
+        },
+        {
+          name: 'Professional',
+          price: '$199/provider/month',
+          billingPeriod: 'monthly',
+          features: ['Unlimited consultations', 'AI intake', 'EHR integration']
+        },
+        {
+          name: 'Enterprise',
+          price: '$499/provider/month',
+          billingPeriod: 'monthly',
+          features: ['Advanced analytics', 'Custom branding', 'API access']
+        }
+      ]
+    },
+    features: [
+      'Video consultation platform',
+      'AI-powered patient intake',
+      'Symptom assessment tools',
+      'Prescription management',
+      'Appointment scheduling',
+      'Insurance verification'
+    ],
+    limitations: [
+      'Internet dependency',
+      'Technology barriers for patients',
+      'Licensing restrictions',
+      'Limited physical examination'
+    ],
+    rating: 4.5,
+    reviewCount: 190,
+    trending: true,
+    featured: false,
+    integrations: ['Epic', 'Cerner', 'Practice management systems'],
+    lastVerified: new Date('2025-05-16')
   }
 ];

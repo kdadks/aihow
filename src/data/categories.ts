@@ -197,14 +197,44 @@ export const categories: Category[] = [
       {
         id: 'diagnostic-ai',
         name: 'Diagnostic AI',
-        description: 'AI for medical diagnostics',
-        parentCategoryId: 'healthcare-ai'
+        description: 'AI tools for medical imaging analysis, pathology diagnosis, and clinical decision support',
+        parentCategoryId: 'healthcare-ai',
+        tools: ['pathology-ai', 'radiology-assist']
       },
       {
         id: 'medical-research',
         name: 'Medical Research',
-        description: 'AI for medical research and development',
-        parentCategoryId: 'healthcare-ai'
+        description: 'AI platforms for drug discovery, genomic analysis, and pharmaceutical research',
+        parentCategoryId: 'healthcare-ai',
+        tools: ['drug-discovery-ai', 'genomics-ai']
+      },
+      {
+        id: 'clinical-documentation',
+        name: 'Clinical Documentation',
+        description: 'AI tools for automated clinical note generation, medical coding, and documentation workflows',
+        parentCategoryId: 'healthcare-ai',
+        tools: ['clinical-notes-ai']
+      },
+      {
+        id: 'patient-support',
+        name: 'Patient Support',
+        description: 'AI-powered tools for patient consultation, mental health support, and wellness management',
+        parentCategoryId: 'healthcare-ai',
+        tools: ['medchat-ai', 'mental-health-ai', 'nutrition-ai']
+      },
+      {
+        id: 'clinical-operations',
+        name: 'Clinical Operations',
+        description: 'AI systems for pharmacy management, telemedicine platforms, and healthcare operations',
+        parentCategoryId: 'healthcare-ai',
+        tools: ['pharmacy-ai', 'telemedicine-ai']
+      },
+      {
+        id: 'surgical-assistance',
+        name: 'Surgical Assistance',
+        description: 'AI platforms for surgical planning, 3D modeling, and operative assistance',
+        parentCategoryId: 'healthcare-ai',
+        tools: ['surgical-planning-ai']
       }
     ]
   },
