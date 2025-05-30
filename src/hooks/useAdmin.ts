@@ -76,21 +76,12 @@ export function useAdmin() {
         pageSize: number = 10,
         status: 'pending' | 'approved' | 'rejected' = 'pending'
     ) => {
-        const filters = { status };
-        return api.content.getAll(page, pageSize);
+        return api.moderation.getQueue(page, pageSize, status);
     }, []);
 
     const reviewContent = useCallback(async (id: string, status: 'approved' | 'rejected', notes?: string) => {
         if (!user?.id) throw new Error('User not authenticated');
-        const newStatus = status === 'approved' ? 'published' : 'archived';
-        return api.content.update(id, {
-            status: newStatus,
-            metadata: {
-                notes,
-                moderator_id: user.id,
-                review_status: status
-            }
-        });
+        return api.moderation.reviewItem(id, status, notes);
     }, [user?.id]);
 
     // System Configuration

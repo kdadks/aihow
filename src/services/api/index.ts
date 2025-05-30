@@ -2,6 +2,7 @@ import { client, getPaginated } from './client';
 import { analytics } from './analytics';
 import { content } from './content';
 import { config } from './config';
+import { moderation } from './moderation';
 
 // Re-export types
 export type {
@@ -21,6 +22,11 @@ export type {
   FeatureFlag
 } from './config';
 
+export type {
+  ModerationItem,
+  ModerationQueueResponse
+} from './moderation';
+
 // Re-export error class
 export { APIError } from './types';
 
@@ -30,5 +36,6 @@ export const api = {
   getPaginated,
   analytics,
   content,
-  config
+  config,
+  moderation
 };

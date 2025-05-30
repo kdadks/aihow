@@ -2,6 +2,7 @@ import type {
     ContentItem,
     SystemSetting,
     FeatureFlag,
+    ModerationItem,
     APIResponse,
     APIErrorResponse
 } from '../../services/api';
@@ -21,7 +22,7 @@ export interface ContentService {
     }) => Promise<AdminAPIResponse<{ data: ContentItem[]; count: number }>>;
     getContentItem: (id: string) => Promise<AdminAPIResponse<ContentItem>>;
     updateContentItem: (id: string, data: Partial<ContentItem>) => Promise<AdminAPIResponse<ContentItem>>;
-    deleteContentItem: (id: string) => Promise<AdminAPIResponse<ContentItem>>;
+    deleteContentItem: (id: string) => Promise<AdminAPIResponse<void>>;
 }
 
 // Moderation Service Types
@@ -30,12 +31,12 @@ export interface ModerationService {
         page?: number,
         pageSize?: number,
         status?: 'pending' | 'approved' | 'rejected'
-    ) => Promise<AdminAPIResponse<{ data: ContentItem[]; count: number }>>;
+    ) => Promise<AdminAPIResponse<{ data: ModerationItem[]; count: number }>>;
     reviewContent: (
         id: string,
         status: 'approved' | 'rejected',
         notes?: string
-    ) => Promise<AdminAPIResponse<ContentItem>>;
+    ) => Promise<AdminAPIResponse<ModerationItem>>;
 }
 
 // Config Service Types
