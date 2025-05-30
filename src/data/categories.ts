@@ -362,20 +362,50 @@ export const categories: Category[] = [
   {
     id: 'ai-education',
     name: 'AI Education',
-    description: 'Tools for learning about AI and machine learning',
+    description: 'Comprehensive tools and platforms for learning AI, machine learning, and data science with interactive tutorials, courses, and practice environments',
     icon: 'graduation-cap',
     subcategories: [
       {
-        id: 'tutorials',
-        name: 'Tutorials',
-        description: 'Interactive tutorials for learning AI',
-        parentCategoryId: 'ai-education'
+        id: 'online-courses',
+        name: 'Online Courses & MOOCs',
+        description: 'Comprehensive online courses and massive open online courses for AI and machine learning education',
+        parentCategoryId: 'ai-education',
+        tools: ['coursera-ai', 'udacity-ai', 'edx-ai', 'udemy-ai', 'pluralsight-ai', 'linkedin-learning-ai']
       },
       {
-        id: 'courses',
-        name: 'Courses',
-        description: 'Comprehensive courses on AI topics',
-        parentCategoryId: 'ai-education'
+        id: 'interactive-tutorials',
+        name: 'Interactive Tutorials',
+        description: 'Hands-on interactive tutorials and coding exercises for learning AI concepts and implementations',
+        parentCategoryId: 'ai-education',
+        tools: ['kaggle-learn', 'codecademy-ai', 'brilliant-ai', 'fastai', 'deeplearning-ai', 'elements-of-ai']
+      },
+      {
+        id: 'coding-platforms',
+        name: 'AI Coding Platforms',
+        description: 'Platforms for practicing AI and machine learning coding with real datasets and projects',
+        parentCategoryId: 'ai-education',
+        tools: ['kaggle', 'google-colab', 'jupyter-notebooks', 'paperspace-gradient', 'github-codespaces', 'replit-ai']
+      },
+      {
+        id: 'visualization-tools',
+        name: 'AI Visualization & Learning Tools',
+        description: 'Visual tools for understanding AI concepts, neural networks, and machine learning algorithms',
+        parentCategoryId: 'ai-education',
+        tools: ['tensorflow-playground', 'neural-network-playground', 'seeing-ai', 'distill-pub', 'ml-visuals', 'ai-explainer']
+      },
+      {
+        id: 'research-papers',
+        name: 'Research & Academic Tools',
+        description: 'Platforms for accessing AI research papers, academic content, and scholarly resources',
+        parentCategoryId: 'ai-education',
+        tools: ['arxiv', 'papers-with-code', 'google-scholar', 'semantic-scholar', 'connected-papers', 'research-rabbit']
+      },
+      {
+        id: 'ai-communities',
+        name: 'Learning Communities',
+        description: 'Online communities and forums for AI learners to collaborate, ask questions, and share knowledge',
+        parentCategoryId: 'ai-education',
+        tools: ['towards-data-science', 'ai-stack-overflow', 'reddit-ml', 'discord-ai', 'huggingface-community', 'ml-twitter']
       }
     ]
   },

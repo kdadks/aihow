@@ -4161,5 +4161,1603 @@ export const tools: Tool[] = [
     featured: false,
     integrations: ['Google Ads', 'Facebook Ads', 'HubSpot', 'Salesforce', 'Analytics tools', 'CMS platforms'],
     lastVerified: new Date('2025-05-22')
+  },
+
+  // =====================
+  // AI EDUCATION TOOLS
+  // =====================
+
+  // Online Courses & MOOCs
+  {
+    id: 'coursera-ai',
+    name: 'Coursera AI Courses',
+    slug: 'coursera-ai',
+    description: 'Coursera offers comprehensive AI and machine learning courses from top universities like Stanford, DeepLearning.AI, and Google. Features hands-on projects, peer-reviewed assignments, and industry certificates.',
+    shortDescription: 'University-level AI courses and specializations',
+    logo: 'https://images.pexels.com/photos/5428836/pexels-photo-5428836.jpeg',
+    website: 'https://www.coursera.org/browse/data-science/machine-learning',
+    categoryId: 'ai-education',
+    subcategoryIds: ['online-courses'],
+    pricing: {
+      type: 'subscription',
+      startingPrice: '$39/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Audit',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['Access to course videos', 'Reading materials', 'Discussion forums']
+        },
+        {
+          name: 'Certificate',
+          price: '$39-79/month',
+          billingPeriod: 'monthly',
+          features: ['All audit features', 'Graded assignments', 'Certificate upon completion', 'Peer feedback']
+        }
+      ]
+    },
+    features: [
+      'Courses from top universities',
+      'Hands-on programming assignments',
+      'Peer-reviewed projects',
+      'Industry-recognized certificates',
+      'Flexible scheduling',
+      'Mobile learning app'
+    ],
+    limitations: [
+      'Certificates require payment',
+      'Some courses have fixed schedules',
+      'Limited free access to assignments',
+      'Subscription needed for full features'
+    ],
+    rating: 4.7,
+    reviewCount: 12540,
+    trending: true,
+    featured: true,
+    integrations: ['Mobile apps', 'Learning management systems', 'LinkedIn profiles'],
+    lastVerified: new Date('2025-05-30')
+  },
+
+  {
+    id: 'udacity-ai',
+    name: 'Udacity AI Nanodegrees',
+    slug: 'udacity-ai',
+    description: 'Udacity offers industry-focused AI and machine learning nanodegree programs designed with tech companies. Features project-based learning, mentor support, and career services.',
+    shortDescription: 'Industry-focused AI nanodegree programs',
+    logo: 'https://images.pexels.com/photos/5935791/pexels-photo-5935791.jpeg',
+    website: 'https://www.udacity.com/school-of-artificial-intelligence',
+    categoryId: 'ai-education',
+    subcategoryIds: ['online-courses'],
+    pricing: {
+      type: 'subscription',
+      startingPrice: '$399/month',
+      hasFreeOption: false,
+      tiers: [
+        {
+          name: 'Nanodegree',
+          price: '$399/month',
+          billingPeriod: 'monthly',
+          features: ['Project-based curriculum', 'Mentor support', 'Career services', 'GitHub portfolio']
+        },
+        {
+          name: 'Nanodegree Plus',
+          price: '$599/month',
+          billingPeriod: 'monthly',
+          features: ['All standard features', 'Job guarantee', 'Extended support', 'Priority mentoring']
+        }
+      ]
+    },
+    features: [
+      'Industry-designed curriculum',
+      'Real-world projects',
+      'Personal mentor support',
+      'Career coaching',
+      'GitHub portfolio building',
+      'Job placement assistance'
+    ],
+    limitations: [
+      'High cost compared to other platforms',
+      'No free options',
+      'Fixed program structure',
+      'Time-intensive commitment'
+    ],
+    rating: 4.5,
+    reviewCount: 3890,
+    trending: true,
+    featured: true,
+    integrations: ['GitHub', 'LinkedIn', 'Career platforms', 'Industry tools'],
+    lastVerified: new Date('2025-05-30')
+  },
+
+  {
+    id: 'edx-ai',
+    name: 'edX AI Courses',
+    slug: 'edx-ai',
+    description: 'edX provides AI and machine learning courses from MIT, Harvard, and other top institutions. Offers both free audit tracks and verified certificates with rigorous academic content.',
+    shortDescription: 'Academic AI courses from top universities',
+    logo: 'https://images.pexels.com/photos/4144923/pexels-photo-4144923.jpeg',
+    website: 'https://www.edx.org/learn/artificial-intelligence',
+    categoryId: 'ai-education',
+    subcategoryIds: ['online-courses'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$50-300 per course',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Audit',
+          price: '$0',
+          billingPeriod: 'one-time',
+          features: ['Course content access', 'Video lectures', 'Basic exercises']
+        },
+        {
+          name: 'Verified Certificate',
+          price: '$50-300',
+          billingPeriod: 'one-time',
+          features: ['All audit features', 'Graded assignments', 'Verified certificate', 'Instructor feedback']
+        }
+      ]
+    },
+    features: [
+      'University-level academic content',
+      'Self-paced learning',
+      'Interactive exercises',
+      'Discussion forums',
+      'Mobile accessibility',
+      'Verified certificates'
+    ],
+    limitations: [
+      'Academic pace may be slow',
+      'Limited practical applications',
+      'Certificate fees required',
+      'Less industry focus'
+    ],
+    rating: 4.6,
+    reviewCount: 8760,
+    trending: false,
+    featured: true,
+    integrations: ['University systems', 'LinkedIn profiles', 'Academic platforms'],
+    lastVerified: new Date('2025-05-30')
+  },
+
+  {
+    id: 'udemy-ai',
+    name: 'Udemy AI Courses',
+    slug: 'udemy-ai',
+    description: 'Udemy hosts thousands of AI and machine learning courses from industry practitioners. Offers lifetime access to purchased courses with practical, hands-on content.',
+    shortDescription: 'Practical AI courses with lifetime access',
+    logo: 'https://images.pexels.com/photos/4144294/pexels-photo-4144294.jpeg',
+    website: 'https://www.udemy.com/topic/artificial-intelligence/',
+    categoryId: 'ai-education',
+    subcategoryIds: ['online-courses'],
+    pricing: {
+      type: 'one-time',
+      startingPrice: '$10-200 per course',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free Courses',
+          price: '$0',
+          billingPeriod: 'one-time',
+          features: ['Basic course content', 'Limited features', 'Community access']
+        },
+        {
+          name: 'Paid Courses',
+          price: '$10-200',
+          billingPeriod: 'one-time',
+          features: ['Full course content', 'Lifetime access', 'Certificate of completion', 'Q&A support']
+        }
+      ]
+    },
+    features: [
+      'Lifetime course access',
+      'Practical, hands-on approach',
+      'Wide variety of instructors',
+      'Regular sales and discounts',
+      'Mobile app learning',
+      'Certificate of completion'
+    ],
+    limitations: [
+      'Variable course quality',
+      'No accreditation',
+      'Limited instructor interaction',
+      'Overwhelming course selection'
+    ],
+    rating: 4.4,
+    reviewCount: 25680,
+    trending: true,
+    featured: false,
+    integrations: ['Mobile apps', 'Various development tools', 'Certificate platforms'],
+    lastVerified: new Date('2025-05-30')
+  },
+
+  // Interactive Tutorials
+  {
+    id: 'kaggle-learn',
+    name: 'Kaggle Learn',
+    slug: 'kaggle-learn',
+    description: 'Kaggle Learn offers free, practical micro-courses in AI and data science. Features hands-on coding exercises with real datasets and immediate feedback in an interactive environment.',
+    shortDescription: 'Free micro-courses with hands-on coding',
+    logo: 'https://images.pexels.com/photos/6424586/pexels-photo-6424586.jpeg',
+    website: 'https://www.kaggle.com/learn',
+    categoryId: 'ai-education',
+    subcategoryIds: ['interactive-tutorials'],
+    pricing: {
+      type: 'free',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['All micro-courses', 'Hands-on exercises', 'Completion certificates', 'Community access']
+        }
+      ]
+    },
+    features: [
+      'Completely free access',
+      'Interactive coding exercises',
+      'Real-world datasets',
+      'Immediate feedback',
+      'Progress tracking',
+      'Community integration'
+    ],
+    limitations: [
+      'Limited depth per course',
+      'No instructor support',
+      'Basic certificate only',
+      'Requires Kaggle account'
+    ],
+    rating: 4.8,
+    reviewCount: 15420,
+    trending: true,
+    featured: true,
+    integrations: ['Kaggle platform', 'Jupyter notebooks', 'Python ecosystem'],
+    lastVerified: new Date('2025-05-30')
+  },
+
+  {
+    id: 'brilliant-ai',
+    name: 'Brilliant AI Courses',
+    slug: 'brilliant-ai',
+    description: 'Brilliant offers interactive AI and computer science courses with visual problem-solving approach. Features bite-sized lessons with immediate application and gamified learning.',
+    shortDescription: 'Interactive visual AI learning platform',
+    logo: 'https://images.pexels.com/photos/5428649/pexels-photo-5428649.jpeg',
+    website: 'https://brilliant.org/courses/artificial-intelligence/',
+    categoryId: 'ai-education',
+    subcategoryIds: ['interactive-tutorials'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$12.99/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['Limited course access', 'Basic problem solving', 'Community features']
+        },
+        {
+          name: 'Premium',
+          price: '$12.99/month',
+          billingPeriod: 'monthly',
+          features: ['All courses', 'Unlimited practice', 'Detailed explanations', 'Progress tracking']
+        }
+      ]
+    },
+    features: [
+      'Visual learning approach',
+      'Interactive problem solving',
+      'Bite-sized lessons',
+      'Gamified experience',
+      'Mobile-first design',
+      'Progress tracking'
+    ],
+    limitations: [
+      'Less coding practice',
+      'Premium required for full access',
+      'Limited practical applications',
+      'More conceptual than hands-on'
+    ],
+    rating: 4.6,
+    reviewCount: 7850,
+    trending: true,
+    featured: false,
+    integrations: ['Mobile apps', 'Web platform', 'Educational tools'],
+    lastVerified: new Date('2025-05-30')
+  },
+
+  {
+    id: 'fastai',
+    name: 'fast.ai',
+    slug: 'fastai',
+    description: 'fast.ai provides free, practical deep learning courses with a top-down approach. Features state-of-the-art techniques taught through hands-on coding with real applications.',
+    shortDescription: 'Free practical deep learning courses',
+    logo: 'https://images.pexels.com/photos/3861972/pexels-photo-3861972.jpeg',
+    website: 'https://www.fast.ai/',
+    categoryId: 'ai-education',
+    subcategoryIds: ['interactive-tutorials'],
+    pricing: {
+      type: 'free',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['Complete course access', 'Jupyter notebooks', 'Community forum', 'Book content']
+        }
+      ]
+    },
+    features: [
+      'Completely free access',
+      'Practical, top-down approach',
+      'State-of-the-art techniques',
+      'Jupyter notebook format',
+      'Active community forum',
+      'Real-world applications'
+    ],
+    limitations: [
+      'Assumes some coding knowledge',
+      'Fast-paced content',
+      'Limited beginner support',
+      'Self-directed learning only'
+    ],
+    rating: 4.9,
+    reviewCount: 6790,
+    trending: true,
+    featured: true,
+    integrations: ['Jupyter notebooks', 'PyTorch', 'Python ecosystem', 'Cloud platforms'],
+    lastVerified: new Date('2025-05-30')
+  },
+
+  // AI Coding Platforms
+  {
+    id: 'kaggle',
+    name: 'Kaggle',
+    slug: 'kaggle',
+    description: 'Kaggle is the world\'s largest data science community with competitions, datasets, notebooks, and courses. Provides free GPU/TPU access for machine learning experiments.',
+    shortDescription: 'Data science community and competition platform',
+    logo: 'https://images.pexels.com/photos/6424587/pexels-photo-6424587.jpeg',
+    website: 'https://www.kaggle.com/',
+    categoryId: 'ai-education',
+    subcategoryIds: ['coding-platforms'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: 'Free with premium features',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['Competitions', 'Datasets', 'Notebooks', 'Limited GPU hours', 'Community access']
+        },
+        {
+          name: 'Kaggle+',
+          price: '$10/month',
+          billingPeriod: 'monthly',
+          features: ['Extended GPU/TPU hours', 'Priority support', 'Advanced features', 'Exclusive content']
+        }
+      ]
+    },
+    features: [
+      'Machine learning competitions',
+      'Free datasets and notebooks',
+      'GPU/TPU compute access',
+      'Community collaboration',
+      'Learning courses',
+      'Career opportunities'
+    ],
+    limitations: [
+      'Limited free compute time',
+      'Competition-focused environment',
+      'Steep learning curve',
+      'Resource usage restrictions'
+    ],
+    rating: 4.7,
+    reviewCount: 18950,
+    trending: true,
+    featured: true,
+    integrations: ['Python/R', 'Jupyter notebooks', 'Cloud platforms', 'ML frameworks'],
+    lastVerified: new Date('2025-05-30')
+  },
+
+  {
+    id: 'google-colab',
+    name: 'Google Colab',
+    slug: 'google-colab',
+    description: 'Google Colaboratory provides free Jupyter notebook environment with GPU/TPU access for machine learning. Features seamless integration with Google Drive and easy sharing.',
+    shortDescription: 'Free Jupyter notebooks with GPU access',
+    logo: 'https://images.pexels.com/photos/4164418/pexels-photo-4164418.jpeg',
+    website: 'https://colab.research.google.com/',
+    categoryId: 'ai-education',
+    subcategoryIds: ['coding-platforms'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$10/month for Pro',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['Basic notebooks', 'Limited GPU/TPU', 'Google Drive integration', '12 hour runtime limit']
+        },
+        {
+          name: 'Colab Pro',
+          price: '$10/month',
+          billingPeriod: 'monthly',
+          features: ['Priority GPU access', 'Longer runtimes', 'More memory', 'Background execution']
+        }
+      ]
+    },
+    features: [
+      'Free GPU/TPU access',
+      'No setup required',
+      'Google Drive integration',
+      'Easy sharing and collaboration',
+      'Pre-installed ML libraries',
+      'Jupyter notebook interface'
+    ],
+    limitations: [
+      'Session timeouts',
+      'Limited free compute',
+      'Internet dependency',
+      'Storage limitations'
+    ],
+    rating: 4.8,
+    reviewCount: 23560,
+    trending: true,
+    featured: true,
+    integrations: ['Google Drive', 'GitHub', 'Python ecosystem', 'ML frameworks'],
+    lastVerified: new Date('2025-05-30')
+  },
+
+  // Visualization Tools
+  {
+    id: 'tensorflow-playground',
+    name: 'TensorFlow Playground',
+    slug: 'tensorflow-playground',
+    description: 'Interactive visualization tool for understanding neural networks. Allows experimentation with different architectures, datasets, and hyperparameters in real-time.',
+    shortDescription: 'Interactive neural network visualization',
+    logo: 'https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg',
+    website: 'https://playground.tensorflow.org/',
+    categoryId: 'ai-education',
+    subcategoryIds: ['visualization-tools'],
+    pricing: {
+      type: 'free',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['Full access', 'Interactive visualization', 'Real-time experimentation', 'Educational content']
+        }
+      ]
+    },
+    features: [
+      'Interactive neural network visualization',
+      'Real-time parameter adjustment',
+      'Multiple dataset options',
+      'Architecture experimentation',
+      'Educational explanations',
+      'No installation required'
+    ],
+    limitations: [
+      'Simple networks only',
+      'Limited to basic concepts',
+      'No advanced features',
+      'Web-based only'
+    ],
+    rating: 4.9,
+    reviewCount: 5420,
+    trending: false,
+    featured: true,
+    integrations: ['Web browsers', 'Educational platforms'],
+    lastVerified: new Date('2025-05-30')
+  },
+
+  {
+    id: 'distill-pub',
+    name: 'Distill',
+    slug: 'distill-pub',
+    description: 'Distill presents machine learning research through clear, interactive visualizations. Features explorable explanations that make complex AI concepts accessible.',
+    shortDescription: 'Interactive ML research explanations',
+    logo: 'https://images.pexels.com/photos/5473298/pexels-photo-5473298.jpeg',
+    website: 'https://distill.pub/',
+    categoryId: 'ai-education',
+    subcategoryIds: ['visualization-tools'],
+    pricing: {
+      type: 'free',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['All articles', 'Interactive visualizations', 'Research content', 'Educational materials']
+        }
+      ]
+    },
+    features: [
+      'Interactive research articles',
+      'High-quality visualizations',
+      'Complex concept explanations',
+      'Peer-reviewed content',
+      'Explorable explanations',
+      'Mobile-friendly design'
+    ],
+    limitations: [
+      'Limited new content',
+      'Advanced topics only',
+      'No interactive exercises',
+      'Read-only format'
+    ],
+    rating: 4.8,
+    reviewCount: 2890,
+    trending: false,
+    featured: true,
+    integrations: ['Web platforms', 'Academic systems', 'Research tools'],
+    lastVerified: new Date('2025-05-30')
+  },
+
+  // Research & Academic Tools
+  {
+    id: 'arxiv',
+    name: 'arXiv',
+    slug: 'arxiv',
+    description: 'arXiv is a free distribution service and open-access archive for scholarly articles in AI, machine learning, and other fields. Provides early access to cutting-edge research.',
+    shortDescription: 'Free access to AI research papers',
+    logo: 'https://images.pexels.com/photos/4144923/pexels-photo-4144923.jpeg',
+    website: 'https://arxiv.org/',
+    categoryId: 'ai-education',
+    subcategoryIds: ['research-papers'],
+    pricing: {
+      type: 'free',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['Full paper access', 'Search functionality', 'RSS feeds', 'Mobile access']
+        }
+      ]
+    },
+    features: [
+      'Free access to research papers',
+      'Early publication access',
+      'Comprehensive search',
+      'RSS feeds and alerts',
+      'Mobile accessibility',
+      'Version tracking'
+    ],
+    limitations: [
+      'No peer review process',
+      'Academic writing style',
+      'Variable paper quality',
+      'No interactive features'
+    ],
+    rating: 4.7,
+    reviewCount: 8950,
+    trending: false,
+    featured: true,
+    integrations: ['Academic platforms', 'Reference managers', 'Research tools'],
+    lastVerified: new Date('2025-05-30')
+  },
+
+  {
+    id: 'papers-with-code',
+    name: 'Papers with Code',
+    slug: 'papers-with-code',
+    description: 'Papers with Code connects machine learning research papers with their implementation code. Features leaderboards, benchmarks, and reproducible research.',
+    shortDescription: 'ML papers with implementation code',
+    logo: 'https://images.pexels.com/photos/546819/pexels-photo-546819.jpeg',
+    website: 'https://paperswithcode.com/',
+    categoryId: 'ai-education',
+    subcategoryIds: ['research-papers'],
+    pricing: {
+      type: 'free',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['Paper access', 'Code repositories', 'Leaderboards', 'Benchmarks', 'Search tools']
+        }
+      ]
+    },
+    features: [
+      'Papers linked to code',
+      'Benchmark leaderboards',
+      'Reproducible research',
+      'Implementation tracking',
+      'State-of-the-art results',
+      'Community contributions'
+    ],
+    limitations: [
+      'Code quality varies',
+      'Not all papers included',
+      'Technical complexity',
+      'Limited beginner content'
+    ],
+    rating: 4.8,
+    reviewCount: 6750,
+    trending: true,
+    featured: true,
+    integrations: ['GitHub', 'arXiv', 'Academic platforms', 'Development tools'],
+    lastVerified: new Date('2025-05-30')
+  },
+
+  // Learning Communities
+  {
+    id: 'towards-data-science',
+    name: 'Towards Data Science',
+    slug: 'towards-data-science',
+    description: 'Towards Data Science is Medium\'s largest publication for AI and data science content. Features articles, tutorials, and insights from industry practitioners and researchers.',
+    shortDescription: 'AI and data science publication on Medium',
+    logo: 'https://images.pexels.com/photos/5473955/pexels-photo-5473955.jpeg',
+    website: 'https://towardsdatascience.com/',
+    categoryId: 'ai-education',
+    subcategoryIds: ['ai-communities'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$5/month for Medium membership',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['Limited articles', 'Basic content', 'Community access']
+        },
+        {
+          name: 'Medium Member',
+          price: '$5/month',
+          billingPeriod: 'monthly',
+          features: ['Unlimited articles', 'Premium content', 'Author support', 'Ad-free reading']
+        }
+      ]
+    },
+    features: [
+      'High-quality articles',
+      'Industry insights',
+      'Practical tutorials',
+      'Expert authors',
+      'Community discussions',
+      'Regular updates'
+    ],
+    limitations: [
+      'Paywall for premium content',
+      'Variable article quality',
+      'No structured curriculum',
+      'Medium platform dependency'
+    ],
+    rating: 4.6,
+    reviewCount: 12400,
+    trending: true,
+    featured: false,
+    integrations: ['Medium platform', 'Social media', 'Professional networks'],
+    lastVerified: new Date('2025-05-30')
+  },
+
+  {
+    id: 'huggingface-community',
+    name: 'Hugging Face Community',
+    slug: 'huggingface-community',
+    description: 'Hugging Face provides a collaborative platform for machine learning with models, datasets, and spaces. Features community-driven development and learning resources.',
+    shortDescription: 'Collaborative ML platform and community',
+    logo: 'https://images.pexels.com/photos/8386442/pexels-photo-8386442.jpeg',
+    website: 'https://huggingface.co/',
+    categoryId: 'ai-education',
+    subcategoryIds: ['ai-communities'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$9/month for Pro',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['Public models and datasets', 'Community features', 'Basic compute', 'Forum access']
+        },
+        {
+          name: 'Pro',
+          price: '$9/month',
+          billingPeriod: 'monthly',
+          features: ['Private repositories', 'Advanced compute', 'Priority support', 'Enhanced features']
+        }
+      ]
+    },
+    features: [
+      'Pre-trained model repository',
+      'Dataset sharing platform',
+      'Collaborative development',
+      'Educational content',
+      'Community forums',
+      'Model deployment tools'
+    ],
+    limitations: [
+      'Technical complexity',
+      'Requires ML knowledge',
+      'Limited free compute',
+      'Platform-specific learning'
+    ],
+    rating: 4.7,
+    reviewCount: 9850,
+    trending: true,
+    featured: true,
+    integrations: ['Python libraries', 'ML frameworks', 'Cloud platforms', 'Development tools'],
+    lastVerified: new Date('2025-05-30')
+  },
+
+  // Additional AI Education Tools
+  {
+    id: 'pluralsight-ai',
+    name: 'Pluralsight AI',
+    slug: 'pluralsight-ai',
+    description: 'Professional AI and machine learning courses with hands-on labs, skill assessments, and learning paths for enterprise-level AI education.',
+    shortDescription: 'Professional AI learning platform',
+    logo: 'https://images.pexels.com/photos/3861943/pexels-photo-3861943.jpeg',
+    website: 'https://www.pluralsight.com/ai',
+    categoryId: 'ai-education',
+    subcategoryIds: ['online-courses'],
+    pricing: {
+      type: 'subscription',
+      startingPrice: '$29/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free Trial',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['Course access', 'Basic assessments', 'Limited labs']
+        },
+        {
+          name: 'Core',
+          price: '$29/month',
+          billingPeriod: 'monthly',
+          features: ['All courses', 'Skill assessments', 'Learning paths', 'Basic analytics']
+        },
+        {
+          name: 'Premium',
+          price: '$45/month',
+          billingPeriod: 'monthly',
+          features: ['Hands-on labs', 'Practice exams', 'Advanced analytics', 'Expert mentoring']
+        }
+      ]
+    },
+    features: [
+      'Professional AI courses',
+      'Hands-on lab exercises',
+      'Skill assessments',
+      'Learning path guidance',
+      'Industry expert instructors',
+      'Certificate programs'
+    ],
+    limitations: [
+      'Subscription required',
+      'Enterprise focus',
+      'High cost',
+      'Technical prerequisites'
+    ],
+    rating: 4.5,
+    reviewCount: 12400,
+    trending: false,
+    featured: false,
+    integrations: ['IDE plugins', 'Enterprise systems', 'Learning management', 'Certification bodies'],
+    lastVerified: new Date('2025-05-30')
+  },
+
+  {
+    id: 'linkedin-learning-ai',
+    name: 'LinkedIn Learning AI',
+    slug: 'linkedin-learning-ai',
+    description: 'Professional AI and machine learning courses integrated with LinkedIn profiles, offering career-focused learning with industry recognition.',
+    shortDescription: 'Career-focused AI learning',
+    logo: 'https://images.pexels.com/photos/267350/pexels-photo-267350.jpeg',
+    website: 'https://www.linkedin.com/learning/topics/artificial-intelligence',
+    categoryId: 'ai-education',
+    subcategoryIds: ['online-courses'],
+    pricing: {
+      type: 'subscription',
+      startingPrice: '$29.99/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free Trial',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['Course access', 'Basic certificates', 'Mobile learning']
+        },
+        {
+          name: 'Premium',
+          price: '$29.99/month',
+          billingPeriod: 'monthly',
+          features: ['All courses', 'LinkedIn certificates', 'Offline viewing', 'Skills assessments']
+        }
+      ]
+    },
+    features: [
+      'Professional AI courses',
+      'LinkedIn profile integration',
+      'Industry certificates',
+      'Career guidance',
+      'Mobile learning app',
+      'Expert instructors'
+    ],
+    limitations: [
+      'Subscription required',
+      'LinkedIn dependency',
+      'Limited hands-on practice',
+      'Course quality varies'
+    ],
+    rating: 4.3,
+    reviewCount: 8650,
+    trending: false,
+    featured: false,
+    integrations: ['LinkedIn profile', 'Microsoft products', 'Mobile apps', 'HR systems'],
+    lastVerified: new Date('2025-05-30')
+  },
+
+  {
+    id: 'jupyter-notebooks',
+    name: 'Jupyter Notebooks',
+    slug: 'jupyter-notebooks',
+    description: 'Interactive computational environment for AI and data science education, enabling live code, equations, visualizations, and narrative text.',
+    shortDescription: 'Interactive AI development environment',
+    logo: 'https://images.pexels.com/photos/1181271/pexels-photo-1181271.jpeg',
+    website: 'https://jupyter.org/',
+    categoryId: 'ai-education',
+    subcategoryIds: ['coding-platforms'],
+    pricing: {
+      type: 'free',
+      startingPrice: '$0',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Open Source',
+          price: '$0',
+          billingPeriod: 'one-time',
+          features: ['Full functionality', 'Local installation', 'Community support', 'Extension ecosystem']
+        }
+      ]
+    },
+    features: [
+      'Interactive notebooks',
+      'Multi-language support',
+      'Rich media output',
+      'Collaborative sharing',
+      'Extension ecosystem',
+      'Export capabilities'
+    ],
+    limitations: [
+      'Local setup required',
+      'Resource intensive',
+      'Version control challenges',
+      'Security considerations'
+    ],
+    rating: 4.8,
+    reviewCount: 15200,
+    trending: true,
+    featured: true,
+    integrations: ['Python', 'R', 'Scala', 'Cloud platforms', 'Git', 'Docker'],
+    lastVerified: new Date('2025-05-30')
+  },
+
+  {
+    id: 'paperspace-gradient',
+    name: 'Paperspace Gradient',
+    slug: 'paperspace-gradient',
+    description: 'Cloud-based machine learning platform with Jupyter notebooks, GPU access, and collaborative features for AI education and research.',
+    shortDescription: 'Cloud ML development platform',
+    logo: 'https://images.pexels.com/photos/1181677/pexels-photo-1177677.jpeg',
+    website: 'https://www.paperspace.com/gradient',
+    categoryId: 'ai-education',
+    subcategoryIds: ['coding-platforms'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$8/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['Basic CPU instances', 'Public notebooks', 'Community support', 'Limited hours']
+        },
+        {
+          name: 'Growth',
+          price: '$8/month',
+          billingPeriod: 'monthly',
+          features: ['GPU access', 'Private notebooks', 'More compute hours', 'Priority support']
+        },
+        {
+          name: 'Pro',
+          price: '$39/month',
+          billingPeriod: 'monthly',
+          features: ['High-end GPUs', 'Unlimited private notebooks', 'Team collaboration', 'Advanced features']
+        }
+      ]
+    },
+    features: [
+      'Cloud Jupyter notebooks',
+      'GPU/TPU access',
+      'Pre-configured environments',
+      'Team collaboration',
+      'Model deployment',
+      'Version control integration'
+    ],
+    limitations: [
+      'Usage-based pricing',
+      'Internet dependency',
+      'Resource limitations on free tier',
+      'Learning curve'
+    ],
+    rating: 4.4,
+    reviewCount: 3200,
+    trending: true,
+    featured: false,
+    integrations: ['GitHub', 'Docker', 'TensorFlow', 'PyTorch', 'MLflow', 'Weights & Biases'],
+    lastVerified: new Date('2025-05-30')
+  },
+
+  {
+    id: 'github-codespaces',
+    name: 'GitHub Codespaces',
+    slug: 'github-codespaces',
+    description: 'Cloud development environment with AI-powered coding assistance, perfect for AI education projects with pre-configured ML environments.',
+    shortDescription: 'Cloud development with AI assistance',
+    logo: 'https://images.pexels.com/photos/1181244/pexels-photo-1181244.jpeg',
+    website: 'https://github.com/features/codespaces',
+    categoryId: 'ai-education',
+    subcategoryIds: ['coding-platforms'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$0.18/hour',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['120 core hours', '15 GB storage', 'Basic instances', 'Personal use']
+        },
+        {
+          name: 'Pay-as-you-go',
+          price: '$0.18/hour',
+          billingPeriod: 'usage-based',
+          features: ['Unlimited usage', 'Powerful instances', 'Team collaboration', 'Enterprise features']
+        }
+      ]
+    },
+    features: [
+      'Pre-configured AI environments',
+      'GitHub Copilot integration',
+      'VS Code in browser',
+      'Repository integration',
+      'Collaborative coding',
+      'Custom configurations'
+    ],
+    limitations: [
+      'Usage-based pricing',
+      'GitHub dependency',
+      'Internet required',
+      'Resource limitations'
+    ],
+    rating: 4.6,
+    reviewCount: 5800,
+    trending: true,
+    featured: false,
+    integrations: ['GitHub', 'VS Code', 'Copilot', 'Docker', 'Git', 'Extensions'],
+    lastVerified: new Date('2025-05-30')
+  },
+
+  {
+    id: 'replit-ai',
+    name: 'Replit AI',
+    slug: 'replit-ai',
+    description: 'Collaborative online IDE with AI-powered coding assistance, featuring built-in AI tutoring and code generation for learning programming and AI.',
+    shortDescription: 'AI-powered collaborative coding platform',
+    logo: 'https://images.pexels.com/photos/1181298/pexels-photo-1181298.jpeg',
+    website: 'https://replit.com/',
+    categoryId: 'ai-education',
+    subcategoryIds: ['coding-platforms'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$7/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['Public repls', 'Basic AI features', 'Community access', 'Limited resources']
+        },
+        {
+          name: 'Core',
+          price: '$7/month',
+          billingPeriod: 'monthly',
+          features: ['Private repls', 'Enhanced AI', 'More resources', 'Priority support']
+        },
+        {
+          name: 'Teams',
+          price: '$20/month',
+          billingPeriod: 'monthly',
+          features: ['Team collaboration', 'Advanced AI', 'Admin controls', 'Enhanced security']
+        }
+      ]
+    },
+    features: [
+      'AI code generation',
+      'Real-time collaboration',
+      'Multi-language support',
+      'Instant deployment',
+      'Educational templates',
+      'AI tutoring assistance'
+    ],
+    limitations: [
+      'Internet dependency',
+      'Resource constraints on free tier',
+      'AI features require subscription',
+      'Limited offline access'
+    ],
+    rating: 4.5,
+    reviewCount: 7200,
+    trending: true,
+    featured: false,
+    integrations: ['Git', 'GitHub', 'Package managers', 'Databases', 'APIs', 'Educational platforms'],
+    lastVerified: new Date('2025-05-30')
+  },
+
+  {
+    id: 'neural-network-playground',
+    name: 'Neural Network Playground',
+    slug: 'neural-network-playground',
+    description: 'Interactive visualization tool for understanding neural networks, allowing hands-on experimentation with network architectures and parameters.',
+    shortDescription: 'Interactive neural network visualization',
+    logo: 'https://images.pexels.com/photos/1181412/pexels-photo-1181412.jpeg',
+    website: 'https://playground.tensorflow.org/',
+    categoryId: 'ai-education',
+    subcategoryIds: ['visualization-tools'],
+    pricing: {
+      type: 'free',
+      startingPrice: '$0',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'one-time',
+          features: ['Full access', 'All visualizations', 'Educational content', 'No registration required']
+        }
+      ]
+    },
+    features: [
+      'Interactive neural network builder',
+      'Real-time visualization',
+      'Parameter adjustment',
+      'Dataset exploration',
+      'Educational explanations',
+      'Shareable configurations'
+    ],
+    limitations: [
+      'Simple networks only',
+      'Limited to toy datasets',
+      'Browser-based only',
+      'No advanced features'
+    ],
+    rating: 4.9,
+    reviewCount: 4500,
+    trending: false,
+    featured: true,
+    integrations: ['TensorFlow', 'Educational platforms', 'Web browsers', 'Sharing tools'],
+    lastVerified: new Date('2025-05-30')
+  },
+
+  {
+    id: 'seeing-ai',
+    name: 'Seeing AI',
+    slug: 'seeing-ai',
+    description: 'Microsoft\'s AI-powered app that narrates the world for visually impaired users, demonstrating computer vision capabilities in education.',
+    shortDescription: 'AI accessibility and computer vision demo',
+    logo: 'https://images.pexels.com/photos/1181354/pexels-photo-1181354.jpeg',
+    website: 'https://www.microsoft.com/en-us/ai/seeing-ai',
+    categoryId: 'ai-education',
+    subcategoryIds: ['visualization-tools'],
+    pricing: {
+      type: 'free',
+      startingPrice: '$0',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'one-time',
+          features: ['Full functionality', 'All AI features', 'Regular updates', 'No ads']
+        }
+      ]
+    },
+    features: [
+      'Object recognition',
+      'Text reading',
+      'Person identification',
+      'Scene description',
+      'Product recognition',
+      'Handwriting detection'
+    ],
+    limitations: [
+      'iOS only',
+      'Internet required for some features',
+      'Language limitations',
+      'Camera quality dependent'
+    ],
+    rating: 4.7,
+    reviewCount: 8900,
+    trending: false,
+    featured: false,
+    integrations: ['iOS accessibility', 'VoiceOver', 'Microsoft services', 'Camera app'],
+    lastVerified: new Date('2025-05-30')
+  },
+
+  {
+    id: 'ml-visuals',
+    name: 'ML Visuals',
+    slug: 'ml-visuals',
+    description: 'Open-source collection of machine learning visualizations and illustrations for education, presentations, and understanding AI concepts.',
+    shortDescription: 'Open-source ML visualization library',
+    logo: 'https://images.pexels.com/photos/1181317/pexels-photo-1181317.jpeg',
+    website: 'https://github.com/dair-ai/ml-visuals',
+    categoryId: 'ai-education',
+    subcategoryIds: ['visualization-tools'],
+    pricing: {
+      type: 'free',
+      startingPrice: '$0',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Open Source',
+          price: '$0',
+          billingPeriod: 'one-time',
+          features: ['All visualizations', 'Commercial use allowed', 'Community contributions', 'Regular updates']
+        }
+      ]
+    },
+    features: [
+      'ML concept illustrations',
+      'High-quality graphics',
+      'Educational diagrams',
+      'Presentation templates',
+      'Open-source license',
+      'Community contributions'
+    ],
+    limitations: [
+      'Static images only',
+      'Limited interactivity',
+      'Requires design skills for customization',
+      'Manual updates needed'
+    ],
+    rating: 4.6,
+    reviewCount: 1200,
+    trending: false,
+    featured: false,
+    integrations: ['Presentation software', 'Educational platforms', 'Social media', 'Documentation tools'],
+    lastVerified: new Date('2025-05-30')
+  },
+
+  {
+    id: 'ai-explainer',
+    name: 'AI Explainer',
+    slug: 'ai-explainer',
+    description: 'Interactive educational platform with visual explanations of AI algorithms, machine learning concepts, and neural network architectures.',
+    shortDescription: 'Interactive AI concept explanations',
+    logo: 'https://images.pexels.com/photos/1181427/pexels-photo-1181427.jpeg',
+    website: 'https://okai.brown.edu/static/index.html',
+    categoryId: 'ai-education',
+    subcategoryIds: ['visualization-tools'],
+    pricing: {
+      type: 'free',
+      startingPrice: '$0',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'one-time',
+          features: ['All explanations', 'Interactive demos', 'Educational content', 'No registration']
+        }
+      ]
+    },
+    features: [
+      'Interactive AI explanations',
+      'Visual algorithm demos',
+      'Step-by-step tutorials',
+      'Concept illustrations',
+      'Educational exercises',
+      'Progressive complexity'
+    ],
+    limitations: [
+      'Academic project',
+      'Limited scope',
+      'Irregular updates',
+      'Browser-based only'
+    ],
+    rating: 4.4,
+    reviewCount: 850,
+    trending: false,
+    featured: false,
+    integrations: ['Web browsers', 'Educational platforms', 'Research tools', 'Academic networks'],
+    lastVerified: new Date('2025-05-30')
+  },
+
+  {
+    id: 'google-scholar',
+    name: 'Google Scholar',
+    slug: 'google-scholar',
+    description: 'Academic search engine for scholarly literature in AI and machine learning, providing access to research papers, citations, and academic resources.',
+    shortDescription: 'Academic search for AI research',
+    logo: 'https://images.pexels.com/photos/159711/books-bookstore-book-reading-159711.jpeg',
+    website: 'https://scholar.google.com/',
+    categoryId: 'ai-education',
+    subcategoryIds: ['research-papers'],
+    pricing: {
+      type: 'free',
+      startingPrice: '$0',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'one-time',
+          features: ['Unlimited searches', 'Citation tracking', 'Author profiles', 'Alerts']
+        }
+      ]
+    },
+    features: [
+      'Academic paper search',
+      'Citation analysis',
+      'Author profiles',
+      'Research alerts',
+      'Library links',
+      'Related articles'
+    ],
+    limitations: [
+      'Limited full-text access',
+      'Quality varies',
+      'No peer review indicators',
+      'Paywall restrictions'
+    ],
+    rating: 4.5,
+    reviewCount: 25000,
+    trending: false,
+    featured: true,
+    integrations: ['University libraries', 'Citation managers', 'Research tools', 'Academic databases'],
+    lastVerified: new Date('2025-05-30')
+  },
+
+  {
+    id: 'semantic-scholar',
+    name: 'Semantic Scholar',
+    slug: 'semantic-scholar',
+    description: 'AI-powered academic search engine that uses machine learning to understand research papers and provide intelligent recommendations.',
+    shortDescription: 'AI-powered academic search',
+    logo: 'https://images.pexels.com/photos/256520/pexels-photo-256520.jpeg',
+    website: 'https://www.semanticscholar.org/',
+    categoryId: 'ai-education',
+    subcategoryIds: ['research-papers'],
+    pricing: {
+      type: 'free',
+      startingPrice: '$0',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'one-time',
+          features: ['AI-powered search', 'Paper summaries', 'Citation analysis', 'Research feeds']
+        }
+      ]
+    },
+    features: [
+      'AI-powered paper discovery',
+      'Intelligent summaries',
+      'Citation context',
+      'Research recommendations',
+      'Author networks',
+      'Impact metrics'
+    ],
+    limitations: [
+      'Limited to certain fields',
+      'Beta features',
+      'Dependent on paper availability',
+      'Algorithm bias potential'
+    ],
+    rating: 4.6,
+    reviewCount: 3400,
+    trending: true,
+    featured: false,
+    integrations: ['Citation managers', 'Research tools', 'Academic databases', 'API access'],
+    lastVerified: new Date('2025-05-30')
+  },
+
+  {
+    id: 'connected-papers',
+    name: 'Connected Papers',
+    slug: 'connected-papers',
+    description: 'Visual tool for exploring academic papers in AI/ML research, creating similarity graphs to discover related work and research trends.',
+    shortDescription: 'Visual research paper exploration',
+    logo: 'https://images.pexels.com/photos/1181673/pexels-photo-1181673.jpeg',
+    website: 'https://www.connectedpapers.com/',
+    categoryId: 'ai-education',
+    subcategoryIds: ['research-papers'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$5/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['5 graphs per month', 'Basic features', 'Paper exploration', 'Community access']
+        },
+        {
+          name: 'Personal',
+          price: '$5/month',
+          billingPeriod: 'monthly',
+          features: ['Unlimited graphs', 'Advanced features', 'Export options', 'Priority support']
+        }
+      ]
+    },
+    features: [
+      'Visual paper networks',
+      'Similarity mapping',
+      'Research trend analysis',
+      'Citation exploration',
+      'Interactive graphs',
+      'Paper recommendations'
+    ],
+    limitations: [
+      'Limited free usage',
+      'Depends on paper database',
+      'Academic focus only',
+      'Internet required'
+    ],
+    rating: 4.7,
+    reviewCount: 2100,
+    trending: true,
+    featured: false,
+    integrations: ['Academic databases', 'Citation managers', 'Research tools', 'Export formats'],
+    lastVerified: new Date('2025-05-30')
+  },
+
+  {
+    id: 'research-rabbit',
+    name: 'Research Rabbit',
+    slug: 'research-rabbit',
+    description: 'AI-powered research discovery platform that helps researchers find relevant papers, track research trends, and build knowledge graphs.',
+    shortDescription: 'AI research discovery platform',
+    logo: 'https://images.pexels.com/photos/1181690/pexels-photo-1181690.jpeg',
+    website: 'https://www.researchrabbit.ai/',
+    categoryId: 'ai-education',
+    subcategoryIds: ['research-papers'],
+    pricing: {
+      type: 'free',
+      startingPrice: '$0',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'one-time',
+          features: ['Unlimited collections', 'Paper discovery', 'Collaboration tools', 'Research feeds']
+        }
+      ]
+    },
+    features: [
+      'AI-powered discovery',
+      'Research collections',
+      'Collaboration tools',
+      'Personalized feeds',
+      'Citation networks',
+      'Research timelines'
+    ],
+    limitations: [
+      'Newer platform',
+      'Limited paper database',
+      'Beta features',
+      'Academic focus'
+    ],
+    rating: 4.5,
+    reviewCount: 1800,
+    trending: true,
+    featured: false,
+    integrations: ['Zotero', 'Mendeley', 'Academic databases', 'Social platforms'],
+    lastVerified: new Date('2025-05-30')
+  },
+
+  {
+    id: 'ai-stack-overflow',
+    name: 'AI Stack Overflow',
+    slug: 'ai-stack-overflow',
+    description: 'Stack Overflow\'s artificial intelligence and machine learning sections, providing Q&A community support for AI development and learning.',
+    shortDescription: 'AI programming Q&A community',
+    logo: 'https://images.pexels.com/photos/1181686/pexels-photo-1181686.jpeg',
+    website: 'https://stackoverflow.com/questions/tagged/artificial-intelligence',
+    categoryId: 'ai-education',
+    subcategoryIds: ['ai-communities'],
+    pricing: {
+      type: 'free',
+      startingPrice: '$0',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'one-time',
+          features: ['Question/answer access', 'Community voting', 'Reputation system', 'Tag following']
+        }
+      ]
+    },
+    features: [
+      'AI programming Q&A',
+      'Expert community',
+      'Code solutions',
+      'Reputation system',
+      'Tag-based organization',
+      'Search functionality'
+    ],
+    limitations: [
+      'Quality varies',
+      'Strict moderation',
+      'Learning curve',
+      'Technical focus only'
+    ],
+    rating: 4.4,
+    reviewCount: 45000,
+    trending: false,
+    featured: true,
+    integrations: ['Developer tools', 'IDEs', 'Documentation', 'Learning platforms'],
+    lastVerified: new Date('2025-05-30')
+  },
+
+  {
+    id: 'reddit-machinelearning',
+    name: 'Reddit Machine Learning',
+    slug: 'reddit-machinelearning',
+    description: 'Reddit\'s machine learning community with discussions, research sharing, career advice, and educational resources for AI enthusiasts.',
+    shortDescription: 'ML community discussions and resources',
+    logo: 'https://images.pexels.com/photos/1181701/pexels-photo-1181701.jpeg',
+    website: 'https://www.reddit.com/r/MachineLearning/',
+    categoryId: 'ai-education',
+    subcategoryIds: ['ai-communities'],
+    pricing: {
+      type: 'free',
+      startingPrice: '$0',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'one-time',
+          features: ['Community access', 'Discussion participation', 'Resource sharing', 'Subreddit features']
+        }
+      ]
+    },
+    features: [
+      'Research discussions',
+      'Paper sharing',
+      'Career advice',
+      'Project showcases',
+      'Weekly threads',
+      'AMA sessions'
+    ],
+    limitations: [
+      'Informal environment',
+      'Quality varies',
+      'Reddit dependency',
+      'Moderation policies'
+    ],
+    rating: 4.3,
+    reviewCount: 18500,
+    trending: false,
+    featured: false,
+    integrations: ['Reddit platform', 'External links', 'Social sharing', 'Mobile apps'],
+    lastVerified: new Date('2025-05-30')
+  },
+
+  {
+    id: 'discord-ai',
+    name: 'Discord AI Communities',
+    slug: 'discord-ai',
+    description: 'Various Discord servers focused on AI and machine learning education, providing real-time chat, study groups, and collaborative learning.',
+    shortDescription: 'Real-time AI learning communities',
+    logo: 'https://images.pexels.com/photos/1181708/pexels-photo-1181708.jpeg',
+    website: 'https://discord.com/',
+    categoryId: 'ai-education',
+    subcategoryIds: ['ai-communities'],
+    pricing: {
+      type: 'free',
+      startingPrice: '$0',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'one-time',
+          features: ['Server access', 'Real-time chat', 'Voice channels', 'File sharing']
+        }
+      ]
+    },
+    features: [
+      'Real-time discussions',
+      'Study groups',
+      'Voice chat sessions',
+      'Resource sharing',
+      'Mentorship programs',
+      'Project collaboration'
+    ],
+    limitations: [
+      'Requires Discord account',
+      'Server-dependent quality',
+      'Time zone differences',
+      'Moderation varies'
+    ],
+    rating: 4.2,
+    reviewCount: 12800,
+    trending: true,
+    featured: false,
+    integrations: ['Discord platform', 'Bots', 'Screen sharing', 'Mobile apps'],
+    lastVerified: new Date('2025-05-30')
+  },
+
+  {
+    id: 'ml-twitter',
+    name: 'ML Twitter Community',
+    slug: 'ml-twitter',
+    description: 'Twitter\'s vibrant machine learning community where researchers, practitioners, and educators share insights, papers, and educational content.',
+    shortDescription: 'ML social media community',
+    logo: 'https://images.pexels.com/photos/1181715/pexels-photo-1181715.jpeg',
+    website: 'https://twitter.com/hashtag/MachineLearning',
+    categoryId: 'ai-education',
+    subcategoryIds: ['ai-communities'],
+    pricing: {
+      type: 'free',
+      startingPrice: '$0',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'one-time',
+          features: ['Community access', 'Content sharing', 'Following experts', 'Hashtag following']
+        }
+      ]
+    },
+    features: [
+      'Expert insights',
+      'Paper announcements',
+      'Thread discussions',
+      'Conference updates',
+      'Career opportunities',
+      'Educational resources'
+    ],
+    limitations: [
+      'Information overload',
+      'Platform dependency',
+      'Character limits',
+      'Algorithm-driven feed'
+    ],
+    rating: 4.1,
+    reviewCount: 32000,
+    trending: false,
+    featured: false,
+    integrations: ['Twitter platform', 'External links', 'Mobile apps', 'Social tools'],
+    lastVerified: new Date('2025-05-30')
   }
 ];

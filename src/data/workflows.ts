@@ -163,5 +163,100 @@ export const workflowBundles: WorkflowBundle[] = [
       'Configure SuperAgent for lead nurturing workflows',
       'Integrate with marketing tools and analytics platforms'
     ]
+  },
+  {
+    id: '10',
+    name: 'AI Learning Fundamentals',
+    description: 'Complete beginner-friendly bundle for learning AI concepts, from interactive tutorials to hands-on coding.',
+    tools: [
+      findTool('coursera-ai'), // Coursera AI
+      findTool('brilliant-ai'), // Brilliant AI
+      findTool('tensorflow-playground'), // TensorFlow Playground
+      findTool('neural-network-playground') // Neural Network Playground
+    ],
+    totalCost: '$49/month',
+    implementationSteps: [
+      'Start with Coursera AI courses for structured learning',
+      'Use Brilliant AI for interactive concept understanding',
+      'Practice with TensorFlow Playground for hands-on experience',
+      'Experiment with Neural Network Playground for visualization',
+      'Build a portfolio of small AI projects'
+    ]
+  },
+  {
+    id: '11', 
+    name: 'AI Research & Academia',
+    description: 'Professional research toolkit combining paper discovery, collaboration platforms, and academic resources.',
+    tools: [
+      findTool('arxiv'), // arXiv
+      findTool('papers-with-code'), // Papers with Code
+      findTool('connected-papers'), // Connected Papers
+      findTool('semantic-scholar') // Semantic Scholar
+    ],
+    totalCost: '$5/month',
+    implementationSteps: [
+      'Set up arXiv alerts for your research areas',
+      'Use Papers with Code to find implementations',
+      'Explore research networks with Connected Papers',
+      'Leverage Semantic Scholar for AI-powered discovery',
+      'Build a comprehensive research library'
+    ]
+  },
+  {
+    id: '12',
+    name: 'AI Coding Bootcamp',
+    description: 'Hands-on AI development environment with cloud platforms, collaborative coding, and learning resources.',
+    tools: [
+      findTool('google-colab'), // Google Colab
+      findTool('kaggle'), // Kaggle
+      findTool('jupyter-notebooks'), // Jupyter Notebooks
+      findTool('github-codespaces') // GitHub Codespaces
+    ],
+    totalCost: '$0-50/month',
+    implementationSteps: [
+      'Start with Google Colab for free GPU access',
+      'Join Kaggle competitions for practical experience',
+      'Set up local Jupyter Notebooks for development',
+      'Use GitHub Codespaces for collaborative projects',
+      'Build and deploy AI models progressively'
+    ]
+  },
+  {
+    id: '13',
+    name: 'Professional AI Education',
+    description: 'Enterprise-level AI learning combining professional courses, certifications, and industry platforms.',
+    tools: [
+      findTool('udacity-ai'), // Udacity AI
+      findTool('pluralsight-ai'), // Pluralsight AI
+      findTool('linkedin-learning-ai'), // LinkedIn Learning AI
+      findTool('fastai') // fast.ai
+    ],
+    totalCost: '$118/month',
+    implementationSteps: [
+      'Enroll in Udacity AI Nanodegree program',
+      'Use Pluralsight AI for skill assessments',
+      'Complete LinkedIn Learning courses for career advancement',
+      'Follow fast.ai practical approach for real-world skills',
+      'Build a professional AI portfolio'
+    ]
+  },
+  {
+    id: '14',
+    name: 'AI Community Learning',
+    description: 'Social learning bundle connecting with AI communities, forums, and collaborative platforms.',
+    tools: [
+      findTool('huggingface-community'), // Hugging Face Community
+      findTool('towards-data-science'), // Towards Data Science
+      findTool('ai-stack-overflow'), // AI Stack Overflow
+      findTool('discord-ai') // Discord AI Communities
+    ],
+    totalCost: '$9/month',
+    implementationSteps: [
+      'Join Hugging Face community for model sharing',
+      'Follow Towards Data Science for industry insights',
+      'Participate in AI Stack Overflow discussions',
+      'Connect with Discord AI study groups',
+      'Build your professional AI network'
+    ]
   }
 ];
