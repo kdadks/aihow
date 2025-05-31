@@ -52,44 +52,31 @@ async function fixAdminAuth() {
     
     // 2. Sign up new admin user
     console.log('Creating new admin account...');
-    const { data: signUpData, error: signUpError } = await supabase.auth.signUp({
+    // Create admin user using the existing create_initial_admin function
+    const { error: createError } = await adminSupabase.rpc('create_initial_admin', {
       email: adminEmail,
-      password: adminPassword,
-      options: {
-        data: {
-          full_name: 'System Administrator'
-        }
-      }
+      password: adminPassword
     });
-    
-    if (signUpError) {
-      throw signUpError;
+
+    if (createError) {
+      throw createError;
     }
+
+    console.log('Admin user created successfully');
     
-    const userId = signUpData.user.id;
-    console.log('Created user with ID:', userId);
-    
-    // 3. Confirm email immediately using admin API
-    console.log('Confirming email...');
-    await adminSupabase.auth.admin.updateUserById(userId, {
-      email_confirm: true,
-      app_metadata: { provider: 'email', providers: ['email'] }
-    });
-    
-    // 4. Set up profile
-    console.log('Creating admin profile...');
-    const { error: profileError } = await adminSupabase
+    // Verify admin user exists
+    console.log('Verifying admin user...');
+    const { data: adminData, error: verifyError } = await adminSupabase
       .from('profiles')
-      .upsert({
-        id: userId,
-        username: adminEmail,
-        full_name: 'System Administrator',
-        updated_at: new Date().toISOString()
-      });
-      
-    if (profileError) {
-      throw profileError;
+      .select('id, username')
+      .eq('username', adminEmail)
+      .single();
+
+    if (verifyError || !adminData) {
+      throw new Error('Failed to verify admin user creation');
     }
+
+    console.log('Admin user verified:', adminData);
     
     // 5. Set up admin role
     console.log('Setting up admin role...');

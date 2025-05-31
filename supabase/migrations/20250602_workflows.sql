@@ -127,19 +127,25 @@ CREATE POLICY "Users can delete their saved items"
     ON user_saved_items FOR DELETE
     USING (user_id = auth.uid());
 
--- Admin policies for all tables
+-- Admin policies for all tables (FIXED: Use proper join to roles table)
 CREATE POLICY "Admins have full access to workflows"
     ON workflows
     AS PERMISSIVE
     FOR ALL
     USING (
-        auth.uid() IN (
-            SELECT user_id FROM user_roles WHERE role = 'admin'
+        exists (
+            select 1 from public.user_roles ur
+            inner join public.roles r on r.id = ur.role_id
+            where ur.user_id = auth.uid()
+            and r.name = 'admin'
         )
     )
     WITH CHECK (
-        auth.uid() IN (
-            SELECT user_id FROM user_roles WHERE role = 'admin'
+        exists (
+            select 1 from public.user_roles ur
+            inner join public.roles r on r.id = ur.role_id
+            where ur.user_id = auth.uid()
+            and r.name = 'admin'
         )
     );
 
@@ -148,13 +154,19 @@ CREATE POLICY "Admins have full access to tool bundles"
     AS PERMISSIVE
     FOR ALL
     USING (
-        auth.uid() IN (
-            SELECT user_id FROM user_roles WHERE role = 'admin'
+        exists (
+            select 1 from public.user_roles ur
+            inner join public.roles r on r.id = ur.role_id
+            where ur.user_id = auth.uid()
+            and r.name = 'admin'
         )
     )
     WITH CHECK (
-        auth.uid() IN (
-            SELECT user_id FROM user_roles WHERE role = 'admin'
+        exists (
+            select 1 from public.user_roles ur
+            inner join public.roles r on r.id = ur.role_id
+            where ur.user_id = auth.uid()
+            and r.name = 'admin'
         )
     );
 
@@ -163,13 +175,19 @@ CREATE POLICY "Admins have full access to saved items"
     AS PERMISSIVE
     FOR ALL
     USING (
-        auth.uid() IN (
-            SELECT user_id FROM user_roles WHERE role = 'admin'
+        exists (
+            select 1 from public.user_roles ur
+            inner join public.roles r on r.id = ur.role_id
+            where ur.user_id = auth.uid()
+            and r.name = 'admin'
         )
     )
     WITH CHECK (
-        auth.uid() IN (
-            SELECT user_id FROM user_roles WHERE role = 'admin'
+        exists (
+            select 1 from public.user_roles ur
+            inner join public.roles r on r.id = ur.role_id
+            where ur.user_id = auth.uid()
+            and r.name = 'admin'
         )
     );
 

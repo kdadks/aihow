@@ -12,9 +12,9 @@ const envPath = path.resolve(__dirname, '../.env');
 dotenv.config({ path: envPath });
 
 // Hardcoded values from the .env file we saw
-const supabaseUrl = process.env.VITE_SUPABASE_URL || 'https://bynlkphjpmxskoqiahow.supabase.co';
-const supabaseAnonKey = process.env.VITE_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ5bmxrcGhqcG14c2tvcWlhaG93Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDgxOTAxMjQsImV4cCI6MjA2Mzc2NjEyNH0.KVrcmJiDxRoyp4zNnqr-C50KlRfNguTuH6F3tICNsJM';
-const supabaseServiceKey = process.env.VITE_SUPABASE_SERVICE_ROLE_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ5bmxrcGhqcG14c2tvcWlhaG93Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc0ODE5MDEyNCwiZXhwIjoyMDYzNzY2MTI0fQ.9m73ycx68w-itsiVes6zXbz7bxkRtrJ9waxUm49n2jQ';
+const supabaseUrl = 'http://127.0.0.1:54321';
+const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS1kZW1vIiwicm9sZSI6ImFub24iLCJleHAiOjE5ODM4MTI5OTZ9.CRXP1A7WOeoJeXxjNni43kdQwgnWNReilDMblYTn_I0';
+const supabaseServiceKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS1kZW1vIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImV4cCI6MTk4MzgxMjk5Nn0.EGIM96RAZx35lJzdJsyH-qQwv8Hdp7fsn3W0YpN81IU';
 
 if (!supabaseUrl || !supabaseAnonKey || !supabaseServiceKey) {
   console.error('Missing Supabase environment variables');
@@ -53,33 +53,16 @@ async function checkAdminLogin() {
     
     // 2. Use the service role client to query the auth.users table directly
     console.log('\nVerifying admin user exists in database...');
-    const { data: usersData, error: usersError } = await supabaseAdmin
-      .from('auth_users_view') // This is often exposed by Supabase
-      .select('*')
-      .eq('email', adminEmail)
-      .single();
-    
-    if (usersError) {
-      console.log('Could not query auth users view, trying users table...');
-      const { data: userData, error: userError } = await supabaseAdmin
-        .from('users') // Try direct database access
-        .select('*')
-        .eq('email', adminEmail)
-        .single();
-        
-      if (userError) {
-        console.error('Error fetching admin user from database:', userError);
-      } else if (userData) {
-        console.log('✓ Admin user found in users table');
-        console.log('User data:', userData);
-      } else {
-        console.error('Admin user not found in users table');
-      }
-    } else if (usersData) {
-      console.log('✓ Admin user exists in auth_users_view');
-      console.log('User data:', usersData);
+    const { data: authUser, error: authError } = await adminSupabase
+      .rpc('auth_user_info', { user_email: adminEmail });
+
+    if (authError) {
+      console.error('Error fetching admin user from auth:', authError);
+    } else if (authUser) {
+      console.log('✓ Admin user exists in auth');
+      console.log('User data:', authUser);
     } else {
-      console.error('Admin user not found in auth_users_view');
+      console.error('Admin user not found in auth system');
     }
     
     // 3. Check admin profile in public.profiles

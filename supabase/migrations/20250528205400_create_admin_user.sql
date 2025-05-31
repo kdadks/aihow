@@ -14,6 +14,7 @@ declare
     admin_role_id uuid;
     has_profiles_table boolean;
     has_user_roles_table boolean;
+    existing_user_id uuid;
 begin
     -- Check if required tables exist
     select exists(select 1 from information_schema.tables where table_schema = 'public' and table_name = 'profiles') into has_profiles_table;
@@ -36,65 +37,85 @@ begin
         raise exception 'Admin role not found';
     end if;
 
-    -- Create admin user in auth.users with explicit UUID
-    insert into auth.users (
-        id,
-        email,
-        encrypted_password,
-        email_confirmed_at,
-        raw_user_meta_data,
-        created_at,
-        updated_at
-    )
-    values (
-        uuid_generate_v4(), -- Generate UUID explicitly
-        'admin@aihow.org',
-        -- Default password: AIhow@Admin2025 (should be changed on first login)
-        crypt('AIhow@Admin2025', gen_salt('bf')),
-        now(),
-        '{"full_name": "System Administrator"}'::jsonb,
-        now(),
-        now()
-    )
-    returning id into admin_user_id;
+    -- Check if admin user already exists
+    select id into existing_user_id
+    from auth.users
+    where email = 'admin@aihow.org';
 
-    if admin_user_id is null then
-        raise exception 'Failed to create admin user';
-    end if;
-
-    -- Check if profiles table has created_at and updated_at columns
-    if exists (
-        select 1 from information_schema.columns 
-        where table_schema = 'public' 
-        and table_name = 'profiles'
-        and column_name = 'created_at'
-    ) then
-        -- Create admin profile with timestamp columns
-        insert into public.profiles (id, username, full_name, created_at, updated_at)
-        values (admin_user_id, 'admin@aihow.org', 'System Administrator', now(), now());
+    if existing_user_id is not null then
+        raise notice 'Admin user already exists with id: %', existing_user_id;
+        admin_user_id := existing_user_id;
     else
-        -- Create admin profile without timestamp columns
-        insert into public.profiles (id, username, full_name)
-        values (admin_user_id, 'admin@aihow.org', 'System Administrator');
+        -- Create admin user in auth.users with explicit UUID
+        insert into auth.users (
+            id,
+            email,
+            encrypted_password,
+            email_confirmed_at,
+            raw_user_meta_data,
+            created_at,
+            updated_at
+        )
+        values (
+            uuid_generate_v4(), -- Generate UUID explicitly
+            'admin@aihow.org',
+            -- Default password: AIhow@Admin2025 (should be changed on first login)
+            crypt('AIhow@Admin2025', gen_salt('bf')),
+            now(),
+            '{"full_name": "System Administrator"}'::jsonb,
+            now(),
+            now()
+        )
+        returning id into admin_user_id;
+
+        if admin_user_id is null then
+            raise exception 'Failed to create admin user';
+        end if;
     end if;
 
-    -- Check if user_roles table has created_at column
-    if exists (
-        select 1 from information_schema.columns 
-        where table_schema = 'public' 
-        and table_name = 'user_roles'
-        and column_name = 'created_at'
-    ) then
-        -- Assign admin role with timestamp
-        insert into public.user_roles (user_id, role_id, created_at)
-        values (admin_user_id, admin_role_id, now());
+    -- Check if profile already exists
+    if not exists (select 1 from public.profiles where id = admin_user_id) then
+        -- Check if profiles table has created_at and updated_at columns
+        if exists (
+            select 1 from information_schema.columns 
+            where table_schema = 'public' 
+            and table_name = 'profiles'
+            and column_name = 'created_at'
+        ) then
+            -- Create admin profile with timestamp columns
+            insert into public.profiles (id, username, full_name, created_at, updated_at)
+            values (admin_user_id, 'admin@aihow.org', 'System Administrator', now(), now());
+        else
+            -- Create admin profile without timestamp columns
+            insert into public.profiles (id, username, full_name)
+            values (admin_user_id, 'admin@aihow.org', 'System Administrator');
+        end if;
     else
-        -- Assign admin role without timestamp
-        insert into public.user_roles (user_id, role_id)
-        values (admin_user_id, admin_role_id);
+        raise notice 'Admin profile already exists';
     end if;
 
-    raise notice 'Admin user created successfully with id: %', admin_user_id;
+    -- Check if user role assignment already exists
+    if not exists (select 1 from public.user_roles where user_id = admin_user_id and role_id = admin_role_id) then
+        -- Check if user_roles table has created_at column
+        if exists (
+            select 1 from information_schema.columns 
+            where table_schema = 'public' 
+            and table_name = 'user_roles'
+            and column_name = 'created_at'
+        ) then
+            -- Assign admin role with timestamp
+            insert into public.user_roles (user_id, role_id, created_at)
+            values (admin_user_id, admin_role_id, now());
+        else
+            -- Assign admin role without timestamp
+            insert into public.user_roles (user_id, role_id)
+            values (admin_user_id, admin_role_id);
+        end if;
+    else
+        raise notice 'Admin role already assigned';
+    end if;
+
+    raise notice 'Admin user setup completed with id: %', admin_user_id;
 exception
     when others then
         raise exception 'Failed to create admin user: %', SQLERRM;
@@ -117,7 +138,7 @@ begin
             from public.roles r
             cross join public.permissions p
             where r.name = 'admin'
-            ON CONFLICT DO NOTHING;
+            on conflict do nothing;
         end if;
     end if;
 end $$;

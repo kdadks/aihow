@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { MainLayout } from './components/layout/MainLayout';
 import { Providers } from './providers/Providers';
-import { adminRoutes } from './admin/routes';
+import { adminRoutes } from './admin/routes/adminRoutes';
 import { LoginForm } from './auth/components/LoginForm';
 import { RegisterForm } from './auth/components/RegisterForm';
 import { ForgotPassword } from './auth/components/ForgotPassword';

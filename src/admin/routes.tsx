@@ -1,6 +1,7 @@
 import React from 'react';
 import { RouteObject } from 'react-router-dom';
-import { AdminLayout, withAdminProtection } from './components/AdminLayout';
+import { AdminLayout } from './components/AdminLayout';
+import { withAuth } from '../auth/components/withAuth';
 
 // Lazy load admin pages
 const Dashboard = React.lazy(() => import('./pages/Dashboard'));
@@ -10,11 +11,11 @@ const SystemSettings = React.lazy(() => import('./pages/SystemSettings'));
 const Analytics = React.lazy(() => import('./pages/Analytics'));
 
 // Wrap components with role-based protection and loading boundaries
-const ProtectedDashboard = withAdminProtection(Dashboard);
-const ProtectedContentManagement = withAdminProtection(ContentManagement, 'canManageContent');
-const ProtectedContentModeration = withAdminProtection(ContentModeration, 'canModerateContent');
-const ProtectedSystemSettings = withAdminProtection(SystemSettings, 'canManageSettings');
-const ProtectedAnalytics = withAdminProtection(Analytics, 'canViewMetrics');
+const ProtectedDashboard = withAuth(Dashboard, { requiredRole: 'admin' });
+const ProtectedContentManagement = withAuth(ContentManagement, { requiredRole: 'canManageContent' });
+const ProtectedContentModeration = withAuth(ContentModeration, { requiredRole: 'canModerateContent' });
+const ProtectedSystemSettings = withAuth(SystemSettings, { requiredRole: 'canManageSettings' });
+const ProtectedAnalytics = withAuth(Analytics, { requiredRole: 'canViewMetrics' });
 
 // Add loading fallback for lazy-loaded components
 const withSuspense = (Component: React.ComponentType) => {

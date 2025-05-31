@@ -1,184 +1,85 @@
-import React from 'react';
-import { Navigate, Outlet } from 'react-router-dom';
-import { useAdminGuard } from '../../auth/hooks/useAuthGuard';
-import { useAuth } from '../../auth/context/AuthContext';
-import { Loading } from '../../components/ui/Loading';
-import { AdminProvider } from '../context/AdminContext';
-import { Breadcrumb } from './Breadcrumb';
-import { AdminNavigation } from './AdminNavigation';
+import { FC } from 'react';
+import { Outlet, NavLink } from 'react-router-dom';
+import { useAdminAuth } from '../auth/hooks/useAdminAuth';
 
-interface AdminLayoutProps {
-  children?: React.ReactNode;
+interface NavItemProps {
+  to: string;
+  label: string;
+  permission?: string;
 }
 
-export function AdminLayout({ children }: AdminLayoutProps) {
-  const { isAuthorized, isLoading, error } = useAdminGuard({
-    redirectTo: '/login',
-    onUnauthorized: () => {
-      // Optional: Log unauthorized access attempts
-      console.warn('Unauthorized access attempt to admin portal');
-    }
-  });
-
-  // Show loading state while checking authorization
-  if (isLoading) {
-    return (
-      <div className="flex items-center justify-center min-h-screen">
-        <Loading />
-      </div>
-    );
+const NavItem: FC<NavItemProps> = ({ to, label, permission }) => {
+  const { hasPermission } = useAdminAuth();
+  
+  if (permission && !hasPermission(permission)) {
+    return null;
   }
 
-  // Redirect unauthorized users
-  if (!isAuthorized) {
-    return (
-      <Navigate 
-        to="/login" 
-        replace 
-        state={{ 
-          error: error || 'You must be an admin to access this area',
-          returnTo: window.location.pathname
-        }} 
-      />
-    );
-  }
-
-  // Render admin portal layout
   return (
-    <AdminProvider>
-      <div className="min-h-screen bg-gray-100">
-        {/* Admin Header */}
-        <header className="bg-white shadow-sm">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-            <div className="flex justify-between items-center">
-              <div className="flex items-center">
-                <h1 className="text-xl font-semibold text-gray-900 mr-8">
-                  Admin Portal
-                </h1>
-                <AdminNavigation />
-              </div>
-            </div>
-          </div>
-        </header>
-
-        {/* Main Content */}
-        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <Breadcrumb />
-          <div className="bg-white shadow-sm rounded-lg p-6">
-            <React.Suspense
-              fallback={
-                <div className="flex items-center justify-center h-64">
-                  <Loading />
-                </div>
-              }
-            >
-              {children || <Outlet />}
-            </React.Suspense>
-          </div>
-        </main>
-
-        {/* Admin Footer */}
-        <footer className="bg-white shadow-sm mt-8">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-            <div className="text-center text-sm text-gray-500">
-              Admin Portal • {new Date().getFullYear()}
-            </div>
-          </div>
-        </footer>
-      </div>
-    </AdminProvider>
-  );
-}
-
-// HOC for protecting admin routes with permissions
-export function withAdminProtection<P extends object>(
-  WrappedComponent: React.ComponentType<P>,
-  permission?: string
-) {
-  return function WithAdminProtection(props: P) {
-    const { isAuthorized, isLoading, error } = useAdminGuard({
-      redirectTo: '/login',
-      onUnauthorized: () => {
-        console.warn(`Unauthorized access attempt to admin route${permission ? ` requiring ${permission}` : ''}`);
+    <NavLink
+      to={to}
+      className={({ isActive }) =>
+        `px-4 py-2 rounded-md transition ${
+          isActive
+            ? 'bg-blue-100 text-blue-700'
+            : 'text-gray-600 hover:bg-gray-100'
+        }`
       }
-    });
+    >
+      {label}
+    </NavLink>
+  );
+};
 
-    // Additional permission check if specified
-    const auth = useAuth();
-    const hasRequiredPermission = permission 
-      ? auth.hasPermission(permission)
-      : true;
+export const AdminLayout: FC = () => {
+  const { admin, logout } = useAdminAuth();
 
-    if (isLoading) {
-      return (
-        <div className="flex items-center justify-center min-h-[200px]">
-          <Loading />
-        </div>
-      );
-    }
-
-    if (!isAuthorized || !hasRequiredPermission) {
-      const errorMessage = !isAuthorized
-        ? 'You must be an admin to access this area'
-        : `You don't have the required permission: ${permission}`;
-
-      return (
-        <Navigate 
-          to="/login" 
-          replace 
-          state={{ 
-            error: error || errorMessage,
-            returnTo: window.location.pathname
-          }} 
-        />
-      );
-    }
-
-    return <WrappedComponent {...props} />;
-  };
-}
-
-// Error Boundary for admin routes
-export class AdminErrorBoundary extends React.Component<
-  { children: React.ReactNode },
-  { hasError: boolean }
-> {
-  constructor(props: { children: React.ReactNode }) {
-    super(props);
-    this.state = { hasError: false };
-  }
-
-  static getDerivedStateFromError(_: Error) {
-    return { hasError: true };
-  }
-
-  componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
-    // Log error to monitoring service
-    console.error('Admin Portal Error:', error, errorInfo);
-  }
-
-  render() {
-    if (this.state.hasError) {
-      return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-100">
-          <div className="bg-white p-8 rounded-lg shadow-sm text-center">
-            <h2 className="text-xl font-semibold text-red-600 mb-2">
-              Something went wrong
-            </h2>
-            <p className="text-gray-600 mb-4">
-              An error occurred in the admin portal. Please try refreshing the page.
-            </p>
+  return (
+    <div className="min-h-screen bg-gray-50">
+      {/* Header */}
+      <header className="bg-white shadow-sm">
+        <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+          <div className="flex items-center space-x-4">
+            <h1 className="text-xl font-bold text-gray-900">Admin Portal</h1>
+            <nav className="flex space-x-2">
+              <NavItem to="/admin/dashboard" label="Dashboard" />
+              <NavItem 
+                to="/admin/settings" 
+                label="Settings"
+                permission="settings.view"
+              />
+              <NavItem 
+                to="/admin/audit" 
+                label="Audit Logs"
+                permission="audit.view"
+              />
+            </nav>
+          </div>
+          <div className="flex items-center space-x-4">
+            <span className="text-sm text-gray-600">
+              {admin?.firstName} {admin?.lastName}
+            </span>
             <button
-              onClick={() => window.location.reload()}
-              className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+              onClick={logout}
+              className="px-3 py-1 text-sm text-red-600 hover:bg-red-50 rounded-md"
             >
-              Refresh Page
+              Logout
             </button>
           </div>
         </div>
-      );
-    }
+      </header>
 
-    return this.props.children;
-  }
-}
+      {/* Main Content */}
+      <main className="max-w-7xl mx-auto py-6 px-4">
+        <Outlet />
+      </main>
+
+      {/* Footer */}
+      <footer className="bg-white border-t mt-auto">
+        <div className="max-w-7xl mx-auto px-4 py-4 text-center text-gray-500 text-sm">
+          Admin Portal © {new Date().getFullYear()}
+        </div>
+      </footer>
+    </div>
+  );
+};
