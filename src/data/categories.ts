@@ -419,13 +419,15 @@ export const categories: Category[] = [
         id: 'slide-generation',
         name: 'Slide Generation',
         description: 'Generate presentation slides',
-        parentCategoryId: 'presentation-tools'
+        parentCategoryId: 'presentation-tools',
+        tools: ['gamma-ai', 'slidebot-ai', 'presentations-ai', 'pitch-avatar', 'decktopus-ai', 'slidebean-ai', 'tome-presentations', 'sendsteps-ai', 'prezo-ai']
       },
       {
         id: 'presentation-enhancement',
         name: 'Presentation Enhancement',
         description: 'Enhance existing presentations',
-        parentCategoryId: 'presentation-tools'
+        parentCategoryId: 'presentation-tools',
+        tools: ['beautiful-ai', 'decktopus-ai', 'tome-presentations', 'designrr-presentations', 'slides-ai', 'sendsteps-ai', 'plus-ai-google-slides', 'prezo-ai']
       }
     ]
   },

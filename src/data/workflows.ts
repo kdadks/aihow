@@ -17,13 +17,13 @@ export const workflowBundles: WorkflowBundle[] = [
     description: 'Comprehensive AI-powered development environment combining multiple code assistants for enhanced productivity.',
     tools: [
       findTool('github-copilot'), // GitHub Copilot
-      findTool('claude-code-assistant'), // Claude Code Assistant  
+      findTool('claude-3-opus'), // Claude 3 Opus for code assistance  
       findTool('cursor-ai')  // Cursor AI
     ],
     totalCost: '$50/month',
     implementationSteps: [
       'Set up GitHub Copilot in your IDE for real-time code suggestions',
-      'Use Claude Code Assistant for complex code generation and refactoring',
+      'Use Claude 3 Opus for complex code generation and refactoring',
       'Leverage Cursor AI for additional insights and code optimization',
       'Integrate tools into your development workflow'
     ]
@@ -33,14 +33,14 @@ export const workflowBundles: WorkflowBundle[] = [
     name: 'Presentation & Content Creation',
     description: 'AI-powered suite for creating professional presentations and optimizing content.',
     tools: [
-      findTool('18'), // Slidebot AI
-      findTool('17'), // PromptBase Pro
-      findTool('2')   // ChatGPT
+      findTool('gamma-ai'), // Gamma AI - Featured presentation builder
+      findTool('beautiful-ai'), // Beautiful.AI - Smart design platform
+      findTool('2')   // ChatGPT - Content optimization
     ],
-    totalCost: '$60/month',
+    totalCost: '$42/month',
     implementationSteps: [
-      'Generate presentation layouts with Slidebot AI',
-      'Optimize content using PromptBase Pro',
+      'Generate presentations from prompts with Gamma AI',
+      'Enhance design and layouts with Beautiful.AI',
       'Refine and polish content with ChatGPT',
       'Ensure brand consistency across materials'
     ]
@@ -67,14 +67,14 @@ export const workflowBundles: WorkflowBundle[] = [
     name: 'AI Code Review & Quality',
     description: 'Advanced toolkit for code review, optimization, and quality assurance using multiple AI assistants.',
     tools: [
-      findTool('claude-code-assistant'), // Claude Code Assistant
-      findTool('google-gemini-code'), // Google Gemini Code
-      findTool('17')  // PromptBase Pro
+      findTool('claude-3-opus'), // Claude 3 Opus for code review
+      findTool('gemini'), // Google Gemini for code optimization
+      findTool('17')  // PromptBase Pro for custom prompts
     ],
     totalCost: '$65/month',
     implementationSteps: [
-      'Use Claude Code Assistant for detailed code reviews',
-      'Optimize code quality with Gemini Code',
+      'Use Claude 3 Opus for detailed code reviews',
+      'Optimize code quality with Gemini',
       'Create custom review prompts with PromptBase Pro',
       'Implement automated quality checks'
     ]
@@ -257,6 +257,40 @@ export const workflowBundles: WorkflowBundle[] = [
       'Participate in AI Stack Overflow discussions',
       'Connect with Discord AI study groups',
       'Build your professional AI network'
+    ]
+  },
+  {
+    id: '15',
+    name: 'Startup Pitch Deck Creation',
+    description: 'Complete toolkit for creating compelling investor-ready pitch presentations with AI-powered content and design.',
+    tools: [
+      findTool('slidebean-ai'), // Slidebean AI - Startup-focused
+      findTool('presentations-ai'), // Presentations.AI - Complete generator
+      findTool('pitch-avatar') // Pitch Avatar - Video presentations
+    ],
+    totalCost: '$133/month',
+    implementationSteps: [
+      'Use Slidebean AI for investor-ready pitch deck templates',
+      'Generate comprehensive content with Presentations.AI',
+      'Create engaging video pitches with Pitch Avatar',
+      'Optimize for different presentation formats and audiences'
+    ]
+  },
+  {
+    id: '16', 
+    name: 'Interactive Presentation Suite',
+    description: 'Advanced presentation tools for creating engaging, interactive experiences with real-time audience participation.',
+    tools: [
+      findTool('sendsteps-ai'), // SendSteps AI - Interactive platform
+      findTool('tome-presentations'), // Tome - Multimedia creator
+      findTool('decktopus-ai') // Decktopus AI - Smart automation
+    ],
+    totalCost: '$42.98/month',
+    implementationSteps: [
+      'Create interactive presentations with SendSteps AI',
+      'Build immersive multimedia content using Tome',
+      'Automate design and content optimization with Decktopus AI',
+      'Integrate real-time audience engagement features'
     ]
   }
 ];

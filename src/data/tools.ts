@@ -1189,7 +1189,7 @@ export const tools: Tool[] = [
     lastVerified: new Date('2025-05-18')
   },
   {
-    id: '18',
+    id: 'slidebot-ai',
     name: 'Slidebot AI',
     slug: 'slidebot-ai',
     description: 'AI-powered presentation tool that automatically generates professional slides from your content, with smart design suggestions and dynamic layouts.',
@@ -1237,351 +1237,608 @@ export const tools: Tool[] = [
     lastVerified: new Date('2025-05-15')
   },
   {
-    id: '19',
-    name: 'WorkflowGPT',
-    slug: 'workflowgpt',
-    description: 'Advanced workflow automation platform that uses AI to design, optimize, and manage complex business processes with natural language commands.',
-    shortDescription: 'AI workflow automation',
-    logo: 'https://images.pexels.com/photos/1181615/pexels-photo-1181615.jpeg',
-    website: 'https://www.workflowgpt.ai',
-    categoryId: 'workflow-automation',
-    subcategoryIds: ['process-automation'],
-    pricing: {
-      type: 'subscription',
-      startingPrice: '$39/month',
-      hasFreeOption: false,
-      tiers: [
-        {
-          name: 'Pro',
-          price: '$39/month',
-          billingPeriod: 'monthly',
-          features: ['Workflow design', 'Process automation', 'Basic analytics']
-        },
-        {
-          name: 'Enterprise',
-          price: '$99/month',
-          billingPeriod: 'monthly',
-          features: ['Advanced automation', 'Custom integrations', 'Priority support']
-        }
-      ]
-    },
-    features: [
-      'Natural language workflow creation',
-      'Process optimization',
-      'Automation templates',
-      'Performance tracking',
-      'Integration management'
-    ],
-    limitations: [
-      'Complex pricing for large teams',
-      'Integration setup required',
-      'Learning curve for advanced features'
-    ],
-    rating: 4.7,
-    reviewCount: 560,
-    trending: true,
-    featured: true,
-    integrations: ['Slack', 'Microsoft Teams', 'Salesforce', 'Jira', 'Custom APIs'],
-    lastVerified: new Date('2025-05-10')
-  },
-  {
-    id: 'github-copilot',
-    name: 'GitHub Copilot',
-    slug: 'github-copilot',
-    description: 'AI pair programmer that suggests code completions in real-time, helping developers write better code faster with context-aware suggestions across multiple programming languages.',
-    shortDescription: 'AI pair programming assistant',
-    logo: 'https://images.pexels.com/photos/4164418/pexels-photo-4164418.jpeg',
-    website: 'https://github.com/features/copilot',
-    categoryId: 'code-creation',
-    subcategoryIds: ['code-completion'],
-    pricing: {
-      type: 'subscription',
-      startingPrice: '$10/month',
-      hasFreeOption: false,
-      tiers: [
-        {
-          name: 'Individual',
-          price: '$10/month',
-          billingPeriod: 'monthly',
-          features: ['AI code completion', 'Multi-language support', 'IDE integration']
-        },
-        {
-          name: 'Business',
-          price: '$19/month',
-          billingPeriod: 'monthly',
-          features: ['Team management', 'Advanced security', 'License compliance']
-        }
-      ]
-    },
-    features: [
-      'Real-time code suggestions',
-      'Multi-language support',
-      'Context awareness',
-      'Function completion',
-      'IDE integration'
-    ],
-    limitations: [
-      'Requires paid subscription',
-      'Internet connection required',
-      'May suggest incorrect code'
-    ],
-    rating: 4.8,
-    reviewCount: 3200,
-    trending: true,
-    featured: false,
-    integrations: ['VSCode', 'Visual Studio', 'JetBrains IDEs', 'Neovim'],
-    lastVerified: new Date('2025-05-20')
-  },
-  {
-    id: 'claude-code-assistant',
-    name: 'Claude Code Assistant',
-    slug: 'claude-code',
-    description: 'Advanced AI coding assistant powered by Anthropic\'s Claude model, specializing in complex code generation, refactoring, and detailed code explanations.',
-    shortDescription: 'Advanced AI code assistant',
-    logo: 'https://images.pexels.com/photos/2004161/pexels-photo-2004161.jpeg',
-    website: 'https://www.anthropic.com/claude/code',
-    categoryId: 'code-creation',
-    subcategoryIds: ['code-generation'],
+    id: 'gamma-ai',
+    name: 'Gamma',
+    slug: 'gamma-ai',
+    description: 'AI-powered presentation builder that creates beautiful slides, documents, and webpages from simple text prompts with advanced design capabilities.',
+    shortDescription: 'AI-powered presentation and webpage builder',
+    logo: 'https://images.pexels.com/photos/4050520/pexels-photo-4050520.jpeg',
+    website: 'https://gamma.app',
+    categoryId: 'presentation-tools',
+    subcategoryIds: ['slide-generation'],
     pricing: {
       type: 'freemium',
-      startingPrice: '$20/month',
+      startingPrice: '$10/month',
       hasFreeOption: true,
       tiers: [
         {
-          name: 'Basic',
+          name: 'Free',
           price: '$0',
           billingPeriod: 'monthly',
-          features: ['Basic code generation', 'Limited requests']
+          features: ['Limited AI credits', 'Basic templates', 'Export to PDF', 'Basic sharing']
+        },
+        {
+          name: 'Plus',
+          price: '$10/month',
+          billingPeriod: 'monthly',
+          features: ['Unlimited AI credits', 'Premium templates', 'Custom branding', 'Advanced export options']
         },
         {
           name: 'Pro',
           price: '$20/month',
           billingPeriod: 'monthly',
-          features: ['Advanced features', 'Priority access', 'Higher limits']
+          features: ['Team collaboration', 'Advanced analytics', 'Custom domains', 'Priority support']
         }
       ]
     },
     features: [
-      'Complex code generation',
-      'Detailed explanations',
-      'Refactoring assistance',
-      'Multiple languages',
-      'Code review'
+      'One-click presentation generation',
+      'Smart content suggestions',
+      'Auto-generated layouts',
+      'Responsive design',
+      'Real-time collaboration',
+      'Custom branding options'
     ],
     limitations: [
-      'Rate limits on free tier',
-      'May require clarification',
-      'Complex setups need guidance'
+      'Limited free credits',
+      'Internet required',
+      'Template restrictions on free tier'
     ],
     rating: 4.7,
-    reviewCount: 1800,
+    reviewCount: 1850,
     trending: true,
-    featured: false,
-    integrations: ['VS Code', 'JetBrains', 'Terminal', 'API access'],
-    lastVerified: new Date('2025-05-19')
+    featured: true,
+    integrations: ['Google Drive', 'Figma', 'Notion', 'PowerPoint'],
+    lastVerified: new Date('2025-05-30')
   },
   {
-    id: 'google-gemini-code',
-    name: 'Google Gemini Code',
-    slug: 'gemini-code',
-    description: 'Google\'s advanced code generation and assistance tool powered by the Gemini model, offering seamless integration with Google\'s development ecosystem.',
-    shortDescription: 'Google\'s AI code assistant',
-    logo: 'https://images.pexels.com/photos/4960464/pexels-photo-4960464.jpeg',
-    website: 'https://gemini.google.com/code',
-    categoryId: 'code-creation',
-    subcategoryIds: ['code-generation'],
-    pricing: {
-      type: 'freemium',
-      startingPrice: '$15/month',
-      hasFreeOption: true,
-      tiers: [
-        {
-          name: 'Free',
-          price: '$0',
-          billingPeriod: 'monthly',
-          features: ['Basic features', 'Community support']
-        },
-        {
-          name: 'Pro',
-          price: '$15/month',
-          billingPeriod: 'monthly',
-          features: ['Advanced coding features', 'Priority generation', 'Enhanced support']
-        }
-      ]
-    },
-    features: [
-      'Smart code completion',
-      'Google Cloud integration',
-      'Multiple language support',
-      'Code explanation',
-      'Contextual suggestions'
-    ],
-    limitations: [
-      'Limited features in free tier',
-      'Google account required',
-      'Region availability varies'
-    ],
-    rating: 4.6,
-    reviewCount: 1500,
-    trending: true,
-    featured: false,
-    integrations: ['Google Cloud', 'Android Studio', 'Chrome DevTools', 'Google Colab'],
-    lastVerified: new Date('2025-05-18')
-  },
-  {
-    id: 'runway-gen-2',
-    name: 'Runway Gen-2',
-    slug: 'runway-gen2',
-    description: 'Advanced AI video generation platform that creates high-quality videos from text prompts or images, with powerful editing and customization capabilities.',
-    shortDescription: 'AI video generation and editing',
-    logo: 'https://images.pexels.com/photos/2873486/pexels-photo-2873486.jpeg',
-    website: 'https://runway.ml',
-    categoryId: 'media-creation',
-    subcategoryIds: ['video-generation'],
+    id: 'beautiful-ai',
+    name: 'Beautiful.AI',
+    slug: 'beautiful-ai',
+    description: 'Intelligent presentation software that automatically designs slides using AI-powered layout engine with smart templates and data visualization.',
+    shortDescription: 'Smart presentation design platform',
+    logo: 'https://images.pexels.com/photos/7947720/pexels-photo-7947720.jpeg',
+    website: 'https://www.beautiful.ai',
+    categoryId: 'presentation-tools',
+    subcategoryIds: ['slide-generation', 'presentation-enhancement'],
     pricing: {
       type: 'subscription',
-      startingPrice: '$15/month',
+      startingPrice: '$12/month',
       hasFreeOption: false,
       tiers: [
         {
-          name: 'Creator',
-          price: '$15/month',
+          name: 'Pro',
+          price: '$12/month',
           billingPeriod: 'monthly',
-          features: ['Basic video generation', 'Standard resolution', 'Community support']
+          features: ['Smart templates', 'Auto-arrange layouts', 'Team sharing', 'Export options']
+        },
+        {
+          name: 'Team',
+          price: '$40/month',
+          billingPeriod: 'monthly',
+          features: ['Team collaboration', 'Brand management', 'Advanced analytics', 'Admin controls']
+        }
+      ]
+    },
+    features: [
+      'Smart template engine',
+      'Auto-arrange layouts',
+      'Data visualization tools',
+      'Brand consistency enforcement',
+      'Real-time collaboration',
+      'Presentation analytics'
+    ],
+    limitations: [
+      'No free tier',
+      'Learning curve for templates',
+      'Limited customization options'
+    ],
+    rating: 4.5,
+    reviewCount: 980,
+    trending: false,
+    featured: false,
+    integrations: ['PowerPoint', 'Google Slides', 'Dropbox', 'Adobe Creative Suite'],
+    lastVerified: new Date('2025-05-28')
+  },
+  {
+    id: 'pitch-avatar',
+    name: 'Pitch Avatar',
+    slug: 'pitch-avatar',
+    description: 'AI-powered platform that creates interactive video presentations with virtual avatars delivering your content in multiple languages.',
+    shortDescription: 'AI avatar presentation creator',
+    logo: 'https://images.pexels.com/photos/3756679/pexels-photo-3756679.jpeg',
+    website: 'https://pitchavatar.com',
+    categoryId: 'presentation-tools',
+    subcategoryIds: ['slide-generation'],
+    pricing: {
+      type: 'subscription',
+      startingPrice: '$29/month',
+      hasFreeOption: false,
+      tiers: [
+        {
+          name: 'Starter',
+          price: '$29/month',
+          billingPeriod: 'monthly',
+          features: ['Basic avatars', '5 presentations/month', 'Standard voices', 'HD export']
         },
         {
           name: 'Professional',
-          price: '$35/month',
+          price: '$79/month',
           billingPeriod: 'monthly',
-          features: ['Advanced generation', 'Higher resolution', 'Priority rendering', 'Professional support']
-        }
-      ]
-    },
-    features: [
-      'Text-to-video generation',
-      'Image-to-video conversion',
-      'Video editing tools',
-      'Motion tracking',
-      'Style transfer'
-    ],
-    limitations: [
-      'Processing time varies',
-      'Limited video length',
-      'Resource-intensive rendering'
-    ],
-    rating: 4.7,
-    reviewCount: 850,
-    trending: true,
-    featured: true,
-    integrations: ['Adobe Premiere', 'After Effects', 'DaVinci Resolve'],
-    lastVerified: new Date('2025-05-20')
-  },
-  {
-    id: 'elevenlabs',
-    name: 'ElevenLabs',
-    slug: 'elevenlabs',
-    description: 'State-of-the-art AI voice synthesis platform offering ultra-realistic voice generation and cloning capabilities with emotional expression control.',
-    shortDescription: 'Premium AI voice generation',
-    logo: 'https://images.pexels.com/photos/3778876/pexels-photo-3778876.jpeg',
-    website: 'https://elevenlabs.io',
-    categoryId: 'media-creation',
-    subcategoryIds: ['audio-generation'],
-    pricing: {
-      type: 'freemium',
-      startingPrice: '$22/month',
-      hasFreeOption: true,
-      tiers: [
-        {
-          name: 'Free',
-          price: '$0',
-          billingPeriod: 'monthly',
-          features: ['Basic voices', 'Limited characters', 'Standard quality']
+          features: ['Premium avatars', 'Unlimited presentations', 'Custom voices', '4K export']
         },
         {
-          name: 'Pro',
-          price: '$22/month',
+          name: 'Enterprise',
+          price: 'Custom',
           billingPeriod: 'monthly',
-          features: ['Professional voices', 'Voice cloning', 'Priority generation']
+          features: ['Custom avatars', 'White-label solution', 'API access', 'Dedicated support']
         }
       ]
     },
     features: [
-      'Ultra-realistic voices',
-      'Voice cloning technology',
-      'Emotion control',
+      'AI avatar presenters',
       'Multi-language support',
-      'API access'
+      'Custom voice synthesis',
+      'Interactive elements',
+      'Brand customization',
+      'Analytics tracking'
     ],
     limitations: [
-      'Character limits on free tier',
-      'Clone quality varies',
-      'Internet required for generation'
+      'No free tier',
+      'Rendering time required',
+      'Limited avatar customization'
     ],
-    rating: 4.8,
-    reviewCount: 1200,
+    rating: 4.4,
+    reviewCount: 420,
     trending: true,
     featured: false,
-    integrations: ['Unity', 'Unreal Engine', 'Web API', 'Discord'],
-    lastVerified: new Date('2025-05-15')
+    integrations: ['PowerPoint', 'Keynote', 'Zoom', 'Teams'],
+    lastVerified: new Date('2025-05-29')
   },
   {
-    id: 'inworld-ai',
-    name: 'Inworld AI',
-    slug: 'inworld-ai',
-    description: 'Advanced AI character creation platform for games and interactive experiences, featuring dynamic NPC personalities and natural conversations.',
-    shortDescription: 'AI character creation for games',
-    logo: 'https://images.pexels.com/photos/1038916/pexels-photo-1038916.jpeg',
-    website: 'https://inworld.ai',
-    categoryId: 'media-creation',
-    subcategoryIds: ['interactive-media'],
+    id: 'presentations-ai',
+    name: 'Presentations.AI',
+    slug: 'presentations-ai',
+    description: 'Advanced AI presentation generator that creates complete slide decks from topic inputs with intelligent content structuring and design optimization.',
+    shortDescription: 'Complete AI presentation generator',
+    logo: 'https://images.pexels.com/photos/4050475/pexels-photo-4050475.jpeg',
+    website: 'https://presentations.ai',
+    categoryId: 'presentation-tools',
+    subcategoryIds: ['slide-generation'],
     pricing: {
       type: 'freemium',
-      startingPrice: '$30/month',
+      startingPrice: '$25/month',
       hasFreeOption: true,
       tiers: [
         {
           name: 'Free',
           price: '$0',
           billingPeriod: 'monthly',
-          features: ['Basic character creation', 'Limited interactions', 'Community support']
+          features: ['3 presentations/month', 'Basic templates', 'Standard export', 'Community support']
         },
         {
           name: 'Pro',
-          price: '$30/month',
+          price: '$25/month',
           billingPeriod: 'monthly',
-          features: ['Advanced AI characters', 'Custom behaviors', 'Developer tools']
+          features: ['Unlimited presentations', 'Premium templates', 'Advanced export', 'Priority support']
+        },
+        {
+          name: 'Business',
+          price: '$49/month',
+          billingPeriod: 'monthly',
+          features: ['Team features', 'Custom branding', 'API access', 'Advanced analytics']
         }
       ]
     },
     features: [
-      'Dynamic NPC creation',
-      'Natural conversations',
-      'Emotional responses',
-      'Memory and context',
-      'Game engine integration'
+      'Topic-to-presentation generation',
+      'Intelligent content structuring',
+      'Auto-generated speaker notes',
+      'Multiple design themes',
+      'Citation management',
+      'Export to multiple formats'
     ],
     limitations: [
-      'API call limits',
-      'Response latency',
-      'Complex setup process'
+      'Limited free generations',
+      'Requires clear topic definition',
+      'May need manual editing'
     ],
     rating: 4.6,
-    reviewCount: 680,
+    reviewCount: 750,
     trending: true,
     featured: false,
-    integrations: ['Unity', 'Unreal Engine', 'Roblox', 'Web API'],
-    lastVerified: new Date('2025-05-18')
+    integrations: ['PowerPoint', 'Google Slides', 'PDF export', 'Web sharing'],
+    lastVerified: new Date('2025-05-30')
   },
   {
-    id: 'descript',
-    name: 'Descript',
-    slug: 'descript',
-    description: 'All-in-one AI-powered video and audio editing platform with transcription, voice cloning, and seamless content editing capabilities.',
-    shortDescription: 'AI video and audio editing',
-    logo: 'https://images.pexels.com/photos/1ownself1/pexels-photo-1ownself1.jpeg',
-    website: 'https://www.descript.com',
-    categoryId: 'media-creation',
-    subcategoryIds: ['media-editing'],
+    id: 'decktopus-ai',
+    name: 'Decktopus AI',
+    slug: 'decktopus-ai',
+    description: 'AI-powered presentation maker that creates professional slides with smart content suggestions, design automation, and interactive elements.',
+    shortDescription: 'Smart presentation automation',
+    logo: 'https://images.pexels.com/photos/7947866/pexels-photo-7947866.jpeg',
+    website: 'https://www.decktopus.com',
+    categoryId: 'presentation-tools',
+    subcategoryIds: ['slide-generation', 'presentation-enhancement'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$9.99/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['5 AI presentations', 'Basic templates', 'Decktopus branding', 'Standard support']
+        },
+        {
+          name: 'Pro',
+          price: '$9.99/month',
+          billingPeriod: 'monthly',
+          features: ['Unlimited presentations', 'Remove branding', 'Premium templates', 'Advanced features']
+        },
+        {
+          name: 'Business',
+          price: '$19.99/month',
+          billingPeriod: 'monthly',
+          features: ['Team collaboration', 'Advanced analytics', 'Custom templates', 'Priority support']
+        }
+      ]
+    },
+    features: [
+      'AI content generation',
+      'Smart design suggestions',
+      'Interactive slide elements',
+      'Voice-over integration',
+      'Real-time feedback',
+      'Mobile optimization'
+    ],
+    limitations: [
+      'Branding on free tier',
+      'Limited free presentations',
+      'Template restrictions'
+    ],
+    rating: 4.3,
+    reviewCount: 1200,
+    trending: false,
+    featured: false,
+    integrations: ['PowerPoint', 'PDF export', 'Social media', 'Webhooks'],
+    lastVerified: new Date('2025-05-27')
+  },
+  {
+    id: 'slidebean-ai',
+    name: 'Slidebean',
+    slug: 'slidebean-ai',
+    description: 'AI-powered presentation platform focused on startup pitch decks with automated design, content optimization, and investor-ready templates.',
+    shortDescription: 'AI pitch deck creator',
+    logo: 'https://images.pexels.com/photos/4050490/pexels-photo-4050490.jpeg',
+    website: 'https://slidebean.com',
+    categoryId: 'presentation-tools',
+    subcategoryIds: ['slide-generation'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$19/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['3 presentations', 'Basic templates', 'Slidebean branding', 'Standard export']
+        },
+        {
+          name: 'Premium',
+          price: '$19/month',
+          billingPeriod: 'monthly',
+          features: ['Unlimited presentations', 'Premium templates', 'Remove branding', 'Analytics']
+        },
+        {
+          name: 'Team',
+          price: '$39/month',
+          billingPeriod: 'monthly',
+          features: ['Team collaboration', 'Advanced analytics', 'Custom templates', 'Priority support']
+        }
+      ]
+    },
+    features: [
+      'Startup-focused templates',
+      'Automated slide design',
+      'Pitch deck optimization',
+      'Investor presentation tools',
+      'Financial slide automation',
+      'Presentation analytics'
+    ],
+    limitations: [
+      'Startup/business focus',
+      'Limited free presentations',
+      'Template dependency'
+    ],
+    rating: 4.4,
+    reviewCount: 850,
+    trending: false,
+    featured: false,
+    integrations: ['Google Drive', 'Dropbox', 'PowerPoint', 'Analytics tools'],
+    lastVerified: new Date('2025-05-26')
+  },
+  {
+    id: 'tome-presentations',
+    name: 'Tome Presentations',
+    slug: 'tome-presentations',
+    description: 'AI-native presentation platform that creates immersive, interactive presentations with multimedia content generation and storytelling focus.',
+    shortDescription: 'AI multimedia presentation creator',
+    logo: 'https://images.pexels.com/photos/4050445/pexels-photo-4050445.jpeg',
+    website: 'https://tome.app/presentations',
+    categoryId: 'presentation-tools',
+    subcategoryIds: ['slide-generation', 'presentation-enhancement'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$16/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['500 AI credits', 'Basic sharing', 'Core features', 'Community templates']
+        },
+        {
+          name: 'Pro',
+          price: '$16/month',
+          billingPeriod: 'monthly',
+          features: ['Unlimited AI credits', 'Custom branding', 'Advanced sharing', 'Premium features']
+        },
+        {
+          name: 'Business',
+          price: '$40/month',
+          billingPeriod: 'monthly',
+          features: ['Team workspace', 'Admin controls', 'Advanced analytics', 'Priority support']
+        }
+      ]
+    },
+    features: [
+      'AI content generation',
+      'Interactive multimedia elements',
+      'Immersive storytelling',
+      'Real-time collaboration',
+      'Custom branding',
+      'Advanced sharing options'
+    ],
+    limitations: [
+      'Credit-based system',
+      'Learning curve',
+      'Internet dependency'
+    ],
+    rating: 4.5,
+    reviewCount: 1100,
+    trending: true,
+    featured: false,
+    integrations: ['Figma', 'Notion', 'Slack', 'Web embeds'],
+    lastVerified: new Date('2025-05-30')
+  },
+  {
+    id: 'designrr-presentations',
+    name: 'Designrr Presentations',
+    slug: 'designrr-presentations',
+    description: 'AI-enhanced presentation tool that automatically converts content from various sources into professional slide presentations with smart formatting.',
+    shortDescription: 'Content-to-presentation converter',
+    logo: 'https://images.pexels.com/photos/4050460/pexels-photo-4050460.jpeg',
+    website: 'https://designrr.io/presentations',
+    categoryId: 'presentation-tools',
+    subcategoryIds: ['presentation-enhancement'],
+    pricing: {
+      type: 'subscription',
+      startingPrice: '$29/month',
+      hasFreeOption: false,
+      tiers: [
+        {
+          name: 'Personal',
+          price: '$29/month',
+          billingPeriod: 'monthly',
+          features: ['Content conversion', 'Basic templates', 'Standard export', 'Email support']
+        },
+        {
+          name: 'Professional',
+          price: '$59/month',
+          billingPeriod: 'monthly',
+          features: ['Advanced conversion', 'Premium templates', 'Team features', 'Priority support']
+        },
+        {
+          name: 'Agency',
+          price: '$99/month',
+          billingPeriod: 'monthly',
+          features: ['White-label option', 'Client management', 'Custom branding', 'Dedicated support']
+        }
+      ]
+    },
+    features: [
+      'Multi-source content import',
+      'Automated slide formatting',
+      'Smart content extraction',
+      'Template customization',
+      'Batch processing',
+      'Multiple export formats'
+    ],
+    limitations: [
+      'No free tier',
+      'Limited source types',
+      'Requires content preparation'
+    ],
+    rating: 4.2,
+    reviewCount: 380,
+    trending: false,
+    featured: false,
+    integrations: ['Google Docs', 'WordPress', 'PDF import', 'Cloud storage'],
+    lastVerified: new Date('2025-05-25')
+  },
+  {
+    id: 'slides-ai',
+    name: 'Slides AI',
+    slug: 'slides-ai',
+    description: 'Google Slides add-on that uses AI to automatically generate presentation content, design slides, and optimize layouts within your existing workflow.',
+    shortDescription: 'Google Slides AI add-on',
+    logo: 'https://images.pexels.com/photos/4050520/pexels-photo-4050520.jpeg',
+    website: 'https://workspace.google.com/marketplace/app/slides_ai',
+    categoryId: 'presentation-tools',
+    subcategoryIds: ['presentation-enhancement'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$10/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['3 AI generations/month', 'Basic templates', 'Standard support', 'Google Slides integration']
+        },
+        {
+          name: 'Pro',
+          price: '$10/month',
+          billingPeriod: 'monthly',
+          features: ['Unlimited AI generations', 'Premium templates', 'Advanced features', 'Priority support']
+        }
+      ]
+    },
+    features: [
+      'Native Google Slides integration',
+      'AI content generation',
+      'Smart design suggestions',
+      'Template automation',
+      'Collaborative editing',
+      'Cloud synchronization'
+    ],
+    limitations: [
+      'Google Slides only',
+      'Limited free generations',
+      'Requires Google account'
+    ],
+    rating: 4.3,
+    reviewCount: 920,
+    trending: false,
+    featured: false,
+    integrations: ['Google Slides', 'Google Workspace', 'Google Drive', 'Google Fonts'],
+    lastVerified: new Date('2025-05-28')
+  },
+  {
+    id: 'sendsteps-ai',
+    name: 'SendSteps AI',
+    slug: 'sendsteps-ai',
+    description: 'Interactive presentation platform with AI-powered content generation, audience engagement tools, and real-time feedback collection.',
+    shortDescription: 'Interactive AI presentation platform',
+    logo: 'https://images.pexels.com/photos/7947720/pexels-photo-7947720.jpeg',
+    website: 'https://www.sendsteps.com',
+    categoryId: 'presentation-tools',
+    subcategoryIds: ['slide-generation', 'presentation-enhancement'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$8.99/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['2 presentations/month', 'Basic interactivity', 'Standard templates', 'Community support']
+        },
+        {
+          name: 'Pro',
+          price: '$8.99/month',
+          billingPeriod: 'monthly',
+          features: ['Unlimited presentations', 'Advanced interactivity', 'Custom branding', 'Analytics']
+        },
+        {
+          name: 'Business',
+          price: '$24.99/month',
+          billingPeriod: 'monthly',
+          features: ['Team features', 'White-label option', 'Advanced analytics', 'Priority support']
+        }
+      ]
+    },
+    features: [
+      'Interactive audience engagement',
+      'AI content generation',
+      'Real-time polls and quizzes',
+      'Audience response collection',
+      'Live presentation mode',
+      'Advanced analytics'
+    ],
+    limitations: [
+      'Limited free presentations',
+      'Internet required for interactivity',
+      'Learning curve for advanced features'
+    ],
+    rating: 4.4,
+    reviewCount: 650,
+    trending: true,
+    featured: false,
+    integrations: ['PowerPoint', 'Zoom', 'Teams', 'Webex'],
+    lastVerified: new Date('2025-05-29')
+  },
+  {
+    id: 'plus-ai-google-slides',
+    name: 'Plus AI for Google Slides',
+    slug: 'plus-ai-google-slides',
+    description: 'Advanced AI add-on for Google Slides that creates presentations from prompts, rewrites content, and enhances existing slides with intelligent suggestions.',
+    shortDescription: 'Advanced Google Slides AI enhancement',
+    logo: 'https://images.pexels.com/photos/4050475/pexels-photo-4050475.jpeg',
+    website: 'https://www.plusdocs.com/plus-ai-for-google-slides',
+    categoryId: 'presentation-tools',
+    subcategoryIds: ['presentation-enhancement'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$15/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['5 AI generations/month', 'Basic features', 'Standard templates', 'Community support']
+        },
+        {
+          name: 'Pro',
+          price: '$15/month',
+          billingPeriod: 'monthly',
+          features: ['100 AI generations/month', 'Advanced features', 'Custom templates', 'Priority support']
+        },
+        {
+          name: 'Premium',
+          price: '$25/month',
+          billingPeriod: 'monthly',
+          features: ['Unlimited generations', 'Team features', 'Advanced customization', 'Dedicated support']
+        }
+      ]
+    },
+    features: [
+      'Advanced AI content generation',
+      'Intelligent slide enhancement',
+      'Content rewriting capabilities',
+      'Smart formatting suggestions',
+      'Template customization',
+      'Collaborative features'
+    ],
+    limitations: [
+      'Google Slides dependency',
+      'Monthly generation limits',
+      'Requires Google Workspace'
+    ],
+    rating: 4.5,
+    reviewCount: 780,
+    trending: true,
+    featured: false,
+    integrations: ['Google Slides', 'Google Workspace', 'Google Drive', 'Third-party templates'],
+    lastVerified: new Date('2025-05-30')
+  },
+  {
+    id: 'prezo-ai',
+    name: 'Prezo AI',
+    slug: 'prezo-ai',
+    description: 'AI-powered presentation assistant that helps create, edit, and optimize presentations with smart content suggestions and design automation.',
+    shortDescription: 'Complete AI presentation assistant',
+    logo: 'https://images.pexels.com/photos/4050490/pexels-photo-4050490.jpeg',
+    website: 'https://prezo.ai',
+    categoryId: 'presentation-tools',
+    subcategoryIds: ['slide-generation', 'presentation-enhancement'],
     pricing: {
       type: 'freemium',
       startingPrice: '$12/month',
@@ -1591,1440 +1848,43 @@ export const tools: Tool[] = [
           name: 'Free',
           price: '$0',
           billingPeriod: 'monthly',
-          features: ['Basic editing', 'Limited transcription', 'Standard export']
+          features: ['3 presentations/month', 'Basic AI features', 'Standard templates', 'Basic export']
         },
         {
-          name: 'Creator',
+          name: 'Starter',
           price: '$12/month',
           billingPeriod: 'monthly',
-          features: ['Advanced editing', 'Full transcription', 'Voice cloning']
-        }
-      ]
-    },
-    features: [
-      'Text-based video editing',
-      'AI transcription',
-      'Voice cloning',
-      'Screen recording',
-      'Collaboration tools'
-    ],
-    limitations: [
-      'Export limits on free tier',
-      'Internet required',
-      'Large file processing time'
-    ],
-    rating: 4.7,
-    reviewCount: 920,
-    trending: true,
-    featured: true,
-    integrations: ['Premiere Pro', 'Final Cut Pro', 'YouTube', 'Dropbox'],
-    lastVerified: new Date('2025-05-19')
-  },
-  {
-    id: 'pika',
-    name: 'Pika',
-    slug: 'pika',
-    description: 'Next-generation AI video creation platform that specializes in dynamic scene transitions, camera movements, and high-quality video generation from both text and image inputs.',
-    shortDescription: 'Advanced AI video creation and editing',
-    logo: 'https://images.pexels.com/photos/2927583/pexels-photo-2927583.jpeg',
-    website: 'https://pika.art',
-    categoryId: 'media-creation',
-    subcategoryIds: ['video-generation'],
-    pricing: {
-      type: 'subscription',
-      startingPrice: '$20/month',
-      hasFreeOption: true,
-      tiers: [
-        {
-          name: 'Starter',
-          price: '$0',
-          billingPeriod: 'monthly',
-          features: ['Basic video generation', 'Limited renders', 'Standard quality']
-        },
-        {
-          name: 'Creator',
-          price: '$20/month',
-          billingPeriod: 'monthly',
-          features: ['Advanced editing', 'Higher quality', 'More renders', 'Priority processing']
-        }
-      ]
-    },
-    features: [
-      'Text-to-video generation',
-      'Image-to-video conversion',
-      'Advanced camera movements',
-      'Scene transitions',
-      'Style customization'
-    ],
-    limitations: [
-      'Render time varies',
-      'Quality depends on tier',
-      'Some features in beta'
-    ],
-    rating: 4.7,
-    reviewCount: 890,
-    trending: true,
-    featured: true,
-    integrations: ['Adobe Creative Suite', 'Social media platforms', 'Cloud storage'],
-    lastVerified: new Date('2025-05-23')
-  },
-  {
-    id: 'character.ai',
-    name: 'Character.ai',
-    slug: 'character-ai',
-    description: 'Advanced AI platform for creating and interacting with customized AI characters, featuring natural conversations, personality development, and integration capabilities.',
-    shortDescription: 'Custom AI character creation',
-    logo: 'https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg',
-    website: 'https://character.ai',
-    categoryId: 'media-creation',
-    subcategoryIds: ['interactive-media'],
-    pricing: {
-      type: 'freemium',
-      startingPrice: '$10/month',
-      hasFreeOption: true,
-      tiers: [
-        {
-          name: 'Basic',
-          price: '$0',
-          billingPeriod: 'monthly',
-          features: ['Basic character creation', 'Public characters', 'Standard response time']
-        },
-        {
-          name: 'Premium',
-          price: '$10/month',
-          billingPeriod: 'monthly',
-          features: ['Private characters', 'Advanced customization', 'Priority access', 'No ads']
-        }
-      ]
-    },
-    features: [
-      'Custom character creation',
-      'Natural conversations',
-      'Memory and context',
-      'Multi-language support',
-      'API access'
-    ],
-    limitations: [
-      'Response time varies',
-      'Character consistency',
-      'Usage limits on free tier'
-    ],
-    rating: 4.8,
-    reviewCount: 1500,
-    trending: true,
-    featured: false,
-    integrations: ['Discord', 'Telegram', 'Custom websites', 'Mobile apps'],
-    lastVerified: new Date('2025-05-22')
-  },
-  {
-    id: 'dalle3',
-    name: 'DALL·E 3',
-    slug: 'dalle3',
-    description: 'OpenAI\'s advanced image generation AI that creates highly detailed and accurate images from natural language descriptions, with improved understanding of spatial relationships and artistic styles.',
-    shortDescription: 'Advanced AI image generation by OpenAI',
-    logo: 'https://images.pexels.com/photos/8386434/pexels-photo-8386434.jpeg',
-    website: 'https://openai.com/dall-e-3',
-    categoryId: 'media-creation',
-    subcategoryIds: ['image-generation'],
-    pricing: {
-      type: 'usage-based',
-      startingPrice: 'Credits system',
-      hasFreeOption: true,
-      tiers: [
-        {
-          name: 'Free',
-          price: '$0',
-          billingPeriod: 'monthly',
-          features: ['Basic image generation', 'Limited credits monthly']
-        },
-        {
-          name: 'Pro',
-          price: 'Pay per use',
-          billingPeriod: 'monthly',
-          features: ['Higher resolution', 'More variations', 'Commercial rights']
-        }
-      ]
-    },
-    features: [
-      'High-fidelity image generation',
-      'Natural language understanding',
-      'Style consistency',
-      'Commercial usage rights',
-      'Integration with ChatGPT'
-    ],
-    limitations: [
-      'Credit system limits',
-      'No direct photo editing',
-      'May need prompt refinement'
-    ],
-    rating: 4.9,
-    reviewCount: 2800,
-    trending: true,
-    featured: true,
-    integrations: ['ChatGPT', 'Microsoft Designer', 'Adobe Creative Cloud'],
-    lastVerified: new Date('2025-05-25')
-  },
-  {
-    id: 'sora',
-    name: 'Sora',
-    slug: 'sora',
-    description: 'OpenAI\'s groundbreaking text-to-video AI model that generates highly realistic, coherent videos with complex scenes, camera movements, and multiple characters.',
-    shortDescription: 'OpenAI\'s text-to-video generation',
-    logo: 'https://images.pexels.com/photos/5473955/pexels-photo-5473955.jpeg',
-    website: 'https://openai.com/sora',
-    categoryId: 'media-creation',
-    subcategoryIds: ['video-generation'],
-    pricing: {
-      type: 'enterprise',
-      startingPrice: 'Contact for pricing',
-      hasFreeOption: false,
-      tiers: [
-        {
-          name: 'API Access',
-          price: 'Custom',
-          billingPeriod: 'monthly',
-          features: ['High-quality video generation', 'Custom integration', 'Priority support']
-        }
-      ]
-    },
-    features: [
-      'Realistic video generation',
-      'Complex scene understanding',
-      'Dynamic camera movements',
-      'Multiple character interactions',
-      'Consistent style and physics'
-    ],
-    limitations: [
-      'Limited public access',
-      'Resource-intensive processing',
-      'Enterprise focus'
-    ],
-    rating: 4.9,
-    reviewCount: 450,
-    trending: true,
-    featured: true,
-    integrations: ['Custom API', 'Enterprise workflows'],
-    lastVerified: new Date('2025-05-24')
-  },
-  {
-    id: 'synthesia',
-    name: 'Synthesia',
-    slug: 'synthesia',
-    description: 'AI platform that creates professional video content with customizable AI avatars speaking your script, ideal for training, marketing, and educational content.',
-    shortDescription: 'AI avatar video creation',
-    logo: 'https://images.pexels.com/photos/3756679/pexels-photo-3756679.jpeg',
-    website: 'https://www.synthesia.io',
-    categoryId: 'media-creation',
-    subcategoryIds: ['video-generation'],
-    pricing: {
-      type: 'subscription',
-      startingPrice: '$30/month',
-      hasFreeOption: false,
-      tiers: [
-        {
-          name: 'Starter',
-          price: '$30/month',
-          billingPeriod: 'monthly',
-          features: ['20 video credits', 'Basic avatars', 'HD quality']
-        },
-        {
-          name: 'Professional',
-          price: '$90/month',
-          billingPeriod: 'monthly',
-          features: ['60 video credits', 'Premium avatars', '4K quality', 'Custom backgrounds']
-        }
-      ]
-    },
-    features: [
-      'AI avatar customization',
-      'Multi-language support',
-      'Script to video',
-      'Custom backgrounds',
-      'Brand voice cloning'
-    ],
-    limitations: [
-      'Credit-based system',
-      'Limited avatar emotions',
-      'Some languages in beta'
-    ],
-    rating: 4.7,
-    reviewCount: 850,
-    trending: true,
-    featured: true,
-    integrations: ['Zapier', 'Microsoft Teams', 'HubSpot', 'Slack'],
-    lastVerified: new Date('2025-05-24')
-  },
-  {
-    id: 'colossyan',
-    name: 'Colossyan',
-    slug: 'colossyan',
-    description: 'Enterprise-focused AI video creation platform specializing in professional training and corporate communications with realistic AI presenters.',
-    shortDescription: 'Corporate AI video creation',
-    logo: 'https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg',
-    website: 'https://colossyan.com',
-    categoryId: 'media-creation',
-    subcategoryIds: ['video-generation'],
-    pricing: {
-      type: 'enterprise',
-      startingPrice: 'Custom pricing',
-      hasFreeOption: false,
-      tiers: [
-        {
-          name: 'Business',
-          price: 'Custom',
-          billingPeriod: 'yearly',
-          features: ['Custom AI presenters', 'Brand integration', 'Enterprise support']
-        }
-      ]
-    },
-    features: [
-      'Professional AI presenters',
-      'Corporate training focus',
-      'Brand customization',
-      'Multiple languages',
-      'Enterprise security'
-    ],
-    limitations: [
-      'Enterprise pricing only',
-      'Minimum commitment required',
-      'Setup time needed'
-    ],
-    rating: 4.6,
-    reviewCount: 320,
-    trending: false,
-    featured: false,
-    integrations: ['LMS platforms', 'Corporate portals', 'SharePoint'],
-    lastVerified: new Date('2025-05-24')
-  },
-  {
-    id: 'lumen5',
-    name: 'Lumen5',
-    slug: 'lumen5',
-    description: 'AI-powered video creation platform that transforms blog posts, articles, and text content into engaging social media videos with automated scene generation.',
-    shortDescription: 'Blog to video automation',
-    logo: 'https://images.pexels.com/photos/1779487/pexels-photo-1779487.jpeg',
-    website: 'https://lumen5.com',
-    categoryId: 'media-creation',
-    subcategoryIds: ['video-generation'],
-    pricing: {
-      type: 'freemium',
-      startingPrice: '$29/month',
-      hasFreeOption: true,
-      tiers: [
-        {
-          name: 'Community',
-          price: '$0',
-          billingPeriod: 'monthly',
-          features: ['Basic templates', 'Watermarked videos', '720p resolution']
-        },
-        {
-          name: 'Creator',
-          price: '$29/month',
-          billingPeriod: 'monthly',
-          features: ['Custom branding', 'Full HD', 'Premium templates']
-        }
-      ]
-    },
-    features: [
-      'Text to video conversion',
-      'Social media templates',
-      'Automated scene creation',
-      'Brand customization',
-      'Stock media library'
-    ],
-    limitations: [
-      'Watermark in free tier',
-      'Template limitations',
-      'Basic automation only'
-    ],
-    rating: 4.5,
-    reviewCount: 950,
-    trending: true,
-    featured: false,
-    integrations: ['WordPress', 'HubSpot', 'Buffer', 'Hootsuite'],
-    lastVerified: new Date('2025-05-24')
-  },
-  {
-    id: 'stable-diffusion',
-    name: 'Stable Diffusion',
-    slug: 'stable-diffusion',
-    description: 'Open-source AI image generation model known for its flexibility, customization options, and ability to run locally, supporting various creative workflows.',
-    shortDescription: 'Open-source AI image generation',
-    logo: 'https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg',
-    website: 'https://stability.ai',
-    categoryId: 'media-creation',
-    subcategoryIds: ['image-generation'],
-    pricing: {
-      type: 'freemium',
-      startingPrice: '$0',
-      hasFreeOption: true,
-      tiers: [
-        {
-          name: 'Open Source',
-          price: '$0',
-          billingPeriod: 'monthly',
-          features: ['Local installation', 'Community models', 'Basic features']
-        },
-        {
-          name: 'API Access',
-          price: 'Usage based',
-          billingPeriod: 'monthly',
-          features: ['Cloud API', 'Higher limits', 'Priority support']
-        }
-      ]
-    },
-    features: [
-      'Local installation option',
-      'Custom model training',
-      'Multiple interfaces',
-      'Active community',
-      'Extensive customization'
-    ],
-    limitations: [
-      'Technical setup required',
-      'Hardware requirements',
-      'Learning curve'
-    ],
-    rating: 4.7,
-    reviewCount: 2100,
-    trending: true,
-    featured: true,
-    integrations: ['Custom UIs', 'Discord bots', 'PhotoShop plugins'],
-    lastVerified: new Date('2025-05-24')
-  },
-  {
-    id: 'adobe-firefly',
-    name: 'Adobe Firefly',
-    slug: 'adobe-firefly',
-    description: 'Adobe\'s AI creative suite for generating and editing images, with seamless integration into Creative Cloud apps and focus on commercial-safe content.',
-    shortDescription: 'Adobe\'s AI creative tools',
-    logo: 'https://images.pexels.com/photos/1181671/pexels-photo-1181671.jpeg',
-    website: 'https://www.adobe.com/firefly',
-    categoryId: 'media-creation',
-    subcategoryIds: ['image-generation', 'media-editing'],
-    pricing: {
-      type: 'subscription',
-      startingPrice: '$19.99/month',
-      hasFreeOption: true,
-      tiers: [
-        {
-          name: 'Free',
-          price: '$0',
-          billingPeriod: 'monthly',
-          features: ['Basic features', 'Limited generations', 'Web only']
-        },
-        {
-          name: 'Creative Cloud Add-on',
-          price: '$19.99/month',
-          billingPeriod: 'monthly',
-          features: ['Full integration', 'Commercial license', 'Priority rendering']
-        }
-      ]
-    },
-    features: [
-      'Text-to-image generation',
-      'Generative fill',
-      'Creative Cloud integration',
-      'Commercial license',
-      'Style customization'
-    ],
-    limitations: [
-      'Subscription required for full access',
-      'Creative Cloud dependency',
-      'Web-only for free tier'
-    ],
-    rating: 4.8,
-    reviewCount: 1600,
-    trending: true,
-    featured: true,
-    integrations: ['Photoshop', 'Illustrator', 'Express', 'InDesign'],
-    lastVerified: new Date('2025-05-24')
-  },
-  {
-    id: 'voicemod-ai',
-    name: 'Voicemod AI',
-    slug: 'voicemod-ai',
-    description: 'Real-time voice changing and synthesis platform using AI to create custom voices and sound effects for streaming, gaming, and content creation.',
-    shortDescription: 'AI voice changing and synthesis',
-    logo: 'https://images.pexels.com/photos/3778876/pexels-photo-3778876.jpeg',
-    website: 'https://www.voicemod.net',
-    categoryId: 'media-creation',
-    subcategoryIds: ['audio-generation'],
-    pricing: {
-      type: 'freemium',
-      startingPrice: '$15/month',
-      hasFreeOption: true,
-      tiers: [
-        {
-          name: 'Free',
-          price: '$0',
-          billingPeriod: 'monthly',
-          features: ['Basic voice effects', 'Limited voices', 'Standard quality']
-        },
-        {
-          name: 'Pro',
-          price: '$15/month',
-          billingPeriod: 'monthly',
-          features: ['Custom voices', 'AI voice creation', 'Pro effects']
-        }
-      ]
-    },
-    features: [
-      'Real-time voice changing',
-      'Custom voice creation',
-      'Soundboard integration',
-      'Stream deck support',
-      'Voice effects library'
-    ],
-    limitations: [
-      'Windows only',
-      'Hardware requirements',
-      'Internet needed for AI features'
-    ],
-    rating: 4.6,
-    reviewCount: 2800,
-    trending: true,
-    featured: false,
-    integrations: ['OBS', 'Discord', 'Zoom', 'Skype'],
-    lastVerified: new Date('2025-05-24')
-  },
-  {
-    id: 'suno-ai',
-    name: 'Suno AI',
-    slug: 'suno-ai',
-    description: 'Advanced AI music generation platform that creates complete songs with vocals, instruments, and arrangements from text prompts.',
-    shortDescription: 'AI song creation platform',
-    logo: 'https://images.pexels.com/photos/1626481/pexels-photo-1626481.jpeg',
-    website: 'https://suno.ai',
-    categoryId: 'media-creation',
-    subcategoryIds: ['audio-generation'],
-    pricing: {
-      type: 'subscription',
-      startingPrice: '$20/month',
-      hasFreeOption: true,
-      tiers: [
-        {
-          name: 'Basic',
-          price: '$0',
-          billingPeriod: 'monthly',
-          features: ['Limited generations', 'Basic quality', 'Community access']
-        },
-        {
-          name: '$20/month',
-          price: '$20/month',
-          billingPeriod: 'monthly',
-          features: ['Unlimited generations', 'High quality', 'Commercial rights']
-        }
-      ]
-    },
-    features: [
-      'Complete song generation',
-      'Vocal synthesis',
-      'Style control',
-      'Instrumental tracks',
-      'Export options'
-    ],
-    limitations: [
-      'Generation time varies',
-      'Style limitations',
-      'Quality varies by tier'
-    ],
-    rating: 4.7,
-    reviewCount: 950,
-    trending: true,
-    featured: true,
-    integrations: ['DAWs', 'Audio editing software', 'Streaming platforms'],
-    lastVerified: new Date('2025-05-24')
-  },
-  {
-    id: 'aiva',
-    name: 'Aiva',
-    slug: 'aiva',
-    description: 'Professional AI music composition platform specializing in creating original soundtracks and background music for various media projects.',
-    shortDescription: 'AI music composition',
-    logo: 'https://images.pexels.com/photos/164821/pexels-photo-164821.jpeg',
-    website: 'https://www.aiva.ai',
-    categoryId: 'media-creation',
-    subcategoryIds: ['audio-generation'],
-    pricing: {
-      type: 'freemium',
-      startingPrice: '$24/month',
-      hasFreeOption: true,
-      tiers: [
-        {
-          name: 'Free',
-          price: '$0',
-          billingPeriod: 'monthly',
-          features: ['Basic composition', 'Limited exports', 'Personal use']
+          features: ['15 presentations/month', 'Advanced AI', 'Premium templates', 'HD export']
         },
         {
           name: 'Pro',
           price: '$24/month',
           billingPeriod: 'monthly',
-          features: ['Advanced composition', 'Commercial rights', 'Priority rendering']
+          features: ['Unlimited presentations', 'Team features', 'Custom branding', 'Analytics']
         }
       ]
     },
     features: [
-      'Orchestral composition',
-      'Style customization',
-      'Theme variation',
-      'MIDI export',
-      'Commercial licensing'
-    ],
-    limitations: [
-      'Export limits on free tier',
-      'Genre limitations',
-      'Complex emotion control'
-    ],
-    rating: 4.5,
-    reviewCount: 780,
-    trending: false,
-    featured: false,
-    integrations: ['DAWs', 'Video editors', 'Game engines'],
-    lastVerified: new Date('2025-05-24')
-  },
-  {
-    id: 'scenario-gg',
-    name: 'Scenario.gg',
-    slug: 'scenario-gg',
-    description: 'AI-powered game asset generation platform that creates high-quality 3D models, textures, and environments from text descriptions or concept sketches.',
-    shortDescription: 'AI game asset generation',
-    logo: 'https://images.pexels.com/photos/7887800/pexels-photo-7887800.jpeg',
-    website: 'https://scenario.gg',
-    categoryId: 'media-creation',
-    subcategoryIds: ['interactive-media'],
-    pricing: {
-      type: 'subscription',
-      startingPrice: '$49/month',
-      hasFreeOption: false,
-      tiers: [
-        {
-          name: 'Indie',
-          price: '$49/month',
-          billingPeriod: 'monthly',
-          features: ['Basic asset generation', 'Standard quality', 'Limited exports']
-        },
-        {
-          name: 'Studio',
-          price: '$199/month',
-          billingPeriod: 'monthly',
-          features: ['Advanced generation', 'Team collaboration', 'Priority support']
-        }
-      ]
-    },
-    features: [
-      '3D asset generation',
-      'Texture creation',
-      'Environment generation',
-      'Style matching',
-      'Game engine integration'
-    ],
-    limitations: [
-      'No free tier',
-      'Processing time varies',
-      'Complex asset limitations'
-    ],
-    rating: 4.6,
-    reviewCount: 420,
-    trending: true,
-    featured: false,
-    integrations: ['Unity', 'Unreal Engine', 'Blender', 'Maya'],
-    lastVerified: new Date('2025-05-24')
-  },
-  {
-    id: '40',
-    name: 'Luma AI',
-    slug: 'luma-ai',
-    description: 'Advanced 3D scanning and modeling platform that uses AI to convert real-world objects and environments into game-ready 3D assets.',
-    shortDescription: 'AI 3D scanning and modeling',
-    logo: 'https://images.pexels.com/photos/8728285/pexels-photo-8728285.jpeg',
-    website: 'https://lumalabs.ai',
-    categoryId: 'media-creation',
-    subcategoryIds: ['interactive-media'],
-    pricing: {
-      type: 'usage-based',
-      startingPrice: 'Pay per scan',
-      hasFreeOption: true,
-      tiers: [
-        {
-          name: 'Basic',
-          price: '$0',
-          billingPeriod: 'monthly',
-          features: ['Basic scans', 'Limited resolution', 'Community features']
-        },
-        {
-          name: 'Pro',
-          price: 'Usage based',
-          billingPeriod: 'monthly',
-          features: ['High-quality scans', 'Commercial use', 'Priority processing']
-        }
-      ]
-    },
-    features: [
-      '3D scanning',
-      'Mesh optimization',
-      'Texture generation',
-      'Mobile scanning',
-      'Cloud processing'
-    ],
-    limitations: [
-      'Scan quality varies',
-      'Large file sizes',
-      'Complex object limitations'
-    ],
-    rating: 4.7,
-    reviewCount: 580,
-    trending: true,
-    featured: false,
-    integrations: ['Unity', 'Unreal Engine', '3D modeling software'],
-    lastVerified: new Date('2025-05-24')
-  },
-  {
-    id: 'unity-muse',
-    name: 'Unity Muse',
-    slug: 'unity-muse',
-    description: 'Unity\'s integrated AI toolset for game development, offering automated content generation, code assistance, and game testing capabilities.',
-    shortDescription: 'Unity\'s AI game dev tools',
-    logo: 'https://images.pexels.com/photos/1921326/pexels-photo-1921326.jpeg',
-    website: 'https://unity.com/products/muse',
-    categoryId: 'media-creation',
-    subcategoryIds: ['interactive-media'],
-    pricing: {
-      type: 'subscription',
-      startingPrice: 'Unity Pro required',
-      hasFreeOption: false,
-      tiers: [
-        {
-          name: 'Pro',
-          price: 'Unity Pro subscription',
-          billingPeriod: 'monthly',
-          features: ['Full AI toolset', 'Integration with Unity', 'Professional support']
-        }
-      ]
-    },
-    features: [
-      'Asset generation',
-      'Code assistance',
-      'Game testing',
-      'Performance optimization',
-      'Content automation'
-    ],
-    limitations: [
-      'Unity Pro required',
-      'Learning curve',
-      'Platform restrictions'
-    ],
-    rating: 4.5,
-    reviewCount: 340,
-    trending: true,
-    featured: false,
-    integrations: ['Unity Editor', 'Asset Store', 'Version Control'],
-    lastVerified: new Date('2025-05-24')
-  },
-  {
-    id: 'adobe-creative-suite-ai',
-    name: 'Adobe Creative Suite AI',
-    slug: 'adobe-creative-suite-ai',
-    description: 'Comprehensive AI tools integrated across Adobe\'s Creative Suite, enhancing photo editing, video production, and creative workflows.',
-    shortDescription: 'Adobe\'s integrated AI tools',
-    logo: 'https://images.pexels.com/photos/1181671/pexels-photo-1181671.jpeg',
-    website: 'https://www.adobe.com/creativecloud',
-    categoryId: 'media-creation',
-    subcategoryIds: ['media-editing'],
-    pricing: {
-      type: 'subscription',
-      startingPrice: '$54.99/month',
-      hasFreeOption: false,
-      tiers: [
-        {
-          name: 'Creative Cloud',
-          price: '$54.99/month',
-          billingPeriod: 'monthly',
-          features: ['All Creative Cloud apps', 'AI features', 'Cloud storage']
-        },
-        {
-          name: 'Enterprise',
-          price: 'Custom',
-          billingPeriod: 'yearly',
-          features: ['Advanced features', 'Enterprise support', 'Custom deployment']
-        }
-      ]
-    },
-    features: [
-      'AI-powered editing',
-      'Automated workflows',
-      'Smart object selection',
-      'Content-aware fill',
-      'Neural filters'
-    ],
-    limitations: [
-      'Subscription required',
-      'Resource intensive',
-      'Learning curve'
-    ],
-    rating: 4.8,
-    reviewCount: 3500,
-    trending: true,
-    featured: true,
-    integrations: ['Creative Cloud apps', 'Stock services', 'Cloud storage'],
-    lastVerified: new Date('2025-05-24')
-  },
-  {
-    id: 'chatgpt-document',
-    name: 'ChatGPT (Document Mode)',
-    slug: 'chatgpt-document',
-    description: 'OpenAI\'s ChatGPT optimized for document creation, offering multi-format writing capabilities from essays to business plans with real-time collaboration features.',
-    shortDescription: 'Multi-format document AI writer',
-    logo: 'https://images.pexels.com/photos/4050315/pexels-photo-4050315.jpeg',
-    website: 'https://chat.openai.com',
-    categoryId: 'document-creation',
-    subcategoryIds: ['general-documents'],
-    pricing: {
-      type: 'freemium',
-      startingPrice: '$20/month',
-      hasFreeOption: true,
-      tiers: [
-        {
-          name: 'Free',
-          price: '$0',
-          billingPeriod: 'monthly',
-          features: ['Basic document creation', 'Limited requests']
-        },
-        {
-          name: 'Plus',
-          price: '$20/month',
-          billingPeriod: 'monthly',
-          features: ['Advanced writing features', 'Priority access', 'Canva integration']
-        }
-      ]
-    },
-    features: [
-      'Multi-format writing',
-      'Real-time collaboration',
-      'Template library',
-      'Export options',
-      'Style customization'
-    ],
-    limitations: [
-      'Limited requests in free tier',
-      'No direct file editing',
-      'Internet required'
-    ],
-    rating: 4.8,
-    reviewCount: 2500,
-    trending: true,
-    featured: false,
-    integrations: ['Canva', 'Google Docs', 'Microsoft Word', 'Notion'],
-    lastVerified: new Date('2025-05-24')
-  },
-  {
-    id: 'notion-ai',
-    name: 'Notion AI',
-    slug: 'notion-ai',
-    description: 'Integrated AI writing assistant within Notion\'s workspace, specializing in document drafting, meeting notes, and knowledge base creation.',
-    shortDescription: 'Workspace integrated AI writing',
-    logo: 'https://images.pexels.com/photos/4050420/pexels-photo-4050420.jpeg',
-    website: 'https://notion.ai',
-    categoryId: 'document-creation',
-    subcategoryIds: ['general-documents'],
-    pricing: {
-      type: 'subscription',
-      startingPrice: '$10/month',
-      hasFreeOption: false,
-      tiers: [
-        {
-          name: 'AI Add-on',
-          price: '$10/month',
-          billingPeriod: 'monthly',
-          features: ['Document drafting', 'Meeting notes', 'Knowledge base']
-        }
-      ]
-    },
-    features: [
-      'Integrated writing assistant',
-      'Smart templates',
-      'Content organization',
-      'Collaborative editing',
-      'Version history'
-    ],
-    limitations: [
-      'Requires Notion subscription',
-      'Limited to Notion platform',
-      'Learning curve'
-    ],
-    rating: 4.7,
-    reviewCount: 1800,
-    trending: true,
-    featured: false,
-    integrations: ['Notion workspace', 'Web clipper', 'API'],
-    lastVerified: new Date('2025-05-24')
-  },
-  {
-    id: 'microsoft-copilot',
-    name: 'Microsoft Copilot',
-    slug: 'microsoft-copilot',
-    description: 'AI assistant integrated into Microsoft Word for document creation, summarization, and improvement, with advanced writing and formatting capabilities.',
-    shortDescription: 'Microsoft Word AI assistant',
-    logo: 'https://images.pexels.com/photos/4050445/pexels-photo-4050445.jpeg',
-    website: 'https://microsoft.com/copilot',
-    categoryId: 'document-creation',
-    subcategoryIds: ['business-documents'],
-    pricing: {
-      type: 'subscription',
-      startingPrice: '$30/month',
-      hasFreeOption: false,
-      tiers: [
-        {
-          name: 'Microsoft 365',
-          price: '$30/month',
-          billingPeriod: 'monthly',
-          features: ['Word integration', 'Advanced editing', 'Template access']
-        }
-      ]
-    },
-    features: [
-      'Smart suggestions',
-      'Document improvement',
-      'Style refinement',
-      'Format automation',
-      'Citation help'
-    ],
-    limitations: [
-      'Requires Microsoft 365',
-      'Windows/Mac only',
-      'Internet connection needed'
-    ],
-    rating: 4.6,
-    reviewCount: 2200,
-    trending: true,
-    featured: false,
-    integrations: ['Microsoft 365', 'Teams', 'SharePoint'],
-    lastVerified: new Date('2025-05-24')
-  },
-  {
-    id: 'grammarly-go',
-    name: 'GrammarlyGO',
-    slug: 'grammarly-go',
-    description: 'AI-powered writing assistant that helps refine tone, improve clarity, and generate content across various platforms and document types.',
-    shortDescription: 'AI writing refinement',
-    logo: 'https://images.pexels.com/photos/4050460/pexels-photo-4050460.jpeg',
-    website: 'https://grammarly.com/go',
-    categoryId: 'document-creation',
-    subcategoryIds: ['general-documents'],
-    pricing: {
-      type: 'freemium',
-      startingPrice: '$15/month',
-      hasFreeOption: true,
-      tiers: [
-        {
-          name: 'Free',
-          price: '$0',
-          billingPeriod: 'monthly',
-          features: ['Basic writing suggestions', 'Grammar checking']
-        },
-        {
-          name: 'Premium',
-          price: '$15/month',
-          billingPeriod: 'monthly',
-          features: ['AI writing', 'Tone adjustment', 'Full-sentence rewrites']
-        }
-      ]
-    },
-    features: [
-      'Writing suggestions',
-      'Tone adjustment',
-      'Content generation',
-      'Browser integration',
-      'Desktop app'
-    ],
-    limitations: [
-      'Limited features in free tier',
-      'May require manual review',
-      'Platform restrictions'
-    ],
-    rating: 4.7,
-    reviewCount: 3100,
-    trending: true,
-    featured: false,
-    integrations: ['Chrome', 'Word', 'Google Docs', 'Slack'],
-    lastVerified: new Date('2025-05-24')
-  },
-  {
-    id: 'tome',
-    name: 'Tome',
-    slug: 'tome',
-    description: 'AI-powered storytelling platform that creates visually rich documents and presentations with minimal input, ideal for pitch decks and visual narratives.',
-    shortDescription: 'AI visual storytelling',
-    logo: 'https://images.pexels.com/photos/4050475/pexels-photo-4050475.jpeg',
-    website: 'https://tome.app',
-    categoryId: 'document-creation',
-    subcategoryIds: ['business-documents'],
-    pricing: {
-      type: 'freemium',
-      startingPrice: '$25/month',
-      hasFreeOption: true,
-      tiers: [
-        {
-          name: 'Basic',
-          price: '$0',
-          billingPeriod: 'monthly',
-          features: ['Basic templates', 'Limited exports']
-        },
-        {
-          name: 'Pro',
-          price: '$25/month',
-          billingPeriod: 'monthly',
-          features: ['Advanced AI', 'Custom branding', 'Full exports']
-        }
-      ]
-    },
-    features: [
-      'Visual storytelling',
-      'AI-generated layouts',
-      'Image generation',
+      'Comprehensive AI assistance',
+      'Multi-format support',
+      'Smart content optimization',
+      'Design automation',
       'Collaboration tools',
-      'Export options'
+      'Performance analytics'
     ],
     limitations: [
-      'Export limitations in free tier',
-      'Template restrictions',
-      'Storage limits'
+      'Monthly presentation limits',
+      'Template restrictions on free tier',
+      'Learning curve for advanced features'
     ],
-    rating: 4.6,
-    reviewCount: 950,
-    trending: true,
-    featured: false,
-    integrations: ['Figma', 'Adobe CC', 'Slack', 'Notion'],
-    lastVerified: new Date('2025-05-24')
-  },
-  {
-    id: 'copy-ai',
-    name: 'Copy.ai',
-    slug: 'copy-ai',
-    description: 'AI-powered writing platform focused on business content creation, featuring templates for marketing materials, sales copy, and professional documents.',
-    shortDescription: 'Business content AI writer',
-    logo: 'https://images.pexels.com/photos/4050480/pexels-photo-4050480.jpeg',
-    website: 'https://copy.ai',
-    categoryId: 'document-creation',
-    subcategoryIds: ['business-documents'],
-    pricing: {
-      type: 'freemium',
-      startingPrice: '$35/month',
-      hasFreeOption: true,
-      tiers: [
-        {
-          name: 'Free',
-          price: '$0',
-          billingPeriod: 'monthly',
-          features: ['Basic templates', 'Limited generations']
-        },
-        {
-          name: 'Pro',
-          price: '$35/month',
-          billingPeriod: 'monthly',
-          features: ['Unlimited generations', 'Custom templates', 'Priority support']
-        }
-      ]
-    },
-    features: [
-      'Marketing templates',
-      'Sales copy generation',
-      'Business document creation',
-      'Multi-language support',
-      'Team collaboration'
-    ],
-    limitations: [
-      'Generation limits on free tier',
-      'Template customization limited',
-      'Advanced features require Pro'
-    ],
-    rating: 4.7,
-    reviewCount: 1850,
-    trending: true,
-    featured: false,
-    integrations: ['Chrome', 'Google Docs', 'WordPress', 'Shopify'],
-    lastVerified: new Date('2025-05-24')
-  },
-  {
-    id: 'lawgeex',
-    name: 'LawGeex',
-    slug: 'lawgeex',
-    description: 'Enterprise-grade AI platform for legal document review and analysis, specializing in contract review, risk assessment, and compliance checking.',
-    shortDescription: 'AI legal document analysis',
-    logo: 'https://images.pexels.com/photos/4050485/pexels-photo-4050485.jpeg',
-    website: 'https://lawgeex.com',
-    categoryId: 'document-creation',
-    subcategoryIds: ['legal-documents'],
-    pricing: {
-      type: 'enterprise',
-      startingPrice: 'Custom pricing',
-      hasFreeOption: false,
-      tiers: [
-        {
-          name: 'Enterprise',
-          price: 'Custom',
-          billingPeriod: 'yearly',
-          features: ['Contract review', 'Risk analysis', 'Compliance checking', 'Custom playbooks']
-        }
-      ]
-    },
-    features: [
-      'AI contract review',
-      'Risk assessment',
-      'Compliance validation',
-      'Legal playbooks',
-      'Workflow automation'
-    ],
-    limitations: [
-      'Enterprise focus only',
-      'Complex implementation',
-      'Requires legal expertise'
-    ],
-    rating: 4.6,
-    reviewCount: 380,
+    rating: 4.3,
+    reviewCount: 540,
     trending: false,
     featured: false,
-    integrations: ['DocuSign', 'Salesforce', 'Microsoft Teams'],
-    lastVerified: new Date('2025-05-24')
+    integrations: ['PowerPoint', 'Google Slides', 'Keynote', 'PDF export'],
+    lastVerified: new Date('2025-05-27')
   },
-  {
-    id: 'resume-io',
-    name: 'Resume.io',
-    slug: 'resume-io',
-    description: 'AI-powered resume builder with smart content suggestions, ATS optimization, and professional templates for creating job-winning resumes and cover letters.',
-    shortDescription: 'Smart resume builder',
-    logo: 'https://images.pexels.com/photos/4050490/pexels-photo-4050490.jpeg',
-    website: 'https://resume.io',
-    categoryId: 'document-creation',
-    subcategoryIds: ['resume-documents'],
-    pricing: {
-      type: 'freemium',
-      startingPrice: '$19/month',
-      hasFreeOption: true,
-      tiers: [
-        {
-          name: 'Basic',
-          price: '$0',
-          billingPeriod: 'monthly',
-          features: ['Basic templates', 'Limited downloads']
-        },
-        {
-          name: 'Pro',
-          price: '$19/month',
-          billingPeriod: 'monthly',
-          features: ['All templates', 'Unlimited downloads', 'Cover letters']
-        }
-      ]
-    },
-    features: [
-      'AI content suggestions',
-      'ATS optimization',
-      'Professional templates',
-      'Cover letter builder',
-      'Multi-format export'
-    ],
-    limitations: [
-      'Download limits on free tier',
-      'Some features Premium only',
-      'Limited customization'
-    ],
-    rating: 4.7,
-    reviewCount: 2800,
-    trending: true,
-    featured: false,
-    integrations: ['LinkedIn', 'Google Drive', 'Dropbox'],
-    lastVerified: new Date('2025-05-24')
-  },
-  {
-    id: 'scite',
-    name: 'Scite',
-    slug: 'scite',
-    description: 'AI research assistant that analyzes scientific papers, provides citation context, and helps create literature reviews with smart summarization.',
-    shortDescription: 'Smart research assistant',
-    logo: 'https://images.pexels.com/photos/4050495/pexels-photo-4050495.jpeg',
-    website: 'https://scite.ai',
-    categoryId: 'document-creation',
-    subcategoryIds: ['academic-research'],
-    pricing: {
-      type: 'freemium',
-      startingPrice: '$15/month',
-      hasFreeOption: true,
-      tiers: [
-        {
-          name: 'Free',
-          price: '$0',
-          billingPeriod: 'monthly',
-          features: ['Basic search', 'Limited citations']
-        },
-        {
-          name: 'Premium',
-          price: '$15/month',
-          billingPeriod: 'monthly',
-          features: ['Full access', 'Citation reports', 'API access']
-        }
-      ]
-    },
-    features: [
-      'Citation analysis',
-      'Smart summaries',
-      'Literature reviews',
-      'Citation reports',
-      'Reference management'
-    ],
-    limitations: [
-      'Academic focus only',
-      'Limited free features',
-      'Requires research context'
-    ],
-    rating: 4.5,
-    reviewCount: 750,
-    trending: false,
-    featured: false,
-    integrations: ['Zotero', 'Mendeley', 'EndNote'],
-    lastVerified: new Date('2025-05-24')
-  },
-  {
-    id: 'consensus',
-    name: 'Consensus',
-    slug: 'consensus',
-    description: 'AI-powered academic search engine that synthesizes research findings, generates literature reviews, and provides evidence-based insights.',
-    shortDescription: 'Research synthesis AI',
-    logo: 'https://images.pexels.com/photos/4050500/pexels-photo-4050500.jpeg',
-    website: 'https://consensus.app',
-    categoryId: 'document-creation',
-    subcategoryIds: ['academic-research'],
-    pricing: {
-      type: 'freemium',
-      startingPrice: '$20/month',
-      hasFreeOption: true,
-      tiers: [
-        {
-          name: 'Basic',
-          price: '$0',
-          billingPeriod: 'monthly',
-          features: ['Basic search', 'Limited summaries']
-        },
-        {
-          name: 'Pro',
-          price: '$20/month',
-          billingPeriod: 'monthly',
-          features: ['Advanced search', 'Full summaries', 'Export options']
-        }
-      ]
-    },
-    features: [
-      'Research synthesis',
-      'Literature reviews',
-      'Evidence analysis',
-      'Citation tracking',
-      'Export capabilities'
-    ],
-    limitations: [
-      'Scientific focus only',
-      'Complex queries needed',
-      'Limited free tier'
-    ],
-    rating: 4.6,
-    reviewCount: 620,
-    trending: true,
-    featured: false,
-    integrations: ['Reference managers', 'Academic databases', 'Export tools'],
-    lastVerified: new Date('2025-05-24')
-  },
-  {
-    id: 'jasper-ai',
-    name: 'Jasper AI',
-    slug: 'jasper-ai',
-    description: 'Advanced AI writing platform specializing in marketing content, blog posts, and business documents with brand voice customization.',
-    shortDescription: 'Marketing-focused AI writer',
-    logo: 'https://images.pexels.com/photos/4050505/pexels-photo-4050505.jpeg',
-    website: 'https://jasper.ai',
-    categoryId: 'document-creation',
-    subcategoryIds: ['business-documents'],
-    pricing: {
-      type: 'subscription',
-      startingPrice: '$49/month',
-      hasFreeOption: false,
-      tiers: [
-        {
-          name: 'Creator',
-          price: '$49/month',
-          billingPeriod: 'monthly',
-          features: ['50k words/month', 'Basic templates', 'Brand voice settings']
-        },
-        {
-          name: 'Teams',
-          price: '$99/month',
-          billingPeriod: 'monthly',
-          features: ['Unlimited words', 'Advanced features', 'Team collaboration']
-        }
-      ]
-    },
-    features: [
-      'Marketing content generation',
-      'Brand voice customization',
-      'Multi-language support',
-      'SEO optimization',
-      'Team workflows'
-    ],
-    limitations: [
-      'Higher pricing tier',
-      'Learning curve',
-      'Template limitations'
-    ],
-    rating: 4.8,
-    reviewCount: 2200,
-    trending: true,
-    featured: false,
-    integrations: ['Surfer SEO', 'Chrome', 'WordPress', 'Grammarly'],
-    lastVerified: new Date('2025-05-24')
-  },
-  {
-    id: 'canva-docs',
-    name: 'Canva Docs',
-    slug: 'canva-docs',
-    description: 'Visual document creation platform with AI assistance for creating beautiful, design-rich documents and presentations.',
-    shortDescription: 'Visual document creator',
-    logo: 'https://images.pexels.com/photos/4050520/pexels-photo-4050520.jpeg',
-    website: 'https://canva.com/docs',
-    categoryId: 'document-creation',
-    subcategoryIds: ['general-documents', 'business-documents'],
-    pricing: {
-      type: 'freemium',
-      startingPrice: '$12.99/month',
-      hasFreeOption: true,
-      tiers: [
-        {
-          name: 'Free',
-          price: '$0',
-          billingPeriod: 'monthly',
-          features: ['Basic templates', 'Limited storage']
-        },
-        {
-          name: 'Pro',
-          price: '$12.99/month',
-          billingPeriod: 'monthly',
-          features: ['Premium features', 'Team collaboration', 'Brand kit']
-        }
-      ]
-    },
-    features: [
-      'Visual document design',
-      'AI writing assistance',
-      'Template library',
-      'Real-time collaboration',
-      'Brand consistency'
-    ],
-    limitations: [
-      'Storage limits on free tier',
-      'Some features Pro only',
-      'Export restrictions'
-    ],
-    rating: 4.7,
-    reviewCount: 3100,
-    trending: true,
-    featured: false,
-    integrations: ['Google Drive', 'Dropbox', 'Microsoft Office'],
-    lastVerified: new Date('2025-05-24')
-  },
-  {
-    id: 'clickup-ai',
-    name: 'ClickUp AI',
-    slug: 'clickup-ai',
-    description: 'Integrated AI writing assistant for project documentation, team wikis, and collaborative documents within the ClickUp workspace.',
-    shortDescription: 'Project documentation AI',
-    logo: 'https://images.pexels.com/photos/4050525/pexels-photo-4050525.jpeg',
-    website: 'https://clickup.com/ai',
-    categoryId: 'document-creation',
-    subcategoryIds: ['business-documents'],
-    pricing: {
-      type: 'subscription',
-      startingPrice: '$10/month',
-      hasFreeOption: true,
-      tiers: [
-        {
-          name: 'Free',
-          price: '$0',
-          billingPeriod: 'monthly',
-          features: ['Basic docs', 'Limited AI usage']
-        },
-        {
-          name: 'Business',
-          price: '$10/month',
-          billingPeriod: 'monthly',
-          features: ['Full AI features', 'Advanced docs', 'Unlimited usage']
-        }
-      ]
-    },
-    features: [
-      'Project documentation',
-      'Team wikis',
-      'AI writing assistance',
-      'Document templates',
-      'Collaboration tools'
-    ],
-    limitations: [
-      'Requires ClickUp',
-      'Limited free tier',
-      'Platform-specific'
-    ],
-    rating: 4.6,
-    reviewCount: 850,
-    trending: false,
-    featured: false,
-    integrations: ['ClickUp', 'Slack', 'Google Workspace'],
-    lastVerified: new Date('2025-05-24')
-  },
-  {
-    id: 'otter-ai',
-    name: 'Otter.ai',
-    slug: 'otter-ai',
-    description: 'AI-powered meeting transcription and note-taking platform that converts conversations into searchable, shareable documents with smart summaries.',
-    shortDescription: 'Meeting transcription AI',
-    logo: 'https://images.pexels.com/photos/4050530/pexels-photo-4050530.jpeg',
-    website: 'https://otter.ai',
-    categoryId: 'document-creation',
-    subcategoryIds: ['general-documents'],
-    pricing: {
-      type: 'freemium',
-      startingPrice: '$16.99/month',
-      hasFreeOption: true,
-      tiers: [
-        {
-          name: 'Basic',
-          price: '$0',
-          billingPeriod: 'monthly',
-          features: ['Basic transcription', 'Limited minutes']
-        },
-        {
-          name: 'Pro',
-          price: '$16.99/month',
-          billingPeriod: 'monthly',
-          features: ['Advanced features', 'More minutes', 'Custom vocabulary']
-        }
-      ]
-    },
-    features: [
-      'Live transcription',
-      'Meeting notes',
-      'Smart summaries',
-      'Collaboration',
-      'Custom vocabulary'
-    ],
-    limitations: [
-      'Accuracy varies',
-      'Limited free minutes',
-      'Language restrictions'
-    ],
-    rating: 4.7,
-    reviewCount: 2200,
-    trending: true,
-    featured: true,
-    integrations: ['Zoom', 'Teams', 'Google Meet', 'Slack'],
-    lastVerified: new Date('2025-05-24')
-  },
-  
+
   // Prompt Management Platforms
   {
     id: 'promptlayer',
@@ -5131,7 +3991,7 @@ export const tools: Tool[] = [
         {
           name: 'Pay-as-you-go',
           price: '$0.18/hour',
-          billingPeriod: 'usage-based',
+          billingPeriod: 'monthly',
           features: ['Unlimited usage', 'Powerful instances', 'Team collaboration', 'Enterprise features']
         }
       ]
@@ -5759,5 +4619,655 @@ export const tools: Tool[] = [
     featured: false,
     integrations: ['Twitter platform', 'External links', 'Mobile apps', 'Social tools'],
     lastVerified: new Date('2025-05-30')
+  },
+
+  // Additional Presentation Tools
+  {
+    id: 'gamma-ai',
+    name: 'Gamma',
+    slug: 'gamma-ai',
+    description: 'AI-powered presentation builder that creates beautiful slides, documents, and webpages from simple text prompts with advanced design capabilities.',
+    shortDescription: 'AI-powered presentation and webpage builder',
+    logo: 'https://images.pexels.com/photos/4050520/pexels-photo-4050520.jpeg',
+    website: 'https://gamma.app',
+    categoryId: 'presentation-tools',
+    subcategoryIds: ['slide-generation'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$10/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['Limited AI credits', 'Basic templates', 'Export to PDF', 'Basic sharing']
+        },
+        {
+          name: 'Plus',
+          price: '$10/month',
+          billingPeriod: 'monthly',
+          features: ['Unlimited AI credits', 'Premium templates', 'Custom branding', 'Advanced export options']
+        },
+        {
+          name: 'Pro',
+          price: '$20/month',
+          billingPeriod: 'monthly',
+          features: ['Team collaboration', 'Advanced analytics', 'Custom domains', 'Priority support']
+        }
+      ]
+    },
+    features: [
+      'One-click presentation generation',
+      'Smart content suggestions',
+      'Auto-generated layouts',
+      'Responsive design',
+      'Real-time collaboration',
+      'Custom branding options'
+    ],
+    limitations: [
+      'Limited free credits',
+      'Internet required',
+      'Template restrictions on free tier'
+    ],
+    rating: 4.7,
+    reviewCount: 1850,
+    trending: true,
+    featured: true,
+    integrations: ['Google Drive', 'Figma', 'Notion', 'PowerPoint'],
+    lastVerified: new Date('2025-05-30')
+  },
+  {
+    id: 'beautiful-ai',
+    name: 'Beautiful.AI',
+    slug: 'beautiful-ai',
+    description: 'Intelligent presentation software that automatically designs slides using AI-powered layout engine with smart templates and data visualization.',
+    shortDescription: 'Smart presentation design platform',
+    logo: 'https://images.pexels.com/photos/7947720/pexels-photo-7947720.jpeg',
+    website: 'https://www.beautiful.ai',
+    categoryId: 'presentation-tools',
+    subcategoryIds: ['slide-generation', 'presentation-enhancement'],
+    pricing: {
+      type: 'subscription',
+      startingPrice: '$12/month',
+      hasFreeOption: false,
+      tiers: [
+        {
+          name: 'Pro',
+          price: '$12/month',
+          billingPeriod: 'monthly',
+          features: ['Smart templates', 'Auto-arrange layouts', 'Team sharing', 'Export options']
+        },
+        {
+          name: 'Team',
+          price: '$40/month',
+          billingPeriod: 'monthly',
+          features: ['Team collaboration', 'Brand management', 'Advanced analytics', 'Admin controls']
+        }
+      ]
+    },
+    features: [
+      'Smart template engine',
+      'Auto-arrange layouts',
+      'Data visualization tools',
+      'Brand consistency enforcement',
+      'Real-time collaboration',
+      'Presentation analytics'
+    ],
+    limitations: [
+      'No free tier',
+      'Learning curve for templates',
+      'Limited customization options'
+    ],
+    rating: 4.5,
+    reviewCount: 980,
+    trending: false,
+    featured: false,
+    integrations: ['PowerPoint', 'Google Slides', 'Dropbox', 'Adobe Creative Suite'],
+    lastVerified: new Date('2025-05-28')
+  },
+  {
+    id: 'pitch-avatar',
+    name: 'Pitch Avatar',
+    slug: 'pitch-avatar',
+    description: 'AI-powered platform that creates interactive video presentations with virtual avatars delivering your content in multiple languages.',
+    shortDescription: 'AI avatar presentation creator',
+    logo: 'https://images.pexels.com/photos/3756679/pexels-photo-3756679.jpeg',
+    website: 'https://pitchavatar.com',
+    categoryId: 'presentation-tools',
+    subcategoryIds: ['slide-generation'],
+    pricing: {
+      type: 'subscription',
+      startingPrice: '$29/month',
+      hasFreeOption: false,
+      tiers: [
+        {
+          name: 'Starter',
+          price: '$29/month',
+          billingPeriod: 'monthly',
+          features: ['Basic avatars', '5 presentations/month', 'Standard voices', 'HD export']
+        },
+        {
+          name: 'Professional',
+          price: '$79/month',
+          billingPeriod: 'monthly',
+          features: ['Premium avatars', 'Unlimited presentations', 'Custom voices', '4K export']
+        },
+        {
+          name: 'Enterprise',
+          price: 'Custom',
+          billingPeriod: 'monthly',
+          features: ['Custom avatars', 'White-label solution', 'API access', 'Dedicated support']
+        }
+      ]
+    },
+    features: [
+      'AI avatar presenters',
+      'Multi-language support',
+      'Custom voice synthesis',
+      'Interactive elements',
+      'Brand customization',
+      'Analytics tracking'
+    ],
+    limitations: [
+      'No free tier',
+      'Rendering time required',
+      'Limited avatar customization'
+    ],
+    rating: 4.4,
+    reviewCount: 420,
+    trending: true,
+    featured: false,
+    integrations: ['PowerPoint', 'Keynote', 'Zoom', 'Teams'],
+    lastVerified: new Date('2025-05-29')
+  },
+  {
+    id: 'presentations-ai',
+    name: 'Presentations.AI',
+    slug: 'presentations-ai',
+    description: 'Advanced AI presentation generator that creates complete slide decks from topic inputs with intelligent content structuring and design optimization.',
+    shortDescription: 'Complete AI presentation generator',
+    logo: 'https://images.pexels.com/photos/4050475/pexels-photo-4050475.jpeg',
+    website: 'https://presentations.ai',
+    categoryId: 'presentation-tools',
+    subcategoryIds: ['slide-generation'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$25/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['3 presentations/month', 'Basic templates', 'Standard export', 'Community support']
+        },
+        {
+          name: 'Pro',
+          price: '$25/month',
+          billingPeriod: 'monthly',
+          features: ['Unlimited presentations', 'Premium templates', 'Advanced export', 'Priority support']
+        },
+        {
+          name: 'Business',
+          price: '$49/month',
+          billingPeriod: 'monthly',
+          features: ['Team features', 'Custom branding', 'API access', 'Advanced analytics']
+        }
+      ]
+    },
+    features: [
+      'Topic-to-presentation generation',
+      'Intelligent content structuring',
+      'Auto-generated speaker notes',
+      'Multiple design themes',
+      'Citation management',
+      'Export to multiple formats'
+    ],
+    limitations: [
+      'Limited free generations',
+      'Requires clear topic definition',
+      'May need manual editing'
+    ],
+    rating: 4.6,
+    reviewCount: 750,
+    trending: true,
+    featured: false,
+    integrations: ['PowerPoint', 'Google Slides', 'PDF export', 'Web sharing'],
+    lastVerified: new Date('2025-05-30')
+  },
+  {
+    id: 'decktopus-ai',
+    name: 'Decktopus AI',
+    slug: 'decktopus-ai',
+    description: 'AI-powered presentation maker that creates professional slides with smart content suggestions, design automation, and interactive elements.',
+    shortDescription: 'Smart presentation automation',
+    logo: 'https://images.pexels.com/photos/7947866/pexels-photo-7947866.jpeg',
+    website: 'https://www.decktopus.com',
+    categoryId: 'presentation-tools',
+    subcategoryIds: ['slide-generation', 'presentation-enhancement'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$9.99/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['5 AI presentations', 'Basic templates', 'Decktopus branding', 'Standard support']
+        },
+        {
+          name: 'Pro',
+          price: '$9.99/month',
+          billingPeriod: 'monthly',
+          features: ['Unlimited presentations', 'Remove branding', 'Premium templates', 'Advanced features']
+        },
+        {
+          name: 'Business',
+          price: '$19.99/month',
+          billingPeriod: 'monthly',
+          features: ['Team collaboration', 'Custom branding', 'Analytics', 'Priority support']
+        }
+      ]
+    },
+    features: [
+      'AI content generation',
+      'Smart design suggestions',
+      'Interactive slide elements',
+      'Voice-over integration',
+      'Real-time feedback',
+      'Mobile optimization'
+    ],
+    limitations: [
+      'Branding on free tier',
+      'Limited free presentations',
+      'Template restrictions'
+    ],
+    rating: 4.3,
+    reviewCount: 1200,
+    trending: false,
+    featured: false,
+    integrations: ['PowerPoint', 'PDF export', 'Social media', 'Webhooks'],
+    lastVerified: new Date('2025-05-27')
+  },
+  {
+    id: 'slidebean-ai',
+    name: 'Slidebean',
+    slug: 'slidebean-ai',
+    description: 'AI-powered presentation platform focused on startup pitch decks with automated design, content optimization, and investor-ready templates.',
+    shortDescription: 'AI pitch deck creator',
+    logo: 'https://images.pexels.com/photos/4050490/pexels-photo-4050490.jpeg',
+    website: 'https://slidebean.com',
+    categoryId: 'presentation-tools',
+    subcategoryIds: ['slide-generation'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$19/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['3 presentations', 'Basic templates', 'Slidebean branding', 'Standard export']
+        },
+        {
+          name: 'Premium',
+          price: '$19/month',
+          billingPeriod: 'monthly',
+          features: ['Unlimited presentations', 'Premium templates', 'Remove branding', 'Analytics']
+        },
+        {
+          name: 'Team',
+          price: '$39/month',
+          billingPeriod: 'monthly',
+          features: ['Team collaboration', 'Advanced analytics', 'Custom templates', 'Priority support']
+        }
+      ]
+    },
+    features: [
+      'Startup-focused templates',
+      'Automated slide design',
+      'Pitch deck optimization',
+      'Investor presentation tools',
+      'Financial slide automation',
+      'Presentation analytics'
+    ],
+    limitations: [
+      'Startup/business focus',
+      'Limited free presentations',
+      'Template dependency'
+    ],
+    rating: 4.4,
+    reviewCount: 850,
+    trending: false,
+    featured: false,
+    integrations: ['Google Drive', 'Dropbox', 'PowerPoint', 'Analytics tools'],
+    lastVerified: new Date('2025-05-26')
+  },
+  {
+    id: 'tome-presentations',
+    name: 'Tome Presentations',
+    slug: 'tome-presentations',
+    description: 'AI-native presentation platform that creates immersive, interactive presentations with multimedia content generation and storytelling focus.',
+    shortDescription: 'AI multimedia presentation creator',
+    logo: 'https://images.pexels.com/photos/4050445/pexels-photo-4050445.jpeg',
+    website: 'https://tome.app/presentations',
+    categoryId: 'presentation-tools',
+    subcategoryIds: ['slide-generation', 'presentation-enhancement'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$16/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['500 AI credits', 'Basic sharing', 'Core features', 'Community templates']
+        },
+        {
+          name: 'Pro',
+          price: '$16/month',
+          billingPeriod: 'monthly',
+          features: ['Unlimited AI credits', 'Custom branding', 'Advanced sharing', 'Premium features']
+        },
+        {
+          name: 'Business',
+          price: '$40/month',
+          billingPeriod: 'monthly',
+          features: ['Team workspace', 'Admin controls', 'Advanced analytics', 'Priority support']
+        }
+      ]
+    },
+    features: [
+      'AI content generation',
+      'Interactive multimedia elements',
+      'Immersive storytelling',
+      'Real-time collaboration',
+      'Custom branding',
+      'Advanced sharing options'
+    ],
+    limitations: [
+      'Credit-based system',
+      'Learning curve',
+      'Internet dependency'
+    ],
+    rating: 4.5,
+    reviewCount: 1100,
+    trending: true,
+    featured: false,
+    integrations: ['Figma', 'Notion', 'Slack', 'Web embeds'],
+    lastVerified: new Date('2025-05-30')
+  },
+  {
+    id: 'designrr-presentations',
+    name: 'Designrr Presentations',
+    slug: 'designrr-presentations',
+    description: 'AI-enhanced presentation tool that automatically converts content from various sources into professional slide presentations with smart formatting.',
+    shortDescription: 'Content-to-presentation converter',
+    logo: 'https://images.pexels.com/photos/4050460/pexels-photo-4050460.jpeg',
+    website: 'https://designrr.io/presentations',
+    categoryId: 'presentation-tools',
+    subcategoryIds: ['presentation-enhancement'],
+    pricing: {
+      type: 'subscription',
+      startingPrice: '$29/month',
+      hasFreeOption: false,
+      tiers: [
+        {
+          name: 'Personal',
+          price: '$29/month',
+          billingPeriod: 'monthly',
+          features: ['Content conversion', 'Basic templates', 'Standard export', 'Email support']
+        },
+        {
+          name: 'Professional',
+          price: '$59/month',
+          billingPeriod: 'monthly',
+          features: ['Advanced conversion', 'Premium templates', 'Team features', 'Priority support']
+        },
+        {
+          name: 'Agency',
+          price: '$99/month',
+          billingPeriod: 'monthly',
+          features: ['White-label option', 'Client management', 'Custom branding', 'Dedicated support']
+        }
+      ]
+    },
+    features: [
+      'Multi-source content import',
+      'Automated slide formatting',
+      'Smart content extraction',
+      'Template customization',
+      'Batch processing',
+      'Multiple export formats'
+    ],
+    limitations: [
+      'No free tier',
+      'Limited source types',
+      'Requires content preparation'
+    ],
+    rating: 4.2,
+    reviewCount: 380,
+    trending: false,
+    featured: false,
+    integrations: ['Google Docs', 'WordPress', 'PDF import', 'Cloud storage'],
+    lastVerified: new Date('2025-05-25')
+  },
+  {
+    id: 'slides-ai',
+    name: 'Slides AI',
+    slug: 'slides-ai',
+    description: 'Google Slides add-on that uses AI to automatically generate presentation content, design slides, and optimize layouts within your existing workflow.',
+    shortDescription: 'Google Slides AI add-on',
+    logo: 'https://images.pexels.com/photos/4050520/pexels-photo-4050520.jpeg',
+    website: 'https://workspace.google.com/marketplace/app/slides_ai',
+    categoryId: 'presentation-tools',
+    subcategoryIds: ['presentation-enhancement'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$10/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['3 AI generations/month', 'Basic templates', 'Standard support', 'Google Slides integration']
+        },
+        {
+          name: 'Pro',
+          price: '$10/month',
+          billingPeriod: 'monthly',
+          features: ['Unlimited AI generations', 'Premium templates', 'Advanced features', 'Priority support']
+        }
+      ]
+    },
+    features: [
+      'Native Google Slides integration',
+      'AI content generation',
+      'Smart design suggestions',
+      'Template automation',
+      'Collaborative editing',
+      'Cloud synchronization'
+    ],
+    limitations: [
+      'Google Slides only',
+      'Limited free generations',
+      'Requires Google account'
+    ],
+    rating: 4.3,
+    reviewCount: 920,
+    trending: false,
+    featured: false,
+    integrations: ['Google Slides', 'Google Workspace', 'Google Drive', 'Google Fonts'],
+    lastVerified: new Date('2025-05-28')
+  },
+  {
+    id: 'sendsteps-ai',
+    name: 'SendSteps AI',
+    slug: 'sendsteps-ai',
+    description: 'Interactive presentation platform with AI-powered content generation, audience engagement tools, and real-time feedback collection.',
+    shortDescription: 'Interactive AI presentation platform',
+    logo: 'https://images.pexels.com/photos/7947720/pexels-photo-7947720.jpeg',
+    website: 'https://www.sendsteps.com',
+    categoryId: 'presentation-tools',
+    subcategoryIds: ['slide-generation', 'presentation-enhancement'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$8.99/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['2 presentations/month', 'Basic interactivity', 'Standard templates', 'Community support']
+        },
+        {
+          name: 'Pro',
+          price: '$8.99/month',
+          billingPeriod: 'monthly',
+          features: ['Unlimited presentations', 'Advanced interactivity', 'Custom branding', 'Analytics']
+        },
+        {
+          name: 'Business',
+          price: '$24.99/month',
+          billingPeriod: 'monthly',
+          features: ['Team features', 'White-label option', 'Advanced analytics', 'Priority support']
+        }
+      ]
+    },
+    features: [
+      'Interactive audience engagement',
+      'AI content generation',
+      'Real-time polls and quizzes',
+      'Audience response collection',
+      'Live presentation mode',
+      'Advanced analytics'
+    ],
+    limitations: [
+      'Limited free presentations',
+      'Internet required for interactivity',
+      'Learning curve for advanced features'
+    ],
+    rating: 4.4,
+    reviewCount: 650,
+    trending: true,
+    featured: false,
+    integrations: ['PowerPoint', 'Zoom', 'Teams', 'Webex'],
+    lastVerified: new Date('2025-05-29')
+  },
+  {
+    id: 'plus-ai-google-slides',
+    name: 'Plus AI for Google Slides',
+    slug: 'plus-ai-google-slides',
+    description: 'Advanced AI add-on for Google Slides that creates presentations from prompts, rewrites content, and enhances existing slides with intelligent suggestions.',
+    shortDescription: 'Advanced Google Slides AI enhancement',
+    logo: 'https://images.pexels.com/photos/4050475/pexels-photo-4050475.jpeg',
+    website: 'https://www.plusdocs.com/plus-ai-for-google-slides',
+    categoryId: 'presentation-tools',
+    subcategoryIds: ['presentation-enhancement'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$15/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['5 AI generations/month', 'Basic features', 'Standard templates', 'Community support']
+        },
+        {
+          name: 'Pro',
+          price: '$15/month',
+          billingPeriod: 'monthly',
+          features: ['100 AI generations/month', 'Advanced features', 'Custom templates', 'Priority support']
+        },
+        {
+          name: 'Premium',
+          price: '$25/month',
+          billingPeriod: 'monthly',
+          features: ['Unlimited generations', 'Team features', 'Advanced customization', 'Dedicated support']
+        }
+      ]
+    },
+    features: [
+      'Advanced AI content generation',
+      'Intelligent slide enhancement',
+      'Content rewriting capabilities',
+      'Smart formatting suggestions',
+      'Template customization',
+      'Collaborative features'
+    ],
+    limitations: [
+      'Google Slides dependency',
+      'Monthly generation limits',
+      'Requires Google Workspace'
+    ],
+    rating: 4.5,
+    reviewCount: 780,
+    trending: true,
+    featured: false,
+    integrations: ['Google Slides', 'Google Workspace', 'Google Drive', 'Third-party templates'],
+    lastVerified: new Date('2025-05-30')
+  },
+  {
+    id: 'prezo-ai',
+    name: 'Prezo AI',
+    slug: 'prezo-ai',
+    description: 'AI-powered presentation assistant that helps create, edit, and optimize presentations with smart content suggestions and design automation.',
+    shortDescription: 'Complete AI presentation assistant',
+    logo: 'https://images.pexels.com/photos/4050490/pexels-photo-4050490.jpeg',
+    website: 'https://prezo.ai',
+    categoryId: 'presentation-tools',
+    subcategoryIds: ['slide-generation', 'presentation-enhancement'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$12/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['3 presentations/month', 'Basic AI features', 'Standard templates', 'Basic export']
+        },
+        {
+          name: 'Starter',
+          price: '$12/month',
+          billingPeriod: 'monthly',
+          features: ['15 presentations/month', 'Advanced AI', 'Premium templates', 'HD export']
+        },
+        {
+          name: 'Pro',
+          price: '$24/month',
+          billingPeriod: 'monthly',
+          features: ['Unlimited presentations', 'Team features', 'Custom branding', 'Analytics']
+        }
+      ]
+    },
+    features: [
+      'Comprehensive AI assistance',
+      'Multi-format support',
+      'Smart content optimization',
+      'Design automation',
+      'Collaboration tools',
+      'Performance analytics'
+    ],
+    limitations: [
+      'Monthly presentation limits',
+      'Template restrictions on free tier',
+      'Learning curve for advanced features'
+    ],
+    rating: 4.3,
+    reviewCount: 540,
+    trending: false,
+    featured: false,
+    integrations: ['PowerPoint', 'Google Slides', 'Keynote', 'PDF export'],
+    lastVerified: new Date('2025-05-27')
   }
 ];
