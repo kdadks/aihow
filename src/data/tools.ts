@@ -1481,7 +1481,7 @@ export const tools: Tool[] = [
           name: 'Business',
           price: '$19.99/month',
           billingPeriod: 'monthly',
-          features: ['Team collaboration', 'Advanced analytics', 'Custom templates', 'Priority support']
+          features: ['Team collaboration', 'Custom branding', 'Analytics', 'Priority support']
         }
       ]
     },
@@ -2850,7 +2850,6 @@ export const tools: Tool[] = [
     integrations: ['Git', 'GitHub', 'Various programming languages', 'Development tools', 'APIs'],
     lastVerified: new Date('2025-05-23')
   },
-
   {
     id: 'gpt-engineer',
     name: 'GPT Engineer',
@@ -4087,7 +4086,6 @@ export const tools: Tool[] = [
     subcategoryIds: ['visualization-tools'],
     pricing: {
       type: 'free',
-      startingPrice: '$0',
       hasFreeOption: true,
       tiers: [
         {
@@ -4209,7 +4207,6 @@ export const tools: Tool[] = [
     integrations: ['Presentation software', 'Educational platforms', 'Social media', 'Documentation tools'],
     lastVerified: new Date('2025-05-30')
   },
-
   {
     id: 'ai-explainer',
     name: 'AI Explainer',
@@ -4254,7 +4251,6 @@ export const tools: Tool[] = [
     integrations: ['Web browsers', 'Educational platforms', 'Research tools', 'Academic networks'],
     lastVerified: new Date('2025-05-30')
   },
-
   {
     id: 'google-scholar',
     name: 'Google Scholar',
@@ -4299,7 +4295,6 @@ export const tools: Tool[] = [
     integrations: ['University libraries', 'Citation managers', 'Research tools', 'Academic databases'],
     lastVerified: new Date('2025-05-30')
   },
-
   {
     id: 'semantic-scholar',
     name: 'Semantic Scholar',
@@ -4344,7 +4339,6 @@ export const tools: Tool[] = [
     integrations: ['Citation managers', 'Research tools', 'Academic databases', 'API access'],
     lastVerified: new Date('2025-05-30')
   },
-
   {
     id: 'connected-papers',
     name: 'Connected Papers',
@@ -4395,7 +4389,6 @@ export const tools: Tool[] = [
     integrations: ['Academic databases', 'Citation managers', 'Research tools', 'Export formats'],
     lastVerified: new Date('2025-05-30')
   },
-
   {
     id: 'research-rabbit',
     name: 'Research Rabbit',
@@ -4440,7 +4433,6 @@ export const tools: Tool[] = [
     integrations: ['Zotero', 'Mendeley', 'Academic databases', 'Social platforms'],
     lastVerified: new Date('2025-05-30')
   },
-
   {
     id: 'ai-stack-overflow',
     name: 'AI Stack Overflow',
@@ -4485,7 +4477,6 @@ export const tools: Tool[] = [
     integrations: ['Developer tools', 'IDEs', 'Documentation', 'Learning platforms'],
     lastVerified: new Date('2025-05-30')
   },
-
   {
     id: 'reddit-machinelearning',
     name: 'Reddit Machine Learning',
@@ -4530,7 +4521,6 @@ export const tools: Tool[] = [
     integrations: ['Reddit platform', 'External links', 'Social sharing', 'Mobile apps'],
     lastVerified: new Date('2025-05-30')
   },
-
   {
     id: 'discord-ai',
     name: 'Discord AI Communities',
@@ -4575,7 +4565,6 @@ export const tools: Tool[] = [
     integrations: ['Discord platform', 'Bots', 'Screen sharing', 'Mobile apps'],
     lastVerified: new Date('2025-05-30')
   },
-
   {
     id: 'ml-twitter',
     name: 'ML Twitter Community',
@@ -5269,5 +5258,883 @@ export const tools: Tool[] = [
     featured: false,
     integrations: ['PowerPoint', 'Google Slides', 'Keynote', 'PDF export'],
     lastVerified: new Date('2025-05-27')
+  },
+
+  // Diagramming Tools
+  {
+    id: 'miro-ai',
+    name: 'Miro AI',
+    slug: 'miro-ai',
+    description: 'Miro AI enhances collaborative whiteboarding with intelligent features like smart diagram generation, auto-organizing sticky notes, mind map creation, and AI-powered insights for brainstorming sessions.',
+    shortDescription: 'AI-powered collaborative whiteboard platform',
+    logo: 'https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg',
+    website: 'https://miro.com/ai/',
+    categoryId: 'diagramming-tools',
+    subcategoryIds: ['mind-maps', 'flowcharts', 'collaborative-diagramming'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$8/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['3 editable boards', 'Basic AI features', 'Core templates', 'Basic collaboration']
+        },
+        {
+          name: 'Starter',
+          price: '$8/month',
+          billingPeriod: 'monthly',
+          features: ['Unlimited personal boards', 'Advanced AI features', 'Premium templates', 'Team collaboration']
+        },
+        {
+          name: 'Business',
+          price: '$16/month',
+          billingPeriod: 'monthly',
+          features: ['Unlimited team boards', 'AI insights & analytics', 'Advanced integrations', 'Admin controls']
+        },
+        {
+          name: 'Enterprise',
+          price: 'Custom',
+          billingPeriod: 'monthly',
+          features: ['Enterprise security', 'Custom AI models', 'Advanced analytics', 'Dedicated support']
+        }
+      ]
+    },
+    features: [
+      'AI-powered mind mapping',
+      'Smart sticky note organization',
+      'Automated flowchart generation',
+      'Real-time collaboration',
+      'AI brainstorming assistance',
+      'Template recommendations',
+      'Data visualization tools',
+      'Integration ecosystem'
+    ],
+    limitations: [
+      'Limited boards on free plan',
+      'Advanced AI features require paid plans',
+      'Learning curve for complex features',
+      'Internet connectivity required'
+    ],
+    rating: 4.6,
+    reviewCount: 3200,
+    trending: true,
+    featured: true,
+    integrations: ['Slack', 'Microsoft Teams', 'Jira', 'Confluence', 'Google Workspace', 'Figma'],
+    lastVerified: new Date('2025-05-31')
+  },
+  {
+    id: 'lucidchart-ai',
+    name: 'Lucidchart AI',
+    slug: 'lucidchart-ai',
+    description: 'Lucidchart AI revolutionizes diagramming with intelligent flowchart generation, smart shape suggestions, auto-layout optimization, and collaborative visual planning for technical documentation.',
+    shortDescription: 'Professional AI diagramming and flowchart tool',
+    logo: 'https://images.pexels.com/photos/590022/pexels-photo-590022.jpeg',
+    website: 'https://lucid.co/lucidchart-ai',
+    categoryId: 'diagramming-tools',
+    subcategoryIds: ['flowcharts', 'technical-diagrams', 'process-mapping'],
+    pricing: {
+      type: 'subscription',
+      startingPrice: '$7.95/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['3 documents', 'Basic templates', 'Limited AI features', '100 professional templates']
+        },
+        {
+          name: 'Individual',
+          price: '$7.95/month',
+          billingPeriod: 'monthly',
+          features: ['Unlimited documents', 'Advanced AI features', 'Integrations', 'Data linking']
+        },
+        {
+          name: 'Team',
+          price: '$9/user/month',
+          billingPeriod: 'monthly',
+          features: ['Team collaboration', 'Advanced shapes', 'Version history', 'Team management']
+        },
+        {
+          name: 'Enterprise',
+          price: 'Custom',
+          billingPeriod: 'monthly',
+          features: ['Advanced security', 'Custom integrations', 'Dedicated support', 'Enterprise controls']
+        }
+      ]
+    },
+    features: [
+      'AI-powered flowchart generation',
+      'Smart shape suggestions',
+      'Auto-layout optimization',
+      'Technical diagram templates',
+      'Data-linked diagrams',
+      'Real-time collaboration',
+      'Version control',
+      'Cloud synchronization'
+    ],
+    limitations: [
+      'Document limits on free plan',
+      'Advanced features require subscription',
+      'Complex diagrams may need manual adjustment',
+      'Learning curve for technical features'
+    ],
+    rating: 4.5,
+    reviewCount: 2800,
+    trending: true,
+    featured: false,
+    integrations: ['Microsoft Office', 'Google Workspace', 'Slack', 'Confluence', 'Jira', 'Salesforce'],
+    lastVerified: new Date('2025-05-31')
+  },
+  {
+    id: 'draw-io-ai',
+    name: 'Draw.io AI',
+    slug: 'draw-io-ai',
+    description: 'Draw.io (now diagrams.net) enhanced with AI capabilities for automatic diagram generation, smart layout suggestions, and intelligent shape recognition for technical and business diagrams.',
+    shortDescription: 'Free AI-enhanced diagramming tool',
+    logo: 'https://images.pexels.com/photos/270348/pexels-photo-270348.jpeg',
+    website: 'https://app.diagrams.net/',
+    categoryId: 'diagramming-tools',
+    subcategoryIds: ['flowcharts', 'technical-diagrams', 'network-diagrams'],
+    pricing: {
+      type: 'free',
+      startingPrice: '$0',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'one-time',
+          features: ['Unlimited diagrams', 'All diagram types', 'Cloud storage options', 'Export formats']
+        }
+      ]
+    },
+    features: [
+      'AI diagram generation',
+      'Smart layout algorithms',
+      'Extensive shape libraries',
+      'Multiple export formats',
+      'Cloud storage integration',
+      'Collaborative editing',
+      'Version history',
+      'Open source flexibility'
+    ],
+    limitations: [
+      'Limited AI features compared to paid tools',
+      'Interface can be overwhelming',
+      'Advanced AI requires browser extensions',
+      'Less polished than premium alternatives'
+    ],
+    rating: 4.3,
+    reviewCount: 1900,
+    trending: false,
+    featured: false,
+    integrations: ['Google Drive', 'OneDrive', 'Dropbox', 'Confluence', 'Jira', 'GitHub'],
+    lastVerified: new Date('2025-05-31')
+  },
+  {
+    id: 'whimsical-ai',
+    name: 'Whimsical AI',
+    slug: 'whimsical-ai',
+    description: 'Whimsical AI combines beautiful design with intelligent features for creating flowcharts, wireframes, mind maps, and sticky notes with AI-powered content generation and layout suggestions.',
+    shortDescription: 'Beautiful AI-powered visual workspace',
+    logo: 'https://images.pexels.com/photos/3861458/pexels-photo-3861458.jpeg',
+    website: 'https://whimsical.com/ai',
+    categoryId: 'diagramming-tools',
+    subcategoryIds: ['mind-maps', 'wireframes', 'flowcharts'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$10/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['4 boards', 'Basic AI features', 'Core templates', '1,000 blocks']
+        },
+        {
+          name: 'Pro',
+          price: '$10/month',
+          billingPeriod: 'monthly',
+          features: ['Unlimited boards', 'Advanced AI features', 'Premium templates', 'Unlimited blocks']
+        },
+        {
+          name: 'Org',
+          price: '$20/month',
+          billingPeriod: 'monthly',
+          features: ['Team features', 'Advanced permissions', 'Priority support', 'Admin controls']
+        }
+      ]
+    },
+    features: [
+      'AI content generation',
+      'Smart wireframe creation',
+      'Beautiful mind mapping',
+      'Sticky note organization',
+      'Template library',
+      'Real-time collaboration',
+      'Export capabilities',
+      'Design-focused interface'
+    ],
+    limitations: [
+      'Limited boards on free plan',
+      'Fewer integrations than competitors',
+      'Advanced features require Pro plan',
+      'Learning curve for complex diagrams'
+    ],
+    rating: 4.4,
+    reviewCount: 1600,
+    trending: true,
+    featured: false,
+    integrations: ['Slack', 'Figma', 'Notion', 'GitHub', 'Linear'],
+    lastVerified: new Date('2025-05-31')
+  },
+  {
+    id: 'visio-ai',
+    name: 'Microsoft Visio AI',
+    slug: 'visio-ai',
+    description: 'Microsoft Visio enhanced with AI capabilities for intelligent diagram creation, data visualization, process automation, and smart shape suggestions for enterprise diagramming needs.',
+    shortDescription: 'Enterprise AI diagramming solution',
+    logo: 'https://images.pexels.com/photos/159888/pexels-photo-159888.jpeg',
+    website: 'https://www.microsoft.com/en-us/microsoft-365/visio/flowchart-software',
+    categoryId: 'diagramming-tools',
+    subcategoryIds: ['flowcharts', 'technical-diagrams', 'process-mapping'],
+    pricing: {
+      type: 'subscription',
+      startingPrice: '$5/month',
+      hasFreeOption: false,
+      tiers: [
+        {
+          name: 'Visio Plan 1',
+          price: '$5/month',
+          billingPeriod: 'monthly',
+          features: ['Web and mobile apps', 'Basic AI features', '2GB OneDrive storage', 'Basic templates']
+        },
+        {
+          name: 'Visio Plan 2',
+          price: '$15/month',
+          billingPeriod: 'monthly',
+          features: ['Desktop + web apps', 'Advanced AI features', 'Data connectivity', 'Advanced templates']
+        }
+      ]
+    },
+    features: [
+      'AI-powered diagram suggestions',
+      'Data-connected diagrams',
+      'Process automation',
+      'Enterprise templates',
+      'Microsoft 365 integration',
+      'Collaborative editing',
+      'Version control',
+      'Advanced security'
+    ],
+    limitations: [
+      'No free tier',
+      'Microsoft ecosystem dependency',
+      'Complex pricing structure',
+      'Learning curve for advanced features'
+    ],
+    rating: 4.2,
+    reviewCount: 2200,
+    trending: false,
+    featured: false,
+    integrations: ['Microsoft 365', 'SharePoint', 'Teams', 'Power BI', 'Azure', 'Excel'],
+    lastVerified: new Date('2025-05-31')
+  },
+  {
+    id: 'mindmeister-ai',
+    name: 'MindMeister AI',
+    slug: 'mindmeister-ai',
+    description: 'MindMeister AI transforms mind mapping with intelligent content suggestions, automated branch creation, smart formatting, and AI-powered brainstorming for creative thinking and project planning.',
+    shortDescription: 'AI-powered mind mapping tool',
+    logo: 'https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg',
+    website: 'https://www.mindmeister.com/ai',
+    categoryId: 'diagramming-tools',
+    subcategoryIds: ['mind-maps', 'brainstorming-tools'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$4.99/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Basic',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['3 mind maps', 'Basic AI features', 'Core templates', 'Export options']
+        },
+        {
+          name: 'Personal',
+          price: '$4.99/month',
+          billingPeriod: 'monthly',
+          features: ['Unlimited mind maps', 'Advanced AI features', 'Premium templates', 'History & backup']
+        },
+        {
+          name: 'Pro',
+          price: '$8.25/month',
+          billingPeriod: 'monthly',
+          features: ['Team collaboration', 'Advanced export', 'Integrations', 'Priority support']
+        },
+        {
+          name: 'Business',
+          price: '$12.49/month',
+          billingPeriod: 'monthly',
+          features: ['Advanced admin', 'Custom branding', 'Advanced security', 'Team analytics']
+        }
+      ]
+    },
+    features: [
+      'AI brainstorming assistance',
+      'Smart content suggestions',
+      'Automated formatting',
+      'Collaborative mind mapping',
+      'Template library',
+      'Export to multiple formats',
+      'Integration capabilities',
+      'Mobile synchronization'
+    ],
+    limitations: [
+      'Limited maps on free plan',
+      'Advanced AI requires paid plans',
+      'Some features need internet connection',
+      'Learning curve for team features'
+    ],
+    rating: 4.3,
+    reviewCount: 1800,
+    trending: true,
+    featured: false,
+    integrations: ['Microsoft Teams', 'G Suite', 'Dropbox', 'MeisterTask', 'Slack'],
+    lastVerified: new Date('2025-05-31')
+  },
+  {
+    id: 'creately-ai',
+    name: 'Creately AI',
+    slug: 'creately-ai',
+    description: 'Creately AI offers intelligent diagramming with automated flowchart generation, smart shape recognition, collaborative visual planning, and AI-powered insights for business process optimization.',
+    shortDescription: 'Intelligent visual collaboration platform',
+    logo: 'https://images.pexels.com/photos/3825581/pexels-photo-3825581.jpeg',
+    website: 'https://creately.com/ai',
+    categoryId: 'diagramming-tools',
+    subcategoryIds: ['flowcharts', 'process-mapping', 'collaborative-diagramming'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$5/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['5 documents', 'Basic AI features', 'Core templates', '3 collaborators']
+        },
+        {
+          name: 'Starter',
+          price: '$5/month',
+          billingPeriod: 'monthly',
+          features: ['Unlimited personal docs', 'Advanced AI features', 'Premium templates', 'Unlimited collaborators']
+        },
+        {
+          name: 'Business',
+          price: '$89/month',
+          billingPeriod: 'monthly',
+          features: ['Team workspace', 'Advanced collaboration', 'Data connectivity', 'Priority support']
+        }
+      ]
+    },
+    features: [
+      'AI diagram generation',
+      'Smart process mapping',
+      'Collaborative workspaces',
+      'Template automation',
+      'Data visualization',
+      'Real-time collaboration',
+      'Version control',
+      'Export capabilities'
+    ],
+    limitations: [
+      'Document limits on free plan',
+      'Steep pricing jump to Business tier',
+      'Learning curve for advanced features',
+      'Limited offline capabilities'
+    ],
+    rating: 4.1,
+    reviewCount: 1200,
+    trending: false,
+    featured: false,
+    integrations: ['Slack', 'Microsoft Teams', 'Google Workspace', 'Confluence', 'Jira'],
+    lastVerified: new Date('2025-05-31')
+  },
+  {
+    id: 'milanote-ai',
+    name: 'Milanote AI',
+    slug: 'milanote-ai',
+    description: 'Milanote AI enhances creative project organization with intelligent mood board creation, smart content curation, automated layout suggestions, and AI-powered creative insights for designers and teams.',
+    shortDescription: 'AI-powered creative mood board tool',
+    logo: 'https://images.pexels.com/photos/3944091/pexels-photo-3944091.jpeg',
+    website: 'https://milanote.com/ai',
+    categoryId: 'diagramming-tools',
+    subcategoryIds: ['mood-boards', 'creative-planning'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$9.99/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['100 notes/images/links', 'Basic AI features', '10 boards', 'File upload (100MB)']
+        },
+        {
+          name: 'Pro',
+          price: '$9.99/month',
+          billingPeriod: 'monthly',
+          features: ['Unlimited notes', 'Advanced AI features', 'Unlimited boards', 'File upload (unlimited)']
+        }
+      ]
+    },
+    features: [
+      'AI mood board generation',
+      'Smart content curation',
+      'Creative project organization',
+      'Collaborative boards',
+      'Template library',
+      'File management',
+      'Mobile synchronization',
+      'Export capabilities'
+    ],
+    limitations: [
+      'Limited storage on free plan',
+      'Focused on creative use cases',
+      'Fewer technical diagram features',
+      'Learning curve for organization'
+    ],
+    rating: 4.2,
+    reviewCount: 950,
+    trending: false,
+    featured: false,
+    integrations: ['Photoshop', 'Sketch', 'Figma', 'InVision', 'Dropbox'],
+    lastVerified: new Date('2025-05-31')
+  },
+  {
+    id: 'xmind-ai',
+    name: 'XMind AI',
+    slug: 'xmind-ai',
+    description: 'XMind AI revolutionizes mind mapping with intelligent content generation, automated structure creation, smart formatting, and AI-powered brainstorming for enhanced productivity and creativity.',
+    shortDescription: 'Advanced AI mind mapping software',
+    logo: 'https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg',
+    website: 'https://www.xmind.net/ai',
+    categoryId: 'diagramming-tools',
+    subcategoryIds: ['mind-maps', 'brainstorming-tools'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$59.99/year',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['Core mind mapping', 'Basic AI features', 'Local storage', 'Basic export']
+        },
+        {
+          name: 'Pro',
+          price: '$59.99/year',
+          billingPeriod: 'yearly',
+          features: ['Advanced AI features', 'Cloud sync', 'Premium themes', 'Advanced export']
+        }
+      ]
+    },
+    features: [
+      'AI-powered mind mapping',
+      'Smart content suggestions',
+      'Multiple map structures',
+      'Rich formatting options',
+      'Presentation mode',
+      'Cloud synchronization',
+      'Team collaboration',
+      'Advanced export options'
+    ],
+    limitations: [
+      'Limited AI features on free plan',
+      'Annual subscription model',
+      'Learning curve for advanced features',
+      'Limited real-time collaboration'
+    ],
+    rating: 4.0,
+    reviewCount: 1400,
+    trending: false,
+    featured: false,
+    integrations: ['Office 365', 'Google Workspace', 'Evernote', 'GitHub'],
+    lastVerified: new Date('2025-05-31')
+  },
+  {
+    id: 'conceptdraw-ai',
+    name: 'ConceptDraw AI',
+    slug: 'conceptdraw-ai',
+    description: 'ConceptDraw AI provides professional diagramming with intelligent automation, extensive template libraries, smart shape suggestions, and AI-powered business process modeling for enterprise users.',
+    shortDescription: 'Professional AI business diagramming suite',
+    logo: 'https://images.pexels.com/photos/590022/pexels-photo-590022.jpeg',
+    website: 'https://www.conceptdraw.com/ai',
+    categoryId: 'diagramming-tools',
+    subcategoryIds: ['flowcharts', 'technical-diagrams', 'business-process-modeling'],
+    pricing: {
+      type: 'subscription',
+      startingPrice: '$199/year',
+      hasFreeOption: false,
+      tiers: [
+        {
+          name: 'Standard',
+          price: '$199/year',
+          billingPeriod: 'yearly',
+          features: ['Core diagramming', 'Basic AI features', 'Standard templates', 'Email support']
+        },
+        {
+          name: 'Professional',
+          price: '$499/year',
+          billingPeriod: 'yearly',
+          features: ['Advanced AI features', 'Premium templates', 'Data connectivity', 'Priority support']
+        }
+      ]
+    },
+    features: [
+      'AI diagram automation',
+      'Extensive template library',
+      'Business process modeling',
+      'Data visualization',
+      'Multi-platform support',
+      'Export capabilities',
+      'Professional templates',
+      'Technical documentation'
+    ],
+    limitations: [
+      'No free tier',
+      'Higher cost than competitors',
+      'Complex interface',
+      'Learning curve for beginners'
+    ],
+    rating: 3.9,
+    reviewCount: 800,
+    trending: false,
+    featured: false,
+    integrations: ['Microsoft Office', 'SharePoint', 'Confluence', 'Dropbox'],
+    lastVerified: new Date('2025-05-31')
+  },
+  {
+    id: 'alteryx',
+    name: 'Alteryx',
+    slug: 'alteryx',
+    description: 'Alteryx is an enterprise-grade data analytics platform that combines data preparation, advanced analytics, and machine learning capabilities. It provides a visual workflow designer that enables users to blend data from multiple sources, perform complex analytics, and deploy predictive models without extensive coding.',
+    shortDescription: 'Enterprise data analytics and machine learning platform',
+    logo: 'https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg',
+    website: 'https://www.alteryx.com',
+    categoryId: 'data-analysis',
+    subcategoryIds: ['data-visualization', 'predictive-analysis'],
+    pricing: {
+      type: 'paid',
+      startingPrice: '$5,195/year',
+      hasFreeOption: false,
+      tiers: [
+        {
+          name: 'Designer',
+          price: '$5,195/year',
+          billingPeriod: 'yearly',
+          features: ['Data preparation', 'Basic analytics', 'Visual workflow', '1 user license']
+        },
+        {
+          name: 'Server',
+          price: '$25,000+/year',
+          billingPeriod: 'yearly',
+          features: ['Enterprise deployment', 'Collaboration', 'Governance', 'Multiple users']
+        },
+        {
+          name: 'Intelligence Suite',
+          price: 'Custom pricing',
+          billingPeriod: 'yearly',
+          features: ['Advanced ML', 'Auto ML', 'Data science collaboration', 'Enterprise features']
+        }
+      ]
+    },
+    features: [
+      'Visual data preparation',
+      'Advanced analytics workflows',
+      'Machine learning automation',
+      'Data blending from 100+ sources',
+      'Predictive modeling',
+      'Spatial analytics',
+      'Text mining capabilities',
+      'Enterprise deployment options'
+    ],
+    limitations: [
+      'High cost for small teams',
+      'Steep learning curve',
+      'Resource intensive',
+      'Limited free options'
+    ],
+    rating: 4.3,
+    reviewCount: 1200,
+    trending: false,
+    featured: true,
+    integrations: ['Snowflake', 'AWS', 'Azure', 'Tableau', 'Power BI', 'Salesforce'],
+    lastVerified: new Date('2025-01-15')
+  },
+  {
+    id: 'hex',
+    name: 'Hex',
+    slug: 'hex',
+    description: 'Hex is a modern collaborative data workspace that combines the power of notebooks, SQL, and no-code tools. It enables data teams to work together on analysis, visualization, and machine learning projects with features like version control, commenting, and real-time collaboration.',
+    shortDescription: 'Collaborative data workspace with notebooks and SQL',
+    logo: 'https://images.pexels.com/photos/11035364/pexels-photo-11035364.jpeg',
+    website: 'https://hex.tech',
+    categoryId: 'data-analysis',
+    subcategoryIds: ['data-visualization', 'predictive-analysis'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$20/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Community',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['2 editors', 'Unlimited viewers', 'Basic integrations', 'Public projects']
+        },
+        {
+          name: 'Team',
+          price: '$20/month',
+          billingPeriod: 'monthly',
+          features: ['Unlimited editors', 'Private projects', 'Advanced integrations', 'Version control']
+        },
+        {
+          name: 'Organization',
+          price: '$60/month',
+          billingPeriod: 'monthly',
+          features: ['Enterprise security', 'SSO', 'Advanced governance', 'Priority support']
+        },
+        {
+          name: 'Enterprise',
+          price: 'Custom pricing',
+          billingPeriod: 'yearly',
+          features: ['On-premise deployment', 'Custom integrations', 'Dedicated support', 'SLA']
+        }
+      ]
+    },
+    features: [
+      'Interactive notebooks',
+      'SQL editor with autocomplete',
+      'Real-time collaboration',
+      'Version control',
+      'Data visualization library',
+      'Python and R support',
+      'Automated reporting',
+      'API integrations'
+    ],
+    limitations: [
+      'Limited offline capabilities',
+      'Learning curve for non-technical users',
+      'Performance with very large datasets',
+      'Limited customization in free tier'
+    ],
+    rating: 4.6,
+    reviewCount: 890,
+    trending: true,
+    featured: true,
+    integrations: ['Snowflake', 'BigQuery', 'Redshift', 'PostgreSQL', 'dbt', 'GitHub'],
+    lastVerified: new Date('2025-01-15')
+  },
+  {
+    id: 'mode',
+    name: 'Mode',
+    slug: 'mode',
+    description: 'Mode is a collaborative analytics platform that combines SQL, Python, and R in a single workspace. It enables data teams to query databases, build visualizations, and share insights through interactive reports and dashboards with enterprise-grade security and governance.',
+    shortDescription: 'Collaborative analytics platform with SQL, Python, and R',
+    logo: 'https://images.pexels.com/photos/590016/pexels-photo-590016.jpg',
+    website: 'https://mode.com',
+    categoryId: 'data-analysis',
+    subcategoryIds: ['data-visualization', 'predictive-analysis'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$35/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Studio',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['3 editors', 'Unlimited viewers', 'Basic SQL', 'Public reports']
+        },
+        {
+          name: 'Business',
+          price: '$35/month',
+          billingPeriod: 'monthly',
+          features: ['Unlimited editors', 'Private reports', 'Python/R support', 'API access']
+        },
+        {
+          name: 'Enterprise',
+          price: '$80/month',
+          billingPeriod: 'monthly',
+          features: ['Advanced security', 'SSO', 'Custom branding', 'Priority support']
+        },
+        {
+          name: 'Data Platform',
+          price: 'Custom pricing',
+          billingPeriod: 'yearly',
+          features: ['Data warehouse', 'ETL pipelines', 'Advanced governance', 'Dedicated support']
+        }
+      ]
+    },
+    features: [
+      'SQL query editor',
+      'Python and R notebooks',
+      'Interactive visualizations',
+      'Collaborative workspace',
+      'Automated reports',
+      'Dashboard creation',
+      'Data governance',
+      'Enterprise security'
+    ],
+    limitations: [
+      'Limited free tier features',
+      'Complex pricing structure',
+      'Performance with large datasets',
+      'Learning curve for beginners'
+    ],
+    rating: 4.4,
+    reviewCount: 950,
+    trending: false,
+    featured: true,
+    integrations: ['Snowflake', 'BigQuery', 'Redshift', 'MySQL', 'PostgreSQL', 'Slack'],
+    lastVerified: new Date('2025-01-15')
+  },
+  {
+    id: 'obviously-ai',
+    name: 'Obviously AI',
+    slug: 'obviously-ai',
+    description: 'Obviously AI is a no-code machine learning platform that enables anyone to build, deploy, and monitor predictive models without programming knowledge. It automates the entire ML pipeline from data preprocessing to model deployment, making advanced analytics accessible to business users.',
+    shortDescription: 'No-code machine learning platform for predictive analytics',
+    logo: 'https://images.pexels.com/photos/8386434/pexels-photo-8386434.jpeg',
+    website: 'https://www.obviously.ai',
+    categoryId: 'data-analysis',
+    subcategoryIds: ['predictive-analysis'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$75/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['1 model', '1,000 predictions/month', 'Basic algorithms', 'Email support']
+        },
+        {
+          name: 'Starter',
+          price: '$75/month',
+          billingPeriod: 'monthly',
+          features: ['5 models', '10,000 predictions/month', 'All algorithms', 'API access']
+        },
+        {
+          name: 'Professional',
+          price: '$200/month',
+          billingPeriod: 'monthly',
+          features: ['25 models', '100,000 predictions/month', 'Advanced features', 'Priority support']
+        },
+        {
+          name: 'Enterprise',
+          price: 'Custom pricing',
+          billingPeriod: 'yearly',
+          features: ['Unlimited models', 'Unlimited predictions', 'On-premise option', 'Dedicated support']
+        }
+      ]
+    },
+    features: [
+      'No-code model building',
+      'Automated feature engineering',
+      'Multiple ML algorithms',
+      'Real-time predictions',
+      'Model monitoring',
+      'API deployment',
+      'Data visualization',
+      'Explainable AI'
+    ],
+    limitations: [
+      'Limited customization',
+      'No code export',
+      'Performance with complex models',
+      'Limited data preprocessing options'
+    ],
+    rating: 4.2,
+    reviewCount: 680,
+    trending: true,
+    featured: false,
+    integrations: ['CSV', 'Excel', 'Google Sheets', 'Zapier', 'API', 'Webhooks'],
+    lastVerified: new Date('2025-01-15')
+  },
+  {
+    id: 'anakin-ai',
+    name: 'Anakin AI',
+    slug: 'anakin-ai',
+    description: 'Anakin AI is a comprehensive AI platform that combines data analysis, automation, and machine learning capabilities. It offers pre-built AI workflows for various business use cases, from data processing and analysis to content generation and predictive modeling, all accessible through a user-friendly interface.',
+    shortDescription: 'All-in-one AI platform for data analysis and automation',
+    logo: 'https://images.pexels.com/photos/8386422/pexels-photo-8386422.jpeg',
+    website: 'https://anakin.ai',
+    categoryId: 'data-analysis',
+    subcategoryIds: ['data-visualization', 'predictive-analysis'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$10/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['10 AI credits/month', 'Basic workflows', 'Community templates', 'Email support']
+        },
+        {
+          name: 'Basic',
+          price: '$10/month',
+          billingPeriod: 'monthly',
+          features: ['1,000 AI credits/month', 'All workflows', 'Premium templates', 'Priority support']
+        },
+        {
+          name: 'Pro',
+          price: '$30/month',
+          billingPeriod: 'monthly',
+          features: ['5,000 AI credits/month', 'Custom workflows', 'API access', 'Advanced features']
+        },
+        {
+          name: 'Enterprise',
+          price: 'Custom pricing',
+          billingPeriod: 'yearly',
+          features: ['Unlimited credits', 'White-label option', 'Dedicated support', 'On-premise deployment']
+        }
+      ]
+    },
+    features: [
+      'Pre-built AI workflows',
+      'Data analysis automation',
+      'Custom workflow builder',
+      'Multiple AI models',
+      'Data visualization',
+      'API integration',
+      'Template marketplace',
+      'Real-time collaboration'
+    ],
+    limitations: [
+      'Credit-based usage model',
+      'Limited offline capabilities',
+      'Performance varies by workflow',
+      'Learning curve for complex workflows'
+    ],
+    rating: 4.1,
+    reviewCount: 520,
+    trending: true,
+    featured: false,
+    integrations: ['Google Sheets', 'Airtable', 'Slack', 'Discord', 'Zapier', 'API'],
+    lastVerified: new Date('2025-01-15')
   }
 ];

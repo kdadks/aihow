@@ -292,5 +292,124 @@ export const workflowBundles: WorkflowBundle[] = [
       'Automate design and content optimization with Decktopus AI',
       'Integrate real-time audience engagement features'
     ]
+  },
+  {
+    id: '17',
+    name: 'Visual Collaboration & Diagramming Suite',
+    description: 'Complete toolkit for team collaboration, diagramming, and visual planning with AI-powered features.',
+    tools: [
+      findTool('miro-ai'), // Miro AI - Collaborative whiteboard
+      findTool('lucidchart-ai'), // Lucidchart AI - Professional diagramming
+      findTool('whimsical-ai') // Whimsical AI - Beautiful visual workspace
+    ],
+    totalCost: '$34/month',
+    implementationSteps: [
+      'Set up Miro AI for team brainstorming and collaborative planning',
+      'Use Lucidchart AI for professional flowcharts and technical diagrams',
+      'Create wireframes and mind maps with Whimsical AI',
+      'Integrate tools for seamless visual workflow'
+    ]
+  },
+  {
+    id: '18',
+    name: 'Mind Mapping & Brainstorming Bundle',
+    description: 'AI-powered creative thinking and ideation tools for enhanced brainstorming and concept development.',
+    tools: [
+      findTool('mindmeister-ai'), // MindMeister AI - Professional mind mapping
+      findTool('xmind-ai'), // XMind AI - Advanced mind mapping
+      findTool('miro-ai') // Miro AI - Collaborative brainstorming
+    ],
+    totalCost: '$22.98/month',
+    implementationSteps: [
+      'Start brainstorming sessions with MindMeister AI',
+      'Develop detailed mind maps using XMind AI',
+      'Collaborate on ideas and concepts with Miro AI',
+      'Export and share mind maps across teams'
+    ]
+  },
+  {
+    id: '19',
+    name: 'Enterprise Process Mapping Suite',
+    description: 'Professional business process modeling and documentation tools for enterprise workflow optimization.',
+    tools: [
+      findTool('visio-ai'), // Microsoft Visio AI - Enterprise diagramming
+      findTool('lucidchart-ai'), // Lucidchart AI - Professional flowcharts
+      findTool('conceptdraw-ai') // ConceptDraw AI - Business process modeling
+    ],
+    totalCost: '$273.95/month',
+    implementationSteps: [
+      'Map enterprise processes with Microsoft Visio AI',
+      'Create detailed flowcharts using Lucidchart AI',
+      'Develop comprehensive business models with ConceptDraw AI',
+      'Integrate with existing enterprise systems and documentation'
+    ]
+  },
+  {
+    id: '20',
+    name: 'Creative Design & Planning Workflow',
+    description: 'AI-enhanced creative project planning, mood boards, and visual organization for designers and creative teams.',
+    tools: [
+      findTool('milanote-ai'), // Milanote AI - Creative mood boards
+      findTool('whimsical-ai'), // Whimsical AI - Design wireframes
+      findTool('miro-ai') // Miro AI - Creative collaboration
+    ],
+    totalCost: '$27.99/month',
+    implementationSteps: [
+      'Organize creative projects and mood boards with Milanote AI',
+      'Create wireframes and design concepts using Whimsical AI',
+      'Collaborate on creative ideas with Miro AI',
+      'Streamline creative workflow from concept to execution'
+    ]
+  },
+  {
+    id: '21',
+    name: 'Technical Documentation & Diagramming',
+    description: 'Complete solution for technical documentation, system architecture diagrams, and engineering workflows.',
+    tools: [
+      findTool('draw-io-ai'), // Draw.io AI - Free technical diagrams
+      findTool('lucidchart-ai'), // Lucidchart AI - Professional diagramming
+      findTool('visio-ai') // Microsoft Visio AI - Enterprise technical diagrams
+    ],
+    totalCost: '$31.95/month',
+    implementationSteps: [
+      'Create basic technical diagrams with Draw.io AI',
+      'Develop professional documentation using Lucidchart AI',
+      'Build enterprise-grade technical diagrams with Visio AI',
+      'Maintain consistent technical documentation standards'
+    ]
+  },
+  {
+    id: '22',
+    name: 'Enterprise Data Analytics Suite',
+    description: 'Comprehensive data analysis workflow combining data preparation, advanced analytics, and machine learning for enterprise-grade insights.',
+    tools: [
+      findTool('alteryx'), // Alteryx - Enterprise data analytics platform
+      findTool('hex'), // Hex - Collaborative data workspace
+      findTool('mode') // Mode - Analytics platform with SQL, Python, and R
+    ],
+    totalCost: '$6,250/year',
+    implementationSteps: [
+      'Set up data preparation workflows with Alteryx for enterprise data blending',
+      'Create collaborative analysis notebooks using Hex for team collaboration',
+      'Build advanced SQL and Python analytics with Mode for reporting',
+      'Establish data governance and sharing protocols across tools'
+    ]
+  },
+  {
+    id: '23',
+    name: 'No-Code Predictive Analytics Bundle',
+    description: 'User-friendly data analysis workflow for business users to build predictive models and automated insights without coding.',
+    tools: [
+      findTool('obviously-ai'), // Obviously AI - No-code machine learning
+      findTool('anakin-ai'), // Anakin AI - All-in-one AI platform
+      findTool('hex') // Hex - Collaborative data workspace (Community tier)
+    ],
+    totalCost: '$95/month',
+    implementationSteps: [
+      'Build predictive models without coding using Obviously AI',
+      'Create automated data workflows with Anakin AI',
+      'Visualize and share results through Hex collaborative workspace',
+      'Set up automated reporting and model monitoring'
+    ]
   }
 ];

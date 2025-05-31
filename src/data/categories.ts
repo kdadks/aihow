@@ -441,13 +441,78 @@ export const categories: Category[] = [
         id: 'flowcharts',
         name: 'Flowcharts',
         description: 'Create flowcharts and process diagrams',
-        parentCategoryId: 'diagramming-tools'
+        parentCategoryId: 'diagramming-tools',
+        tools: ['lucidchart-ai', 'draw-io-ai', 'visio-ai', 'whimsical-ai', 'creately-ai', 'conceptdraw-ai', 'miro-ai']
       },
       {
         id: 'mind-maps',
         name: 'Mind Maps',
         description: 'Create mind maps and concept diagrams',
-        parentCategoryId: 'diagramming-tools'
+        parentCategoryId: 'diagramming-tools',
+        tools: ['miro-ai', 'mindmeister-ai', 'whimsical-ai', 'xmind-ai']
+      },
+      {
+        id: 'technical-diagrams',
+        name: 'Technical Diagrams',
+        description: 'Create technical and engineering diagrams',
+        parentCategoryId: 'diagramming-tools',
+        tools: ['lucidchart-ai', 'draw-io-ai', 'visio-ai', 'conceptdraw-ai']
+      },
+      {
+        id: 'collaborative-diagramming',
+        name: 'Collaborative Diagramming',
+        description: 'Real-time collaborative diagram creation',
+        parentCategoryId: 'diagramming-tools',
+        tools: ['miro-ai', 'creately-ai', 'lucidchart-ai', 'whimsical-ai']
+      },
+      {
+        id: 'process-mapping',
+        name: 'Process Mapping',
+        description: 'Business process and workflow mapping',
+        parentCategoryId: 'diagramming-tools',
+        tools: ['lucidchart-ai', 'visio-ai', 'creately-ai', 'conceptdraw-ai']
+      },
+      {
+        id: 'wireframes',
+        name: 'Wireframes & Mockups',
+        description: 'UI/UX wireframes and mockup creation',
+        parentCategoryId: 'diagramming-tools',
+        tools: ['whimsical-ai', 'miro-ai']
+      },
+      {
+        id: 'network-diagrams',
+        name: 'Network Diagrams',
+        description: 'IT infrastructure and network diagrams',
+        parentCategoryId: 'diagramming-tools',
+        tools: ['draw-io-ai', 'lucidchart-ai', 'visio-ai']
+      },
+      {
+        id: 'mood-boards',
+        name: 'Mood Boards',
+        description: 'Creative mood boards and inspiration collections',
+        parentCategoryId: 'diagramming-tools',
+        tools: ['milanote-ai', 'miro-ai']
+      },
+      {
+        id: 'brainstorming-tools',
+        name: 'Brainstorming Tools',
+        description: 'AI-powered brainstorming and ideation',
+        parentCategoryId: 'diagramming-tools',
+        tools: ['miro-ai', 'mindmeister-ai', 'xmind-ai']
+      },
+      {
+        id: 'creative-planning',
+        name: 'Creative Planning',
+        description: 'Creative project planning and organization',
+        parentCategoryId: 'diagramming-tools',
+        tools: ['milanote-ai', 'miro-ai', 'whimsical-ai']
+      },
+      {
+        id: 'business-process-modeling',
+        name: 'Business Process Modeling',
+        description: 'Enterprise business process modeling and optimization',
+        parentCategoryId: 'diagramming-tools',
+        tools: ['conceptdraw-ai', 'visio-ai', 'lucidchart-ai', 'creately-ai']
       }
     ]
   },
@@ -461,13 +526,15 @@ export const categories: Category[] = [
         id: 'data-visualization',
         name: 'Data Visualization',
         description: 'Visualize data with AI assistance',
-        parentCategoryId: 'data-analysis'
+        parentCategoryId: 'data-analysis',
+        tools: ['alteryx', 'hex', 'mode', 'anakin-ai']
       },
       {
         id: 'predictive-analysis',
         name: 'Predictive Analysis',
         description: 'Predict trends and patterns in data',
-        parentCategoryId: 'data-analysis'
+        parentCategoryId: 'data-analysis',
+        tools: ['alteryx', 'hex', 'mode', 'obviously-ai', 'anakin-ai']
       }
     ]
   }
