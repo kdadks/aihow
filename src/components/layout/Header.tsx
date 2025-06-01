@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../auth/hooks/useAuth';
-import { Search, Menu, X, Scale, ChevronDown, ChevronRight, Users } from 'lucide-react';
+import { Search, Menu, X, Scale, ChevronDown, ChevronRight, Users, MoreHorizontal } from 'lucide-react';
 import { categories } from '../../data/categories';
 import { tools } from '../../data/tools';
 import { Button } from '../ui/Button';
@@ -14,9 +14,12 @@ export const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [activeCategoryId, setActiveCategoryId] = useState<string | null>(null);
+  const [openMobileCategories, setOpenMobileCategories] = useState<Set<string>>(new Set());
   const [searchQuery, setSearchQuery] = useState('');
+  const [showScrollIndicator, setShowScrollIndicator] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const searchRef = useRef<HTMLFormElement>(null);
+  const mobileMenuRef = useRef<HTMLDivElement>(null);
   const { selectedTools } = useComparisonStore();
 
   // Handle clicking outside of dropdown
@@ -30,8 +33,45 @@ export const Header: React.FC = () => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
+  // Handle scroll indicator for mobile menu
+  useEffect(() => {
+    const handleScroll = () => {
+      if (mobileMenuRef.current) {
+        const { scrollTop, scrollHeight, clientHeight } = mobileMenuRef.current;
+        const isScrollable = scrollHeight > clientHeight;
+        const isNearBottom = scrollTop + clientHeight >= scrollHeight - 20;
+        setShowScrollIndicator(isScrollable && !isNearBottom);
+      }
+    };
+
+    if (isMenuOpen && mobileMenuRef.current) {
+      const menuElement = mobileMenuRef.current;
+      menuElement.addEventListener('scroll', handleScroll);
+      // Check initially
+      handleScroll();
+      
+      return () => menuElement.removeEventListener('scroll', handleScroll);
+    }
+  }, [isMenuOpen]);
+
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
+    // Reset mobile categories to closed state when menu opens
+    if (!isMenuOpen) {
+      setOpenMobileCategories(new Set());
+    }
+  };
+
+  const toggleMobileCategory = (categoryId: string) => {
+    setOpenMobileCategories(prev => {
+      const newSet = new Set(prev);
+      if (newSet.has(categoryId)) {
+        newSet.delete(categoryId);
+      } else {
+        newSet.add(categoryId);
+      }
+      return newSet;
+    });
   };
 
   const handleSearchSubmit = (e: React.FormEvent) => {
@@ -247,8 +287,12 @@ export const Header: React.FC = () => {
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="md:hidden border-t border-gray-200">
-          <div className="px-4 pt-4 pb-6 space-y-5">
+        <div className="md:hidden border-t border-gray-200 bg-white relative">
+          {/* Mobile menu container with proper height constraints and scrolling */}
+          <div
+            ref={mobileMenuRef}
+            className="px-4 pt-4 pb-6 space-y-5 max-h-[calc(100vh-4rem)] overflow-y-auto mobile-menu-scroll mobile-scrollbar"
+          >
             {/* Mobile Search */}
             <form onSubmit={handleSearchSubmit} className="relative">
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -315,8 +359,8 @@ export const Header: React.FC = () => {
             <div className="rounded-lg border border-gray-200 overflow-hidden">
               <div className="px-4 py-3 bg-gray-50 border-b border-gray-200 flex justify-between items-center">
                 <span className="text-base font-semibold text-gray-900">AI Categories</span>
-                <Link 
-                  to="/directory" 
+                <Link
+                  to="/directory"
                   className="text-xs font-medium text-blue-600"
                   onClick={() => setIsMenuOpen(false)}
                 >
@@ -324,10 +368,16 @@ export const Header: React.FC = () => {
                 </Link>
               </div>
               
-              <nav className="divide-y divide-gray-100 max-h-[40vh] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent">
+              {/* Improved scrollable navigation with better mobile touch support */}
+              <nav
+                className="divide-y divide-gray-100 max-h-[50vh] overflow-y-auto mobile-menu-scroll mobile-scrollbar relative scroll-fade-bottom"
+              >
                 {categories.map(category => (
-                  <details key={category.id} className="group">
-                    <summary className="flex items-center justify-between px-4 py-3 cursor-pointer focus:outline-none hover:bg-gray-50">
+                  <div key={category.id} className="group">
+                    <button
+                      onClick={() => toggleMobileCategory(category.id)}
+                      className="w-full flex items-center justify-between px-4 py-3 cursor-pointer focus:outline-none hover:bg-gray-50 mobile-touch-target"
+                    >
                       <div className="flex items-center">
                         {/* Display category icon if available */}
                         {category.icon && (
@@ -337,9 +387,12 @@ export const Header: React.FC = () => {
                         )}
                         <span className="text-sm font-medium text-gray-900">{category.name}</span>
                       </div>
-                      <ChevronDown className="h-5 w-5 text-gray-400 group-open:rotate-180 transition-transform" />
-                    </summary>
-                    <div className="px-4 py-2 bg-gray-50 space-y-2">
+                      <ChevronDown className={`h-5 w-5 text-gray-400 transition-transform ${
+                        openMobileCategories.has(category.id) ? 'rotate-180' : ''
+                      }`} />
+                    </button>
+                    {openMobileCategories.has(category.id) && (
+                      <div className="px-4 py-2 bg-gray-50 space-y-2">
                       <div className="mb-2 flex justify-between items-center">
                         <Link
                           to={`/directory/${category.id}`}
@@ -355,7 +408,7 @@ export const Header: React.FC = () => {
                           <div key={subcategory.id} className="py-1">
                             <Link
                               to={`/directory/${category.id}/${subcategory.id}`}
-                              className="block text-sm font-medium text-gray-800 hover:text-blue-600"
+                              className="block text-sm font-medium text-gray-800 hover:text-blue-600 mobile-touch-target px-2 py-2 rounded-md hover:bg-gray-100"
                               onClick={() => setIsMenuOpen(false)}
                             >
                               {subcategory.name}
@@ -389,8 +442,9 @@ export const Header: React.FC = () => {
                           </div>
                         ))}
                       </div>
-                    </div>
-                  </details>
+                      </div>
+                    )}
+                  </div>
                 ))}
               </nav>
             </div>
@@ -401,33 +455,33 @@ export const Header: React.FC = () => {
                 <span className="text-base font-semibold text-gray-900">More Resources</span>
               </div>
               <div className="grid grid-cols-2 divide-y divide-x divide-gray-100">
-                <Link 
-                  to="/blog" 
-                  className="flex flex-col items-center justify-center p-4 text-center hover:bg-gray-100"
+                <Link
+                  to="/blog"
+                  className="flex flex-col items-center justify-center p-4 text-center hover:bg-gray-100 mobile-touch-target"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   <ChevronRight className="h-5 w-5 text-gray-500 mb-1" />
                   <span className="text-sm font-medium text-gray-900">AI Blog</span>
                 </Link>
-                <Link 
-                  to="/testimonials" 
-                  className="flex flex-col items-center justify-center p-4 text-center hover:bg-gray-100"
+                <Link
+                  to="/testimonials"
+                  className="flex flex-col items-center justify-center p-4 text-center hover:bg-gray-100 mobile-touch-target"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   <ChevronRight className="h-5 w-5 text-gray-500 mb-1" />
                   <span className="text-sm font-medium text-gray-900">Reviews</span>
                 </Link>
-                <Link 
-                  to="/about" 
-                  className="flex flex-col items-center justify-center p-4 text-center hover:bg-gray-100 border-t"
+                <Link
+                  to="/about"
+                  className="flex flex-col items-center justify-center p-4 text-center hover:bg-gray-100 border-t mobile-touch-target"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   <ChevronRight className="h-5 w-5 text-gray-500 mb-1" />
                   <span className="text-sm font-medium text-gray-900">About Us</span>
                 </Link>
-                <Link 
-                  to="/contact" 
-                  className="flex flex-col items-center justify-center p-4 text-center hover:bg-gray-100 border-t"
+                <Link
+                  to="/contact"
+                  className="flex flex-col items-center justify-center p-4 text-center hover:bg-gray-100 border-t mobile-touch-target"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   <ChevronRight className="h-5 w-5 text-gray-500 mb-1" />
@@ -457,6 +511,16 @@ export const Header: React.FC = () => {
               </div>
             </div>
           </div>
+          
+          {/* Scroll indicator */}
+          {showScrollIndicator && (
+            <div className="absolute bottom-0 left-0 right-0 flex justify-center py-2 bg-gradient-to-t from-white via-white to-transparent pointer-events-none">
+              <div className="flex items-center space-x-1 text-gray-400 text-xs">
+                <MoreHorizontal className="h-4 w-4" />
+                <span>Scroll for more</span>
+              </div>
+            </div>
+          )}
         </div>
       )}
     </header>
