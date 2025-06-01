@@ -21,11 +21,14 @@ export const adminRoutes: AdminRouteObject[] = [
     public: true
   },
   {
-    path: '/admin/*',
-    element: <AdminAuthGuard><AdminLayout /></AdminAuthGuard>,
+    path: '/admin',
+    element: (
+      <AdminAuthGuard>
+        <AdminLayout />
+      </AdminAuthGuard>
+    ),
     children: [
       {
-        // Index route that redirects to dashboard
         index: true,
         element: <Navigate to="/admin/dashboard" replace />
       },

@@ -43,15 +43,13 @@ export const AdminLayout: FC = () => {
             <h1 className="text-xl font-bold text-gray-900">Admin Portal</h1>
             <nav className="flex space-x-2">
               <NavItem to="/admin/dashboard" label="Dashboard" />
-              <NavItem 
-                to="/admin/settings" 
+              <NavItem
+                to="/admin/settings"
                 label="Settings"
-                permission="settings.view"
               />
-              <NavItem 
-                to="/admin/audit" 
+              <NavItem
+                to="/admin/audit"
                 label="Audit Logs"
-                permission="audit.view"
               />
             </nav>
           </div>

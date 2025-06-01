@@ -1,5 +1,5 @@
-import { FC } from 'react';
-import { Navigate } from 'react-router-dom';
+import { FC, useEffect } from 'react';
+import { Navigate, useNavigate } from 'react-router-dom';
 import { AdminLoginForm } from '../auth/components/AdminLoginForm';
 import { useAdminAuth } from '../auth/hooks/useAdminAuth';
 import { AdminAuthConfig } from '../auth/types/adminAuth';
@@ -14,16 +14,29 @@ const defaultConfig: AdminAuthConfig = {
 
 export const AdminLoginPage: FC = () => {
   const { isAuthenticated, login } = useAdminAuth();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      console.log('[AdminLoginPage] User authenticated, navigating to dashboard');
+      // Force navigation to dashboard
+      navigate('/admin/dashboard', { replace: true });
+    }
+  }, [isAuthenticated, navigate]);
 
   if (isAuthenticated) {
+    console.log('[AdminLoginPage] Already authenticated, redirecting to dashboard');
     return <Navigate to="/admin/dashboard" replace />;
   }
 
   const handleLogin = async (email: string, password: string) => {
     try {
+      console.log('[AdminLoginPage] Attempting login...');
       await login(email, password);
+      console.log('[AdminLoginPage] Login successful');
+      // Navigation will be handled by the useEffect above
     } catch (error) {
-      console.error('Login failed:', error);
+      console.error('[AdminLoginPage] Login failed:', error);
       // Re-throw error to propagate to form component
       throw error;
     }
