@@ -40,6 +40,39 @@
     touch-action: manipulation;
   }
   
+  /* Sticky auth section styling */
+  .mobile-auth-sticky {
+    backdrop-filter: blur(8px);
+    background-color: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    position: relative;
+  }
+  
+  /* Subtle accent border to highlight auth section */
+  .mobile-auth-sticky::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #60A5FA, #3B82F6);
+    opacity: 0.8;
+  }
+  
+  /* Enhanced mobile menu container */
+  .mobile-menu-container {
+    max-height: calc(100vh - 4rem);
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Improved scroll fade effects */
+  .scroll-fade-container {
+    position: relative;
+    overflow: hidden;
+  }
+  
   /* Fade indicator for scrollable content */
   .scroll-fade-bottom::after {
     content: '';
@@ -62,5 +95,59 @@
     background: linear-gradient(rgba(255, 255, 255, 0.9), transparent);
     pointer-events: none;
     z-index: 1;
+  }
+  
+  /* Enhanced mobile category styling */
+  .mobile-category-header {
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    border-left: 3px solid #3b82f6;
+  }
+  
+  .mobile-subcategory-item {
+    transition: all 0.2s ease-in-out;
+    border-left: 2px solid transparent;
+  }
+  
+  .mobile-subcategory-item:hover {
+    border-left-color: #60a5fa;
+    background-color: #f1f5f9;
+  }
+  
+  .mobile-tool-item {
+    transition: all 0.15s ease-in-out;
+    position: relative;
+  }
+  
+  .mobile-tool-item:hover {
+    transform: translateX(2px);
+    background-color: #eff6ff;
+  }
+  
+  .mobile-tool-indicator {
+    transition: all 0.15s ease-in-out;
+  }
+  
+  .mobile-tool-item:hover .mobile-tool-indicator {
+    background-color: #2563eb;
+    transform: scale(1.2);
+  }
+  
+  /* Better focus states for accessibility */
+  .mobile-touch-target:focus {
+    outline: 2px solid #3b82f6;
+    outline-offset: 2px;
+  }
+  
+  /* Smooth expansion animation */
+  .mobile-expansion-enter {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out, opacity 0.2s ease-out;
+  }
+  
+  .mobile-expansion-enter-active {
+    max-height: 500px;
+    opacity: 1;
   }
 }
