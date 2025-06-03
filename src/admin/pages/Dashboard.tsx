@@ -409,10 +409,10 @@ function EnhancedDashboard() {
 }
 
 // Main Dashboard component with error boundary
-const AdminDashboard = () => {
+function Dashboard() {
   const { admin } = useAdminAuth();
 
-  console.log('[AdminDashboard] Rendering dashboard for admin:', admin?.email);
+  console.log('[Dashboard] Rendering dashboard for admin:', admin?.email);
 
   // Return enhanced dashboard if analytics components are available, otherwise simple dashboard
   try {
@@ -422,9 +422,9 @@ const AdminDashboard = () => {
       return <SimpleDashboard />;
     }
   } catch (error) {
-    console.error('[AdminDashboard] Error occurred:', error);
+    console.error('[Dashboard] Error occurred:', error);
     return <SimpleDashboard />;
   }
 }
 
-export default AdminDashboard;
+export default Dashboard;

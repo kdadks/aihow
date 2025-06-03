@@ -1,81 +1,85 @@
+import { Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { MainLayout } from './components/layout/MainLayout';
 import { Providers } from './providers/Providers';
 import { adminRoutes } from './admin/routes/adminRoutes';
-import { LoginForm } from './auth/components/LoginForm';
-import { RegisterForm } from './auth/components/RegisterForm';
-import { ForgotPassword } from './auth/components/ForgotPassword';
-import { ResetPassword } from './auth/components/ResetPassword';
+import { MainLayout } from './components/layout/MainLayout';
+import { ProtectedRoute } from './components/auth/ProtectedRoute';
 import HomePage from './pages/HomePage';
-import DirectoryPage from './pages/DirectoryPage';
-import RecommendationPage from './pages/RecommendationPage';
-import ToolDetailPage from './pages/ToolDetailPage';
-import WorkflowsPage from './pages/WorkflowsPage';
-import ComparisonPage from './pages/ComparisonPage';
-import CategoriesPage from './pages/CategoriesPage';
+import AboutPage from './pages/AboutPage';
+import CommunityPage from './pages/CommunityPage';
 import ContactPage from './pages/ContactPage';
 import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
 import TermsPage from './pages/TermsPage';
-import NotFoundPage from './pages/NotFoundPage';
-import AboutPage from './pages/AboutPage';
-import CommunityPage from './pages/CommunityPage';
-import ReviewsPage from './pages/ReviewsPage';
-import BlogPage from './pages/BlogPage';
-import ForumPage from './pages/ForumPage';
-import TestimonialsPage from './pages/TestimonialsPage';
+import LoginPage from './pages/LoginPage';
+import SignupPage from './pages/SignupPage';
+import ForgotPasswordPage from './pages/ForgotPasswordPage';
+
+// Lazy load the dashboard
+const UserDashboard = lazy(() => import('./pages/UserDashboard'));
+
+function AppRoutes() {
+    return (
+        <Routes>
+            {/* Admin routes */}
+            {adminRoutes.map((route) => (
+                <Route
+                    key={route.path}
+                    path={route.path}
+                    element={route.element}
+                >
+                    {route.children?.map((child) => (
+                        <Route
+                            key={child.path || 'index'}
+                            path={child.path}
+                            element={child.element}
+                            index={child.index}
+                        />
+                    ))}
+                </Route>
+            ))}
+
+            {/* Main Layout with public routes */}
+            <Route path="/" element={<MainLayout />}>
+                <Route index element={<HomePage />} />
+                <Route path="about" element={<AboutPage />} />
+                <Route path="community" element={<CommunityPage />} />
+                <Route path="contact" element={<ContactPage />} />
+                <Route path="privacy" element={<PrivacyPolicyPage />} />
+                <Route path="terms" element={<TermsPage />} />
+                <Route path="login" element={<LoginPage />} />
+                <Route path="signup" element={<SignupPage />} />
+                <Route path="forgot-password" element={<ForgotPasswordPage />} />
+                
+                {/* Protected dashboard route */}
+                <Route
+                    path="dashboard"
+                    element={
+                        <ProtectedRoute>
+                            <UserDashboard />
+                        </ProtectedRoute>
+                    }
+                />
+            </Route>
+        </Routes>
+    );
+}
 
 function App() {
-  return (
-    <Providers>
-      <Router>
-      <Routes>
-        {adminRoutes.map((route) => (
-          <Route
-            key={route.path}
-            path={route.path}
-            element={route.element}
-          >
-            {route.children?.map((child) => (
-              <Route
-                key={child.path}
-                path={child.path}
-                element={child.element}
-                index={child.index}
-              />
-            ))}
-          </Route>
-        ))}
-        <Route path="/" element={<MainLayout />}>
-          <Route index element={<HomePage />} />
-          <Route path="directory">
-            <Route index element={<DirectoryPage />} />
-            <Route path=":categoryId" element={<DirectoryPage />} />
-            <Route path=":categoryId/:subcategoryId" element={<DirectoryPage />} />
-          </Route>
-          <Route path="categories" element={<CategoriesPage />} />
-          <Route path="recommendation" element={<RecommendationPage />} />
-          <Route path="tool/:slug" element={<ToolDetailPage />} />
-          <Route path="workflows" element={<WorkflowsPage />} />
-          <Route path="compare" element={<ComparisonPage />} />
-          <Route path="contact" element={<ContactPage />} />
-          <Route path="privacy" element={<PrivacyPolicyPage />} />
-          <Route path="terms" element={<TermsPage />} />
-          <Route path="about" element={<AboutPage />} />
-          <Route path="community" element={<CommunityPage />} />
-          <Route path="reviews" element={<ReviewsPage />} />
-          <Route path="blog" element={<BlogPage />} />
-          <Route path="forum" element={<ForumPage />} />
-          <Route path="testimonials" element={<TestimonialsPage />} />
-          <Route path="login" element={<LoginForm />} />
-          <Route path="signup" element={<RegisterForm />} />
-          <Route path="forgot-password" element={<ForgotPassword />} />
-          <Route path="reset-password" element={<ResetPassword />} />
-          <Route path="*" element={<NotFoundPage />} />
-        </Route>
-      </Routes>
-      </Router>
-    </Providers>
-  );
+    return (
+        <Providers>
+            <Router>
+                <Suspense
+                    fallback={
+                        <div className="flex justify-center items-center min-h-screen">
+                            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-600"></div>
+                        </div>
+                    }
+                >
+                    <AppRoutes />
+                </Suspense>
+            </Router>
+        </Providers>
+    );
 }
 
 export default App;
