@@ -1,6 +1,6 @@
 import { Navigate, RouteObject } from 'react-router-dom';
 import { AdminAuthGuard } from '../auth/components/AdminAuthGuard';
-import Dashboard from '../pages/Dashboard';
+import AdminDashboard from '../pages/AdminDashboard';
 import { AdminLayout } from '../components/AdminLayout';
 import NotFoundPage from '../../pages/NotFoundPage';
 import { AdminLoginPage } from '../pages/AdminLoginPage';
@@ -41,7 +41,7 @@ export const adminRoutes: AdminRouteObject[] = [
       },
       { 
         path: 'dashboard', 
-        element: <Dashboard /> 
+        element: <AdminDashboard />
       },
       { 
         path: 'settings', 
