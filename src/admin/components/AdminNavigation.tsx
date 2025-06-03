@@ -70,21 +70,25 @@ export function AdminNavigation() {
   );
 
   return (
-    <nav className="space-x-4">
+    <nav className="flex items-center space-x-2">
       {filteredNavItems.map((item) => (
         <NavLink
           key={item.path}
           to={item.path}
           className={({ isActive }) =>
-            `inline-flex items-center px-3 py-2 rounded-md text-sm font-medium ${
+            `group inline-flex items-center px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 ${
               isActive
-                ? 'bg-gray-900 text-white'
-                : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
+                ? 'bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-lg transform scale-105'
+                : 'text-gray-600 hover:bg-white/80 hover:text-blue-600 hover:shadow-md backdrop-blur-sm'
             }`
           }
         >
-          {item.icon}
-          <span className="ml-2">{item.label}</span>
+          <span className={`transition-transform duration-200 ${
+            'group-hover:scale-110'
+          }`}>
+            {item.icon}
+          </span>
+          <span className="ml-2.5 font-semibold">{item.label}</span>
         </NavLink>
       ))}
     </nav>
