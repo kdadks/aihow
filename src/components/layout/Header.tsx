@@ -114,7 +114,7 @@ export const Header: React.FC = () => {
           <div className="flex items-center flex-shrink-0">
             <Link to="/" className="flex items-center h-8">
               <Logo className="h-full" />
-              <span className="ml-2.5 text-xl font-bold text-gray-900">How2AI</span>
+              <span className="ml-2.5 text-xl font-bold text-gray-900">How2doAI</span>
             </Link>
           </div>
 

@@ -94,8 +94,8 @@ const TermsPage: React.FC = () => {
               For questions about these Terms, please contact us at:
             </p>
             <div className="mt-4 text-gray-600">
-              <p>Email: legal@how2ai.com</p>
-              <p>Address: 123 AI Boulevard, Tech District, San Francisco, CA 94105</p>
+              <p>Email: support@how2doai.com</p>
+              <p>Address: Lucknow, Uttar Pradesh, India</p>
             </div>
           </section>
         </div>

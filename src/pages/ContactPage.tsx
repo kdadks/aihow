@@ -17,18 +17,18 @@ const ContactPage: React.FC = () => {
               <div className="space-y-4">
                 <div>
                   <h3 className="font-medium text-gray-900">Email</h3>
-                  <p className="text-gray-600">support@how2ai.com</p>
+                  <p className="text-gray-600">support@how2doai.com</p>
                 </div>
                 <div>
                   <h3 className="font-medium text-gray-900">Phone</h3>
-                  <p className="text-gray-600">+1 (555) 123-4567</p>
+                  <p className="text-gray-600">+91 7982303199</p>
                 </div>
                 <div>
                   <h3 className="font-medium text-gray-900">Office</h3>
                   <p className="text-gray-600">
-                    123 AI Boulevard<br />
-                    Tech District<br />
-                    San Francisco, CA 94105
+                    Lucknow<br />
+                    Uttar Pradesh<br />
+                    India
                   </p>
                 </div>
               </div>

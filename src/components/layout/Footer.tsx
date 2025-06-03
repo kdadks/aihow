@@ -11,7 +11,7 @@ export const Footer: React.FC = () => {
           <div className="mb-8 md:mb-0">
             <Link to="/" className="flex items-center">
               <Logo className="h-8 w-auto" />
-              <span className="ml-2 text-xl font-bold text-gray-900">How2AI</span>
+              <span className="ml-2 text-xl font-bold text-gray-900">How2doAI</span>
             </Link>
             <p className="mt-4 text-sm text-gray-600">
               Discover and compare the best AI tools for your workflow. Our platform helps you find the perfect AI solutions for your specific needs.
