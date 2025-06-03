@@ -4,6 +4,7 @@ import Dashboard from '../pages/Dashboard';
 import { AdminLayout } from '../components/AdminLayout';
 import NotFoundPage from '../../pages/NotFoundPage';
 import { AdminLoginPage } from '../pages/AdminLoginPage';
+import { AdminAuthProvider } from '../auth/context/AdminAuthContext';
 
 // Custom route property interface
 interface AdminRouteProps {
@@ -17,15 +18,21 @@ type AdminRouteObject = RouteObject & AdminRouteProps;
 export const adminRoutes: AdminRouteObject[] = [
   {
     path: '/admin/login',
-    element: <AdminLoginPage />,
+    element: (
+      <AdminAuthProvider>
+        <AdminLoginPage />
+      </AdminAuthProvider>
+    ),
     public: true
   },
   {
     path: '/admin',
     element: (
-      <AdminAuthGuard>
-        <AdminLayout />
-      </AdminAuthGuard>
+      <AdminAuthProvider>
+        <AdminAuthGuard>
+          <AdminLayout />
+        </AdminAuthGuard>
+      </AdminAuthProvider>
     ),
     children: [
       {
