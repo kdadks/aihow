@@ -44,7 +44,7 @@ export const Footer: React.FC = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/recommendation" className="text-sm text-gray-600 hover:text-gray-900">
+                <Link to="/tool-finder" className="text-sm text-gray-600 hover:text-gray-900">
                   Tool Finder
                 </Link>
               </li>
@@ -54,7 +54,7 @@ export const Footer: React.FC = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/categories" className="text-sm text-gray-600 hover:text-gray-900">
+                <Link to="/directory" className="text-sm text-gray-600 hover:text-gray-900">
                   Categories
                 </Link>
               </li>
@@ -85,7 +85,7 @@ export const Footer: React.FC = () => {
               </li>
               <li>
                 <Link to="/testimonials" className="text-sm text-gray-600 hover:text-gray-900">
-                  Success Stories
+                  Testimonials
                 </Link>
               </li>
             </ul>

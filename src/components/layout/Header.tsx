@@ -447,16 +447,16 @@ export const Header: React.FC = () => {
             </div>
 
             {/* Compare Tools Link */}
-            {selectedTools.length > 0 && (
-              <Link 
-                to="/compare" 
-                className="flex items-center justify-center px-4 py-3 rounded-md text-base font-semibold text-blue-600 bg-blue-50 hover:bg-blue-100 transition-colors"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                <Scale className="h-5 w-5 mr-3" />
-                Compare Selected Tools ({selectedTools.length})
-              </Link>
-            )}
+              {selectedTools.length > 0 && (
+                <Link 
+                  to="/compare" 
+                  className="flex items-center justify-center px-4 py-3 rounded-md text-base font-semibold text-blue-600 bg-blue-50 hover:bg-blue-100 transition-colors"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  <Scale className="h-5 w-5 mr-3" />
+                  Compare Selected Tools ({selectedTools.length})
+                </Link>
+              )}
 
             {/* Mobile Navigation */}
             <div className="rounded-lg border border-gray-200 overflow-hidden">

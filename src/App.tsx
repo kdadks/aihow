@@ -1,21 +1,9 @@
-import { Suspense, lazy } from 'react';
+import { Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Providers } from './providers/Providers';
 import { adminRoutes } from './admin/routes/adminRoutes';
 import { MainLayout } from './components/layout/MainLayout';
-import { ProtectedRoute } from './components/auth/ProtectedRoute';
-import HomePage from './pages/HomePage';
-import AboutPage from './pages/AboutPage';
-import CommunityPage from './pages/CommunityPage';
-import ContactPage from './pages/ContactPage';
-import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
-import TermsPage from './pages/TermsPage';
-import LoginPage from './pages/LoginPage';
-import SignupPage from './pages/SignupPage';
-import ForgotPasswordPage from './pages/ForgotPasswordPage';
-
-// Lazy load the dashboard
-const UserDashboard = lazy(() => import('./pages/UserDashboard'));
+import { publicRoutes } from './routes/publicRoutes';
 
 function AppRoutes() {
     return (
@@ -40,25 +28,14 @@ function AppRoutes() {
 
             {/* Main Layout with public routes */}
             <Route path="/" element={<MainLayout />}>
-                <Route index element={<HomePage />} />
-                <Route path="about" element={<AboutPage />} />
-                <Route path="community" element={<CommunityPage />} />
-                <Route path="contact" element={<ContactPage />} />
-                <Route path="privacy" element={<PrivacyPolicyPage />} />
-                <Route path="terms" element={<TermsPage />} />
-                <Route path="login" element={<LoginPage />} />
-                <Route path="signup" element={<SignupPage />} />
-                <Route path="forgot-password" element={<ForgotPasswordPage />} />
-                
-                {/* Protected dashboard route */}
-                <Route
-                    path="dashboard"
-                    element={
-                        <ProtectedRoute>
-                            <UserDashboard />
-                        </ProtectedRoute>
-                    }
-                />
+                {publicRoutes.map((route) => (
+                    <Route
+                        key={route.path}
+                        path={route.path}
+                        element={route.element}
+                        index={route.path === '/'}
+                    />
+                ))}
             </Route>
         </Routes>
     );

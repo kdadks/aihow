@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { AdminAuthState, AdminUser, AdminRole, ProfileWithRoles, RoleData } from '../types/adminAuth';
+import { AdminAuthState, AdminUser, AdminRole } from '../types/adminAuth';
 import { supabase } from '../../../lib/supabase';
 import { Session } from '@supabase/supabase-js';
 
@@ -81,42 +81,48 @@ export const AdminAuthProvider: React.FC<AdminAuthProviderProps> = ({ children }
 
       console.log('[AdminAuthContext] Profile data fetched:', profileData);
 
-      // Get user roles with simplified query
-      const { data: userRolesData, error: userRolesError } = await supabase
-        .from('user_roles')
-        .select(`
-          roles (
-            id,
-            name
-          )
-        `)
-        .eq('user_id', session.user.id);
+      // Get user's role and permissions using the new schema
+      const { data: roleAssignmentData, error: roleAssignmentError } = await supabase
+        .from('user_role_assignments')
+        .select('role_id')
+        .eq('user_id', session.user.id)
+        .single();
 
-      if (userRolesError) {
-        console.error('[AdminAuthContext] Failed to fetch user roles:', userRolesError);
+      if (roleAssignmentError || !roleAssignmentData) {
+        console.error('[AdminAuthContext] Failed to fetch user role assignment:', roleAssignmentError);
         await handleLogout();
         return;
       }
 
-      console.log('[AdminAuthContext] User roles data:', userRolesData);
+      // Now fetch the actual role data from user_roles table
+      const { data: roleData, error: roleError } = await supabase
+        .from('user_roles')
+        .select('id, name, permissions')
+        .eq('id', roleAssignmentData.role_id)
+        .single();
 
-      // Extract role data
-      const firstRole = userRolesData?.[0]?.roles;
-      const userRole = (firstRole as any)?.name as AdminRole || 'content_admin';
+      if (roleError || !roleData) {
+        console.error('[AdminAuthContext] Failed to fetch role data:', roleError);
+        await handleLogout();
+        return;
+      }
+
+      console.log('[AdminAuthContext] User role data:', roleData);
+
+      const userRole = roleData.name as AdminRole;
       
       console.log('[AdminAuthContext] User role determined:', userRole);
 
-      // Get permissions separately if role exists - simplified approach
+      // Get permissions from the role's permissions JSON
       let userPermissions: string[] = [];
+      const permissions = roleData.permissions as Record<string, boolean>;
       
-      // Use fallback permissions based on role for now
-      if (userRole === 'admin') {
-        userPermissions = ['admin_access', 'user_management', 'content_management', 'system_settings'];
-      } else if (userRole === 'content_admin') {
-        userPermissions = ['content_management'];
-      } else if (userRole === 'system_admin') {
-        userPermissions = ['admin_access', 'user_management', 'content_management', 'system_settings', 'system_admin'];
-      }
+      // Convert permissions object to array of enabled permissions
+      userPermissions = Object.entries(permissions)
+        .filter(([_, enabled]) => enabled)
+        .map(([permission]) => permission);
+
+      console.log('[AdminAuthContext] User permissions:', userPermissions);
 
       console.log('[AdminAuthContext] User permissions:', userPermissions);
 
@@ -152,44 +158,56 @@ export const AdminAuthProvider: React.FC<AdminAuthProviderProps> = ({ children }
     try {
       console.log('[AdminAuthContext] Starting login process for:', email);
       
-      const { data, error } = await supabase.auth.signInWithPassword({
+      const { data: authData, error: authError } = await supabase.auth.signInWithPassword({
         email,
         password
       });
 
-      if (error) {
-        console.error('[AdminAuthContext] Login error:', error);
-        throw error;
+      if (authError) {
+        console.error('[AdminAuthContext] Login error:', authError);
+        throw authError;
       }
 
-      console.log('[AdminAuthContext] Login successful, user ID:', data.user?.id);
+      console.log('[AdminAuthContext] Login successful, user ID:', authData.user?.id);
 
-      // Check if user has admin role
-      console.log('[AdminAuthContext] Checking admin role for user:', data.user?.id);
+      // Check if user has admin role using the new schema
+      console.log('[AdminAuthContext] Checking admin role for user:', authData.user?.id);
+      
+      // First get the role assignment
+      const { data: roleAssignmentData, error: roleAssignmentError } = await supabase
+        .from('user_role_assignments')
+        .select('role_id')
+        .eq('user_id', authData.user?.id)
+        .single();
+
+      if (roleAssignmentError || !roleAssignmentData) {
+        console.error('[AdminAuthContext] Failed to fetch user role assignment:', roleAssignmentError);
+        throw new Error('Failed to fetch user role assignment');
+      }
+
+      // Then get the actual role data
       const { data: roleData, error: roleError } = await supabase
         .from('user_roles')
-        .select('roles(name)')
-        .eq('user_id', data.user?.id)
+        .select('name, permissions')
+        .eq('id', roleAssignmentData.role_id)
         .single();
-      
-      console.log('[AdminAuthContext] Role query result:', { roleData, roleError });
 
-      if (roleError || !roleData || !roleData.roles) {
-        console.error('[AdminAuthContext] Failed to fetch user role or user has no role');
-        throw new Error('Failed to fetch user role');
+      if (roleError || !roleData) {
+        console.error('[AdminAuthContext] Failed to fetch role data:', roleError);
+        throw new Error('Failed to fetch role data');
       }
 
       const validRoles = ['admin', 'system_admin', 'content_admin'];
-      if (!validRoles.includes((roleData.roles as any).name)) {
-        console.error('[AdminAuthContext] User does not have admin privileges, role:', (roleData.roles as any).name);
+      if (!validRoles.includes(roleData.name)) {
+        console.error('[AdminAuthContext] User does not have admin privileges, role:', roleData.name);
         throw new Error('User does not have admin privileges');
       }
 
-      console.log('[AdminAuthContext] User has valid admin role:', (roleData.roles as any).name);
+      console.log('[AdminAuthContext] User has valid admin role:', roleData.name);
 
       // Check if MFA is required for super admin
-      if ((roleData.roles as any).name === 'admin' || (roleData.roles as any).name === 'system_admin') {
-        const factorId = data.user?.factors?.[0]?.id;
+      if (roleData.name === 'admin' || roleData.name === 'system_admin') {
+        const factorId = authData.user?.factors?.[0]?.id;
         
         // Only require MFA if it's set up for the user
         if (factorId) {
@@ -214,9 +232,9 @@ export const AdminAuthProvider: React.FC<AdminAuthProviderProps> = ({ children }
 
       // Ensure the auth state change handler gets called
       // This is important for proper state management
-      if (data.session) {
+      if (authData.session) {
         console.log('[AdminAuthContext] Processing session after login');
-        await handleAuthChange('SIGNED_IN', data.session);
+        await handleAuthChange('SIGNED_IN', authData.session);
       }
       
       console.log('[AdminAuthContext] Login process completed successfully');
