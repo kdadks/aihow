@@ -429,12 +429,12 @@ export const Header: React.FC = () => {
                 <span className="text-sm font-medium text-gray-800">Workflows</span>
               </Link>
               <Link 
-                to="/recommendation" 
+                to="/tool-finder" 
                 onClick={() => setIsMenuOpen(false)}
                 className="flex flex-col items-center justify-center bg-gradient-to-r from-purple-50 to-purple-100 rounded-lg p-3 shadow-sm"
               >
                 <Search className="h-6 w-6 text-purple-600 mb-1" />
-                <span className="text-sm font-medium text-gray-800">Get Recommendations</span>
+                <span className="text-sm font-medium text-gray-800">Tool Finder</span>
               </Link>
               <Link 
                 to="/community" 
