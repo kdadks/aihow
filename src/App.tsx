@@ -44,7 +44,12 @@ function AppRoutes() {
 function App() {
     return (
         <Providers>
-            <Router>
+            <Router
+                future={{
+                    v7_startTransition: true,
+                    v7_relativeSplatPath: true
+                }}
+            >
                 <Suspense
                     fallback={
                         <div className="flex justify-center items-center min-h-screen">
