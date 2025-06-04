@@ -51,7 +51,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
       // Assign the role to the user
       const { error: assignError } = await supabase
-        .from('user_roles')
+        .from('user_role_assignments')
         .insert([{ user_id: userId, role_id: roleData.id }]);
 
       if (assignError) throw createAuthError('ROLE_ASSIGN_ERROR', assignError.message);
@@ -68,13 +68,13 @@ export function AuthProvider({ children }: AuthProviderProps) {
         const { data: { session } } = await supabase.auth.getSession();
         
         if (session?.user) {
-          // Fetch user profile
+          // Fetch user profile and roles
           const { data: profileData } = await supabase
             .from('profiles')
             .select(`
               *,
-              user_roles (
-                role:roles (
+              user_role_assignments(
+                role:roles(
                   id,
                   name
                 )
@@ -85,7 +85,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
           const profile = profileData ? {
             ...profileData,
-            roles: profileData.user_roles?.map((ur: UserRoleRelation) => ur.role) || []
+            roles: profileData.user_role_assignments?.map((ura: any) => ura.role) || []
           } : createUserProfile(session.user.id);
 
           const user: User = {
@@ -137,13 +137,13 @@ export function AuthProvider({ children }: AuthProviderProps) {
       if (authError) throw createAuthError('INVALID_CREDENTIALS', authError.message);
       if (!data?.user) throw createAuthError('UNKNOWN', 'Login failed - no user data');
 
-      // Fetch user profile
+      // Fetch user profile and roles
       const { data: profileData } = await supabase
         .from('profiles')
         .select(`
           *,
-          user_roles (
-            role:roles (
+          user_role_assignments(
+            role:roles(
               id,
               name
             )
@@ -154,7 +154,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
       const profile = profileData ? {
         ...profileData,
-        roles: profileData.user_roles?.map((ur: UserRoleRelation) => ur.role) || []
+        roles: profileData.user_role_assignments?.map((ura: any) => ura.role) || []
       } : createUserProfile(data.user.id);
 
       const user: User = {
@@ -211,10 +211,11 @@ export function AuthProvider({ children }: AuthProviderProps) {
         .from('profiles')
         .select(`
           *,
-          user_roles (
-            role:roles (
+          user_role_assignments(
+            role:user_roles(
               id,
-              name
+              name,
+              permissions
             )
           )
         `)
@@ -222,7 +223,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
         .single();
 
       if (updatedProfileData) {
-        profile.roles = updatedProfileData.user_roles?.map((ur: UserRoleRelation) => ur.role) || [];
+        profile.roles = updatedProfileData.user_role_assignments?.map((ura: any) => ura.role) || [];
       }
 
       const user: User = {
