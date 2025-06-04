@@ -9,9 +9,9 @@ import { Button } from '../components/ui/Button';
 import { Badge } from '../components/ui/Badge';
 
 const ToolDetailPage: React.FC = () => {
-  const { slug } = useParams<{ slug: string }>();
-  const navigate = useNavigate();
-  const tool = tools.find(t => t.slug === slug);
+const { toolSlug } = useParams<{ categoryId: string; subcategoryId: string; toolSlug: string }>();
+const navigate = useNavigate();
+const tool = tools.find(t => t.slug === toolSlug);
   const { selectedTools, addTool, isToolSelectable } = useComparisonStore();
   
   const isToolSelected = tool ? selectedTools.some(t => t.id === tool.id) : false;
@@ -311,7 +311,7 @@ const ToolDetailPage: React.FC = () => {
                       {similarTools.map(similarTool => (
                         <Link 
                           key={similarTool.id} 
-                          to={`/tool/${similarTool.slug}`}
+                          to={`/directory/${similarTool.categoryId}/${similarTool.subcategoryIds[0]}/${similarTool.slug}`}
                           className="flex items-center p-3 border border-gray-100 rounded-lg hover:bg-gray-50"
                         >
                           <div className="h-10 w-10 rounded overflow-hidden mr-3">

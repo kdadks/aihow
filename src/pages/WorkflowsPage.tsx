@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Card, CardHeader, CardContent, CardTitle, CardFooter } from '../components/ui/Card';
 import { Button } from '../components/ui/Button';
 import { workflowBundles } from '../data/workflows';
@@ -14,7 +15,13 @@ const WorkflowsPage: React.FC = () => {
     setShowBundleCreator(false);
   };
 
+  const navigate = useNavigate();
+
   const handleGetStarted = (bundle: typeof workflowBundles[0]) => {
+    navigate(`/bundle/${bundle.id}`);
+  };
+
+  const handleCustomize = (bundle: typeof workflowBundles[0]) => {
     setSelectedBundle(bundle);
     setShowBundleCreator(true);
   };
@@ -114,12 +121,20 @@ const WorkflowsPage: React.FC = () => {
                         <p className="text-sm text-gray-500">Total Cost</p>
                         <p className="text-lg font-bold text-gray-900">{workflow.totalCost}</p>
                       </div>
-                      <Button 
-                        rightIcon={<ArrowRight className="h-4 w-4" />}
-                        onClick={() => handleGetStarted(workflow)}
-                      >
-                        Get Started
-                      </Button>
+                      <div className="space-x-2">
+                        <Button 
+                          onClick={() => handleGetStarted(workflow)}
+                          rightIcon={<ArrowRight className="h-4 w-4" />}
+                        >
+                          Get Started
+                        </Button>
+                        <Button 
+                          variant="secondary"
+                          onClick={() => handleCustomize(workflow)}
+                        >
+                          Customize
+                        </Button>
+                      </div>
                     </div>
                   </CardFooter>
                 </Card>

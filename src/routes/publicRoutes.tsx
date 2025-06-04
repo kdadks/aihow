@@ -20,6 +20,7 @@ const BundlePage = lazy(() => import('../pages/BundlePage'));
 const TestimonialsPage = lazy(() => import('../pages/TestimonialsPage'));
 const ForumPage = lazy(() => import('../pages/ForumPage'));
 const RecommendationPage = lazy(() => import('../pages/RecommendationPage'));
+const BundleDetailPage = lazy(() => import('../pages/BundleDetailPage'));
 
 export const publicRoutes: RouteObject[] = [
     {
@@ -75,6 +76,10 @@ export const publicRoutes: RouteObject[] = [
         element: <DirectoryPage />
     },
     {
+        path: '/tool/:toolSlug',
+        element: <ToolDetailPage />
+    },
+    {
         path: '/directory/:categoryId/:subcategoryId/:toolSlug',
         element: <ToolDetailPage />
     },
@@ -97,6 +102,10 @@ export const publicRoutes: RouteObject[] = [
     {
         path: '/bundle',
         element: <BundlePage />
+    },
+    {
+        path: '/bundle/:bundleId',
+        element: <BundleDetailPage />
     },
     {
         path: '/testimonials',

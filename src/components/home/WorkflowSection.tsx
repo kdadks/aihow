@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Card, CardHeader, CardTitle, CardContent, CardFooter } from '../ui/Card';
+import { Card, CardHeader, CardTitle, CardContent } from '../ui/Card';
 import { Button } from '../ui/Button';
 import { workflowBundles } from '../../data/workflows';
-import { GitBranch, ArrowRight } from 'lucide-react';
+import { GitBranch, ArrowRight, Layers } from 'lucide-react';
 
 export const WorkflowSection: React.FC = () => {
   return (
@@ -48,8 +48,11 @@ export const WorkflowSection: React.FC = () => {
                       <p className="text-sm text-gray-500">Total Cost</p>
                       <p className="text-lg font-bold text-gray-900">{workflow.totalCost}</p>
                     </div>
-                    <Link to={`/workflow/${workflow.id}`}>
-                      <Button variant="outline" rightIcon={<ArrowRight className="h-4 w-4" />}>
+                    <Link to={`/bundle/${workflow.id}`}>
+                      <Button 
+                        variant="outline" 
+                        rightIcon={<ArrowRight className="h-4 w-4" />}
+                      >
                         View Details
                       </Button>
                     </Link>
@@ -63,7 +66,7 @@ export const WorkflowSection: React.FC = () => {
         <div className="mt-12 text-center">
           <Link to="/workflows">
             <Button variant="outline" rightIcon={<ArrowRight className="h-4 w-4" />}>
-              View all workflow bundles
+              View all workflows
             </Button>
           </Link>
         </div>
