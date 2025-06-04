@@ -1,0 +1,122 @@
+name: Test Quality Checks
+
+on:
+  pull_request:
+    paths:
+      - 'cypress/**'
+      - '.github/workflows/**'
+      - 'package.json'
+      - 'package-lock.json'
+
+jobs:
+  cypress-lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Check Cypress test quality
+        run: |
+          # Check for common test smells
+          npx eslint cypress/e2e/**/*.ts
+          
+          # Check for focused or skipped tests
+          ! grep -r "describe.only\|it.only\|context.only\|describe.skip\|it.skip\|context.skip" cypress/e2e/
+
+      - name: Verify test coverage
+        run: |
+          # Ensure all critical paths have tests
+          FILES_TO_CHECK=(
+            "auth"
+            "tools"
+            "admin"
+          )
+          
+          for file in "${FILES_TO_CHECK[@]}"; do
+            if [ ! -f "cypress/e2e/${file}.cy.ts" ]; then
+              echo "Missing test file for ${file}"
+              exit 1
+            fi
+          done
+
+      - name: Check custom commands usage
+        run: |
+          # Ensure proper use of custom commands
+          ! grep -r "cy.get('[data-testid=" cypress/e2e/
+          ! grep -r "cy.get('[data-cy=" cypress/e2e/
+
+      - name: Verify test setup
+        run: |
+          # Check for proper beforeEach hooks
+          for file in cypress/e2e/*.cy.ts; do
+            if ! grep -q "beforeEach" "$file"; then
+              echo "Missing beforeEach in $file"
+              exit 1
+            fi
+          done
+
+      - name: Check test organization
+        run: |
+          # Ensure tests are properly organized in describe blocks
+          for file in cypress/e2e/*.cy.ts; do
+            if [ $(grep -c "describe(" "$file") -lt 1 ]; then
+              echo "Missing describe blocks in $file"
+              exit 1
+            fi
+          done
+
+      - name: Check documentation
+        run: |
+          # Verify test documentation exists
+          if [ ! -f "docs/TESTING.md" ]; then
+            echo "Missing testing documentation"
+            exit 1
+          fi
+
+  cypress-types:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Type check Cypress tests
+        run: |
+          npx tsc --project cypress/tsconfig.json --noEmit
+
+  cypress-performance:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run performance checks
+        run: |
+          # Check test execution time
+          npm run test:e2e:ci -- --config "reporterOptions.reportDir=cypress/reports"
+          
+          # Analyze and fail if tests are too slow
+          node scripts/analyze-test-performance.js

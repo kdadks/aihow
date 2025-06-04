@@ -38,9 +38,9 @@ export const MetricWidget: React.FC<MetricWidgetProps> = ({
   className
 }) => {
   const trendColor = {
-    up: 'text-green-600',
-    down: 'text-red-600',
-    neutral: 'text-gray-600'
+    up: 'text-green-600 bg-green-50 border-green-200',
+    down: 'text-red-600 bg-red-50 border-red-200',
+    neutral: 'text-gray-600 bg-gray-50 border-gray-200'
   };
 
   const TrendIcon = () => {
@@ -76,20 +76,23 @@ export const MetricWidget: React.FC<MetricWidgetProps> = ({
       loading={loading}
       error={error}
       onRefresh={onRefresh}
-      className={className}
+      className={cn('bg-white/80 backdrop-blur-xl border border-white/20 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105', className)}
     >
-      <div className="flex flex-col justify-center h-full">
-        <div className="text-3xl font-semibold text-gray-900">
+      <div className="flex flex-col justify-center h-full p-2">
+        <div className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-3">
           {formatValue(value, format)}
         </div>
         {typeof change !== 'undefined' && (
-          <div className={cn('flex items-center mt-2 space-x-1', trendColor[trend])}>
+          <div className={cn(
+            'inline-flex items-center px-3 py-1.5 rounded-full border transition-all duration-200 text-sm font-medium',
+            trendColor[trend]
+          )}>
             <TrendIcon />
-            <span className="text-sm">
+            <span className="ml-1">
               {change > 0 ? '+' : ''}
               {formatValue(change, 'percentage')}
             </span>
-            <span className="text-sm text-gray-500">vs last period</span>
+            <span className="ml-2 text-gray-500 font-normal">vs last period</span>
           </div>
         )}
       </div>

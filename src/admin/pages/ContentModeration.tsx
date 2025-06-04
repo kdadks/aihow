@@ -1,219 +1,196 @@
-import React from 'react';
-import { useAdminContext } from '../context/AdminContext';
-import type { ModerationItem } from '../../services/api';
+import { useState, useEffect } from 'react';
+import { useModerationAdmin } from '../context/AdminContext';
+import type { ContentItem, ModerationFilters, ModerationStats } from '../types/moderation';
 
 export default function ContentModeration() {
-    const { moderationService } = useAdminContext();
-    const [items, setItems] = React.useState<ModerationItem[]>([]);
-    const [totalCount, setTotalCount] = React.useState(0);
-    const [currentPage, setCurrentPage] = React.useState(1);
-    const [loading, setLoading] = React.useState(true);
-    const [error, setError] = React.useState<string | null>(null);
-    const [activeTab, setActiveTab] = React.useState<'pending' | 'approved' | 'rejected'>('pending');
+    const moderation = useModerationAdmin();
+    const [items, setItems] = useState<ContentItem[]>([]);
+    const [totalCount, setTotalCount] = useState(0);
+    const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
+    const [stats, setStats] = useState<ModerationStats>({
+        pending: 0,
+        approved: 0,
+        rejected: 0
+    });
 
-    const pageSize = 10;
+    const [filters, setFilters] = useState<ModerationFilters>({
+        status: 'pending'
+    });
 
-    // Fetch moderation queue
-    React.useEffect(() => {
-        const fetchQueue = async () => {
-            try {
-                setLoading(true);
-                const response = await moderationService.getModerationQueue(
-                    currentPage,
-                    pageSize,
-                    activeTab
-                );
+    const [currentPage, setCurrentPage] = useState(1);
+    const pageSize = 20;
 
-                if (response.error) {
-                    throw new Error(response.error.message);
-                }
+    useEffect(() => {
+        fetchContent();
+        fetchStats();
+    }, [currentPage, filters]);
 
-                if (response.data) {
-                    setItems(response.data.data);
-                    setTotalCount(response.data.count);
-                }
-            } catch (err) {
-                setError(err instanceof Error ? err.message : 'Failed to load moderation queue');
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        fetchQueue();
-    }, [currentPage, activeTab, moderationService]);
-
-    const handlePageChange = (page: number) => {
-        setCurrentPage(page);
-    };
-
-    const handleReview = async (id: string, status: 'approved' | 'rejected', notes?: string) => {
+    const fetchContent = async () => {
         try {
-            const response = await moderationService.reviewContent(id, status, notes);
-            if (response.error) {
-                throw new Error(response.error.message);
-            }
-
-            // Remove the item from the list if it was in the pending queue
-            if (activeTab === 'pending') {
-                setItems(prev => prev.filter(item => item.id !== id));
-                setTotalCount(prev => prev - 1);
+            setIsLoading(true);
+            const result = await moderation.getContent(filters, currentPage, pageSize);
+            if (result.error) throw result.error;
+            if (result.data) {
+                setItems(result.data.data);
+                setTotalCount(result.data.count);
             }
         } catch (err) {
-            setError(err instanceof Error ? err.message : 'Failed to review content');
+            setError(err instanceof Error ? err.message : 'Failed to load content');
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
+    const fetchStats = async () => {
+        try {
+            const result = await moderation.getContentStats();
+            if (result.error) throw result.error;
+            if (result.data) {
+                setStats(result.data);
+            }
+        } catch (err) {
+            console.error('Failed to load stats:', err);
+        }
+    };
+
+    const handleStatusUpdate = async (id: string, status: ContentItem['status'], reason?: string) => {
+        try {
+            const result = await moderation.updateContentStatus(id, status, reason);
+            if (result.error) throw result.error;
+            await fetchContent();
+            await fetchStats();
+        } catch (err) {
+            console.error('Failed to update status:', err);
         }
     };
 
     if (error) {
         return (
-            <div className="bg-red-50 border border-red-200 rounded-lg p-4 text-red-700">
+            <div className="bg-red-50 border border-red-200 text-red-700 p-4 rounded-lg">
                 {error}
             </div>
         );
     }
 
     return (
-        <div className="space-y-6">
-            <div className="flex items-center justify-between">
-                <h1 className="text-2xl font-semibold text-gray-900">Content Moderation</h1>
-            </div>
+        <div className="min-h-full bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                {/* Stats */}
+                <div className="grid grid-cols-3 gap-4 mb-8">
+                    <div className="bg-white rounded-lg shadow-sm p-6">
+                        <h3 className="text-sm font-medium text-gray-500">Pending</h3>
+                        <p className="text-3xl font-bold text-yellow-600">{stats.pending}</p>
+                    </div>
+                    <div className="bg-white rounded-lg shadow-sm p-6">
+                        <h3 className="text-sm font-medium text-gray-500">Approved</h3>
+                        <p className="text-3xl font-bold text-green-600">{stats.approved}</p>
+                    </div>
+                    <div className="bg-white rounded-lg shadow-sm p-6">
+                        <h3 className="text-sm font-medium text-gray-500">Rejected</h3>
+                        <p className="text-3xl font-bold text-red-600">{stats.rejected}</p>
+                    </div>
+                </div>
 
-            {/* Tabs */}
-            <div className="border-b border-gray-200">
-                <nav className="-mb-px flex space-x-8">
-                    <button
-                        className={`py-4 px-1 border-b-2 font-medium text-sm ${
-                            activeTab === 'pending'
-                                ? 'border-blue-500 text-blue-600'
-                                : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-                        }`}
-                        onClick={() => setActiveTab('pending')}
-                    >
-                        Pending Review
-                    </button>
-                    <button
-                        className={`py-4 px-1 border-b-2 font-medium text-sm ${
-                            activeTab === 'approved'
-                                ? 'border-blue-500 text-blue-600'
-                                : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-                        }`}
-                        onClick={() => setActiveTab('approved')}
-                    >
-                        Approved
-                    </button>
-                    <button
-                        className={`py-4 px-1 border-b-2 font-medium text-sm ${
-                            activeTab === 'rejected'
-                                ? 'border-blue-500 text-blue-600'
-                                : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-                        }`}
-                        onClick={() => setActiveTab('rejected')}
-                    >
-                        Rejected
-                    </button>
-                </nav>
-            </div>
+                {/* Filters */}
+                <div className="bg-white rounded-lg shadow-sm p-4 mb-8">
+                    <div className="flex space-x-4">
+                        <select
+                            value={filters.status || ''}
+                            onChange={(e) => setFilters({
+                                ...filters,
+                                status: e.target.value as ContentItem['status'] || undefined
+                            })}
+                            className="rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                        >
+                            <option value="">All Status</option>
+                            <option value="pending">Pending</option>
+                            <option value="approved">Approved</option>
+                            <option value="rejected">Rejected</option>
+                        </select>
+                    </div>
+                </div>
 
-            {/* Content List */}
-            <div className="bg-white rounded-lg shadow overflow-hidden">
-                {loading ? (
-                    <div className="flex items-center justify-center h-64">
-                        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500" />
+                {/* Content List */}
+                {isLoading ? (
+                    <div className="flex justify-center items-center h-32">
+                        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-600"></div>
                     </div>
                 ) : (
-                    <div className="overflow-x-auto">
-                        <table className="min-w-full divide-y divide-gray-200">
-                            <thead className="bg-gray-50">
-                                <tr>
-                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Content ID
-                                    </th>
-                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Status
-                                    </th>
-                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Submitted
-                                    </th>
-                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Notes
-                                    </th>
-                                    {activeTab === 'pending' && (
-                                        <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                            Actions
-                                        </th>
-                                    )}
-                                </tr>
-                            </thead>
-                            <tbody className="bg-white divide-y divide-gray-200">
-                                {items.map(item => (
-                                    <tr key={item.id}>
-                                        <td className="px-6 py-4 whitespace-nowrap">
-                                            <div className="text-sm text-gray-900">
-                                                {item.content_id}
-                                            </div>
-                                        </td>
-                                        <td className="px-6 py-4 whitespace-nowrap">
-                                            <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full
-                                                ${item.status === 'approved' ? 'bg-green-100 text-green-800' :
-                                                item.status === 'rejected' ? 'bg-red-100 text-red-800' :
-                                                'bg-yellow-100 text-yellow-800'}`}
-                                            >
-                                                {item.status}
-                                            </span>
-                                        </td>
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                            {new Date(item.created_at).toLocaleDateString()}
-                                        </td>
-                                        <td className="px-6 py-4 text-sm text-gray-500">
-                                            {item.notes || '-'}
-                                        </td>
-                                        {activeTab === 'pending' && (
-                                            <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                    <div className="space-y-4">
+                        {items.map((item) => (
+                            <div key={item.id} className="bg-white rounded-lg shadow-sm p-6">
+                                <div className="flex justify-between">
+                                    <div>
+                                        <h3 className="text-lg font-medium">{item.type}</h3>
+                                        <p className="text-sm text-gray-500">By: {item.user_id}</p>
+                                        <pre className="mt-2 text-sm text-gray-700 whitespace-pre-wrap">
+                                            {JSON.stringify(item.content, null, 2)}
+                                        </pre>
+                                    </div>
+                                    <div className="flex items-start space-x-2">
+                                        {item.status === 'pending' && (
+                                            <>
                                                 <button
-                                                    className="text-green-600 hover:text-green-900 mr-4"
-                                                    onClick={() => handleReview(item.id, 'approved')}
+                                                    onClick={() => handleStatusUpdate(item.id, 'approved')}
+                                                    className="px-3 py-1 bg-green-50 text-green-700 rounded-md hover:bg-green-100"
                                                 >
                                                     Approve
                                                 </button>
                                                 <button
-                                                    className="text-red-600 hover:text-red-900"
-                                                    onClick={() => handleReview(item.id, 'rejected', 'Content violates guidelines')}
+                                                    onClick={() => {
+                                                        const reason = window.prompt('Reason for rejection:');
+                                                        if (reason) {
+                                                            handleStatusUpdate(item.id, 'rejected', reason);
+                                                        }
+                                                    }}
+                                                    className="px-3 py-1 bg-red-50 text-red-700 rounded-md hover:bg-red-100"
                                                 >
                                                     Reject
                                                 </button>
-                                            </td>
+                                            </>
                                         )}
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
+                                        {item.status !== 'pending' && (
+                                            <span className={`px-3 py-1 rounded-md ${
+                                                item.status === 'approved'
+                                                    ? 'bg-green-50 text-green-700'
+                                                    : 'bg-red-50 text-red-700'
+                                            }`}>
+                                                {item.status.charAt(0).toUpperCase() + item.status.slice(1)}
+                                            </span>
+                                        )}
+                                    </div>
+                                </div>
+                                {item.reason && (
+                                    <p className="mt-2 text-sm text-red-600">
+                                        Reason: {item.reason}
+                                    </p>
+                                )}
+                            </div>
+                        ))}
                     </div>
                 )}
 
                 {/* Pagination */}
-                {!loading && totalCount > pageSize && (
-                    <div className="bg-white px-4 py-3 border-t border-gray-200">
-                        <div className="flex items-center justify-between">
-                            <div className="text-sm text-gray-700">
-                                Showing {((currentPage - 1) * pageSize) + 1} to {Math.min(currentPage * pageSize, totalCount)} of {totalCount} results
-                            </div>
-                            <div className="flex space-x-2">
-                                {Array.from({ length: Math.ceil(totalCount / pageSize) }).map((_, i) => (
-                                    <button
-                                        key={i}
-                                        className={`px-3 py-1 rounded-md ${
-                                            currentPage === i + 1
-                                                ? 'bg-blue-600 text-white'
-                                                : 'bg-white text-gray-700 hover:bg-gray-50'
-                                        }`}
-                                        onClick={() => handlePageChange(i + 1)}
-                                    >
-                                        {i + 1}
-                                    </button>
-                                ))}
-                            </div>
-                        </div>
-                    </div>
-                )}
+                <div className="mt-8 flex justify-between items-center">
+                    <button
+                        onClick={() => setCurrentPage(page => Math.max(1, page - 1))}
+                        disabled={currentPage === 1}
+                        className="px-4 py-2 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50"
+                    >
+                        Previous
+                    </button>
+                    <span className="text-sm text-gray-700">
+                        Page {currentPage} of {Math.ceil(totalCount / pageSize)}
+                    </span>
+                    <button
+                        onClick={() => setCurrentPage(page => page + 1)}
+                        disabled={currentPage >= Math.ceil(totalCount / pageSize)}
+                        className="px-4 py-2 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50"
+                    >
+                        Next
+                    </button>
+                </div>
             </div>
         </div>
     );

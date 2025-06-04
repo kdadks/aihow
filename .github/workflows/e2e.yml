@@ -1,0 +1,115 @@
+name: E2E Tests
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  e2e:
+    runs-on: ubuntu-latest
+    # Service containers to run with the job
+    services:
+      # Supabase service container (if needed)
+      postgres:
+        image: postgres:14
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: postgres
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build application
+        run: npm run build
+
+      - name: Start development server
+        run: npm run dev & npx wait-on http://localhost:5173
+
+      - name: Install Cypress
+        run: npx cypress install
+
+      - name: Run Cypress tests
+        uses: cypress-io/github-action@v5
+        with:
+          browser: chrome
+          headed: false
+          record: false
+          start: npm run dev
+          wait-on: 'http://localhost:5173'
+          wait-on-timeout: 120
+        env:
+          CYPRESS_BASE_URL: http://localhost:5173
+          CYPRESS_CI: true
+          # Add any other required environment variables
+          VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
+          VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
+
+      - name: Upload Cypress screenshots
+        uses: actions/upload-artifact@v3
+        if: failure()
+        with:
+          name: cypress-screenshots
+          path: cypress/screenshots
+
+      - name: Upload Cypress videos
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: cypress-videos
+          path: cypress/videos
+
+  e2e-chrome:
+    needs: e2e
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install dependencies
+        run: npm ci
+      - name: Cypress run in Chrome
+        uses: cypress-io/github-action@v5
+        with:
+          browser: chrome
+          headed: false
+          record: false
+          start: npm run dev
+          wait-on: 'http://localhost:5173'
+        env:
+          CYPRESS_BASE_URL: http://localhost:5173
+          CYPRESS_CI: true
+
+  e2e-firefox:
+    needs: e2e
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install dependencies
+        run: npm ci
+      - name: Cypress run in Firefox
+        uses: cypress-io/github-action@v5
+        with:
+          browser: firefox
+          headed: false
+          record: false
+          start: npm run dev
+          wait-on: 'http://localhost:5173'
+        env:
+          CYPRESS_BASE_URL: http://localhost:5173
+          CYPRESS_CI: true

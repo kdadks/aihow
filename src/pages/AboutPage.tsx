@@ -4,14 +4,14 @@ const AboutPage: React.FC = () => {
   return (
     <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-3xl mx-auto">
-        <h1 className="text-3xl font-bold text-gray-900 mb-8">About how2AI</h1>
+        <h1 className="text-3xl font-bold text-gray-900 mb-8">About how2doAI</h1>
         
         <div className="bg-white shadow-lg rounded-lg p-6 mb-8">
           <div className="space-y-8">
             <section>
               <h2 className="text-xl font-semibold text-gray-800 mb-4">Our Mission</h2>
               <p className="text-gray-600">
-                At how2AI, we're dedicated to making artificial intelligence accessible and practical for everyone. 
+                At how2doAI, we're dedicated to making artificial intelligence accessible and practical for everyone. 
                 Our platform helps individuals and businesses navigate the rapidly evolving landscape of AI tools, 
                 ensuring they find the perfect solutions for their specific needs.
               </p>

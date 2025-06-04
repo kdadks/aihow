@@ -1,75 +1,110 @@
+#!/usr/bin/env node
+
+/**
+ * Reset Admin Password Script
+ * 
+ * This script resets the password for the testadmin@aihow.org user
+ * so you can log in and test admin authentication.
+ */
+
 import { createClient } from '@supabase/supabase-js';
-import dotenv from 'dotenv';
-import path from 'path';
-import { fileURLToPath } from 'url';
-import fs from 'fs';
+import { config } from 'dotenv';
 
-// Get directory name
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
+config();
 
-// Load environment variables from .env
-const envPath = path.resolve(__dirname, '../.env');
-dotenv.config({ path: envPath });
+const supabaseUrl = process.env.VITE_SUPABASE_URL;
+const supabaseServiceKey = process.env.VITE_SUPABASE_SERVICE_ROLE_KEY;
 
-// Hardcoded values from the .env file we saw
-const supabaseUrl = process.env.VITE_SUPABASE_URL || 'https://bynlkphjpmxskoqiahow.supabase.co';
-const supabaseServiceKey = process.env.VITE_SUPABASE_SERVICE_ROLE_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ5bmxrcGhqcG14c2tvcWlhaG93Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc0ODE5MDEyNCwiZXhwIjoyMDYzNzY2MTI0fQ.9m73ycx68w-itsiVes6zXbz7bxkRtrJ9waxUm49n2jQ';
+if (!supabaseUrl || !supabaseServiceKey) {
+  console.error('❌ Missing Supabase configuration. Please check your .env file.');
+  console.error('Required: VITE_SUPABASE_URL, VITE_SUPABASE_SERVICE_ROLE_KEY');
+  process.exit(1);
+}
 
-// Admin credentials
-const adminEmail = 'admin@aihow.org';
-const adminPassword = 'AIhow@Admin2025';
+const adminSupabase = createClient(supabaseUrl, supabaseServiceKey, {
+  auth: {
+    autoRefreshToken: false,
+    persistSession: false
+  }
+});
+
+const ADMIN_EMAIL = 'testadmin@aihow.org';
+const NEW_PASSWORD = 'AdminTest123!'; // New known password
 
 async function resetAdminPassword() {
-  console.log('Resetting admin password...');
-  
-  if (!supabaseUrl || !supabaseServiceKey) {
-    console.error('Missing Supabase environment variables');
-    process.exit(1);
-  }
-  
-  const supabase = createClient(supabaseUrl, supabaseServiceKey);
+  console.log('🔐 Resetting Admin Password...\n');
   
   try {
-    // Get the admin user ID using the service role key
-    console.log('Finding admin user by email...');
-    const { data: profileData, error: profileError } = await supabase
-      .from('profiles')
-      .select('id')
-      .eq('username', adminEmail)
-      .single();
-      
-    if (profileError) {
-      console.error('Error finding admin user:', profileError);
+    // First, find the admin user
+    console.log('1. Finding admin user...');
+    const { data: users, error: listError } = await adminSupabase.auth.admin.listUsers();
+    
+    if (listError) {
+      console.error('❌ Failed to list users:', listError.message);
       return;
     }
     
-    if (!profileData?.id) {
-      console.error('Admin user not found in profiles');
+    const adminUser = users.users.find(u => u.email === ADMIN_EMAIL);
+    
+    if (!adminUser) {
+      console.error(`❌ Admin user ${ADMIN_EMAIL} not found`);
       return;
     }
     
-    const userId = profileData.id;
-    console.log('Admin user ID:', userId);
+    console.log(`✅ Found admin user: ${adminUser.id}`);
     
-    // Update admin user password using the admin API
-    console.log('Updating admin password...');
-    const { data, error } = await supabase.auth.admin.updateUserById(
-      userId,
-      { password: adminPassword }
+    // Reset the password
+    console.log('\n2. Resetting password...');
+    const { data: updateData, error: updateError } = await adminSupabase.auth.admin.updateUserById(
+      adminUser.id,
+      {
+        password: NEW_PASSWORD
+      }
     );
     
-    if (error) {
-      console.error('Error updating admin password:', error);
+    if (updateError) {
+      console.error('❌ Failed to reset password:', updateError.message);
       return;
     }
     
-    console.log('✅ Admin password reset successful');
-    console.log('Try logging in with:');
-    console.log('Email:', adminEmail);
-    console.log('Password:', adminPassword);
+    console.log('✅ Password reset successfully!');
+    
+    // Verify the user still has admin role
+    console.log('\n3. Verifying admin role...');
+    const { data: userRoles, error: roleError } = await adminSupabase
+      .from('user_roles')
+      .select(`
+        roles (name)
+      `)
+      .eq('user_id', adminUser.id);
+    
+    if (roleError) {
+      console.error('❌ Failed to check user roles:', roleError.message);
+    } else {
+      const hasAdminRole = userRoles.some(ur => ur.roles?.name === 'admin');
+      
+      if (hasAdminRole) {
+        console.log('✅ Admin role confirmed');
+      } else {
+        console.log('⚠️  Admin role not found');
+      }
+    }
+    
+    // Success summary
+    console.log('\n🎉 SUCCESS! Admin password has been reset!');
+    console.log('\n📋 Updated Admin Credentials:');
+    console.log(`   Email: ${ADMIN_EMAIL}`);
+    console.log(`   Password: ${NEW_PASSWORD}`);
+    console.log(`   User ID: ${adminUser.id}`);
+    
+    console.log('\n🔗 Next Steps:');
+    console.log('   1. Start the development server: npm run dev');
+    console.log('   2. Navigate to: http://localhost:5173/admin/login');
+    console.log('   3. Use the credentials above to log in');
+    console.log('   4. Change password after first successful login');
     
   } catch (error) {
-    console.error('Error:', error);
+    console.error('❌ Unexpected error:', error.message);
   }
 }
 

@@ -8,7 +8,7 @@ const CommunityPage: React.FC = () => {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <div className="text-center mb-12">
         <h1 className="text-4xl font-bold text-gray-900 mb-4">
-          How2AI Community
+          How2doAI Community
         </h1>
         <p className="text-xl text-gray-600 max-w-2xl mx-auto">
           Join our vibrant community of AI enthusiasts. Share experiences, learn from others, and stay updated with the latest in AI tools.

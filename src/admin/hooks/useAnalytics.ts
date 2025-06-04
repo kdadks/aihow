@@ -56,9 +56,9 @@ export const useAnalytics = (options: UseAnalyticsOptions = {}) => {
 
       setState({
         summary,
-        userRegistrations: registrations,
-        trafficMetrics: traffic,
-        searchAnalytics: search,
+        userRegistrations: registrations || [],
+        trafficMetrics: traffic || [],
+        searchAnalytics: search || [],
         isLoading: false,
         error: null
       });

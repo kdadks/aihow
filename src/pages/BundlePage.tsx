@@ -1,15 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, Link, useLocation } from 'react-router-dom';
 import { BundleCreator } from '../components/bundles/BundleCreator';
 import { workflowBundles } from '../data/workflows';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/Card';
 import { Button } from '../components/ui/Button';
-import { Dialog } from '../components/ui/Dialog';
 import { GitBranch, ArrowRight, CheckCircle2, Layers } from 'lucide-react';
 
 const BundlePage: React.FC = () => {
+  const navigate = useNavigate();
   const [activeView, setActiveView] = useState<'create' | 'browse'>('create');
+  const location = useLocation();
   const [selectedBundle, setSelectedBundle] = useState<typeof workflowBundles[0] | null>(null);
-  const [showBundleDetails, setShowBundleDetails] = useState(false);
+
+  useEffect(() => {
+    const state = location.state as { customizeBundle?: typeof workflowBundles[0] };
+    if (state?.customizeBundle) {
+      setSelectedBundle(state.customizeBundle);
+      setActiveView('create');
+    }
+  }, [location.state]);
 
   const handleSaveBundle = (bundle: any) => {
     // Handle saving the bundle (would typically involve API call)
@@ -21,9 +30,12 @@ const BundlePage: React.FC = () => {
     setActiveView('create');
   };
 
+  const handleGetStarted = (bundle: typeof workflowBundles[0]) => {
+    navigate(`/bundle/${bundle.id}`);
+  };
+
   const handleViewDetails = (bundle: typeof workflowBundles[0]) => {
-    setSelectedBundle(bundle);
-    setShowBundleDetails(true);
+    navigate(`/bundle/${bundle.id}`);
   };
 
   return (
@@ -60,14 +72,24 @@ const BundlePage: React.FC = () => {
                     <GitBranch className="h-5 w-5" />
                     <CardTitle>{bundle.name}</CardTitle>
                   </div>
-                  <Button
-                    size="sm"
-                    variant="secondary"
-                    onClick={() => handleUseBundle(bundle)}
-                    className="bg-white/10 hover:bg-white/20"
-                  >
-                    Use Bundle
-                  </Button>
+                  <div className="space-x-2">
+                    <Button
+                      size="sm"
+                      variant="secondary"
+                      onClick={() => handleGetStarted(bundle)}
+                      className="bg-white/10 hover:bg-white/20"
+                    >
+                      Get Started
+                    </Button>
+                    <Button
+                      size="sm"
+                      variant="secondary"
+                      onClick={() => handleUseBundle(bundle)}
+                      className="bg-white/10 hover:bg-white/20"
+                    >
+                      Customize
+                    </Button>
+                  </div>
                 </div>
                 <p className="mt-2 text-blue-100">{bundle.description}</p>
               </CardHeader>
@@ -96,12 +118,13 @@ const BundlePage: React.FC = () => {
                       <p className="text-sm text-gray-500">Monthly Cost</p>
                       <p className="text-lg font-bold text-gray-900">{bundle.totalCost}</p>
                     </div>
-                    <Button
-                      onClick={() => handleViewDetails(bundle)}
-                      rightIcon={<ArrowRight className="h-4 w-4" />}
-                    >
-                      View Details
-                    </Button>
+                    <Link to={`/bundle/${bundle.id}`}>
+                      <Button
+                        rightIcon={<ArrowRight className="h-4 w-4" />}
+                      >
+                        Get Details
+                      </Button>
+                    </Link>
                   </div>
                 </div>
               </CardContent>
@@ -109,70 +132,6 @@ const BundlePage: React.FC = () => {
           ))}
         </div>
       )}
-
-      <Dialog 
-        open={showBundleDetails}
-        onClose={() => setShowBundleDetails(false)}
-        className="max-w-3xl"
-      >
-        {selectedBundle && (
-          <div className="p-6">
-            <div className="flex items-start justify-between mb-6">
-              <div>
-                <h2 className="text-2xl font-bold text-gray-900">{selectedBundle.name}</h2>
-                <p className="text-gray-600 mt-1">{selectedBundle.description}</p>
-              </div>
-              <Button
-                onClick={() => {
-                  handleUseBundle(selectedBundle);
-                  setShowBundleDetails(false);
-                }}
-              >
-                Use This Bundle
-              </Button>
-            </div>
-
-            <div className="space-y-6">
-              <div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">Implementation Steps</h3>
-                <div className="bg-gray-50 rounded-lg p-4">
-                  <ol className="list-decimal list-inside space-y-3">
-                    {selectedBundle.implementationSteps.map((step, index) => (
-                      <li key={index} className="text-gray-700">{step}</li>
-                    ))}
-                  </ol>
-                </div>
-              </div>
-
-              <div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">Included Tools</h3>
-                <div className="grid gap-4">
-                  {selectedBundle.tools.map((tool) => (
-                    <div key={tool.id} className="bg-white p-4 rounded-lg border border-gray-200">
-                      <div className="flex items-start space-x-4">
-                        <div className="h-12 w-12 rounded overflow-hidden flex-shrink-0">
-                          <img src={tool.logo} alt={tool.name} className="h-full w-full object-cover" />
-                        </div>
-                        <div>
-                          <h4 className="font-medium text-gray-900">{tool.name}</h4>
-                          <p className="text-sm text-gray-500 mb-2">{tool.description || tool.shortDescription}</p>
-                          {tool.features && (
-                            <ul className="list-disc list-inside text-sm text-gray-600 space-y-1">
-                              {tool.features.slice(0, 2).map((feature, index) => (
-                                <li key={index}>{feature}</li>
-                              ))}
-                            </ul>
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
-      </Dialog>
     </div>
   );
 };

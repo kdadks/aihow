@@ -16,7 +16,7 @@ export const HeroSection: React.FC = () => {
             Discover, compare, and integrate the best AI tools to enhance your productivity and creative potential.
           </p>
           <div className="mt-10 flex flex-wrap justify-center gap-4">
-            <Link to="/recommendation">
+            <Link to="/tool-finder">
               <Button size="lg" rightIcon={<ArrowRight className="h-5 w-5" />}>
                 Find Tools
               </Button>
@@ -31,7 +31,7 @@ export const HeroSection: React.FC = () => {
                 Compare Tools
               </Button>
             </Link>
-            <Link to="/recommendation">
+            <Link to="/tool-finder">
               <Button size="lg" variant="secondary" rightIcon={<Sparkles className="h-5 w-5" />}>
                 Get Recommendations
               </Button>
@@ -73,7 +73,7 @@ export const HeroSection: React.FC = () => {
                 <p className="mt-2 text-gray-600 flex-grow">
                   Answer a few questions about your needs and we'll recommend the perfect AI tools for you.
                 </p>
-                <Link to="/recommendation" className="mt-4 inline-flex items-center text-purple-600 font-medium hover:text-purple-800">
+                <Link to="/tool-finder" className="mt-4 inline-flex items-center text-purple-600 font-medium hover:text-purple-800">
                   Take the assessment <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </div>

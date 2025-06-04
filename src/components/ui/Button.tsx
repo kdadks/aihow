@@ -29,8 +29,8 @@ export const Button: React.FC<ButtonProps> = ({
   const variantStyles: Record<ButtonVariant, string> = {
     primary: 'bg-primary text-white hover:bg-primary-hover focus-visible:ring-primary/30',
     secondary: 'bg-secondary text-gray-800 hover:bg-secondary-hover hover:text-gray-900 focus-visible:ring-secondary/30',
-    outline: 'border border-primary bg-transparent text-primary hover:bg-accent hover:text-primary-hover focus-visible:ring-primary/20',
-    ghost: 'bg-transparent text-primary hover:bg-accent hover:text-primary-hover focus-visible:ring-accent/30',
+    outline: 'border border-gray-300 bg-transparent text-gray-700 hover:bg-gray-50 hover:text-gray-900 focus-visible:ring-gray-300/20',
+    ghost: 'bg-transparent text-gray-600 hover:bg-gray-100 hover:text-gray-900 focus-visible:ring-gray-300/30',
     link: 'bg-transparent underline-offset-4 hover:underline text-primary hover:text-primary-hover p-0 h-auto',
   };
 

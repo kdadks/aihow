@@ -1,51 +1,70 @@
+import { lazy } from 'react';
 import { Navigate, RouteObject } from 'react-router-dom';
-import { AdminAuthGuard } from '../auth/components/AdminAuthGuard';
-import Dashboard from '../pages/Dashboard';
 import { AdminLayout } from '../components/AdminLayout';
-import NotFoundPage from '../../pages/NotFoundPage';
 import { AdminLoginPage } from '../pages/AdminLoginPage';
+import { useAuth } from '../../auth/hooks/useAuth';
 
-// Custom route property interface
-interface AdminRouteProps {
-  public?: boolean;
+const Dashboard = lazy(() => import('../pages/Dashboard'));
+const UserManagement = lazy(() => import('../pages/UserManagement'));
+const ContentModeration = lazy(() => import('../pages/ContentModeration'));
+const SettingsPage = lazy(() => import('../pages/SettingsPage'));
+const AuditLog = lazy(() => import('../pages/AuditLog'));
+
+function ProtectedRoute({ children }: { children: React.ReactNode }) {
+    const { user, loading } = useAuth();
+
+    if (loading) {
+        return (
+            <div className="flex justify-center items-center min-h-screen">
+                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-600"></div>
+            </div>
+        );
+    }
+
+    if (!user) {
+        return <Navigate to="/admin/login" />;
+    }
+
+    return <>{children}</>;
 }
 
-// Extended route type that includes our custom properties
-type AdminRouteObject = RouteObject & AdminRouteProps;
-
-// Admin route configuration
-export const adminRoutes: AdminRouteObject[] = [
-  {
-    path: '/admin/login',
-    element: <AdminLoginPage />,
-    public: true
-  },
-  {
-    path: '/admin/*',
-    element: <AdminAuthGuard><AdminLayout /></AdminAuthGuard>,
-    children: [
-      {
-        // Index route that redirects to dashboard
-        index: true,
-        element: <Navigate to="/admin/dashboard" replace />
-      },
-      { 
-        path: 'dashboard', 
-        element: <Dashboard /> 
-      },
-      { 
-        path: 'settings', 
-        element: <Navigate to="/admin/dashboard" replace /> // Temporarily redirect until Settings page is implemented
-      },
-      { 
-        path: 'audit', 
-        element: <Navigate to="/admin/dashboard" replace /> // Temporarily redirect until Audit page is implemented
-      },
-      {
-        // Catch-all route for 404 handling
-        path: '*',
-        element: <NotFoundPage />
-      }
-    ]
-  }
+export const adminRoutes: RouteObject[] = [
+    {
+        path: '/admin',
+        element: (
+            <ProtectedRoute>
+                <AdminLayout />
+            </ProtectedRoute>
+        ),
+        children: [
+            {
+                index: true,
+                element: <Navigate to="/admin/dashboard" replace />
+            },
+            {
+                path: 'dashboard',
+                element: <Dashboard />
+            },
+            {
+                path: 'users',
+                element: <UserManagement />
+            },
+            {
+                path: 'moderation',
+                element: <ContentModeration />
+            },
+            {
+                path: 'settings',
+                element: <SettingsPage />
+            },
+            {
+                path: 'audit',
+                element: <AuditLog />
+            }
+        ]
+    },
+    {
+        path: '/admin/login',
+        element: <AdminLoginPage />
+    }
 ];

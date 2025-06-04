@@ -128,7 +128,7 @@ const FeaturedToolCard: React.FC<FeaturedToolCardProps> = ({ tool }) => {
             </Button>
           </div>
           <div className="flex items-center justify-between gap-3">
-            <Link to={`/tool/${tool.slug}`} className="flex-1">
+            <Link to={`/directory/${tool.categoryId}/${tool.subcategoryIds[0]}/${tool.slug}`} className="flex-1">
               <Button size="sm" variant="primary" className="w-full">
                 View Details
               </Button>
