@@ -186,7 +186,11 @@ const tool = tools.find(t => t.slug === toolSlug);
               <section>
                 <div className="flex items-center justify-between mb-4">
                   <h2 className="text-2xl font-bold text-gray-900">Reviews</h2>
-                  <Button variant="outline" leftIcon={<MessageSquare className="h-4 w-4" />}>
+                  <Button
+                    variant="outline"
+                    leftIcon={<MessageSquare className="h-4 w-4" />}
+                    onClick={() => navigate(`/write-review?toolId=${tool.id}`)}
+                  >
                     Write a Review
                   </Button>
                 </div>
@@ -245,7 +249,11 @@ const tool = tools.find(t => t.slug === toolSlug);
                 ) : (
                   <div className="text-center bg-gray-50 py-10 rounded-lg">
                     <p className="text-gray-500 mb-4">No reviews yet for this tool</p>
-                    <Button variant="outline" leftIcon={<MessageSquare className="h-4 w-4" />}>
+                    <Button
+                      variant="outline"
+                      leftIcon={<MessageSquare className="h-4 w-4" />}
+                      onClick={() => navigate(`/write-review?toolId=${tool.id}`)}
+                    >
                       Be the first to review
                     </Button>
                   </div>

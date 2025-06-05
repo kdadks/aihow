@@ -1,6 +1,6 @@
 import { ErrorBoundary } from 'react-error-boundary';
 import ErrorFallback from '../components/errors/ErrorFallback';
-import { AuthProvider } from '../auth/hooks/useAuth';
+import { AuthProvider } from '../auth/providers/AuthProvider';
 import { AdminProvider } from '../admin/context/AdminContext';
 
 interface ProvidersProps {

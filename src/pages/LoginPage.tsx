@@ -16,8 +16,15 @@ export default function LoginPage() {
         setIsLoading(true);
 
         try {
-            await login(email, password);
-            navigate('/dashboard');
+            const result = await login(email, password);
+            if (result?.user) {
+                // Small delay to ensure auth state is updated
+                setTimeout(() => {
+                    navigate('/dashboard', { replace: true });
+                }, 100);
+            } else {
+                throw new Error('Login failed - no user data');
+            }
         } catch (err) {
             setError(err instanceof Error ? err.message : 'Failed to login');
         } finally {

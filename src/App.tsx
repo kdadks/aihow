@@ -2,32 +2,43 @@ import { Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Providers } from './providers/Providers';
 import { adminRoutes } from './admin/routes/adminRoutes';
+import { protectedRoutes } from './routes/protectedRoutes';
 import { MainLayout } from './components/layout/MainLayout';
 import { publicRoutes } from './routes/publicRoutes';
 
 function AppRoutes() {
     return (
         <Routes>
-            {/* Admin routes */}
-            {adminRoutes.map((route) => (
-                <Route
-                    key={route.path}
-                    path={route.path}
-                    element={route.element}
-                >
-                    {route.children?.map((child) => (
-                        <Route
-                            key={child.path || 'index'}
-                            path={child.path}
-                            element={child.element}
-                            index={child.index}
-                        />
-                    ))}
-                </Route>
-            ))}
-
-            {/* Main Layout with public routes */}
+            {/* Main Layout wrapping all routes */}
             <Route path="/" element={<MainLayout />}>
+                {/* Admin routes */}
+                {adminRoutes.map((route) => (
+                    <Route
+                        key={route.path}
+                        path={route.path}
+                        element={route.element}
+                    >
+                        {route.children?.map((child) => (
+                            <Route
+                                key={child.path || 'index'}
+                                path={child.path}
+                                element={child.element}
+                                index={child.index}
+                            />
+                        ))}
+                    </Route>
+                ))}
+
+                {/* Protected routes */}
+                {protectedRoutes.map((route) => (
+                    <Route
+                        key={route.path}
+                        path={route.path}
+                        element={route.element}
+                    />
+                ))}
+
+                {/* Public routes */}
                 {publicRoutes.map((route) => (
                     <Route
                         key={route.path}

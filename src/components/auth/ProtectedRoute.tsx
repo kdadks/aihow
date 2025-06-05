@@ -10,9 +10,10 @@ export function ProtectedRoute({
     children, 
     redirectTo = '/login' 
 }: ProtectedRouteProps) {
-    const { user, loading } = useAuth();
+    const { user, loading, isInitialized } = useAuth();
 
-    if (loading) {
+    // Don't redirect until auth is initialized
+    if (loading || !isInitialized) {
         return (
             <div className="flex justify-center items-center min-h-screen">
                 <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-600"></div>
@@ -20,8 +21,9 @@ export function ProtectedRoute({
         );
     }
 
+    // Only redirect after auth is initialized and user is not present
     if (!user) {
-        return <Navigate to={redirectTo} state={{ from: window.location.pathname }} />;
+        return <Navigate to={redirectTo} state={{ from: window.location.pathname }} replace />;
     }
 
     return <>{children}</>;

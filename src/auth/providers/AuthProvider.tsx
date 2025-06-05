@@ -69,19 +69,19 @@ export function AuthProvider({ children }: AuthProviderProps) {
         
         if (session?.user) {
           // Fetch user profile and roles
-          const { data: profileData } = await supabase
-            .from('profiles')
-            .select(`
-              *,
-              user_role_assignments(
-                role:roles(
-                  id,
-                  name
-                )
-              )
-            `)
-            .eq('id', session.user.id)
-            .single();
+      const { data: profileData } = await supabase
+        .from('profiles')
+        .select(`
+          *,
+          user_role_assignments(
+            roles(
+              id,
+              name
+            )
+          )
+        `)
+        .eq('id', session.user.id)
+        .single();
 
           const profile = profileData ? {
             ...profileData,
@@ -143,7 +143,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
         .select(`
           *,
           user_role_assignments(
-            role:roles(
+            roles(
               id,
               name
             )
@@ -212,7 +212,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
         .select(`
           *,
           user_role_assignments(
-            role:user_roles(
+            roles(
               id,
               name,
               permissions
