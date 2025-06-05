@@ -6136,5 +6136,1597 @@ export const tools: Tool[] = [
     featured: false,
     integrations: ['Google Sheets', 'Airtable', 'Slack', 'Discord', 'Zapier', 'API'],
     lastVerified: new Date('2025-01-15')
+  },
+  // === MEDIA CREATION TOOLS ===
+  // Image Generation Tools
+  {
+    id: 'dall-e-3',
+    name: 'DALL·E 3',
+    slug: 'dall-e-3',
+    description: 'DALL·E 3 is OpenAI\'s most advanced AI image generation model that creates highly detailed and accurate images from text descriptions. It excels at understanding complex prompts and generating photorealistic and artistic images with remarkable precision.',
+    shortDescription: 'OpenAI\'s advanced AI image generator with precise prompt understanding',
+    logo: 'https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg',
+    website: 'https://openai.com/dall-e-3',
+    categoryId: 'media-creation',
+    subcategoryIds: ['image-generation'],
+    pricing: {
+      type: 'pay-per-use',
+      startingPrice: '$0.040 per image',
+      hasFreeOption: false,
+      tiers: [
+        {
+          name: 'Standard',
+          price: '$0.040 per image (1024×1024)',
+          billingPeriod: 'one-time',
+          features: ['High-quality image generation', 'Multiple aspect ratios', 'Style variations']
+        },
+        {
+          name: 'HD',
+          price: '$0.080 per image (1024×1024)',
+          billingPeriod: 'one-time',
+          features: ['Enhanced detail and quality', 'Sharper images', 'Better text rendering']
+        }
+      ]
+    },
+    features: [
+      'Highly accurate prompt interpretation',
+      'Photorealistic and artistic styles',
+      'Multiple resolution options',
+      'Built-in safety filters',
+      'Integration with ChatGPT Plus',
+      'Commercial usage rights'
+    ],
+    limitations: [
+      'Pay-per-image model can be expensive',
+      'Limited batch generation',
+      'Cannot edit existing images',
+      'Content policy restrictions'
+    ],
+    rating: 4.8,
+    reviewCount: 2150,
+    trending: true,
+    featured: true,
+    integrations: ['ChatGPT', 'OpenAI API', 'Microsoft Designer'],
+    lastVerified: new Date('2025-01-20')
+  },
+  {
+    id: 'stable-diffusion',
+    name: 'Stable Diffusion',
+    slug: 'stable-diffusion',
+    description: 'Stable Diffusion is an open-source AI image generation model that can be run locally or through various online services. It offers high-quality image generation with extensive customization options and community-driven improvements.',
+    shortDescription: 'Open-source AI image generator with local deployment options',
+    logo: 'https://images.pexels.com/photos/8439093/pexels-photo-8439093.jpeg',
+    website: 'https://stability.ai/stable-diffusion',
+    categoryId: 'media-creation',
+    subcategoryIds: ['image-generation'],
+    pricing: {
+      type: 'free',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Open Source',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['Free to use and modify', 'Local deployment', 'Community models', 'No usage limits']
+        },
+        {
+          name: 'Cloud Services',
+          price: 'Varies by provider',
+          billingPeriod: 'monthly',
+          features: ['Hosted solutions', 'API access', 'Faster generation', 'Premium models']
+        }
+      ]
+    },
+    features: [
+      'Open-source and customizable',
+      'Local deployment capability',
+      'Extensive model variants',
+      'Fine-tuning options',
+      'Active community support',
+      'No usage restrictions'
+    ],
+    limitations: [
+      'Requires technical setup for local use',
+      'Hardware requirements for optimal performance',
+      'Inconsistent quality without fine-tuning',
+      'Limited official support'
+    ],
+    rating: 4.6,
+    reviewCount: 3200,
+    trending: true,
+    featured: false,
+    integrations: ['Automatic1111', 'ComfyUI', 'Hugging Face', 'Replicate'],
+    lastVerified: new Date('2025-01-18')
+  },
+  {
+    id: 'adobe-firefly',
+    name: 'Adobe Firefly',
+    slug: 'adobe-firefly',
+    description: 'Adobe Firefly is a family of generative AI models designed for creative workflows. It offers high-quality image generation, text effects, and vector graphics creation, all trained on Adobe Stock and openly licensed content.',
+    shortDescription: 'Adobe\'s creative AI suite for commercial-safe content generation',
+    logo: 'https://images.pexels.com/photos/7135037/pexels-photo-7135037.jpeg',
+    website: 'https://www.adobe.com/products/firefly.html',
+    categoryId: 'media-creation',
+    subcategoryIds: ['image-generation'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$4.99/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['25 generative credits/month', 'Basic features', 'Standard quality']
+        },
+        {
+          name: 'Premium',
+          price: '$4.99/month',
+          billingPeriod: 'monthly',
+          features: ['100 generative credits/month', 'Priority processing', 'High-quality output']
+        },
+        {
+          name: 'Creative Cloud Integration',
+          price: 'Included with CC',
+          billingPeriod: 'monthly',
+          features: ['Unlimited credits', 'Full Creative Cloud integration', 'Commercial licensing']
+        }
+      ]
+    },
+    features: [
+      'Commercial-safe content generation',
+      'Integration with Creative Cloud',
+      'Text-to-image generation',
+      'Vector graphics creation',
+      'Style matching and transfer',
+      'Content credentials'
+    ],
+    limitations: [
+      'Limited free tier',
+      'Requires Adobe ecosystem for full features',
+      'Credit-based usage model',
+      'Limited customization compared to open-source alternatives'
+    ],
+    rating: 4.5,
+    reviewCount: 1850,
+    trending: true,
+    featured: false,
+    integrations: ['Photoshop', 'Illustrator', 'Express', 'Creative Cloud'],
+    lastVerified: new Date('2025-01-15')
+  },
+  {
+    id: 'leonardo-ai',
+    name: 'Leonardo.ai',
+    slug: 'leonardo-ai',
+    description: 'Leonardo.ai is a powerful AI image generation platform focused on creating production-quality visual assets. It offers fine-tuned models for different styles and use cases, making it ideal for creative professionals and content creators.',
+    shortDescription: 'Professional AI image generation with fine-tuned models',
+    logo: 'https://images.pexels.com/photos/8439093/pexels-photo-8439093.jpeg',
+    website: 'https://leonardo.ai',
+    categoryId: 'media-creation',
+    subcategoryIds: ['image-generation'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$10/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['150 tokens daily', 'Basic models', 'Community access']
+        },
+        {
+          name: 'Apprentice',
+          price: '$10/month',
+          billingPeriod: 'monthly',
+          features: ['8,500 tokens/month', 'Priority generation', 'Advanced models']
+        },
+        {
+          name: 'Artisan',
+          price: '$24/month',
+          billingPeriod: 'monthly',
+          features: ['25,000 tokens/month', 'Premium models', 'Commercial license']
+        },
+        {
+          name: 'Maestro',
+          price: '$48/month',
+          billingPeriod: 'monthly',
+          features: ['60,000 tokens/month', 'All features', 'API access']
+        }
+      ]
+    },
+    features: [
+      'Fine-tuned models for specific styles',
+      'Image-to-image transformation',
+      'AI Canvas for editing',
+      'Motion generation',
+      'Prompt enhancement',
+      'Commercial licensing'
+    ],
+    limitations: [
+      'Token-based usage system',
+      'Limited free tier',
+      'Learning curve for advanced features',
+      'Queue times during peak usage'
+    ],
+    rating: 4.6,
+    reviewCount: 1650,
+    trending: true,
+    featured: false,
+    integrations: ['API access', 'Discord bot', 'Web interface'],
+    lastVerified: new Date('2025-01-12')
+  },
+  {
+    id: 'clipdrop',
+    name: 'ClipDrop',
+    slug: 'clipdrop',
+    description: 'ClipDrop is an AI-powered creative suite that offers image generation, background removal, upscaling, and various editing tools. It provides an ecosystem of AI tools for seamless creative workflows.',
+    shortDescription: 'All-in-one AI creative suite for image editing and generation',
+    logo: 'https://images.pexels.com/photos/7135037/pexels-photo-7135037.jpeg',
+    website: 'https://clipdrop.co',
+    categoryId: 'media-creation',
+    subcategoryIds: ['image-generation'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$7/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['Limited daily uses', 'Basic tools', 'Watermarked outputs']
+        },
+        {
+          name: 'Pro',
+          price: '$7/month',
+          billingPeriod: 'monthly',
+          features: ['Unlimited usage', 'All tools', 'No watermarks', 'API access']
+        }
+      ]
+    },
+    features: [
+      'Multiple AI tools in one platform',
+      'Background removal and replacement',
+      'Image upscaling and enhancement',
+      'Text-to-image generation',
+      'Object removal and cleanup',
+      'Mobile and web apps'
+    ],
+    limitations: [
+      'Limited free usage',
+      'Some tools require internet connection',
+      'Quality varies by tool',
+      'Subscription required for professional use'
+    ],
+    rating: 4.4,
+    reviewCount: 890,
+    trending: false,
+    featured: false,
+    integrations: ['Mobile apps', 'API', 'Figma plugin'],
+    lastVerified: new Date('2025-01-10')
+  },
+  // Video Generation Tools
+  {
+    id: 'runway-gen-2',
+    name: 'Runway Gen-2',
+    slug: 'runway-gen-2',
+    description: 'Runway Gen-2 is a next-generation AI video generation model that creates high-quality videos from text prompts, images, or existing video clips. It offers unprecedented control over video creation and editing workflows.',
+    shortDescription: 'Next-generation AI video generator with multimodal inputs',
+    logo: 'https://images.pexels.com/photos/7988086/pexels-photo-7988086.jpeg',
+    website: 'https://runwayml.com',
+    categoryId: 'media-creation',
+    subcategoryIds: ['video-generation'],
+    pricing: {
+      type: 'subscription',
+      startingPrice: '$12/month',
+      hasFreeOption: false,
+      tiers: [
+        {
+          name: 'Basic',
+          price: '$12/month',
+          billingPeriod: 'monthly',
+          features: ['125 credits/month', '720p generation', 'Basic models']
+        },
+        {
+          name: 'Standard',
+          price: '$28/month',
+          billingPeriod: 'monthly',
+          features: ['625 credits/month', '1080p generation', 'Advanced models', 'Priority queue']
+        },
+        {
+          name: 'Pro',
+          price: '$76/month',
+          billingPeriod: 'monthly',
+          features: ['2250 credits/month', '4K generation', 'All features', 'API access']
+        }
+      ]
+    },
+    features: [
+      'Text-to-video generation',
+      'Image-to-video conversion',
+      'Video-to-video transformation',
+      'Multiple aspect ratios',
+      'High-resolution output',
+      'Advanced motion controls'
+    ],
+    limitations: [
+      'Credit-based usage model',
+      'Expensive for heavy usage',
+      'Generation time can be lengthy',
+      'Limited video duration'
+    ],
+    rating: 4.7,
+    reviewCount: 1420,
+    trending: true,
+    featured: true,
+    integrations: ['Adobe After Effects', 'Final Cut Pro', 'API'],
+    lastVerified: new Date('2025-01-22')
+  },
+  {
+    id: 'pika',
+    name: 'Pika',
+    slug: 'pika',
+    description: 'Pika is an AI video generation platform that specializes in creating smooth, high-quality videos from text descriptions and images. It focuses on ease of use while delivering professional-grade video content.',
+    shortDescription: 'User-friendly AI video generator for smooth, high-quality content',
+    logo: 'https://images.pexels.com/photos/7988154/pexels-photo-7988154.jpeg',
+    website: 'https://pika.art',
+    categoryId: 'media-creation',
+    subcategoryIds: ['video-generation'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$10/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['Limited daily generations', 'Basic quality', 'Watermarked videos']
+        },
+        {
+          name: 'Pro',
+          price: '$10/month',
+          billingPeriod: 'monthly',
+          features: ['Unlimited generations', 'HD quality', 'No watermarks', 'Priority processing']
+        },
+        {
+          name: 'Team',
+          price: '$30/month',
+          billingPeriod: 'monthly',
+          features: ['All Pro features', 'Team collaboration', 'Commercial license', 'Advanced controls']
+        }
+      ]
+    },
+    features: [
+      'Text-to-video generation',
+      'Image animation',
+      'Smooth motion synthesis',
+      'Multiple video formats',
+      'Easy-to-use interface',
+      'Fast generation times'
+    ],
+    limitations: [
+      'Limited customization options',
+      'Shorter video durations',
+      'Free tier restrictions',
+      'Limited style control'
+    ],
+    rating: 4.5,
+    reviewCount: 980,
+    trending: true,
+    featured: false,
+    integrations: ['Web interface', 'Discord bot', 'API coming soon'],
+    lastVerified: new Date('2025-01-20')
+  },
+  {
+    id: 'sora',
+    name: 'Sora',
+    slug: 'sora',
+    description: 'Sora is OpenAI\'s revolutionary text-to-video AI model capable of generating high-quality, realistic videos up to a minute long. It demonstrates remarkable understanding of physics, motion, and complex scene composition.',
+    shortDescription: 'OpenAI\'s groundbreaking text-to-video AI with realistic physics',
+    logo: 'https://images.pexels.com/photos/8439093/pexels-photo-8439093.jpeg',
+    website: 'https://openai.com/sora',
+    categoryId: 'media-creation',
+    subcategoryIds: ['video-generation'],
+    pricing: {
+      type: 'coming-soon',
+      hasFreeOption: false,
+      tiers: [
+        {
+          name: 'Research Preview',
+          price: 'Invitation only',
+          billingPeriod: 'monthly',
+          features: ['Limited access', 'Research purposes', 'Feedback required']
+        }
+      ]
+    },
+    features: [
+      'Up to 60-second video generation',
+      'Realistic physics simulation',
+      'Complex scene understanding',
+      'Multiple camera angles',
+      'High visual quality',
+      'Temporal consistency'
+    ],
+    limitations: [
+      'Not publicly available yet',
+      'Invitation-only access',
+      'Long generation times expected',
+      'High computational requirements'
+    ],
+    rating: 4.9,
+    reviewCount: 450,
+    trending: true,
+    featured: true,
+    integrations: ['Coming soon'],
+    lastVerified: new Date('2025-01-25')
+  },
+  {
+    id: 'synthesia',
+    name: 'Synthesia',
+    slug: 'synthesia',
+    description: 'Synthesia is an AI video generation platform that creates professional videos with AI avatars. It\'s designed for business communications, training, and marketing, offering multilingual support and custom avatar creation.',
+    shortDescription: 'AI video platform with realistic avatars for business content',
+    logo: 'https://images.pexels.com/photos/7988190/pexels-photo-7988190.jpeg',
+    website: 'https://www.synthesia.io',
+    categoryId: 'media-creation',
+    subcategoryIds: ['video-generation'],
+    pricing: {
+      type: 'subscription',
+      startingPrice: '$22.50/month',
+      hasFreeOption: false,
+      tiers: [
+        {
+          name: 'Starter',
+          price: '$22.50/month',
+          billingPeriod: 'monthly',
+          features: ['10 minutes/month', '90+ avatars', '120+ languages', 'Basic templates']
+        },
+        {
+          name: 'Creator',
+          price: '$67.50/month',
+          billingPeriod: 'monthly',
+          features: ['30 minutes/month', 'All avatars', 'Custom backgrounds', 'Priority support']
+        },
+        {
+          name: 'Enterprise',
+          price: 'Custom pricing',
+          billingPeriod: 'yearly',
+          features: ['Unlimited minutes', 'Custom avatars', 'API access', 'Dedicated support']
+        }
+      ]
+    },
+    features: [
+      'AI avatar video creation',
+      '120+ languages supported',
+      'Custom avatar training',
+      'Professional templates',
+      'Screen recording integration',
+      'Team collaboration tools'
+    ],
+    limitations: [
+      'Expensive for individuals',
+      'Limited free trial',
+      'Avatar movements can look artificial',
+      'Subscription-based only'
+    ],
+    rating: 4.6,
+    reviewCount: 1150,
+    trending: true,
+    featured: false,
+    integrations: ['PowerPoint', 'Canva', 'API', 'LMS platforms'],
+    lastVerified: new Date('2025-01-18')
+  },
+  {
+    id: 'colossyan',
+    name: 'Colossyan',
+    slug: 'colossyan',
+    description: 'Colossyan is an AI video generator that creates professional videos with AI presenters. It specializes in learning and development content, offering diverse avatars and comprehensive video creation tools.',
+    shortDescription: 'AI video creator with diverse presenters for L&D content',
+    logo: 'https://images.pexels.com/photos/7988225/pexels-photo-7988225.jpeg',
+    website: 'https://www.colossyan.com',
+    categoryId: 'media-creation',
+    subcategoryIds: ['video-generation'],
+    pricing: {
+      type: 'subscription',
+      startingPrice: '$19/month',
+      hasFreeOption: false,
+      tiers: [
+        {
+          name: 'Starter',
+          price: '$19/month',
+          billingPeriod: 'monthly',
+          features: ['10 minutes/month', 'Basic avatars', 'Standard quality', 'Basic support']
+        },
+        {
+          name: 'Pro',
+          price: '$61/month',
+          billingPeriod: 'monthly',
+          features: ['30 minutes/month', 'Premium avatars', 'HD quality', 'Priority support']
+        },
+        {
+          name: 'Enterprise',
+          price: 'Custom pricing',
+          billingPeriod: 'yearly',
+          features: ['Unlimited minutes', 'Custom avatars', 'API access', 'White-label option']
+        }
+      ]
+    },
+    features: [
+      'Diverse AI presenters',
+      'Learning-focused templates',
+      'Multilingual support',
+      'Interactive elements',
+      'Collaboration tools',
+      'Analytics and tracking'
+    ],
+    limitations: [
+      'Limited free options',
+      'Focus primarily on business/education',
+      'Subscription required',
+      'Avatar customization limitations'
+    ],
+    rating: 4.4,
+    reviewCount: 720,
+    trending: false,
+    featured: false,
+    integrations: ['LMS platforms', 'PowerPoint', 'Google Slides'],
+    lastVerified: new Date('2025-01-15')
+  },
+  {
+    id: 'lumen5',
+    name: 'Lumen5',
+    slug: 'lumen5',
+    description: 'Lumen5 is an AI-powered video creation platform that transforms text content into engaging videos. It uses AI to match content with relevant visuals, making video creation accessible for content marketers and creators.',
+    shortDescription: 'AI video maker that transforms text into engaging visual content',
+    logo: 'https://images.pexels.com/photos/7135027/pexels-photo-7135027.jpeg',
+    website: 'https://lumen5.com',
+    categoryId: 'media-creation',
+    subcategoryIds: ['video-generation'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$19/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Community',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['3 videos/month', '720p quality', 'Lumen5 branding', 'Basic templates']
+        },
+        {
+          name: 'Basic',
+          price: '$19/month',
+          billingPeriod: 'monthly',
+          features: ['15 videos/month', '1080p quality', 'No branding', 'Premium media']
+        },
+        {
+          name: 'Starter',
+          price: '$59/month',
+          billingPeriod: 'monthly',
+          features: ['60 videos/month', 'Custom branding', 'Auto-captions', 'Priority support']
+        },
+        {
+          name: 'Professional',
+          price: '$149/month',
+          billingPeriod: 'monthly',
+          features: ['Unlimited videos', 'Team collaboration', 'API access', 'Advanced features']
+        }
+      ]
+    },
+    features: [
+      'Text-to-video conversion',
+      'AI-powered content matching',
+      'Extensive media library',
+      'Customizable templates',
+      'Auto-generated captions',
+      'Social media optimization'
+    ],
+    limitations: [
+      'Limited customization in free tier',
+      'Branding on free videos',
+      'Template-based creation',
+      'Internet connection required'
+    ],
+    rating: 4.3,
+    reviewCount: 1350,
+    trending: false,
+    featured: false,
+    integrations: ['YouTube', 'Facebook', 'LinkedIn', 'Twitter', 'WordPress'],
+    lastVerified: new Date('2025-01-12')
+  },
+  // Audio & Music Generation Tools
+  {
+    id: 'elevenlabs',
+    name: 'ElevenLabs',
+    slug: 'elevenlabs',
+    description: 'ElevenLabs is a leading AI voice generation platform that creates realistic, expressive speech in multiple languages. It offers voice cloning, text-to-speech, and speech-to-speech capabilities with exceptional quality and emotional range.',
+    shortDescription: 'Premium AI voice generation with realistic speech and cloning',
+    logo: 'https://images.pexels.com/photos/7948035/pexels-photo-7948035.jpeg',
+    website: 'https://elevenlabs.io',
+    categoryId: 'media-creation',
+    subcategoryIds: ['audio-generation'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$5/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['10,000 characters/month', 'Basic voices', 'Standard quality']
+        },
+        {
+          name: 'Starter',
+          price: '$5/month',
+          billingPeriod: 'monthly',
+          features: ['30,000 characters/month', 'Instant voice cloning', 'Commercial license']
+        },
+        {
+          name: 'Creator',
+          price: '$22/month',
+          billingPeriod: 'monthly',
+          features: ['100,000 characters/month', 'Professional voice cloning', 'Multiple downloads']
+        },
+        {
+          name: 'Pro',
+          price: '$99/month',
+          billingPeriod: 'monthly',
+          features: ['500,000 characters/month', 'Highest quality voices', 'Priority support']
+        }
+      ]
+    },
+    features: [
+      'Realistic voice synthesis',
+      'Voice cloning technology',
+      'Multiple languages supported',
+      'Emotional expression control',
+      'High-quality audio output',
+      'API integration'
+    ],
+    limitations: [
+      'Character-based usage limits',
+      'Voice cloning requires samples',
+      'Can be expensive for heavy usage',
+      'Some accents may be less accurate'
+    ],
+    rating: 4.8,
+    reviewCount: 2340,
+    trending: true,
+    featured: true,
+    integrations: ['API', 'Discord bot', 'Third-party apps'],
+    lastVerified: new Date('2025-01-20')
+  },
+  {
+    id: 'voicemod',
+    name: 'Voicemod',
+    slug: 'voicemod',
+    description: 'Voicemod is a real-time voice changer and AI voice generator that offers a wide range of voice effects, custom voice creation, and text-to-speech capabilities. It\'s popular among gamers, content creators, and streamers.',
+    shortDescription: 'Real-time voice changer with AI voice effects and generation',
+    logo: 'https://images.pexels.com/photos/7948065/pexels-photo-7948065.jpeg',
+    website: 'https://www.voicemod.net',
+    categoryId: 'media-creation',
+    subcategoryIds: ['audio-generation'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$3.33/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['Limited voice effects', 'Basic real-time changing', 'Community access']
+        },
+        {
+          name: 'Pro',
+          price: '$3.33/month (billed annually)',
+          billingPeriod: 'yearly',
+          features: ['All voice effects', 'Custom voice creation', 'Soundboard', 'Priority updates']
+        }
+      ]
+    },
+    features: [
+      'Real-time voice changing',
+      'AI voice generation',
+      'Custom voice effects',
+      'Soundboard integration',
+      'Gaming integration',
+      'Streaming compatibility'
+    ],
+    limitations: [
+      'Limited effects in free version',
+      'Requires Windows or Mac',
+      'Can affect system performance',
+      'Learning curve for advanced features'
+    ],
+    rating: 4.5,
+    reviewCount: 1860,
+    trending: true,
+    featured: false,
+    integrations: ['Discord', 'OBS', 'Twitch', 'VRChat', 'Among Us'],
+    lastVerified: new Date('2025-01-18')
+  },
+  {
+    id: 'suno-ai',
+    name: 'Suno.ai',
+    slug: 'suno-ai',
+    description: 'Suno.ai is an AI music generation platform that creates complete songs with vocals and instruments from text prompts. It can generate music in various genres and styles, making music creation accessible to everyone.',
+    shortDescription: 'AI music generator creating complete songs from text prompts',
+    logo: 'https://images.pexels.com/photos/7948098/pexels-photo-7948098.jpeg',
+    website: 'https://suno.ai',
+    categoryId: 'media-creation',
+    subcategoryIds: ['audio-generation'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$8/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['50 credits/day', 'Basic generation', 'Non-commercial use']
+        },
+        {
+          name: 'Pro',
+          price: '$8/month',
+          billingPeriod: 'monthly',
+          features: ['500 credits/month', 'Commercial license', 'Priority generation', 'No ads']
+        },
+        {
+          name: 'Premier',
+          price: '$24/month',
+          billingPeriod: 'monthly',
+          features: ['2,000 credits/month', 'All features', 'Fastest generation', 'Premium support']
+        }
+      ]
+    },
+    features: [
+      'Complete song generation',
+      'Vocal and instrumental tracks',
+      'Multiple music genres',
+      'Custom lyrics input',
+      'High-quality audio output',
+      'Commercial licensing available'
+    ],
+    limitations: [
+      'Credit-based usage system',
+      'Limited style control',
+      'Generation time varies',
+      'Copyright considerations for similar melodies'
+    ],
+    rating: 4.6,
+    reviewCount: 1450,
+    trending: true,
+    featured: true,
+    integrations: ['Web interface', 'Discord bot', 'API coming soon'],
+    lastVerified: new Date('2025-01-22')
+  },
+  {
+    id: 'aiva',
+    name: 'AIVA',
+    slug: 'aiva',
+    description: 'AIVA (Artificial Intelligence Virtual Artist) is an AI composer that creates original music for films, video games, commercials, and other creative projects. It specializes in orchestral and cinematic compositions.',
+    shortDescription: 'AI composer for orchestral and cinematic music creation',
+    logo: 'https://images.pexels.com/photos/7948125/pexels-photo-7948125.jpeg',
+    website: 'https://www.aiva.ai',
+    categoryId: 'media-creation',
+    subcategoryIds: ['audio-generation'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '€15/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '€0',
+          billingPeriod: 'monthly',
+          features: ['3 downloads/month', 'AIVA attribution required', 'Basic compositions']
+        },
+        {
+          name: 'Standard',
+          price: '€15/month',
+          billingPeriod: 'monthly',
+          features: ['15 downloads/month', 'No attribution required', 'Copyright ownership']
+        },
+        {
+          name: 'Pro',
+          price: '€49/month',
+          billingPeriod: 'monthly',
+          features: ['300 downloads/month', 'All features', 'Priority support', 'Commercial license']
+        }
+      ]
+    },
+    features: [
+      'Orchestral music composition',
+      'Multiple musical styles',
+      'Custom mood and emotion settings',
+      'Professional-quality output',
+      'MIDI and audio export',
+      'Copyright ownership available'
+    ],
+    limitations: [
+      'Limited free downloads',
+      'Primarily classical/orchestral focus',
+      'Subscription required for ownership',
+      'Less suitable for modern genres'
+    ],
+    rating: 4.4,
+    reviewCount: 680,
+    trending: false,
+    featured: false,
+    integrations: ['MIDI export', 'Audio formats', 'Music software'],
+    lastVerified: new Date('2025-01-15')
+  },
+  {
+    id: 'soundraw',
+    name: 'Soundraw',
+    slug: 'soundraw',
+    description: 'Soundraw is an AI music generator that creates royalty-free music for content creators. It offers customizable tracks across various genres and moods, perfect for videos, podcasts, and other creative projects.',
+    shortDescription: 'AI music generator for royalty-free content creation',
+    logo: 'https://images.pexels.com/photos/7948155/pexels-photo-7948155.jpeg',
+    website: 'https://soundraw.io',
+    categoryId: 'media-creation',
+    subcategoryIds: ['audio-generation'],
+    pricing: {
+      type: 'subscription',
+      startingPrice: '$16.99/month',
+      hasFreeOption: false,
+      tiers: [
+        {
+          name: 'Creator',
+          price: '$16.99/month',
+          billingPeriod: 'monthly',
+          features: ['Unlimited downloads', 'Royalty-free license', 'All genres', 'Basic customization']
+        },
+        {
+          name: 'Artist',
+          price: '$29.99/month',
+          billingPeriod: 'monthly',
+          features: ['All Creator features', 'Stem downloads', 'Advanced editing', 'Priority support']
+        }
+      ]
+    },
+    features: [
+      'Royalty-free music generation',
+      'Multiple genres and moods',
+      'Customizable track elements',
+      'Unlimited downloads',
+      'High-quality audio',
+      'Content creator focused'
+    ],
+    limitations: [
+      'No free tier',
+      'Subscription-based only',
+      'Limited advanced customization',
+      'May sound algorithmic to trained ears'
+    ],
+    rating: 4.3,
+    reviewCount: 920,
+    trending: false,
+    featured: false,
+    integrations: ['Content creation platforms', 'Social media', 'Video editors'],
+    lastVerified: new Date('2025-01-12')
+  },
+  {
+    id: 'mubert',
+    name: 'Mubert',
+    slug: 'mubert',
+    description: 'Mubert is an AI music platform that generates personalized soundtracks in real-time. It offers both streaming services for listeners and music generation tools for content creators, with a focus on electronic and ambient music.',
+    shortDescription: 'Real-time AI music generation platform for streaming and content',
+    logo: 'https://images.pexels.com/photos/7948180/pexels-photo-7948180.jpeg',
+    website: 'https://mubert.com',
+    categoryId: 'media-creation',
+    subcategoryIds: ['audio-generation'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$14/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['Limited downloads', 'Basic quality', 'Personal use only']
+        },
+        {
+          name: 'Creator',
+          price: '$14/month',
+          billingPeriod: 'monthly',
+          features: ['25 downloads/month', 'High quality', 'Commercial license', 'No attribution']
+        },
+        {
+          name: 'Pro',
+          price: '$39/month',
+          billingPeriod: 'monthly',
+          features: ['500 downloads/month', 'API access', 'Priority generation', 'Advanced features']
+        }
+      ]
+    },
+    features: [
+      'Real-time music generation',
+      'Electronic and ambient focus',
+      'Mood-based generation',
+      'API for developers',
+      'Streaming service',
+      'Commercial licensing'
+    ],
+    limitations: [
+      'Limited to electronic genres',
+      'Free tier very restricted',
+      'Quality can be inconsistent',
+      'Less suitable for traditional music needs'
+    ],
+    rating: 4.2,
+    reviewCount: 540,
+    trending: false,
+    featured: false,
+    integrations: ['API', 'Streaming platforms', 'Developer tools'],
+    lastVerified: new Date('2025-01-10')
+  },
+  // Interactive & Game Media Tools
+  {
+    id: 'inworld-ai',
+    name: 'Inworld AI',
+    slug: 'inworld-ai',
+    description: 'Inworld AI creates intelligent, interactive characters for games, virtual worlds, and immersive experiences. These AI characters can engage in natural conversations, remember past interactions, and develop personalities.',
+    shortDescription: 'AI-powered interactive characters for games and virtual worlds',
+    logo: 'https://images.pexels.com/photos/8439093/pexels-photo-8439093.jpeg',
+    website: 'https://inworld.ai',
+    categoryId: 'media-creation',
+    subcategoryIds: ['interactive-media'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$20/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Starter',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['1,000 API calls/month', 'Basic characters', 'Community support']
+        },
+        {
+          name: 'Creator',
+          price: '$20/month',
+          billingPeriod: 'monthly',
+          features: ['20,000 API calls/month', 'Advanced characters', 'Custom training']
+        },
+        {
+          name: 'Pro',
+          price: '$200/month',
+          billingPeriod: 'monthly',
+          features: ['200,000 API calls/month', 'Enterprise features', 'Priority support']
+        }
+      ]
+    },
+    features: [
+      'Natural language conversations',
+      'Character memory and personality',
+      'Real-time interaction',
+      'Emotional intelligence',
+      'Multi-platform integration',
+      'Voice and text support'
+    ],
+    limitations: [
+      'API-based usage limits',
+      'Requires integration work',
+      'Can be expensive for high usage',
+      'Learning curve for implementation'
+    ],
+    rating: 4.5,
+    reviewCount: 380,
+    trending: true,
+    featured: false,
+    integrations: ['Unity', 'Unreal Engine', 'Web platforms', 'VR/AR systems'],
+    lastVerified: new Date('2025-01-20')
+  },
+  {
+    id: 'scenario-gg',
+    name: 'Scenario.gg',
+    slug: 'scenario-gg',
+    description: 'Scenario.gg is an AI-powered game asset generation platform that creates consistent, high-quality art for video games. It allows game developers to train custom AI models and generate assets that match their specific art style.',
+    shortDescription: 'AI game asset generator with custom style training',
+    logo: 'https://images.pexels.com/photos/7135037/pexels-photo-7135037.jpeg',
+    website: 'https://www.scenario.gg',
+    categoryId: 'media-creation',
+    subcategoryIds: ['interactive-media'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$12/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['100 generations/month', 'Public models', 'Basic features']
+        },
+        {
+          name: 'Pro',
+          price: '$12/month',
+          billingPeriod: 'monthly',
+          features: ['1,000 generations/month', 'Private models', 'Custom training', 'HD quality']
+        },
+        {
+          name: 'Team',
+          price: '$49/month',
+          billingPeriod: 'monthly',
+          features: ['5,000 generations/month', 'Team collaboration', 'Priority training', 'API access']
+        }
+      ]
+    },
+    features: [
+      'Custom AI model training',
+      'Consistent art style generation',
+      'Game-focused asset creation',
+      'Team collaboration tools',
+      'High-resolution outputs',
+      'Batch generation capabilities'
+    ],
+    limitations: [
+      'Learning curve for model training',
+      'Limited free generations',
+      'Requires quality training data',
+      'Generation times can vary'
+    ],
+    rating: 4.6,
+    reviewCount: 540,
+    trending: true,
+    featured: false,
+    integrations: ['Unity', 'Unreal Engine', 'Photoshop', 'API'],
+    lastVerified: new Date('2025-01-18')
+  },
+  {
+    id: 'luma-ai',
+    name: 'Luma AI',
+    slug: 'luma-ai',
+    description: 'Luma AI creates photorealistic 3D models and scenes from simple text prompts or images. It\'s designed for creators who need high-quality 3D assets for games, AR/VR, and digital content without extensive 3D modeling knowledge.',
+    shortDescription: 'AI-powered 3D model and scene generation platform',
+    logo: 'https://images.pexels.com/photos/8439093/pexels-photo-8439093.jpeg',
+    website: 'https://lumalabs.ai',
+    categoryId: 'media-creation',
+    subcategoryIds: ['interactive-media'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$24/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['30 generations/month', 'Basic quality', 'Personal use']
+        },
+        {
+          name: 'Standard',
+          price: '$24/month',
+          billingPeriod: 'monthly',
+          features: ['150 generations/month', 'High quality', 'Commercial license', 'Priority queue']
+        },
+        {
+          name: 'Pro',
+          price: '$80/month',
+          billingPeriod: 'monthly',
+          features: ['500 generations/month', 'Highest quality', 'API access', 'Advanced features']
+        }
+      ]
+    },
+    features: [
+      '3D model generation from text',
+      'Photorealistic quality',
+      'Multiple export formats',
+      'Scene composition',
+      'Texture generation',
+      'AR/VR optimization'
+    ],
+    limitations: [
+      'Generation-based limits',
+      'Complex scenes may require multiple attempts',
+      'Limited editing capabilities',
+      'High-quality models require paid plans'
+    ],
+    rating: 4.4,
+    reviewCount: 720,
+    trending: true,
+    featured: false,
+    integrations: ['Blender', 'Unity', 'Unreal Engine', 'Three.js'],
+    lastVerified: new Date('2025-01-15')
+  },
+  {
+    id: 'unity-muse',
+    name: 'Unity Muse',
+    slug: 'unity-muse',
+    description: 'Unity Muse is an AI-powered suite of tools integrated into the Unity engine for game development. It assists with code generation, sprite creation, texture generation, and other game development tasks directly within the Unity environment.',
+    shortDescription: 'AI-powered development tools integrated into Unity engine',
+    logo: 'https://images.pexels.com/photos/7988086/pexels-photo-7988086.jpeg',
+    website: 'https://unity.com/products/muse',
+    categoryId: 'media-creation',
+    subcategoryIds: ['interactive-media'],
+    pricing: {
+      type: 'subscription',
+      startingPrice: '$18/month',
+      hasFreeOption: false,
+      tiers: [
+        {
+          name: 'Unity Pro + Muse',
+          price: '$18/month (additional to Unity Pro)',
+          billingPeriod: 'monthly',
+          features: ['Integrated AI tools', 'Code generation', 'Asset creation', 'Unlimited usage']
+        }
+      ]
+    },
+    features: [
+      'Native Unity integration',
+      'AI code generation',
+      'Sprite and texture creation',
+      'Animation assistance',
+      'Game logic suggestions',
+      'Asset optimization'
+    ],
+    limitations: [
+      'Requires Unity Pro subscription',
+      'Limited to Unity ecosystem',
+      'Still in development/preview',
+      'Additional cost on top of Unity'
+    ],
+    rating: 4.3,
+    reviewCount: 280,
+    trending: true,
+    featured: false,
+    integrations: ['Unity Engine', 'Unity Asset Store', 'Unity Cloud'],
+    lastVerified: new Date('2025-01-12')
+  },
+  {
+    id: 'character-ai',
+    name: 'Character.ai',
+    slug: 'character-ai',
+    description: 'Character.ai allows users to create and interact with AI-powered characters that can engage in conversations, roleplay, and provide entertainment. It\'s popular for creative writing, character development, and interactive storytelling.',
+    shortDescription: 'Platform for creating and chatting with AI characters',
+    logo: 'https://images.pexels.com/photos/7948035/pexels-photo-7948035.jpeg',
+    website: 'https://character.ai',
+    categoryId: 'media-creation',
+    subcategoryIds: ['interactive-media'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$9.99/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['Basic characters', 'Limited conversations', 'Public characters']
+        },
+        {
+          name: 'Plus',
+          price: '$9.99/month',
+          billingPeriod: 'monthly',
+          features: ['Priority access', 'Faster responses', 'Character rooms', 'Skip waiting times']
+        }
+      ]
+    },
+    features: [
+      'Custom character creation',
+      'Natural conversations',
+      'Character memory',
+      'Roleplay capabilities',
+      'Community sharing',
+      'Mobile and web access'
+    ],
+    limitations: [
+      'Free tier has waiting times',
+      'Limited customization in free version',
+      'Conversations can become repetitive',
+      'Content filtering may limit creativity'
+    ],
+    rating: 4.5,
+    reviewCount: 4200,
+    trending: true,
+    featured: false,
+    integrations: ['Web platform', 'Mobile apps', 'Community features'],
+    lastVerified: new Date('2025-01-22')
+  },
+  {
+    id: 'novelai',
+    name: 'NovelAI',
+    slug: 'novelai',
+    description: 'NovelAI is an AI-powered writing assistant and storytelling platform that helps create interactive fiction, characters, and immersive narratives. It includes both text generation and image generation capabilities for creative projects.',
+    shortDescription: 'AI storytelling platform with text and image generation',
+    logo: 'https://images.pexels.com/photos/7948065/pexels-photo-7948065.jpeg',
+    website: 'https://novelai.net',
+    categoryId: 'media-creation',
+    subcategoryIds: ['interactive-media'],
+    pricing: {
+      type: 'subscription',
+      startingPrice: '$10/month',
+      hasFreeOption: false,
+      tiers: [
+        {
+          name: 'Tablet',
+          price: '$10/month',
+          billingPeriod: 'monthly',
+          features: ['Unlimited text generation', '1000 Anlas for images', 'Advanced AI models']
+        },
+        {
+          name: 'Scroll',
+          price: '$15/month',
+          billingPeriod: 'monthly',
+          features: ['All Tablet features', '1000 additional Anlas', 'Advanced image features']
+        },
+        {
+          name: 'Opus',
+          price: '$25/month',
+          billingPeriod: 'monthly',
+          features: ['All features', '10,000 Anlas', 'Highest priority', 'Largest context']
+        }
+      ]
+    },
+    features: [
+      'Interactive storytelling',
+      'Character development tools',
+      'Image generation for stories',
+      'Customizable AI behavior',
+      'World-building assistance',
+      'Export capabilities'
+    ],
+    limitations: [
+      'No free tier',
+      'Image generation uses credits',
+      'Learning curve for advanced features',
+      'Subscription required for all features'
+    ],
+    rating: 4.4,
+    reviewCount: 1150,
+    trending: false,
+    featured: false,
+    integrations: ['Web platform', 'Export tools', 'Community features'],
+    lastVerified: new Date('2025-01-10')
+  },
+  // AI-Powered Media Editing Tools
+  {
+    id: 'descript',
+    name: 'Descript',
+    slug: 'descript',
+    description: 'Descript is an all-in-one audio and video editing platform that uses AI to simplify content creation. It offers text-based editing, automatic transcription, voice cloning, and collaborative editing features.',
+    shortDescription: 'AI-powered audio and video editor with text-based editing',
+    logo: 'https://images.pexels.com/photos/7988190/pexels-photo-7988190.jpeg',
+    website: 'https://www.descript.com',
+    categoryId: 'media-creation',
+    subcategoryIds: ['media-editing'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$12/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['3 hours transcription/month', 'Watermarked exports', 'Basic editing']
+        },
+        {
+          name: 'Creator',
+          price: '$12/month',
+          billingPeriod: 'monthly',
+          features: ['10 hours transcription/month', 'No watermarks', 'Overdub voice cloning']
+        },
+        {
+          name: 'Pro',
+          price: '$24/month',
+          billingPeriod: 'monthly',
+          features: ['30 hours transcription/month', 'Advanced features', 'Priority support']
+        },
+        {
+          name: 'Enterprise',
+          price: 'Custom pricing',
+          billingPeriod: 'yearly',
+          features: ['Unlimited transcription', 'Team features', 'Advanced security']
+        }
+      ]
+    },
+    features: [
+      'Text-based video editing',
+      'Automatic transcription',
+      'Voice cloning (Overdub)',
+      'Screen recording',
+      'Collaborative editing',
+      'Podcast publishing'
+    ],
+    limitations: [
+      'Limited free transcription hours',
+      'Learning curve for new users',
+      'Voice cloning requires training',
+      'Internet connection required'
+    ],
+    rating: 4.7,
+    reviewCount: 2850,
+    trending: true,
+    featured: true,
+    integrations: ['YouTube', 'Spotify', 'Apple Podcasts', 'Slack'],
+    lastVerified: new Date('2025-01-20')
+  },
+  {
+    id: 'runway-editor',
+    name: 'Runway',
+    slug: 'runway-editor',
+    description: 'Runway is a comprehensive AI video editing platform offering advanced tools like background removal, object tracking, motion tracking, and various AI-powered effects for professional video production.',
+    shortDescription: 'Professional AI video editing with advanced effects and tools',
+    logo: 'https://images.pexels.com/photos/7988086/pexels-photo-7988086.jpeg',
+    website: 'https://runwayml.com',
+    categoryId: 'media-creation',
+    subcategoryIds: ['media-editing'],
+    pricing: {
+      type: 'subscription',
+      startingPrice: '$12/month',
+      hasFreeOption: false,
+      tiers: [
+        {
+          name: 'Basic',
+          price: '$12/month',
+          billingPeriod: 'monthly',
+          features: ['125 credits/month', 'AI editing tools', 'HD exports']
+        },
+        {
+          name: 'Standard',
+          price: '$28/month',
+          billingPeriod: 'monthly',
+          features: ['625 credits/month', 'Advanced tools', '4K exports', 'Priority processing']
+        },
+        {
+          name: 'Pro',
+          price: '$76/month',
+          billingPeriod: 'monthly',
+          features: ['2250 credits/month', 'All features', 'Team collaboration', 'API access']
+        }
+      ]
+    },
+    features: [
+      'AI background removal',
+      'Object and motion tracking',
+      'Style transfer effects',
+      'Automatic subtitles',
+      'Color correction AI',
+      'Collaborative editing'
+    ],
+    limitations: [
+      'Credit-based usage model',
+      'No free tier',
+      'Can be expensive for heavy use',
+      'Learning curve for advanced features'
+    ],
+    rating: 4.6,
+    reviewCount: 1950,
+    trending: true,
+    featured: false,
+    integrations: ['Adobe Premiere', 'Final Cut Pro', 'After Effects'],
+    lastVerified: new Date('2025-01-18')
+  },
+  {
+    id: 'adobe-photoshop-premiere',
+    name: 'Adobe Photoshop & Premiere',
+    slug: 'adobe-photoshop-premiere',
+    description: 'Adobe\'s flagship creative applications enhanced with AI features including generative fill, content-aware tools, auto-reframe, and intelligent editing assistance powered by Adobe Sensei.',
+    shortDescription: 'Industry-standard creative apps enhanced with AI capabilities',
+    logo: 'https://images.pexels.com/photos/7135037/pexels-photo-7135037.jpeg',
+    website: 'https://www.adobe.com/creativecloud.html',
+    categoryId: 'media-creation',
+    subcategoryIds: ['media-editing'],
+    pricing: {
+      type: 'subscription',
+      startingPrice: '$20.99/month',
+      hasFreeOption: false,
+      tiers: [
+        {
+          name: 'Individual App',
+          price: '$20.99/month per app',
+          billingPeriod: 'monthly',
+          features: ['Single app access', 'AI features', 'Cloud storage', 'Mobile apps']
+        },
+        {
+          name: 'Creative Cloud All Apps',
+          price: '$54.99/month',
+          billingPeriod: 'monthly',
+          features: ['All 20+ apps', 'Advanced AI features', 'Premium fonts', 'Collaboration tools']
+        },
+        {
+          name: 'Business',
+          price: '$84.99/month per license',
+          billingPeriod: 'monthly',
+          features: ['All apps', 'Advanced admin', 'Enhanced security', 'Priority support']
+        }
+      ]
+    },
+    features: [
+      'Generative AI fill and expand',
+      'Content-aware editing',
+      'Auto-reframe for social media',
+      'Speech-to-text captions',
+      'Smart color matching',
+      'Professional-grade tools'
+    ],
+    limitations: [
+      'Expensive subscription model',
+      'Steep learning curve',
+      'Resource-intensive',
+      'Requires consistent internet for full features'
+    ],
+    rating: 4.8,
+    reviewCount: 15600,
+    trending: true,
+    featured: true,
+    integrations: ['Creative Cloud ecosystem', 'Third-party plugins', 'Stock libraries'],
+    lastVerified: new Date('2025-01-22')
+  },
+  {
+    id: 'kapwing',
+    name: 'Kapwing',
+    slug: 'kapwing',
+    description: 'Kapwing is an online video editor that uses AI to simplify content creation for social media. It offers automatic subtitles, background removal, video resizing, and collaborative editing features.',
+    shortDescription: 'AI-powered online video editor for social media content',
+    logo: 'https://images.pexels.com/photos/7135027/pexels-photo-7135027.jpeg',
+    website: 'https://www.kapwing.com',
+    categoryId: 'media-creation',
+    subcategoryIds: ['media-editing'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$16/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['3 exports/month', 'Basic tools', 'Kapwing watermark', '720p quality']
+        },
+        {
+          name: 'Pro',
+          price: '$16/month',
+          billingPeriod: 'monthly',
+          features: ['Unlimited exports', 'AI features', 'No watermark', '1080p quality']
+        },
+        {
+          name: 'Team',
+          price: '$50/month',
+          billingPeriod: 'monthly',
+          features: ['All Pro features', 'Team collaboration', 'Priority support', 'Brand kit']
+        }
+      ]
+    },
+    features: [
+      'Automatic subtitle generation',
+      'AI background removal',
+      'Smart video resizing',
+      'Template library',
+      'Collaborative editing',
+      'Social media optimization'
+    ],
+    limitations: [
+      'Limited free exports',
+      'Internet connection required',
+      'Advanced features require subscription',
+      'File size limitations'
+    ],
+    rating: 4.5,
+    reviewCount: 3400,
+    trending: true,
+    featured: false,
+    integrations: ['YouTube', 'TikTok', 'Instagram', 'Twitter', 'Slack'],
+    lastVerified: new Date('2025-01-15')
+  },
+  {
+    id: 'otter-ai',
+    name: 'Otter.ai',
+    slug: 'otter-ai',
+    description: 'Otter.ai is an AI-powered transcription service that automatically converts speech to text in real-time. It\'s designed for meetings, interviews, lectures, and any audio content that needs accurate transcription.',
+    shortDescription: 'AI transcription service for meetings and audio content',
+    logo: 'https://images.pexels.com/photos/7948035/pexels-photo-7948035.jpeg',
+    website: 'https://otter.ai',
+    categoryId: 'media-creation',
+    subcategoryIds: ['media-editing'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$8.33/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Basic',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['600 minutes/month', 'Real-time transcription', 'Basic search']
+        },
+        {
+          name: 'Pro',
+          price: '$8.33/month',
+          billingPeriod: 'monthly',
+          features: ['6,000 minutes/month', 'Advanced search', 'Export options', 'Custom vocabulary']
+        },
+        {
+          name: 'Business',
+          price: '$20/month per user',
+          billingPeriod: 'monthly',
+          features: ['Unlimited minutes', 'Team features', 'Admin controls', 'Priority support']
+        }
+      ]
+    },
+    features: [
+      'Real-time transcription',
+      'Speaker identification',
+      'Keyword search',
+      'Meeting integration',
+      'Export capabilities',
+      'Mobile and web access'
+    ],
+    limitations: [
+      'Limited free minutes',
+      'Accuracy varies with audio quality',
+      'Requires good internet connection',
+      'May struggle with accents or technical terms'
+    ],
+    rating: 4.6,
+    reviewCount: 5200,
+    trending: true,
+    featured: false,
+    integrations: ['Zoom', 'Google Meet', 'Microsoft Teams', 'Slack'],
+    lastVerified: new Date('2025-01-20')
+  },
+  {
+    id: 'pictory',
+    name: 'Pictory',
+    slug: 'pictory',
+    description: 'Pictory is an AI video creation platform that transforms long-form content into short, engaging videos. It uses AI to automatically extract highlights, add captions, and create social media-ready clips.',
+    shortDescription: 'AI video creator that transforms long content into engaging clips',
+    logo: 'https://images.pexels.com/photos/7988225/pexels-photo-7988225.jpeg',
+    website: 'https://pictory.ai',
+    categoryId: 'media-creation',
+    subcategoryIds: ['media-editing'],
+    pricing: {
+      type: 'subscription',
+      startingPrice: '$19/month',
+      hasFreeOption: false,
+      tiers: [
+        {
+          name: 'Starter',
+          price: '$19/month',
+          billingPeriod: 'monthly',
+          features: ['30 videos/month', 'Basic features', 'Standard quality', 'Pictory branding']
+        },
+        {
+          name: 'Professional',
+          price: '$39/month',
+          billingPeriod: 'monthly',
+          features: ['60 videos/month', 'Advanced features', 'HD quality', 'No branding']
+        },
+        {
+          name: 'Teams',
+          price: '$99/month',
+          billingPeriod: 'monthly',
+          features: ['90 videos/month', 'Team collaboration', 'Priority support', 'API access']
+        }
+      ]
+    },
+    features: [
+      'AI highlight extraction',
+      'Automatic captioning',
+      'Text-to-video conversion',
+      'Voice-over generation',
+      'Template library',
+      'Social media optimization'
+    ],
+    limitations: [
+      'No free tier',
+      'Monthly video limits',
+      'Template-based creation',
+      'Limited customization options'
+    ],
+    rating: 4.4,
+    reviewCount: 1680,
+    trending: false,
+    featured: false,
+    integrations: ['YouTube', 'Social media platforms', 'Cloud storage'],
+    lastVerified: new Date('2025-01-12')
   }
 ];

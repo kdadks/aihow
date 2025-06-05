@@ -411,5 +411,215 @@ export const workflowBundles: WorkflowBundle[] = [
       'Visualize and share results through Hex collaborative workspace',
       'Set up automated reporting and model monitoring'
     ]
+  },
+  // === MEDIA CREATION BUNDLES ===
+  {
+    id: '24',
+    name: 'Complete Content Creator Studio',
+    description: 'Professional-grade media creation workflow covering image, video, and audio content production for content creators and influencers.',
+    tools: [
+      findTool('dall-e-3'), // DALL·E 3 - Premium image generation
+      findTool('runway-gen-2'), // Runway Gen-2 - Professional video creation
+      findTool('elevenlabs'), // ElevenLabs - Voice generation and cloning
+      findTool('descript') // Descript - All-in-one editing
+    ],
+    totalCost: '$134/month',
+    implementationSteps: [
+      'Create stunning visuals and thumbnails using DALL·E 3',
+      'Generate professional video content with Runway Gen-2',
+      'Produce high-quality voiceovers using ElevenLabs',
+      'Edit and polish all content using Descript\'s text-based editing',
+      'Establish consistent branding and content scheduling'
+    ]
+  },
+  {
+    id: '25',
+    name: 'AI-Powered Marketing Media Suite',
+    description: 'Complete marketing content creation workflow for businesses and agencies, covering social media, ads, and promotional materials.',
+    tools: [
+      findTool('adobe-firefly'), // Adobe Firefly - Commercial-safe content
+      findTool('synthesia'), // Synthesia - Professional video presentations
+      findTool('suno-ai'), // Suno.ai - Background music and jingles
+      findTool('kapwing') // Kapwing - Social media optimization
+    ],
+    totalCost: '$109.49/month',
+    implementationSteps: [
+      'Generate commercial-safe visuals with Adobe Firefly',
+      'Create professional presentation videos using Synthesia',
+      'Produce custom background music and jingles with Suno.ai',
+      'Optimize content for all social platforms using Kapwing',
+      'Develop comprehensive marketing content calendar'
+    ]
+  },
+  {
+    id: '26',
+    name: 'Indie Game Development Media Pipeline',
+    description: 'Complete game asset creation workflow for indie developers, covering 2D art, 3D models, audio, and character development.',
+    tools: [
+      findTool('scenario-gg'), // Scenario.gg - Game asset generation
+      findTool('luma-ai'), // Luma AI - 3D model creation
+      findTool('mubert'), // Mubert - Game music generation
+      findTool('character-ai') // Character.ai - Character development
+    ],
+    totalCost: '$107/month',
+    implementationSteps: [
+      'Generate consistent 2D game assets using Scenario.gg',
+      'Create 3D models and environments with Luma AI',
+      'Produce adaptive game music using Mubert',
+      'Develop character personalities with Character.ai',
+      'Integrate assets into game development pipeline'
+    ]
+  },
+  {
+    id: '27',
+    name: 'Professional Video Production Workflow',
+    description: 'High-end video production suite for filmmakers, agencies, and professional content creators requiring cinema-quality output.',
+    tools: [
+      findTool('runway-editor'), // Runway - Advanced video editing
+      findTool('sora'), // Sora - Revolutionary video generation
+      findTool('adobe-photoshop-premiere'), // Adobe Creative Suite
+      findTool('otter-ai') // Otter.ai - Professional transcription
+    ],
+    totalCost: '$154.99/month + Sora access',
+    implementationSteps: [
+      'Create groundbreaking footage using Sora (when available)',
+      'Apply advanced AI effects and editing with Runway',
+      'Use Adobe Creative Suite for professional finishing',
+      'Generate accurate transcripts and subtitles with Otter.ai',
+      'Establish color grading and post-production workflows'
+    ]
+  },
+  {
+    id: '28',
+    name: 'Podcast & Audio Content Studio',
+    description: 'Complete podcast production workflow covering voice generation, music creation, editing, and transcription for audio content creators.',
+    tools: [
+      findTool('elevenlabs'), // ElevenLabs - Voice cloning and generation
+      findTool('aiva'), // AIVA - Professional intro/outro music
+      findTool('descript'), // Descript - Podcast editing
+      findTool('soundraw') // Soundraw - Royalty-free background music
+    ],
+    totalCost: '$64.99/month',
+    implementationSteps: [
+      'Clone your voice or create AI hosts using ElevenLabs',
+      'Compose professional intro/outro music with AIVA',
+      'Edit podcasts using Descript\'s text-based interface',
+      'Generate background music with Soundraw',
+      'Set up automated podcast publishing workflow'
+    ]
+  },
+  {
+    id: '29',
+    name: 'E-Learning Content Creation Bundle',
+    description: 'Educational content creation workflow for course creators, teachers, and training professionals requiring engaging multimedia lessons.',
+    tools: [
+      findTool('colossyan'), // Colossyan - Educational video presenters
+      findTool('leonardo-ai'), // Leonardo.ai - Educational illustrations
+      findTool('voicemod'), // Voicemod - Engaging voice effects
+      findTool('pictory') // Pictory - Long-form to lesson conversion
+    ],
+    totalCost: '$105/month',
+    implementationSteps: [
+      'Create diverse educational presenters using Colossyan',
+      'Generate clear educational illustrations with Leonardo.ai',
+      'Add engaging voice effects for younger audiences with Voicemod',
+      'Convert long-form content to bite-sized lessons using Pictory',
+      'Develop interactive learning experiences and assessments'
+    ]
+  },
+  {
+    id: '30',
+    name: 'Social Media Mastery Suite',
+    description: 'Complete social media content creation workflow optimized for viral content, trending formats, and platform-specific requirements.',
+    tools: [
+      findTool('pika'), // Pika - Quick viral video generation
+      findTool('clipdrop'), // ClipDrop - Multi-tool content creation
+      findTool('lumen5'), // Lumen5 - Text-to-video for social
+      findTool('kapwing') // Kapwing - Social media optimization
+    ],
+    totalCost: '$94/month',
+    implementationSteps: [
+      'Generate trending video content quickly using Pika',
+      'Create varied visual content with ClipDrop\'s toolkit',
+      'Transform blog posts to videos using Lumen5',
+      'Optimize everything for each platform using Kapwing',
+      'Establish viral content creation and posting schedule'
+    ]
+  },
+  {
+    id: '31',
+    name: 'Enterprise Training & Communication',
+    description: 'Professional corporate communication suite for HR, training departments, and internal communications requiring multilingual support.',
+    tools: [
+      findTool('synthesia'), // Synthesia - Professional corporate videos
+      findTool('adobe-firefly'), // Adobe Firefly - Brand-safe visuals
+      findTool('otter-ai'), // Otter.ai - Meeting transcription
+      findTool('pictory') // Pictory - Policy to video conversion
+    ],
+    totalCost: '$116.49/month',
+    implementationSteps: [
+      'Create multilingual training videos using Synthesia',
+      'Generate brand-compliant visuals with Adobe Firefly',
+      'Transcribe and document meetings using Otter.ai',
+      'Convert policies and documents to videos with Pictory',
+      'Establish corporate communication standards and workflows'
+    ]
+  },
+  {
+    id: '32',
+    name: 'Creative Agency Production Pipeline',
+    description: 'Full-service creative agency workflow covering client presentations, campaign assets, and multimedia production for professional agencies.',
+    tools: [
+      findTool('stable-diffusion'), // Stable Diffusion - Unlimited creative assets
+      findTool('runway-gen-2'), // Runway Gen-2 - Premium video production
+      findTool('elevenlabs'), // ElevenLabs - Professional voiceovers
+      findTool('adobe-photoshop-premiere') // Adobe Creative Suite - Industry standard
+    ],
+    totalCost: '$154.99/month + compute costs',
+    implementationSteps: [
+      'Generate unlimited creative concepts using Stable Diffusion',
+      'Produce high-end video content with Runway Gen-2',
+      'Create professional voiceovers with ElevenLabs',
+      'Finish all work using Adobe Creative Suite',
+      'Establish client approval workflows and asset management'
+    ]
+  },
+  {
+    id: '33',
+    name: 'Interactive Media & Gaming Experience',
+    description: 'Next-generation interactive content creation for game developers, VR creators, and interactive media professionals.',
+    tools: [
+      findTool('inworld-ai'), // Inworld AI - Interactive characters
+      findTool('unity-muse'), // Unity Muse - Game development AI
+      findTool('luma-ai'), // Luma AI - 3D asset creation
+      findTool('novelai') // NovelAI - Interactive storytelling
+    ],
+    totalCost: '$272/month + Unity Pro',
+    implementationSteps: [
+      'Create intelligent NPCs and characters using Inworld AI',
+      'Accelerate development with Unity Muse AI tools',
+      'Generate 3D assets and environments with Luma AI',
+      'Develop branching narratives using NovelAI',
+      'Integrate all systems for seamless interactive experiences'
+    ]
+  },
+  {
+    id: '34',
+    name: 'Budget-Friendly Creator Starter Kit',
+    description: 'Affordable media creation bundle for beginners and budget-conscious creators starting their content journey.',
+    tools: [
+      findTool('stable-diffusion'), // Stable Diffusion - Free image generation
+      findTool('pika'), // Pika - Affordable video creation
+      findTool('mubert'), // Mubert - Budget music generation
+      findTool('clipdrop') // ClipDrop - Multi-tool value
+    ],
+    totalCost: '$31/month + free options',
+    implementationSteps: [
+      'Start with free Stable Diffusion for unlimited images',
+      'Create engaging videos using Pika\'s affordable plans',
+      'Generate background music with Mubert',
+      'Use ClipDrop for various editing and creation tasks',
+      'Build audience and upgrade tools as you grow'
+    ]
   }
 ];
