@@ -193,13 +193,13 @@ export const BundleCreator: React.FC<BundleCreatorProps> = ({ onSave, initialBun
           <div className="space-y-6">
             <div className="bg-blue-50 p-4 rounded-lg">
               <div className="flex justify-between items-start mb-3">
-                <div>
-                  <h3 className="text-lg font-medium text-blue-900">Best Match: {recommendedBundle.name}</h3>
+                <div className="min-w-0 flex-1 mr-4">
+                  <h3 className="text-lg font-medium text-blue-900 truncate">Best Match: {recommendedBundle.name}</h3>
                   <p className="text-sm text-blue-700">{recommendedBundle.description}</p>
                 </div>
                 <Button
                   onClick={applyRecommendedBundle}
-                  className="bg-blue-500 hover:bg-blue-600"
+                  className="bg-blue-500 hover:bg-blue-600 flex-shrink-0"
                   leftIcon={<Wand2 className="h-4 w-4" />}
                 >
                   Use This Bundle
@@ -221,8 +221,8 @@ export const BundleCreator: React.FC<BundleCreatorProps> = ({ onSave, initialBun
                 <div className="space-y-4">
                   {alternativeRecommendations.map((bundle) => (
                     <div key={bundle.id} className="flex justify-between items-start">
-                      <div>
-                        <h5 className="font-medium text-gray-900">{bundle.name}</h5>
+                      <div className="min-w-0 flex-1 mr-4">
+                        <h5 className="font-medium text-gray-900 truncate">{bundle.name}</h5>
                         <p className="text-sm text-gray-500">{bundle.description}</p>
                       </div>
                       <Button
@@ -232,6 +232,7 @@ export const BundleCreator: React.FC<BundleCreatorProps> = ({ onSave, initialBun
                           setRecommendedBundle(bundle);
                           applyRecommendedBundle();
                         }}
+                        className="flex-shrink-0"
                       >
                         Use Instead
                       </Button>
@@ -275,11 +276,12 @@ export const BundleCreator: React.FC<BundleCreatorProps> = ({ onSave, initialBun
           {filteredTools.map(tool => (
             <Card key={tool.id} className="hover:shadow-md transition-shadow">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-lg font-medium">{tool.name}</CardTitle>
+                <CardTitle className="text-lg font-medium truncate flex-1 mr-4">{tool.name}</CardTitle>
                 <Button
                   size="sm"
                   onClick={() => handleAddTool(tool)}
                   leftIcon={<Plus className="h-4 w-4" />}
+                  className="flex-shrink-0"
                 >
                   Add
                 </Button>
@@ -305,9 +307,9 @@ export const BundleCreator: React.FC<BundleCreatorProps> = ({ onSave, initialBun
                   key={tool.id}
                   className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow"
                 >
-                  <div className="flex items-start justify-between mb-4">
-                    <div>
-                      <h4 className="font-medium text-gray-900 text-xl mb-2">{tool.name}</h4>
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="min-w-0 flex-1">
+                      <h4 className="font-medium text-gray-900 text-xl mb-2 truncate">{tool.name}</h4>
                       <Badge className="mb-2" variant="outline">
                         {tool.pricing.startingPrice || 'Free'}
                       </Badge>
@@ -317,7 +319,7 @@ export const BundleCreator: React.FC<BundleCreatorProps> = ({ onSave, initialBun
                       size="sm"
                       onClick={() => handleRemoveTool(tool)}
                       leftIcon={<X className="h-4 w-4" />}
-                      className="text-gray-500 hover:text-red-500"
+                      className="text-gray-500 hover:text-red-500 ml-4 flex-shrink-0"
                     >
                       Remove
                     </Button>
