@@ -621,5 +621,235 @@ export const workflowBundles: WorkflowBundle[] = [
       'Use ClipDrop for various editing and creation tasks',
       'Build audience and upgrade tools as you grow'
     ]
+  },
+  // === DOCUMENT CREATION BUNDLES ===
+  {
+    id: '35',
+    name: 'Professional Document Creation Suite',
+    description: 'Complete toolkit for creating high-quality business documents, reports, and proposals with AI-powered writing assistance.',
+    tools: [
+      findTool('jasper-ai'), // Jasper AI - Professional business writing
+      findTool('tome'), // Tome - AI-powered presentations
+      findTool('grammarly-go'), // Grammarly - Writing enhancement
+      findTool('pandadoc-ai') // PandaDoc AI - Proposal automation
+    ],
+    totalCost: '$195/month',
+    implementationSteps: [
+      'Set up Jasper AI for high-quality business content creation',
+      'Use Tome for creating engaging presentations and documents',
+      'Integrate Grammarly for polished, error-free writing',
+      'Automate proposal workflows with PandaDoc AI',
+      'Establish brand consistency across all documents'
+    ]
+  },
+  {
+    id: '36',
+    name: 'Academic Research & Writing Bundle',
+    description: 'Comprehensive suite for academic writing, research, and paper creation with AI-powered citation and analysis tools.',
+    tools: [
+      findTool('scispace'), // SciSpace - Academic research assistant
+      findTool('chatgpt-document'), // ChatGPT for Documents - General writing
+      findTool('deepl-ai'), // DeepL - Translation
+      findTool('grammarly-go') // Grammarly - Academic writing enhancement
+    ],
+    totalCost: '$89/month',
+    implementationSteps: [
+      'Use SciSpace for literature reviews and research discovery',
+      'Generate initial drafts with ChatGPT for Documents',
+      'Translate sources and content with DeepL',
+      'Polish academic writing with Grammarly',
+      'Maintain proper citations and academic standards'
+    ]
+  },
+  {
+    id: '37',
+    name: 'Legal Document Automation Suite',
+    description: 'Professional legal document creation and analysis workflow for law firms and legal professionals.',
+    tools: [
+      findTool('lexis-ai'), // Lexis+ AI - Legal research
+      findTool('harvey-ai'), // Harvey.ai - Legal assistant
+      findTool('litera-one'), // Litera One - Document management
+      findTool('pandadoc-ai') // PandaDoc AI - Contract automation
+    ],
+    totalCost: '$850/month',
+    implementationSteps: [
+      'Conduct legal research with Lexis+ AI',
+      'Draft legal documents using Harvey.ai',
+      'Manage document workflows with Litera One',
+      'Automate contract creation with PandaDoc AI',
+      'Ensure compliance and quality control processes'
+    ]
+  },
+  {
+    id: '38',
+    name: 'Creative Writing & Content Studio',
+    description: 'AI-powered creative writing workflow for authors, screenwriters, and content creators.',
+    tools: [
+      findTool('sudowrite'), // Sudowrite - Creative writing partner
+      findTool('novelai'), // NovelAI - Storytelling platform
+      findTool('shortlyai'), // Shortly AI - Writing assistant
+      findTool('grammarly-go') // Grammarly - Writing enhancement
+    ],
+    totalCost: '$79/month',
+    implementationSteps: [
+      'Generate creative ideas and overcome blocks with Sudowrite',
+      'Develop stories and characters using NovelAI',
+      'Write and expand content with Shortly AI',
+      'Polish and refine writing with Grammarly',
+      'Build a consistent creative workflow and publishing schedule'
+    ]
+  },
+  {
+    id: '39',
+    name: 'Career Development Document Bundle',
+    description: 'Complete career advancement toolkit for resumes, cover letters, and professional documentation.',
+    tools: [
+      findTool('teal'), // Teal - Career platform
+      findTool('rezi'), // Rezi - ATS-optimized resumes
+      findTool('kickresume'), // Kickresume - Professional templates
+      findTool('grammarly-go') // Grammarly - Professional writing
+    ],
+    totalCost: '$55/month',
+    implementationSteps: [
+      'Build professional network and track applications with Teal',
+      'Create ATS-optimized resumes using Rezi',
+      'Design visually appealing documents with Kickresume',
+      'Ensure error-free professional communication with Grammarly',
+      'Maintain updated career documents and portfolio'
+    ]
+  },
+  {
+    id: '40',
+    name: 'Marketing Content Creation Workflow',
+    description: 'AI-powered marketing content creation for campaigns, copy, and promotional materials.',
+    tools: [
+      findTool('copy-ai-marketing'), // Copy.ai Marketing - High-converting copy
+      findTool('persado'), // Persado - Language optimization
+      findTool('anyword'), // Anyword - Predictive copywriting
+      findTool('notion-ai') // Notion AI - Document creation and collaboration
+    ],
+    totalCost: '$579/month',
+    implementationSteps: [
+      'Generate high-converting marketing copy with Copy.ai',
+      'Optimize messaging for conversions using Persado',
+      'Score and test copy performance with Anyword',
+      'Create visual marketing materials with Canva Docs',
+      'Implement A/B testing and performance tracking'
+    ]
+  },
+  // === CODE CREATION BUNDLES ===
+  {
+    id: '41',
+    name: 'Full-Stack Web Development Suite',
+    description: 'Complete web development workflow from design to deployment with AI-powered frontend and backend tools.',
+    tools: [
+      findTool('v0-dev'), // v0 by Vercel - React component generation
+      findTool('github-copilot'), // GitHub Copilot - Code assistance
+      findTool('cursor-ai'), // Cursor AI - AI-powered IDE
+      findTool('zapier-ai') // Zapier AI - Workflow automation and deployment
+    ],
+    totalCost: '$50/month',
+    implementationSteps: [
+      'Generate React components and UI with v0 by Vercel',
+      'Accelerate coding with GitHub Copilot assistance',
+      'Use Cursor AI for intelligent code editing and refactoring',
+      'Deploy and host applications with Vercel',
+      'Establish CI/CD pipeline for automated deployments'
+    ]
+  },
+  {
+    id: '42',
+    name: 'Mobile App Development Bundle',
+    description: 'Complete mobile application development workflow for iOS and Android with AI-powered cross-platform tools.',
+    tools: [
+      findTool('flutterflow'), // FlutterFlow - Visual app builder
+      findTool('github-copilot'), // GitHub Copilot - Code assistance
+      findTool('expo-ai'), // Expo with AI Tools - React Native platform
+      findTool('figma-to-code') // Figma to Code AI - Design conversion
+    ],
+    totalCost: '$71/month',
+    implementationSteps: [
+      'Design app interfaces visually with FlutterFlow',
+      'Get coding assistance with GitHub Copilot',
+      'Develop cross-platform apps using Expo with AI Tools',
+      'Convert designs to code with Figma to Code AI',
+      'Test, build, and deploy mobile applications'
+    ]
+  },
+  {
+    id: '43',
+    name: 'Enterprise DevOps Automation Suite',
+    description: 'Advanced DevOps workflow for enterprise teams with AI-powered infrastructure management and deployment automation.',
+    tools: [
+      findTool('gitlab-ai'), // GitLab AI - Complete DevOps platform
+      findTool('docker-ai'), // Docker with AI Tools - Containerization
+      findTool('kubernetes-ai'), // Kubernetes AI Tools - Orchestration
+      findTool('terraform-ai') // Terraform with AI Tools - Infrastructure
+    ],
+    totalCost: '$240/month',
+    implementationSteps: [
+      'Set up comprehensive DevOps workflows with GitLab AI',
+      'Containerize applications using Docker with AI Tools',
+      'Orchestrate deployments with Kubernetes AI Tools',
+      'Manage infrastructure as code with Terraform AI',
+      'Implement monitoring, security, and compliance automation'
+    ]
+  },
+  {
+    id: '44',
+    name: 'Frontend Development Accelerator',
+    description: 'Modern frontend development workflow with AI-powered design-to-code conversion and component generation.',
+    tools: [
+      findTool('framer-ai'), // Framer AI - Interactive web design
+      findTool('webflow-ai'), // Webflow AI - Visual development
+      findTool('locofy-ai'), // Locofy.ai - Design-to-code platform
+      findTool('github-copilot') // GitHub Copilot - Code assistance
+    ],
+    totalCost: '$87/month',
+    implementationSteps: [
+      'Create interactive designs with Framer AI',
+      'Build responsive websites with Webflow AI',
+      'Convert designs to production code using Locofy.ai',
+      'Enhance development speed with GitHub Copilot',
+      'Optimize for performance and user experience'
+    ]
+  },
+  {
+    id: '45',
+    name: 'AI-Powered Development Team',
+    description: 'Complete AI development assistance combining multiple coding assistants and automation tools for maximum productivity.',
+    tools: [
+      findTool('cursor-ai'), // Cursor AI - AI-powered IDE
+      findTool('github-copilot'), // GitHub Copilot - Code assistance
+      findTool('codeium'), // Codeium - AI coding assistant
+      findTool('github-actions-ai') // GitHub Actions AI - CI/CD automation
+    ],
+    totalCost: '$40/month',
+    implementationSteps: [
+      'Set up Cursor AI as primary development environment',
+      'Integrate GitHub Copilot for intelligent code completion',
+      'Use Codeium for additional AI coding assistance',
+      'Automate workflows with GitHub Actions AI',
+      'Establish code review and quality assurance processes'
+    ]
+  },
+  {
+    id: '46',
+    name: 'No-Code/Low-Code Development Suite',
+    description: 'Visual development workflow for building applications without extensive coding using AI-powered platforms.',
+    tools: [
+      findTool('builder-ai'), // Builder.ai - Custom software platform
+      findTool('flutterflow'), // FlutterFlow - Visual app builder
+      findTool('webflow-ai'), // Webflow AI - Web development
+      findTool('kodular-ai') // Kodular - Android app development
+    ],
+    totalCost: '$170/month',
+    implementationSteps: [
+      'Plan and architect applications with Builder.ai',
+      'Build mobile apps visually using FlutterFlow',
+      'Create responsive websites with Webflow AI',
+      'Develop Android apps with Kodular AI',
+      'Deploy and maintain applications across platforms'
+    ]
   }
 ];

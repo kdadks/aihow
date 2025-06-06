@@ -62,13 +62,22 @@ export const BundleCreator: React.FC<BundleCreatorProps> = ({ onSave, initialBun
   const findRecommendedBundle = (useCaseText: string) => {
     const useCaseMap = {
       'healthcare': ['medical', 'health', 'patient', 'clinical', 'doctor'],
-      'education': ['teach', 'learn', 'course', 'student', 'education'],
-      'automation': ['automate', 'workflow', 'process', 'integrate'],
-      'data': ['analysis', 'data', 'insight', 'visualization', 'report'],
+      'education': ['teach', 'learn', 'course', 'student', 'education', 'academic', 'training'],
+      'automation': ['automate', 'workflow', 'process', 'integrate', 'devops', 'deploy', 'ci/cd'],
+      'data': ['analysis', 'data', 'insight', 'visualization', 'report', 'analytics'],
       'agent': ['agent', 'autonomous', 'agentic', 'automate', 'bot'],
-      'research': ['research', 'study', 'analyze', 'literature'],
-      'content': ['content', 'create', 'write', 'blog', 'article'],
-      'visual': ['presentation', 'diagram', 'visual', 'design', 'image']
+      'research': ['research', 'study', 'analyze', 'literature', 'academic', 'paper', 'citation'],
+      'content': ['content', 'create', 'write', 'blog', 'article', 'copy', 'marketing'],
+      'visual': ['presentation', 'diagram', 'visual', 'design', 'image'],
+      'document': ['document', 'documents', 'writing', 'report', 'proposal', 'contract', 'legal', 'resume', 'cv', 'business plan', 'essay', 'letter'],
+      'code': ['code', 'coding', 'programming', 'development', 'software', 'app', 'website', 'frontend', 'backend', 'mobile', 'web', 'api', 'github', 'javascript', 'python', 'react'],
+      'mobile': ['mobile', 'app', 'android', 'ios', 'flutter', 'react native', 'smartphone'],
+      'frontend': ['frontend', 'ui', 'ux', 'web design', 'website', 'react', 'component', 'html', 'css'],
+      'legal': ['legal', 'law', 'contract', 'compliance', 'attorney', 'lawyer', 'litigation'],
+      'career': ['resume', 'cv', 'job', 'career', 'interview', 'cover letter', 'professional'],
+      'marketing': ['marketing', 'campaign', 'copy', 'sales', 'conversion', 'advertising', 'promotion'],
+      'creative': ['creative', 'story', 'novel', 'fiction', 'writing', 'screenplay', 'poetry'],
+      'business': ['business', 'professional', 'corporate', 'enterprise', 'proposal', 'plan']
     };
 
     const text = useCaseText.toLowerCase();
@@ -86,21 +95,41 @@ export const BundleCreator: React.FC<BundleCreatorProps> = ({ onSave, initialBun
       }) || null;
     }
 
-    // Map categories to specific bundles
+    // Map categories to specific bundles - prioritize newer specialized bundles
     const categoryToBundleMap: { [key: string]: string } = {
       'healthcare': 'Healthcare AI Assistant',
-      'education': 'AI Education Platform',
-      'automation': 'Workflow Automation Suite',
-      'data': 'Data Analysis & Presentation',
+      'education': 'AI Learning Fundamentals',
+      'automation': 'Enterprise DevOps Automation Suite',
+      'data': 'Enterprise Data Analytics Suite',
       'agent': 'Autonomous Agent Workflow',
-      'research': 'AI Research Assistant',
-      'content': 'Content Creator Suite',
-      'visual': 'Visual Content Production'
+      'research': 'Academic Research & Writing Bundle',
+      'content': 'Complete Content Creator Studio',
+      'visual': 'Visual Collaboration & Diagramming Suite',
+      'document': 'Professional Document Creation Suite',
+      'code': 'AI-Powered Development Team',
+      'mobile': 'Mobile App Development Bundle',
+      'frontend': 'Frontend Development Accelerator',
+      'legal': 'Legal Document Automation Suite',
+      'career': 'Career Development Document Bundle',
+      'marketing': 'Marketing Content Creation Workflow',
+      'creative': 'Creative Writing & Content Studio',
+      'business': 'Professional Document Creation Suite'
     };
 
-    // Find matching bundle
-    const recommendedBundleName = categoryToBundleMap[matchingCategories[0]];
-    return workflowBundles.find(bundle => bundle.name === recommendedBundleName) || null;
+    // Find matching bundle based on highest priority category
+    for (const category of matchingCategories) {
+      const recommendedBundleName = categoryToBundleMap[category];
+      if (recommendedBundleName) {
+        const bundle = workflowBundles.find(bundle => bundle.name === recommendedBundleName);
+        if (bundle) return bundle;
+      }
+    }
+
+    // Fallback to original logic
+    return workflowBundles.find(bundle => {
+      const bundleText = (bundle.description + ' ' + bundle.name).toLowerCase();
+      return bundleText.includes(text) || text.includes(bundleText);
+    }) || null;
   };
 
   const handleUseCaseChange = (text: string) => {
