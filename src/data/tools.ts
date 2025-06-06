@@ -1,6 +1,1540 @@
 import { Tool } from '../types';
 
 export const tools: Tool[] = [
+  // Document Creation Tools
+  {
+    id: 'chatgpt-document',
+    name: 'ChatGPT for Documents',
+    slug: 'chatgpt-document',
+    description: 'ChatGPT excels at creating various types of documents including essays, reports, letters, and creative writing. With its advanced language understanding, it can adapt writing style, tone, and format to match specific document requirements while maintaining coherence and quality.',
+    shortDescription: 'AI-powered document creation with natural language generation',
+    logo: 'https://images.pexels.com/photos/8438918/pexels-photo-8438918.jpeg',
+    website: 'https://chat.openai.com',
+    categoryId: 'document-creation',
+    subcategoryIds: ['general-documents'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$20/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['Limited daily usage', 'Basic document creation', 'GPT-3.5 model']
+        },
+        {
+          name: 'ChatGPT Plus',
+          price: '$20/month',
+          billingPeriod: 'monthly',
+          features: ['Unlimited usage', 'GPT-4 access', 'Priority access', 'Advanced document features']
+        }
+      ]
+    },
+    features: [
+      'Multi-format document creation',
+      'Style and tone adaptation',
+      'Real-time editing and revision',
+      'Research assistance',
+      'Citation and reference help',
+      'Multiple language support'
+    ],
+    limitations: [
+      'May require fact-checking for accuracy',
+      'Limited knowledge cutoff date',
+      'Free tier has usage restrictions',
+      'Cannot access real-time information'
+    ],
+    rating: 4.7,
+    reviewCount: 2800,
+    trending: true,
+    featured: true,
+    integrations: ['API access', 'Third-party plugins', 'Browser extensions'],
+    lastVerified: new Date('2025-06-01')
+  },
+  {
+    id: 'grammarly-go',
+    name: 'Grammarly',
+    slug: 'grammarly-go',
+    description: 'Grammarly uses AI to help improve writing quality by checking grammar, spelling, punctuation, and style. Beyond basic corrections, it offers suggestions for clarity, engagement, and tone, making it essential for professional document creation and editing.',
+    shortDescription: 'AI writing assistant for grammar, style, and clarity improvement',
+    logo: 'https://images.pexels.com/photos/4050442/pexels-photo-4050442.jpeg',
+    website: 'https://grammarly.com',
+    categoryId: 'document-creation',
+    subcategoryIds: ['general-documents'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$12/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['Basic grammar and spelling', 'Limited suggestions', 'Browser extension']
+        },
+        {
+          name: 'Premium',
+          price: '$12/month',
+          billingPeriod: 'monthly',
+          features: ['Advanced grammar check', 'Style suggestions', 'Tone detection', 'Plagiarism checker']
+        },
+        {
+          name: 'Business',
+          price: '$15/user/month',
+          billingPeriod: 'monthly',
+          features: ['All Premium features', 'Team management', 'Brand style guide', 'Analytics dashboard']
+        }
+      ]
+    },
+    features: [
+      'Real-time grammar and spell checking',
+      'Style and tone suggestions',
+      'Plagiarism detection',
+      'Writing analytics',
+      'Multiple platform integration',
+      'Genre-specific writing assistance'
+    ],
+    limitations: [
+      'Advanced features require paid subscription',
+      'Can be overly prescriptive sometimes',
+      'Limited creative writing support',
+      'Requires internet connection for full functionality'
+    ],
+    rating: 4.6,
+    reviewCount: 3200,
+    trending: false,
+    featured: true,
+    integrations: ['Microsoft Office', 'Google Docs', 'Browser extensions', 'Mobile apps', 'Desktop apps'],
+    lastVerified: new Date('2025-06-01')
+  },
+  {
+    id: 'jasper-ai',
+    name: 'Jasper AI',
+    slug: 'jasper-ai',
+    description: 'Jasper AI is a comprehensive AI writing platform designed for businesses and content creators. It offers templates for various document types, brand voice training, and collaborative features, making it ideal for creating professional business documents, marketing materials, and content at scale.',
+    shortDescription: 'Enterprise AI writing platform for business content creation',
+    logo: 'https://images.pexels.com/photos/11035363/pexels-photo-11035363.jpeg',
+    website: 'https://jasper.ai',
+    categoryId: 'document-creation',
+    subcategoryIds: ['business-documents'],
+    pricing: {
+      type: 'subscription',
+      startingPrice: '$49/month',
+      hasFreeOption: false,
+      tiers: [
+        {
+          name: 'Creator',
+          price: '$49/month',
+          billingPeriod: 'monthly',
+          features: ['1 user', 'Unlimited words', '50+ templates', 'Plagiarism checker']
+        },
+        {
+          name: 'Pro',
+          price: '$69/month',
+          billingPeriod: 'monthly',
+          features: ['5 users', 'Unlimited words', 'Brand voice', 'Workflows', 'Collaboration tools']
+        },
+        {
+          name: 'Business',
+          price: 'Custom',
+          billingPeriod: 'monthly',
+          features: ['Custom users', 'Advanced features', 'Priority support', 'Custom integrations']
+        }
+      ]
+    },
+    features: [
+      'Business document templates',
+      'Brand voice training',
+      'Team collaboration',
+      'Multi-language support',
+      'Plagiarism detection',
+      'Workflow automation'
+    ],
+    limitations: [
+      'No free tier available',
+      'Higher price point than alternatives',
+      'Learning curve for advanced features',
+      'Requires subscription for all features'
+    ],
+    rating: 4.5,
+    reviewCount: 1800,
+    trending: true,
+    featured: false,
+    integrations: ['Google Docs', 'Microsoft Word', 'Browser extension', 'API access', 'Zapier'],
+    lastVerified: new Date('2025-06-01')
+  },
+  {
+    id: 'tome',
+    name: 'Tome',
+    slug: 'tome',
+    description: 'Tome is an AI-native platform that creates comprehensive business documents and presentations. It combines text generation with multimedia content creation, allowing users to build professional reports, proposals, and presentations with integrated visuals and interactive elements.',
+    shortDescription: 'AI-powered business document and presentation creator',
+    logo: 'https://images.pexels.com/photos/4050445/pexels-photo-4050445.jpeg',
+    website: 'https://tome.app',
+    categoryId: 'document-creation',
+    subcategoryIds: ['business-documents'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$16/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['Limited credits', 'Basic templates', 'Export options']
+        },
+        {
+          name: 'Pro',
+          price: '$16/month',
+          billingPeriod: 'monthly',
+          features: ['Unlimited credits', 'Premium templates', 'Custom branding', 'Priority support']
+        }
+      ]
+    },
+    features: [
+      'AI document generation',
+      'Multimedia content integration',
+      'Interactive presentations',
+      'Custom branding options',
+      'Collaboration tools',
+      'Multiple export formats'
+    ],
+    limitations: [
+      'Limited free tier credits',
+      'Newer platform with evolving features',
+      'Requires internet connection',
+      'Learning curve for advanced features'
+    ],
+    rating: 4.4,
+    reviewCount: 850,
+    trending: true,
+    featured: false,
+    integrations: ['Web-based platform', 'Export to various formats', 'Embedding options'],
+    lastVerified: new Date('2025-06-01')
+  },
+  {
+    id: 'writesonic',
+    name: 'Writesonic',
+    slug: 'writesonic',
+    description: 'Writesonic is an AI writing platform that offers a wide range of document creation tools, from business proposals to creative content. With its multiple AI models and specialized templates, it helps create professional documents quickly while maintaining quality and consistency.',
+    shortDescription: 'Versatile AI writing platform for various document types',
+    logo: 'https://images.pexels.com/photos/4050430/pexels-photo-4050430.jpeg',
+    website: 'https://writesonic.com',
+    categoryId: 'document-creation',
+    subcategoryIds: ['business-documents', 'creative-writing'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$19/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['10,000 words/month', 'Basic templates', 'GPT-3.5 model']
+        },
+        {
+          name: 'Pro',
+          price: '$19/month',
+          billingPeriod: 'monthly',
+          features: ['Unlimited words', 'GPT-4 access', 'Premium templates', 'Priority support']
+        },
+        {
+          name: 'Enterprise',
+          price: 'Custom',
+          billingPeriod: 'monthly',
+          features: ['Custom features', 'Team management', 'API access', 'Dedicated support']
+        }
+      ]
+    },
+    features: [
+      'Multiple AI model options',
+      '100+ writing templates',
+      'Real-time collaboration',
+      'Bulk content generation',
+      'SEO optimization tools',
+      'Multi-language support'
+    ],
+    limitations: [
+      'Free tier has word limits',
+      'Quality varies between templates',
+      'Requires careful prompt crafting',
+      'Advanced features need paid plans'
+    ],
+    rating: 4.3,
+    reviewCount: 2100,
+    trending: false,
+    featured: false,
+    integrations: ['Browser extension', 'API access', 'WordPress plugin', 'Chrome extension'],
+    lastVerified: new Date('2025-06-01')
+  },
+  {
+    id: 'scispace',
+    name: 'SciSpace',
+    slug: 'scispace',
+    description: 'SciSpace (formerly Typeset) is an AI-powered research assistant that helps create academic papers, literature reviews, and research documents. It offers features like paper discovery, summarization, citation management, and academic writing assistance tailored for researchers and students.',
+    shortDescription: 'AI research assistant for academic writing and paper discovery',
+    logo: 'https://images.pexels.com/photos/4050297/pexels-photo-4050297.jpeg',
+    website: 'https://scispace.com',
+    categoryId: 'document-creation',
+    subcategoryIds: ['academic-research'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$20/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['5 questions/day', 'Basic paper discovery', 'Limited AI assistance']
+        },
+        {
+          name: 'Premium',
+          price: '$20/month',
+          billingPeriod: 'monthly',
+          features: ['Unlimited questions', 'Advanced AI features', 'Priority support', 'Export options']
+        }
+      ]
+    },
+    features: [
+      'Research paper discovery',
+      'AI-powered summarization',
+      'Citation management',
+      'Academic writing assistance',
+      'Literature review generation',
+      'Data extraction from papers'
+    ],
+    limitations: [
+      'Limited free tier usage',
+      'Focused primarily on academic content',
+      'Requires subscription for advanced features',
+      'May need manual verification of citations'
+    ],
+    rating: 4.5,
+    reviewCount: 950,
+    trending: true,
+    featured: false,
+    integrations: ['Reference managers', 'Academic databases', 'Browser extension', 'API access'],
+    lastVerified: new Date('2025-06-01')
+  },
+  {
+    id: 'lexis-ai',
+    name: 'Lexis+ AI',
+    slug: 'lexis-ai',
+    description: 'Lexis+ AI is a comprehensive legal research and document creation platform that uses artificial intelligence to assist lawyers and legal professionals. It offers case law research, document drafting, contract analysis, and legal brief generation with AI-powered insights.',
+    shortDescription: 'AI-powered legal research and document creation platform',
+    logo: 'https://images.pexels.com/photos/5668887/pexels-photo-5668887.jpeg',
+    website: 'https://www.lexisnexis.com/en-us/products/lexis-plus.page',
+    categoryId: 'document-creation',
+    subcategoryIds: ['legal-documents'],
+    pricing: {
+      type: 'subscription',
+      startingPrice: 'Custom',
+      hasFreeOption: false,
+      tiers: [
+        {
+          name: 'Professional',
+          price: 'Custom',
+          billingPeriod: 'monthly',
+          features: ['Legal research', 'Document drafting', 'Case law analysis', 'AI insights']
+        },
+        {
+          name: 'Enterprise',
+          price: 'Custom',
+          billingPeriod: 'monthly',
+          features: ['All Professional features', 'Team collaboration', 'Advanced analytics', 'Custom integrations']
+        }
+      ]
+    },
+    features: [
+      'AI-powered legal research',
+      'Document drafting assistance',
+      'Case law analysis',
+      'Contract review and analysis',
+      'Legal brief generation',
+      'Compliance checking'
+    ],
+    limitations: [
+      'Enterprise pricing not publicly available',
+      'Requires legal expertise to use effectively',
+      'Subscription-based only',
+      'Limited to legal domain'
+    ],
+    rating: 4.2,
+    reviewCount: 450,
+    trending: false,
+    featured: false,
+    integrations: ['Legal databases', 'Document management systems', 'Practice management software'],
+    lastVerified: new Date('2025-06-01')
+  },
+  {
+    id: 'harvey-ai',
+    name: 'Harvey.ai',
+    slug: 'harvey-ai',
+    description: 'Harvey.ai is an AI assistant specifically designed for legal professionals, offering capabilities in legal research, document drafting, contract analysis, and case preparation. Built with legal expertise, it helps law firms increase efficiency while maintaining accuracy in legal work.',
+    shortDescription: 'Specialized AI assistant for legal professionals and law firms',
+    logo: 'https://images.pexels.com/photos/5668886/pexels-photo-5668886.jpeg',
+    website: 'https://harvey.ai',
+    categoryId: 'document-creation',
+    subcategoryIds: ['legal-documents'],
+    pricing: {
+      type: 'enterprise',
+      startingPrice: 'Custom',
+      hasFreeOption: false,
+      tiers: [
+        {
+          name: 'Enterprise',
+          price: 'Custom',
+          billingPeriod: 'monthly',
+          features: ['Legal AI assistant', 'Document analysis', 'Research capabilities', 'Custom deployment']
+        }
+      ]
+    },
+    features: [
+      'Legal document analysis',
+      'Case research assistance',
+      'Contract drafting support',
+      'Legal brief creation',
+      'Regulatory compliance checking',
+      'Specialized legal knowledge base'
+    ],
+    limitations: [
+      'Enterprise-only pricing',
+      'Requires legal domain expertise',
+      'Custom implementation needed',
+      'Limited public availability'
+    ],
+    rating: 4.1,
+    reviewCount: 180,
+    trending: true,
+    featured: false,
+    integrations: ['Law firm management systems', 'Legal databases', 'Document repositories'],
+    lastVerified: new Date('2025-06-01')
+  },
+  {
+    id: 'litera-one',
+    name: 'Litera One',
+    slug: 'litera-one',
+    description: 'Litera One provides AI-powered document creation and management tools specifically for legal professionals. It offers automated document assembly, contract analysis, proofreading, and collaboration features designed to improve efficiency in legal document workflows.',
+    shortDescription: 'AI-powered legal document management and creation platform',
+    logo: 'https://images.pexels.com/photos/5668888/pexels-photo-5668888.jpeg',
+    website: 'https://www.litera.com',
+    categoryId: 'document-creation',
+    subcategoryIds: ['legal-documents'],
+    pricing: {
+      type: 'subscription',
+      startingPrice: 'Custom',
+      hasFreeOption: false,
+      tiers: [
+        {
+          name: 'Professional',
+          price: 'Custom',
+          billingPeriod: 'monthly',
+          features: ['Document assembly', 'AI proofreading', 'Collaboration tools', 'Version control']
+        },
+        {
+          name: 'Enterprise',
+          price: 'Custom',
+          billingPeriod: 'monthly',
+          features: ['All Professional features', 'Advanced analytics', 'Custom integrations', 'Priority support']
+        }
+      ]
+    },
+    features: [
+      'Automated document assembly',
+      'AI-powered proofreading',
+      'Document comparison',
+      'Collaboration workflows',
+      'Version control',
+      'Integration with legal systems'
+    ],
+    limitations: [
+      'Custom pricing only',
+      'Focused on legal industry',
+      'Requires implementation support',
+      'Learning curve for complex features'
+    ],
+    rating: 4.0,
+    reviewCount: 320,
+    trending: false,
+    featured: false,
+    integrations: ['Microsoft Office', 'Legal practice management', 'Document management systems'],
+    lastVerified: new Date('2025-06-01')
+  },
+  {
+    id: 'teal',
+    name: 'Teal',
+    slug: 'teal',
+    description: 'Teal is an AI-powered career platform that helps create professional resumes, cover letters, and LinkedIn profiles. It offers resume optimization, job matching, and career coaching features, making it a comprehensive tool for job seekers and career advancement.',
+    shortDescription: 'AI-powered resume builder and career platform',
+    logo: 'https://images.pexels.com/photos/4050314/pexels-photo-4050314.jpeg',
+    website: 'https://tealhq.com',
+    categoryId: 'document-creation',
+    subcategoryIds: ['resume-documents'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$9/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['Basic resume builder', 'Job tracking', 'Limited AI features']
+        },
+        {
+          name: 'Teal+',
+          price: '$9/month',
+          billingPeriod: 'monthly',
+          features: ['Unlimited AI features', 'Advanced resume analysis', 'Priority support', 'Career coaching']
+        }
+      ]
+    },
+    features: [
+      'AI resume optimization',
+      'ATS-friendly templates',
+      'Job application tracking',
+      'LinkedIn profile optimization',
+      'Cover letter generation',
+      'Interview preparation'
+    ],
+    limitations: [
+      'Limited free tier features',
+      'Focus primarily on resume building',
+      'Advanced features require subscription',
+      'May need manual customization'
+    ],
+    rating: 4.6,
+    reviewCount: 1200,
+    trending: true,
+    featured: false,
+    integrations: ['LinkedIn', 'Job boards', 'ATS systems', 'Calendar apps'],
+    lastVerified: new Date('2025-06-01')
+  },
+  {
+    id: 'rezi',
+    name: 'Rezi',
+    slug: 'rezi',
+    description: 'Rezi is an AI-powered resume builder that optimizes resumes for Applicant Tracking Systems (ATS). It offers real-time content suggestions, keyword optimization, and formatting assistance to help job seekers create resumes that pass through automated screening systems.',
+    shortDescription: 'ATS-optimized AI resume builder with real-time optimization',
+    logo: 'https://images.pexels.com/photos/4050315/pexels-photo-4050315.jpeg',
+    website: 'https://rezi.ai',
+    categoryId: 'document-creation',
+    subcategoryIds: ['resume-documents'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$29/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['1 resume', 'Basic templates', 'Limited AI features']
+        },
+        {
+          name: 'Pro',
+          price: '$29/month',
+          billingPeriod: 'monthly',
+          features: ['Unlimited resumes', 'All templates', 'AI writing assistant', 'ATS analysis']
+        }
+      ]
+    },
+    features: [
+      'ATS optimization scoring',
+      'Real-time content suggestions',
+      'Keyword optimization',
+      'Multiple resume formats',
+      'Cover letter builder',
+      'Interview preparation tools'
+    ],
+    limitations: [
+      'Free tier very limited',
+      'Higher pricing than some competitors',
+      'Requires subscription for best features',
+      'Learning curve for optimization features'
+    ],
+    rating: 4.4,
+    reviewCount: 800,
+    trending: false,
+    featured: false,
+    integrations: ['Job boards', 'ATS systems', 'LinkedIn', 'Email platforms'],
+    lastVerified: new Date('2025-06-01')
+  },
+  {
+    id: 'kickresume',
+    name: 'Kickresume',
+    slug: 'kickresume',
+    description: 'Kickresume combines AI-powered resume building with professionally designed templates. It offers AI writing assistance, career guidance, and portfolio creation tools, making it suitable for various industries and career levels from entry-level to executive positions.',
+    shortDescription: 'AI resume builder with professional templates and career tools',
+    logo: 'https://images.pexels.com/photos/4050316/pexels-photo-4050316.jpeg',
+    website: 'https://kickresume.com',
+    categoryId: 'document-creation',
+    subcategoryIds: ['resume-documents'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$19/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['Basic templates', 'Limited downloads', 'Basic AI features']
+        },
+        {
+          name: 'Premium',
+          price: '$19/month',
+          billingPeriod: 'monthly',
+          features: ['All templates', 'Unlimited downloads', 'AI writer', 'Cover letters', 'Portfolio builder']
+        }
+      ]
+    },
+    features: [
+      'AI-powered content generation',
+      'Professional design templates',
+      'Cover letter builder',
+      'Personal website creation',
+      'Resume examples library',
+      'Career guidance tools'
+    ],
+    limitations: [
+      'Free tier has download limits',
+      'Premium features require subscription',
+      'Limited customization in some templates',
+      'AI suggestions may need refinement'
+    ],
+    rating: 4.5,
+    reviewCount: 1500,
+    trending: false,
+    featured: false,
+    integrations: ['LinkedIn import', 'Portfolio hosting', 'Social media sharing'],
+    lastVerified: new Date('2025-06-01')
+  },
+  {
+    id: 'zety',
+    name: 'Zety',
+    slug: 'zety',
+    description: 'Zety is an AI-enhanced resume builder that offers guided resume creation with real-time tips and suggestions. It provides industry-specific templates, cover letter building, and job search tools, helping users create professional documents tailored to their target roles.',
+    shortDescription: 'AI-guided resume builder with industry-specific templates',
+    logo: 'https://images.pexels.com/photos/4050317/pexels-photo-4050317.jpeg',
+    website: 'https://zety.com',
+    categoryId: 'document-creation',
+    subcategoryIds: ['resume-documents'],
+    pricing: {
+      type: 'subscription',
+      startingPrice: '$5.95/month',
+      hasFreeOption: false,
+      tiers: [
+        {
+          name: 'Monthly',
+          price: '$5.95/month',
+          billingPeriod: 'monthly',
+          features: ['All templates', 'Cover letters', 'AI assistance', 'Download options']
+        },
+        {
+          name: '14-day',
+          price: '$2.95/14 days',
+          billingPeriod: 'one-time',
+          features: ['All features', 'Short-term access', 'Full functionality']
+        }
+      ]
+    },
+    features: [
+      'Step-by-step resume building',
+      'Real-time content suggestions',
+      'Industry-specific templates',
+      'Cover letter matching',
+      'Resume scoring and tips',
+      'Multiple download formats'
+    ],
+    limitations: [
+      'No free tier available',
+      'Subscription required for downloads',
+      'Limited template customization',
+      'Recurring billing model'
+    ],
+    rating: 4.3,
+    reviewCount: 2200,
+    trending: false,
+    featured: false,
+    integrations: ['Job boards', 'Social media', 'Email platforms'],
+    lastVerified: new Date('2025-06-01')
+  },
+  {
+    id: 'resumai-wonsulting',
+    name: 'ResumAI by Wonsulting',
+    slug: 'resumai-wonsulting',
+    description: 'ResumAI by Wonsulting is an AI-powered resume builder created by career coaching experts. It offers personalized resume optimization, industry-specific guidance, and proven templates based on successful job placements, particularly strong in tech and corporate sectors.',
+    shortDescription: 'Expert-backed AI resume builder with proven templates',
+    logo: 'https://images.pexels.com/photos/4050318/pexels-photo-4050318.jpeg',
+    website: 'https://wonsulting.com/resumai',
+    categoryId: 'document-creation',
+    subcategoryIds: ['resume-documents'],
+    pricing: {
+      type: 'subscription',
+      startingPrice: '$19.99/month',
+      hasFreeOption: false,
+      tiers: [
+        {
+          name: 'Basic',
+          price: '$19.99/month',
+          billingPeriod: 'monthly',
+          features: ['AI resume builder', 'Basic templates', 'Download options']
+        },
+        {
+          name: 'Premium',
+          price: '$39.99/month',
+          billingPeriod: 'monthly',
+          features: ['All Basic features', 'Expert review', 'Cover letters', 'LinkedIn optimization', 'Priority support']
+        }
+      ]
+    },
+    features: [
+      'Expert-designed templates',
+      'AI content optimization',
+      'Industry-specific guidance',
+      'Career coaching insights',
+      'LinkedIn profile optimization',
+      'Job search strategy tools'
+    ],
+    limitations: [
+      'No free tier available',
+      'Higher pricing than some alternatives',
+      'Focused primarily on corporate/tech roles',
+      'Requires subscription for all features'
+    ],
+    rating: 4.7,
+    reviewCount: 650,
+    trending: true,
+    featured: false,
+    integrations: ['LinkedIn', 'Job boards', 'Career coaching platform'],
+    lastVerified: new Date('2025-06-01')
+  },
+  // Marketing & Sales Materials Tools
+  {
+    id: 'copy-ai-marketing',
+    name: 'Copy.ai Marketing',
+    slug: 'copy-ai-marketing',
+    description: 'Copy.ai specializes in creating high-converting marketing copy using advanced AI. It offers templates for ads, emails, social media posts, product descriptions, and sales pages, helping marketers generate compelling content that drives engagement and conversions.',
+    shortDescription: 'AI-powered marketing copy generator for high-converting content',
+    logo: 'https://images.pexels.com/photos/4050420/pexels-photo-4050420.jpeg',
+    website: 'https://copy.ai',
+    categoryId: 'document-creation',
+    subcategoryIds: ['marketing-sales'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$36/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['2,000 words/month', 'Basic templates', '90+ tools']
+        },
+        {
+          name: 'Pro',
+          price: '$36/month',
+          billingPeriod: 'monthly',
+          features: ['Unlimited words', 'Priority support', 'Brand voice', 'Team collaboration']
+        },
+        {
+          name: 'Team',
+          price: '$186/month',
+          billingPeriod: 'monthly',
+          features: ['All Pro features', '5 team members', 'Advanced collaboration', 'Custom workflows']
+        }
+      ]
+    },
+    features: [
+      'High-converting ad copy',
+      'Email marketing templates',
+      'Social media content creation',
+      'Product description generation',
+      'Sales page optimization',
+      'Brand voice customization'
+    ],
+    limitations: [
+      'Free tier has word limits',
+      'Quality varies between templates',
+      'Requires editing for brand alignment',
+      'Advanced features need paid plans'
+    ],
+    rating: 4.4,
+    reviewCount: 2800,
+    trending: true,
+    featured: false,
+    integrations: ['HubSpot', 'Salesforce', 'WordPress', 'Shopify', 'Chrome extension'],
+    lastVerified: new Date('2025-06-01')
+  },
+  {
+    id: 'persado',
+    name: 'Persado',
+    slug: 'persado',
+    description: 'Persado uses AI and machine learning to generate marketing language that drives higher engagement and conversion rates. It analyzes emotional triggers and psychological motivators to create personalized marketing messages optimized for specific audiences and channels.',
+    shortDescription: 'AI marketing language optimization for higher conversions',
+    logo: 'https://images.pexels.com/photos/4050421/pexels-photo-4050421.jpeg',
+    website: 'https://persado.com',
+    categoryId: 'document-creation',
+    subcategoryIds: ['marketing-sales'],
+    pricing: {
+      type: 'enterprise',
+      startingPrice: 'Custom',
+      hasFreeOption: false,
+      tiers: [
+        {
+          name: 'Enterprise',
+          price: 'Custom',
+          billingPeriod: 'yearly',
+          features: ['AI-generated copy', 'A/B testing', 'Performance analytics', 'Custom integration']
+        }
+      ]
+    },
+    features: [
+      'Emotion-driven copywriting',
+      'Automated A/B testing',
+      'Performance prediction',
+      'Multi-channel optimization',
+      'Real-time personalization',
+      'Advanced analytics dashboard'
+    ],
+    limitations: [
+      'Enterprise-only pricing',
+      'Complex implementation process',
+      'Requires significant data volume',
+      'Limited transparency in AI decisions'
+    ],
+    rating: 4.2,
+    reviewCount: 380,
+    trending: false,
+    featured: false,
+    integrations: ['Salesforce', 'Adobe', 'Oracle', 'SAP', 'Custom APIs'],
+    lastVerified: new Date('2025-06-01')
+  },
+  {
+    id: 'anyword',
+    name: 'Anyword',
+    slug: 'anyword',
+    description: 'Anyword is a performance-driven AI copywriting platform that predicts content performance before publication. It generates and optimizes marketing copy across multiple channels, providing predictive performance scores to help marketers choose the best-performing variations.',
+    shortDescription: 'Predictive AI copywriting with performance scoring',
+    logo: 'https://images.pexels.com/photos/4050422/pexels-photo-4050422.jpeg',
+    website: 'https://anyword.com',
+    categoryId: 'document-creation',
+    subcategoryIds: ['marketing-sales'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$39/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Starter',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['1,000 words/month', 'Basic templates', 'Performance prediction']
+        },
+        {
+          name: 'Data-Driven',
+          price: '$39/month',
+          billingPeriod: 'monthly',
+          features: ['20,000 words/month', 'All templates', 'Advanced analytics', 'Custom audiences']
+        },
+        {
+          name: 'Business',
+          price: '$79/month',
+          billingPeriod: 'monthly',
+          features: ['50,000 words/month', 'Team collaboration', 'Brand guidelines', 'Priority support']
+        }
+      ]
+    },
+    features: [
+      'Predictive performance scoring',
+      'Multi-channel optimization',
+      'Custom audience targeting',
+      'Brand voice consistency',
+      'Real-time optimization',
+      'Comprehensive analytics'
+    ],
+    limitations: [
+      'Learning curve for optimization features',
+      'Predictions may not always be accurate',
+      'Limited free tier usage',
+      'Requires consistent data for best results'
+    ],
+    rating: 4.3,
+    reviewCount: 950,
+    trending: true,
+    featured: false,
+    integrations: ['Facebook Ads', 'Google Ads', 'Salesforce', 'HubSpot', 'Shopify'],
+    lastVerified: new Date('2025-06-01')
+  },
+  // Educational Content Tools
+  {
+    id: 'courseai',
+    name: 'CourseAI',
+    slug: 'courseai',
+    description: 'CourseAI helps educators and content creators build comprehensive online courses using AI. It generates course outlines, lesson plans, quizzes, and educational content, making it easier to create engaging learning experiences across various subjects and skill levels.',
+    shortDescription: 'AI-powered online course creation and educational content generator',
+    logo: 'https://images.pexels.com/photos/4050350/pexels-photo-4050350.jpeg',
+    website: 'https://courseai.com',
+    categoryId: 'document-creation',
+    subcategoryIds: ['educational-content'],
+    pricing: {
+      type: 'subscription',
+      startingPrice: '$29/month',
+      hasFreeOption: false,
+      tiers: [
+        {
+          name: 'Creator',
+          price: '$29/month',
+          billingPeriod: 'monthly',
+          features: ['5 courses/month', 'AI content generation', 'Basic templates', 'Quiz creation']
+        },
+        {
+          name: 'Educator',
+          price: '$59/month',
+          billingPeriod: 'monthly',
+          features: ['Unlimited courses', 'Advanced AI features', 'Custom branding', 'Student analytics']
+        },
+        {
+          name: 'Institution',
+          price: '$149/month',
+          billingPeriod: 'monthly',
+          features: ['Multi-user access', 'White-label solution', 'API access', 'Priority support']
+        }
+      ]
+    },
+    features: [
+      'Automated course outline generation',
+      'Lesson plan creation',
+      'Quiz and assessment builder',
+      'Multi-format content support',
+      'Student progress tracking',
+      'Interactive content elements'
+    ],
+    limitations: [
+      'No free tier available',
+      'Content may need manual refinement',
+      'Limited customization in lower tiers',
+      'Requires pedagogical knowledge for best results'
+    ],
+    rating: 4.5,
+    reviewCount: 680,
+    trending: true,
+    featured: false,
+    integrations: ['LMS platforms', 'Zoom', 'Google Classroom', 'Canvas', 'Moodle'],
+    lastVerified: new Date('2025-06-01')
+  },
+  {
+    id: 'synthesia-education',
+    name: 'Synthesia for Education',
+    slug: 'synthesia-education',
+    description: 'Synthesia enables educators to create AI-generated video content for online learning. With AI avatars and text-to-speech capabilities, it helps create engaging educational videos, training materials, and tutorials without the need for cameras or studios.',
+    shortDescription: 'AI video creation platform for educational content and training',
+    logo: 'https://images.pexels.com/photos/4050351/pexels-photo-4050351.jpeg',
+    website: 'https://synthesia.io/education',
+    categoryId: 'document-creation',
+    subcategoryIds: ['educational-content'],
+    pricing: {
+      type: 'subscription',
+      startingPrice: '$30/month',
+      hasFreeOption: false,
+      tiers: [
+        {
+          name: 'Personal',
+          price: '$30/month',
+          billingPeriod: 'monthly',
+          features: ['10 minutes/month', '70+ AI avatars', '120+ languages', 'Basic editing']
+        },
+        {
+          name: 'Corporate',
+          price: '$67/month',
+          billingPeriod: 'monthly',
+          features: ['30 minutes/month', 'Custom avatars', 'Team collaboration', 'Priority support']
+        },
+        {
+          name: 'Enterprise',
+          price: 'Custom',
+          billingPeriod: 'monthly',
+          features: ['Unlimited minutes', 'Advanced features', 'SSO integration', 'Dedicated support']
+        }
+      ]
+    },
+    features: [
+      'AI avatar video creation',
+      'Multi-language support',
+      'Educational video templates',
+      'Screen recording integration',
+      'Interactive elements',
+      'Branded content creation'
+    ],
+    limitations: [
+      'No free tier available',
+      'Limited video minutes on lower plans',
+      'AI avatars may feel impersonal',
+      'Requires good script writing skills'
+    ],
+    rating: 4.6,
+    reviewCount: 1200,
+    trending: true,
+    featured: false,
+    integrations: ['PowerPoint', 'Articulate', 'LMS platforms', 'YouTube', 'Vimeo'],
+    lastVerified: new Date('2025-06-01')
+  },
+  {
+    id: 'coursebox-ai',
+    name: 'Coursebox AI',
+    slug: 'coursebox-ai',
+    description: 'Coursebox AI transforms existing content into interactive online courses using artificial intelligence. It can convert documents, videos, and websites into structured learning experiences with quizzes, assessments, and progress tracking.',
+    shortDescription: 'AI-powered course creation from existing content and materials',
+    logo: 'https://images.pexels.com/photos/4050352/pexels-photo-4050352.jpeg',
+    website: 'https://coursebox.ai',
+    categoryId: 'document-creation',
+    subcategoryIds: ['educational-content'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$39/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['1 course', 'Basic templates', 'Limited AI features']
+        },
+        {
+          name: 'Pro',
+          price: '$39/month',
+          billingPeriod: 'monthly',
+          features: ['Unlimited courses', 'Advanced AI', 'Custom branding', 'Analytics']
+        },
+        {
+          name: 'Team',
+          price: '$99/month',
+          billingPeriod: 'monthly',
+          features: ['Team collaboration', 'White-label', 'API access', 'Priority support']
+        }
+      ]
+    },
+    features: [
+      'Content-to-course conversion',
+      'Interactive quiz generation',
+      'Progress tracking',
+      'Multi-format support',
+      'Custom branding options',
+      'Student engagement analytics'
+    ],
+    limitations: [
+      'Free tier very limited',
+      'AI conversion may need refinement',
+      'Limited customization options',
+      'Requires structured input content'
+    ],
+    rating: 4.4,
+    reviewCount: 520,
+    trending: true,
+    featured: false,
+    integrations: ['Google Drive', 'Dropbox', 'YouTube', 'Vimeo', 'LMS platforms'],
+    lastVerified: new Date('2025-06-01')
+  },
+  // Proposal & Contract Tools
+  {
+    id: 'pandadoc-ai',
+    name: 'PandaDoc AI',
+    slug: 'pandadoc-ai',
+    description: 'PandaDoc AI enhances document creation and management with artificial intelligence features. It helps create proposals, contracts, and quotes faster with smart templates, automated workflows, and AI-powered content suggestions.',
+    shortDescription: 'AI-enhanced document automation for proposals and contracts',
+    logo: 'https://images.pexels.com/photos/4050380/pexels-photo-4050380.jpeg',
+    website: 'https://pandadoc.com/ai',
+    categoryId: 'document-creation',
+    subcategoryIds: ['proposals-contracts'],
+    pricing: {
+      type: 'subscription',
+      startingPrice: '$19/month',
+      hasFreeOption: false,
+      tiers: [
+        {
+          name: 'Essentials',
+          price: '$19/user/month',
+          billingPeriod: 'monthly',
+          features: ['5 documents/month', 'Basic templates', 'E-signatures', 'AI assistance']
+        },
+        {
+          name: 'Business',
+          price: '$49/user/month',
+          billingPeriod: 'monthly',
+          features: ['Unlimited documents', 'Advanced AI', 'Workflow automation', 'CRM integration']
+        },
+        {
+          name: 'Enterprise',
+          price: 'Custom',
+          billingPeriod: 'monthly',
+          features: ['Custom features', 'Advanced security', 'Dedicated support', 'Custom integrations']
+        }
+      ]
+    },
+    features: [
+      'AI-powered content generation',
+      'Smart template suggestions',
+      'Automated workflow creation',
+      'Electronic signature integration',
+      'Real-time collaboration',
+      'Performance analytics'
+    ],
+    limitations: [
+      'No free tier available',
+      'Learning curve for advanced features',
+      'Per-user pricing can be expensive',
+      'AI suggestions may need refinement'
+    ],
+    rating: 4.5,
+    reviewCount: 1800,
+    trending: false,
+    featured: false,
+    integrations: ['Salesforce', 'HubSpot', 'Pipedrive', 'Zapier', 'Google Workspace'],
+    lastVerified: new Date('2025-06-01')
+  },
+  {
+    id: 'proposify-ai',
+    name: 'Proposify AI',
+    slug: 'proposify-ai',
+    description: 'Proposify AI streamlines proposal creation with intelligent content suggestions and automated formatting. It helps sales teams create winning proposals faster by analyzing successful patterns and generating personalized content for each prospect.',
+    shortDescription: 'AI-powered proposal creation and optimization platform',
+    logo: 'https://images.pexels.com/photos/4050381/pexels-photo-4050381.jpeg',
+    website: 'https://proposify.com/ai',
+    categoryId: 'document-creation',
+    subcategoryIds: ['proposals-contracts'],
+    pricing: {
+      type: 'subscription',
+      startingPrice: '$49/month',
+      hasFreeOption: false,
+      tiers: [
+        {
+          name: 'Team',
+          price: '$49/user/month',
+          billingPeriod: 'monthly',
+          features: ['Unlimited proposals', 'AI content suggestions', 'Basic analytics', 'Team collaboration']
+        },
+        {
+          name: 'Business',
+          price: '$99/user/month',
+          billingPeriod: 'monthly',
+          features: ['Advanced AI features', 'Custom branding', 'Advanced analytics', 'CRM integration']
+        },
+        {
+          name: 'Enterprise',
+          price: 'Custom',
+          billingPeriod: 'monthly',
+          features: ['Custom features', 'Advanced security', 'Dedicated support', 'Custom integrations']
+        }
+      ]
+    },
+    features: [
+      'AI content generation',
+      'Proposal performance tracking',
+      'Smart template library',
+      'Client interaction analytics',
+      'Automated follow-ups',
+      'Custom branding options'
+    ],
+    limitations: [
+      'No free tier available',
+      'Higher pricing than some competitors',
+      'Learning curve for optimization',
+      'AI suggestions need context'
+    ],
+    rating: 4.3,
+    reviewCount: 920,
+    trending: false,
+    featured: false,
+    integrations: ['Salesforce', 'HubSpot', 'Pipedrive', 'Slack', 'Google Workspace'],
+    lastVerified: new Date('2025-06-01')
+  },
+  {
+    id: 'qwilr-ai',
+    name: 'Qwilr AI',
+    slug: 'qwilr-ai',
+    description: 'Qwilr AI creates interactive, web-based proposals and quotes that engage clients better than traditional PDFs. It uses AI to suggest content improvements, optimize layouts, and track client engagement to increase proposal success rates.',
+    shortDescription: 'Interactive AI-powered proposals and quotes platform',
+    logo: 'https://images.pexels.com/photos/4050382/pexels-photo-4050382.jpeg',
+    website: 'https://qwilr.com/ai',
+    categoryId: 'document-creation',
+    subcategoryIds: ['proposals-contracts'],
+    pricing: {
+      type: 'subscription',
+      startingPrice: '$35/month',
+      hasFreeOption: false,
+      tiers: [
+        {
+          name: 'Business',
+          price: '$35/user/month',
+          billingPeriod: 'monthly',
+          features: ['Unlimited pages', 'AI content assistance', 'Basic analytics', 'E-signature']
+        },
+        {
+          name: 'Enterprise',
+          price: '$59/user/month',
+          billingPeriod: 'monthly',
+          features: ['Advanced AI features', 'Custom domains', 'Advanced analytics', 'Team management']
+        }
+      ]
+    },
+    features: [
+      'Interactive web-based proposals',
+      'AI content optimization',
+      'Real-time client engagement tracking',
+      'Integrated payment processing',
+      'Custom branding and domains',
+      'Performance analytics'
+    ],
+    limitations: [
+      'No free tier available',
+      'Web-based format may not suit all clients',
+      'Limited offline functionality',
+      'Learning curve for design features'
+    ],
+    rating: 4.4,
+    reviewCount: 750,
+    trending: true,
+    featured: false,
+    integrations: ['Stripe', 'PayPal', 'Salesforce', 'HubSpot', 'Zapier'],
+    lastVerified: new Date('2025-06-01')
+  },
+  // Translation & Localization Tools
+  {
+    id: 'deepl-ai',
+    name: 'DeepL',
+    slug: 'deepl-ai',
+    description: 'DeepL uses advanced neural networks to provide highly accurate translations that maintain context and nuance. It supports over 30 languages and offers document translation, making it ideal for professional document localization and multilingual content creation.',
+    shortDescription: 'Advanced neural machine translation with superior accuracy',
+    logo: 'https://images.pexels.com/photos/4050400/pexels-photo-4050400.jpeg',
+    website: 'https://deepl.com',
+    categoryId: 'document-creation',
+    subcategoryIds: ['translation-localization'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$6.99/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['5,000 characters/month', 'Basic translation', 'Web interface']
+        },
+        {
+          name: 'Pro',
+          price: '$6.99/month',
+          billingPeriod: 'monthly',
+          features: ['Unlimited text translation', 'Document translation', 'Enhanced security', 'CAT tool integration']
+        },
+        {
+          name: 'Advanced',
+          price: '$22.99/month',
+          billingPeriod: 'monthly',
+          features: ['All Pro features', 'Priority support', 'Team management', 'Advanced integrations']
+        }
+      ]
+    },
+    features: [
+      'High-accuracy neural translation',
+      'Document format preservation',
+      'Context-aware translations',
+      'CAT tool integration',
+      'Bulk document processing',
+      'API access for developers'
+    ],
+    limitations: [
+      'Free tier has character limits',
+      'Limited language pairs compared to some competitors',
+      'Advanced features require paid plans',
+      'May struggle with highly specialized terminology'
+    ],
+    rating: 4.7,
+    reviewCount: 3200,
+    trending: false,
+    featured: true,
+    integrations: ['CAT tools', 'Microsoft Office', 'Google Workspace', 'API integrations'],
+    lastVerified: new Date('2025-06-01')
+  },
+  {
+    id: 'lokalise-ai',
+    name: 'Lokalise AI',
+    slug: 'lokalise-ai',
+    description: 'Lokalise AI streamlines the localization process with AI-powered translation management. It offers automated translation suggestions, quality checks, and workflow automation to help teams manage multilingual content efficiently across apps, websites, and documents.',
+    shortDescription: 'AI-powered localization management and translation platform',
+    logo: 'https://images.pexels.com/photos/4050401/pexels-photo-4050401.jpeg',
+    website: 'https://lokalise.com/ai',
+    categoryId: 'document-creation',
+    subcategoryIds: ['translation-localization'],
+    pricing: {
+      type: 'subscription',
+      startingPrice: '$120/month',
+      hasFreeOption: false,
+      tiers: [
+        {
+          name: 'Growth',
+          price: '$120/month',
+          billingPeriod: 'monthly',
+          features: ['AI translation assistance', 'Project management', 'Team collaboration', 'API access']
+        },
+        {
+          name: 'Pro',
+          price: '$300/month',
+          billingPeriod: 'monthly',
+          features: ['Advanced AI features', 'Custom workflows', 'Advanced integrations', 'Priority support']
+        },
+        {
+          name: 'Enterprise',
+          price: 'Custom',
+          billingPeriod: 'monthly',
+          features: ['Custom AI models', 'SSO integration', 'Dedicated support', 'Custom features']
+        }
+      ]
+    },
+    features: [
+      'AI-powered translation assistance',
+      'Automated quality checks',
+      'Workflow automation',
+      'Real-time collaboration',
+      'Version control',
+      'Integration ecosystem'
+    ],
+    limitations: [
+      'No free tier available',
+      'Higher pricing for small teams',
+      'Learning curve for advanced features',
+      'AI quality depends on content type'
+    ],
+    rating: 4.5,
+    reviewCount: 890,
+    trending: true,
+    featured: false,
+    integrations: ['GitHub', 'Figma', 'Sketch', 'Android Studio', 'Xcode'],
+    lastVerified: new Date('2025-06-01')
+  },
+  {
+    id: 'phrase-ai',
+    name: 'Phrase AI',
+    slug: 'phrase-ai',
+    description: 'Phrase AI provides intelligent translation management with machine learning capabilities. It helps teams automate translation workflows, maintain consistency across languages, and leverage AI to improve translation quality and reduce time-to-market for global content.',
+    shortDescription: 'Intelligent translation management with ML-powered automation',
+    logo: 'https://images.pexels.com/photos/4050402/pexels-photo-4050402.jpeg',
+    website: 'https://phrase.com/ai',
+    categoryId: 'document-creation',
+    subcategoryIds: ['translation-localization'],
+    pricing: {
+      type: 'subscription',
+      startingPrice: '$18/month',
+      hasFreeOption: false,
+      tiers: [
+        {
+          name: 'Starter',
+          price: '$18/user/month',
+          billingPeriod: 'monthly',
+          features: ['Basic AI features', 'Project management', 'API access', 'Standard support']
+        },
+        {
+          name: 'Professional',
+          price: '$50/user/month',
+          billingPeriod: 'monthly',
+          features: ['Advanced AI translation', 'Workflow automation', 'Quality checks', 'Priority support']
+        },
+        {
+          name: 'Enterprise',
+          price: 'Custom',
+          billingPeriod: 'monthly',
+          features: ['Custom AI models', 'Advanced security', 'Dedicated support', 'Custom integrations']
+        }
+      ]
+    },
+    features: [
+      'ML-powered translation suggestions',
+      'Automated workflow management',
+      'Quality assurance automation',
+      'Translation memory optimization',
+      'Real-time collaboration',
+      'Advanced reporting and analytics'
+    ],
+    limitations: [
+      'No free tier available',
+      'Complex pricing structure',
+      'Learning curve for full utilization',
+      'AI effectiveness varies by language pair'
+    ],
+    rating: 4.4,
+    reviewCount: 650,
+    trending: false,
+    featured: false,
+    integrations: ['GitHub', 'Gitlab', 'Bitbucket', 'Slack', 'Jira'],
+    lastVerified: new Date('2025-06-01')
+  },
+  // Creative Writing Tools
+  {
+    id: 'sudowrite',
+    name: 'Sudowrite',
+    slug: 'sudowrite',
+    description: 'Sudowrite is an AI writing partner specifically designed for creative writers, novelists, and storytellers. It helps with character development, plot generation, dialogue writing, and overcoming writer\'s block by providing creative suggestions that maintain your unique voice and style.',
+    shortDescription: 'AI writing partner for creative fiction and storytelling',
+    logo: 'https://images.pexels.com/photos/4050450/pexels-photo-4050450.jpeg',
+    website: 'https://sudowrite.com',
+    categoryId: 'document-creation',
+    subcategoryIds: ['creative-writing'],
+    pricing: {
+      type: 'subscription',
+      startingPrice: '$19/month',
+      hasFreeOption: false,
+      tiers: [
+        {
+          name: 'Hobby',
+          price: '$19/month',
+          billingPeriod: 'monthly',
+          features: ['30,000 words/month', 'All writing tools', 'Character development', 'Plot assistance']
+        },
+        {
+          name: 'Professional',
+          price: '$29/month',
+          billingPeriod: 'monthly',
+          features: ['90,000 words/month', 'Priority processing', 'Advanced features', 'Export options']
+        },
+        {
+          name: 'Max',
+          price: '$99/month',
+          billingPeriod: 'monthly',
+          features: ['300,000 words/month', 'Fastest processing', 'Beta features', 'Priority support']
+        }
+      ]
+    },
+    features: [
+      'Creative writing assistance',
+      'Character development tools',
+      'Plot and scene generation',
+      'Dialogue enhancement',
+      'Style consistency maintenance',
+      'Writer\'s block solutions'
+    ],
+    limitations: [
+      'No free tier available',
+      'Monthly word limits',
+      'Focused primarily on fiction writing',
+      'AI suggestions may need refinement'
+    ],
+    rating: 4.6,
+    reviewCount: 1400,
+    trending: true,
+    featured: true,
+    integrations: ['Google Docs', 'Microsoft Word', 'Scrivener', 'Export to various formats'],
+    lastVerified: new Date('2025-06-01')
+  },
+  {
+    id: 'novelai',
+    name: 'NovelAI',
+    slug: 'novelai',
+    description: 'NovelAI is a subscription-based AI storytelling service that helps writers create unique stories, adventures, and even virtual companionship. It offers advanced AI models trained specifically for creative writing, with features for world-building, character creation, and narrative development.',
+    shortDescription: 'AI-powered storytelling and creative writing platform',
+    logo: 'https://images.pexels.com/photos/4050451/pexels-photo-4050451.jpeg',
+    website: 'https://novelai.net',
+    categoryId: 'document-creation',
+    subcategoryIds: ['creative-writing'],
+    pricing: {
+      type: 'subscription',
+      startingPrice: '$10/month',
+      hasFreeOption: false,
+      tiers: [
+        {
+          name: 'Tablet',
+          price: '$10/month',
+          billingPeriod: 'monthly',
+          features: ['Unlimited text generations', 'Memory up to 3000 tokens', 'Advanced AI model', 'Export options']
+        },
+        {
+          name: 'Scroll',
+          price: '$15/month',
+          billingPeriod: 'monthly',
+          features: ['All Tablet features', 'Memory up to 6000 tokens', 'Advanced features', 'Image generation']
+        },
+        {
+          name: 'Opus',
+          price: '$25/month',
+          billingPeriod: 'monthly',
+          features: ['All Scroll features', 'Memory up to 8000 tokens', 'Premium features', 'Priority access']
+        }
+      ]
+    },
+    features: [
+      'AI story generation',
+      'Character and world building',
+      'Adventure mode gaming',
+      'Image generation for stories',
+      'Lorebook for world consistency',
+      'Multiple writing genres support'
+    ],
+    limitations: [
+      'No free tier available',
+      'Subscription required for all features',
+      'Content filtering limitations',
+      'Learning curve for advanced features'
+    ],
+    rating: 4.3,
+    reviewCount: 2100,
+    trending: true,
+    featured: false,
+    integrations: ['Export formats', 'API access', 'Third-party tools'],
+    lastVerified: new Date('2025-06-01')
+  },
+  {
+    id: 'shortlyai',
+    name: 'Shortly AI',
+    slug: 'shortlyai',
+    description: 'Shortly AI is a straightforward AI writing assistant that helps writers continue their stories, articles, and creative works. With a simple interface and powerful AI, it provides seamless writing assistance without complicated features, making it perfect for writers who want to focus on their craft.',
+    shortDescription: 'Simple and powerful AI writing assistant for seamless content creation',
+    logo: 'https://images.pexels.com/photos/4050452/pexels-photo-4050452.jpeg',
+    website: 'https://shortlyai.com',
+    categoryId: 'document-creation',
+    subcategoryIds: ['creative-writing'],
+    pricing: {
+      type: 'subscription',
+      startingPrice: '$79/month',
+      hasFreeOption: false,
+      tiers: [
+        {
+          name: 'Annual',
+          price: '$65/month',
+          billingPeriod: 'yearly',
+          features: ['Unlimited writing', 'All AI models', 'Priority support', 'No word limits']
+        },
+        {
+          name: 'Monthly',
+          price: '$79/month',
+          billingPeriod: 'monthly',
+          features: ['Unlimited writing', 'All AI models', 'Standard support', 'No word limits']
+        }
+      ]
+    },
+    features: [
+      'Unlimited AI writing assistance',
+      'Simple, distraction-free interface',
+      'Instant text continuation',
+      'Multiple writing styles',
+      'Real-time writing collaboration',
+      'Export to various formats'
+    ],
+    limitations: [
+      'No free tier available',
+      'Higher pricing than competitors',
+      'Limited advanced features',
+      'Minimal customization options'
+    ],
+    rating: 4.2,
+    reviewCount: 820,
+    trending: false,
+    featured: false,
+    integrations: ['Google Docs', 'Export options', 'Basic API access'],
+    lastVerified: new Date('2025-06-01')
+  },
   {
     id: 'zapier-ai',
     name: 'Zapier AI',
@@ -7728,5 +9262,1305 @@ export const tools: Tool[] = [
     featured: false,
     integrations: ['YouTube', 'Social media platforms', 'Cloud storage'],
     lastVerified: new Date('2025-01-12')
+  },
+  // Code Creation Tools - Enhanced Coding Assistants
+  {
+    id: 'github-copilot-business',
+    name: 'GitHub Copilot Business',
+    slug: 'github-copilot-business',
+    description: 'Enhanced version of GitHub Copilot designed for businesses with advanced security, compliance features, and team management capabilities. Provides AI-powered code suggestions with enterprise-grade privacy and control.',
+    shortDescription: 'Enterprise AI pair programmer with advanced security',
+    logo: 'https://images.pexels.com/photos/11035386/pexels-photo-11035386.jpeg',
+    website: 'https://github.com/features/copilot/plans',
+    categoryId: 'code-creation',
+    subcategoryIds: ['coding-assistants'],
+    pricing: {
+      type: 'subscription',
+      startingPrice: '$19/user/month',
+      hasFreeOption: false,
+      tiers: [
+        {
+          name: 'Business',
+          price: '$19/user/month',
+          billingPeriod: 'monthly',
+          features: ['AI code completion', 'Enterprise security', 'Admin controls', 'Audit logs', 'Policy management']
+        }
+      ]
+    },
+    features: [
+      'AI-powered code suggestions',
+      'Multi-language support',
+      'Enterprise security controls',
+      'Usage analytics',
+      'Policy enforcement',
+      'Audit logging'
+    ],
+    limitations: [
+      'No free tier',
+      'Requires GitHub Enterprise',
+      'Internet connection required',
+      'May suggest outdated patterns'
+    ],
+    rating: 4.7,
+    reviewCount: 3200,
+    trending: true,
+    featured: true,
+    integrations: ['VS Code', 'Visual Studio', 'JetBrains IDEs', 'Neovim', 'GitHub'],
+    lastVerified: new Date('2025-05-20')
+  },
+  {
+    id: 'claude-dev',
+    name: 'Claude for Developers',
+    slug: 'claude-dev',
+    description: 'Anthropic Claude optimized for development tasks with enhanced code understanding, debugging assistance, and architecture planning. Excels at code review, refactoring, and technical documentation.',
+    shortDescription: 'AI assistant specialized for software development',
+    logo: 'https://images.pexels.com/photos/8438922/pexels-photo-8438922.jpeg',
+    website: 'https://www.anthropic.com/claude',
+    categoryId: 'code-creation',
+    subcategoryIds: ['coding-assistants'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$20/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['Limited messages', 'Basic code assistance', 'Web interface access']
+        },
+        {
+          name: 'Pro',
+          price: '$20/month',
+          billingPeriod: 'monthly',
+          features: ['5x more usage', 'Priority access', 'Early feature access', 'API access']
+        }
+      ]
+    },
+    features: [
+      'Advanced code understanding',
+      'Architecture planning',
+      'Code review assistance',
+      'Debug support',
+      'Technical documentation',
+      'Multi-language expertise'
+    ],
+    limitations: [
+      'Usage limits in free tier',
+      'No direct IDE integration',
+      'Requires copy-paste workflow',
+      'Internet connection required'
+    ],
+    rating: 4.8,
+    reviewCount: 2800,
+    trending: true,
+    featured: true,
+    integrations: ['API access', 'Web interface', 'Third-party extensions'],
+    lastVerified: new Date('2025-05-18')
+  },
+  {
+    id: 'gemini-code',
+    name: 'Gemini Code Assist',
+    slug: 'gemini-code',
+    description: 'Google Gemini specialized for coding tasks with multimodal capabilities, supporting code generation, debugging, and explanation across multiple programming languages with visual understanding.',
+    shortDescription: 'Google AI assistant for coding with multimodal support',
+    logo: 'https://images.pexels.com/photos/11035471/pexels-photo-11035471.jpeg',
+    website: 'https://cloud.google.com/ai/generative-ai',
+    categoryId: 'code-creation',
+    subcategoryIds: ['coding-assistants'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$0.15/1K tokens',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free Tier',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['15 requests/minute', 'Basic code assistance', 'API access']
+        },
+        {
+          name: 'Pay-as-you-go',
+          price: '$0.15/1K tokens',
+          billingPeriod: 'monthly',
+          features: ['Unlimited requests', 'Advanced features', 'Priority support', 'Enterprise features']
+        }
+      ]
+    },
+    features: [
+      'Multimodal code understanding',
+      'Visual code analysis',
+      'Code generation',
+      'Debugging assistance',
+      'Architecture suggestions',
+      'Documentation generation'
+    ],
+    limitations: [
+      'Pay-per-use after free tier',
+      'Requires Google Cloud setup',
+      'API-based integration',
+      'Learning curve for setup'
+    ],
+    rating: 4.6,
+    reviewCount: 1900,
+    trending: true,
+    featured: false,
+    integrations: ['Google Cloud', 'APIs', 'Custom integrations', 'Third-party tools'],
+    lastVerified: new Date('2025-05-16')
+  },
+  {
+    id: 'roocode',
+    name: 'RooCode AI',
+    slug: 'roocode',
+    description: 'AI-powered coding assistant that helps developers write, review, and optimize code with intelligent suggestions, automated refactoring, and best practice recommendations.',
+    shortDescription: 'AI coding assistant for better code quality',
+    logo: 'https://images.pexels.com/photos/4164418/pexels-photo-4164418.jpeg',
+    website: 'https://roocode.com/',
+    categoryId: 'code-creation',
+    subcategoryIds: ['coding-assistants', 'code-optimization'],
+    pricing: {
+      type: 'Free',
+      startingPrice: 'Free',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['Basic code suggestions', 'Limited refactoring', '50 AI requests/month']
+        },
+        {
+          name: 'Pro',
+          price: '$15/month',
+          billingPeriod: 'monthly',
+          features: ['Advanced AI features', 'Unlimited refactoring', 'Code quality insights', 'Team features']
+        }
+      ]
+    },
+    features: [
+      'Intelligent code suggestions',
+      'Automated refactoring',
+      'Code quality analysis',
+      'Best practice recommendations',
+      'Performance optimization',
+      'Security vulnerability detection'
+    ],
+    limitations: [
+      'Limited free tier usage',
+      'Newer platform with smaller community',
+      'Limited IDE integrations',
+      'Still in active development'
+    ],
+    rating: 4.4,
+    reviewCount: 680,
+    trending: true,
+    featured: false,
+    integrations: ['VS Code', 'WebStorm', 'Git', 'CI/CD pipelines'],
+    lastVerified: new Date('2025-05-14')
+  },
+  // Code Creation Tools - API Development
+  {
+    id: 'thunder-client-ai',
+    name: 'Thunder Client AI',
+    slug: 'thunder-client-ai',
+    description: 'Lightweight API testing tool with AI-powered features for VS Code. Offers intelligent request generation, automated testing scenarios, and smart API documentation.',
+    shortDescription: 'AI-enhanced API testing tool for VS Code',
+    logo: 'https://images.pexels.com/photos/546819/pexels-photo-546819.jpeg',
+    website: 'https://www.thunderclient.com',
+    categoryId: 'code-creation',
+    subcategoryIds: ['api-development'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$5/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['Basic API testing', 'Local collections', 'Basic AI assistance']
+        },
+        {
+          name: 'Team',
+          price: '$5/user/month',
+          billingPeriod: 'monthly',
+          features: ['Team collaboration', 'Cloud sync', 'Advanced AI features', 'Git integration']
+        }
+      ]
+    },
+    features: [
+      'AI request generation',
+      'Smart environment variables',
+      'Automated test creation',
+      'API documentation generation',
+      'VS Code integration',
+      'Collection management'
+    ],
+    limitations: [
+      'Limited to VS Code',
+      'Smaller ecosystem than Postman',
+      'AI features require paid plan',
+      'Limited enterprise features'
+    ],
+    rating: 4.5,
+    reviewCount: 1200,
+    trending: true,
+    featured: false,
+    integrations: ['VS Code', 'Git', 'CI/CD', 'OpenAPI', 'GraphQL'],
+    lastVerified: new Date('2025-05-15')
+  },
+  // Code Creation Tools - Testing Automation
+  {
+    id: 'playwright-ai',
+    name: 'Playwright with AI',
+    slug: 'playwright-ai',
+    description: 'Microsoft Playwright enhanced with AI capabilities for automated browser testing. Features intelligent test generation, self-healing selectors, and automated debugging.',
+    shortDescription: 'AI-enhanced browser automation testing',
+    logo: 'https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg',
+    website: 'https://playwright.dev',
+    categoryId: 'code-creation',
+    subcategoryIds: ['testing-automation'],
+    pricing: {
+      type: 'free',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Open Source',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['Full Playwright features', 'AI-enhanced testing', 'Community support', 'Cross-browser testing']
+        }
+      ]
+    },
+    features: [
+      'AI test generation',
+      'Cross-browser testing',
+      'Auto-wait functionality',
+      'Mobile testing',
+      'API testing',
+      'Visual regression testing'
+    ],
+    limitations: [
+      'Requires coding knowledge',
+      'Setup complexity for beginners',
+      'Limited visual test recorder',
+      'Steeper learning curve'
+    ],
+    rating: 4.7,
+    reviewCount: 2100,
+    trending: true,
+    featured: true,
+    integrations: ['GitHub Actions', 'Azure DevOps', 'Jenkins', 'Docker', 'CI/CD pipelines'],
+    lastVerified: new Date('2025-05-18')
+},
+
+  // Mobile Development AI Tools
+  {
+    id: 'flutterflow',
+    name: 'FlutterFlow',
+    slug: 'flutterflow',
+    description: 'FlutterFlow is a visual app builder that uses AI to help create native mobile applications for iOS and Android. It provides drag-and-drop interface design, automatic code generation, and AI-powered suggestions for UI components and app logic.',
+    shortDescription: 'Visual app builder with AI-powered mobile app development',
+    logo: 'https://images.pexels.com/photos/4050470/pexels-photo-4050470.jpeg',
+    website: 'https://flutterflow.io',
+    categoryId: 'code-creation',
+    subcategoryIds: ['mobile-development'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$30/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['Basic app building', 'Limited exports', 'Community support']
+        },
+        {
+          name: 'Standard',
+          price: '$30/month',
+          billingPeriod: 'monthly',
+          features: ['Unlimited exports', 'Custom code', 'Firebase integration', 'AI suggestions']
+        },
+        {
+          name: 'Pro',
+          price: '$70/month',
+          billingPeriod: 'monthly',
+          features: ['Advanced features', 'Team collaboration', 'Priority support', 'Custom domains']
+        }
+      ]
+    },
+    features: [
+      'Visual drag-and-drop interface',
+      'AI-powered UI suggestions',
+      'Automatic code generation',
+      'Flutter framework integration',
+      'Real-time preview',
+      'Firebase backend integration'
+    ],
+    limitations: [
+      'Limited to Flutter framework',
+      'Requires Flutter knowledge for advanced customization',
+      'Export limitations on free tier',
+      'Dependency on FlutterFlow platform'
+    ],
+    rating: 4.5,
+    reviewCount: 1850,
+    trending: true,
+    featured: true,
+    integrations: ['Firebase', 'Supabase', 'REST APIs', 'Flutter packages'],
+    lastVerified: new Date('2025-06-01')
+  },
+  {
+    id: 'expo-ai',
+    name: 'Expo with AI Tools',
+    slug: 'expo-ai',
+    description: 'Expo enhanced with AI development tools provides an open-source platform for React Native development. With AI-powered code suggestions, automatic optimization, and intelligent debugging, it streamlines mobile app development for cross-platform applications.',
+    shortDescription: 'AI-enhanced React Native development platform',
+    logo: 'https://images.pexels.com/photos/4050468/pexels-photo-4050468.jpeg',
+    website: 'https://expo.dev',
+    categoryId: 'code-creation',
+    subcategoryIds: ['mobile-development'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$29/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['Basic development tools', 'Community support', 'Limited builds']
+        },
+        {
+          name: 'Production',
+          price: '$29/month',
+          billingPeriod: 'monthly',
+          features: ['Unlimited builds', 'AI code assistance', 'Priority support', 'Advanced analytics']
+        }
+      ]
+    },
+    features: [
+      'AI-powered code completion',
+      'Cross-platform development',
+      'Hot reloading',
+      'Over-the-air updates',
+      'Built-in debugging tools',
+      'Automatic optimization suggestions'
+    ],
+    limitations: [
+      'Requires React Native knowledge',
+      'Some native features require ejecting',
+      'Build queue limitations on free tier',
+      'Learning curve for beginners'
+    ],
+    rating: 4.6,
+    reviewCount: 2200,
+    trending: true,
+    featured: false,
+    integrations: ['React Native', 'TypeScript', 'GraphQL', 'Firebase', 'Supabase'],
+    lastVerified: new Date('2025-06-01')
+  },
+  {
+    id: 'react-native-ai',
+    name: 'React Native AI',
+    slug: 'react-native-ai',
+    description: 'React Native AI is a comprehensive toolkit that integrates artificial intelligence capabilities directly into React Native development. It provides pre-built AI components, machine learning model integration, and intelligent code generation for mobile apps.',
+    shortDescription: 'AI toolkit for React Native mobile app development',
+    logo: 'https://images.pexels.com/photos/4050469/pexels-photo-4050469.jpeg',
+    website: 'https://reactnative.ai',
+    categoryId: 'code-creation',
+    subcategoryIds: ['mobile-development'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$25/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['Basic AI components', 'Limited API calls', 'Community support']
+        },
+        {
+          name: 'Pro',
+          price: '$25/month',
+          billingPeriod: 'monthly',
+          features: ['Advanced AI features', 'Unlimited API calls', 'Custom models', 'Priority support']
+        }
+      ]
+    },
+    features: [
+      'Pre-built AI components',
+      'Machine learning model integration',
+      'Natural language processing',
+      'Computer vision capabilities',
+      'Voice recognition integration',
+      'Intelligent code suggestions'
+    ],
+    limitations: [
+      'Requires React Native expertise',
+      'Limited free tier API calls',
+      'Dependency on external AI services',
+      'Performance considerations for on-device AI'
+    ],
+    rating: 4.3,
+    reviewCount: 920,
+    trending: true,
+    featured: false,
+    integrations: ['OpenAI', 'Google ML Kit', 'TensorFlow Lite', 'Core ML', 'AWS AI services'],
+    lastVerified: new Date('2025-06-01')
+  },
+  {
+    id: 'ionic-ai',
+    name: 'Ionic with AI Studio',
+    slug: 'ionic-ai',
+    description: 'Ionic AI Studio enhances the popular Ionic framework with artificial intelligence capabilities for hybrid mobile app development. It offers AI-powered design suggestions, code generation, and intelligent optimization for cross-platform mobile applications.',
+    shortDescription: 'AI-enhanced hybrid mobile app development framework',
+    logo: 'https://images.pexels.com/photos/4050467/pexels-photo-4050467.jpeg',
+    website: 'https://ionic.io',
+    categoryId: 'code-creation',
+    subcategoryIds: ['mobile-development'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$40/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Community',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['Basic Ionic tools', 'Community support', 'Limited AI features']
+        },
+        {
+          name: 'Growth',
+          price: '$40/month',
+          billingPeriod: 'monthly',
+          features: ['AI design assistance', 'Code generation', 'Cloud builds', 'Analytics']
+        },
+        {
+          name: 'Scale',
+          price: '$120/month',
+          billingPeriod: 'monthly',
+          features: ['Advanced AI features', 'Team collaboration', 'Enterprise support', 'Custom integrations']
+        }
+      ]
+    },
+    features: [
+      'AI-powered UI/UX design',
+      'Hybrid app development',
+      'Cross-platform compatibility',
+      'Intelligent code optimization',
+      'Automated testing suggestions',
+      'Performance monitoring'
+    ],
+    limitations: [
+      'Web technology limitations for native features',
+      'Performance may not match native apps',
+      'Requires web development knowledge',
+      'Advanced AI features require paid plans'
+    ],
+    rating: 4.2,
+    reviewCount: 1560,
+    trending: false,
+    featured: false,
+    integrations: ['Angular', 'React', 'Vue.js', 'Capacitor', 'Cordova'],
+    lastVerified: new Date('2025-06-01')
+  },
+  {
+    id: 'capacitor-ai',
+    name: 'Capacitor AI',
+    slug: 'capacitor-ai',
+    description: 'Capacitor AI brings artificial intelligence to native mobile app development using web technologies. It provides AI-powered native plugin suggestions, automatic platform optimization, and intelligent bridge code generation for seamless native functionality.',
+    shortDescription: 'AI-powered native mobile app development with web technologies',
+    logo: 'https://images.pexels.com/photos/4050466/pexels-photo-4050466.jpeg',
+    website: 'https://capacitorjs.com',
+    categoryId: 'code-creation',
+    subcategoryIds: ['mobile-development'],
+    pricing: {
+      type: 'open_source',
+      startingPrice: '$0',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Open Source',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['Full framework access', 'Community support', 'Basic AI tools']
+        },
+        {
+          name: 'Enterprise',
+          price: 'Custom',
+          billingPeriod: 'monthly',
+          features: ['Advanced AI features', 'Priority support', 'Custom plugins', 'Training']
+        }
+      ]
+    },
+    features: [
+      'Native plugin AI suggestions',
+      'Cross-platform development',
+      'Web-to-native bridge optimization',
+      'Automatic performance tuning',
+      'AI-powered debugging',
+      'Native API integration assistance'
+    ],
+    limitations: [
+      'Requires web development skills',
+      'Some advanced native features may need custom plugins',
+      'Enterprise AI features require custom pricing',
+      'Performance overhead compared to native development'
+    ],
+    rating: 4.4,
+    reviewCount: 1340,
+    trending: true,
+    featured: false,
+    integrations: ['iOS SDK', 'Android SDK', 'PWA', 'Electron', 'Native plugins'],
+    lastVerified: new Date('2025-06-01')
+  },
+  {
+    id: 'kodular-ai',
+    name: 'Kodular',
+    slug: 'kodular-ai',
+    description: 'Kodular is a visual development platform that uses AI to simplify Android app creation through drag-and-drop interface. It offers AI-powered component suggestions, automatic layout optimization, and intelligent app monetization strategies for non-programmers.',
+    shortDescription: 'AI-powered visual Android app development platform',
+    logo: 'https://images.pexels.com/photos/4050465/pexels-photo-4050465.jpeg',
+    website: 'https://kodular.io',
+    categoryId: 'code-creation',
+    subcategoryIds: ['mobile-development'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$9.99/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['Basic app building', 'Limited exports', 'Community support']
+        },
+        {
+          name: 'Premium',
+          price: '$9.99/month',
+          billingPeriod: 'monthly',
+          features: ['Unlimited exports', 'AI suggestions', 'Custom branding', 'Priority support']
+        }
+      ]
+    },
+    features: [
+      'Visual drag-and-drop development',
+      'AI component recommendations',
+      'No-code Android app creation',
+      'Monetization assistance',
+      'Automatic UI optimization',
+      'Built-in testing tools'
+    ],
+    limitations: [
+      'Android-only platform',
+      'Limited advanced programming capabilities',
+      'Export restrictions on free tier',
+      'May not suit complex app requirements'
+    ],
+    rating: 4.1,
+    reviewCount: 950,
+    trending: false,
+    featured: false,
+    integrations: ['Google Play Console', 'AdMob', 'Firebase', 'Payment gateways'],
+    lastVerified: new Date('2025-06-01')
+  },
+
+  // Frontend Development AI Tools
+  {
+    id: 'v0-dev',
+    name: 'v0 by Vercel',
+    slug: 'v0-dev',
+    description: 'v0 is Vercel\'s AI-powered frontend development tool that generates React components and complete user interfaces from text descriptions. It creates production-ready code with modern design patterns, responsive layouts, and best practices.',
+    shortDescription: 'AI-powered React component and UI generation tool',
+    logo: 'https://images.pexels.com/photos/4050471/pexels-photo-4050471.jpeg',
+    website: 'https://v0.dev',
+    categoryId: 'code-creation',
+    subcategoryIds: ['frontend-development'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$20/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['Limited generations', 'Basic components', 'Community support']
+        },
+        {
+          name: 'Pro',
+          price: '$20/month',
+          billingPeriod: 'monthly',
+          features: ['Unlimited generations', 'Advanced components', 'Custom styling', 'Priority support']
+        }
+      ]
+    },
+    features: [
+      'Text-to-React component generation',
+      'Modern UI library integration',
+      'Responsive design generation',
+      'TypeScript support',
+      'Tailwind CSS integration',
+      'Interactive preview'
+    ],
+    limitations: [
+      'Limited to React ecosystem',
+      'Requires React knowledge for customization',
+      'Free tier has generation limits',
+      'May need manual refinement for complex designs'
+    ],
+    rating: 4.7,
+    reviewCount: 1650,
+    trending: true,
+    featured: true,
+    integrations: ['React', 'Next.js', 'Tailwind CSS', 'TypeScript', 'Vercel'],
+    lastVerified: new Date('2025-06-01')
+  },
+  {
+    id: 'builder-ai',
+    name: 'Builder.ai',
+    slug: 'builder-ai',
+    description: 'Builder.ai is an AI-powered platform that creates custom software applications including web and mobile frontends. It uses artificial intelligence to understand requirements, design interfaces, and generate production-ready code with minimal human intervention.',
+    shortDescription: 'AI-powered custom software and frontend development platform',
+    logo: 'https://images.pexels.com/photos/4050472/pexels-photo-4050472.jpeg',
+    website: 'https://builder.ai',
+    categoryId: 'code-creation',
+    subcategoryIds: ['frontend-development'],
+    pricing: {
+      type: 'enterprise',
+      startingPrice: 'Custom',
+      hasFreeOption: false,
+      tiers: [
+        {
+          name: 'Studio',
+          price: 'Custom',
+          billingPeriod: 'one-time',
+          features: ['AI-powered development', 'Custom applications', 'Full-stack solutions', 'Dedicated team']
+        }
+      ]
+    },
+    features: [
+      'AI-driven software development',
+      'Custom UI/UX design',
+      'Full-stack application creation',
+      'Automated testing',
+      'Deployment automation',
+      'Ongoing maintenance'
+    ],
+    limitations: [
+      'Enterprise-only pricing',
+      'Project-based engagement model',
+      'Limited control over development process',
+      'Higher cost compared to traditional development'
+    ],
+    rating: 4.2,
+    reviewCount: 380,
+    trending: false,
+    featured: false,
+    integrations: ['Cloud platforms', 'Third-party APIs', 'Payment systems', 'Analytics tools'],
+    lastVerified: new Date('2025-06-01')
+  },
+  {
+    id: 'framer-ai',
+    name: 'Framer AI',
+    slug: 'framer-ai',
+    description: 'Framer AI combines design and development with artificial intelligence to create interactive web experiences. It offers AI-powered component generation, automatic responsive design, and intelligent animation suggestions for modern web interfaces.',
+    shortDescription: 'AI-powered interactive web design and development platform',
+    logo: 'https://images.pexels.com/photos/4050473/pexels-photo-4050473.jpeg',
+    website: 'https://framer.com',
+    categoryId: 'code-creation',
+    subcategoryIds: ['frontend-development'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$15/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['Basic design tools', 'Limited AI features', 'Community templates']
+        },
+        {
+          name: 'Mini',
+          price: '$15/month',
+          billingPeriod: 'monthly',
+          features: ['Custom domain', 'AI assistance', 'Advanced animations', 'Form handling']
+        },
+        {
+          name: 'Basic',
+          price: '$25/month',
+          billingPeriod: 'monthly',
+          features: ['Multiple sites', 'AI optimization', 'Analytics', 'Collaboration tools']
+        }
+      ]
+    },
+    features: [
+      'AI-powered design generation',
+      'Interactive prototype creation',
+      'Responsive design automation',
+      'Component library integration',
+      'Animation and micro-interaction AI',
+      'Code export capabilities'
+    ],
+    limitations: [
+      'Learning curve for complex interactions',
+      'Limited backend integration',
+      'Advanced AI features require paid plans',
+      'May generate excessive code for simple designs'
+    ],
+    rating: 4.5,
+    reviewCount: 2100,
+    trending: true,
+    featured: false,
+    integrations: ['Figma', 'Sketch', 'React', 'TypeScript', 'CMS platforms'],
+    lastVerified: new Date('2025-06-01')
+  },
+  {
+    id: 'webflow-ai',
+    name: 'Webflow AI',
+    slug: 'webflow-ai',
+    description: 'Webflow AI enhances the popular visual web development platform with artificial intelligence capabilities. It provides AI-powered design suggestions, automatic SEO optimization, content generation, and intelligent responsive design adjustments.',
+    shortDescription: 'AI-enhanced visual web development platform',
+    logo: 'https://images.pexels.com/photos/4050474/pexels-photo-4050474.jpeg',
+    website: 'https://webflow.com',
+    categoryId: 'code-creation',
+    subcategoryIds: ['frontend-development'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$14/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['2 projects', 'Basic AI features', 'Webflow subdomain']
+        },
+        {
+          name: 'Basic',
+          price: '$14/month',
+          billingPeriod: 'monthly',
+          features: ['Custom domain', 'AI design assistance', 'Form handling', 'Site search']
+        },
+        {
+          name: 'CMS',
+          price: '$23/month',
+          billingPeriod: 'monthly',
+          features: ['Content management', 'AI content generation', 'Dynamic content', '2,000 CMS items']
+        }
+      ]
+    },
+    features: [
+      'Visual drag-and-drop design',
+      'AI design suggestions',
+      'Automatic responsive design',
+      'Content generation AI',
+      'SEO optimization assistance',
+      'Clean code export'
+    ],
+    limitations: [
+      'Steeper learning curve',
+      'Limited e-commerce on lower tiers',
+      'Can become expensive for large sites',
+      'Some advanced features require coding knowledge'
+    ],
+    rating: 4.6,
+    reviewCount: 3200,
+    trending: true,
+    featured: true,
+    integrations: ['Zapier', 'Google Analytics', 'Mailchimp', 'Stripe', 'CMS platforms'],
+    lastVerified: new Date('2025-06-01')
+  },
+  {
+    id: 'figma-to-code',
+    name: 'Figma to Code AI',
+    slug: 'figma-to-code',
+    description: 'Figma to Code AI automatically converts Figma designs into production-ready frontend code. Using advanced AI algorithms, it generates clean, responsive HTML, CSS, and React components while maintaining design fidelity and best practices.',
+    shortDescription: 'AI-powered design-to-code conversion from Figma',
+    logo: 'https://images.pexels.com/photos/4050475/pexels-photo-4050475.jpeg',
+    website: 'https://figma-to-code.com',
+    categoryId: 'code-creation',
+    subcategoryIds: ['frontend-development'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$19/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['5 conversions/month', 'Basic HTML/CSS', 'Community support']
+        },
+        {
+          name: 'Pro',
+          price: '$19/month',
+          billingPeriod: 'monthly',
+          features: ['Unlimited conversions', 'React/Vue components', 'TypeScript support', 'Priority support']
+        },
+        {
+          name: 'Team',
+          price: '$49/month',
+          billingPeriod: 'monthly',
+          features: ['Team collaboration', 'Custom frameworks', 'API access', 'Advanced customization']
+        }
+      ]
+    },
+    features: [
+      'Figma design conversion',
+      'Multiple framework support',
+      'Responsive code generation',
+      'Component extraction',
+      'Clean, semantic code',
+      'Design system integration'
+    ],
+    limitations: [
+      'Requires well-structured Figma designs',
+      'May need manual refinement for complex layouts',
+      'Limited free tier conversions',
+      'Dependency on Figma design quality'
+    ],
+    rating: 4.3,
+    reviewCount: 1280,
+    trending: true,
+    featured: false,
+    integrations: ['Figma', 'React', 'Vue.js', 'Angular', 'TypeScript', 'Tailwind CSS'],
+    lastVerified: new Date('2025-06-01')
+  },
+  {
+    id: 'locofy-ai',
+    name: 'Locofy.ai',
+    slug: 'locofy-ai',
+    description: 'Locofy.ai is an AI-powered design-to-code platform that converts designs from Figma and Adobe XD into production-ready frontend code. It supports multiple frameworks and provides intelligent component structuring with responsive design capabilities.',
+    shortDescription: 'AI design-to-code platform for multiple design tools and frameworks',
+    logo: 'https://images.pexels.com/photos/4050476/pexels-photo-4050476.jpeg',
+    website: 'https://locofy.ai',
+    categoryId: 'code-creation',
+    subcategoryIds: ['frontend-development'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$25/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['10 exports/month', 'Basic frameworks', 'Community support']
+        },
+        {
+          name: 'Pro',
+          price: '$25/month',
+          billingPeriod: 'monthly',
+          features: ['Unlimited exports', 'All frameworks', 'Advanced features', 'Priority support']
+        },
+        {
+          name: 'Team',
+          price: '$100/month',
+          billingPeriod: 'monthly',
+          features: ['Team collaboration', 'Custom components', 'API access', 'White-label options']
+        }
+      ]
+    },
+    features: [
+      'Multi-design tool support',
+      'Framework flexibility',
+      'Intelligent component creation',
+      'Responsive code generation',
+      'Design system compatibility',
+      'Version control integration'
+    ],
+    limitations: [
+      'Quality depends on design structure',
+      'Limited free tier exports',
+      'May require post-conversion optimization',
+      'Learning curve for optimal results'
+    ],
+    rating: 4.4,
+    reviewCount: 920,
+    trending: true,
+    featured: false,
+    integrations: ['Figma', 'Adobe XD', 'React', 'Next.js', 'Vue.js', 'HTML/CSS'],
+    lastVerified: new Date('2025-06-01')
+  },
+
+  // DevOps & CI/CD AI Tools
+  {
+    id: 'github-actions-ai',
+    name: 'GitHub Actions AI',
+    slug: 'github-actions-ai',
+    description: 'GitHub Actions enhanced with AI capabilities provides intelligent workflow automation, predictive build optimization, and smart deployment strategies. It offers AI-powered workflow suggestions, automated testing recommendations, and intelligent error resolution.',
+    shortDescription: 'AI-enhanced CI/CD automation and workflow intelligence',
+    logo: 'https://images.pexels.com/photos/4050477/pexels-photo-4050477.jpeg',
+    website: 'https://github.com/features/actions',
+    categoryId: 'code-creation',
+    subcategoryIds: ['devops-cicd'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$4/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['2,000 minutes/month', 'Basic AI suggestions', 'Public repositories']
+        },
+        {
+          name: 'Pro',
+          price: '$4/month',
+          billingPeriod: 'monthly',
+          features: ['3,000 minutes/month', 'Advanced AI features', 'Private repositories', 'Priority support']
+        },
+        {
+          name: 'Team',
+          price: '$4/user/month',
+          billingPeriod: 'monthly',
+          features: ['10,000 minutes/month', 'Team AI insights', 'Advanced security', 'Team management']
+        }
+      ]
+    },
+    features: [
+      'AI workflow optimization',
+      'Predictive build analysis',
+      'Intelligent error detection',
+      'Automated testing suggestions',
+      'Smart deployment strategies',
+      'Performance monitoring'
+    ],
+    limitations: [
+      'Limited minutes on free tier',
+      'Requires GitHub ecosystem',
+      'AI features may need fine-tuning',
+      'Learning curve for complex workflows'
+    ],
+    rating: 4.7,
+    reviewCount: 4200,
+    trending: true,
+    featured: true,
+    integrations: ['GitHub', 'Docker', 'Kubernetes', 'AWS', 'Azure', 'Google Cloud'],
+    lastVerified: new Date('2025-06-01')
+  },
+  {
+    id: 'jenkins-ai',
+    name: 'Jenkins with AI Plugins',
+    slug: 'jenkins-ai',
+    description: 'Jenkins enhanced with AI plugins provides intelligent build automation, predictive failure detection, and smart resource optimization. It offers AI-powered pipeline suggestions, automated troubleshooting, and intelligent deployment scheduling.',
+    shortDescription: 'AI-enhanced Jenkins automation and pipeline intelligence',
+    logo: 'https://images.pexels.com/photos/4050478/pexels-photo-4050478.jpeg',
+    website: 'https://jenkins.io',
+    categoryId: 'code-creation',
+    subcategoryIds: ['devops-cicd'],
+    pricing: {
+      type: 'open_source',
+      startingPrice: '$0',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Open Source',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['Full Jenkins access', 'Community AI plugins', 'Self-hosted']
+        },
+        {
+          name: 'CloudBees CI',
+          price: 'Custom',
+          billingPeriod: 'monthly',
+          features: ['Enterprise AI features', 'Managed service', 'Premium support', 'Advanced analytics']
+        }
+      ]
+    },
+    features: [
+      'AI-powered pipeline optimization',
+      'Predictive build failure detection',
+      'Intelligent resource scheduling',
+      'Automated troubleshooting',
+      'Smart deployment recommendations',
+      'Performance analytics'
+    ],
+    limitations: [
+      'Requires infrastructure management',
+      'AI features depend on plugins',
+      'Setup complexity for beginners',
+      'Enterprise features require CloudBees'
+    ],
+    rating: 4.5,
+    reviewCount: 3800,
+    trending: false,
+    featured: false,
+    integrations: ['Docker', 'Kubernetes', 'AWS', 'Azure', 'Git', 'Maven', 'Gradle'],
+    lastVerified: new Date('2025-06-01')
+  },
+  {
+    id: 'docker-ai',
+    name: 'Docker with AI Tools',
+    slug: 'docker-ai',
+    description: 'Docker enhanced with AI capabilities provides intelligent containerization, automated optimization, and smart resource management. It offers AI-powered Dockerfile generation, security scanning, and performance optimization for container workflows.',
+    shortDescription: 'AI-enhanced containerization and deployment platform',
+    logo: 'https://images.pexels.com/photos/4050479/pexels-photo-4050479.jpeg',
+    website: 'https://docker.com',
+    categoryId: 'code-creation',
+    subcategoryIds: ['devops-cicd'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$5/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Personal',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['Basic Docker features', 'Limited AI assistance', 'Public repositories']
+        },
+        {
+          name: 'Pro',
+          price: '$5/month',
+          billingPeriod: 'monthly',
+          features: ['Advanced AI features', 'Private repositories', 'Enhanced security', 'Priority support']
+        },
+        {
+          name: 'Team',
+          price: '$7/user/month',
+          billingPeriod: 'monthly',
+          features: ['Team collaboration', 'AI insights', 'Advanced security', 'Team management']
+        }
+      ]
+    },
+    features: [
+      'AI Dockerfile optimization',
+      'Intelligent image building',
+      'Automated security scanning',
+      'Performance optimization',
+      'Resource usage analytics',
+      'Smart deployment suggestions'
+    ],
+    limitations: [
+      'Requires containerization knowledge',
+      'AI features limited on free tier',
+      'Resource intensive for large applications',
+      'Learning curve for Docker concepts'
+    ],
+    rating: 4.6,
+    reviewCount: 5200,
+    trending: true,
+    featured: true,
+    integrations: ['Kubernetes', 'CI/CD platforms', 'Cloud providers', 'Orchestration tools'],
+    lastVerified: new Date('2025-06-01')
+  },
+  {
+    id: 'kubernetes-ai',
+    name: 'Kubernetes AI Tools',
+    slug: 'kubernetes-ai',
+    description: 'Kubernetes enhanced with AI tools provides intelligent cluster management, automated scaling, and predictive resource optimization. It offers AI-powered deployment strategies, anomaly detection, and intelligent troubleshooting for container orchestration.',
+    shortDescription: 'AI-powered Kubernetes cluster management and orchestration',
+    logo: 'https://images.pexels.com/photos/4050480/pexels-photo-4050480.jpeg',
+    website: 'https://kubernetes.io',
+    categoryId: 'code-creation',
+    subcategoryIds: ['devops-cicd'],
+    pricing: {
+      type: 'open_source',
+      startingPrice: '$0',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Open Source',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['Full Kubernetes access', 'Community AI tools', 'Self-managed']
+        },
+        {
+          name: 'Managed Services',
+          price: 'Variable',
+          billingPeriod: 'monthly',
+          features: ['Cloud provider AI features', 'Managed clusters', 'Enterprise support', 'Advanced AI tools']
+        }
+      ]
+    },
+    features: [
+      'AI-powered auto-scaling',
+      'Intelligent resource optimization',
+      'Predictive failure detection',
+      'Automated deployment strategies',
+      'Anomaly detection',
+      'Smart load balancing'
+    ],
+    limitations: [
+      'Complex learning curve',
+      'Requires cluster management expertise',
+      'AI tools may need additional setup',
+      'Resource intensive for small applications'
+    ],
+    rating: 4.4,
+    reviewCount: 2800,
+    trending: true,
+    featured: false,
+    integrations: ['Docker', 'Helm', 'Prometheus', 'Grafana', 'Cloud providers', 'CI/CD tools'],
+    lastVerified: new Date('2025-06-01')
+  },
+  {
+    id: 'terraform-ai',
+    name: 'Terraform with AI Tools',
+    slug: 'terraform-ai',
+    description: 'Terraform enhanced with AI capabilities provides intelligent infrastructure as code, automated optimization, and smart resource planning. It offers AI-powered configuration generation, cost optimization, and security best practice recommendations.',
+    shortDescription: 'AI-enhanced infrastructure as code and automation',
+    logo: 'https://images.pexels.com/photos/4050481/pexels-photo-4050481.jpeg',
+    website: 'https://terraform.io',
+    categoryId: 'code-creation',
+    subcategoryIds: ['devops-cicd'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$20/user/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Open Source',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['Core Terraform', 'Community AI tools', 'Local state management']
+        },
+        {
+          name: 'Terraform Cloud',
+          price: '$20/user/month',
+          billingPeriod: 'monthly',
+          features: ['Remote state', 'AI policy suggestions', 'VCS integration', 'Collaboration tools']
+        },
+        {
+          name: 'Enterprise',
+          price: 'Custom',
+          billingPeriod: 'monthly',
+          features: ['Advanced AI features', 'SSO', 'Audit logging', 'Private registry']
+        }
+      ]
+    },
+    features: [
+      'AI configuration generation',
+      'Intelligent resource planning',
+      'Automated cost optimization',
+      'Security best practices',
+      'Drift detection',
+      'Smart dependency management'
+    ],
+    limitations: [
+      'Requires infrastructure knowledge',
+      'AI features mainly in paid tiers',
+      'Complex for beginners',
+      'State management complexity'
+    ],
+    rating: 4.5,
+    reviewCount: 2100,
+    trending: true,
+    featured: false,
+    integrations: ['AWS', 'Azure', 'Google Cloud', 'GitHub', 'GitLab', 'CI/CD platforms'],
+    lastVerified: new Date('2025-06-01')
+  },
+  {
+    id: 'ansible-ai',
+    name: 'Ansible with AI Tools',
+    slug: 'ansible-ai',
+    description: 'Ansible enhanced with AI capabilities provides intelligent automation, predictive configuration management, and smart playbook optimization. It offers AI-powered playbook generation, error prediction, and automated remediation for infrastructure management.',
+    shortDescription: 'AI-enhanced automation and configuration management',
+    logo: 'https://images.pexels.com/photos/4050482/pexels-photo-4050482.jpeg',
+    website: 'https://ansible.com',
+    categoryId: 'code-creation',
+    subcategoryIds: ['devops-cicd'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$10,000/year',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Open Source',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['Core Ansible', 'Community modules', 'Basic automation']
+        },
+        {
+          name: 'Ansible Automation Platform',
+          price: '$10,000/year',
+          billingPeriod: 'yearly',
+          features: ['AI-powered insights', 'Web UI', 'Analytics', 'Enterprise support']
+        }
+      ]
+    },
+    features: [
+      'AI playbook generation',
+      'Predictive failure detection',
+      'Intelligent automation',
+      'Configuration drift detection',
+      'Smart error handling',
+      'Performance optimization'
+    ],
+    limitations: [
+      'Requires automation knowledge',
+      'Enterprise AI features are expensive',
+      'Learning curve for complex scenarios',
+      'Limited Windows support'
+    ],
+    rating: 4.3,
+    reviewCount: 1900,
+    trending: false,
+    featured: false,
+    integrations: ['Linux systems', 'Cloud platforms', 'Network devices', 'CI/CD tools', 'Monitoring systems'],
+    lastVerified: new Date('2025-06-01')
+  },
+  {
+    id: 'gitlab-ai',
+    name: 'GitLab AI',
+    slug: 'gitlab-ai',
+    description: 'GitLab AI integrates artificial intelligence throughout the DevOps lifecycle, providing intelligent code suggestions, automated security scanning, predictive analytics, and smart CI/CD optimization within a complete DevOps platform.',
+    shortDescription: 'AI-integrated complete DevOps platform with intelligent automation',
+    logo: 'https://images.pexels.com/photos/4050483/pexels-photo-4050483.jpeg',
+    website: 'https://gitlab.com',
+    categoryId: 'code-creation',
+    subcategoryIds: ['devops-cicd'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$19/user/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['Basic AI features', 'Unlimited private repos', 'CI/CD', '5GB storage']
+        },
+        {
+          name: 'Premium',
+          price: '$19/user/month',
+          billingPeriod: 'monthly',
+          features: ['Advanced AI insights', 'Security scanning', 'Advanced CI/CD', 'Priority support']
+        },
+        {
+          name: 'Ultimate',
+          price: '$99/user/month',
+          billingPeriod: 'monthly',
+          features: ['Full AI suite', 'Compliance management', 'Portfolio management', 'Executive insights']
+        }
+      ]
+    },
+    features: [
+      'AI-powered code suggestions',
+      'Intelligent security scanning',
+      'Predictive DevOps analytics',
+      'Automated testing recommendations',
+      'Smart merge request insights',
+      'Performance optimization AI'
+    ],
+    limitations: [
+      'Can be complex for small teams',
+      'Advanced AI features require higher tiers',
+      'Resource intensive for self-hosted',
+      'Learning curve for full platform adoption'
+    ],
+    rating: 4.6,
+    reviewCount: 3500,
+    trending: true,
+    featured: true,
+    integrations: ['Kubernetes', 'Docker', 'Jira', 'Slack', 'AWS', 'Google Cloud', 'Azure'],
+    lastVerified: new Date('2025-06-01')
   }
 ];
