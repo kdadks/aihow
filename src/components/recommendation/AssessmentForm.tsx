@@ -86,10 +86,15 @@ export const AssessmentForm: React.FC<AssessmentFormProps> = ({ onComplete }) =>
           let score = 0;
           let reasons = [];
 
-          // Score based on purpose
-          if (purpose === 'content' && tool.categoryId.includes('media') || tool.categoryId.includes('document')) {
-            score += 30;
-            reasons.push('Matches your content creation needs');
+          // Score based on purpose - Enhanced for media creation
+          if (purpose === 'content') {
+            if (tool.categoryId === 'media-creation') {
+              score += 40; // Higher score for media creation tools
+              reasons.push('Perfect for media and content creation');
+            } else if (tool.categoryId.includes('document')) {
+              score += 25;
+              reasons.push('Great for document and written content');
+            }
           }
           if (purpose === 'development' && tool.categoryId.includes('code')) {
             score += 30;

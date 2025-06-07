@@ -62,28 +62,70 @@ export const categories: Category[] = [
         name: 'Professional & Business Documents',
         description: 'Create business plans, proposals, reports, and other professional documents',
         parentCategoryId: 'document-creation',
-        tools: ['microsoft-copilot', 'tome', 'copy-ai', 'jasper-ai', 'clickup-ai', 'canva-docs']
+        tools: ['microsoft-copilot', 'tome', 'copy-ai', 'jasper-ai', 'writesonic', 'clickup-ai', 'canva-docs']
       },
       {
         id: 'academic-research',
         name: 'Academic & Research Documents',
         description: 'Create academic papers, literature reviews, and research documents',
         parentCategoryId: 'document-creation',
-        tools: ['scite', 'consensus']
+        tools: ['scispace', 'scite', 'consensus', 'deepseek']
       },
       {
         id: 'legal-documents',
         name: 'Legal & Contract Documents',
         description: 'Create and analyze legal documents, contracts, and compliance materials',
         parentCategoryId: 'document-creation',
-        tools: ['lawgeex', 'donotpay']
+        tools: ['lexis-ai', 'harvey-ai', 'litera-one', 'lawgeex', 'donotpay']
       },
       {
         id: 'resume-documents',
         name: 'Resume & Cover Letters',
         description: 'Create professional resumes, CVs, and cover letters',
         parentCategoryId: 'document-creation',
-        tools: ['resume-io', 'teal']
+        tools: ['teal', 'rezi', 'kickresume', 'zety', 'resumai-wonsulting', 'resume-io']
+      },
+      {
+        id: 'technical-documentation',
+        name: 'Technical Documentation',
+        description: 'AI tools for creating API documentation, user manuals, technical specifications, and developer guides',
+        parentCategoryId: 'document-creation',
+        tools: ['gitbook-ai', 'confluence-ai', 'mintlify-docs', 'readme-ai', 'docusaurus-ai', 'gitiles-ai']
+      },
+      {
+        id: 'creative-writing',
+        name: 'Creative Writing',
+        description: 'AI tools for stories, scripts, poetry, novels, and other creative content creation',
+        parentCategoryId: 'document-creation',
+        tools: ['sudowrite', 'novelai', 'shortlyai', 'jasper-creative', 'rytr-creative', 'writesonic']
+      },
+      {
+        id: 'marketing-sales',
+        name: 'Marketing & Sales Materials',
+        description: 'AI tools for creating brochures, sales decks, marketing copy, and promotional content',
+        parentCategoryId: 'document-creation',
+        tools: ['copy-ai-marketing', 'persado', 'anyword', 'jasper-marketing', 'writesonic-marketing', 'phrasee']
+      },
+      {
+        id: 'educational-content',
+        name: 'Educational Content',
+        description: 'AI tools for creating course materials, tutorials, training documents, and educational resources',
+        parentCategoryId: 'document-creation',
+        tools: ['courseai', 'synthesia-education', 'coursebox-ai', 'teachable-ai', 'udemy-ai', 'coursera-ai', 'skillshare-ai', 'thinkific-ai']
+      },
+      {
+        id: 'proposals-contracts',
+        name: 'Proposal & Contract Tools',
+        description: 'AI tools for creating RFP responses, project proposals, and contract documents',
+        parentCategoryId: 'document-creation',
+        tools: ['pandadoc-ai', 'proposify-ai', 'qwilr-ai', 'docusign-ai', 'bidsketch-ai', 'nusii-ai']
+      },
+      {
+        id: 'translation-localization',
+        name: 'Translation & Localization',
+        description: 'AI tools for multi-language documents, translation, and content localization',
+        parentCategoryId: 'document-creation',
+        tools: ['deepl-ai', 'lokalise-ai', 'phrase-ai', 'google-translate-ai', 'crowdin-ai', 'transifex-ai']
       }
     ]
   },
@@ -98,14 +140,14 @@ export const categories: Category[] = [
         name: 'Coding Assistants',
         description: 'Get help with writing and debugging code',
         parentCategoryId: 'code-creation',
-        tools: ['github-copilot', 'codeium', 'cursor-ai', 'tabnine', 'aider-ai', 'safurai']
+        tools: ['github-copilot', 'github-copilot-business', 'claude-dev', 'gemini-code', 'roocode', 'codeium', 'cursor-ai', 'tabnine', 'aider-ai', 'safurai']
       },
       {
         id: 'code-optimization',
         name: 'Code Optimization',
         description: 'Optimize and refactor code',
         parentCategoryId: 'code-creation',
-        tools: ['mintlify', 'aider-ai', 'safurai', 'sourcegraph-cody', 'codiumai']
+        tools: ['roocode', 'mintlify', 'aider-ai', 'safurai', 'sourcegraph-cody', 'codiumai']
       },
       {
         id: 'code-generation',
@@ -113,6 +155,48 @@ export const categories: Category[] = [
         description: 'Generate complete code snippets or applications from descriptions',
         parentCategoryId: 'code-creation',
         tools: ['claude-code', 'gemini-code', 'gpt-pilot', 'devin-ai', 'mutable-ai', 'replit-ghost-writer']
+      },
+      {
+        id: 'api-development',
+        name: 'API Development Tools',
+        description: 'Tools for designing, building, and testing APIs with AI assistance',
+        parentCategoryId: 'code-creation',
+        tools: ['thunder-client-ai', 'swagger-ai', 'rapidapi-ai', 'apidog', 'bruno-ai']
+      },
+      {
+        id: 'testing-automation',
+        name: 'Testing & QA Automation',
+        description: 'AI-powered tools for automated testing, test generation, and quality assurance',
+        parentCategoryId: 'code-creation',
+        tools: ['playwright-ai', 'jest-ai', 'selenium-ai', 'testim-ai']
+      },
+      {
+        id: 'devops-cicd',
+        name: 'DevOps & CI/CD',
+        description: 'AI tools for deployment automation, infrastructure management, and continuous integration',
+        parentCategoryId: 'code-creation',
+        tools: ['github-actions-ai', 'jenkins-ai', 'docker-ai', 'kubernetes-ai', 'terraform-ai', 'ansible-ai', 'gitlab-ai']
+      },
+      {
+        id: 'database-backend',
+        name: 'Database & Backend Tools',
+        description: 'AI tools for database design, backend architecture, and server-side development',
+        parentCategoryId: 'code-creation',
+        tools: ['prisma-ai', 'supabase-ai', 'firebase-ai', 'mongodb-ai', 'planetscale-ai', 'neon-ai']
+      },
+      {
+        id: 'frontend-development',
+        name: 'Frontend Development',
+        description: 'AI tools for UI/UX code generation, component libraries, and frontend frameworks',
+        parentCategoryId: 'code-creation',
+        tools: ['v0-dev', 'builder-ai', 'framer-ai', 'webflow-ai', 'figma-to-code', 'locofy-ai']
+      },
+      {
+        id: 'mobile-development',
+        name: 'Mobile Development',
+        description: 'AI tools for iOS, Android, and cross-platform mobile app development',
+        parentCategoryId: 'code-creation',
+        tools: ['flutterflow', 'expo-ai', 'react-native-ai', 'ionic-ai', 'capacitor-ai', 'kodular-ai']
       }
     ]
   },

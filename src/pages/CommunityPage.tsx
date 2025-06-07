@@ -1,17 +1,94 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { MessageCircle, Star, BookOpen, Users } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
+import { MessageCircle, Star, BookOpen, Users, PlusCircle, Edit3 } from 'lucide-react';
 import { forumCategories, reviews, blogPosts } from '../data/community';
+import { useAuth } from '../auth/hooks/useAuth';
 
 const CommunityPage: React.FC = () => {
+  const navigate = useNavigate();
+  const { user, isAuthenticated } = useAuth();
+
+  const handleGetStarted = () => {
+    navigate('/signup');
+  };
+
+
+  // Render different content based on authentication status
+  const renderSectionContent = (section: 'forum' | 'reviews' | 'blog' | 'testimonials') => {
+    if (!isAuthenticated) {
+      return (
+        <div className="text-sm text-gray-500">
+          {section === 'forum' && forumCategories.slice(0, 2).map((category, index) => (
+            <div key={index}>• {category.lastPost.title}</div>
+          ))}
+          {section === 'reviews' && reviews.slice(0, 2).map((review, index) => (
+            <div key={index}>• "{review.content.substring(0, 60)}..."</div>
+          ))}
+          {section === 'blog' && blogPosts.slice(0, 2).map((post, index) => (
+            <div key={index}>• {post.title}</div>
+          ))}
+          {section === 'testimonials' && (
+            <>
+              <div>• Watch video testimonials from our users</div>
+              <div>• Read detailed case studies</div>
+            </>
+          )}
+        </div>
+      );
+    }
+
+    // Authenticated user content with enhanced features
+    return (
+      <div className="space-y-3">
+        <div className="text-sm text-gray-500">
+          {section === 'forum' && forumCategories.slice(0, 2).map((category, index) => (
+            <div key={index}>• {category.lastPost.title}</div>
+          ))}
+          {section === 'reviews' && reviews.slice(0, 2).map((review, index) => (
+            <div key={index}>• "{review.content.substring(0, 60)}..."</div>
+          ))}
+          {section === 'blog' && blogPosts.slice(0, 2).map((post, index) => (
+            <div key={index}>• {post.title}</div>
+          ))}
+          {section === 'testimonials' && (
+            <>
+              <div>• Watch video testimonials from our users</div>
+              <div>• Read detailed case studies</div>
+            </>
+          )}
+        </div>
+        <div className="flex items-center gap-2 pt-2 border-t border-gray-100">
+          <button className="flex items-center gap-1 text-xs text-blue-600 hover:text-blue-800 font-medium">
+            <PlusCircle className="w-3 h-3" />
+            {section === 'forum' && 'Start Discussion'}
+            {section === 'reviews' && 'Write Review'}
+            {section === 'blog' && 'Write Article'}
+            {section === 'testimonials' && 'Share Story'}
+          </button>
+          <span className="text-gray-300">|</span>
+          <button className="flex items-center gap-1 text-xs text-gray-600 hover:text-gray-800 font-medium">
+            <Edit3 className="w-3 h-3" />
+            {section === 'forum' && 'My Posts'}
+            {section === 'reviews' && 'My Reviews'}
+            {section === 'blog' && 'My Articles'}
+            {section === 'testimonials' && 'My Stories'}
+          </button>
+        </div>
+      </div>
+    );
+  };
+
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <div className="text-center mb-12">
         <h1 className="text-4xl font-bold text-gray-900 mb-4">
-          How2doAI Community
+          {isAuthenticated ? 'Welcome back!' : 'How2doAI Community'}
         </h1>
         <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-          Join our vibrant community of AI enthusiasts. Share experiences, learn from others, and stay updated with the latest in AI tools.
+          {isAuthenticated
+            ? 'Share your insights, engage with fellow AI enthusiasts, and grow your expertise.'
+            : 'Join our vibrant community of AI enthusiasts. Share experiences, learn from others, and stay updated with the latest in AI tools.'
+          }
         </p>
       </div>
 
@@ -29,15 +106,12 @@ const CommunityPage: React.FC = () => {
             </h2>
           </div>
           <p className="text-gray-600 mb-4">
-            Join discussions about AI tools, share your experiences, and get help from the community.
+            {isAuthenticated
+              ? 'Start discussions, share insights, and get help from the community.'
+              : 'Join discussions about AI tools, share your experiences, and get help from the community.'
+            }
           </p>
-          <div className="space-y-2">
-            {forumCategories.slice(0, 2).map((category, index) => (
-              <div key={index} className="text-sm text-gray-500">
-                • {category.lastPost.title}
-              </div>
-            ))}
-          </div>
+          {renderSectionContent('forum')}
         </Link>
 
         {/* Reviews Section */}
@@ -52,15 +126,12 @@ const CommunityPage: React.FC = () => {
             </h2>
           </div>
           <p className="text-gray-600 mb-4">
-            Read verified customer reviews and share your own experience with AI tools.
+            {isAuthenticated
+              ? 'Write detailed reviews and read insights from verified users.'
+              : 'Read verified customer reviews and share your own experience with AI tools.'
+            }
           </p>
-          <div className="space-y-2">
-            {reviews.slice(0, 2).map((review, index) => (
-              <div key={index} className="text-sm text-gray-500">
-                • "{review.content.substring(0, 60)}..."
-              </div>
-            ))}
-          </div>
+          {renderSectionContent('reviews')}
         </Link>
 
         {/* Blog Section */}
@@ -75,15 +146,12 @@ const CommunityPage: React.FC = () => {
             </h2>
           </div>
           <p className="text-gray-600 mb-4">
-            Stay updated with the latest insights, tutorials, and news about AI tools.
+            {isAuthenticated
+              ? 'Write articles, share tutorials, and contribute to our knowledge base.'
+              : 'Stay updated with the latest insights, tutorials, and news about AI tools.'
+            }
           </p>
-          <div className="space-y-2">
-            {blogPosts.slice(0, 2).map((post, index) => (
-              <div key={index} className="text-sm text-gray-500">
-                • {post.title}
-              </div>
-            ))}
-          </div>
+          {renderSectionContent('blog')}
         </Link>
 
         {/* Testimonials Section */}
@@ -98,13 +166,12 @@ const CommunityPage: React.FC = () => {
             </h2>
           </div>
           <p className="text-gray-600 mb-4">
-            Discover how organizations are transforming their workflows with AI tools.
+            {isAuthenticated
+              ? 'Share your success story and inspire others in their AI journey.'
+              : 'Discover how organizations are transforming their workflows with AI tools.'
+            }
           </p>
-          <div className="text-sm text-gray-500">
-            • Watch video testimonials from our users
-            <br />
-            • Read detailed case studies
-          </div>
+          {renderSectionContent('testimonials')}
         </Link>
       </div>
 
@@ -131,18 +198,58 @@ const CommunityPage: React.FC = () => {
         </div>
       </div>
 
-      {/* CTA Section */}
-      <div className="text-center mt-12">
-        <h2 className="text-2xl font-bold text-gray-900 mb-4">
-          Join Our Community Today
-        </h2>
-        <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
-          Share your experiences, learn from others, and be part of the AI tools revolution.
-        </p>
-        <button className="bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700">
-          Get Started Free
-        </button>
-      </div>
+      {/* CTA Section - Different content for authenticated vs non-authenticated users */}
+      {!isAuthenticated ? (
+        <div className="text-center mt-12">
+          <h2 className="text-2xl font-bold text-gray-900 mb-4">
+            Join Our Community Today
+          </h2>
+          <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
+            Share your experiences, learn from others, and be part of the AI tools revolution.
+          </p>
+          <button
+            onClick={handleGetStarted}
+            className="bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition-colors duration-200 font-semibold"
+          >
+            Get Started Free
+          </button>
+        </div>
+      ) : (
+        <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl p-8 text-center mt-12">
+          <h2 className="text-2xl font-bold text-gray-900 mb-4">
+            Ready to Contribute?
+          </h2>
+          <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
+            Your insights matter! Start sharing your expertise and help fellow AI enthusiasts succeed.
+          </p>
+          <div className="flex flex-wrap justify-center gap-4">
+            <Link
+              to="/forum"
+              className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors duration-200 font-semibold"
+            >
+              Start a Discussion
+            </Link>
+            <Link
+              to="/reviews"
+              className="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition-colors duration-200 font-semibold"
+            >
+              Write a Review
+            </Link>
+            <Link
+              to="/blog"
+              className="bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700 transition-colors duration-200 font-semibold"
+            >
+              Share an Article
+            </Link>
+            <Link
+              to="/dashboard"
+              className="bg-gray-600 text-white px-6 py-2 rounded-lg hover:bg-gray-700 transition-colors duration-200 font-semibold"
+            >
+              Go to Dashboard
+            </Link>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

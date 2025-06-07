@@ -62,13 +62,22 @@ export const BundleCreator: React.FC<BundleCreatorProps> = ({ onSave, initialBun
   const findRecommendedBundle = (useCaseText: string) => {
     const useCaseMap = {
       'healthcare': ['medical', 'health', 'patient', 'clinical', 'doctor'],
-      'education': ['teach', 'learn', 'course', 'student', 'education'],
-      'automation': ['automate', 'workflow', 'process', 'integrate'],
-      'data': ['analysis', 'data', 'insight', 'visualization', 'report'],
+      'education': ['teach', 'learn', 'course', 'student', 'education', 'academic', 'training'],
+      'automation': ['automate', 'workflow', 'process', 'integrate', 'devops', 'deploy', 'ci/cd'],
+      'data': ['analysis', 'data', 'insight', 'visualization', 'report', 'analytics'],
       'agent': ['agent', 'autonomous', 'agentic', 'automate', 'bot'],
-      'research': ['research', 'study', 'analyze', 'literature'],
-      'content': ['content', 'create', 'write', 'blog', 'article'],
-      'visual': ['presentation', 'diagram', 'visual', 'design', 'image']
+      'research': ['research', 'study', 'analyze', 'literature', 'academic', 'paper', 'citation'],
+      'content': ['content', 'create', 'write', 'blog', 'article', 'copy', 'marketing'],
+      'visual': ['presentation', 'diagram', 'visual', 'design', 'image'],
+      'document': ['document', 'documents', 'writing', 'report', 'proposal', 'contract', 'legal', 'resume', 'cv', 'business plan', 'essay', 'letter'],
+      'code': ['code', 'coding', 'programming', 'development', 'software', 'app', 'website', 'frontend', 'backend', 'mobile', 'web', 'api', 'github', 'javascript', 'python', 'react'],
+      'mobile': ['mobile', 'app', 'android', 'ios', 'flutter', 'react native', 'smartphone'],
+      'frontend': ['frontend', 'ui', 'ux', 'web design', 'website', 'react', 'component', 'html', 'css'],
+      'legal': ['legal', 'law', 'contract', 'compliance', 'attorney', 'lawyer', 'litigation'],
+      'career': ['resume', 'cv', 'job', 'career', 'interview', 'cover letter', 'professional'],
+      'marketing': ['marketing', 'campaign', 'copy', 'sales', 'conversion', 'advertising', 'promotion'],
+      'creative': ['creative', 'story', 'novel', 'fiction', 'writing', 'screenplay', 'poetry'],
+      'business': ['business', 'professional', 'corporate', 'enterprise', 'proposal', 'plan']
     };
 
     const text = useCaseText.toLowerCase();
@@ -86,21 +95,41 @@ export const BundleCreator: React.FC<BundleCreatorProps> = ({ onSave, initialBun
       }) || null;
     }
 
-    // Map categories to specific bundles
+    // Map categories to specific bundles - prioritize newer specialized bundles
     const categoryToBundleMap: { [key: string]: string } = {
       'healthcare': 'Healthcare AI Assistant',
-      'education': 'AI Education Platform',
-      'automation': 'Workflow Automation Suite',
-      'data': 'Data Analysis & Presentation',
+      'education': 'AI Learning Fundamentals',
+      'automation': 'Enterprise DevOps Automation Suite',
+      'data': 'Enterprise Data Analytics Suite',
       'agent': 'Autonomous Agent Workflow',
-      'research': 'AI Research Assistant',
-      'content': 'Content Creator Suite',
-      'visual': 'Visual Content Production'
+      'research': 'Academic Research & Writing Bundle',
+      'content': 'Complete Content Creator Studio',
+      'visual': 'Visual Collaboration & Diagramming Suite',
+      'document': 'Professional Document Creation Suite',
+      'code': 'AI-Powered Development Team',
+      'mobile': 'Mobile App Development Bundle',
+      'frontend': 'Frontend Development Accelerator',
+      'legal': 'Legal Document Automation Suite',
+      'career': 'Career Development Document Bundle',
+      'marketing': 'Marketing Content Creation Workflow',
+      'creative': 'Creative Writing & Content Studio',
+      'business': 'Professional Document Creation Suite'
     };
 
-    // Find matching bundle
-    const recommendedBundleName = categoryToBundleMap[matchingCategories[0]];
-    return workflowBundles.find(bundle => bundle.name === recommendedBundleName) || null;
+    // Find matching bundle based on highest priority category
+    for (const category of matchingCategories) {
+      const recommendedBundleName = categoryToBundleMap[category];
+      if (recommendedBundleName) {
+        const bundle = workflowBundles.find(bundle => bundle.name === recommendedBundleName);
+        if (bundle) return bundle;
+      }
+    }
+
+    // Fallback to original logic
+    return workflowBundles.find(bundle => {
+      const bundleText = (bundle.description + ' ' + bundle.name).toLowerCase();
+      return bundleText.includes(text) || text.includes(bundleText);
+    }) || null;
   };
 
   const handleUseCaseChange = (text: string) => {
@@ -164,13 +193,13 @@ export const BundleCreator: React.FC<BundleCreatorProps> = ({ onSave, initialBun
           <div className="space-y-6">
             <div className="bg-blue-50 p-4 rounded-lg">
               <div className="flex justify-between items-start mb-3">
-                <div>
-                  <h3 className="text-lg font-medium text-blue-900">Best Match: {recommendedBundle.name}</h3>
+                <div className="min-w-0 flex-1 mr-4">
+                  <h3 className="text-lg font-medium text-blue-900 truncate">Best Match: {recommendedBundle.name}</h3>
                   <p className="text-sm text-blue-700">{recommendedBundle.description}</p>
                 </div>
                 <Button
                   onClick={applyRecommendedBundle}
-                  className="bg-blue-500 hover:bg-blue-600"
+                  className="bg-blue-500 hover:bg-blue-600 flex-shrink-0"
                   leftIcon={<Wand2 className="h-4 w-4" />}
                 >
                   Use This Bundle
@@ -192,8 +221,8 @@ export const BundleCreator: React.FC<BundleCreatorProps> = ({ onSave, initialBun
                 <div className="space-y-4">
                   {alternativeRecommendations.map((bundle) => (
                     <div key={bundle.id} className="flex justify-between items-start">
-                      <div>
-                        <h5 className="font-medium text-gray-900">{bundle.name}</h5>
+                      <div className="min-w-0 flex-1 mr-4">
+                        <h5 className="font-medium text-gray-900 truncate">{bundle.name}</h5>
                         <p className="text-sm text-gray-500">{bundle.description}</p>
                       </div>
                       <Button
@@ -203,6 +232,7 @@ export const BundleCreator: React.FC<BundleCreatorProps> = ({ onSave, initialBun
                           setRecommendedBundle(bundle);
                           applyRecommendedBundle();
                         }}
+                        className="flex-shrink-0"
                       >
                         Use Instead
                       </Button>
@@ -246,11 +276,12 @@ export const BundleCreator: React.FC<BundleCreatorProps> = ({ onSave, initialBun
           {filteredTools.map(tool => (
             <Card key={tool.id} className="hover:shadow-md transition-shadow">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-lg font-medium">{tool.name}</CardTitle>
+                <CardTitle className="text-lg font-medium truncate flex-1 mr-4">{tool.name}</CardTitle>
                 <Button
                   size="sm"
                   onClick={() => handleAddTool(tool)}
                   leftIcon={<Plus className="h-4 w-4" />}
+                  className="flex-shrink-0"
                 >
                   Add
                 </Button>
@@ -276,9 +307,9 @@ export const BundleCreator: React.FC<BundleCreatorProps> = ({ onSave, initialBun
                   key={tool.id}
                   className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow"
                 >
-                  <div className="flex items-start justify-between mb-4">
-                    <div>
-                      <h4 className="font-medium text-gray-900 text-xl mb-2">{tool.name}</h4>
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="min-w-0 flex-1">
+                      <h4 className="font-medium text-gray-900 text-xl mb-2 truncate">{tool.name}</h4>
                       <Badge className="mb-2" variant="outline">
                         {tool.pricing.startingPrice || 'Free'}
                       </Badge>
@@ -288,7 +319,7 @@ export const BundleCreator: React.FC<BundleCreatorProps> = ({ onSave, initialBun
                       size="sm"
                       onClick={() => handleRemoveTool(tool)}
                       leftIcon={<X className="h-4 w-4" />}
-                      className="text-gray-500 hover:text-red-500"
+                      className="text-gray-500 hover:text-red-500 ml-4 flex-shrink-0"
                     >
                       Remove
                     </Button>

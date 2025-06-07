@@ -10,7 +10,7 @@ import { useComparisonStore } from '../../stores/comparisonStore';
 
 export const Header: React.FC = () => {
   const navigate = useNavigate();
-  const { user, isAuthenticated } = useAuth();
+  const { user, isAuthenticated, logout } = useAuth();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [activeCategoryId, setActiveCategoryId] = useState<string | null>(null);
@@ -282,10 +282,43 @@ export const Header: React.FC = () => {
                 />
               </form>
               
-              <div className="flex items-center space-x-3">
-                <Button variant="ghost" size="sm" onClick={() => navigate('/login')}>Log in</Button>
-                <Button size="sm" onClick={() => navigate('/signup')}>Sign up</Button>
-              </div>
+              {isAuthenticated ? (
+                <div className="flex items-center space-x-3">
+                  <Link
+                    to="/my-content"
+                    className="text-gray-700 hover:text-gray-900 text-sm font-medium px-3 py-2 rounded-md hover:bg-gray-50"
+                  >
+                    My Content
+                  </Link>
+                  <Link
+                    to="/dashboard"
+                    className="text-gray-700 hover:text-gray-900 text-sm font-medium px-3 py-2 rounded-md hover:bg-gray-50"
+                  >
+                    Dashboard
+                  </Link>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={async () => {
+                      try {
+                        await logout();
+                        navigate('/');
+                      } catch (error) {
+                        console.error('Logout error:', error);
+                        // Still navigate even if logout fails
+                        navigate('/login');
+                      }
+                    }}
+                  >
+                    Log out
+                  </Button>
+                </div>
+              ) : (
+                <div className="flex items-center space-x-3">
+                  <Button variant="ghost" size="sm" onClick={() => navigate('/login')}>Log in</Button>
+                  <Button size="sm" onClick={() => navigate('/signup')}>Sign up</Button>
+                </div>
+              )}
             </div>
           </div>
 

@@ -51,9 +51,14 @@ const BlogPage: React.FC = () => {
         <h1 className="text-4xl font-bold text-gray-900 mb-4">
           The AI Tools Blog
         </h1>
-        <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+        <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-6">
           Stay updated with the latest AI tools, industry news, and expert guides.
         </p>
+        <a href="/write-article" className="inline-block">
+          <button className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors font-medium">
+            Write an Article
+          </button>
+        </a>
       </div>
 
       {/* Search and Categories */}

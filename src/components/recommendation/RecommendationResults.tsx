@@ -1,11 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Star, ArrowRight, Save, Redo } from 'lucide-react';
+import { Star, ArrowRight, Save, Redo, GitBranch, Package } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from '../ui/Card';
 import { Button } from '../ui/Button';
 import { Badge } from '../ui/Badge';
 import { Recommendation, Tool } from '../../types';
 import { tools } from '../../data/tools';
+import { workflowBundles } from '../../data/workflows';
 
 interface RecommendationResultsProps {
   recommendations: Recommendation[];
@@ -24,6 +25,26 @@ export const RecommendationResults: React.FC<RecommendationResultsProps> = ({
       tool
     };
   }).filter(rec => rec.tool) as (Recommendation & { tool: Tool })[];
+
+  // Get relevant workflow bundles based on recommended tools
+  const getRelevantBundles = () => {
+    const mediaCreationBundles = workflowBundles.filter(bundle =>
+      bundle.id >= '24' // Media creation bundles start from ID 24
+    );
+    
+    const hasMediaCreationTools = recommendedTools.some(rec =>
+      rec.tool.categoryId === 'media-creation'
+    );
+    
+    if (hasMediaCreationTools) {
+      // Return top 3 most relevant media creation bundles
+      return mediaCreationBundles.slice(0, 3);
+    }
+    
+    return [];
+  };
+
+  const suggestedBundles = getRelevantBundles();
 
   return (
     <div className="max-w-4xl mx-auto">
@@ -134,12 +155,100 @@ export const RecommendationResults: React.FC<RecommendationResultsProps> = ({
             </Card>
           ))}
         </div>
+
+        {/* Workflow Bundles Section */}
+        {suggestedBundles.length > 0 && (
+          <div className="mt-12 pt-8 border-t border-gray-200">
+            <div className="flex items-center gap-3 mb-6">
+              <Package className="h-6 w-6 text-blue-600" />
+              <h3 className="text-xl font-bold text-gray-900">Recommended Workflow Bundles</h3>
+            </div>
+            <p className="text-gray-600 mb-6">
+              Consider these curated workflow bundles that combine multiple tools for complete solutions:
+            </p>
+            
+            <div className="grid gap-6">
+              {suggestedBundles.map((bundle) => (
+                <Card key={bundle.id} className="border-l-4 border-l-purple-500">
+                  <CardHeader className="bg-gradient-to-r from-purple-50 to-blue-50">
+                    <div className="flex items-start justify-between">
+                      <div className="flex items-center gap-3">
+                        <GitBranch className="h-5 w-5 text-purple-600" />
+                        <div>
+                          <CardTitle className="text-lg">{bundle.name}</CardTitle>
+                          <p className="text-purple-700 mt-1">{bundle.description}</p>
+                        </div>
+                      </div>
+                      <Badge variant="secondary" className="bg-purple-100 text-purple-800">
+                        Bundle
+                      </Badge>
+                    </div>
+                  </CardHeader>
+                  
+                  <CardContent className="pt-4">
+                    <div className="grid md:grid-cols-2 gap-6">
+                      <div>
+                        <h4 className="font-medium text-gray-900 mb-3">Included Tools ({bundle.tools.length})</h4>
+                        <div className="space-y-2">
+                          {bundle.tools.slice(0, 3).map((tool) => (
+                            <div key={tool.id} className="flex items-center gap-3">
+                              <div className="h-8 w-8 rounded overflow-hidden flex-shrink-0">
+                                <img src={tool.logo} alt={tool.name} className="h-full w-full object-cover" />
+                              </div>
+                              <span className="text-sm text-gray-700">{tool.name}</span>
+                            </div>
+                          ))}
+                          {bundle.tools.length > 3 && (
+                            <p className="text-sm text-gray-500 ml-11">
+                              +{bundle.tools.length - 3} more tools
+                            </p>
+                          )}
+                        </div>
+                      </div>
+                      
+                      <div>
+                        <h4 className="font-medium text-gray-900 mb-3">Key Benefits</h4>
+                        <ul className="space-y-1 text-sm text-gray-600">
+                          {bundle.implementationSteps.slice(0, 3).map((step, index) => (
+                            <li key={index} className="flex items-start gap-2">
+                              <span className="text-purple-500 mt-1">•</span>
+                              <span>{step}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  </CardContent>
+                  
+                  <CardFooter className="bg-gray-50 flex justify-between items-center">
+                    <div>
+                      <span className="text-sm text-gray-500">Total Cost</span>
+                      <p className="font-bold text-gray-900">{bundle.totalCost}</p>
+                    </div>
+                    <div className="flex gap-3">
+                      <Link to="/workflows">
+                        <Button variant="outline" size="sm">
+                          View All Bundles
+                        </Button>
+                      </Link>
+                      <Link to={`/bundle/${bundle.id}`}>
+                        <Button size="sm" rightIcon={<ArrowRight className="h-4 w-4" />}>
+                          Get Started
+                        </Button>
+                      </Link>
+                    </div>
+                  </CardFooter>
+                </Card>
+              ))}
+            </div>
+          </div>
+        )}
         
         <div className="mt-8 text-center">
           <p className="text-gray-600 mb-4">Looking for something different?</p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <Button 
-              variant="outline" 
+            <Button
+              variant="outline"
               leftIcon={<Redo className="h-4 w-4" />}
               onClick={onReset}
             >
@@ -148,6 +257,11 @@ export const RecommendationResults: React.FC<RecommendationResultsProps> = ({
             <Link to="/directory">
               <Button>
                 Browse All Tools
+              </Button>
+            </Link>
+            <Link to="/workflows">
+              <Button variant="secondary">
+                View Workflow Bundles
               </Button>
             </Link>
           </div>
