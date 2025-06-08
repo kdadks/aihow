@@ -103,26 +103,26 @@ export const Header: React.FC = () => {
     <header className="bg-white shadow-sm sticky top-0 z-40">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <div className="flex items-center flex-shrink-0">
+          {/* Logo - Fixed Left */}
+          <div className="flex items-center flex-shrink-0 mr-8">
             <Link to="/" className="flex items-center h-8">
               <Logo className="h-full" />
               <span className="ml-2.5 text-xl font-bold text-gray-900">How2doAI</span>
             </Link>
           </div>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex md:items-center flex-1 mx-8">
-            <nav className="flex mx-auto space-x-6">
-              {/* AI Hub Dropdown */}
+          {/* Desktop Navigation - Centered with proper spacing */}
+          <div className="hidden md:flex md:items-center md:justify-center flex-1 mx-8">
+            <nav className="flex items-center space-x-8">
+              {/* AI Hub Dropdown - Fixed positioning */}
               <div className="relative" ref={dropdownRef}>
                 <button
                   onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                  className="text-gray-700 hover:text-gray-900 text-sm font-medium inline-flex items-center px-3 py-2 rounded-md hover:bg-gray-50"
+                  className="text-gray-700 hover:text-gray-900 text-sm font-medium inline-flex items-center px-3 py-2 rounded-md hover:bg-gray-50 whitespace-nowrap"
                   aria-expanded={isDropdownOpen}
                 >
                   AI HUB
-                  <ChevronDown className={`ml-1 w-4 h-4 transition-transform ${isDropdownOpen ? 'rotate-180' : ''}`} />
+                  <ChevronDown className={`ml-1 w-4 h-4 transition-transform flex-shrink-0 ${isDropdownOpen ? 'rotate-180' : ''}`} />
                 </button>
                 
                 {isDropdownOpen && (
@@ -138,8 +138,8 @@ export const Header: React.FC = () => {
                             <li key={category.id}>
                               <button
                                 className={`w-full text-left px-3 py-2 text-sm rounded-md ${
-                                  activeCategoryId === category.id 
-                                    ? 'bg-blue-50 text-blue-700 font-medium' 
+                                  activeCategoryId === category.id
+                                    ? 'bg-blue-50 text-blue-700 font-medium'
                                     : 'text-gray-700 hover:bg-gray-100'
                                 }`}
                                 onClick={() => setActiveCategoryId(category.id)}
@@ -235,76 +235,86 @@ export const Header: React.FC = () => {
               </div>
               
               {/* Other Navigation Links */}
-              <Link 
-                to="/workflows" 
-                className="text-gray-700 hover:text-gray-900 text-sm font-medium px-3 py-2 rounded-md hover:bg-gray-50"
+              <Link
+                to="/workflows"
+                className="text-gray-700 hover:text-gray-900 text-sm font-medium px-3 py-2 rounded-md hover:bg-gray-50 whitespace-nowrap"
               >
                 Workflows
               </Link>
-              <Link 
-                to="/community" 
-                className="text-gray-700 hover:text-gray-900 text-sm font-medium px-3 py-2 rounded-md hover:bg-gray-50"
+              <Link
+                to="/community"
+                className="text-gray-700 hover:text-gray-900 text-sm font-medium px-3 py-2 rounded-md hover:bg-gray-50 whitespace-nowrap"
               >
                 Community
               </Link>
-              {selectedTools.length > 0 && (
-                <Link
-                  to="/compare"
-                  className="text-blue-600 hover:text-blue-800 text-sm font-medium flex items-center px-3 py-2 rounded-md hover:bg-blue-50"
-                >
-                  <Scale className="h-4 w-4 mr-1.5" />
-                  Compare <span className="ml-1.5 bg-blue-100 text-blue-800 px-2 py-0.5 rounded-full text-xs">
-                    {selectedTools.length}
-                  </span>
-                </Link>
-              )}
-            </nav>
-
-            {/* Search and User Actions */}
-            <div className="flex items-center ml-auto space-x-4">
-              <AutocompleteSearch
-                className="w-64"
-                placeholder="Search tools..."
-              />
               
-              {isAuthenticated ? (
-                <div className="flex items-center space-x-3">
+              {/* Compare Tools - Fixed Width Container to prevent layout shift */}
+              <div className="w-32 flex justify-center">
+                {selectedTools.length > 0 && (
                   <Link
-                    to="/my-content"
-                    className="text-gray-700 hover:text-gray-900 text-sm font-medium px-3 py-2 rounded-md hover:bg-gray-50"
+                    to="/compare"
+                    className="text-blue-600 hover:text-blue-800 text-sm font-medium flex items-center px-3 py-2 rounded-md hover:bg-blue-50 whitespace-nowrap"
                   >
-                    My Content
+                    <Scale className="h-4 w-4 mr-1.5 flex-shrink-0" />
+                    Compare
+                    <span className="ml-1.5 bg-blue-100 text-blue-800 px-2 py-0.5 rounded-full text-xs flex-shrink-0">
+                      {selectedTools.length}
+                    </span>
                   </Link>
-                  <Link
-                    to="/dashboard"
-                    className="text-gray-700 hover:text-gray-900 text-sm font-medium px-3 py-2 rounded-md hover:bg-gray-50"
-                  >
-                    Dashboard
-                  </Link>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    onClick={async () => {
-                      try {
-                        await logout();
-                        navigate('/');
-                      } catch (error) {
-                        console.error('Logout error:', error);
-                        // Still navigate even if logout fails
-                        navigate('/login');
-                      }
-                    }}
-                  >
-                    Log out
-                  </Button>
-                </div>
-              ) : (
-                <div className="flex items-center space-x-3">
-                  <Button variant="ghost" size="sm" onClick={() => navigate('/login')}>Log in</Button>
-                  <Button size="sm" onClick={() => navigate('/signup')}>Sign up</Button>
-                </div>
-              )}
-            </div>
+                )}
+              </div>
+            </nav>
+          </div>
+
+          {/* Right Section - Fixed Right */}
+          <div className="hidden md:flex md:items-center md:space-x-4 flex-shrink-0">
+            <AutocompleteSearch
+              className="w-64"
+              placeholder="Search tools..."
+            />
+            
+            {isAuthenticated ? (
+              <div className="flex items-center space-x-3">
+                <Link
+                  to="/my-content"
+                  className="text-gray-700 hover:text-gray-900 text-sm font-medium px-3 py-2 rounded-md hover:bg-gray-50 whitespace-nowrap"
+                >
+                  My Content
+                </Link>
+                <Link
+                  to="/dashboard"
+                  className="text-gray-700 hover:text-gray-900 text-sm font-medium px-3 py-2 rounded-md hover:bg-gray-50 whitespace-nowrap"
+                >
+                  Dashboard
+                </Link>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={async () => {
+                    try {
+                      await logout();
+                      navigate('/');
+                    } catch (error) {
+                      console.error('Logout error:', error);
+                      // Still navigate even if logout fails
+                      navigate('/login');
+                    }
+                  }}
+                  className="whitespace-nowrap"
+                >
+                  Log out
+                </Button>
+              </div>
+            ) : (
+              <div className="flex items-center space-x-3">
+                <Button variant="ghost" size="sm" onClick={() => navigate('/login')} className="whitespace-nowrap">
+                  Log in
+                </Button>
+                <Button size="sm" onClick={() => navigate('/signup')} className="whitespace-nowrap">
+                  Sign up
+                </Button>
+              </div>
+            )}
           </div>
 
           {/* Mobile Menu Toggle */}
