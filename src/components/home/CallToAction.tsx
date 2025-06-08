@@ -17,8 +17,8 @@ export const CallToAction: React.FC = () => {
           Get personalized recommendations based on your specific needs and start boosting your productivity today.
         </p>
         <div className="mt-10 flex flex-col sm:flex-row justify-center gap-4">
-          <Link to="/recommendation">
-            <Button size="lg" className="bg-white text-blue-600 hover:bg-blue-50">
+          <Link to="/tool-finder">
+            <Button size="lg" variant="outline" className="border-white bg-white text-blue-600 hover:bg-white hover:text-blue-800">
               Get Started
             </Button>
           </Link>

@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { Tool } from '../../types/Tool.d';
+import { SupportOptionKey } from '../../types/common.d';
 import { ErrorBoundary } from './ErrorBoundary';
-
-type SupportOptionKey = 'documentation' | 'email' | 'phone' | 'chat' | 'community';
 
 type SortableField = keyof Pick<Tool, 'name' | 'rating' | 'reviewCount'> | '';
 
@@ -19,7 +18,7 @@ interface ComparisonStoreState {
   filters: Filters;
   setSortField: (field: SortableField) => void;
   setSortDirection: (direction: 'asc' | 'desc') => void;
-  setFilter: (key: keyof Filters, values: string[]) => void;
+  setFilter: <K extends keyof Filters>(key: K, values: Filters[K]) => void;
   clearFilters: () => void;
   saveComparison: (name: string, isPublic?: boolean) => void;
   trackComparison: () => void;
@@ -88,11 +87,11 @@ export const ComparisonGrid: React.FC<ComparisonGridProps> = ({ tools, onRemoveT
     allCertifications: Array.from(new Set(tools.flatMap(tool => tool.certifications || []))),
     allSupportOptions: Array.from(new Set(tools.flatMap(tool =>
       tool.supportOptions ?
-        Object.entries(tool.supportOptions)
+        (Object.entries(tool.supportOptions) as [SupportOptionKey, boolean][])
           .filter(([_, value]) => value)
           .map(([key]) => key)
         : []
-    ))),
+    ))) as SupportOptionKey[],
     allPricingTiers: Array.from(new Set(tools.flatMap(tool =>
       tool.pricing && tool.pricing.tiers ? 
       tool.pricing.tiers.map(tier => tier.name) : 
@@ -103,7 +102,7 @@ export const ComparisonGrid: React.FC<ComparisonGridProps> = ({ tools, onRemoveT
   // Filter features based on search term
   const filteredFeatures = useMemo(() => {
     const features = selectedFeatures.length > 0 ? selectedFeatures : allFeatures;
-    return features.filter(feature => 
+    return features.filter((feature: string) =>
       feature.toLowerCase().includes(searchTerm.toLowerCase()) &&
       !hiddenFeatures.has(feature)
     );
