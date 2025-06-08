@@ -86,12 +86,17 @@ const BundleDetailPage: React.FC = () => {
               <h2 className="text-xl font-semibold mb-4">Bundle Details</h2>
               <div className="space-y-4">
                 <div>
-                  <label className="text-sm font-medium text-gray-600">Monthly Cost</label>
+                  <label className="text-sm font-medium text-gray-600">Estimated subscription cost (Subject to usage)</label>
                   <p className="text-2xl font-bold text-gray-900">{bundle.totalCost}</p>
                 </div>
-                <Button className="w-full" size="lg">
-                  Use This Bundle
-                </Button>
+                <div className="space-y-3">
+                  <Button className="w-full" size="lg">
+                    Get Started
+                  </Button>
+                  <Button className="w-full" size="lg" variant="secondary">
+                    Customize Bundle
+                  </Button>
+                </div>
               </div>
             </CardContent>
           </Card>

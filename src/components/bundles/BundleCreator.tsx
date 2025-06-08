@@ -61,7 +61,12 @@ export const BundleCreator: React.FC<BundleCreatorProps> = ({ onSave, initialBun
 
   const findRecommendedBundle = (useCaseText: string) => {
     const useCaseMap = {
-      'healthcare': ['medical', 'health', 'patient', 'clinical', 'doctor'],
+      'healthcare': ['medical', 'health', 'patient', 'clinical', 'doctor', 'nurse', 'hospital', 'diagnosis', 'treatment', 'medicine', 'healthcare', 'wellness', 'therapy', 'psychiatric', 'mental health', 'pharmacy', 'drug', 'pathology', 'radiology', 'surgery', 'surgical', 'telemedicine', 'genomics', 'oncology', 'cancer'],
+      'diagnostic-ai': ['diagnosis', 'diagnostic', 'pathology', 'radiology', 'imaging', 'medical imaging', 'cancer detection', 'tumor', 'x-ray', 'mri', 'ct scan', 'oncology'],
+      'medical-research': ['drug discovery', 'pharmaceutical', 'research', 'genomics', 'biotech', 'clinical trial', 'molecular', 'dna', 'genetics', 'variant calling'],
+      'clinical-ops': ['telemedicine', 'pharmacy', 'medication', 'digital health', 'remote monitoring', 'patient management', 'clinical operations'],
+      'patient-support': ['patient', 'symptom', 'mental health', 'wellness', 'nutrition', 'chatbot', 'health assessment', 'therapy', 'counseling'],
+      'surgical-ai': ['surgery', 'surgical', 'operative', 'vr', 'surgical planning', 'training', 'simulation'],
       'education': ['teach', 'learn', 'course', 'student', 'education', 'academic', 'training'],
       'automation': ['automate', 'workflow', 'process', 'integrate', 'devops', 'deploy', 'ci/cd'],
       'data': ['analysis', 'data', 'insight', 'visualization', 'report', 'analytics'],
@@ -98,6 +103,11 @@ export const BundleCreator: React.FC<BundleCreatorProps> = ({ onSave, initialBun
     // Map categories to specific bundles - prioritize newer specialized bundles
     const categoryToBundleMap: { [key: string]: string } = {
       'healthcare': 'Healthcare AI Assistant',
+      'diagnostic-ai': 'Advanced Diagnostic & Imaging Suite',
+      'medical-research': 'Medical Research & Drug Discovery Suite',
+      'clinical-ops': 'Clinical Operations & Telemedicine Bundle',
+      'patient-support': 'Digital Health & Wellness Platform',
+      'surgical-ai': 'Surgical Planning & Training Suite',
       'education': 'AI Learning Fundamentals',
       'automation': 'Enterprise DevOps Automation Suite',
       'data': 'Enterprise Data Analytics Suite',
@@ -385,7 +395,7 @@ export const BundleCreator: React.FC<BundleCreatorProps> = ({ onSave, initialBun
                     <div className="flex items-center space-x-2">
                       <Calculator className="h-5 w-5 text-gray-500" />
                       <span className="text-lg font-semibold text-gray-900">
-                        Total Monthly Cost: ${calculateTotalCost(selectedTools)}
+                        Estimated subscription cost (Subject to usage): ${calculateTotalCost(selectedTools)}
                       </span>
                     </div>
                   </div>

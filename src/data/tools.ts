@@ -10562,5 +10562,703 @@ export const tools: Tool[] = [
     featured: true,
     integrations: ['Kubernetes', 'Docker', 'Jira', 'Slack', 'AWS', 'Google Cloud', 'Azure'],
     lastVerified: new Date('2025-06-01')
+  },
+  
+  // Healthcare AI Tools
+  {
+    id: 'pathology-ai',
+    name: 'PathAI',
+    slug: 'pathology-ai',
+    description: 'PathAI is a leading AI platform for pathology that assists pathologists in making more accurate diagnoses. It uses machine learning to analyze tissue samples, detect cancer, and provide quantitative insights for better patient outcomes.',
+    shortDescription: 'AI-powered pathology platform for accurate disease diagnosis',
+    logo: 'https://images.pexels.com/photos/4173251/pexels-photo-4173251.jpeg',
+    website: 'https://www.pathai.com',
+    categoryId: 'healthcare-ai',
+    subcategoryIds: ['diagnostic-ai'],
+    pricing: {
+      type: 'enterprise',
+      startingPrice: 'Contact for pricing',
+      hasFreeOption: false,
+      tiers: [
+        {
+          name: 'Enterprise',
+          price: 'Custom',
+          billingPeriod: 'yearly',
+          features: ['AI pathology analysis', 'Integration with lab systems', 'Compliance support', 'Training and support']
+        }
+      ]
+    },
+    features: [
+      'AI-powered tissue analysis',
+      'Cancer detection and grading',
+      'Quantitative pathology metrics',
+      'Integration with lab workflows',
+      'FDA-approved algorithms',
+      'Real-time analysis results'
+    ],
+    limitations: [
+      'Requires professional pathologist oversight',
+      'High implementation costs',
+      'Regulatory compliance requirements',
+      'Limited to supported tissue types'
+    ],
+    rating: 4.7,
+    reviewCount: 420,
+    trending: true,
+    featured: true,
+    integrations: ['Laboratory Information Systems', 'PACS', 'Electronic Health Records'],
+    lastVerified: new Date('2025-06-01')
+  },
+  {
+    id: 'radiology-assist',
+    name: 'Aidoc',
+    slug: 'radiology-assist',
+    description: 'Aidoc is an AI radiologist assistant that automatically detects acute abnormalities in medical imaging. It helps radiologists prioritize urgent cases, reduce interpretation time, and improve diagnostic accuracy across multiple imaging modalities.',
+    shortDescription: 'AI radiologist assistant for medical imaging analysis',
+    logo: 'https://images.pexels.com/photos/8466803/pexels-photo-8466803.jpeg',
+    website: 'https://www.aidoc.com',
+    categoryId: 'healthcare-ai',
+    subcategoryIds: ['diagnostic-ai'],
+    pricing: {
+      type: 'enterprise',
+      startingPrice: 'Contact for pricing',
+      hasFreeOption: false,
+      tiers: [
+        {
+          name: 'Enterprise',
+          price: 'Custom',
+          billingPeriod: 'yearly',
+          features: ['AI imaging analysis', 'Priority case flagging', 'Multiple modality support', '24/7 monitoring']
+        }
+      ]
+    },
+    features: [
+      'Automated abnormality detection',
+      'Case prioritization',
+      'Multi-modality imaging support',
+      'Real-time alerts',
+      'Integration with PACS systems',
+      'Stroke and PE detection'
+    ],
+    limitations: [
+      'Requires radiologist final interpretation',
+      'High implementation costs',
+      'Specific to supported conditions',
+      'Regulatory approval varies by region'
+    ],
+    rating: 4.6,
+    reviewCount: 380,
+    trending: true,
+    featured: true,
+    integrations: ['PACS', 'RIS', 'Electronic Health Records', 'Worklist management'],
+    lastVerified: new Date('2025-06-01')
+  },
+  {
+    id: 'drug-discovery-ai',
+    name: 'Atomwise',
+    slug: 'drug-discovery-ai',
+    description: 'Atomwise uses AI for drug discovery, utilizing deep learning to predict how different compounds will interact with target proteins. It accelerates the discovery of new medicines by identifying promising drug candidates faster than traditional methods.',
+    shortDescription: 'AI-powered drug discovery platform for pharmaceutical research',
+    logo: 'https://images.pexels.com/photos/3825367/pexels-photo-3825367.jpeg',
+    website: 'https://www.atomwise.com',
+    categoryId: 'healthcare-ai',
+    subcategoryIds: ['medical-research'],
+    pricing: {
+      type: 'enterprise',
+      startingPrice: 'Contact for pricing',
+      hasFreeOption: false,
+      tiers: [
+        {
+          name: 'Research Collaboration',
+          price: 'Custom',
+          billingPeriod: 'yearly',
+          features: ['AI drug discovery platform', 'Molecular analysis', 'Research collaboration', 'Expert consultation']
+        }
+      ]
+    },
+    features: [
+      'AI-powered molecular analysis',
+      'Drug-target interaction prediction',
+      'Compound optimization',
+      'Virtual screening',
+      'Research collaboration tools',
+      'Expert scientific support'
+    ],
+    limitations: [
+      'Requires extensive pharmaceutical expertise',
+      'High costs for research programs',
+      'Limited to specific research areas',
+      'Long development timelines'
+    ],
+    rating: 4.5,
+    reviewCount: 160,
+    trending: true,
+    featured: false,
+    integrations: ['Research databases', 'Molecular modeling software', 'Laboratory systems'],
+    lastVerified: new Date('2025-06-01')
+  },
+  {
+    id: 'genomics-ai',
+    name: 'DeepVariant',
+    slug: 'genomics-ai',
+    description: 'DeepVariant is Google\'s AI tool for genomic variant calling that uses deep learning to identify genetic variations from DNA sequencing data. It provides highly accurate variant calls for research and clinical genomics applications.',
+    shortDescription: 'AI-powered genomic variant calling for DNA analysis',
+    logo: 'https://images.pexels.com/photos/8617876/pexels-photo-8617876.jpeg',
+    website: 'https://github.com/google/deepvariant',
+    categoryId: 'healthcare-ai',
+    subcategoryIds: ['medical-research'],
+    pricing: {
+      type: 'free',
+      startingPrice: '$0',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Open Source',
+          price: '$0',
+          billingPeriod: 'one-time',
+          features: ['Genomic variant calling', 'Deep learning models', 'Research use', 'Community support']
+        },
+        {
+          name: 'Google Cloud',
+          price: 'Pay per use',
+          billingPeriod: 'monthly',
+          features: ['Cloud-based processing', 'Scalable infrastructure', 'Professional support', 'Enterprise features']
+        }
+      ]
+    },
+    features: [
+      'Deep learning variant calling',
+      'High accuracy genetic analysis',
+      'Support for multiple sequencing platforms',
+      'Open source availability',
+      'Scalable cloud processing',
+      'Research and clinical applications'
+    ],
+    limitations: [
+      'Requires bioinformatics expertise',
+      'Computational resource intensive',
+      'Limited to supported file formats',
+      'May require additional validation'
+    ],
+    rating: 4.8,
+    reviewCount: 890,
+    trending: true,
+    featured: true,
+    integrations: ['Google Cloud Platform', 'Bioinformatics pipelines', 'Genomics workflows'],
+    lastVerified: new Date('2025-06-01')
+  },
+  {
+    id: 'clinical-notes-ai',
+    name: 'Nuance DAX',
+    slug: 'clinical-notes-ai',
+    description: 'Nuance Dragon Ambient eXperience (DAX) is an AI-powered clinical documentation tool that automatically generates clinical notes from natural physician-patient conversations, reducing documentation burden and improving physician efficiency.',
+    shortDescription: 'AI clinical documentation assistant for automated note generation',
+    logo: 'https://images.pexels.com/photos/4173239/pexels-photo-4173239.jpeg',
+    website: 'https://www.nuance.com/healthcare/ambient-clinical-intelligence.html',
+    categoryId: 'healthcare-ai',
+    subcategoryIds: ['clinical-documentation'],
+    pricing: {
+      type: 'enterprise',
+      startingPrice: 'Contact for pricing',
+      hasFreeOption: false,
+      tiers: [
+        {
+          name: 'Enterprise',
+          price: 'Custom',
+          billingPeriod: 'monthly',
+          features: ['Ambient clinical documentation', 'EHR integration', 'HIPAA compliance', 'Professional support']
+        }
+      ]
+    },
+    features: [
+      'Ambient conversation capture',
+      'Automated clinical note generation',
+      'EHR integration',
+      'Real-time documentation',
+      'HIPAA compliant',
+      'Multi-specialty support'
+    ],
+    limitations: [
+      'Requires physician oversight',
+      'High implementation costs',
+      'Limited to supported specialties',
+      'Privacy and security considerations'
+    ],
+    rating: 4.4,
+    reviewCount: 650,
+    trending: true,
+    featured: true,
+    integrations: ['Epic', 'Cerner', 'AllScripts', 'Major EHR systems'],
+    lastVerified: new Date('2025-06-01')
+  },
+  {
+    id: 'medchat-ai',
+    name: 'Ada Health',
+    slug: 'medchat-ai',
+    description: 'Ada Health is an AI-powered health assessment app that provides personalized health guidance through conversational AI. It helps users understand their symptoms and connects them with appropriate healthcare resources.',
+    shortDescription: 'AI health assessment chatbot for symptom analysis',
+    logo: 'https://images.pexels.com/photos/5726794/pexels-photo-5726794.jpeg',
+    website: 'https://ada.com',
+    categoryId: 'healthcare-ai',
+    subcategoryIds: ['patient-support'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: 'Free',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Personal',
+          price: '$0',
+          billingPeriod: 'one-time',
+          features: ['Health assessment', 'Symptom analysis', 'Basic health insights', 'Limited consultations']
+        },
+        {
+          name: 'Premium',
+          price: '$9.99/month',
+          billingPeriod: 'monthly',
+          features: ['Unlimited assessments', 'Advanced insights', 'Priority support', 'Health tracking']
+        }
+      ]
+    },
+    features: [
+      'AI symptom assessment',
+      'Personalized health insights',
+      'Medical knowledge base',
+      'Healthcare provider recommendations',
+      'Multi-language support',
+      'Privacy-focused design'
+    ],
+    limitations: [
+      'Not a replacement for professional medical advice',
+      'Limited to symptom assessment',
+      'Requires internet connection',
+      'May not cover all medical conditions'
+    ],
+    rating: 4.3,
+    reviewCount: 12500,
+    trending: true,
+    featured: false,
+    integrations: ['Health apps', 'Wearable devices', 'Healthcare providers'],
+    lastVerified: new Date('2025-06-01')
+  },
+  {
+    id: 'mental-health-ai',
+    name: 'Woebot',
+    slug: 'mental-health-ai',
+    description: 'Woebot is an AI-powered mental health chatbot that provides cognitive behavioral therapy (CBT) techniques and emotional support. It offers 24/7 availability for mental health assistance and mood tracking.',
+    shortDescription: 'AI mental health chatbot for emotional support and therapy',
+    logo: 'https://images.pexels.com/photos/5699456/pexels-photo-5699456.jpeg',
+    website: 'https://woebothealth.com',
+    categoryId: 'healthcare-ai',
+    subcategoryIds: ['patient-support'],
+    pricing: {
+      type: 'subscription',
+      startingPrice: '$39/month',
+      hasFreeOption: false,
+      tiers: [
+        {
+          name: 'Individual',
+          price: '$39/month',
+          billingPeriod: 'monthly',
+          features: ['24/7 AI therapy support', 'CBT techniques', 'Mood tracking', 'Personalized interventions']
+        },
+        {
+          name: 'Enterprise',
+          price: 'Custom',
+          billingPeriod: 'yearly',
+          features: ['All individual features', 'Team management', 'Analytics dashboard', 'Professional support']
+        }
+      ]
+    },
+    features: [
+      'AI-powered CBT therapy',
+      '24/7 emotional support',
+      'Mood and wellness tracking',
+      'Personalized interventions',
+      'Evidence-based techniques',
+      'Privacy protection'
+    ],
+    limitations: [
+      'Not a replacement for human therapy',
+      'Limited to text-based interaction',
+      'Subscription required for full access',
+      'May not suit all therapy needs'
+    ],
+    rating: 4.2,
+    reviewCount: 3200,
+    trending: true,
+    featured: false,
+    integrations: ['Health apps', 'Employee wellness programs', 'Healthcare providers'],
+    lastVerified: new Date('2025-06-01')
+  },
+  {
+    id: 'nutrition-ai',
+    name: 'MyFitnessPal AI',
+    slug: 'nutrition-ai',
+    description: 'MyFitnessPal AI uses machine learning to provide personalized nutrition recommendations, food recognition, and dietary insights. It helps users track nutrition, set goals, and make healthier food choices with AI assistance.',
+    shortDescription: 'AI-powered nutrition tracking and dietary recommendation app',
+    logo: 'https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg',
+    website: 'https://www.myfitnesspal.com',
+    categoryId: 'healthcare-ai',
+    subcategoryIds: ['patient-support'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$9.99/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'one-time',
+          features: ['Basic food tracking', 'Calorie counting', 'Exercise logging', 'Basic insights']
+        },
+        {
+          name: 'Premium',
+          price: '$9.99/month',
+          billingPeriod: 'monthly',
+          features: ['AI food recognition', 'Advanced analytics', 'Personalized goals', 'Macro tracking', 'Ad-free experience']
+        }
+      ]
+    },
+    features: [
+      'AI food recognition',
+      'Personalized nutrition recommendations',
+      'Comprehensive food database',
+      'Macro and micronutrient tracking',
+      'Integration with fitness devices',
+      'Social support features'
+    ],
+    limitations: [
+      'Free version has limited features',
+      'Requires consistent user input',
+      'May not account for all dietary restrictions',
+      'Food recognition accuracy varies'
+    ],
+    rating: 4.4,
+    reviewCount: 25600,
+    trending: false,
+    featured: true,
+    integrations: ['Fitbit', 'Apple Health', 'Google Fit', 'Garmin', 'Samsung Health'],
+    lastVerified: new Date('2025-06-01')
+  },
+  {
+    id: 'pharmacy-ai',
+    name: 'PillPack by Amazon',
+    slug: 'pharmacy-ai',
+    description: 'PillPack by Amazon uses AI to optimize medication management, providing personalized medication packaging, delivery scheduling, and drug interaction monitoring. It simplifies complex medication regimens for patients.',
+    shortDescription: 'AI-powered pharmacy service for medication management',
+    logo: 'https://images.pexels.com/photos/3683098/pexels-photo-3683098.jpeg',
+    website: 'https://www.pillpack.com',
+    categoryId: 'healthcare-ai',
+    subcategoryIds: ['clinical-operations'],
+    pricing: {
+      type: 'subscription',
+      startingPrice: 'Insurance dependent',
+      hasFreeOption: false,
+      tiers: [
+        {
+          name: 'Standard Service',
+          price: 'Insurance co-pay',
+          billingPeriod: 'monthly',
+          features: ['Automated medication packaging', 'Delivery service', 'Medication synchronization', 'Pharmacist support']
+        }
+      ]
+    },
+    features: [
+      'AI-optimized medication packaging',
+      'Automated delivery scheduling',
+      'Drug interaction monitoring',
+      'Medication adherence tracking',
+      'Insurance coordination',
+      '24/7 pharmacist support'
+    ],
+    limitations: [
+      'Limited to supported insurance plans',
+      'Geographic availability restrictions',
+      'Requires prescription transfer',
+      'May not suit all medication types'
+    ],
+    rating: 4.5,
+    reviewCount: 8900,
+    trending: false,
+    featured: false,
+    integrations: ['Insurance providers', 'Healthcare systems', 'Electronic health records'],
+    lastVerified: new Date('2025-06-01')
+  },
+  {
+    id: 'telemedicine-ai',
+    name: 'Teladoc Health AI',
+    slug: 'telemedicine-ai',
+    description: 'Teladoc Health AI integrates artificial intelligence into telemedicine consultations, providing clinical decision support, symptom triage, and personalized treatment recommendations during virtual healthcare visits.',
+    shortDescription: 'AI-enhanced telemedicine platform for virtual healthcare',
+    logo: 'https://images.pexels.com/photos/5726805/pexels-photo-5726805.jpeg',
+    website: 'https://www.teladoc.com',
+    categoryId: 'healthcare-ai',
+    subcategoryIds: ['clinical-operations'],
+    pricing: {
+      type: 'subscription',
+      startingPrice: '$89/month',
+      hasFreeOption: false,
+      tiers: [
+        {
+          name: 'Individual',
+          price: '$89/month',
+          billingPeriod: 'monthly',
+          features: ['24/7 virtual consultations', 'AI-assisted diagnosis', 'Prescription services', 'Health monitoring']
+        },
+        {
+          name: 'Family',
+          price: '$189/month',
+          billingPeriod: 'monthly',
+          features: ['All individual features', 'Family coverage', 'Pediatric care', 'Mental health support']
+        }
+      ]
+    },
+    features: [
+      'AI-powered symptom assessment',
+      '24/7 virtual consultations',
+      'Clinical decision support',
+      'Electronic prescriptions',
+      'Health monitoring integration',
+      'Multi-specialty access'
+    ],
+    limitations: [
+      'Cannot replace in-person care for serious conditions',
+      'Limited physical examination capabilities',
+      'Insurance coverage varies',
+      'Technology requirements for access'
+    ],
+    rating: 4.3,
+    reviewCount: 15600,
+    trending: true,
+    featured: true,
+    integrations: ['Health insurance', 'Pharmacy networks', 'Electronic health records', 'Wearable devices'],
+    lastVerified: new Date('2025-06-01')
+  },
+  {
+    id: 'surgical-planning-ai',
+    name: 'Surgical Theater VR',
+    slug: 'surgical-planning-ai',
+    description: 'Surgical Theater VR combines AI with virtual reality to create personalized 3D surgical simulations. It helps surgeons plan complex procedures, practice techniques, and improve patient outcomes through immersive visualization.',
+    shortDescription: 'AI-powered VR platform for surgical planning and training',
+    logo: 'https://images.pexels.com/photos/7089019/pexels-photo-7089019.jpeg',
+    website: 'https://www.surgicaltheater.net',
+    categoryId: 'healthcare-ai',
+    subcategoryIds: ['surgical-assistance'],
+    pricing: {
+      type: 'enterprise',
+      startingPrice: 'Contact for pricing',
+      hasFreeOption: false,
+      tiers: [
+        {
+          name: 'Hospital License',
+          price: 'Custom',
+          billingPeriod: 'yearly',
+          features: ['VR surgical planning', 'AI-powered 3D modeling', 'Training modules', 'Professional support']
+        }
+      ]
+    },
+    features: [
+      'AI-powered 3D surgical modeling',
+      'VR surgical simulation',
+      'Patient-specific planning',
+      'Risk assessment tools',
+      'Training and education modules',
+      'Outcome prediction'
+    ],
+    limitations: [
+      'High implementation costs',
+      'Requires specialized hardware',
+      'Limited to supported procedures',
+      'Extensive training required'
+    ],
+    rating: 4.6,
+    reviewCount: 240,
+    trending: true,
+    featured: true,
+    integrations: ['Medical imaging systems', 'Hospital information systems', 'VR hardware'],
+    lastVerified: new Date('2025-06-01')
+  },
+  {
+    id: 'babylon-health-ai',
+    name: 'Babylon Health AI',
+    slug: 'babylon-health-ai',
+    description: 'Babylon Health AI provides comprehensive digital healthcare services powered by artificial intelligence, including symptom checking, virtual consultations, health monitoring, and personalized health insights.',
+    shortDescription: 'Comprehensive AI-powered digital healthcare platform',
+    logo: 'https://images.pexels.com/photos/4173251/pexels-photo-4173251.jpeg',
+    website: 'https://www.babylonhealth.com',
+    categoryId: 'healthcare-ai',
+    subcategoryIds: ['patient-support', 'clinical-operations'],
+    pricing: {
+      type: 'subscription',
+      startingPrice: '$9.99/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Basic',
+          price: '$0',
+          billingPeriod: 'one-time',
+          features: ['AI symptom checker', 'Health tracking', 'Basic insights', 'Limited consultations']
+        },
+        {
+          name: 'Premium',
+          price: '$9.99/month',
+          billingPeriod: 'monthly',
+          features: ['Unlimited AI consultations', 'GP appointments', 'Health monitoring', 'Prescription services']
+        }
+      ]
+    },
+    features: [
+      'AI-powered symptom assessment',
+      'Virtual doctor consultations',
+      'Health monitoring and tracking',
+      'Personalized health insights',
+      'Prescription management',
+      'Mental health support'
+    ],
+    limitations: [
+      'Geographic availability limited',
+      'Premium features require subscription',
+      'Not suitable for emergency conditions',
+      'Technology access requirements'
+    ],
+    rating: 4.1,
+    reviewCount: 18900,
+    trending: true,
+    featured: false,
+    integrations: ['NHS systems', 'Insurance providers', 'Pharmacy networks', 'Health apps'],
+    lastVerified: new Date('2025-06-01')
+  },
+  {
+    id: 'paige-ai-pathology',
+    name: 'Paige.AI',
+    slug: 'paige-ai-pathology',
+    description: 'Paige.AI is an FDA-approved AI platform for digital pathology that assists pathologists in cancer detection and diagnosis. It provides AI-powered analysis of tissue samples with high accuracy and efficiency.',
+    shortDescription: 'FDA-approved AI pathology platform for cancer detection',
+    logo: 'https://images.pexels.com/photos/4173251/pexels-photo-4173251.jpeg',
+    website: 'https://paige.ai',
+    categoryId: 'healthcare-ai',
+    subcategoryIds: ['diagnostic-ai'],
+    pricing: {
+      type: 'enterprise',
+      startingPrice: 'Contact for pricing',
+      hasFreeOption: false,
+      tiers: [
+        {
+          name: 'Enterprise',
+          price: 'Custom',
+          billingPeriod: 'yearly',
+          features: ['AI pathology analysis', 'Cancer detection algorithms', 'Laboratory integration', 'Regulatory compliance']
+        }
+      ]
+    },
+    features: [
+      'FDA-approved AI algorithms',
+      'Cancer detection and classification',
+      'Digital pathology workflow',
+      'Quality assurance tools',
+      'Integration with lab systems',
+      'Continuous learning capabilities'
+    ],
+    limitations: [
+      'Requires pathologist oversight',
+      'High implementation costs',
+      'Limited to approved use cases',
+      'Regulatory compliance requirements'
+    ],
+    rating: 4.8,
+    reviewCount: 180,
+    trending: true,
+    featured: true,
+    integrations: ['Digital pathology systems', 'Laboratory information systems', 'Hospital networks'],
+    lastVerified: new Date('2025-06-01')
+  },
+  {
+    id: 'ibm-watson-oncology',
+    name: 'IBM Watson for Oncology',
+    slug: 'ibm-watson-oncology',
+    description: 'IBM Watson for Oncology is an AI-powered clinical decision support system that helps oncologists identify treatment options by analyzing patient data against a vast knowledge base of medical literature and treatment guidelines.',
+    shortDescription: 'AI clinical decision support system for cancer treatment',
+    logo: 'https://images.pexels.com/photos/3825368/pexels-photo-3825368.jpeg',
+    website: 'https://www.ibm.com/watson-health/oncology',
+    categoryId: 'healthcare-ai',
+    subcategoryIds: ['diagnostic-ai', 'clinical-documentation'],
+    pricing: {
+      type: 'enterprise',
+      startingPrice: 'Contact for pricing',
+      hasFreeOption: false,
+      tiers: [
+        {
+          name: 'Enterprise',
+          price: 'Custom',
+          billingPeriod: 'yearly',
+          features: ['AI treatment recommendations', 'Clinical guidelines analysis', 'Patient data integration', 'Evidence-based insights']
+        }
+      ]
+    },
+    features: [
+      'AI-powered treatment recommendations',
+      'Evidence-based decision support',
+      'Integration with medical literature',
+      'Patient data analysis',
+      'Clinical workflow integration',
+      'Continuous knowledge updates'
+    ],
+    limitations: [
+      'Requires oncologist oversight',
+      'High implementation costs',
+      'Limited to supported cancer types',
+      'Complex integration requirements'
+    ],
+    rating: 4.2,
+    reviewCount: 320,
+    trending: false,
+    featured: false,
+    integrations: ['Electronic health records', 'Hospital information systems', 'Medical databases'],
+    lastVerified: new Date('2025-06-01')
+  },
+  {
+    id: 'veracyte-ai-genomics',
+    name: 'Veracyte Genomic Classifier',
+    slug: 'veracyte-ai-genomics',
+    description: 'Veracyte uses AI and machine learning to analyze genomic data for cancer diagnosis and treatment decisions. Their genomic classifiers help physicians make more informed decisions about patient care through molecular insights.',
+    shortDescription: 'AI-powered genomic analysis for cancer diagnosis and treatment',
+    logo: 'https://images.pexels.com/photos/8617876/pexels-photo-8617876.jpeg',
+    website: 'https://www.veracyte.com',
+    categoryId: 'healthcare-ai',
+    subcategoryIds: ['medical-research', 'diagnostic-ai'],
+    pricing: {
+      type: 'enterprise',
+      startingPrice: 'Contact for pricing',
+      hasFreeOption: false,
+      tiers: [
+        {
+          name: 'Clinical Testing',
+          price: 'Per test pricing',
+          billingPeriod: 'one-time',
+          features: ['Genomic analysis', 'AI classification', 'Clinical reporting', 'Professional consultation']
+        }
+      ]
+    },
+    features: [
+      'AI-powered genomic classification',
+      'Cancer risk assessment',
+      'Treatment decision support',
+      'Molecular profiling',
+      'Clinical grade accuracy',
+      'Comprehensive reporting'
+    ],
+    limitations: [
+      'Limited to specific cancer types',
+      'Requires tissue samples',
+      'High per-test costs',
+      'Insurance coverage varies'
+    ],
+    rating: 4.5,
+    reviewCount: 290,
+    trending: true,
+    featured: false,
+    integrations: ['Laboratory systems', 'Electronic health records', 'Pathology workflows'],
+    lastVerified: new Date('2025-06-01')
   }
 ];

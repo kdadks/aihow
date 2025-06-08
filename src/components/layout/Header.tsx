@@ -7,6 +7,7 @@ import { tools } from '../../data/tools';
 import { Button } from '../ui/Button';
 import { Logo } from '../ui/Logo';
 import { useComparisonStore } from '../../stores/comparisonStore';
+import { AutocompleteSearch } from '../search/AutocompleteSearch';
 
 export const Header: React.FC = () => {
   const navigate = useNavigate();
@@ -16,10 +17,8 @@ export const Header: React.FC = () => {
   const [activeCategoryId, setActiveCategoryId] = useState<string | null>(null);
   const [openMobileCategories, setOpenMobileCategories] = useState<Set<string>>(new Set());
   const [openMobileSubcategories, setOpenMobileSubcategories] = useState<Set<string>>(new Set());
-  const [searchQuery, setSearchQuery] = useState('');
   const [showScrollIndicator, setShowScrollIndicator] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
-  const searchRef = useRef<HTMLFormElement>(null);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
   const { selectedTools } = useComparisonStore();
 
@@ -96,12 +95,6 @@ export const Header: React.FC = () => {
     });
   };
 
-  const handleSearchSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (searchQuery.trim()) {
-      navigate(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
-    }
-  };
 
   // Get popular categories for quicker access
   const popularCategories = categories.slice(0, 6);
@@ -269,18 +262,10 @@ export const Header: React.FC = () => {
 
             {/* Search and User Actions */}
             <div className="flex items-center ml-auto space-x-4">
-              <form ref={searchRef} onSubmit={handleSearchSubmit} className="relative w-64">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <Search className="h-4 w-4 text-gray-400" />
-                </div>
-                <input
-                  type="text"
-                  placeholder="Search tools..."
-                  className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md text-sm bg-white text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                />
-              </form>
+              <AutocompleteSearch
+                className="w-64"
+                placeholder="Search tools..."
+              />
               
               {isAuthenticated ? (
                 <div className="flex items-center space-x-3">
@@ -430,18 +415,13 @@ export const Header: React.FC = () => {
             className="px-4 pt-4 pb-6 space-y-5 max-h-[calc(100vh-8rem)] overflow-y-auto mobile-menu-scroll mobile-scrollbar"
           >
             {/* Mobile Search */}
-            <form onSubmit={handleSearchSubmit} className="relative">
-              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <Search className="h-4 w-4 text-gray-400" />
-              </div>
-              <input
-                type="text"
-                placeholder="Search tools..."
-                className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md text-sm bg-white text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-              />
-            </form>
+            <AutocompleteSearch
+              className="w-full"
+              placeholder="Search tools..."
+              onSearch={() => {
+                setIsMenuOpen(false);
+              }}
+            />
 
             {/* Quick Access Cards */}
             <div className="grid grid-cols-2 gap-3">

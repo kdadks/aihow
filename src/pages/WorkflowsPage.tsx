@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Card, CardHeader, CardContent, CardTitle, CardFooter } from '../components/ui/Card';
 import { Button } from '../components/ui/Button';
+import { Pagination } from '../components/ui/Pagination';
 import { workflowBundles } from '../data/workflows';
 import { GitBranch, ArrowRight, MoveRight, X } from 'lucide-react';
 import { BundleCreator } from '../components/bundles/BundleCreator';
@@ -9,6 +10,19 @@ import { BundleCreator } from '../components/bundles/BundleCreator';
 const WorkflowsPage: React.FC = () => {
   const [showBundleCreator, setShowBundleCreator] = useState(false);
   const [selectedBundle, setSelectedBundle] = useState<typeof workflowBundles[0] | null>(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  
+  const itemsPerPage = 10;
+  const totalPages = Math.ceil(workflowBundles.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const currentBundles = workflowBundles.slice(startIndex, endIndex);
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+    // Scroll to top of the page when page changes
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   const handleSaveBundle = (bundle: any) => {
     console.log('Saving bundle:', bundle);
@@ -80,9 +94,19 @@ const WorkflowsPage: React.FC = () => {
           </div>
         ) : (
           <>
+            {/* Pagination Info */}
+            <div className="flex justify-between items-center mb-6">
+              <div className="text-sm text-gray-600">
+                Showing {startIndex + 1}-{Math.min(endIndex, workflowBundles.length)} of {workflowBundles.length} workflow bundles
+              </div>
+              <div className="text-sm text-gray-600">
+                Page {currentPage} of {totalPages}
+              </div>
+            </div>
+
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              {workflowBundles.map((workflow) => (
-                <Card key={workflow.id} className="overflow-hidden">
+              {currentBundles.map((workflow) => (
+                <Card key={workflow.id} className="overflow-hidden flex flex-col h-full">
                   <CardHeader className="bg-gradient-to-r from-blue-600 to-purple-600 text-white">
                     <div className="flex items-center space-x-2">
                       <GitBranch className="h-5 w-5" />
@@ -90,7 +114,7 @@ const WorkflowsPage: React.FC = () => {
                     </div>
                     <p className="mt-2 text-blue-100">{workflow.description}</p>
                   </CardHeader>
-                  <CardContent className="pt-6">
+                  <CardContent className="pt-6 flex-1">
                     <p className="text-gray-700 font-medium mb-3">Included Tools:</p>
                     <div className="space-y-4">
                       {workflow.tools.map((tool) => (
@@ -116,21 +140,25 @@ const WorkflowsPage: React.FC = () => {
                     </div>
                   </CardContent>
                   <CardFooter className="border-t border-gray-100 pt-4">
-                    <div className="w-full flex justify-between items-center">
-                      <div>
-                        <p className="text-sm text-gray-500">Total Cost</p>
+                    <div className="w-full flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
+                      <div className="flex-1">
+                        <p className="text-sm text-gray-500">Estimated subscription cost (Subject to usage)</p>
                         <p className="text-lg font-bold text-gray-900">{workflow.totalCost}</p>
                       </div>
-                      <div className="space-x-2">
-                        <Button 
+                      <div className="flex gap-3 flex-shrink-0">
+                        <Button
+                          size="md"
                           onClick={() => handleGetStarted(workflow)}
                           rightIcon={<ArrowRight className="h-4 w-4" />}
+                          className="min-w-[120px]"
                         >
                           Get Started
                         </Button>
-                        <Button 
+                        <Button
+                          size="md"
                           variant="secondary"
                           onClick={() => handleCustomize(workflow)}
+                          className="min-w-[100px]"
                         >
                           Customize
                         </Button>
@@ -141,7 +169,18 @@ const WorkflowsPage: React.FC = () => {
               ))}
             </div>
 
-            <div className="text-center">
+            {/* Pagination Controls */}
+            {totalPages > 1 && (
+              <div className="mt-12 flex justify-center">
+                <Pagination
+                  currentPage={currentPage}
+                  totalPages={totalPages}
+                  onPageChange={handlePageChange}
+                />
+              </div>
+            )}
+
+            <div className="text-center mt-12">
               <div className="max-w-3xl mx-auto bg-gray-50 p-8 rounded-lg border border-gray-200">
                 <h2 className="text-2xl font-bold text-gray-900 mb-4">Need a custom workflow?</h2>
                 <p className="text-gray-700 mb-6">

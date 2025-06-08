@@ -851,5 +851,120 @@ export const workflowBundles: WorkflowBundle[] = [
       'Develop Android apps with Kodular AI',
       'Deploy and maintain applications across platforms'
     ]
+  },
+  // === HEALTHCARE AI BUNDLES ===
+  {
+    id: '47',
+    name: 'Healthcare AI Assistant',
+    description: 'Comprehensive AI-powered healthcare toolkit for medical professionals, combining diagnostic assistance with patient support and clinical documentation.',
+    tools: [
+      findTool('pathology-ai'), // PathAI - AI pathology platform
+      findTool('medchat-ai'), // Ada Health - AI health assessment
+      findTool('clinical-notes-ai'), // Nuance DAX - Clinical documentation
+      findTool('mental-health-ai') // Woebot - Mental health support
+    ],
+    totalCost: '$89+/month',
+    implementationSteps: [
+      'Set up PathAI for accurate pathology diagnosis and analysis',
+      'Deploy Ada Health for patient symptom assessment and triage',
+      'Integrate Nuance DAX for automated clinical documentation',
+      'Implement Woebot for patient mental health support',
+      'Establish secure data handling and HIPAA compliance protocols'
+    ]
+  },
+  {
+    id: '48',
+    name: 'Medical Research & Drug Discovery Suite',
+    description: 'Advanced AI toolkit for pharmaceutical research, drug discovery, and genomic analysis for research institutions and biotech companies.',
+    tools: [
+      findTool('drug-discovery-ai'), // Atomwise - Drug discovery platform
+      findTool('genomics-ai'), // DeepVariant - Genomic analysis
+      findTool('veracyte-ai-genomics'), // Veracyte - Cancer genomics
+      findTool('ibm-watson-oncology') // IBM Watson - Oncology research
+    ],
+    totalCost: '$450+/month',
+    implementationSteps: [
+      'Deploy Atomwise for AI-powered drug discovery and screening',
+      'Set up DeepVariant for accurate genomic variant calling',
+      'Integrate Veracyte for cancer genomic classification',
+      'Use IBM Watson Oncology for treatment decision support',
+      'Establish research data pipelines and collaboration workflows'
+    ]
+  },
+  {
+    id: '49',
+    name: 'Clinical Operations & Telemedicine Bundle',
+    description: 'Complete digital healthcare operations suite combining telemedicine, pharmacy management, and comprehensive patient care platforms.',
+    tools: [
+      findTool('babylon-health-ai'), // Babylon Health - Digital healthcare platform
+      findTool('telemedicine-ai'), // Teladoc Health AI - Telemedicine
+      findTool('pharmacy-ai'), // PillPack - Pharmacy automation
+      findTool('nutrition-ai') // MyFitnessPal AI - Nutrition tracking
+    ],
+    totalCost: '$124+/month',
+    implementationSteps: [
+      'Deploy Babylon Health AI for comprehensive digital healthcare',
+      'Set up Teladoc Health AI for virtual consultations',
+      'Integrate PillPack for automated medication management',
+      'Implement MyFitnessPal AI for patient nutrition tracking',
+      'Establish integrated patient care workflows and data sharing'
+    ]
+  },
+  {
+    id: '50',
+    name: 'Advanced Diagnostic & Imaging Suite',
+    description: 'Professional medical imaging and diagnostic AI toolkit for hospitals and diagnostic centers requiring advanced analysis capabilities.',
+    tools: [
+      findTool('radiology-assist'), // Aidoc - AI radiologist assistant
+      findTool('paige-ai-pathology'), // Paige.AI - FDA-approved pathology
+      findTool('pathology-ai'), // PathAI - Advanced pathology platform
+      findTool('ibm-watson-oncology') // IBM Watson - Clinical decision support
+    ],
+    totalCost: '$520+/month',
+    implementationSteps: [
+      'Deploy Aidoc for AI-assisted radiology and imaging analysis',
+      'Implement Paige.AI for FDA-approved cancer detection',
+      'Set up PathAI for comprehensive pathology diagnosis',
+      'Integrate IBM Watson Oncology for treatment recommendations',
+      'Establish imaging workflows and diagnostic reporting systems'
+    ]
+  },
+  {
+    id: '51',
+    name: 'Digital Health & Wellness Platform',
+    description: 'Patient-focused digital health suite combining AI health assessment, mental wellness, nutrition guidance, and remote monitoring.',
+    tools: [
+      findTool('medchat-ai'), // Ada Health - Symptom assessment
+      findTool('mental-health-ai'), // Woebot - Mental health chatbot
+      findTool('nutrition-ai'), // MyFitnessPal AI - Nutrition tracking
+      findTool('babylon-health-ai') // Babylon Health - Comprehensive platform
+    ],
+    totalCost: '$44+/month',
+    implementationSteps: [
+      'Set up Ada Health for patient symptom self-assessment',
+      'Deploy Woebot for ongoing mental health support',
+      'Integrate MyFitnessPal AI for personalized nutrition plans',
+      'Use Babylon Health AI for comprehensive health monitoring',
+      'Create patient engagement workflows and wellness tracking'
+    ]
+  },
+  {
+    id: '52',
+    name: 'Surgical Planning & Training Suite',
+    description: 'Advanced surgical AI toolkit combining VR surgical planning, 3D modeling, and operative assistance for surgical teams and training centers.',
+    tools: [
+      findTool('surgical-planning-ai'), // Surgical Theater VR - Planning platform
+      findTool('pathology-ai'), // PathAI - Tissue analysis
+      findTool('radiology-assist'), // Aidoc - Pre-operative imaging
+      findTool('clinical-notes-ai') // Nuance DAX - Surgical documentation
+    ],
+    totalCost: '$210+/month',
+    implementationSteps: [
+      'Deploy Surgical Theater VR for immersive surgical planning',
+      'Use PathAI for pre-operative tissue analysis',
+      'Integrate Aidoc for comprehensive pre-surgical imaging',
+      'Set up Nuance DAX for automated surgical documentation',
+      'Establish surgical workflow optimization and training protocols'
+    ]
   }
 ];

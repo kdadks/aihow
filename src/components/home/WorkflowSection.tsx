@@ -43,14 +43,14 @@ export const WorkflowSection: React.FC = () => {
                 </div>
                 
                 <div className="mt-6 pt-4 border-t border-gray-100">
-                  <div className="flex justify-between items-center">
-                    <div>
-                      <p className="text-sm text-gray-500">Total Cost</p>
+                  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
+                    <div className="flex-1">
+                      <p className="text-sm text-gray-500">Estimated subscription cost (Subject to usage)</p>
                       <p className="text-lg font-bold text-gray-900">{workflow.totalCost}</p>
                     </div>
-                    <Link to={`/bundle/${workflow.id}`}>
-                      <Button 
-                        variant="outline" 
+                    <Link to={`/bundle/${workflow.id}`} className="flex-shrink-0">
+                      <Button
+                        variant="outline"
                         rightIcon={<ArrowRight className="h-4 w-4" />}
                       >
                         View Details

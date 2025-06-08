@@ -220,12 +220,12 @@ export const RecommendationResults: React.FC<RecommendationResultsProps> = ({
                     </div>
                   </CardContent>
                   
-                  <CardFooter className="bg-gray-50 flex justify-between items-center">
-                    <div>
-                      <span className="text-sm text-gray-500">Total Cost</span>
+                  <CardFooter className="bg-gray-50 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 p-6">
+                    <div className="flex-1">
+                      <span className="text-sm text-gray-500">Estimated subscription cost (Subject to usage)</span>
                       <p className="font-bold text-gray-900">{bundle.totalCost}</p>
                     </div>
-                    <div className="flex gap-3">
+                    <div className="flex gap-3 flex-shrink-0">
                       <Link to="/workflows">
                         <Button variant="outline" size="sm">
                           View All Bundles

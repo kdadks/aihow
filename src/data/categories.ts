@@ -283,35 +283,35 @@ export const categories: Category[] = [
         name: 'Diagnostic AI',
         description: 'AI tools for medical imaging analysis, pathology diagnosis, and clinical decision support',
         parentCategoryId: 'healthcare-ai',
-        tools: ['pathology-ai', 'radiology-assist']
+        tools: ['pathology-ai', 'radiology-assist', 'paige-ai-pathology', 'ibm-watson-oncology', 'veracyte-ai-genomics']
       },
       {
         id: 'medical-research',
         name: 'Medical Research',
         description: 'AI platforms for drug discovery, genomic analysis, and pharmaceutical research',
         parentCategoryId: 'healthcare-ai',
-        tools: ['drug-discovery-ai', 'genomics-ai']
+        tools: ['drug-discovery-ai', 'genomics-ai', 'veracyte-ai-genomics']
       },
       {
         id: 'clinical-documentation',
         name: 'Clinical Documentation',
         description: 'AI tools for automated clinical note generation, medical coding, and documentation workflows',
         parentCategoryId: 'healthcare-ai',
-        tools: ['clinical-notes-ai']
+        tools: ['clinical-notes-ai', 'ibm-watson-oncology']
       },
       {
         id: 'patient-support',
         name: 'Patient Support',
         description: 'AI-powered tools for patient consultation, mental health support, and wellness management',
         parentCategoryId: 'healthcare-ai',
-        tools: ['medchat-ai', 'mental-health-ai', 'nutrition-ai']
+        tools: ['medchat-ai', 'mental-health-ai', 'nutrition-ai', 'babylon-health-ai']
       },
       {
         id: 'clinical-operations',
         name: 'Clinical Operations',
         description: 'AI systems for pharmacy management, telemedicine platforms, and healthcare operations',
         parentCategoryId: 'healthcare-ai',
-        tools: ['pharmacy-ai', 'telemedicine-ai']
+        tools: ['pharmacy-ai', 'telemedicine-ai', 'babylon-health-ai']
       },
       {
         id: 'surgical-assistance',

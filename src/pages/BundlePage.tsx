@@ -65,19 +65,19 @@ const BundlePage: React.FC = () => {
       ) : (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {workflowBundles.map((bundle) => (
-            <Card key={bundle.id} className="overflow-hidden hover:shadow-lg transition-shadow">
+            <Card key={bundle.id} className="overflow-hidden hover:shadow-lg transition-shadow flex flex-col h-full">
               <CardHeader className="bg-gradient-to-r from-blue-600 to-purple-600 text-white">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-2">
                     <GitBranch className="h-5 w-5" />
                     <CardTitle>{bundle.name}</CardTitle>
                   </div>
-                  <div className="space-x-2">
+                  <div className="flex gap-3">
                     <Button
                       size="sm"
                       variant="secondary"
                       onClick={() => handleGetStarted(bundle)}
-                      className="bg-white/10 hover:bg-white/20"
+                      className="bg-white/10 hover:bg-white/20 min-w-[100px]"
                     >
                       Get Started
                     </Button>
@@ -85,7 +85,7 @@ const BundlePage: React.FC = () => {
                       size="sm"
                       variant="secondary"
                       onClick={() => handleUseBundle(bundle)}
-                      className="bg-white/10 hover:bg-white/20"
+                      className="bg-white/10 hover:bg-white/20 min-w-[90px]"
                     >
                       Customize
                     </Button>
@@ -93,7 +93,7 @@ const BundlePage: React.FC = () => {
                 </div>
                 <p className="mt-2 text-blue-100">{bundle.description}</p>
               </CardHeader>
-              <CardContent className="pt-6">
+              <CardContent className="pt-6 flex-1">
                 <div className="flex items-center space-x-2 mb-4">
                   <Layers className="h-5 w-5 text-blue-600" />
                   <span className="font-medium text-gray-900">Included Tools</span>
@@ -113,18 +113,29 @@ const BundlePage: React.FC = () => {
                 </div>
 
                 <div className="border-t border-gray-100 pt-4">
-                  <div className="flex justify-between items-center">
-                    <div>
-                      <p className="text-sm text-gray-500">Monthly Cost</p>
+                  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
+                    <div className="flex-1">
+                      <p className="text-sm text-gray-500">Estimated subscription cost (Subject to usage)</p>
                       <p className="text-lg font-bold text-gray-900">{bundle.totalCost}</p>
                     </div>
-                    <Link to={`/bundle/${bundle.id}`}>
+                    <div className="flex gap-3 flex-shrink-0">
                       <Button
+                        size="md"
+                        onClick={() => handleGetStarted(bundle)}
                         rightIcon={<ArrowRight className="h-4 w-4" />}
+                        className="min-w-[120px]"
                       >
-                        Get Details
+                        Get Started
                       </Button>
-                    </Link>
+                      <Button
+                        size="md"
+                        variant="secondary"
+                        onClick={() => handleUseBundle(bundle)}
+                        className="min-w-[100px]"
+                      >
+                        Customize
+                      </Button>
+                    </div>
                   </div>
                 </div>
               </CardContent>
