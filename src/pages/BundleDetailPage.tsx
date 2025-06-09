@@ -1,16 +1,21 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, useSearchParams } from 'react-router-dom';
 import { workflowBundles } from '../data/workflows';
 import { Button } from '../components/ui/Button';
 import { Card, CardContent } from '../components/ui/Card';
-import { GitBranch, ArrowLeft, CheckCircle2, Layers, ExternalLink, Settings, MessageCircle } from 'lucide-react';
+import { ArrowLeft, CheckCircle2, Settings, MessageCircle, Bookmark } from 'lucide-react';
 import { BundleCreator } from '../components/bundles/BundleCreator';
 
 const BundleDetailPage: React.FC = () => {
   const { bundleId } = useParams();
   const navigate = useNavigate();
-  const [bundle, setBundle] = useState(workflowBundles.find(b => b.id === bundleId));
+  const [searchParams] = useSearchParams();
+  const [bundle] = useState(workflowBundles.find(b => b.id === bundleId));
   const [showCustomizer, setShowCustomizer] = useState(false);
+  const [bundleSaved, setBundleSaved] = useState(false);
+  
+  // Check if user came from recommendation
+  const isFromRecommendation = searchParams.get('source') === 'recommendation';
 
   useEffect(() => {
     if (!bundle) {
@@ -18,14 +23,38 @@ const BundleDetailPage: React.FC = () => {
     }
   }, [bundle, navigate]);
 
-  const handleGetStarted = () => {
-    // For now, open the first tool's URL or show a getting started message
-    if (bundle && bundle.tools.length > 0) {
-      const firstTool = bundle.tools[0];
-      if (firstTool.url) {
-        window.open(firstTool.url, '_blank');
-      } else {
-        alert(`Getting started with ${bundle.name}!\n\nNext steps:\n${bundle.implementationSteps.slice(0, 3).join('\n')}`);
+  const handleSaveBundle = () => {
+    if (bundle) {
+      try {
+        // Save bundle to localStorage
+        const savedBundles = JSON.parse(localStorage.getItem('savedBundles') || '[]');
+        const bundleExists = savedBundles.some((saved: any) => saved.id === bundle.id);
+        
+        if (!bundleExists) {
+          const bundleToSave = {
+            id: bundle.id,
+            name: bundle.name,
+            description: bundle.description,
+            totalCost: bundle.totalCost,
+            savedAt: new Date().toISOString(),
+            type: 'bundle',
+            isCustom: false,
+            tools: bundle.tools,
+            bundleData: bundle // Store full bundle data for reference
+          };
+          
+          savedBundles.push(bundleToSave);
+          localStorage.setItem('savedBundles', JSON.stringify(savedBundles));
+          setBundleSaved(true);
+          
+          // Show success message
+          alert(`Bundle "${bundle.name}" has been saved to your collection!\n\nYou can view and manage your saved bundles from the Dashboard.`);
+        } else {
+          alert(`Bundle "${bundle.name}" is already in your saved collection!`);
+        }
+      } catch (error) {
+        console.error('Error saving bundle:', error);
+        alert('Failed to save bundle. Please try again.');
       }
     }
   };
@@ -35,6 +64,8 @@ const BundleDetailPage: React.FC = () => {
   };
 
   const handleContactForImplementation = () => {
+    if (!bundle) return;
+    
     // Navigate to contact page with bundle reference
     const params = new URLSearchParams({
       bundle: bundle.id,
@@ -82,12 +113,25 @@ const BundleDetailPage: React.FC = () => {
       <div className="mb-6">
         <Button
           variant="ghost"
-          onClick={() => navigate('/bundle')}
+          onClick={() => navigate(isFromRecommendation ? '/recommendation' : '/bundle')}
           className="mb-4"
           leftIcon={<ArrowLeft className="h-4 w-4" />}
         >
-          Back to Bundles
+          {isFromRecommendation ? 'Back to Recommendations' : 'Back to Bundles'}
         </Button>
+        
+        {isFromRecommendation && (
+          <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
+            <div className="flex items-center">
+              <CheckCircle2 className="h-5 w-5 text-blue-600 mr-2" />
+              <span className="text-blue-800 font-medium">Recommended Bundle Selected</span>
+            </div>
+            <p className="text-blue-700 mt-1 text-sm">
+              This bundle was recommended based on your AI assessment. Review the details below and save it to your collection when ready.
+            </p>
+          </div>
+        )}
+        
         <h1 className="text-3xl font-bold text-gray-900 sm:text-4xl">{bundle.name}</h1>
         <p className="mt-2 text-lg text-gray-600">{bundle.description}</p>
       </div>
@@ -147,14 +191,26 @@ const BundleDetailPage: React.FC = () => {
                   <p className="text-2xl font-bold text-gray-900">{bundle.totalCost}</p>
                 </div>
                 <div className="space-y-3">
-                  <Button
-                    className="w-full"
-                    size="lg"
-                    onClick={handleGetStarted}
-                    leftIcon={<ExternalLink className="h-4 w-4" />}
-                  >
-                    Get Started
-                  </Button>
+                  {isFromRecommendation && !bundleSaved && (
+                    <Button
+                      className="w-full"
+                      size="lg"
+                      onClick={handleSaveBundle}
+                      leftIcon={<Bookmark className="h-4 w-4" />}
+                    >
+                      Save This Bundle
+                    </Button>
+                  )}
+                  
+                  {bundleSaved && (
+                    <div className="bg-green-50 border border-green-200 rounded-lg p-3 mb-3">
+                      <div className="flex items-center">
+                        <CheckCircle2 className="h-4 w-4 text-green-600 mr-2" />
+                        <span className="text-green-800 text-sm font-medium">Bundle saved successfully!</span>
+                      </div>
+                    </div>
+                  )}
+                  
                   <Button
                     className="w-full"
                     size="lg"

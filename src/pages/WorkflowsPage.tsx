@@ -4,13 +4,26 @@ import { Card, CardHeader, CardContent, CardTitle, CardFooter } from '../compone
 import { Button } from '../components/ui/Button';
 import { Pagination } from '../components/ui/Pagination';
 import { workflowBundles } from '../data/workflows';
-import { GitBranch, ArrowRight, MoveRight, X } from 'lucide-react';
-import { BundleCreator } from '../components/bundles/BundleCreator';
+import { GitBranch, MoveRight, X } from 'lucide-react';
+import { EnterpriseWorkflowCreator, type EnterpriseWorkflow } from '../components/bundles/EnterpriseWorkflowCreator';
+import { useWorkflowDraftRestore } from '../hooks/useWorkflowDraftRestore';
+import { DraftRestoreModal } from '../components/bundles/DraftRestoreModal';
 
 const WorkflowsPage: React.FC = () => {
   const [showBundleCreator, setShowBundleCreator] = useState(false);
   const [selectedBundle, setSelectedBundle] = useState<typeof workflowBundles[0] | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
+  const [restoredWorkflow, setRestoredWorkflow] = useState<EnterpriseWorkflow | null>(null);
+  
+  // Draft restoration hook
+  const {
+    showRestorePrompt,
+    restoreDraft,
+    discardDraft,
+    dismissRestorePrompt,
+    workflowName,
+    draftAge
+  } = useWorkflowDraftRestore();
   
   const itemsPerPage = 10;
   const totalPages = Math.ceil(workflowBundles.length / itemsPerPage);
@@ -25,14 +38,97 @@ const WorkflowsPage: React.FC = () => {
   };
 
   const handleSaveBundle = (bundle: any) => {
-    console.log('Saving bundle:', bundle);
-    setShowBundleCreator(false);
+    try {
+      // Check if it's an Enterprise Workflow or a regular bundle
+      if (bundle.metadata && bundle.tools) {
+        // It's an Enterprise Workflow - save to savedWorkflows
+        const workflowToSave = {
+          ...bundle,
+          id: bundle.id || `workflow_${Date.now()}`,
+          metadata: {
+            ...bundle.metadata,
+            lastModified: new Date()
+          }
+        };
+
+        const existingWorkflows = JSON.parse(localStorage.getItem('savedWorkflows') || '[]');
+        const updatedWorkflows = [...existingWorkflows, workflowToSave];
+        localStorage.setItem('savedWorkflows', JSON.stringify(updatedWorkflows));
+
+        alert(`Workflow "${bundle.name}" has been saved to your collection!`);
+      } else {
+        // It's a regular bundle - this shouldn't happen in WorkflowsPage
+        console.log('Regular bundle save not handled in WorkflowsPage');
+      }
+      
+      setShowBundleCreator(false);
+      setRestoredWorkflow(null); // Clear restored workflow after save
+    } catch (error) {
+      console.error('Error saving bundle:', error);
+      alert('Failed to save bundle. Please try again.');
+    }
+  };
+
+  const handleRestoreDraft = () => {
+    const draftWorkflow = restoreDraft();
+    if (draftWorkflow) {
+      setRestoredWorkflow(draftWorkflow);
+      setSelectedBundle(null); // Clear any selected bundle
+      setShowBundleCreator(true);
+    }
+  };
+
+  const handleDiscardDraft = () => {
+    discardDraft();
+    setRestoredWorkflow(null);
+  };
+
+  const handleCreateNewWorkflow = () => {
+    setRestoredWorkflow(null);
+    setSelectedBundle(null);
+    setShowBundleCreator(true);
   };
 
   const navigate = useNavigate();
 
-  const handleGetStarted = (bundle: typeof workflowBundles[0]) => {
-    navigate(`/bundle/${bundle.id}`);
+  // Convert WorkflowBundle to EnterpriseWorkflow format
+  const convertBundleToEnterpriseWorkflow = (bundle: typeof workflowBundles[0] | null): EnterpriseWorkflow | null => {
+    if (!bundle) return null;
+    
+    return {
+      name: bundle.name,
+      description: bundle.description,
+      useCase: bundle.description, // Use description as use case
+      tools: bundle.tools,
+      totalCost: parseFloat(bundle.totalCost.replace(/[^0-9.-]+/g, '')) || 0,
+      metadata: {
+        version: '1.0.0',
+        lastModified: new Date(),
+        createdBy: 'current-user',
+        status: 'draft',
+        tags: []
+      },
+      collaboration: {
+        isShared: false,
+        permissions: 'view',
+        sharedWith: [],
+        allowComments: false,
+        requireApproval: false
+      },
+      approvalWorkflow: {
+        isEnabled: false,
+        approvers: [],
+        status: 'none'
+      },
+      auditLog: [],
+      versionControl: {
+        currentVersion: '1.0.0',
+        previousVersions: [],
+        changeLog: ['Initial workflow creation from bundle template'],
+        autoSave: true,
+        backupEnabled: true
+      }
+    };
   };
 
   const handleCustomize = (bundle: typeof workflowBundles[0]) => {
@@ -60,7 +156,7 @@ const WorkflowsPage: React.FC = () => {
           <div className="flex-shrink-0">
             <Button 
               rightIcon={<MoveRight className="h-4 w-4" />}
-              onClick={() => setShowBundleCreator(true)}
+              onClick={handleCreateNewWorkflow}
             >
               Create Custom Workflow
             </Button>
@@ -87,9 +183,9 @@ const WorkflowsPage: React.FC = () => {
                 Close
               </Button>
             </div>
-            <BundleCreator 
-              onSave={handleSaveBundle} 
-              initialBundle={selectedBundle}
+            <EnterpriseWorkflowCreator
+              onSave={handleSaveBundle}
+              initialWorkflow={restoredWorkflow || convertBundleToEnterpriseWorkflow(selectedBundle)}
             />
           </div>
         ) : (
@@ -148,19 +244,19 @@ const WorkflowsPage: React.FC = () => {
                       <div className="flex gap-3 flex-shrink-0">
                         <Button
                           size="md"
-                          onClick={() => handleGetStarted(workflow)}
-                          rightIcon={<ArrowRight className="h-4 w-4" />}
-                          className="min-w-[120px]"
+                          variant="secondary"
+                          onClick={() => handleCustomize(workflow)}
+                          className="min-w-[140px]"
                         >
-                          Get Started
+                          Customize Bundle
                         </Button>
                         <Button
                           size="md"
-                          variant="secondary"
-                          onClick={() => handleCustomize(workflow)}
-                          className="min-w-[100px]"
+                          variant="outline"
+                          onClick={() => navigate(`/contact?bundle=${workflow.id}&bundleName=${workflow.name}&inquiryType=implementation`)}
+                          className="min-w-[120px]"
                         >
-                          Customize
+                          Contact Us
                         </Button>
                       </div>
                     </div>
@@ -186,7 +282,7 @@ const WorkflowsPage: React.FC = () => {
                 <p className="text-gray-700 mb-6">
                   Don't see a workflow bundle that fits your specific needs? We can help you create a custom workflow with the perfect combination of AI tools for your unique requirements.
                 </p>
-                <Button size="lg" onClick={() => setShowBundleCreator(true)}>
+                <Button size="lg" onClick={handleCreateNewWorkflow}>
                   Create Custom Workflow
                 </Button>
               </div>
@@ -194,6 +290,16 @@ const WorkflowsPage: React.FC = () => {
           </>
         )}
       </div>
+
+      {/* Draft Restore Modal */}
+      <DraftRestoreModal
+        isOpen={showRestorePrompt}
+        onClose={dismissRestorePrompt}
+        onRestore={handleRestoreDraft}
+        onDiscard={handleDiscardDraft}
+        workflowName={workflowName}
+        draftAge={draftAge}
+      />
     </div>
   );
 };

@@ -103,7 +103,7 @@ const TestimonialsPage: React.FC = () => {
           Join thousands of successful organizations using our AI tool recommendations to optimize their operations.
         </p>
         <button className="bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700">
-          Get Started Free
+          Explore AI Tools
         </button>
       </div>
     </div>

@@ -18,8 +18,8 @@ export const CallToAction: React.FC = () => {
         </p>
         <div className="mt-10 flex flex-col sm:flex-row justify-center gap-4">
           <Link to="/tool-finder">
-            <Button size="lg" variant="outline" className="border-white bg-white text-blue-600 hover:bg-white hover:text-blue-800">
-              Get Started
+            <Button size="lg" variant="outline" className="border-white text-white hover:bg-blue-500">
+              Find AI Tools
             </Button>
           </Link>
           <Link to="/directory">

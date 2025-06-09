@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useAuth } from '../auth/hooks/useAuth';
 import { supabase } from '../lib/supabase';
 
@@ -75,6 +75,25 @@ export default function UserDashboard() {
                                 <div className="ml-5">
                                     <h3 className="text-lg font-medium text-gray-900">My Content</h3>
                                     <p className="text-sm text-gray-500">Manage your reviews and articles</p>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+
+                    {/* My Bundles */}
+                    <a href="/dashboard/bundles" className="bg-white overflow-hidden shadow rounded-lg hover:shadow-md transition-shadow">
+                        <div className="p-5">
+                            <div className="flex items-center">
+                                <div className="flex-shrink-0">
+                                    <div className="h-12 w-12 bg-indigo-100 rounded-md flex items-center justify-center">
+                                        <svg className="h-6 w-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div className="ml-5">
+                                    <h3 className="text-lg font-medium text-gray-900">My Bundles</h3>
+                                    <p className="text-sm text-gray-500">Saved workflows and bundles</p>
                                 </div>
                             </div>
                         </div>

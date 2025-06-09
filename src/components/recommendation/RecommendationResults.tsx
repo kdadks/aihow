@@ -231,9 +231,14 @@ export const RecommendationResults: React.FC<RecommendationResultsProps> = ({
                           View All Bundles
                         </Button>
                       </Link>
+                      <Link to={`/bundle/${bundle.id}?source=recommendation`}>
+                        <Button size="sm" className="bg-blue-600 hover:bg-blue-700" rightIcon={<ArrowRight className="h-4 w-4" />}>
+                          Use This Bundle
+                        </Button>
+                      </Link>
                       <Link to={`/bundle/${bundle.id}`}>
-                        <Button size="sm" rightIcon={<ArrowRight className="h-4 w-4" />}>
-                          Get Started
+                        <Button variant="outline" size="sm">
+                          View Details
                         </Button>
                       </Link>
                     </div>

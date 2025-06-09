@@ -8,11 +8,26 @@ const WriteArticlePage = lazy(() => import('../pages/WriteArticlePage'));
 const MyContentPage = lazy(() => import('../pages/MyContentPage'));
 const UserProfilePage = lazy(() => import('../pages/UserProfilePage'));
 const UserSettingsPage = lazy(() => import('../pages/UserSettingsPage'));
+const DashboardBundlesPage = lazy(() => import('../pages/DashboardBundlesPage'));
+const SavedBundleDetailPage = lazy(() => import('../pages/SavedBundleDetailPage'));
+const SavedWorkflowDetailPage = lazy(() => import('../pages/SavedWorkflowDetailPage'));
 
 export const protectedRoutes: RouteObject[] = [
     {
         path: '/dashboard',
         element: <ProtectedRoute><UserDashboard /></ProtectedRoute>
+    },
+    {
+        path: '/dashboard/bundles',
+        element: <ProtectedRoute><DashboardBundlesPage /></ProtectedRoute>
+    },
+    {
+        path: '/dashboard/bundles/:bundleId',
+        element: <ProtectedRoute><SavedBundleDetailPage /></ProtectedRoute>
+    },
+    {
+        path: '/dashboard/workflows/:workflowId',
+        element: <ProtectedRoute><SavedWorkflowDetailPage /></ProtectedRoute>
     },
     {
         path: '/write-review',

@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, Link, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { BundleCreator } from '../components/bundles/BundleCreator';
 import { workflowBundles } from '../data/workflows';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/Card';
 import { Button } from '../components/ui/Button';
-import { GitBranch, ArrowRight, CheckCircle2, Layers } from 'lucide-react';
+import { GitBranch, Layers } from 'lucide-react';
 
 const BundlePage: React.FC = () => {
   const navigate = useNavigate();
@@ -21,21 +21,42 @@ const BundlePage: React.FC = () => {
   }, [location.state]);
 
   const handleSaveBundle = (bundle: any) => {
-    // Handle saving the bundle (would typically involve API call)
-    console.log('Saving bundle:', bundle);
+    try {
+      // Check if it's an Enterprise Workflow or a regular bundle
+      if (bundle.metadata && bundle.tools) {
+        // It's an Enterprise Workflow - save to savedWorkflows
+        const workflowToSave = {
+          ...bundle,
+          id: bundle.id || `workflow_${Date.now()}`,
+          metadata: {
+            ...bundle.metadata,
+            lastModified: new Date()
+          }
+        };
+
+        const existingWorkflows = JSON.parse(localStorage.getItem('savedWorkflows') || '[]');
+        
+        // Check if workflow already exists
+        const workflowExists = existingWorkflows.some((saved: any) => saved.id === workflowToSave.id);
+        if (!workflowExists) {
+          const updatedWorkflows = [...existingWorkflows, workflowToSave];
+          localStorage.setItem('savedWorkflows', JSON.stringify(updatedWorkflows));
+          alert(`Workflow "${bundle.name}" has been saved to your collection!`);
+        } else {
+          alert(`Workflow "${bundle.name}" is already in your saved collection!`);
+        }
+      } else {
+        console.log('Bundle save from BundlePage - redirecting to bundle detail for proper save');
+      }
+    } catch (error) {
+      console.error('Error saving bundle:', error);
+      alert('Failed to save bundle. Please try again.');
+    }
   };
 
   const handleUseBundle = (bundle: typeof workflowBundles[0]) => {
     setSelectedBundle(bundle);
     setActiveView('create');
-  };
-
-  const handleGetStarted = (bundle: typeof workflowBundles[0]) => {
-    navigate(`/bundle/${bundle.id}`);
-  };
-
-  const handleViewDetails = (bundle: typeof workflowBundles[0]) => {
-    navigate(`/bundle/${bundle.id}`);
   };
 
   return (
@@ -76,18 +97,18 @@ const BundlePage: React.FC = () => {
                     <Button
                       size="sm"
                       variant="secondary"
-                      onClick={() => handleGetStarted(bundle)}
+                      onClick={() => handleUseBundle(bundle)}
                       className="bg-white/10 hover:bg-white/20 min-w-[100px]"
                     >
-                      Get Started
+                      Customize Bundle
                     </Button>
                     <Button
                       size="sm"
-                      variant="secondary"
-                      onClick={() => handleUseBundle(bundle)}
-                      className="bg-white/10 hover:bg-white/20 min-w-[90px]"
+                      variant="outline"
+                      onClick={() => navigate(`/contact?bundle=${bundle.id}&bundleName=${bundle.name}&inquiryType=implementation`)}
+                      className="bg-white/10 hover:bg-white/20 min-w-[100px] border-white/20 text-white"
                     >
-                      Customize
+                      Contact Us
                     </Button>
                   </div>
                 </div>
@@ -121,19 +142,19 @@ const BundlePage: React.FC = () => {
                     <div className="flex gap-3 flex-shrink-0">
                       <Button
                         size="md"
-                        onClick={() => handleGetStarted(bundle)}
-                        rightIcon={<ArrowRight className="h-4 w-4" />}
-                        className="min-w-[120px]"
+                        variant="secondary"
+                        onClick={() => handleUseBundle(bundle)}
+                        className="min-w-[140px]"
                       >
-                        Get Started
+                        Customize Bundle
                       </Button>
                       <Button
                         size="md"
-                        variant="secondary"
-                        onClick={() => handleUseBundle(bundle)}
-                        className="min-w-[100px]"
+                        variant="outline"
+                        onClick={() => navigate(`/contact?bundle=${bundle.id}&bundleName=${bundle.name}&inquiryType=implementation`)}
+                        className="min-w-[120px]"
                       >
-                        Customize
+                        Contact Us
                       </Button>
                     </div>
                   </div>

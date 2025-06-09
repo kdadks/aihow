@@ -166,7 +166,7 @@ const ContactPage: React.FC = () => {
     },
     {
       title: 'Business Inquiries',
-      value: 'partnerships@how2doai.com',
+      value: 'support@how2doai.com',
       description: 'For partnerships and collaborations',
       icon: (
         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">

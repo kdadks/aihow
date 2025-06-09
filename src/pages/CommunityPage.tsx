@@ -6,7 +6,7 @@ import { useAuth } from '../auth/hooks/useAuth';
 
 const CommunityPage: React.FC = () => {
   const navigate = useNavigate();
-  const { user, isAuthenticated } = useAuth();
+  const { isAuthenticated } = useAuth();
 
   const handleGetStarted = () => {
     navigate('/signup');
@@ -211,7 +211,7 @@ const CommunityPage: React.FC = () => {
             onClick={handleGetStarted}
             className="bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition-colors duration-200 font-semibold"
           >
-            Get Started Free
+            Join Community
           </button>
         </div>
       ) : (
