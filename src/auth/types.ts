@@ -12,6 +12,8 @@ export type AuthErrorType =
   | 'RATE_LIMIT'
   | 'ROLE_ASSIGN_ERROR'
   | 'ROLE_NOT_FOUND'
+  | 'EMAIL_VERIFICATION'
+  | 'EMAIL_NOT_VERIFIED'
   | 'UNKNOWN';
 
 export interface AuthError {
@@ -45,9 +47,11 @@ export interface UserRoleRelation {
 export interface UserProfile {
   id: string;
   username: string;
-  full_name?: string;
-  avatar_url?: string;
-  roles: UserRole[];
+  created_at: string;
+  updated_at: string;
+  full_name?: string | null;
+  avatar_url?: string | null;
+  role: 'admin' | 'moderator' | 'user';
 }
 
 // Type guard for UserProfile
@@ -92,6 +96,8 @@ export interface AuthResponse {
   user: User;
   session: Session | null;
   weakPassword?: WeakPassword;
+  verificationNeeded?: boolean;
+  message?: string;
 }
 
 // Type guard for AuthResponse
