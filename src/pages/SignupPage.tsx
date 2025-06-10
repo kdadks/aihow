@@ -62,9 +62,9 @@ export default function SignupPage() {
 
         try {
             await register(email, password);
-            navigate('/dashboard');
+            navigate('/login');
         } catch (err) {
-            setError(err instanceof Error ? err.message : 'Failed to sign up');
+            setError('Email sent for Verification. Please sign in after verification');
         } finally {
             setIsLoading(false);
         }
