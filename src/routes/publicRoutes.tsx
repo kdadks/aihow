@@ -23,6 +23,8 @@ const ForumPage = lazy(() => import('../pages/ForumPage'));
 const RecommendationPage = lazy(() => import('../pages/RecommendationPage'));
 const BundleDetailPage = lazy(() => import('../pages/BundleDetailPage'));
 const SearchPage = lazy(() => import('../pages/SearchPage'));
+const CaseStudyPage = lazy(() => import('../pages/CaseStudyPage'));
+const BlogPostDetailPage = lazy(() => import('../pages/BlogPostDetailPage'));
 
 export const publicRoutes: RouteObject[] = [
     {
@@ -98,8 +100,12 @@ export const publicRoutes: RouteObject[] = [
         element: <ReviewsPage />
     },
     {
-        path: '/blog',   
+        path: '/blog',
         element: <BlogPage />
+    },
+    {
+        path: '/blog/:slug',
+        element: <BlogPostDetailPage />
     },
     {
         path: '/bundle',
@@ -120,5 +126,9 @@ export const publicRoutes: RouteObject[] = [
     {
         path: '/search',
         element: <SearchPage />
+    },
+    {
+        path: '/case-study/:id',
+        element: <CaseStudyPage />
     }
 ];

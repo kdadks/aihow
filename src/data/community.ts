@@ -6,7 +6,7 @@ export const reviews = [
     rating: 5,
     date: "May 20, 2025",
     verified: true,
-    content: "I've tried multiple AI tool directories, but how2AI stands out with its detailed comparisons and accurate recommendations. The workflow bundles feature saved me hours of research!",
+    content: "I've tried multiple AI tool directories, but How2doAI stands out with its detailed comparisons and accurate recommendations. The workflow bundles feature saved me hours of research!",
     photoUrl: "https://images.unsplash.com/photo-1494790108377-be9c29b29330"
   },
   {
@@ -22,7 +22,55 @@ export const reviews = [
     date: "May 15, 2025",
     verified: true,
     content: "The comparison feature is invaluable. Being able to see detailed feature breakdowns and pricing comparisons helped me make an informed decision for my business.",
-    photoUrl: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80"
+    photoUrl: "https://images.unsplash.com/photo-1544005313-94ddf0286df2"
+  },
+  {
+    name: "Rajesh Kumar",
+    rating: 5,
+    date: "March 15, 2025",
+    verified: true,
+    content: "How2doAI has been instrumental in helping my startup find the right AI tools. The curated recommendations saved us months of research and helped us scale our operations efficiently.",
+    photoUrl: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d"
+  },
+  {
+    name: "Priya Sharma",
+    rating: 5,
+    date: "March 22, 2025",
+    verified: true,
+    content: "As a digital marketing professional, finding the right AI tools was challenging until I discovered how2AI. The detailed comparisons and honest reviews are incredibly helpful.",
+    photoUrl: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2"
+  },
+  {
+    name: "Arjun Patel",
+    rating: 4,
+    date: "April 8, 2025",
+    verified: true,
+    content: "Great platform with comprehensive tool listings. The workflow bundles feature is particularly useful for someone like me who needs multiple AI tools working together.",
+    photoUrl: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e"
+  },
+  {
+    name: "Sneha Agarwal",
+    rating: 5,
+    date: "April 15, 2025",
+    verified: true,
+    content: "The AI tool recommendations are spot-on! I found several tools that perfectly fit my development workflow. The community reviews are genuine and very helpful.",
+    photoUrl: "https://images.unsplash.com/photo-1517841905240-472988babdf9"
+  },
+  {
+    name: "Vikash Singh",
+    rating: 5,
+    date: "April 28, 2025",
+    verified: true,
+    content: "how2AI is my go-to resource for discovering new AI tools. The detailed feature breakdowns and pricing information help me make informed decisions for my business.",
+    photoUrl: "https://images.unsplash.com/photo-1519345182560-3f2917c472ef"
+  },
+  {
+    name: "Kavya Nair",
+    rating: 4,
+    date: "May 5, 2025",
+    verified: true,
+    content: "Excellent curation of AI tools across different categories. The search functionality is powerful and the filters help narrow down exactly what I need.",
+    photoUrl: "https://images.unsplash.com/photo-1580489944761-15a19d654956"
   }
 ];
 
@@ -93,21 +141,73 @@ export const testimonials = [
     name: "Sarah Miller",
     role: "Content Director",
     company: "TechCorp Inc",
-    content: "how2AI transformed our content production workflow. Their tool recommendations helped us increase output by 300% while maintaining quality.",
-    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330",
+    content: "How2doAI transformed our content production workflow. Their tool recommendations helped us increase output by 300% while maintaining quality.",
+    image: "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f",
     rating: 5,
-    tags: ["Content Production", "Workflow Optimization"],
-    videoUrl: "https://storage.googleapis.com/webfundamentals-assets/videos/chrome.mp4" // Sample video from Google
+    tags: ["Content Production", "Workflow Optimization"]
   },
   {
     name: "David Chen",
     role: "Marketing Manager",
     company: "Growth Studios",
-    content: "The AI tool recommendations we got were spot-on. We've saved countless hours researching tools.",
-    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e",
+    content: "The AI tool recommendations we got were spot-on. We've saved countless hours researching tools and our campaign performance increased significantly.",
+    image: "https://images.unsplash.com/photo-1560250097-0b93528c311a",
     rating: 5,
-    tags: ["Marketing", "Tool Selection"],
-    videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" // Sample open-source video
+    tags: ["Marketing", "Tool Selection", "Campaign Performance"]
+  },
+  {
+    name: "Anish Reddy",
+    role: "Product Manager",
+    company: "InnovateTech Solutions",
+    content: "How2doAI helped us identify the perfect AI tools for our product development cycle. The detailed comparisons and user reviews gave us confidence in our technology stack decisions.",
+    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e",
+    rating: 5,
+    tags: ["Product Development", "AI Integration"]
+  },
+  {
+    name: "Meera Gupta",
+    role: "Digital Marketing Lead",
+    company: "Creative Digital Agency",
+    content: "The workflow bundles feature transformed how we approach AI implementation. We went from struggling with tool selection to having a comprehensive AI-powered marketing suite.",
+    image: "https://images.unsplash.com/photo-1551836022-deb4988cc6c0",
+    rating: 5,
+    tags: ["Digital Marketing", "Workflow Automation", "AI Implementation"]
+  },
+  {
+    name: "Rohit Joshi",
+    role: "CTO",
+    company: "NextGen Startups",
+    content: "As a startup CTO, budget and efficiency are crucial. How2doAI's recommendations helped us build a powerful AI toolkit without breaking the bank.",
+    image: "https://images.unsplash.com/photo-1568602471122-7832951cc4c5",
+    rating: 5,
+    tags: ["Startup", "Cost Optimization", "AI Strategy"]
+  },
+  {
+    name: "Kavi Iyer",
+    role: "Content Strategy Director",
+    company: "MediaFlow Inc",
+    content: "The AI content creation tools recommended by How2doAI have revolutionized our content pipeline. We're producing 3x more content with the same team size.",
+    image: "https://images.unsplash.com/photo-1582750433449-648ed127bb54",
+    rating: 5,
+    tags: ["Content Creation", "Productivity"]
+  },
+  {
+    name: "Arjun Malhotra",
+    role: "Operations Manager",
+    company: "Efficient Systems Ltd",
+    content: "How2doAI's detailed tool analysis helped us automate 70% of our repetitive tasks. The time savings have allowed our team to focus on strategic initiatives.",
+    image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d",
+    rating: 4,
+    tags: ["Process Automation", "Operations"]
+  },
+  {
+    name: "Adi Bansal",
+    role: "Research Analyst",
+    company: "Data Insights Corp",
+    content: "The AI research and analysis tools found through How2doAI have enhanced our research capabilities significantly. Client retention has improved dramatically.",
+    image: "https://images.unsplash.com/photo-1595152452543-e5fc28ebc2b8",
+    rating: 5,
+    tags: ["Data Analysis", "Research", "Client Services"]
   }
 ];
 
@@ -131,5 +231,45 @@ export const caseStudies = [
       "90% time saved in research"
     ],
     link: "/case-study/growth-studios"
+  },
+  {
+    title: "Startup AI Transformation",
+    company: "InnovateTech Solutions",
+    metrics: [
+      "400% faster product development",
+      "50% reduction in operational costs",
+      "95% automation of routine tasks"
+    ],
+    link: "/case-study/innovatetech"
+  },
+  {
+    title: "Digital Marketing Revolution",
+    company: "Creative Digital Agency",
+    metrics: [
+      "5x increase in content production",
+      "80% improvement in campaign ROI",
+      "60% reduction in manual work"
+    ],
+    link: "/case-study/creative-digital"
+  },
+  {
+    title: "Healthcare AI Implementation",
+    company: "MedTech India",
+    metrics: [
+      "70% faster diagnosis processing",
+      "85% accuracy improvement",
+      "40% cost savings in operations"
+    ],
+    link: "/case-study/medtech-india"
+  },
+  {
+    title: "E-commerce AI Optimization",
+    company: "ShopSmart Solutions",
+    metrics: [
+      "3x increase in conversion rates",
+      "50% reduction in customer support queries",
+      "200% improvement in personalization"
+    ],
+    link: "/case-study/shopsmart"
   }
 ];

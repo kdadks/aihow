@@ -3,8 +3,12 @@ import { QuoteIcon } from 'lucide-react';
 import { reviews } from '../../data/reviews';
 
 export const TestimonialSection: React.FC = () => {
-  // Get a few reviews from different tools
-  const testimonials = reviews.slice(0, 3);
+  // Get a mix of recent reviews including some with Indian names
+  const featuredReviewIds = ['11', '14', '24', '22', '19', '29'];
+  const testimonials = featuredReviewIds
+    .map(id => reviews.find(r => r.id === id))
+    .filter((review): review is NonNullable<typeof review> => review !== undefined)
+    .slice(0, 6); // Show up to 6 testimonials
 
   return (
     <section className="py-16 bg-gradient-to-b from-gray-50 to-white">

@@ -1,54 +1,36 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { Link } from 'react-router-dom';
 import { TestimonialCard } from '../components/testimonials/TestimonialCard';
-import { FileText, Play } from 'lucide-react';
+import { FileText, Users, BarChart3 } from 'lucide-react';
 import { testimonials, caseStudies } from '../data/community';
 
 const TestimonialsPage: React.FC = () => {
-  const [filter, setFilter] = useState<'all' | 'video'>('all');
-
-  const filteredTestimonials = filter === 'all'
-    ? testimonials
-    : testimonials.filter(t => t.videoUrl);
-
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <div className="text-center mb-12">
         <h1 className="text-4xl font-bold text-gray-900 mb-4">
           Customer Success Stories
         </h1>
-        <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+        <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-6">
           See how organizations are transforming their workflows with AI tools recommended by our platform.
         </p>
-      </div>
-
-      {/* Filter Tabs */}
-      <div className="flex justify-center space-x-4 mb-8">
-        <button
-          onClick={() => setFilter('all')}
-          className={`px-4 py-2 rounded-lg ${
-            filter === 'all'
-              ? 'bg-blue-600 text-white'
-              : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-          }`}
-        >
-          All Testimonials
-        </button>
-        <button
-          onClick={() => setFilter('video')}
-          className={`px-4 py-2 rounded-lg flex items-center space-x-2 ${
-            filter === 'video'
-              ? 'bg-blue-600 text-white'
-              : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-          }`}
-        >
-          <Play className="w-4 h-4" />
-          <span>Video Stories</span>
-        </button>
+        
+        {/* Stats */}
+        <div className="flex justify-center space-x-8 mb-8">
+          <div className="flex items-center space-x-2 text-gray-600">
+            <Users className="w-5 h-5" />
+            <span className="font-medium">{testimonials.length} Success Stories</span>
+          </div>
+          <div className="flex items-center space-x-2 text-gray-600">
+            <BarChart3 className="w-5 h-5" />
+            <span className="font-medium">4.8/5 Average Rating</span>
+          </div>
+        </div>
       </div>
 
       {/* Testimonials Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
-        {filteredTestimonials.map((testimonial, index) => (
+        {testimonials.map((testimonial, index) => (
           <TestimonialCard key={index} {...testimonial} />
         ))}
       </div>
@@ -83,12 +65,12 @@ const TestimonialsPage: React.FC = () => {
                   </li>
                 ))}
               </ul>
-              <a
-                href={study.link}
+              <Link
+                to={study.link}
                 className="text-blue-600 hover:underline font-medium"
               >
                 Read full case study →
-              </a>
+              </Link>
             </div>
           ))}
         </div>
@@ -102,9 +84,12 @@ const TestimonialsPage: React.FC = () => {
         <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
           Join thousands of successful organizations using our AI tool recommendations to optimize their operations.
         </p>
-        <button className="bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700">
+        <Link
+          to="/directory"
+          className="inline-block bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition-colors"
+        >
           Explore AI Tools
-        </button>
+        </Link>
       </div>
     </div>
   );
