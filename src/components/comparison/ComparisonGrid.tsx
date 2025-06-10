@@ -804,7 +804,7 @@ export const ComparisonGrid: React.FC<ComparisonGridProps> = ({ tools, onRemoveT
       )}
 
       {/* Save Dialog */}
-      <Dialog open={saveDialogOpen} onClose={() => setSaveDialogOpen(false)}>
+      <Dialog open={saveDialogOpen} onOpenChange={(open) => setSaveDialogOpen(open)}>
         <div className="p-6 w-full max-w-md">
           <h3 className="text-lg font-medium mb-4">Save Comparison</h3>
           <input

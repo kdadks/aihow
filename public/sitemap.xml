@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Main Sitemap -->
+  <sitemap>
+    <loc>https://how2doai.com/sitemap.xml</loc>
+    <lastmod>2025-06-10T19:23:00+01:00</lastmod>
+  </sitemap>
+
+  <!-- Tools Sitemap -->
+  <sitemap>
+    <loc>https://how2doai.com/sitemap-tools.xml</loc>
+    <lastmod>2025-06-10T19:23:00+01:00</lastmod>
+  </sitemap>
+
+  <!-- Reviews Sitemap -->
+  <sitemap>
+    <loc>https://how2doai.com/sitemap-reviews.xml</loc>
+    <lastmod>2025-06-10T19:23:00+01:00</lastmod>
+  </sitemap>
+
+  <!-- Blog Sitemap -->
+  <sitemap>
+    <loc>https://how2doai.com/sitemap-blog.xml</loc>
+    <lastmod>2025-06-10T19:23:00+01:00</lastmod>
+  </sitemap>
+</sitemapindex>

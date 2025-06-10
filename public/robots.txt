@@ -1,0 +1,52 @@
+# How2doAI Robots.txt
+# Updated for 2025 SEO optimization
+
+# Allow all crawlers
+User-agent: *
+
+# High-Priority Pages (Core Content)
+Allow: /tool-finder
+Allow: /directory
+Allow: /compare
+Allow: /workflows
+Allow: /chatgpt-tools
+Allow: /bundle
+Allow: /reviews
+Allow: /blog
+
+# Secondary Pages (Supporting Content)
+Allow: /community
+Allow: /forum
+Allow: /testimonials
+Allow: /about
+Allow: /contact
+
+# Temporary Optimization Directives
+Crawl-delay: 2
+
+# Prevent Duplicate Content & Non-Essential Pages
+Disallow: /search?*
+Disallow: /*?ref=*
+Disallow: /*?source=*
+Disallow: /*?utm_*
+Disallow: /dashboard*
+Disallow: /admin*
+Disallow: /api/*
+Disallow: /temp/*
+Disallow: /draft/*
+Disallow: /*?page=*
+Disallow: /*/print
+Clean-param: utm_source&utm_medium&utm_campaign&utm_content&utm_term
+
+# Additional Crawler Directives
+Request-rate: 1/2
+Visit-time: 0600-2300
+
+# XML Sitemaps
+Sitemap: https://how2doai.com/sitemap.xml
+Sitemap: https://how2doai.com/sitemap-tools.xml
+Sitemap: https://how2doai.com/sitemap-reviews.xml
+Sitemap: https://how2doai.com/sitemap-blog.xml
+
+# Host Preference
+Host: https://how2doai.com

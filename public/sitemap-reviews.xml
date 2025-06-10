@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <!-- In-depth Reviews -->
+  <url>
+    <loc>https://how2doai.com/reviews/chatgpt-review</loc>
+    <lastmod>2025-06-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://how2doai.com/images/reviews/chatgpt-review.jpg</image:loc>
+      <image:title>ChatGPT Review 2025</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://how2doai.com/reviews/claude-review</loc>
+    <lastmod>2025-06-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://how2doai.com/images/reviews/claude-review.jpg</image:loc>
+      <image:title>Claude AI Review 2025</image:title>
+    </image:image>
+  </url>
+  
+  <!-- Comparative Reviews -->
+  <url>
+    <loc>https://how2doai.com/reviews/best-ai-chatbots</loc>
+    <lastmod>2025-06-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://how2doai.com/reviews/best-ai-image-generators</loc>
+    <lastmod>2025-06-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  
+  <!-- Use Case Reviews -->
+  <url>
+    <loc>https://how2doai.com/reviews/ai-tools-for-content-creation</loc>
+    <lastmod>2025-06-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://how2doai.com/reviews/ai-tools-for-developers</loc>
+    <lastmod>2025-06-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- Tool Comparison Reviews -->
+  <url>
+    <loc>https://how2doai.com/reviews/chatgpt-vs-bard-comparison</loc>
+    <lastmod>2025-06-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://how2doai.com/reviews/midjourney-vs-dall-e-comparison</loc>
+    <lastmod>2025-06-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  
+  <!-- Review Categories -->
+  <url>
+    <loc>https://how2doai.com/reviews/chatbots</loc>
+    <lastmod>2025-06-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://how2doai.com/reviews/image-generation</loc>
+    <lastmod>2025-06-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://how2doai.com/reviews/code-generation</loc>
+    <lastmod>2025-06-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+</urlset>

@@ -1,32 +1,63 @@
 [build]
-  publish = "dist"
   command = "npm run build"
-  functions = "netlify/functions"
-
-[dev]
-  command = "npm run dev"
-  port = 3000
   publish = "dist"
 
-# Disable edge functions for now and rely on standard redirects
-# [[edge_functions]]
-#   path = "/*"
-#   function = "netlify"
+# Force HTTPS
+[[redirects]]
+  from = "http://*"
+  to = "https://:splat"
+  status = 301
+  force = true
 
-# Primary redirect for SPA - this will be used if the edge function fails
+# HSTS Preload list submission
+[[headers]]
+  for = "/*"
+  [headers.values]
+    # Security Headers from netlify/headers are automatically included
+    # Additional security configurations
+    Expect-CT = "max-age=86400, enforce"
+    NEL = '{"report_to":"default","max_age":31536000,"include_subdomains":true}'
+    Report-To = '{"group":"default","max_age":31536000,"endpoints":[{"url":"https://how2doai.report-uri.com/a/d/g"}],"include_subdomains":true}'
+
+# Handle SPA routing
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
+
+# Redirect www to non-www
+[[redirects]]
+  from = "https://www.how2doai.com/*"
+  to = "https://how2doai.com/:splat"
+  status = 301
   force = true
 
-# Set cache headers for assets
+# Enable HTTP/2 Server Push
 [[headers]]
-  for = "/assets/*"
+  for = "/"
+  [headers.values]
+    Link = [
+      "</styles.css>; rel=preload; as=style",
+      "</main.js>; rel=preload; as=script"
+    ]
+
+# Cache Control for static assets
+[[headers]]
+  for = "/static/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
 
-# Enable pre-rendering for performance (optional)
+[[headers]]
+  for = "*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "*.css"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Security plugin configuration
 [build.processing]
   skip_processing = false
 [build.processing.css]
@@ -39,3 +70,13 @@
   pretty_urls = true
 [build.processing.images]
   compress = true
+
+# Environment variables
+[context.production.environment]
+  NODE_ENV = "production"
+  HTTPS = "true"
+  HSTS = "true"
+
+[context.deploy-preview.environment]
+  NODE_ENV = "production"
+  HTTPS = "true"
