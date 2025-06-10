@@ -14,6 +14,8 @@ export const AUTH_ERRORS: Record<AuthErrorType, string> = {
   RATE_LIMIT: 'Too many attempts, please try again later',
   ROLE_ASSIGN_ERROR: 'Failed to assign user role',
   ROLE_NOT_FOUND: 'Role not found',
+  EMAIL_VERIFICATION: 'Please check your email to verify your account, then sign in',
+  EMAIL_NOT_VERIFIED: 'Please verify your email address before signing in',
   UNKNOWN: 'An unexpected error occurred'
 };
 

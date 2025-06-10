@@ -6,7 +6,6 @@ import {
   AuthErrorType,
   User,
   UserProfile,
-  UserRoleRelation,
   AuthResponse,
   isAuthError
 } from '../types';
@@ -31,66 +30,39 @@ export function AuthProvider({ children }: AuthProviderProps) {
     message: message || AUTH_ERRORS[type]
   });
 
-  const createUserProfile = (userId: string, username?: string): UserProfile => ({
-    id: userId,
-    username: username || userId,
-    roles: [] // Initialize with empty roles array
-  });
-
-  const assignDefaultRole = async (userId: string) => {
-    try {
-      // Get the default user role ID
-      const { data: roleData, error: roleError } = await supabase
-        .from('roles')
-        .select('id')
-        .eq('name', 'user')
-        .single();
-
-      if (roleError) throw createAuthError('ROLE_ASSIGN_ERROR', roleError.message);
-      if (!roleData) throw createAuthError('ROLE_NOT_FOUND', 'Default user role not found');
-
-      // Assign the role to the user
-      const { error: assignError } = await supabase
-        .from('user_role_assignments')
-        .insert([{ user_id: userId, role_id: roleData.id }]);
-
-      if (assignError) throw createAuthError('ROLE_ASSIGN_ERROR', assignError.message);
-    } catch (error) {
-      throw createAuthError('ROLE_ASSIGN_ERROR', error instanceof Error ? error.message : 'Failed to assign default role');
-    }
-  };
-
   useEffect(() => {
     const initAuth = async () => {
       try {
         setState(prev => ({ ...prev, loading: true }));
         
+        // Check if we're in the email verification flow
+        const hasVerifyParams = window.location.hash.includes('type=email_verification');
+        if (hasVerifyParams) {
+          // Clear any existing session for clean verification
+          await supabase.auth.signOut();
+          setState({
+            user: null,
+            session: null,
+            error: null,
+            loading: false,
+            isInitialized: true,
+            isAuthenticated: false
+          });
+          return;
+        }
+        
         const { data: { session } } = await supabase.auth.getSession();
         
         if (session?.user) {
-          // Fetch user profile and roles
-      const { data: profileData } = await supabase
-        .from('profiles')
-        .select(`
-          *,
-          user_role_assignments(
-            roles(
-              id,
-              name
-            )
-          )
-        `)
-        .eq('id', session.user.id)
-        .single();
-
-          const profile = profileData ? {
-            ...profileData,
-            roles: profileData.user_role_assignments?.map((ura: any) => ura.role) || []
-          } : createUserProfile(session.user.id);
+          const { data: profileData } = await supabase
+            .from('profiles')
+            .select('id, username, created_at, updated_at, role, full_name, avatar_url')
+            .eq('id', session.user.id)
+            .single();
 
           const user: User = {
             ...session.user,
-            profile
+            profile: profileData || null
           };
 
           setState({
@@ -123,12 +95,52 @@ export function AuthProvider({ children }: AuthProviderProps) {
     };
 
     initAuth();
+
+    // Set up auth state change listener
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
+      if (event === 'SIGNED_IN') {
+        // Handle successful sign in
+        if (session?.user) {
+          const { data: profileData } = await supabase
+            .from('profiles')
+            .select('*')
+            .eq('id', session.user.id)
+            .single();
+
+          setState({
+            user: {
+              ...session.user,
+              profile: profileData || null
+            },
+            session,
+            error: null,
+            loading: false,
+            isInitialized: true,
+            isAuthenticated: true
+          });
+        }
+      } else if (event === 'SIGNED_OUT') {
+        setState({
+          user: null,
+          session: null,
+          error: null,
+          loading: false,
+          isInitialized: true,
+          isAuthenticated: false
+        });
+      }
+    });
+
+    return () => {
+      subscription?.unsubscribe();
+    };
   }, []);
 
   const login = async (email: string, password: string): Promise<AuthResponse> => {
     try {
       setState(prev => ({ ...prev, loading: true, error: null }));
       
+      // First authenticate the user
       const { data, error: authError } = await supabase.auth.signInWithPassword({
         email,
         password,
@@ -137,32 +149,52 @@ export function AuthProvider({ children }: AuthProviderProps) {
       if (authError) throw createAuthError('INVALID_CREDENTIALS', authError.message);
       if (!data?.user) throw createAuthError('UNKNOWN', 'Login failed - no user data');
 
-      // Fetch user profile and roles
-      const { data: profileData } = await supabase
-        .from('profiles')
-        .select(`
-          *,
-          user_role_assignments(
-            roles(
-              id,
-              name
-            )
-          )
-        `)
-        .eq('id', data.user.id)
-        .single();
-
-      const profile = profileData ? {
-        ...profileData,
-        roles: profileData.user_role_assignments?.map((ura: any) => ura.role) || []
-      } : createUserProfile(data.user.id);
-
+      // Create initial user state
       const user: User = {
         ...data.user,
-        profile
+        profile: null
       };
 
-      setState(prev => ({ 
+      try {
+        // Try to get existing profile
+        const { data: profile } = await supabase
+          .from('profiles')
+          .select('*')
+          .eq('id', data.user.id)
+          .maybeSingle();
+
+        if (profile) {
+          user.profile = profile;
+        } else {
+          // Create new profile if none exists
+          const now = new Date().toISOString();
+          const newProfile: UserProfile = {
+            id: data.user.id,
+            username: data.user.email?.split('@')[0] || data.user.id,
+            created_at: now,
+            updated_at: now,
+            role: 'user',
+            full_name: null,
+            avatar_url: null
+          };
+
+          const { data: createdProfile, error: createError } = await supabase
+            .from('profiles')
+            .insert([newProfile])
+            .select()
+            .single();
+
+          if (createError) {
+            console.error('Failed to create profile:', createError);
+          } else if (createdProfile) {
+            user.profile = createdProfile;
+          }
+        }
+      } catch (error) {
+        console.error('Error handling profile:', error);
+      }
+
+      setState(prev => ({
         ...prev,
         user,
         session: data.session,
@@ -183,64 +215,31 @@ export function AuthProvider({ children }: AuthProviderProps) {
     }
   };
 
-  const register = async (email: string, password: string, username?: string): Promise<AuthResponse> => {
+  const register = async (email: string, password: string): Promise<AuthResponse> => {
     try {
       setState(prev => ({ ...prev, loading: true, error: null }));
 
       const { data, error: authError } = await supabase.auth.signUp({
         email,
         password,
+        options: {
+          emailRedirectTo: window.location.origin + '/login'
+        }
       });
 
       if (authError) throw createAuthError('EMAIL_EXISTS', authError.message);
       if (!data?.user) throw createAuthError('UNKNOWN', 'Registration failed - no user data');
 
-      // Create user profile and assign default role
-      const profile = createUserProfile(data.user.id, username);
-      const { error: profileError } = await supabase
-        .from('profiles')
-        .insert([profile]);
-
-      if (profileError) throw createAuthError('PROFILE_CREATE_ERROR', profileError.message);
-
-      // Assign default role
-      await assignDefaultRole(data.user.id);
-
-      // Fetch the profile with roles
-      const { data: updatedProfileData } = await supabase
-        .from('profiles')
-        .select(`
-          *,
-          user_role_assignments(
-            roles(
-              id,
-              name,
-              permissions
-            )
-          )
-        `)
-        .eq('id', data.user.id)
-        .single();
-
-      if (updatedProfileData) {
-        profile.roles = updatedProfileData.user_role_assignments?.map((ura: any) => ura.role) || [];
-      }
-
-      const user: User = {
-        ...data.user,
-        profile
+      setState(prev => ({ ...prev, loading: false }));
+      return {
+        user: {
+          ...data.user,
+          profile: null
+        },
+        session: null,
+        verificationNeeded: true,
+        message: 'Please check your email to verify your account, then sign in'
       };
-
-      setState(prev => ({
-        ...prev,
-        user,
-        session: data.session,
-        loading: false,
-        error: null,
-        isAuthenticated: true
-      }));
-
-      return { user, session: data.session };
     } catch (error) {
       const authError = isAuthError(error) ? error : createAuthError('UNKNOWN', 'Registration failed');
       setState(prev => ({
@@ -278,7 +277,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     }
   };
 
-  const updateProfile = async (profileUpdate: Partial<Omit<UserProfile, 'id' | 'roles'>>) => {
+  const updateProfile = async (profileUpdate: Partial<Omit<UserProfile, 'id' | 'role'>>) => {
     try {
       setState(prev => ({ ...prev, loading: true, error: null }));
 
@@ -323,7 +322,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
   };
 
   const hasRole = (role: string) => {
-    return state.user?.profile?.roles.some(r => r.name === role) || false;
+    return state.user?.profile?.role === role;
   };
 
   const hasPermission = (_permission: string) => {

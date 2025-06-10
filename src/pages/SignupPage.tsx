@@ -15,6 +15,7 @@ export default function SignupPage() {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [error, setError] = useState<string | null>(null);
+    const [successMessage, setSuccessMessage] = useState<string | null>(null);
     const [isLoading, setIsLoading] = useState(false);
     const [passwordFocused, setPasswordFocused] = useState(false);
     const [requirements, setRequirements] = useState<PasswordRequirements>({
@@ -61,9 +62,14 @@ export default function SignupPage() {
         setIsLoading(true);
 
         try {
-            await register(email, password);
-            navigate('/dashboard');
+            const response = await register(email, password);
+            setSuccessMessage(response.message || 'Please check your email to verify your account, then sign in');
+            setError(null);
+            setTimeout(() => {
+                navigate('/login');
+            }, 3000);
         } catch (err) {
+            setSuccessMessage(null);
             setError(err instanceof Error ? err.message : 'Failed to sign up');
         } finally {
             setIsLoading(false);
@@ -94,6 +100,12 @@ export default function SignupPage() {
                         {error && (
                             <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-md" role="alert">
                                 <span className="block sm:inline">{error}</span>
+                            </div>
+                        )}
+                        {successMessage && (
+                            <div className="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-md" role="alert">
+                                <span className="block sm:inline">{successMessage}</span>
+                                <span className="block text-sm mt-1">Redirecting to login page in 3 seconds...</span>
                             </div>
                         )}
 
