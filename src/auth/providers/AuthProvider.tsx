@@ -223,7 +223,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
         email,
         password,
         options: {
-          emailRedirectTo: window.location.origin + '/login'
+          emailRedirectTo: window.location.origin + '/confirm-email'
         }
       });
 

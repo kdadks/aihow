@@ -23,6 +23,7 @@ const ForumPage = lazy(() => import('../pages/ForumPage'));
 const RecommendationPage = lazy(() => import('../pages/RecommendationPage'));
 const BundleDetailPage = lazy(() => import('../pages/BundleDetailPage'));
 const SearchPage = lazy(() => import('../pages/SearchPage'));
+const EmailConfirmationPage = lazy(() => import('../pages/EmailConfirmationPage'));
 
 export const publicRoutes: RouteObject[] = [
     {
@@ -120,5 +121,9 @@ export const publicRoutes: RouteObject[] = [
     {
         path: '/search',
         element: <SearchPage />
+    },
+    {
+        path: '/confirm-email',
+        element: <EmailConfirmationPage />
     }
 ];
