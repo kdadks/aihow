@@ -7,6 +7,7 @@ const PrivacyPolicyPage = lazy(() => import('../pages/PrivacyPolicyPage'));
 const TermsPage = lazy(() => import('../pages/TermsPage'));
 const SignupPage = lazy(() => import('../pages/SignupPage'));
 const ForgotPasswordPage = lazy(() => import('../pages/ForgotPasswordPage'));
+const ResetPasswordPage = lazy(() => import('../pages/ResetPasswordPage'));
 const WorkflowsPage = lazy(() => import('../pages/WorkflowsPage'));
 const HomePage = lazy(() => import('../pages/HomePage'));
 const CommunityPage = lazy(() => import('../pages/CommunityPage'));
@@ -55,6 +56,10 @@ export const publicRoutes: RouteObject[] = [
     {
         path: '/forgot-password',
         element: <ForgotPasswordPage />
+    },
+    {
+        path: '/reset-password',
+        element: <ResetPasswordPage />
     },
     {
         path: '/workflows',

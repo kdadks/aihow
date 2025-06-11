@@ -124,6 +124,7 @@ export interface AuthContextType {
   login: (email: string, password: string) => Promise<AuthResponse>;
   register: (email: string, password: string, username?: string) => Promise<AuthResponse>;
   logout: () => Promise<void>;
+  forgotPassword: (email: string) => Promise<void>;
   updateProfile: (profile: Partial<Omit<UserProfile, 'id' | 'roles'>>) => Promise<void>;
   checkAuth: () => Promise<boolean>;
   hasRole: (role: string) => boolean;

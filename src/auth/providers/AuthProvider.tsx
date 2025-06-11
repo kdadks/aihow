@@ -312,6 +312,28 @@ export function AuthProvider({ children }: AuthProviderProps) {
     }
   };
 
+  const forgotPassword = async (email: string): Promise<void> => {
+    try {
+      setState(prev => ({ ...prev, loading: true, error: null }));
+
+      const { error } = await supabase.auth.resetPasswordForEmail(email, {
+        redirectTo: window.location.origin + '/reset-password'
+      });
+
+      if (error) throw createAuthError('UNKNOWN', error.message);
+
+      setState(prev => ({ ...prev, loading: false }));
+    } catch (error) {
+      const authError = isAuthError(error) ? error : createAuthError('UNKNOWN', 'Failed to send reset email');
+      setState(prev => ({
+        ...prev,
+        loading: false,
+        error: authError
+      }));
+      throw authError;
+    }
+  };
+
   const checkAuth = async () => {
     try {
       const { data: { session } } = await supabase.auth.getSession();
@@ -339,6 +361,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     login,
     register,
     logout,
+    forgotPassword,
     updateProfile,
     checkAuth,
     hasRole,

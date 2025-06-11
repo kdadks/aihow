@@ -36,13 +36,16 @@ const initialState: AuthState = {
 // Default context implementation
 const defaultContext: AuthContextType = {
   ...initialState,
-  login: async () => { 
+  login: async () => {
     throw createAuthError('NOT_INITIALIZED');
   },
   register: async () => {
     throw createAuthError('NOT_INITIALIZED');
   },
   logout: async () => {
+    throw createAuthError('NOT_INITIALIZED');
+  },
+  forgotPassword: async () => {
     throw createAuthError('NOT_INITIALIZED');
   },
   updateProfile: async () => {
