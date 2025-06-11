@@ -25,6 +25,7 @@ const BundleDetailPage = lazy(() => import('../pages/BundleDetailPage'));
 const SearchPage = lazy(() => import('../pages/SearchPage'));
 const CaseStudyPage = lazy(() => import('../pages/CaseStudyPage'));
 const BlogPostDetailPage = lazy(() => import('../pages/BlogPostDetailPage'));
+const EmailConfirmationPage = lazy(() => import('../pages/EmailConfirmationPage'));
 
 export const publicRoutes: RouteObject[] = [
     {
@@ -130,5 +131,9 @@ export const publicRoutes: RouteObject[] = [
     {
         path: '/case-study/:id',
         element: <CaseStudyPage />
+    },
+    {
+        path: '/confirm-email',
+        element: <EmailConfirmationPage />
     }
 ];
