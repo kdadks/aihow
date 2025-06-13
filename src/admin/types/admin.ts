@@ -26,6 +26,11 @@ export interface RoleAssignment {
 }
 
 // User management types
+export interface UserProfile {
+    username: string | null;
+    full_name: string | null;
+}
+
 export interface AdminUser {
     id: string;
     email: string;
@@ -33,6 +38,7 @@ export interface AdminUser {
     created_at: string;
     last_sign_in_at: string | null;
     is_active: boolean;
+    profile: UserProfile | null;
 }
 
 export interface UserUpdateRequest {

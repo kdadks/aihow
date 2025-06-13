@@ -1,81 +1,72 @@
-import { createContext, useContext } from 'react';
-import { AuthContextType, AuthState, AuthError, AuthErrorType } from '../types';
-import { supabase } from '../../lib/supabase';
+import { createContext } from 'react';
+import { AuthContextType, AuthErrorType } from '../types';
 
-// Define specific auth error types
-export const AUTH_ERRORS: Record<AuthErrorType, string> = {
-  NOT_INITIALIZED: 'Authentication context not initialized',
-  INVALID_CREDENTIALS: 'Invalid email or password',
-  EMAIL_EXISTS: 'Email already registered',
-  WEAK_PASSWORD: 'Password is too weak',
-  NETWORK_ERROR: 'Network connection error',
-  PROFILE_CREATE_ERROR: 'Failed to create user profile',
-  UNAUTHORIZED: 'User not authenticated',
-  RATE_LIMIT: 'Too many attempts, please try again later',
-  ROLE_ASSIGN_ERROR: 'Failed to assign user role',
-  ROLE_NOT_FOUND: 'Role not found',
-  EMAIL_VERIFICATION: 'Please check your email to verify your account, then sign in',
-  EMAIL_NOT_VERIFIED: 'Please verify your email address before signing in',
-  UNKNOWN: 'An unexpected error occurred'
-};
-
-const createAuthError = (type: AuthErrorType, message?: string): AuthError => ({
-  type,
-  message: message || AUTH_ERRORS[type]
-});
-
-const initialState: AuthState = {
+// Default values for context - all async methods throw errors by default
+export const AuthContext = createContext<AuthContextType>({
   user: null,
   session: null,
-  loading: false,
   error: null,
+  loading: true,
   isInitialized: false,
-  isAuthenticated: false
-};
-
-// Default context implementation
-const defaultContext: AuthContextType = {
-  ...initialState,
-  login: async () => {
-    throw createAuthError('NOT_INITIALIZED');
-  },
-  register: async () => {
-    throw createAuthError('NOT_INITIALIZED');
-  },
-  logout: async () => {
-    throw createAuthError('NOT_INITIALIZED');
-  },
-  forgotPassword: async () => {
-    throw createAuthError('NOT_INITIALIZED');
-  },
-  updateProfile: async () => {
-    throw createAuthError('NOT_INITIALIZED');
-  },
-  checkAuth: async () => {
-    throw createAuthError('NOT_INITIALIZED');
-  },
-  hasRole: (role: string) => {
-    // Check user metadata from current session for role
-    if (!initialState.session?.user?.app_metadata) return false;
-    
-    const userRoles = initialState.session.user.app_metadata.roles || [];
-    if (!userRoles) return false;
-
-    // Support both array and string role formats
-    return Array.isArray(userRoles)
-      ? userRoles.includes(role)
-      : userRoles === role;
-  },
-  hasPermission: () => false,
+  isAuthenticated: false,
+  login: async () => { throw new Error('AuthContext not initialized'); },
+  register: async () => { throw new Error('AuthContext not initialized'); },
+  logout: async () => { throw new Error('AuthContext not initialized'); },
+  updateProfile: async () => { throw new Error('AuthContext not initialized'); },
+  forgotPassword: async () => { throw new Error('AuthContext not initialized'); },
+  checkAuth: async () => { throw new Error('AuthContext not initialized'); },
+  hasRole: () => false,
+  hasPermission: async () => false,
+  isUser: () => false,
   clearError: () => {}
+});
+
+// Centralized error messages
+export const AUTH_ERRORS: Record<AuthErrorType, string> = {
+  INVALID_CREDENTIALS: 'Invalid email or password',
+  EMAIL_EXISTS: 'An account with this email already exists',
+  UNAUTHORIZED: 'You must be logged in to access this resource',
+  PROFILE_FETCH_ERROR: 'Failed to load user profile',
+  PROFILE_CREATE_ERROR: 'Failed to create user profile',
+  DATABASE_ACCESS_ERROR: 'Database access denied. Please try logging in again.',
+  UNKNOWN: 'An unknown error occurred'
 };
 
-export const AuthContext = createContext<AuthContextType>(defaultContext);
+// Helper to collect and log errors
+export const logAuthError = (
+  type: AuthErrorType,
+  error: any,
+  context?: string
+) => {
+  const timestamp = new Date().toISOString();
+  const message = error?.message || AUTH_ERRORS[type];
+  const details = {
+    type,
+    message,
+    context,
+    timestamp,
+    originalError: error
+  };
 
-export const useAuth = () => {
-  const context = useContext(AuthContext);
-  if (!context) {
-    throw createAuthError('NOT_INITIALIZED', 'useAuth must be used within AuthProvider');
+  console.error('Auth Error:', details);
+
+  // Return formatted error
+  return {
+    type,
+    message: message || AUTH_ERRORS[type]
+  };
+};
+
+// Helper to check if a session token is present and not expired
+export const hasValidSession = (session: any): boolean => {
+  if (!session?.access_token) return false;
+
+  try {
+    const tokenData = JSON.parse(atob(session.access_token.split('.')[1]));
+    const expirationTime = tokenData.exp * 1000; // Convert to milliseconds
+    return Date.now() < expirationTime;
+  } catch (error) {
+    console.error('Error parsing session token:', error);
+    return false;
   }
-  return context;
 };
