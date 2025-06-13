@@ -11,7 +11,7 @@ import { AutocompleteSearch } from '../search/AutocompleteSearch';
 
 export const Header: React.FC = () => {
   const navigate = useNavigate();
-  const { user, isAuthenticated, logout } = useAuth();
+  const { user, isAuthenticated, isInitialized, logout } = useAuth();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [activeCategoryId, setActiveCategoryId] = useState<string | null>(null);
@@ -273,7 +273,8 @@ export const Header: React.FC = () => {
               placeholder="Search tools..."
             />
             
-            {isAuthenticated ? (
+            {/* Hide auth UI during initialization */}
+            {!isInitialized ? null : isAuthenticated ? (
               <div className="flex items-center space-x-3">
                 <Link
                   to="/my-content"
@@ -344,7 +345,8 @@ export const Header: React.FC = () => {
             role="banner"
             aria-label="Authentication section"
           >
-            {!isAuthenticated ? (
+            {/* Hide auth UI during initialization */}
+            {!isInitialized ? null : !isAuthenticated ? (
               <>
                 <div className="flex items-center justify-between mb-3">
                   <span className="text-sm font-semibold text-gray-900">Quick Access</span>
@@ -407,9 +409,15 @@ export const Header: React.FC = () => {
                     variant="ghost"
                     size="sm"
                     className="text-xs text-gray-500 mobile-touch-target"
-                    onClick={() => {
-                      // Note: logout functionality would need to be implemented in useAuth
-                      setIsMenuOpen(false);
+                    onClick={async () => {
+                      setIsMenuOpen(false);  // Close menu before logout to prevent UI flicker
+                      try {
+                        await logout();
+                        navigate('/');
+                      } catch (error) {
+                        console.error('Logout error:', error);
+                        navigate('/login');
+                      }
                     }}
                   >
                     Sign out

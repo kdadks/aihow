@@ -5,7 +5,6 @@ import { supabase } from '../lib/supabase';
 interface UserProfile {
     username?: string;
     full_name?: string;
-    email?: string;
 }
 
 export default function UserDashboard() {
@@ -23,18 +22,19 @@ export default function UserDashboard() {
         if (!user) return;
 
         try {
-            const { data: profileData } = await supabase
+            // Get profile data directly from user object and profiles table
+            const { data: profileData, error } = await supabase
                 .from('profiles')
-                .select('username, full_name, email')
+                .select('username, full_name')  // avatar_url was being selected but not used
                 .eq('id', user.id)
                 .single();
 
+            if (error) throw error;
             setProfile(profileData);
         } catch (error) {
             console.error('Error fetching profile:', error);
             // Use fallback data if profile doesn't exist
             setProfile({
-                email: user.email || '',
                 username: user.email?.split('@')[0] || ''
             });
         } finally {
@@ -45,9 +45,8 @@ export default function UserDashboard() {
     const getDisplayName = () => {
         if (profile?.full_name) return profile.full_name;
         if (profile?.username) return profile.username;
-        if (profile?.email || user?.email) {
-            const email = profile?.email || user?.email || '';
-            return email.split('@')[0]; // Use the part before @ as display name
+        if (user?.email) {
+            return user.email.split('@')[0]; // Use the part before @ as display name
         }
         return 'User';
     };

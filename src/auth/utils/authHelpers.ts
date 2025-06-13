@@ -1,6 +1,24 @@
 import { Session } from '@supabase/supabase-js';
-import { supabase } from '../../lib/supabase';
+import { supabase, getProfile } from '../../lib/supabase';
 import { User, UserProfile } from '../types';
+
+/**
+ * Gets user profile by ID
+ */
+export const getUserProfile = async (userId: string): Promise<UserProfile | null> => {
+  // Use the optimized getProfile function from lib/supabase.ts
+  const profile = await getProfile(userId);
+  
+  if (!profile) return null;
+  
+  // Convert to UserProfile type
+  return {
+    username: profile.username,
+    full_name: profile.full_name,
+    avatar_url: profile.avatar_url || null,
+    roles: profile.roles || []
+  };
+};
 
 /**
  * Checks if the current session is valid
@@ -18,7 +36,7 @@ export const isSessionValid = (session: Session | null): boolean => {
  */
 export const checkUserRole = (user: User | null, requiredRole: string): boolean => {
   if (!user?.profile?.roles) return false;
-  return user.profile.roles.some(role => role.name === requiredRole);
+  return user.profile.roles.includes(requiredRole);
 };
 
 /**
@@ -26,7 +44,7 @@ export const checkUserRole = (user: User | null, requiredRole: string): boolean 
  */
 export const getUserRoles = (user: User | null): string[] => {
   if (!user?.profile?.roles) return [];
-  return user.profile.roles.map(role => role.name);
+  return user.profile.roles;
 };
 
 /**
@@ -45,7 +63,7 @@ export const updateUserProfile = async (
 
   if (error) throw error;
   if (!data) throw new Error('Profile not found');
-  return data;
+  return data as UserProfile;
 };
 
 /**
@@ -93,62 +111,7 @@ export const removeUserRole = async (userId: string, roleName: string): Promise<
   const { error } = await supabase
     .from('user_roles')
     .delete()
-    .match({
-      user_id: userId,
-      role_id: role.id
-    });
+    .match({ user_id: userId, role_id: role.id });
 
   if (error) throw error;
-};
-
-/**
- * Gets user profile by ID
- */
-export const getUserProfile = async (userId: string): Promise<UserProfile | null> => {
-  const { data, error } = await supabase
-    .from('profiles')
-    .select(`
-      id,
-      username,
-      full_name,
-      avatar_url,
-      user_roles (
-        roles (
-          id,
-          name,
-          description
-        )
-      )
-    `)
-    .eq('id', userId)
-    .single();
-
-  if (error) throw error;
-  
-  return data ? {
-    ...data,
-    roles: data.user_roles?.map((ur: any) => ur.roles) || []
-  } : null;
-};
-
-/**
- * Formats error messages from Supabase
- */
-export const formatAuthError = (error: any): string => {
-  if (typeof error === 'string') return error;
-  
-  const message = error?.message || 'An unknown error occurred';
-  
-  // Handle specific error cases
-  if (message.includes('Email not confirmed')) {
-    return 'Please confirm your email address before logging in';
-  }
-  if (message.includes('Invalid login credentials')) {
-    return 'Invalid email or password';
-  }
-  if (message.includes('Email already registered')) {
-    return 'An account with this email already exists';
-  }
-  
-  return message;
 };

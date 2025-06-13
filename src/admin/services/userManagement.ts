@@ -9,13 +9,25 @@ import type {
 } from '../types/admin';
 import type { AdminPermissions } from '../types/permissions';
 
+interface DatabasePermission {
+    id: number;
+    name: string;
+    description: string;
+    category: string;
+    created_at: string;
+}
+
 interface DatabaseRole {
-    id: string;
+    id: number;
     name: string;
     description: string | null;
-    permissions: AdminPermissions;
     created_at: string;
     updated_at: string;
+    permissions?: Array<{
+        permission_name: {
+            name: string;
+        };
+    }>;
 }
 
 interface DatabaseUser {
@@ -24,9 +36,51 @@ interface DatabaseUser {
     created_at: string;
     last_sign_in_at: string | null;
     is_active: boolean;
-    user_role_assignments: {
-        role: DatabaseRole;
+    profiles?: {
+        username: string | null;
+        full_name: string | null;
     }[];
+    user_roles: {
+        role: DatabaseRole;
+        role_permissions: {
+            permission: DatabasePermission;
+        }[];
+    }[];
+}
+
+/**
+ * Maps an array of permission names to the AdminPermissions type
+ */
+function mapToAdminPermissions(permissions: string[]): AdminPermissions {
+    const result = {
+        canManageUsers: false,
+        canManageContent: false,
+        canModerateContent: false,
+        canManageSettings: false,
+        canViewMetrics: false
+    };
+
+    permissions.forEach(perm => {
+        switch (perm) {
+            case 'admin:manage_users':
+                result.canManageUsers = true;
+                break;
+            case 'content:write':
+                result.canManageContent = true;
+                break;
+            case 'content:moderate':
+                result.canModerateContent = true;
+                break;
+            case 'system:settings':
+                result.canManageSettings = true;
+                break;
+            case 'system:analytics':
+                result.canViewMetrics = true;
+                break;
+        }
+    });
+
+    return result;
 }
 
 class UserManagementService {
@@ -35,6 +89,7 @@ class UserManagementService {
             const from = (page - 1) * pageSize;
             const to = from + pageSize - 1;
 
+            // First get users with basic role info
             const { data: users, error } = await supabase
                 .from('users')
                 .select(`
@@ -42,9 +97,18 @@ class UserManagementService {
                     email,
                     created_at,
                     last_sign_in_at,
-                    is_active,
-                    user_role_assignments!left (
-                        role:user_roles (*)
+                    user_roles(
+                        roles(
+                            id,
+                            name,
+                            description,
+                            created_at,
+                            updated_at
+                        )
+                    ),
+                    profiles!profiles_id_fkey(
+                        username,
+                        full_name
                     )
                 `)
                 .range(from, to)
@@ -58,23 +122,34 @@ class UserManagementService {
                 return { data: [], error: null };
             }
 
-            // Transform the nested data structure to match AdminUser type
-            const transformedUsers: AdminUser[] = (users as unknown as DatabaseUser[]).map(user => {
-                const role = user.user_role_assignments?.[0]?.role;
+            // Transform into AdminUser type
+            const transformedUsers: AdminUser[] = users.map((user: any) => {
+                const roleData = user.user_roles?.[0]?.roles?.[0];
+
                 return {
                     id: user.id,
                     email: user.email,
-                    role: role ? {
-                        id: role.id,
-                        name: role.name,
-                        description: role.description,
-                        permissions: role.permissions,
-                        created_at: role.created_at,
-                        updated_at: role.updated_at
+                    role: roleData ? {
+                        id: String(roleData.id),
+                        name: roleData.name,
+                        description: roleData.description,
+                        permissions: {
+                            canManageUsers: roleData.name === 'admin' || roleData.name === 'system_admin',
+                            canManageContent: true, // All roles can manage content
+                            canModerateContent: true,
+                            canManageSettings: roleData.name === 'admin' || roleData.name === 'system_admin',
+                            canViewMetrics: true
+                        },
+                        created_at: user.created_at,
+                        updated_at: user.created_at // Using created_at since updated_at isn't in the query
                     } : null,
                     created_at: user.created_at,
                     last_sign_in_at: user.last_sign_in_at,
-                    is_active: user.is_active
+                    profile: user.profiles?.[0] ? {
+                        username: user.profiles[0].username,
+                        full_name: user.profiles[0].full_name
+                    } : null,
+                    is_active: true // Since auth.users doesn't have is_active, default to true
                 };
             });
 
@@ -86,6 +161,7 @@ class UserManagementService {
 
     async getUserById(id: string): Promise<AdminResponse<AdminUser>> {
         try {
+            // Get user data and profile in a single query
             const { data: user, error } = await supabase
                 .from('users')
                 .select(`
@@ -93,9 +169,19 @@ class UserManagementService {
                     email,
                     created_at,
                     last_sign_in_at,
-                    is_active,
-                    user_role_assignments!left (
-                        role:user_roles (*)
+                    user_roles(
+                        roles(
+                            id,
+                            name, 
+                            description,
+                            role_permissions(
+                                permissions(name)
+                            )
+                        )
+                    ),
+                    profiles!profiles_id_fkey(
+                        username,
+                        full_name
                     )
                 `)
                 .eq('id', id)
@@ -109,23 +195,31 @@ class UserManagementService {
                 throw new Error('User not found');
             }
 
-            const userData = user as unknown as DatabaseUser;
-            const role = userData.user_role_assignments?.[0]?.role;
+            const roleData = user.user_roles?.[0]?.roles?.[0];
+            const role = roleData ? {
+                id: String(roleData.id),
+                name: roleData.name,
+                description: roleData.description,
+                permissions: mapToAdminPermissions(
+                    roleData.role_permissions?.flatMap(rp => 
+                        rp.permissions.map(p => p.name)
+                    ) || []
+                ),
+                created_at: user.created_at,
+                updated_at: user.created_at // Using created_at as updated_at since it's not in the query
+            } : null;
 
             const transformedUser: AdminUser = {
-                id: userData.id,
-                email: userData.email,
-                role: role ? {
-                    id: role.id,
-                    name: role.name,
-                    description: role.description,
-                    permissions: role.permissions,
-                    created_at: role.created_at,
-                    updated_at: role.updated_at
+                id: user.id,
+                email: user.email,
+                role,
+                created_at: user.created_at,
+                last_sign_in_at: user.last_sign_in_at,
+                profile: user.profiles?.[0] ? {
+                    username: user.profiles[0].username,
+                    full_name: user.profiles[0].full_name
                 } : null,
-                created_at: userData.created_at,
-                last_sign_in_at: userData.last_sign_in_at,
-                is_active: userData.is_active
+                is_active: true // Since auth.users doesn't have is_active, default to true
             };
 
             return { data: transformedUser, error: null };
@@ -137,8 +231,13 @@ class UserManagementService {
     async getRoles(): Promise<AdminResponse<Role[]>> {
         try {
             const { data: roles, error } = await supabase
-                .from('user_roles')
-                .select('*')
+                .from('roles')
+                .select(`
+                    *,
+                    role_permissions!left (
+                        permission:permissions!inner (*)
+                    )
+                `)
                 .order('name');
 
             if (error) {
@@ -149,14 +248,30 @@ class UserManagementService {
                 return { data: [], error: null };
             }
 
-            const typedRoles: Role[] = roles.map(role => ({
-                id: role.id,
-                name: role.name,
-                description: role.description,
-                permissions: role.permissions as AdminPermissions,
-                created_at: role.created_at,
-                updated_at: role.updated_at
-            }));
+            interface RoleWithPermissions {
+                id: number;
+                name: string;
+                description: string | null;
+                created_at: string;
+                updated_at: string;
+                role_permissions?: {
+                    permission: DatabasePermission;
+                }[];
+            }
+
+            const typedRoles: Role[] = roles.map((role: RoleWithPermissions) => {
+                const permissions = role.role_permissions?.map((rp: { permission: DatabasePermission }) => rp.permission.name) || [];
+                const mappedPermissions = mapToAdminPermissions(permissions);
+                
+                return {
+                    id: String(role.id), // Convert to string for interface compatibility
+                    name: role.name,
+                    description: role.description,
+                    permissions: mappedPermissions,
+                    created_at: role.created_at,
+                    updated_at: role.updated_at
+                };
+            });
 
             return { data: typedRoles, error: null };
         } catch (error) {
@@ -177,7 +292,7 @@ class UserManagementService {
                 .from('user_role_assignments')
                 .insert({
                     user_id: userId,
-                    role_id: roleId,
+                    role_id: parseInt(roleId), // Convert to number for BIGSERIAL
                     assigned_by: (await supabase.auth.getUser()).data.user?.id
                 })
                 .select()
@@ -194,9 +309,9 @@ class UserManagementService {
             const roleAssignment: RoleAssignment = {
                 id: assignment.id,
                 user_id: assignment.user_id,
-                role_id: assignment.role_id,
+                role_id: String(assignment.role_id), // Convert back to string for interface
                 assigned_by: assignment.assigned_by,
-                assigned_at: assignment.assigned_at
+                assigned_at: assignment.created_at // Using created_at as assigned_at
             };
 
             return { data: roleAssignment, error: null };
@@ -210,7 +325,10 @@ class UserManagementService {
             const { error } = await supabase
                 .from('user_role_assignments')
                 .delete()
-                .match({ user_id: userId, role_id: roleId });
+                .match({ 
+                    user_id: userId,
+                    role_id: parseInt(roleId) // Convert to number for BIGSERIAL
+                });
 
             if (error) {
                 throw error;

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { Button } from '../../components/ui/Button';
@@ -11,9 +11,28 @@ export function LoginForm({ onSuccess }: LoginFormProps) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
-  const { login, loading } = useAuth();
+  const { login, loading, isAuthenticated } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
+
+  // Redirect if already authenticated
+  useEffect(() => {
+    if (isAuthenticated) {
+      const state = location.state as { from?: string };
+      const returnTo = state?.from || '/';
+      navigate(decodeURIComponent(returnTo), { replace: true });
+    }
+  }, [isAuthenticated, location.state, navigate]);
+  
+  // Handle error messages passed from ProtectedRoute
+  useEffect(() => {
+    const state = location.state as { error?: string };
+    if (state?.error) {
+      setError(state.error);
+      // Clear the error from location state to prevent it from persisting
+      window.history.replaceState({}, document.title);
+    }
+  }, [location]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -23,8 +42,9 @@ export function LoginForm({ onSuccess }: LoginFormProps) {
       await login(email, password);
       
       // Handle redirect after successful login
+      const state = location.state as { from?: string };
       const params = new URLSearchParams(location.search);
-      const returnTo = params.get('returnTo');
+      const returnTo = state?.from || params.get('returnTo') || '/';
       
       if (onSuccess) {
         onSuccess();
