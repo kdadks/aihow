@@ -9,8 +9,10 @@ export const assessmentQuestions: Question[] = [
       { id: 'purpose-1', text: 'Content Creation (text, images, videos)', value: 'content' },
       { id: 'purpose-2', text: 'Productivity & Workflow Automation', value: 'productivity' },
       { id: 'purpose-3', text: 'Software Development & Coding', value: 'development' },
-      { id: 'purpose-4', text: 'Data Analysis & Visualization', value: 'data' },
-      { id: 'purpose-5', text: 'Learning & Education', value: 'education' }
+      { id: 'purpose-4', text: 'Research & Academic Work', value: 'research' },
+      { id: 'purpose-5', text: 'Business & Enterprise Applications', value: 'business' },
+      { id: 'purpose-6', text: 'Data Analysis & Visualization', value: 'data' },
+      { id: 'purpose-7', text: 'Learning & Education', value: 'education' }
     ]
   },
   {
@@ -69,5 +71,37 @@ export const assessmentQuestions: Question[] = [
       { id: 'budget-4', text: '$50-100/month', value: 'high' },
       { id: 'budget-5', text: 'Over $100/month', value: 'enterprise' }
     ]
+  },
+  {
+    id: 'research-focus',
+    text: 'What type of research work are you primarily focused on?',
+    type: 'multiple',
+    options: [
+      { id: 'research-1', text: 'Academic literature review and analysis', value: 'literature' },
+      { id: 'research-2', text: 'Complex mathematical or scientific reasoning', value: 'reasoning' },
+      { id: 'research-3', text: 'Data analysis and statistical research', value: 'data-analysis' },
+      { id: 'research-4', text: 'Knowledge management and organization', value: 'knowledge' },
+      { id: 'research-5', text: 'Academic writing and paper creation', value: 'writing' }
+    ],
+    dependsOn: {
+      questionId: 'purpose',
+      answers: ['research']
+    }
+  },
+  {
+    id: 'business-focus',
+    text: 'What business applications are you most interested in?',
+    type: 'multiple',
+    options: [
+      { id: 'business-1', text: 'Team collaboration and communication', value: 'collaboration' },
+      { id: 'business-2', text: 'AI model deployment and MLOps', value: 'deployment' },
+      { id: 'business-3', text: 'Enterprise security and compliance', value: 'security' },
+      { id: 'business-4', text: 'Custom AI model training and fine-tuning', value: 'custom-models' },
+      { id: 'business-5', text: 'Business process automation', value: 'automation' }
+    ],
+    dependsOn: {
+      questionId: 'purpose',
+      answers: ['business']
+    }
   }
 ];

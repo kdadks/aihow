@@ -11260,5 +11260,2884 @@ export const tools: Tool[] = [
     featured: false,
     integrations: ['Laboratory systems', 'Electronic health records', 'Pathology workflows'],
     lastVerified: new Date('2025-06-01')
+  },
+  
+  // Additional Media Creation Tools
+  // Video Generation Tools
+  {
+    id: 'invideo-ai',
+    name: 'InVideo AI',
+    slug: 'invideo-ai',
+    description: 'InVideo AI is an intelligent video creation platform that transforms text prompts into professional videos. It offers AI-powered script generation, voice synthesis, and automated video editing with a vast library of templates and stock footage.',
+    shortDescription: 'AI video creator that transforms text into professional videos',
+    logo: 'https://images.pexels.com/photos/7988147/pexels-photo-7988147.jpeg',
+    website: 'https://invideo.io',
+    categoryId: 'media-creation',
+    subcategoryIds: ['video-generation'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$15/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['10 exports/month', '15 min videos', 'InVideo watermark', 'iStock media access']
+        },
+        {
+          name: 'Plus',
+          price: '$15/month',
+          billingPeriod: 'monthly',
+          features: ['40 exports/month', '60 min videos', 'No watermark', 'Premium templates']
+        },
+        {
+          name: 'Max',
+          price: '$30/month',
+          billingPeriod: 'monthly',
+          features: ['Unlimited exports', 'Unlimited duration', 'Voice cloning', 'Priority support']
+        }
+      ]
+    },
+    features: [
+      'AI script generation from prompts',
+      'Text-to-video conversion',
+      'Voice synthesis and cloning',
+      'Automated video editing',
+      'Template customization',
+      'Stock footage integration'
+    ],
+    limitations: [
+      'Limited exports in free tier',
+      'Watermark on free videos',
+      'Template-based approach',
+      'Quality depends on input prompts'
+    ],
+    rating: 4.4,
+    reviewCount: 2800,
+    trending: true,
+    featured: false,
+    integrations: ['YouTube', 'Social media platforms', 'Cloud storage', 'Stock libraries'],
+    lastVerified: new Date('2025-06-16')
+  },
+  {
+    id: 'fliki',
+    name: 'Fliki',
+    slug: 'fliki',
+    description: 'Fliki is an AI-powered video generation platform that creates videos from text, articles, or presentations. It features realistic AI voices, automated script generation, and millions of stock assets for professional video content.',
+    shortDescription: 'Text-to-video platform with AI voices and automated generation',
+    logo: 'https://images.pexels.com/photos/7988156/pexels-photo-7988156.jpeg',
+    website: 'https://fliki.ai',
+    categoryId: 'media-creation',
+    subcategoryIds: ['video-generation'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$21/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['5 minutes/month', 'Standard voices', 'Basic templates']
+        },
+        {
+          name: 'Standard',
+          price: '$21/month',
+          billingPeriod: 'monthly',
+          features: ['180 minutes/month', 'Premium voices', 'HD quality', 'No watermark']
+        },
+        {
+          name: 'Premium',
+          price: '$66/month',
+          billingPeriod: 'monthly',
+          features: ['600 minutes/month', 'Ultra-realistic voices', 'Voice cloning', 'API access']
+        }
+      ]
+    },
+    features: [
+      'Text-to-video conversion',
+      'Article to video transformation',
+      'AI voice synthesis',
+      'Automated scene generation',
+      'Stock media library',
+      'Multi-language support'
+    ],
+    limitations: [
+      'Limited free minutes',
+      'Voice quality varies',
+      'Template restrictions',
+      'Export limitations on free tier'
+    ],
+    rating: 4.3,
+    reviewCount: 1900,
+    trending: true,
+    featured: false,
+    integrations: ['Social media platforms', 'Blog platforms', 'Stock libraries'],
+    lastVerified: new Date('2025-06-16')
+  },
+  {
+    id: 'steve-ai',
+    name: 'Steve AI',
+    slug: 'steve-ai',
+    description: 'Steve AI is an AI video maker that transforms text into animated videos and live-action content. It offers character-based animations, automated voiceovers, and extensive customization options for various video formats.',
+    shortDescription: 'AI video maker for animated and live-action content creation',
+    logo: 'https://images.pexels.com/photos/7988172/pexels-photo-7988172.jpeg',
+    website: 'https://www.steve.ai',
+    categoryId: 'media-creation',
+    subcategoryIds: ['video-generation'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$15/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['3 videos/month', '2 min duration', 'Basic templates', 'Steve watermark']
+        },
+        {
+          name: 'Basic',
+          price: '$15/month',
+          billingPeriod: 'monthly',
+          features: ['Unlimited videos', '10 min duration', 'No watermark', 'Premium assets']
+        },
+        {
+          name: 'Pro',
+          price: '$60/month',
+          billingPeriod: 'monthly',
+          features: ['Extended duration', 'Voice cloning', 'Team collaboration', 'Priority support']
+        }
+      ]
+    },
+    features: [
+      'Text-to-animated video',
+      'Live-action video creation',
+      'Character animations',
+      'AI voiceover generation',
+      'Template customization',
+      'Multi-format export'
+    ],
+    limitations: [
+      'Limited free video count',
+      'Watermark on free tier',
+      'Template-dependent quality',
+      'Learning curve for customization'
+    ],
+    rating: 4.2,
+    reviewCount: 1600,
+    trending: false,
+    featured: false,
+    integrations: ['Social media platforms', 'Cloud storage', 'Stock libraries'],
+    lastVerified: new Date('2025-06-16')
+  },
+  {
+    id: 'heygen',
+    name: 'HeyGen',
+    slug: 'heygen',
+    description: 'HeyGen is an AI video generation platform that creates personalized videos with AI avatars. It specializes in business communications, marketing videos, and educational content with realistic human presenters.',
+    shortDescription: 'AI avatar video generator for business and marketing content',
+    logo: 'https://images.pexels.com/photos/7988180/pexels-photo-7988180.jpeg',
+    website: 'https://www.heygen.com',
+    categoryId: 'media-creation',
+    subcategoryIds: ['video-generation', 'avatar-generation'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$24/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['1 minute/month', 'Basic avatars', 'Standard quality']
+        },
+        {
+          name: 'Creator',
+          price: '$24/month',
+          billingPeriod: 'monthly',
+          features: ['15 minutes/month', 'Premium avatars', 'HD quality', 'Voice cloning']
+        },
+        {
+          name: 'Business',
+          price: '$120/month',
+          billingPeriod: 'monthly',
+          features: ['90 minutes/month', 'Custom avatars', '4K quality', 'API access']
+        }
+      ]
+    },
+    features: [
+      'AI avatar creation',
+      'Personalized video generation',
+      'Voice cloning technology',
+      'Multi-language support',
+      'Custom avatar training',
+      'Business template library'
+    ],
+    limitations: [
+      'Limited free usage',
+      'High-quality avatars require paid plans',
+      'Custom avatar creation costs extra',
+      'Processing time for complex videos'
+    ],
+    rating: 4.5,
+    reviewCount: 2200,
+    trending: true,
+    featured: true,
+    integrations: ['CRM systems', 'Email platforms', 'Social media', 'API integrations'],
+    lastVerified: new Date('2025-06-16')
+  },
+
+  // Image Generation Tools
+  {
+    id: 'ideogram',
+    name: 'Ideogram',
+    slug: 'ideogram',
+    description: 'Ideogram is an AI image generator that excels at creating images with accurate text rendering and typography. It offers high-quality image generation with precise control over text elements and visual composition.',
+    shortDescription: 'AI image generator with superior text rendering capabilities',
+    logo: 'https://images.pexels.com/photos/8438920/pexels-photo-8438920.jpeg',
+    website: 'https://ideogram.ai',
+    categoryId: 'media-creation',
+    subcategoryIds: ['image-generation'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$7/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['100 images/month', 'Standard quality', 'Public generations']
+        },
+        {
+          name: 'Basic',
+          price: '$7/month',
+          billingPeriod: 'monthly',
+          features: ['400 images/month', 'Private generations', 'Priority processing']
+        },
+        {
+          name: 'Plus',
+          price: '$16/month',
+          billingPeriod: 'monthly',
+          features: ['1000 images/month', 'Higher resolution', 'Commercial usage']
+        }
+      ]
+    },
+    features: [
+      'Superior text rendering in images',
+      'Typography integration',
+      'Style transfer capabilities',
+      'High-resolution output',
+      'Batch generation',
+      'Commercial licensing'
+    ],
+    limitations: [
+      'Limited free generations',
+      'Public visibility on free tier',
+      'Queue times during peak usage',
+      'Style limitations compared to specialized tools'
+    ],
+    rating: 4.6,
+    reviewCount: 1500,
+    trending: true,
+    featured: false,
+    integrations: ['API access', 'Web interface', 'Download tools'],
+    lastVerified: new Date('2025-06-16')
+  },
+  {
+    id: 'flux',
+    name: 'Flux',
+    slug: 'flux',
+    description: 'Flux is a next-generation AI image generator that creates highly detailed and photorealistic images. It offers advanced prompt understanding, style consistency, and professional-grade image quality for creative professionals.',
+    shortDescription: 'Next-gen AI image generator with photorealistic quality',
+    logo: 'https://images.pexels.com/photos/8438925/pexels-photo-8438925.jpeg',
+    website: 'https://flux.ai',
+    categoryId: 'media-creation',
+    subcategoryIds: ['image-generation'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$10/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['25 images/month', 'Standard resolution', 'Basic models']
+        },
+        {
+          name: 'Pro',
+          price: '$10/month',
+          billingPeriod: 'monthly',
+          features: ['500 images/month', 'High resolution', 'Advanced models', 'Priority queue']
+        },
+        {
+          name: 'Enterprise',
+          price: '$50/month',
+          billingPeriod: 'monthly',
+          features: ['5000 images/month', 'Ultra-high resolution', 'Custom models', 'API access']
+        }
+      ]
+    },
+    features: [
+      'Photorealistic image generation',
+      'Advanced prompt understanding',
+      'Style consistency',
+      'High-resolution output',
+      'Custom model training',
+      'Professional workflows'
+    ],
+    limitations: [
+      'Limited free tier',
+      'Processing time for high-quality images',
+      'Learning curve for optimal prompting',
+      'Requires good hardware for local use'
+    ],
+    rating: 4.7,
+    reviewCount: 1200,
+    trending: true,
+    featured: true,
+    integrations: ['API access', 'Creative software plugins', 'Workflow tools'],
+    lastVerified: new Date('2025-06-16')
+  },
+  {
+    id: 'freepik-ai',
+    name: 'Freepik AI',
+    slug: 'freepik-ai',
+    description: 'Freepik AI is an AI image generator integrated into the popular Freepik platform. It offers easy-to-use image generation with access to millions of stock assets and seamless integration with design workflows.',
+    shortDescription: 'AI image generator integrated with Freepik stock library',
+    logo: 'https://images.pexels.com/photos/8438928/pexels-photo-8438928.jpeg',
+    website: 'https://www.freepik.com/ai',
+    categoryId: 'media-creation',
+    subcategoryIds: ['image-generation'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$7/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['3 AI images/day', 'Basic quality', 'Freepik attribution']
+        },
+        {
+          name: 'Premium',
+          price: '$7/month',
+          billingPeriod: 'monthly',
+          features: ['100 AI images/month', 'HD quality', 'No attribution', 'Stock access']
+        },
+        {
+          name: 'Teams',
+          price: '$15/user/month',
+          billingPeriod: 'monthly',
+          features: ['Unlimited AI images', 'Team features', 'Brand management', 'Priority support']
+        }
+      ]
+    },
+    features: [
+      'Easy AI image generation',
+      'Stock library integration',
+      'Template-based creation',
+      'Brand consistency tools',
+      'Collaborative features',
+      'Commercial licensing'
+    ],
+    limitations: [
+      'Limited daily free images',
+      'Attribution required on free tier',
+      'Less advanced than specialized tools',
+      'Template-dependent outputs'
+    ],
+    rating: 4.3,
+    reviewCount: 3500,
+    trending: false,
+    featured: false,
+    integrations: ['Freepik ecosystem', 'Design tools', 'Stock libraries'],
+    lastVerified: new Date('2025-06-16')
+  },
+  {
+    id: 'canva-ai',
+    name: 'Canva AI',
+    slug: 'canva-ai',
+    description: 'Canva AI integrates advanced AI image generation and editing capabilities into the popular design platform. It offers text-to-image generation, background removal, and smart design suggestions within Canva\'s ecosystem.',
+    shortDescription: 'AI-powered design tools integrated into Canva platform',
+    logo: 'https://images.pexels.com/photos/8438932/pexels-photo-8438932.jpeg',
+    website: 'https://www.canva.com/ai-image-generator',
+    categoryId: 'media-creation',
+    subcategoryIds: ['image-generation', 'social-media-content'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$15/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['Limited AI features', 'Basic templates', 'Canva watermark']
+        },
+        {
+          name: 'Pro',
+          price: '$15/month',
+          billingPeriod: 'monthly',
+          features: ['500 AI images/month', 'Premium templates', 'Background remover', 'Brand kit']
+        },
+        {
+          name: 'Teams',
+          price: '$30/month for 5 users',
+          billingPeriod: 'monthly',
+          features: ['Unlimited AI features', 'Team collaboration', 'Brand management', 'Admin controls']
+        }
+      ]
+    },
+    features: [
+      'Text-to-image generation',
+      'Background removal',
+      'Smart design suggestions',
+      'Template integration',
+      'Brand consistency',
+      'Social media optimization'
+    ],
+    limitations: [
+      'Limited AI features on free tier',
+      'Template-based approach',
+      'Less control than specialized tools',
+      'Quality varies with complexity'
+    ],
+    rating: 4.4,
+    reviewCount: 8500,
+    trending: true,
+    featured: false,
+    integrations: ['Canva ecosystem', 'Social media platforms', 'Stock libraries', 'Cloud storage'],
+    lastVerified: new Date('2025-06-16')
+  },
+
+  // Audio Generation Tools
+  {
+    id: 'udio',
+    name: 'Udio',
+    slug: 'udio',
+    description: 'Udio is an AI music generation platform that creates high-quality songs with vocals and instruments from text prompts. It offers advanced music composition capabilities with natural-sounding vocals and professional mixing.',
+    shortDescription: 'AI music generator creating complete songs with vocals',
+    logo: 'https://images.pexels.com/photos/8617876/pexels-photo-8617876.jpeg',
+    website: 'https://udio.ai',
+    categoryId: 'media-creation',
+    subcategoryIds: ['audio-generation'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$10/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['1200 credits/month', 'Standard quality', 'Public sharing']
+        },
+        {
+          name: 'Standard',
+          price: '$10/month',
+          billingPeriod: 'monthly',
+          features: ['4800 credits/month', 'High quality', 'Private generations', 'Commercial use']
+        },
+        {
+          name: 'Pro',
+          price: '$30/month',
+          billingPeriod: 'monthly',
+          features: ['14400 credits/month', 'Ultra quality', 'Priority processing', 'Extended clips']
+        }
+      ]
+    },
+    features: [
+      'Text-to-music generation',
+      'Vocal synthesis',
+      'Genre versatility',
+      'High-quality audio output',
+      'Lyric integration',
+      'Commercial licensing'
+    ],
+    limitations: [
+      'Credit-based usage',
+      'Processing time for complex songs',
+      'Limited fine-tuning control',
+      'Copyright considerations for similar outputs'
+    ],
+    rating: 4.5,
+    reviewCount: 1800,
+    trending: true,
+    featured: true,
+    integrations: ['Audio editing software', 'Music platforms', 'API access'],
+    lastVerified: new Date('2025-06-16')
+  },
+  {
+    id: 'boomy',
+    name: 'Boomy',
+    slug: 'boomy',
+    description: 'Boomy is an AI music creation platform that enables anyone to create original songs in seconds. It offers instant music generation, distribution to streaming platforms, and monetization opportunities for creators.',
+    shortDescription: 'Instant AI music creation with streaming distribution',
+    logo: 'https://images.pexels.com/photos/8617880/pexels-photo-8617880.jpeg',
+    website: 'https://boomy.com',
+    categoryId: 'media-creation',
+    subcategoryIds: ['audio-generation'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$2.99/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['25 saves/month', 'Basic editing', 'Streaming distribution']
+        },
+        {
+          name: 'Creator',
+          price: '$2.99/month',
+          billingPeriod: 'monthly',
+          features: ['500 saves/month', 'Advanced editing', 'MP3 downloads', 'Priority support']
+        },
+        {
+          name: 'Pro',
+          price: '$9.99/month',
+          billingPeriod: 'monthly',
+          features: ['Unlimited saves', 'Commercial licensing', 'WAV downloads', 'Release priority']
+        }
+      ]
+    },
+    features: [
+      'Instant music generation',
+      'Style customization',
+      'Streaming platform distribution',
+      'Monetization opportunities',
+      'Community features',
+      'Mobile app access'
+    ],
+    limitations: [
+      'Limited customization depth',
+      'Generic output quality',
+      'Revenue sharing required',
+      'Limited genre variety'
+    ],
+    rating: 4.0,
+    reviewCount: 5200,
+    trending: false,
+    featured: false,
+    integrations: ['Spotify', 'Apple Music', 'YouTube Music', 'Amazon Music'],
+    lastVerified: new Date('2025-06-16')
+  },
+  {
+    id: 'beatoven-ai',
+    name: 'Beatoven.ai',
+    slug: 'beatoven-ai',
+    description: 'Beatoven.ai creates unique, royalty-free background music for videos, podcasts, and games. It uses AI to compose music that matches the mood and pacing of your content with granular control over composition.',
+    shortDescription: 'AI composer for royalty-free background music',
+    logo: 'https://images.pexels.com/photos/8617885/pexels-photo-8617885.jpeg',
+    website: 'https://www.beatoven.ai',
+    categoryId: 'media-creation',
+    subcategoryIds: ['audio-generation'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$3/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['15 minutes/month', 'Basic quality', 'Personal use only']
+        },
+        {
+          name: 'Personal',
+          price: '$3/month',
+          billingPeriod: 'monthly',
+          features: ['60 minutes/month', 'HD quality', 'Personal & commercial use']
+        },
+        {
+          name: 'Creator',
+          price: '$6/month',
+          billingPeriod: 'monthly',
+          features: ['300 minutes/month', 'Premium quality', 'Advanced customization']
+        }
+      ]
+    },
+    features: [
+      'Mood-based music generation',
+      'Video synchronization',
+      'Granular control',
+      'Royalty-free licensing',
+      'Multiple export formats',
+      'Real-time editing'
+    ],
+    limitations: [
+      'Limited free minutes',
+      'Learning curve for advanced features',
+      'Processing time for complex compositions',
+      'Style limitations for specific genres'
+    ],
+    rating: 4.3,
+    reviewCount: 1400,
+    trending: true,
+    featured: false,
+    integrations: ['Video editing software', 'Social media platforms', 'Podcast platforms'],
+    lastVerified: new Date('2025-06-16')
+  },
+  {
+    id: 'lalal-ai',
+    name: 'Lalal.ai',
+    slug: 'lalal-ai',
+    description: 'Lalal.ai is an AI-powered audio separation tool that can extract vocals, instruments, and other audio components from music tracks. It\'s ideal for creating karaoke tracks, remixes, and audio post-production.',
+    shortDescription: 'AI audio separation for vocals and instrument extraction',
+    logo: 'https://images.pexels.com/photos/8617890/pexels-photo-8617890.jpeg',
+    website: 'https://www.lalal.ai',
+    categoryId: 'media-creation',
+    subcategoryIds: ['audio-generation', 'media-editing'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$18/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['10 minutes/month', 'Basic separation', 'Standard quality']
+        },
+        {
+          name: 'Lite',
+          price: '$18/month',
+          billingPeriod: 'monthly',
+          features: ['300 minutes/month', 'High quality', 'Batch processing']
+        },
+        {
+          name: 'Plus',
+          price: '$35/month',
+          billingPeriod: 'monthly',
+          features: ['750 minutes/month', 'Ultra quality', 'Phoenix model', 'API access']
+        }
+      ]
+    },
+    features: [
+      'Vocal extraction',
+      'Instrument separation',
+      'High-quality audio processing',
+      'Batch processing',
+      'Multiple output formats',
+      'API integration'
+    ],
+    limitations: [
+      'Limited free usage',
+      'Processing time for large files',
+      'Quality depends on source material',
+      'Subscription required for regular use'
+    ],
+    rating: 4.6,
+    reviewCount: 2100,
+    trending: true,
+    featured: false,
+    integrations: ['Audio editing software', 'Music production tools', 'API platforms'],
+    lastVerified: new Date('2025-06-16')
+  },
+
+  // Interactive & Game Media Tools
+  {
+    id: 'meshy',
+    name: 'Meshy',
+    slug: 'meshy',
+    description: 'Meshy is an AI-powered 3D model generator that creates detailed 3D assets from text prompts or images. It\'s designed for game developers, 3D artists, and VR/AR creators who need quick 3D content generation.',
+    shortDescription: 'AI 3D model generator from text and images',
+    logo: 'https://images.pexels.com/photos/8617895/pexels-photo-8617895.jpeg',
+    website: 'https://www.meshy.ai',
+    categoryId: 'media-creation',
+    subcategoryIds: ['interactive-media'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$20/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['200 credits/month', 'Standard quality', 'Basic models']
+        },
+        {
+          name: 'Pro',
+          price: '$20/month',
+          billingPeriod: 'monthly',
+          features: ['1000 credits/month', 'High quality', 'Advanced features', 'Commercial use']
+        },
+        {
+          name: 'Max',
+          price: '$60/month',
+          billingPeriod: 'monthly',
+          features: ['5000 credits/month', 'Ultra quality', 'Priority processing', 'API access']
+        }
+      ]
+    },
+    features: [
+      'Text-to-3D generation',
+      'Image-to-3D conversion',
+      'Game-ready assets',
+      'Multiple export formats',
+      'Texture generation',
+      'Commercial licensing'
+    ],
+    limitations: [
+      'Credit-based system',
+      'Processing time for complex models',
+      'Limited fine-tuning control',
+      'Requires 3D software knowledge for optimization'
+    ],
+    rating: 4.4,
+    reviewCount: 950,
+    trending: true,
+    featured: false,
+    integrations: ['Unity', 'Unreal Engine', 'Blender', '3D software tools'],
+    lastVerified: new Date('2025-06-16')
+  },
+  {
+    id: 'spline-ai',
+    name: 'Spline AI',
+    slug: 'spline-ai',
+    description: 'Spline AI integrates artificial intelligence into the popular 3D design tool, offering AI-powered 3D object generation, texture creation, and scene composition for web-based 3D experiences.',
+    shortDescription: 'AI-powered 3D design tool for web experiences',
+    logo: 'https://images.pexels.com/photos/8617900/pexels-photo-8617900.jpeg',
+    website: 'https://spline.design',
+    categoryId: 'media-creation',
+    subcategoryIds: ['interactive-media'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$9/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['Public projects', 'Basic AI features', 'Standard quality']
+        },
+        {
+          name: 'Pro',
+          price: '$9/month',
+          billingPeriod: 'monthly',
+          features: ['Private projects', 'Advanced AI', 'HD exports', 'Collaboration']
+        },
+        {
+          name: 'Team',
+          price: '$30/month',
+          billingPeriod: 'monthly',
+          features: ['Team features', 'Unlimited AI', 'Brand management', 'Priority support']
+        }
+      ]
+    },
+    features: [
+      'AI 3D object generation',
+      'Texture synthesis',
+      'Scene composition',
+      'Web-based 3D creation',
+      'Real-time collaboration',
+      'Interactive experiences'
+    ],
+    limitations: [
+      'Web-based only',
+      'Limited to Spline ecosystem',
+      'AI features still developing',
+      'Learning curve for 3D design'
+    ],
+    rating: 4.2,
+    reviewCount: 800,
+    trending: true,
+    featured: false,
+    integrations: ['Web platforms', 'React', 'JavaScript frameworks'],
+    lastVerified: new Date('2025-06-16')
+  },
+  {
+    id: 'blender-copilot',
+    name: 'Blender Copilot',
+    slug: 'blender-copilot',
+    description: 'Blender Copilot is an AI assistant add-on for Blender that helps with 3D modeling, animation, and rendering tasks. It provides intelligent suggestions, automates repetitive tasks, and assists with complex 3D workflows.',
+    shortDescription: 'AI assistant for Blender 3D creation and animation',
+    logo: 'https://images.pexels.com/photos/8617905/pexels-photo-8617905.jpeg',
+    website: 'https://blendercopilot.ai',
+    categoryId: 'media-creation',
+    subcategoryIds: ['interactive-media', 'animation-motion'],
+    pricing: {
+      type: 'subscription',
+      startingPrice: '$15/month',
+      hasFreeOption: false,
+      tiers: [
+        {
+          name: 'Individual',
+          price: '$15/month',
+          billingPeriod: 'monthly',
+          features: ['AI modeling assistance', 'Animation automation', 'Render optimization']
+        },
+        {
+          name: 'Studio',
+          price: '$45/month',
+          billingPeriod: 'monthly',
+          features: ['Team features', 'Advanced AI', 'Custom training', 'Priority support']
+        }
+      ]
+    },
+    features: [
+      'AI modeling assistance',
+      'Animation automation',
+      'Render optimization',
+      'Workflow suggestions',
+      'Asset generation',
+      'Custom AI training'
+    ],
+    limitations: [
+      'Requires Blender knowledge',
+      'No free tier',
+      'Add-on dependency',
+      'Limited to Blender ecosystem'
+    ],
+    rating: 4.1,
+    reviewCount: 450,
+    trending: false,
+    featured: false,
+    integrations: ['Blender', '3D pipelines', 'Render engines'],
+    lastVerified: new Date('2025-06-16')
+  },
+  {
+    id: 'promethean-ai',
+    name: 'Promethean AI',
+    slug: 'promethean-ai',
+    description: 'Promethean AI is an AI assistant for 3D artists and game developers that helps build virtual worlds. It automates asset placement, suggests environmental details, and accelerates the creation of detailed 3D environments.',
+    shortDescription: 'AI assistant for building virtual worlds and 3D environments',
+    logo: 'https://images.pexels.com/photos/8617910/pexels-photo-8617910.jpeg',
+    website: 'https://www.prometheanai.com',
+    categoryId: 'media-creation',
+    subcategoryIds: ['interactive-media'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$39/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['Basic asset suggestions', 'Limited projects', 'Community support']
+        },
+        {
+          name: 'Professional',
+          price: '$39/month',
+          billingPeriod: 'monthly',
+          features: ['Advanced AI features', 'Unlimited projects', 'Commercial use', 'Priority support']
+        },
+        {
+          name: 'Studio',
+          price: '$99/month',
+          billingPeriod: 'monthly',
+          features: ['Team collaboration', 'Custom AI training', 'Enterprise features', 'Dedicated support']
+        }
+      ]
+    },
+    features: [
+      'Intelligent asset placement',
+      'Environmental suggestion',
+      'Workflow automation',
+      'Asset library integration',
+      'Style consistency',
+      'Team collaboration'
+    ],
+    limitations: [
+      'Requires 3D software expertise',
+      'Limited free features',
+      'Learning curve for AI suggestions',
+      'Dependency on asset libraries'
+    ],
+    rating: 4.3,
+    reviewCount: 650,
+    trending: true,
+    featured: false,
+    integrations: ['Unity', 'Unreal Engine', '3D software tools', 'Asset libraries'],
+    lastVerified: new Date('2025-06-16')
+  },
+
+  // AI Avatar & Digital Human Creation Tools
+  {
+    id: 'd-id',
+    name: 'D-ID',
+    slug: 'd-id',
+    description: 'D-ID is a creative AI platform that generates talking head videos from still images. It offers realistic facial animations, lip-sync technology, and personalized video creation for marketing, education, and entertainment.',
+    shortDescription: 'AI platform for creating talking videos from photos',
+    logo: 'https://images.pexels.com/photos/8617915/pexels-photo-8617915.jpeg',
+    website: 'https://www.d-id.com',
+    categoryId: 'media-creation',
+    subcategoryIds: ['avatar-generation'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$5.99/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['5 credits/month', 'Basic quality', 'Standard voices']
+        },
+        {
+          name: 'Lite',
+          price: '$5.99/month',
+          billingPeriod: 'monthly',
+          features: ['100 credits/month', 'HD quality', 'Premium voices', 'Commercial use']
+        },
+        {
+          name: 'Pro',
+          price: '$29.99/month',
+          billingPeriod: 'monthly',
+          features: ['500 credits/month', 'Ultra quality', 'Voice cloning', 'API access']
+        }
+      ]
+    },
+    features: [
+      'Photo-to-video animation',
+      'Realistic lip-sync',
+      'Voice cloning',
+      'Multi-language support',
+      'Custom avatar creation',
+      'API integration'
+    ],
+    limitations: [
+      'Credit-based usage',
+      'Limited free credits',
+      'Processing time for high quality',
+      'Uncanny valley effect in some outputs'
+    ],
+    rating: 4.4,
+    reviewCount: 2800,
+    trending: true,
+    featured: true,
+    integrations: ['Video platforms', 'Social media', 'API tools', 'Marketing platforms'],
+    lastVerified: new Date('2025-06-16')
+  },
+  {
+    id: 'hour-one',
+    name: 'Hour One',
+    slug: 'hour-one',
+    description: 'Hour One is an AI video generator that creates professional videos with virtual presenters. It specializes in business communications, training videos, and personalized video content with human-like AI presenters.',
+    shortDescription: 'Professional AI video generator with virtual presenters',
+    logo: 'https://images.pexels.com/photos/8617920/pexels-photo-8617920.jpeg',
+    website: 'https://hourone.ai',
+    categoryId: 'media-creation',
+    subcategoryIds: ['avatar-generation', 'video-generation'],
+    pricing: {
+      type: 'subscription',
+      startingPrice: '$25/month',
+      hasFreeOption: false,
+      tiers: [
+        {
+          name: 'Lite',
+          price: '$25/month',
+          billingPeriod: 'monthly',
+          features: ['10 videos/month', 'HD quality', 'Basic presenters', 'Standard voices']
+        },
+        {
+          name: 'Business',
+          price: '$95/month',
+          billingPeriod: 'monthly',
+          features: ['50 videos/month', '4K quality', 'Premium presenters', 'Voice cloning']
+        },
+        {
+          name: 'Enterprise',
+          price: 'Custom',
+          billingPeriod: 'monthly',
+          features: ['Unlimited videos', 'Custom presenters', 'White-label', 'Dedicated support']
+        }
+      ]
+    },
+    features: [
+      'Virtual presenter creation',
+      'Professional video templates',
+      'Multi-language support',
+      'Brand customization',
+      'Team collaboration',
+      'Analytics dashboard'
+    ],
+    limitations: [
+      'No free tier',
+      'Limited presenter variety',
+      'Subscription required',
+      'Learning curve for customization'
+    ],
+    rating: 4.2,
+    reviewCount: 1200,
+    trending: false,
+    featured: false,
+    integrations: ['Business platforms', 'LMS systems', 'Marketing tools'],
+    lastVerified: new Date('2025-06-16')
+  },
+  {
+    id: 'elai-io',
+    name: 'Elai.io',
+    slug: 'elai-io',
+    description: 'Elai.io is an AI video generation platform that creates professional videos with AI avatars from text. It offers multilingual support, custom avatar creation, and seamless integration for business communications.',
+    shortDescription: 'AI video platform with customizable avatars and multilingual support',
+    logo: 'https://images.pexels.com/photos/8617925/pexels-photo-8617925.jpeg',
+    website: 'https://elai.io',
+    categoryId: 'media-creation',
+    subcategoryIds: ['avatar-generation', 'video-generation'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$23/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['1 minute/month', 'Basic avatars', 'Standard quality']
+        },
+        {
+          name: 'Basic',
+          price: '$23/month',
+          billingPeriod: 'monthly',
+          features: ['15 minutes/month', 'Premium avatars', 'HD quality', 'Voice cloning']
+        },
+        {
+          name: 'Advanced',
+          price: '$100/month',
+          billingPeriod: 'monthly',
+          features: ['180 minutes/month', 'Custom avatars', '4K quality', 'API access']
+        }
+      ]
+    },
+    features: [
+      'Custom avatar creation',
+      'Multilingual video generation',
+      'Voice cloning technology',
+      'Professional templates',
+      'Brand customization',
+      'Bulk video creation'
+    ],
+    limitations: [
+      'Limited free usage',
+      'Custom avatar creation costs extra',
+      'Processing time for high-quality videos',
+      'Learning curve for advanced features'
+    ],
+    rating: 4.3,
+    reviewCount: 1500,
+    trending: true,
+    featured: false,
+    integrations: ['Business tools', 'LMS platforms', 'Social media', 'API services'],
+    lastVerified: new Date('2025-06-16')
+  },
+  {
+    id: 'yepic-ai',
+    name: 'Yepic AI',
+    slug: 'yepic-ai',
+    description: 'Yepic AI is a video personalization platform that creates AI-generated videos with talking avatars. It specializes in personalized marketing videos, sales outreach, and customer communication at scale.',
+    shortDescription: 'AI video personalization platform for marketing and sales',
+    logo: 'https://images.pexels.com/photos/8617930/pexels-photo-8617930.jpeg',
+    website: 'https://www.yepic.ai',
+    categoryId: 'media-creation',
+    subcategoryIds: ['avatar-generation'],
+    pricing: {
+      type: 'subscription',
+      startingPrice: '$7.98/month',
+      hasFreeOption: false,
+      tiers: [
+        {
+          name: 'Starter',
+          price: '$7.98/month',
+          billingPeriod: 'monthly',
+          features: ['5 videos/month', 'Basic avatars', 'Standard quality']
+        },
+        {
+          name: 'Business',
+          price: '$79/month',
+          billingPeriod: 'monthly',
+          features: ['50 videos/month', 'Premium avatars', 'HD quality', 'Personalization']
+        },
+        {
+          name: 'Enterprise',
+          price: 'Custom',
+          billingPeriod: 'monthly',
+          features: ['Unlimited videos', 'Custom avatars', 'White-label', 'Dedicated support']
+        }
+      ]
+    },
+    features: [
+      'Video personalization',
+      'Talking avatar creation',
+      'Multi-language support',
+      'Sales integration',
+      'Bulk video generation',
+      'Analytics tracking'
+    ],
+    limitations: [
+      'No free tier',
+      'Limited avatar customization',
+      'Subscription required',
+      'Focus on business use cases'
+    ],
+    rating: 4.1,
+    reviewCount: 800,
+    trending: false,
+    featured: false,
+    integrations: ['CRM systems', 'Email platforms', 'Sales tools'],
+    lastVerified: new Date('2025-06-16')
+  },
+  {
+    id: 'tavus',
+    name: 'Tavus',
+    slug: 'tavus',
+    description: 'Tavus is an AI video personalization platform that creates highly realistic personalized videos using AI replicas. It\'s designed for sales teams, marketers, and customer success teams to scale personalized video communication.',
+    shortDescription: 'Hyper-realistic AI video personalization for sales and marketing',
+    logo: 'https://images.pexels.com/photos/8617935/pexels-photo-8617935.jpeg',
+    website: 'https://www.tavus.io',
+    categoryId: 'media-creation',
+    subcategoryIds: ['avatar-generation'],
+    pricing: {
+      type: 'subscription',
+      startingPrice: '$100/month',
+      hasFreeOption: false,
+      tiers: [
+        {
+          name: 'Starter',
+          price: '$100/month',
+          billingPeriod: 'monthly',
+          features: ['100 videos/month', 'Basic replica', 'Standard quality']
+        },
+        {
+          name: 'Growth',
+          price: '$500/month',
+          billingPeriod: 'monthly',
+          features: ['500 videos/month', 'Premium replica', 'HD quality', 'Integrations']
+        },
+        {
+          name: 'Enterprise',
+          price: 'Custom',
+          billingPeriod: 'monthly',
+          features: ['Unlimited videos', 'Custom features', 'White-label', 'Dedicated support']
+        }
+      ]
+    },
+    features: [
+      'Hyper-realistic AI replicas',
+      'Personalized video generation',
+      'Voice cloning',
+      'CRM integration',
+      'Analytics dashboard',
+      'Automated workflows'
+    ],
+    limitations: [
+      'High pricing',
+      'No free tier',
+      'Requires high-quality training data',
+      'Processing time for replica creation'
+    ],
+    rating: 4.5,
+    reviewCount: 600,
+    trending: true,
+    featured: false,
+    integrations: ['Salesforce', 'HubSpot', 'Outreach', 'Sales engagement platforms'],
+    lastVerified: new Date('2025-06-16')
+  },
+  {
+    id: 'movio',
+    name: 'Movio',
+    slug: 'movio',
+    description: 'Movio is an AI video generator that creates spokesperson videos from text. It offers a library of AI avatars, multiple languages, and professional video templates for marketing and business communication.',
+    shortDescription: 'AI spokesperson video generator with professional templates',
+    logo: 'https://images.pexels.com/photos/8617940/pexels-photo-8617940.jpeg',
+    website: 'https://www.movio.la',
+    categoryId: 'media-creation',
+    subcategoryIds: ['avatar-generation', 'video-generation'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$30/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['1 video/month', 'Basic avatars', 'Movio watermark']
+        },
+        {
+          name: 'Pro',
+          price: '$30/month',
+          billingPeriod: 'monthly',
+          features: ['15 videos/month', 'Premium avatars', 'No watermark', 'HD quality']
+        },
+        {
+          name: 'Enterprise',
+          price: '$300/month',
+          billingPeriod: 'monthly',
+          features: ['300 videos/month', 'Custom avatars', 'White-label', 'Priority support']
+        }
+      ]
+    },
+    features: [
+      'AI spokesperson videos',
+      'Professional templates',
+      'Multi-language support',
+      'Custom avatar creation',
+      'Brand customization',
+      'Video analytics'
+    ],
+    limitations: [
+      'Limited free tier',
+      'Watermark on free videos',
+      'Template-based approach',
+      'Quality varies with avatar selection'
+    ],
+    rating: 4.0,
+    reviewCount: 1100,
+    trending: false,
+    featured: false,
+    integrations: ['Social media platforms', 'Marketing tools', 'Video hosting'],
+    lastVerified: new Date('2025-06-16')
+  },
+
+  // Animation & Motion Graphics Tools
+  {
+    id: 'stable-video-diffusion',
+    name: 'Stable Video Diffusion',
+    slug: 'stable-video-diffusion',
+    description: 'Stable Video Diffusion is an open-source AI model that generates short video clips from still images. It offers high-quality video generation with temporal consistency and realistic motion synthesis.',
+    shortDescription: 'Open-source AI model for image-to-video generation',
+    logo: 'https://images.pexels.com/photos/8617945/pexels-photo-8617945.jpeg',
+    website: 'https://stability.ai/research/stable-video-diffusion',
+    categoryId: 'media-creation',
+    subcategoryIds: ['animation-motion'],
+    pricing: {
+      type: 'open-source',
+      startingPrice: 'Free',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Open Source',
+          price: '$0',
+          billingPeriod: 'one-time',
+          features: ['Free model access', 'Local deployment', 'Commercial use', 'Community support']
+        },
+        {
+          name: 'Stability AI API',
+          price: '$0.10/generation',
+          billingPeriod: 'pay-per-use',
+          features: ['Cloud API access', 'Higher resolution', 'Faster processing', 'Priority support']
+        }
+      ]
+    },
+    features: [
+      'Image-to-video generation',
+      'Temporal consistency',
+      'High-quality output',
+      'Open-source model',
+      'Commercial licensing',
+      'Custom fine-tuning'
+    ],
+    limitations: [
+      'Requires technical setup for local use',
+      'Limited video length',
+      'Processing time varies',
+      'Hardware requirements for optimal performance'
+    ],
+    rating: 4.5,
+    reviewCount: 850,
+    trending: true,
+    featured: true,
+    integrations: ['Python environments', 'Machine learning frameworks', 'Cloud platforms'],
+    lastVerified: new Date('2025-06-16')
+  },
+  {
+    id: 'pika-labs',
+    name: 'Pika Labs',
+    slug: 'pika-labs',
+    description: 'Pika Labs is an AI video generation platform that creates dynamic videos from text prompts and images. It specializes in creating viral-ready content with smooth animations and creative effects.',
+    shortDescription: 'AI video platform for viral content with creative animations',
+    logo: 'https://images.pexels.com/photos/8617950/pexels-photo-8617950.jpeg',
+    website: 'https://pika.art',
+    categoryId: 'media-creation',
+    subcategoryIds: ['animation-motion', 'video-generation'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$10/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['30 generations/month', 'Standard quality', 'Basic features']
+        },
+        {
+          name: 'Standard',
+          price: '$10/month',
+          billingPeriod: 'monthly',
+          features: ['700 generations/month', 'HD quality', 'Advanced features', 'Priority queue']
+        },
+        {
+          name: 'Unlimited',
+          price: '$35/month',
+          billingPeriod: 'monthly',
+          features: ['Unlimited generations', 'Ultra HD quality', 'Early access features', 'Commercial license']
+        }
+      ]
+    },
+    features: [
+      'Text-to-video generation',
+      'Image-to-video animation',
+      'Creative effects library',
+      'Viral content optimization',
+      'Social media formats',
+      'Community sharing'
+    ],
+    limitations: [
+      'Limited free generations',
+      'Queue times during peak usage',
+      'Video length restrictions',
+      'Style consistency challenges'
+    ],
+    rating: 4.3,
+    reviewCount: 1400,
+    trending: true,
+    featured: false,
+    integrations: ['Social media platforms', 'Content creation tools', 'Discord community'],
+    lastVerified: new Date('2025-06-16')
+  },
+  {
+    id: 'leiapix',
+    name: 'LeiaPix',
+    slug: 'leiapix',
+    description: 'LeiaPix converts 2D images into immersive 3D animations using AI depth mapping. It creates stunning parallax effects and depth-based animations that bring static images to life.',
+    shortDescription: '2D to 3D image animation with AI depth mapping',
+    logo: 'https://images.pexels.com/photos/8617955/pexels-photo-8617955.jpeg',
+    website: 'https://convert.leiapix.com',
+    categoryId: 'media-creation',
+    subcategoryIds: ['animation-motion'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$5/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['5 conversions/day', 'Standard quality', 'Basic animations']
+        },
+        {
+          name: 'Pro',
+          price: '$5/month',
+          billingPeriod: 'monthly',
+          features: ['Unlimited conversions', 'HD quality', 'Advanced animations', 'No watermark']
+        }
+      ]
+    },
+    features: [
+      'AI depth mapping',
+      'Parallax animation effects',
+      '2D to 3D conversion',
+      'Immersive visual effects',
+      'Multiple export formats',
+      'Easy-to-use interface'
+    ],
+    limitations: [
+      'Limited daily free conversions',
+      'Quality depends on source image',
+      'Simple animation types',
+      'No video input support'
+    ],
+    rating: 4.2,
+    reviewCount: 950,
+    trending: false,
+    featured: false,
+    integrations: ['Web interface', 'Social media platforms', 'Image galleries'],
+    lastVerified: new Date('2025-06-16')
+  },
+  {
+    id: 'myheritage-ai',
+    name: 'MyHeritage AI',
+    slug: 'myheritage-ai',
+    description: 'MyHeritage AI Time Machine and Deep Nostalgia create animated videos from historical photos. It brings old family photos to life with realistic facial animations and historical theme generation.',
+    shortDescription: 'AI photo animation for historical and family memories',
+    logo: 'https://images.pexels.com/photos/8617960/pexels-photo-8617960.jpeg',
+    website: 'https://www.myheritage.com/ai',
+    categoryId: 'media-creation',
+    subcategoryIds: ['animation-motion'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$9.95/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['Limited animations', 'Basic quality', 'Watermarked output']
+        },
+        {
+          name: 'Complete',
+          price: '$9.95/month',
+          billingPeriod: 'monthly',
+          features: ['Unlimited animations', 'HD quality', 'No watermark', 'Premium features']
+        }
+      ]
+    },
+    features: [
+      'Photo animation',
+      'Historical theme generation',
+      'Face enhancement',
+      'Deep nostalgia effects',
+      'Family tree integration',
+      'High-quality restoration'
+    ],
+    limitations: [
+      'Focus on historical/family content',
+      'Limited free features',
+      'Subscription for full access',
+      'Specific use case application'
+    ],
+    rating: 4.4,
+    reviewCount: 2800,
+    trending: false,
+    featured: false,
+    integrations: ['Family tree platforms', 'Photo storage services', 'Social media'],
+    lastVerified: new Date('2025-06-16')
+  },
+  {
+    id: 'immersity-ai',
+    name: 'Immersity AI',
+    slug: 'immersity-ai',
+    description: 'Immersity AI converts 2D images and videos into immersive 3D content using advanced AI depth estimation. It creates spatial videos and images for VR/AR experiences and 3D displays.',
+    shortDescription: 'AI-powered 2D to 3D conversion for immersive experiences',
+    logo: 'https://images.pexels.com/photos/8617965/pexels-photo-8617965.jpeg',
+    website: 'https://www.immersity.ai',
+    categoryId: 'media-creation',
+    subcategoryIds: ['animation-motion'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$9.99/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['50 credits/month', 'Standard quality', 'Basic 3D effects']
+        },
+        {
+          name: 'Creator',
+          price: '$9.99/month',
+          billingPeriod: 'monthly',
+          features: ['500 credits/month', 'HD quality', 'Advanced effects', 'Commercial use']
+        },
+        {
+          name: 'Pro',
+          price: '$29.99/month',
+          billingPeriod: 'monthly',
+          features: ['2000 credits/month', '4K quality', 'Batch processing', 'API access']
+        }
+      ]
+    },
+    features: [
+      'AI depth estimation',
+      '2D to 3D conversion',
+      'Spatial video creation',
+      'VR/AR compatibility',
+      'Batch processing',
+      'High-quality output'
+    ],
+    limitations: [
+      'Credit-based usage',
+      'Processing time for high quality',
+      'Limited free credits',
+      'Requires specialized viewing for 3D effect'
+    ],
+    rating: 4.1,
+    reviewCount: 600,
+    trending: true,
+    featured: false,
+    integrations: ['VR platforms', 'AR applications', '3D displays', 'Video editing software'],
+    lastVerified: new Date('2025-06-16')
+  },
+  {
+    id: 'kaiber',
+    name: 'Kaiber',
+    slug: 'kaiber',
+    description: 'Kaiber is an AI video generation platform that creates artistic videos from text prompts, images, and music. It specializes in creative and artistic video content with unique visual styles.',
+    shortDescription: 'AI video generator for artistic and creative content',
+    logo: 'https://images.pexels.com/photos/8617970/pexels-photo-8617970.jpeg',
+    website: 'https://kaiber.ai',
+    categoryId: 'media-creation',
+    subcategoryIds: ['animation-motion', 'video-generation'],
+    pricing: {
+      type: 'subscription',
+      startingPrice: '$5/month',
+      hasFreeOption: false,
+      tiers: [
+        {
+          name: 'Explorer',
+          price: '$5/month',
+          billingPeriod: 'monthly',
+          features: ['300 credits/month', '720p quality', 'Basic styles']
+        },
+        {
+          name: 'Artist',
+          price: '$15/month',
+          billingPeriod: 'monthly',
+          features: ['1000 credits/month', '1080p quality', 'Advanced styles', 'Audio reactivity']
+        },
+        {
+          name: 'Pro',
+          price: '$30/month',
+          billingPeriod: 'monthly',
+          features: ['2500 credits/month', '4K quality', 'All styles', 'Priority processing']
+        }
+      ]
+    },
+    features: [
+      'Artistic video generation',
+      'Music-reactive visuals',
+      'Style transfer effects',
+      'Text-to-video creation',
+      'Image animation',
+      'Creative filters'
+    ],
+    limitations: [
+      'No free tier',
+      'Credit-based system',
+      'Artistic focus may not suit all needs',
+      'Processing time for complex videos'
+    ],
+    rating: 4.2,
+    reviewCount: 1100,
+    trending: true,
+    featured: false,
+    integrations: ['Music platforms', 'Social media', 'Creative tools'],
+    lastVerified: new Date('2025-06-16')
+  },
+  {
+    id: 'neural-frames',
+    name: 'Neural Frames',
+    slug: 'neural-frames',
+    description: 'Neural Frames is an AI animation tool that creates trippy, artistic videos from text prompts. It specializes in psychedelic and abstract visual content with frame-by-frame AI generation.',
+    shortDescription: 'AI animation tool for psychedelic and abstract video content',
+    logo: 'https://images.pexels.com/photos/8617975/pexels-photo-8617975.jpeg',
+    website: 'https://www.neuralframes.com',
+    categoryId: 'media-creation',
+    subcategoryIds: ['animation-motion'],
+    pricing: {
+      type: 'subscription',
+      startingPrice: '$19/month',
+      hasFreeOption: false,
+      tiers: [
+        {
+          name: 'Newbie',
+          price: '$19/month',
+          billingPeriod: 'monthly',
+          features: ['5 minutes/month', 'Standard quality', 'Basic prompting']
+        },
+        {
+          name: 'Creator',
+          price: '$39/month',
+          billingPeriod: 'monthly',
+          features: ['25 minutes/month', 'HD quality', 'Advanced prompting', 'Custom models']
+        },
+        {
+          name: 'Pro',
+          price: '$99/month',
+          billingPeriod: 'monthly',
+          features: ['100 minutes/month', '4K quality', 'All features', 'Priority support']
+        }
+      ]
+    },
+    features: [
+      'Frame-by-frame AI generation',
+      'Psychedelic visual effects',
+      'Abstract art creation',
+      'Music synchronization',
+      'Custom AI models',
+      'Real-time preview'
+    ],
+    limitations: [
+      'No free tier',
+      'Niche artistic style',
+      'Limited practical applications',
+      'Requires artistic vision'
+    ],
+    rating: 4.0,
+    reviewCount: 450,
+    trending: false,
+    featured: false,
+    integrations: ['Music software', 'Video editing tools', 'Creative platforms'],
+    lastVerified: new Date('2025-06-16')
+  },
+
+  // Podcast & Audio Production Tools
+  {
+    id: 'podcastle',
+    name: 'Podcastle',
+    slug: 'podcastle',
+    description: 'Podcastle is an all-in-one AI podcast platform that offers recording, editing, and publishing tools. It features AI-powered audio enhancement, transcription, and voice synthesis for professional podcast production.',
+    shortDescription: 'AI-powered podcast platform for recording, editing, and publishing',
+    logo: 'https://images.pexels.com/photos/8617980/pexels-photo-8617980.jpeg',
+    website: 'https://podcastle.ai',
+    categoryId: 'media-creation',
+    subcategoryIds: ['podcast-audio'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$11.99/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['3 hours recording/month', 'Basic editing', 'AI enhancement']
+        },
+        {
+          name: 'Storyteller',
+          price: '$11.99/month',
+          billingPeriod: 'monthly',
+          features: ['20 hours recording/month', 'Advanced editing', 'AI voices', 'Publishing tools']
+        },
+        {
+          name: 'Pro',
+          price: '$23.99/month',
+          billingPeriod: 'monthly',
+          features: ['Unlimited recording', 'Team collaboration', 'Custom branding', 'Analytics']
+        }
+      ]
+    },
+    features: [
+      'AI audio enhancement',
+      'Voice synthesis',
+      'Automatic transcription',
+      'Podcast publishing',
+      'Remote recording',
+      'Collaborative editing'
+    ],
+    limitations: [
+      'Limited free recording time',
+      'AI voices may sound artificial',
+      'Learning curve for advanced features',
+      'Subscription required for full features'
+    ],
+    rating: 4.4,
+    reviewCount: 1800,
+    trending: true,
+    featured: false,
+    integrations: ['Spotify', 'Apple Podcasts', 'Google Podcasts', 'RSS feeds'],
+    lastVerified: new Date('2025-06-16')
+  },
+  {
+    id: 'cleanvoice',
+    name: 'Cleanvoice',
+    slug: 'cleanvoice',
+    description: 'Cleanvoice is an AI audio editing tool that automatically removes filler words, background noise, and long silences from audio recordings. It\'s designed specifically for podcasters and content creators.',
+    shortDescription: 'AI audio cleaner that removes filler words and background noise',
+    logo: 'https://images.pexels.com/photos/8617990/pexels-photo-8617990.jpeg',
+    website: 'https://cleanvoice.ai',
+    categoryId: 'media-creation',
+    subcategoryIds: ['podcast-audio', 'media-editing'],
+    pricing: {
+      type: 'pay-per-use',
+      startingPrice: '$0.36/minute',
+      hasFreeOption: false,
+      tiers: [
+        {
+          name: 'Pay-per-minute',
+          price: '$0.36/minute',
+          billingPeriod: 'pay-per-use',
+          features: ['Filler word removal', 'Noise reduction', 'Silence removal', 'Multiple languages']
+        }
+      ]
+    },
+    features: [
+      'Automatic filler word removal',
+      'Background noise reduction',
+      'Silence trimming',
+      'Multi-language support',
+      'Batch processing',
+      'High-quality output'
+    ],
+    limitations: [
+      'Pay-per-use pricing only',
+      'No subscription option',
+      'Processing time varies',
+      'May occasionally remove wanted speech'
+    ],
+    rating: 4.3,
+    reviewCount: 850,
+    trending: true,
+    featured: false,
+    integrations: ['Audio editing software', 'Podcast platforms', 'Cloud storage'],
+    lastVerified: new Date('2025-06-16')
+  },
+  {
+    id: 'adobe-podcast',
+    name: 'Adobe Podcast',
+    slug: 'adobe-podcast',
+    description: 'Adobe Podcast is a web-based AI audio recording and editing platform. It offers studio-quality recording, AI-powered audio enhancement, and automatic transcription for professional podcast production.',
+    shortDescription: 'AI-powered web-based podcast recording and editing platform',
+    logo: 'https://images.pexels.com/photos/8617995/pexels-photo-8617995.jpeg',
+    website: 'https://podcast.adobe.com',
+    categoryId: 'media-creation',
+    subcategoryIds: ['podcast-audio'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: 'Coming Soon',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free Beta',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['Studio-quality recording', 'AI enhancement', 'Basic transcription', 'Cloud storage']
+        }
+      ]
+    },
+    features: [
+      'Studio-quality recording',
+      'AI audio enhancement',
+      'Automatic transcription',
+      'Remote recording',
+      'Cloud-based editing',
+      'Integration with Adobe ecosystem'
+    ],
+    limitations: [
+      'Currently in beta',
+      'Limited features available',
+      'Requires Adobe account',
+      'Web-based only'
+    ],
+    rating: 4.2,
+    reviewCount: 450,
+    trending: true,
+    featured: false,
+    integrations: ['Adobe Creative Cloud', 'Cloud storage', 'Podcast platforms'],
+    lastVerified: new Date('2025-06-16')
+  },
+  {
+    id: 'auphonic',
+    name: 'Auphonic',
+    slug: 'auphonic',
+    description: 'Auphonic is an AI audio post-production tool that automatically balances audio levels, reduces noise, and optimizes audio quality for podcasts, radio, and video content.',
+    shortDescription: 'AI audio post-production for professional podcast quality',
+    logo: 'https://images.pexels.com/photos/8618005/pexels-photo-8618005.jpeg',
+    website: 'https://auphonic.com',
+    categoryId: 'media-creation',
+    subcategoryIds: ['podcast-audio', 'media-editing'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$11/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['2 hours/month', 'Basic processing', 'Standard quality']
+        },
+        {
+          name: 'Starter',
+          price: '$11/month',
+          billingPeriod: 'monthly',
+          features: ['9 hours/month', 'Advanced processing', 'High quality', 'API access']
+        },
+        {
+          name: 'Creator',
+          price: '$33/month',
+          billingPeriod: 'monthly',
+          features: ['30 hours/month', 'Premium features', 'Batch processing', 'Priority support']
+        }
+      ]
+    },
+    features: [
+      'Automatic audio leveling',
+      'Noise reduction',
+      'Audio optimization',
+      'Batch processing',
+      'Multiple format support',
+      'API integration'
+    ],
+    limitations: [
+      'Limited free hours',
+      'Processing time for large files',
+      'Technical interface',
+      'Requires audio expertise for optimal results'
+    ],
+    rating: 4.4,
+    reviewCount: 1200,
+    trending: false,
+    featured: false,
+    integrations: ['Podcast platforms', 'Cloud storage', 'Audio editing software', 'APIs'],
+    lastVerified: new Date('2025-06-16')
+  },
+  {
+    id: 'resemble-ai',
+    name: 'Resemble AI',
+    slug: 'resemble-ai',
+    description: 'Resemble AI offers advanced voice cloning and text-to-speech capabilities with real-time voice synthesis. It\'s designed for creating custom voices, dubbing, and personalized audio content.',
+    shortDescription: 'Advanced voice cloning and custom text-to-speech platform',
+    logo: 'https://images.pexels.com/photos/8618010/pexels-photo-8618010.jpeg',
+    website: 'https://www.resemble.ai',
+    categoryId: 'media-creation',
+    subcategoryIds: ['podcast-audio', 'audio-generation'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$0.006/second',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['10 minutes/month', 'Basic voices', 'Standard quality']
+        },
+        {
+          name: 'Pay-as-you-go',
+          price: '$0.006/second',
+          billingPeriod: 'pay-per-use',
+          features: ['Custom voices', 'High quality', 'Real-time synthesis', 'Commercial use']
+        },
+        {
+          name: 'Enterprise',
+          price: 'Custom',
+          billingPeriod: 'monthly',
+          features: ['Unlimited usage', 'Custom features', 'Dedicated support', 'On-premise deployment']
+        }
+      ]
+    },
+    features: [
+      'Voice cloning technology',
+      'Real-time voice synthesis',
+      'Custom voice creation',
+      'Emotional speech synthesis',
+      'Multi-language support',
+      'API integration'
+    ],
+    limitations: [
+      'Limited free usage',
+      'Requires voice training data',
+      'Pay-per-second pricing can be expensive',
+      'Technical setup required'
+    ],
+    rating: 4.5,
+    reviewCount: 750,
+    trending: true,
+    featured: false,
+    integrations: ['APIs', 'Development platforms', 'Voice applications', 'Gaming platforms'],
+    lastVerified: new Date('2025-06-16')
+  },
+  
+  // Additional General AI Tools
+  {
+    id: 'llama-3-2',
+    name: 'Llama 3.2',
+    slug: 'llama-3-2',
+    description: 'Meta\'s latest open-source large language model offering state-of-the-art performance in reasoning, code generation, and multimodal understanding. Available in various sizes from 1B to 90B parameters with both text-only and vision capabilities.',
+    shortDescription: 'Meta\'s open-source multimodal AI model for text and vision tasks',
+    logo: 'https://images.pexels.com/photos/8728380/pexels-photo-8728380.jpeg',
+    website: 'https://llama.meta.com',
+    categoryId: 'general-ai',
+    subcategoryIds: ['chatbots', 'multimodal-ai'],
+    pricing: {
+      type: 'free',
+      startingPrice: '$0',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Open Source',
+          price: '$0',
+          billingPeriod: 'one-time',
+          features: ['Full model access', 'Commercial license', 'Self-hosted', 'Customizable']
+        }
+      ]
+    },
+    features: [
+      'Multimodal understanding (text + vision)',
+      'Advanced reasoning capabilities',
+      'Code generation and debugging',
+      'Multiple model sizes available',
+      'Open-source and customizable',
+      'Commercial-friendly license'
+    ],
+    limitations: [
+      'Requires significant computational resources',
+      'Self-hosting and setup required',
+      'No built-in safety guardrails',
+      'Limited real-time information access'
+    ],
+    rating: 4.6,
+    reviewCount: 1850,
+    trending: true,
+    featured: true,
+    integrations: ['Hugging Face', 'Ollama', 'LM Studio', 'API endpoints'],
+    lastVerified: new Date('2025-06-16')
+  },
+  {
+    id: 'claude-3-5-sonnet',
+    name: 'Claude 3.5 Sonnet',
+    slug: 'claude-3-5-sonnet',
+    description: 'Anthropic\'s most advanced AI model featuring superior reasoning, coding, and creative capabilities. Excels at complex analysis, detailed explanations, and maintaining context over long conversations with built-in safety features.',
+    shortDescription: 'Anthropic\'s most advanced AI with superior reasoning and safety',
+    logo: 'https://images.pexels.com/photos/8728390/pexels-photo-8728390.jpeg',
+    website: 'https://claude.ai',
+    categoryId: 'general-ai',
+    subcategoryIds: ['chatbots', 'specialized-assistants'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$20/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['Limited daily usage', 'Claude 3.5 Sonnet access', 'Web interface']
+        },
+        {
+          name: 'Pro',
+          price: '$20/month',
+          billingPeriod: 'monthly',
+          features: ['5x more usage', 'Priority bandwidth', 'Early feature access', 'Claude 3 Opus access']
+        },
+        {
+          name: 'Team',
+          price: '$25/user/month',
+          billingPeriod: 'monthly',
+          features: ['Higher usage limits', 'Central billing', 'Admin console', 'Early feature access']
+        }
+      ]
+    },
+    features: [
+      'Advanced reasoning and analysis',
+      'Superior coding capabilities',
+      'Long-form content creation',
+      'Built-in safety features',
+      'Large context window (200K tokens)',
+      'Document analysis and summarization'
+    ],
+    limitations: [
+      'Limited free tier usage',
+      'No real-time internet access',
+      'Cannot generate images',
+      'Knowledge cutoff limitations'
+    ],
+    rating: 4.8,
+    reviewCount: 2400,
+    trending: true,
+    featured: true,
+    integrations: ['API access', 'Third-party apps', 'Browser extensions', 'Mobile apps'],
+    lastVerified: new Date('2025-06-16')
+  },
+  {
+    id: 'o1-preview',
+    name: 'OpenAI o1-preview',
+    slug: 'o1-preview',
+    description: 'OpenAI\'s breakthrough reasoning model that thinks step-by-step before responding. Excels at complex problem-solving, mathematical reasoning, scientific analysis, and coding challenges that require deep thinking and planning.',
+    shortDescription: 'OpenAI\'s advanced reasoning model for complex problem-solving',
+    logo: 'https://images.pexels.com/photos/8728385/pexels-photo-8728385.jpeg',
+    website: 'https://openai.com/o1',
+    categoryId: 'general-ai',
+    subcategoryIds: ['chatbots', 'specialized-assistants'],
+    pricing: {
+      type: 'subscription',
+      startingPrice: '$20/month',
+      hasFreeOption: false,
+      tiers: [
+        {
+          name: 'ChatGPT Plus',
+          price: '$20/month',
+          billingPeriod: 'monthly',
+          features: ['Limited o1-preview access', 'GPT-4o access', 'Priority access', 'Early features']
+        },
+        {
+          name: 'API Access',
+          price: 'Pay-per-use',
+          billingPeriod: 'pay-per-use',
+          features: ['Full o1 access', 'Higher rate limits', 'Production use', 'Developer tools']
+        }
+      ]
+    },
+    features: [
+      'Advanced step-by-step reasoning',
+      'Complex mathematical problem solving',
+      'Scientific analysis and research',
+      'Advanced coding and debugging',
+      'Multi-step planning capabilities',
+      'Chain-of-thought processing'
+    ],
+    limitations: [
+      'Slower response times due to reasoning',
+      'Higher cost per query',
+      'Limited availability in free tier',
+      'No image generation capabilities'
+    ],
+    rating: 4.7,
+    reviewCount: 1200,
+    trending: true,
+    featured: true,
+    integrations: ['OpenAI API', 'ChatGPT interface', 'Third-party platforms', 'Developer tools'],
+    lastVerified: new Date('2025-06-16')
+  },
+  {
+    id: 'groq-ai',
+    name: 'Groq',
+    slug: 'groq-ai',
+    description: 'Ultra-fast AI inference platform powered by custom LPU (Language Processing Unit) hardware. Delivers lightning-fast responses for various open-source models with exceptional speed and efficiency.',
+    shortDescription: 'Ultra-fast AI inference with custom hardware acceleration',
+    logo: 'https://images.pexels.com/photos/8728395/pexels-photo-8728395.jpeg',
+    website: 'https://groq.com',
+    categoryId: 'general-ai',
+    subcategoryIds: ['chatbots', 'multimodal-ai'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$0.27/1M tokens',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['14,400 requests/day', 'Multiple models', 'High-speed inference']
+        },
+        {
+          name: 'Pay-as-you-go',
+          price: '$0.27/1M tokens',
+          billingPeriod: 'pay-per-use',
+          features: ['Unlimited usage', 'All models', 'Production use', 'Priority support']
+        }
+      ]
+    },
+    features: [
+      'Ultra-fast inference speeds',
+      'Multiple open-source models',
+      'Custom LPU hardware acceleration',
+      'Low latency responses',
+      'High throughput capabilities',
+      'Developer-friendly API'
+    ],
+    limitations: [
+      'Limited to specific model selection',
+      'No model fine-tuning',
+      'Dependent on Groq infrastructure',
+      'Less model variety than general platforms'
+    ],
+    rating: 4.5,
+    reviewCount: 890,
+    trending: true,
+    featured: false,
+    integrations: ['REST API', 'Python SDK', 'JavaScript SDK', 'Streaming responses'],
+    lastVerified: new Date('2025-06-16')
+  },
+  {
+    id: 'hugging-chat',
+    name: 'HuggingChat',
+    slug: 'hugging-chat',
+    description: 'Open-source conversational AI platform by Hugging Face featuring multiple state-of-the-art language models. Offers free access to various models with transparent, ethical AI development practices.',
+    shortDescription: 'Open-source AI chat platform with multiple models',
+    logo: 'https://images.pexels.com/photos/8728400/pexels-photo-8728400.jpeg',
+    website: 'https://huggingface.co/chat',
+    categoryId: 'general-ai',
+    subcategoryIds: ['chatbots', 'multimodal-ai'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$9/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['Limited daily usage', 'Multiple models', 'Open-source access']
+        },
+        {
+          name: 'PRO',
+          price: '$9/month',
+          billingPeriod: 'monthly',
+          features: ['Unlimited usage', 'Priority access', 'Latest models', 'Advanced features']
+        }
+      ]
+    },
+    features: [
+      'Multiple open-source models',
+      'Transparent AI development',
+      'Model comparison capabilities',
+      'Community-driven improvements',
+      'Privacy-focused design',
+      'Regular model updates'
+    ],
+    limitations: [
+      'Limited free tier usage',
+      'Varying model quality',
+      'No fine-tuning capabilities',
+      'Dependent on community contributions'
+    ],
+    rating: 4.3,
+    reviewCount: 1450,
+    trending: false,
+    featured: false,
+    integrations: ['Hugging Face ecosystem', 'Open-source libraries', 'Community tools', 'Model hub'],
+    lastVerified: new Date('2025-06-16')
+  },
+  {
+    id: 'mistral-ai',
+    name: 'Mistral AI',
+    slug: 'mistral-ai',
+    description: 'European AI company offering efficient, high-performance language models with a focus on openness and responsible AI. Provides both open-source and commercial models optimized for various use cases.',
+    shortDescription: 'Efficient European AI models with open-source options',
+    logo: 'https://images.pexels.com/photos/8728405/pexels-photo-8728405.jpeg',
+    website: 'https://mistral.ai',
+    categoryId: 'general-ai',
+    subcategoryIds: ['chatbots', 'specialized-assistants'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$0.25/1M tokens',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Open Source',
+          price: '$0',
+          billingPeriod: 'one-time',
+          features: ['Mistral 7B model', 'Self-hosted', 'Commercial use', 'Full access']
+        },
+        {
+          name: 'API Access',
+          price: '$0.25/1M tokens',
+          billingPeriod: 'pay-per-use',
+          features: ['Mistral Large', 'Mistral Medium', 'Mistral Small', 'Cloud hosting']
+        }
+      ]
+    },
+    features: [
+      'Efficient model architecture',
+      'European data governance',
+      'Open-source models available',
+      'Multilingual capabilities',
+      'Responsible AI practices',
+      'Enterprise-grade security'
+    ],
+    limitations: [
+      'Smaller model ecosystem',
+      'Limited integrations',
+      'Newer company with evolving features',
+      'European focus may limit global features'
+    ],
+    rating: 4.4,
+    reviewCount: 650,
+    trending: true,
+    featured: false,
+    integrations: ['REST API', 'Python SDK', 'Cloud platforms', 'Enterprise tools'],
+    lastVerified: new Date('2025-06-16')
+  },
+  {
+    id: 'wolfram-alpha',
+    name: 'Wolfram Alpha',
+    slug: 'wolfram-alpha',
+    description: 'Computational knowledge engine that uses AI to answer factual queries and solve complex mathematical, scientific, and technical problems with step-by-step solutions and visualizations.',
+    shortDescription: 'AI-powered computational knowledge engine for math and science',
+    logo: 'https://images.pexels.com/photos/8728410/pexels-photo-8728410.jpeg',
+    website: 'https://www.wolframalpha.com',
+    categoryId: 'general-ai',
+    subcategoryIds: ['search-augmentation', 'specialized-assistants'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$7.25/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['Basic queries', 'Limited step-by-step', 'Standard timeout']
+        },
+        {
+          name: 'Pro',
+          price: '$7.25/month',
+          billingPeriod: 'monthly',
+          features: ['Extended computation time', 'Step-by-step solutions', 'File uploads', 'No ads']
+        }
+      ]
+    },
+    features: [
+      'Mathematical computation and solving',
+      'Scientific data analysis',
+      'Step-by-step solutions',
+      'Data visualization',
+      'Unit conversions',
+      'Statistical analysis'
+    ],
+    limitations: [
+      'Limited to factual and computational queries',
+      'Not conversational like chatbots',
+      'Requires specific query formatting',
+      'Advanced features need subscription'
+    ],
+    rating: 4.6,
+    reviewCount: 3200,
+    trending: false,
+    featured: true,
+    integrations: ['API access', 'Educational platforms', 'Calculator apps', 'Research tools'],
+    lastVerified: new Date('2025-06-16')
+  },
+  {
+    id: 'elicit',
+    name: 'Elicit',
+    slug: 'elicit',
+    description: 'AI research assistant that helps researchers find, summarize, and analyze academic papers. Uses machine learning to accelerate literature reviews and extract insights from scientific publications.',
+    shortDescription: 'AI research assistant for academic literature analysis',
+    logo: 'https://images.pexels.com/photos/8728415/pexels-photo-8728415.jpeg',
+    website: 'https://elicit.org',
+    categoryId: 'general-ai',
+    subcategoryIds: ['search-augmentation', 'specialized-assistants'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$10/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['5,000 one-time credits', 'Basic searches', 'Paper summaries']
+        },
+        {
+          name: 'Plus',
+          price: '$10/month',
+          billingPeriod: 'monthly',
+          features: ['12,000 credits/month', 'Advanced features', 'Unlimited searches', 'Priority support']
+        },
+        {
+          name: 'Pro',
+          price: '$25/month',
+          billingPeriod: 'monthly',
+          features: ['25,000 credits/month', 'All features', 'Bulk operations', 'Team collaboration']
+        }
+      ]
+    },
+    features: [
+      'Academic paper search and discovery',
+      'Automated literature reviews',
+      'Paper summarization',
+      'Data extraction from studies',
+      'Citation analysis',
+      'Research question answering'
+    ],
+    limitations: [
+      'Limited to academic research',
+      'Credit-based usage system',
+      'Requires research methodology knowledge',
+      'May miss very recent publications'
+    ],
+    rating: 4.5,
+    reviewCount: 1100,
+    trending: true,
+    featured: false,
+    integrations: ['Academic databases', 'Reference managers', 'Research workflows', 'Citation tools'],
+    lastVerified: new Date('2025-06-16')
+  },
+  {
+    id: 'consensus-ai',
+    name: 'Consensus',
+    slug: 'consensus-ai',
+    description: 'AI-powered academic search engine that finds and synthesizes insights from scientific research papers. Provides evidence-based answers by analyzing peer-reviewed studies across multiple disciplines.',
+    shortDescription: 'AI search engine for evidence-based research insights',
+    logo: 'https://images.pexels.com/photos/8728420/pexels-photo-8728420.jpeg',
+    website: 'https://consensus.app',
+    categoryId: 'general-ai',
+    subcategoryIds: ['search-augmentation', 'specialized-assistants'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$8.99/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['20 searches/month', 'Basic summaries', 'Limited features']
+        },
+        {
+          name: 'Premium',
+          price: '$8.99/month',
+          billingPeriod: 'monthly',
+          features: ['Unlimited searches', 'Detailed analysis', 'Study quality indicators', 'Export features']
+        }
+      ]
+    },
+    features: [
+      'Evidence-based research synthesis',
+      'Study quality assessment',
+      'Scientific consensus identification',
+      'Multi-disciplinary coverage',
+      'Real-time literature monitoring',
+      'Research trend analysis'
+    ],
+    limitations: [
+      'Limited free searches',
+      'Focused on academic research only',
+      'May not cover all research databases',
+      'Requires understanding of research methodology'
+    ],
+    rating: 4.4,
+    reviewCount: 780,
+    trending: true,
+    featured: false,
+    integrations: ['Academic databases', 'Research platforms', 'Citation managers', 'Educational tools'],
+    lastVerified: new Date('2025-06-16')
+  },
+  {
+    id: 'mem-ai',
+    name: 'Mem',
+    slug: 'mem-ai',
+    description: 'AI-powered note-taking and knowledge management system that automatically organizes, connects, and surfaces relevant information. Uses machine learning to enhance personal productivity and information recall.',
+    shortDescription: 'AI-powered note-taking with automatic organization and insights',
+    logo: 'https://images.pexels.com/photos/8728425/pexels-photo-8728425.jpeg',
+    website: 'https://mem.ai',
+    categoryId: 'general-ai',
+    subcategoryIds: ['specialized-assistants', 'chatbots'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$8.33/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['Unlimited notes', 'Basic AI features', 'Mobile & web access']
+        },
+        {
+          name: 'Mem X',
+          price: '$8.33/month',
+          billingPeriod: 'monthly',
+          features: ['Advanced AI features', 'Smart Write', 'Collections', 'Unlimited file uploads']
+        }
+      ]
+    },
+    features: [
+      'AI-powered note organization',
+      'Automatic content connections',
+      'Smart writing assistance',
+      'Knowledge graph visualization',
+      'Cross-platform synchronization',
+      'Natural language search'
+    ],
+    limitations: [
+      'Advanced AI features require subscription',
+      'Relatively new platform',
+      'Limited integration options',
+      'Learning curve for optimal usage'
+    ],
+    rating: 4.2,
+    reviewCount: 950,
+    trending: true,
+    featured: false,
+    integrations: ['Mobile apps', 'Web browsers', 'Email clients', 'Calendar apps'],
+    lastVerified: new Date('2025-06-16')
+  },
+  {
+    id: 'anthropic-constitutional-ai',
+    name: 'Constitutional AI',
+    slug: 'anthropic-constitutional-ai',
+    description: 'Anthropic\'s research framework for training AI systems to be helpful, harmless, and honest through constitutional principles. Focuses on AI safety, alignment, and responsible development practices.',
+    shortDescription: 'AI safety research framework for responsible AI development',
+    logo: 'https://images.pexels.com/photos/8728430/pexels-photo-8728430.jpeg',
+    website: 'https://www.anthropic.com/constitutional-ai',
+    categoryId: 'general-ai',
+    subcategoryIds: ['specialized-assistants'],
+    pricing: {
+      type: 'research',
+      startingPrice: 'Research only',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Research Access',
+          price: '$0',
+          billingPeriod: 'one-time',
+          features: ['Research papers', 'Methodology documentation', 'Academic collaboration']
+        }
+      ]
+    },
+    features: [
+      'AI safety research methodologies',
+      'Constitutional training principles',
+      'Alignment research frameworks',
+      'Ethical AI development guidelines',
+      'Transparency in AI behavior',
+      'Academic collaboration opportunities'
+    ],
+    limitations: [
+      'Research-focused, not a product',
+      'Requires academic or research background',
+      'Limited practical implementation tools',
+      'Primarily theoretical framework'
+    ],
+    rating: 4.7,
+    reviewCount: 320,
+    trending: false,
+    featured: true,
+    integrations: ['Academic institutions', 'Research collaborations', 'Safety frameworks'],
+    lastVerified: new Date('2025-06-16')
+  },
+  {
+    id: 'weights-biases',
+    name: 'Weights & Biases',
+    slug: 'weights-biases',
+    description: 'MLOps platform for machine learning experiment tracking, model management, and team collaboration. Provides tools for monitoring, visualizing, and optimizing machine learning workflows.',
+    shortDescription: 'MLOps platform for ML experiment tracking and model management',
+    logo: 'https://images.pexels.com/photos/8728435/pexels-photo-8728435.jpeg',
+    website: 'https://wandb.ai',
+    categoryId: 'general-ai',
+    subcategoryIds: ['specialized-assistants'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$50/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['Personal projects', 'Basic tracking', '100GB storage', 'Community support']
+        },
+        {
+          name: 'Team',
+          price: '$50/month',
+          billingPeriod: 'monthly',
+          features: ['Team collaboration', 'Advanced features', '1TB storage', 'Priority support']
+        },
+        {
+          name: 'Enterprise',
+          price: 'Custom',
+          billingPeriod: 'monthly',
+          features: ['Advanced security', 'Dedicated support', 'Custom deployment', 'Unlimited storage']
+        }
+      ]
+    },
+    features: [
+      'Experiment tracking and logging',
+      'Model versioning and registry',
+      'Hyperparameter optimization',
+      'Team collaboration tools',
+      'Interactive visualizations',
+      'Integration with ML frameworks'
+    ],
+    limitations: [
+      'Limited free tier storage',
+      'Learning curve for new users',
+      'Can be expensive for large teams',
+      'Requires ML workflow knowledge'
+    ],
+    rating: 4.6,
+    reviewCount: 1800,
+    trending: true,
+    featured: false,
+    integrations: ['TensorFlow', 'PyTorch', 'Scikit-learn', 'Jupyter', 'Cloud platforms'],
+    lastVerified: new Date('2025-06-16')
+  },
+  {
+    id: 'huggingface-hub',
+    name: 'Hugging Face Hub',
+    slug: 'huggingface-hub',
+    description: 'Comprehensive platform for sharing, discovering, and deploying machine learning models. Hosts thousands of pre-trained models, datasets, and tools for natural language processing and machine learning.',
+    shortDescription: 'Open platform for ML model sharing and deployment',
+    logo: 'https://images.pexels.com/photos/8728440/pexels-photo-8728440.jpeg',
+    website: 'https://huggingface.co',
+    categoryId: 'general-ai',
+    subcategoryIds: ['specialized-assistants', 'multimodal-ai'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$9/month',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['Public repositories', 'Community features', 'Basic inference API']
+        },
+        {
+          name: 'PRO',
+          price: '$9/month',
+          billingPeriod: 'monthly',
+          features: ['Private repositories', 'Early access features', 'Enhanced inference API', 'Priority support']
+        },
+        {
+          name: 'Enterprise',
+          price: '$20/user/month',
+          billingPeriod: 'monthly',
+          features: ['Advanced security', 'SSO integration', 'Dedicated support', 'Custom deployment']
+        }
+      ]
+    },
+    features: [
+      'Vast model repository',
+      'Pre-trained model access',
+      'Model deployment tools',
+      'Dataset hosting and sharing',
+      'Community collaboration',
+      'Integration with major ML frameworks'
+    ],
+    limitations: [
+      'Public repositories in free tier',
+      'Limited private storage in free tier',
+      'Requires ML knowledge for optimal use',
+      'Dependency on community contributions'
+    ],
+    rating: 4.8,
+    reviewCount: 4200,
+    trending: true,
+    featured: true,
+    integrations: ['PyTorch', 'TensorFlow', 'JAX', 'Cloud platforms', 'APIs'],
+    lastVerified: new Date('2025-06-16')
+  },
+  {
+    id: 'replicate',
+    name: 'Replicate',
+    slug: 'replicate',
+    description: 'Cloud platform for running and deploying machine learning models with simple API access. Provides easy deployment of open-source models without infrastructure management.',
+    shortDescription: 'Cloud platform for running ML models via simple APIs',
+    logo: 'https://images.pexels.com/photos/8728445/pexels-photo-8728445.jpeg',
+    website: 'https://replicate.com',
+    categoryId: 'general-ai',
+    subcategoryIds: ['specialized-assistants', 'multimodal-ai'],
+    pricing: {
+      type: 'pay-per-use',
+      startingPrice: 'Variable',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free Trial',
+          price: '$10 credit',
+          billingPeriod: 'one-time',
+          features: ['$10 free credit', 'All models access', 'API usage']
+        },
+        {
+          name: 'Pay-as-you-go',
+          price: 'Variable',
+          billingPeriod: 'pay-per-use',
+          features: ['Per-second billing', 'Automatic scaling', 'All models', 'API access']
+        }
+      ]
+    },
+    features: [
+      'Easy model deployment',
+      'Automatic scaling',
+      'Per-second billing',
+      'Wide model selection',
+      'Simple API interface',
+      'No infrastructure management'
+    ],
+    limitations: [
+      'Pay-per-use can be expensive',
+      'Limited to available models',
+      'Dependent on cloud infrastructure',
+      'No model training capabilities'
+    ],
+    rating: 4.5,
+    reviewCount: 1350,
+    trending: true,
+    featured: false,
+    integrations: ['REST API', 'Python client', 'JavaScript client', 'webhooks'],
+    lastVerified: new Date('2025-06-16')
+  },
+  {
+    id: 'openai-fine-tuning',
+    name: 'OpenAI Fine-tuning',
+    slug: 'openai-fine-tuning',
+    description: 'Platform for customizing OpenAI models with your own data to improve performance on specific tasks. Allows organizations to create specialized AI models while maintaining OpenAI\'s safety standards.',
+    shortDescription: 'Customize OpenAI models with your own data for specialized tasks',
+    logo: 'https://images.pexels.com/photos/8728450/pexels-photo-8728450.jpeg',
+    website: 'https://platform.openai.com/docs/guides/fine-tuning',
+    categoryId: 'general-ai',
+    subcategoryIds: ['specialized-assistants'],
+    pricing: {
+      type: 'pay-per-use',
+      startingPrice: '$8/1M tokens',
+      hasFreeOption: false,
+      tiers: [
+        {
+          name: 'Fine-tuning',
+          price: '$8/1M tokens',
+          billingPeriod: 'pay-per-use',
+          features: ['Custom model training', 'GPT-3.5 Turbo base', 'Dedicated model access', 'Training data management']
+        },
+        {
+          name: 'Fine-tuned Usage',
+          price: '$12/1M tokens',
+          billingPeriod: 'pay-per-use',
+          features: ['Fine-tuned model inference', 'Enhanced performance', 'Custom capabilities', 'API access']
+        }
+      ]
+    },
+    features: [
+      'Custom model training',
+      'Domain-specific optimization',
+      'Training data management',
+      'Model performance monitoring',
+      'Safety guideline compliance',
+      'Production-ready deployment'
+    ],
+    limitations: [
+      'Requires quality training data',
+      'Higher costs than base models',
+      'Training time requirements',
+      'Technical expertise needed'
+    ],
+    rating: 4.4,
+    reviewCount: 850,
+    trending: true,
+    featured: false,
+    integrations: ['OpenAI API', 'Training pipelines', 'Data platforms', 'MLOps tools'],
+    lastVerified: new Date('2025-06-16')
+  },
+  {
+    id: 'openai-codex',
+    name: 'OpenAI Codex',
+    slug: 'openai-codex',
+    description: 'AI system that translates natural language to code and powers GitHub Copilot. Excels at understanding and generating code in dozens of programming languages with contextual awareness.',
+    shortDescription: 'AI code generation system powering GitHub Copilot',
+    logo: 'https://images.pexels.com/photos/8728455/pexels-photo-8728455.jpeg',
+    website: 'https://openai.com/blog/openai-codex',
+    categoryId: 'general-ai',
+    subcategoryIds: ['coding-assistants', 'specialized-assistants'],
+    pricing: {
+      type: 'pay-per-use',
+      startingPrice: 'Variable',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free Trial',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['Limited usage', 'API access', 'Multiple languages']
+        },
+        {
+          name: 'Pay-per-use',
+          price: 'Variable',
+          billingPeriod: 'pay-per-use',
+          features: ['Production usage', 'Full API access', 'Commercial license', 'Priority support']
+        }
+      ]
+    },
+    features: [
+      'Natural language to code translation',
+      'Multi-language programming support',
+      'Code completion and generation',
+      'Contextual code understanding',
+      'Documentation generation',
+      'Code explanation and comments'
+    ],
+    limitations: [
+      'May generate incorrect or insecure code',
+      'Requires code review and testing',
+      'Limited to training data knowledge',
+      'API-only access (no direct interface)'
+    ],
+    rating: 4.7,
+    reviewCount: 2800,
+    trending: true,
+    featured: true,
+    integrations: ['GitHub Copilot', 'OpenAI API', 'IDEs', 'Developer tools'],
+    lastVerified: new Date('2025-06-16')
+  },
+  {
+    id: 'scale-ai',
+    name: 'Scale AI',
+    slug: 'scale-ai',
+    description: 'Data platform for AI that provides high-quality training data, model evaluation, and fine-tuning services. Specializes in data labeling, annotation, and ML model improvement for enterprises.',
+    shortDescription: 'Enterprise data platform for AI training and model improvement',
+    logo: 'https://images.pexels.com/photos/8728475/pexels-photo-8728475.jpeg',
+    website: 'https://scale.com',
+    categoryId: 'general-ai',
+    subcategoryIds: ['model-deployment', 'specialized-assistants'],
+    pricing: {
+      type: 'enterprise',
+      startingPrice: 'Custom',
+      hasFreeOption: false,
+      tiers: [
+        {
+          name: 'Enterprise',
+          price: 'Custom',
+          billingPeriod: 'monthly',
+          features: ['Data labeling services', 'Model evaluation', 'Custom annotation', 'Enterprise support']
+        }
+      ]
+    },
+    features: [
+      'High-quality data labeling',
+      'Model evaluation and testing',
+      'Custom annotation workflows',
+      'Multi-modal data support',
+      'Quality assurance processes',
+      'Enterprise-grade security'
+    ],
+    limitations: [
+      'Enterprise-only pricing',
+      'Custom implementation required',
+      'High cost for small projects',
+      'Complex setup and integration'
+    ],
+    rating: 4.5,
+    reviewCount: 280,
+    trending: true,
+    featured: false,
+    integrations: ['ML frameworks', 'Cloud platforms', 'Enterprise systems', 'Data pipelines'],
+    lastVerified: new Date('2025-06-16')
+  },
+  {
+    id: 'together-ai',
+    name: 'Together AI',
+    slug: 'together-ai',
+    description: 'Cloud platform for running and fine-tuning open-source language models with focus on speed, cost-efficiency, and customization. Provides access to cutting-edge models with competitive pricing.',
+    shortDescription: 'Fast and cost-effective platform for open-source AI models',
+    logo: 'https://images.pexels.com/photos/8728480/pexels-photo-8728480.jpeg',
+    website: 'https://together.ai',
+    categoryId: 'general-ai',
+    subcategoryIds: ['open-source-models', 'fast-inference'],
+    pricing: {
+      type: 'pay-per-use',
+      startingPrice: '$0.2/1M tokens',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free Trial',
+          price: '$5 credit',
+          billingPeriod: 'one-time',
+          features: ['$5 free credit', 'All models access', 'API usage']
+        },
+        {
+          name: 'Pay-as-you-go',
+          price: '$0.2/1M tokens',
+          billingPeriod: 'pay-per-use',
+          features: ['Competitive pricing', 'Fast inference', 'Multiple models', 'Fine-tuning']
+        }
+      ]
+    },
+    features: [
+      'Fast open-source model inference',
+      'Competitive pay-per-use pricing',
+      'Model fine-tuning capabilities',
+      'Wide selection of models',
+      'Developer-friendly API',
+      'High-performance infrastructure'
+    ],
+    limitations: [
+      'Limited to open-source models',
+      'Newer platform with evolving features',
+      'Pay-per-use pricing model only',
+      'Requires technical integration'
+    ],
+    rating: 4.4,
+    reviewCount: 520,
+    trending: true,
+    featured: false,
+    integrations: ['REST API', 'Python SDK', 'Model libraries', 'Development tools'],
+    lastVerified: new Date('2025-06-16')
+  },
+  {
+    id: 'anthropic-claude-teams',
+    name: 'Claude for Teams',
+    slug: 'anthropic-claude-teams',
+    description: 'Enterprise version of Claude designed for team collaboration with enhanced security, administration controls, and higher usage limits. Perfect for organizations needing secure AI assistance.',
+    shortDescription: 'Enterprise Claude with team management and enhanced security',
+    logo: 'https://images.pexels.com/photos/8728470/pexels-photo-8728470.jpeg',
+    website: 'https://claude.ai/teams',
+    categoryId: 'general-ai',
+    subcategoryIds: ['specialized-assistants', 'chatbots'],
+    pricing: {
+      type: 'subscription',
+      startingPrice: '$30/user/month',
+      hasFreeOption: false,
+      tiers: [
+        {
+          name: 'Team',
+          price: '$30/user/month',
+          billingPeriod: 'monthly',
+          features: ['Higher usage limits', 'Team management', 'Priority support', 'Admin controls']
+        },
+        {
+          name: 'Enterprise',
+          price: 'Custom',
+          billingPeriod: 'monthly',
+          features: ['Custom deployment', 'Advanced security', 'SSO integration', 'Dedicated support']
+        }
+      ]
+    },
+    features: [
+      'Team collaboration tools',
+      'Enhanced security features',
+      'Administrative controls',
+      'Higher usage limits',
+      'Priority customer support',
+      'SSO and enterprise integration'
+    ],
+    limitations: [
+      'Higher cost than individual plans',
+      'Minimum user requirements',
+      'Enterprise features need custom pricing',
+      'Setup complexity for large organizations'
+    ],
+    rating: 4.6,
+    reviewCount: 450,
+    trending: true,
+    featured: false,
+    integrations: ['SSO providers', 'Enterprise tools', 'Team platforms', 'Security systems'],
+    lastVerified: new Date('2025-06-16')
+  },
+  {
+    id: 'cohere-ai',
+    name: 'Cohere',
+    slug: 'cohere-ai',
+    description: 'Enterprise AI platform providing large language models through APIs for text generation, understanding, and embedding. Focuses on enterprise-grade solutions with customization and fine-tuning options.',
+    shortDescription: 'Enterprise AI platform with customizable language models',
+    logo: 'https://images.pexels.com/photos/8728485/pexels-photo-8728485.jpeg',
+    website: 'https://cohere.ai',
+    categoryId: 'general-ai',
+    subcategoryIds: ['specialized-assistants', 'model-deployment'],
+    pricing: {
+      type: 'freemium',
+      startingPrice: '$1/1K requests',
+      hasFreeOption: true,
+      tiers: [
+        {
+          name: 'Free Trial',
+          price: '$0',
+          billingPeriod: 'monthly',
+          features: ['5M tokens/month', 'Basic models', 'API access']
+        },
+        {
+          name: 'Production',
+          price: '$1/1K requests',
+          billingPeriod: 'pay-per-use',
+          features: ['Advanced models', 'Custom fine-tuning', 'Enterprise support', 'Higher rate limits']
+        }
+      ]
+    },
+    features: [
+      'Enterprise-grade language models',
+      'Custom model fine-tuning',
+      'Text generation and understanding',
+      'Embedding models',
+      'Multi-language support',
+      'Enterprise security and compliance'
+    ],
+    limitations: [
+      'API-only access',
+      'Requires technical integration',
+      'Higher pricing for advanced features',
+      'Limited free tier usage'
+    ],
+    rating: 4.3,
+    reviewCount: 680,
+    trending: false,
+    featured: false,
+    integrations: ['REST API', 'Python SDK', 'Enterprise systems', 'Cloud platforms'],
+    lastVerified: new Date('2025-06-16')
   }
 ];

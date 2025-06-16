@@ -28,20 +28,78 @@ export const RecommendationResults: React.FC<RecommendationResultsProps> = ({
 
   // Get relevant workflow bundles based on recommended tools
   const getRelevantBundles = () => {
-    const mediaCreationBundles = workflowBundles.filter(bundle =>
-      bundle.id >= '24' // Media creation bundles start from ID 24
-    );
+    const toolCategories = recommendedTools.map(rec => rec.tool.categoryId);
+    const toolSubcategories = recommendedTools.flatMap(rec => rec.tool.subcategoryIds);
+    const toolIds = recommendedTools.map(rec => rec.tool.id);
     
-    const hasMediaCreationTools = recommendedTools.some(rec =>
-      rec.tool.categoryId === 'media-creation'
-    );
+    let relevantBundles = [];
     
-    if (hasMediaCreationTools) {
-      // Return top 3 most relevant media creation bundles
-      return mediaCreationBundles.slice(0, 3);
+    // Check for General AI tools and recommend new AI bundles
+    const hasGeneralAI = toolCategories.includes('general-ai');
+    const hasReasoningTools = toolSubcategories.includes('reasoning-math') ||
+                             toolIds.some(id => ['o1-preview', 'claude-3-5-sonnet', 'wolfram-alpha'].includes(id));
+    const hasResearchTools = toolSubcategories.includes('research-analysis') ||
+                            toolIds.some(id => ['elicit', 'consensus-ai', 'mem-ai'].includes(id));
+    const hasOpenSourceTools = toolSubcategories.includes('open-source-models') ||
+                              toolIds.some(id => ['llama-3-2', 'hugging-chat', 'mistral-ai'].includes(id));
+    const hasCodingTools = toolCategories.includes('code-creation') ||
+                          toolSubcategories.includes('coding-assistants') ||
+                          toolIds.some(id => ['openai-codex', 'github-copilot', 'cursor-ai'].includes(id));
+    
+    // Advanced AI Reasoning Suite (ID 53)
+    if (hasReasoningTools) {
+      relevantBundles.push(workflowBundles.find(b => b.id === '53'));
     }
     
-    return [];
+    // Academic Research Intelligence Platform (ID 54)
+    if (hasResearchTools) {
+      relevantBundles.push(workflowBundles.find(b => b.id === '54'));
+    }
+    
+    // Open Source AI Development Suite (ID 56)
+    if (hasOpenSourceTools) {
+      relevantBundles.push(workflowBundles.find(b => b.id === '56'));
+    }
+    
+    // AI-Powered Code Generation Suite (ID 59)
+    if (hasCodingTools) {
+      relevantBundles.push(workflowBundles.find(b => b.id === '59'));
+    }
+    
+    // Enterprise AI Model Deployment Platform (ID 55) for advanced users
+    if (hasGeneralAI && toolIds.some(id => ['weights-biases', 'huggingface-hub', 'scale-ai'].includes(id))) {
+      relevantBundles.push(workflowBundles.find(b => b.id === '55'));
+    }
+    
+    // Check for media creation tools
+    const hasMediaCreationTools = toolCategories.includes('media-creation');
+    if (hasMediaCreationTools) {
+      const mediaCreationBundles = workflowBundles.filter(bundle =>
+        bundle.id >= '24' && bundle.id <= '34' // Media creation bundles
+      );
+      relevantBundles.push(...mediaCreationBundles.slice(0, 2));
+    }
+    
+    // Check for document creation tools
+    const hasDocumentTools = toolCategories.includes('document-creation');
+    if (hasDocumentTools) {
+      const documentBundles = workflowBundles.filter(bundle =>
+        bundle.id >= '35' && bundle.id <= '40' // Document creation bundles
+      );
+      relevantBundles.push(...documentBundles.slice(0, 2));
+    }
+    
+    // Check for workflow automation tools
+    const hasWorkflowTools = toolCategories.includes('workflow-automation');
+    if (hasWorkflowTools) {
+      const workflowBundlesFiltered = workflowBundles.filter(bundle =>
+        ['1', '3', '5', '6', '7', '8', '9'].includes(bundle.id) // Core workflow bundles
+      );
+      relevantBundles.push(...workflowBundlesFiltered.slice(0, 2));
+    }
+    
+    // Filter out undefined and limit to top 3 most relevant
+    return relevantBundles.filter((bundle): bundle is NonNullable<typeof bundle> => Boolean(bundle)).slice(0, 3);
   };
 
   const suggestedBundles = getRelevantBundles();

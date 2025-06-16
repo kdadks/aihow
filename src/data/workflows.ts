@@ -966,5 +966,196 @@ export const workflowBundles: WorkflowBundle[] = [
       'Set up Nuance DAX for automated surgical documentation',
       'Establish surgical workflow optimization and training protocols'
     ]
+  },
+  // === ADVANCED AI REASONING & RESEARCH BUNDLES ===
+  {
+    id: '53',
+    name: 'Advanced AI Reasoning Suite',
+    description: 'Cutting-edge AI models specialized for complex reasoning, mathematical problem-solving, and deep analytical thinking.',
+    tools: [
+      findTool('o1-preview'), // OpenAI o1-preview - Advanced reasoning
+      findTool('claude-3-5-sonnet'), // Claude 3.5 Sonnet - Superior reasoning
+      findTool('wolfram-alpha'), // Wolfram Alpha - Computational knowledge
+      findTool('groq-ai') // Groq - Ultra-fast inference
+    ],
+    totalCost: '$35/month',
+    implementationSteps: [
+      'Use OpenAI o1-preview for complex step-by-step reasoning tasks',
+      'Deploy Claude 3.5 Sonnet for advanced analysis and coding',
+      'Integrate Wolfram Alpha for mathematical computations and factual queries',
+      'Leverage Groq for ultra-fast AI responses when speed is critical',
+      'Establish workflows for different reasoning complexity levels'
+    ]
+  },
+  {
+    id: '54',
+    name: 'Academic Research Intelligence Platform',
+    description: 'Comprehensive research workflow combining AI-powered literature discovery, evidence synthesis, and knowledge management.',
+    tools: [
+      findTool('elicit'), // Elicit - AI research assistant
+      findTool('consensus-ai'), // Consensus - Evidence-based research
+      findTool('mem-ai'), // Mem - AI knowledge management
+      findTool('claude-3-5-sonnet') // Claude 3.5 Sonnet - Analysis and writing
+    ],
+    totalCost: '$61/month',
+    implementationSteps: [
+      'Set up Elicit for automated literature reviews and paper analysis',
+      'Use Consensus for evidence-based research synthesis',
+      'Organize research insights with Mem\'s AI-powered knowledge system',
+      'Generate comprehensive analyses with Claude 3.5 Sonnet',
+      'Build systematic research workflows and citation management'
+    ]
+  },
+  {
+    id: '55',
+    name: 'Enterprise AI Model Deployment Platform',
+    description: 'Complete MLOps and AI model deployment workflow for organizations building and scaling AI applications.',
+    tools: [
+      findTool('weights-biases'), // Weights & Biases - MLOps platform
+      findTool('huggingface-hub'), // Hugging Face Hub - Model repository
+      findTool('replicate'), // Replicate - Model deployment
+      findTool('scale-ai') // Scale AI - Data platform
+    ],
+    totalCost: '$130/month + usage',
+    implementationSteps: [
+      'Track experiments and models with Weights & Biases',
+      'Access and deploy models through Hugging Face Hub',
+      'Scale model inference with Replicate\'s cloud platform',
+      'Enhance model performance with Scale AI\'s data services',
+      'Establish production-ready ML pipelines and monitoring'
+    ]
+  },
+  {
+    id: '56',
+    name: 'Open Source AI Development Suite',
+    description: 'Cost-effective AI development workflow using open-source models and platforms for maximum flexibility and control.',
+    tools: [
+      findTool('llama-3-2'), // Llama 3.2 - Open-source multimodal AI
+      findTool('hugging-chat'), // HuggingChat - Open-source chat platform
+      findTool('mistral-ai'), // Mistral AI - Efficient open models
+      findTool('together-ai') // Together AI - Fast open-source inference
+    ],
+    totalCost: '$25/month',
+    implementationSteps: [
+      'Deploy Llama 3.2 for multimodal AI capabilities',
+      'Set up HuggingChat for conversational AI applications',
+      'Integrate Mistral AI for efficient language processing',
+      'Use Together AI for fast and cost-effective model inference',
+      'Build custom AI solutions with full control over models and data'
+    ]
+  },
+  {
+    id: '57',
+    name: 'High-Performance AI Inference Platform',
+    description: 'Ultra-fast AI processing workflow optimized for real-time applications and high-throughput requirements.',
+    tools: [
+      findTool('groq-ai'), // Groq - Ultra-fast inference
+      findTool('together-ai'), // Together AI - Fast open-source models
+      findTool('replicate'), // Replicate - Scalable deployment
+      findTool('huggingface-hub') // Hugging Face Hub - Model access
+    ],
+    totalCost: '$40/month + usage',
+    implementationSteps: [
+      'Deploy Groq for lightning-fast AI responses',
+      'Use Together AI for cost-effective high-speed inference',
+      'Scale with Replicate for variable demand handling',
+      'Access diverse models through Hugging Face Hub',
+      'Optimize for latency and throughput in production applications'
+    ]
+  },
+  {
+    id: '58',
+    name: 'Enterprise AI Safety & Ethics Platform',
+    description: 'Responsible AI development workflow focusing on safety, ethics, and compliance for enterprise deployments.',
+    tools: [
+      findTool('anthropic-constitutional-ai'), // Constitutional AI - Safety framework
+      findTool('anthropic-claude-teams'), // Claude for Teams - Enterprise security
+      findTool('weights-biases'), // Weights & Biases - Model monitoring
+      findTool('scale-ai') // Scale AI - Data quality and evaluation
+    ],
+    totalCost: '$180/month + custom pricing',
+    implementationSteps: [
+      'Implement Constitutional AI principles for responsible development',
+      'Deploy Claude for Teams with enterprise security features',
+      'Monitor model behavior and bias with Weights & Biases',
+      'Ensure data quality and safety with Scale AI evaluation',
+      'Establish governance frameworks and compliance protocols'
+    ]
+  },
+  {
+    id: '59',
+    name: 'AI-Powered Code Generation Suite',
+    description: 'Advanced coding workflow combining multiple AI assistants for maximum development productivity and code quality.',
+    tools: [
+      findTool('openai-codex'), // OpenAI Codex - Advanced code generation
+      findTool('claude-3-5-sonnet'), // Claude 3.5 Sonnet - Code analysis
+      findTool('github-copilot'), // GitHub Copilot - IDE integration
+      findTool('cursor-ai') // Cursor AI - AI-powered development environment
+    ],
+    totalCost: '$70/month',
+    implementationSteps: [
+      'Integrate OpenAI Codex for advanced code generation capabilities',
+      'Use Claude 3.5 Sonnet for complex code analysis and refactoring',
+      'Deploy GitHub Copilot for real-time coding assistance',
+      'Set up Cursor AI as primary AI-enhanced development environment',
+      'Establish code review workflows and quality assurance processes'
+    ]
+  },
+  {
+    id: '60',
+    name: 'Multi-Modal AI Content Platform',
+    description: 'Comprehensive content creation workflow leveraging AI models capable of understanding and generating text, images, and multimedia.',
+    tools: [
+      findTool('llama-3-2'), // Llama 3.2 - Multimodal capabilities
+      findTool('claude-3-5-sonnet'), // Claude 3.5 Sonnet - Advanced text processing
+      findTool('huggingface-hub'), // Hugging Face Hub - Model access
+      findTool('replicate') // Replicate - Multimodal model deployment
+    ],
+    totalCost: '$35/month + usage',
+    implementationSteps: [
+      'Deploy Llama 3.2 for text and vision understanding tasks',
+      'Use Claude 3.5 Sonnet for sophisticated content analysis and generation',
+      'Access specialized models through Hugging Face Hub',
+      'Scale multimodal applications with Replicate deployment',
+      'Build integrated workflows for text, image, and multimedia content'
+    ]
+  },
+  {
+    id: '61',
+    name: 'Enterprise AI Team Collaboration Suite',
+    description: 'Professional AI platform designed for team collaboration with enhanced security, administration, and enterprise features.',
+    tools: [
+      findTool('anthropic-claude-teams'), // Claude for Teams - Enterprise collaboration
+      findTool('cohere-ai'), // Cohere - Enterprise AI platform
+      findTool('openai-fine-tuning'), // OpenAI Fine-tuning - Custom models
+      findTool('weights-biases') // Weights & Biases - Team ML workflow
+    ],
+    totalCost: '$130/month + usage',
+    implementationSteps: [
+      'Set up Claude for Teams with enterprise security and team management',
+      'Deploy Cohere for customizable enterprise AI solutions',
+      'Create specialized models with OpenAI Fine-tuning',
+      'Collaborate on ML projects with Weights & Biases team features',
+      'Establish enterprise governance and collaboration workflows'
+    ]
+  },
+  {
+    id: '62',
+    name: 'AI Knowledge Management & Productivity Suite',
+    description: 'Intelligent productivity workflow combining AI-powered note-taking, knowledge organization, and research capabilities.',
+    tools: [
+      findTool('mem-ai'), // Mem - AI knowledge management
+      findTool('claude-3-5-sonnet'), // Claude 3.5 Sonnet - Analysis and synthesis
+      findTool('elicit'), // Elicit - Research assistance
+      findTool('wolfram-alpha') // Wolfram Alpha - Computational knowledge
+    ],
+    totalCost: '$45/month',
+    implementationSteps: [
+      'Organize knowledge and insights with Mem\'s AI-powered system',
+      'Generate comprehensive analyses with Claude 3.5 Sonnet',
+      'Conduct research and literature reviews with Elicit',
+      'Access computational knowledge with Wolfram Alpha',
+      'Build intelligent workflows for information management and synthesis'
+    ]
   }
 ];

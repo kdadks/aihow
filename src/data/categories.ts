@@ -12,35 +12,63 @@ export const categories: Category[] = [
         name: 'Video Generation',
         description: 'Create and edit videos using AI with text prompts, images, or rough video input',
         parentCategoryId: 'media-creation',
-        tools: ['Runway Gen-2', 'Pika', 'Sora', 'Synthesia', 'Colossyan', 'Lumen5']
+        tools: ['Runway Gen-2', 'Pika', 'Sora', 'Synthesia', 'Colossyan', 'Lumen5', 'Invideo AI', 'Fliki', 'Steve AI', 'HeyGen']
       },
       {
         id: 'image-generation',
         name: 'Image Generation',
         description: 'Generate or edit images from text prompts, other images, or sketches',
         parentCategoryId: 'media-creation',
-        tools: ['DALL·E 3', 'Midjourney', 'Stable Diffusion', 'Adobe Firefly', 'Leonardo.ai', 'ClipDrop']
+        tools: ['DALL·E 3', 'Midjourney', 'Stable Diffusion', 'Adobe Firefly', 'Leonardo.ai', 'ClipDrop', 'Ideogram', 'Flux', 'Freepik AI', 'Canva AI']
       },
       {
         id: 'audio-generation',
         name: 'Audio & Music Generation',
         description: 'Create voice, music, and sound effects using AI',
         parentCategoryId: 'media-creation',
-        tools: ['ElevenLabs', 'Voicemod', 'Suno.ai', 'Aiva', 'Soundraw', 'Mubert']
+        tools: ['ElevenLabs', 'Voicemod', 'Suno.ai', 'Aiva', 'Soundraw', 'Mubert', 'Udio', 'Boomy', 'Beatoven.ai', 'Lalal.ai']
       },
       {
         id: 'interactive-media',
         name: 'Interactive & Game Media',
         description: 'Create games, interactive characters, and 3D assets using AI',
         parentCategoryId: 'media-creation',
-        tools: ['Inworld AI', 'Scenario.gg', 'Luma AI', 'Unity Muse', 'Character.ai', 'NovelAI']
+        tools: ['Inworld AI', 'Scenario.gg', 'Luma AI', 'Unity Muse', 'Character.ai', 'NovelAI', 'Meshy', 'Spline AI', 'Blender Copilot', 'Promethean AI']
       },
       {
         id: 'media-editing',
         name: 'AI-Powered Media Editing',
         description: 'Enhanced editing tools for video, audio, and images',
         parentCategoryId: 'media-creation',
-        tools: ['Descript', 'Runway', 'Adobe Photoshop & Premiere', 'Kapwing', 'Otter.ai', 'Pictory']
+        tools: ['Descript', 'Runway', 'Adobe Photoshop & Premiere', 'Kapwing', 'Otter.ai', 'Pictory', 'Filmora AI', 'InVideo', 'Wondershare Filmii', 'Topaz AI']
+      },
+      {
+        id: 'avatar-generation',
+        name: 'AI Avatar & Digital Human Creation',
+        description: 'Create realistic AI avatars, digital humans, and virtual presenters',
+        parentCategoryId: 'media-creation',
+        tools: ['D-ID', 'Synthesia', 'Hour One', 'Colossyan', 'Elai.io', 'Yepic AI', 'Tavus', 'Movio']
+      },
+      {
+        id: 'animation-motion',
+        name: 'Animation & Motion Graphics',
+        description: 'AI tools for creating animations, motion graphics, and dynamic visual content',
+        parentCategoryId: 'media-creation',
+        tools: ['RunwayML', 'Stable Video Diffusion', 'Pika Labs', 'LeiaPix', 'MyHeritage AI', 'Immersity AI', 'Kaiber', 'Neural Frames']
+      },
+      {
+        id: 'podcast-audio',
+        name: 'Podcast & Audio Production',
+        description: 'Specialized AI tools for podcast creation, audio enhancement, and voice synthesis',
+        parentCategoryId: 'media-creation',
+        tools: ['Descript', 'Podcastle', 'Speechify', 'Cleanvoice', 'Adobe Podcast', 'Krisp', 'Auphonic', 'Resemble AI']
+      },
+      {
+        id: 'social-media-content',
+        name: 'Social Media Content Creation',
+        description: 'AI tools specifically designed for creating social media posts, stories, and viral content',
+        parentCategoryId: 'media-creation',
+        tools: ['Canva AI', 'Jasper Art', 'Lumen5', 'InVideo', 'Buffer AI', 'Hootsuite AI', 'Lately', 'Predis AI']
       }
     ]
   },
@@ -211,35 +239,84 @@ export const categories: Category[] = [
         name: 'Chatbots',
         description: 'Conversational AI assistants for general-purpose tasks and everyday use',
         parentCategoryId: 'general-ai',
-        tools: ['chatgpt', 'claude', 'gpt-4o', 'gemini', 'deepseek', 'perplexity-ai', 'you-ai', 'llama-3', 'anthropic-claude-for-teams', 'hugging-chat']
+        tools: ['chatgpt', 'claude', 'gpt-4o', 'gemini', 'deepseek', 'perplexity-ai', 'you-ai', 'llama-3', 'anthropic-claude-for-teams', 'hugging-chat', 'llama-3-2', 'claude-3-5-sonnet', 'o1-preview', 'groq-ai', 'hugging-chat', 'mistral-ai', 'anthropic-claude-teams']
       },
       {
         id: 'multimodal-ai',
         name: 'Multimodal AI',
         description: 'Advanced AI models capable of understanding and processing multiple input types including text, images, audio, and video',
         parentCategoryId: 'general-ai',
-        tools: ['gpt-4o', 'claude-3-opus', 'gemini', 'llama-3', 'deepseek', 'groq']
+        tools: ['gpt-4o', 'claude-3-opus', 'gemini', 'llama-3', 'deepseek', 'groq', 'llama-3-2', 'claude-3-5-sonnet', 'groq-ai', 'hugging-chat', 'huggingface-hub', 'replicate']
       },
       {
         id: 'coding-assistants',
         name: 'Coding Assistants',
         description: 'AI tools specifically designed to help developers write, understand, debug, and optimize code across various programming languages',
         parentCategoryId: 'general-ai',
-        tools: ['github-copilot', 'codeium', 'cursor-ai', 'deepseek', 'tabnine', 'aws-codewhisperer']
+        tools: ['github-copilot', 'codeium', 'cursor-ai', 'deepseek', 'tabnine', 'aws-codewhisperer', 'openai-codex']
       },
       {
         id: 'search-augmentation',
         name: 'Search & Research',
         description: 'AI-enhanced search engines and research tools that provide contextual answers, citations, and intelligent information retrieval',
         parentCategoryId: 'general-ai',
-        tools: ['perplexity-ai', 'you-ai', 'bing-copilot', 'kagi', 'elicit', 'google-search']
+        tools: ['perplexity-ai', 'you-ai', 'bing-copilot', 'kagi', 'elicit', 'google-search', 'wolfram-alpha', 'consensus-ai']
       },
       {
         id: 'specialized-assistants',
         name: 'Specialized Assistants',
         description: 'Purpose-built AI assistants optimized for specific domains, industries, or enterprise use cases with enhanced security and collaboration features',
         parentCategoryId: 'general-ai',
-        tools: ['anthropic-claude-for-teams', 'microsoft-copilot', 'notion-ai', 'jasper-ai', 'google-duet-ai', 'claude-3-opus']
+        tools: ['anthropic-claude-for-teams', 'microsoft-copilot', 'notion-ai', 'jasper-ai', 'google-duet-ai', 'claude-3-opus', 'claude-3-5-sonnet', 'o1-preview', 'mem-ai', 'anthropic-constitutional-ai']
+      },
+      {
+        id: 'reasoning-math',
+        name: 'Reasoning & Mathematical AI',
+        description: 'AI models specifically designed for complex reasoning, mathematical problem-solving, and logical analysis',
+        parentCategoryId: 'general-ai',
+        tools: ['o1-preview', 'wolfram-alpha', 'claude-3-5-sonnet', 'llama-3-2']
+      },
+      {
+        id: 'fast-inference',
+        name: 'High-Speed AI Inference',
+        description: 'AI platforms optimized for ultra-fast response times and high-throughput applications',
+        parentCategoryId: 'general-ai',
+        tools: ['groq-ai', 'replicate', 'huggingface-hub']
+      },
+      {
+        id: 'open-source-models',
+        name: 'Open Source AI Models',
+        description: 'Free and open-source AI models that can be self-hosted and customized',
+        parentCategoryId: 'general-ai',
+        tools: ['llama-3-2', 'hugging-chat', 'mistral-ai', 'huggingface-hub']
+      },
+      {
+        id: 'research-analysis',
+        name: 'AI Research & Analysis Tools',
+        description: 'AI tools specifically designed for academic research, literature analysis, and scientific discovery',
+        parentCategoryId: 'general-ai',
+        tools: ['elicit', 'consensus-ai', 'wolfram-alpha', 'anthropic-constitutional-ai']
+      },
+      {
+        id: 'knowledge-management',
+        name: 'AI Knowledge Management',
+        description: 'AI-powered tools for organizing, connecting, and retrieving personal or organizational knowledge',
+        parentCategoryId: 'general-ai',
+        tools: ['mem-ai', 'notion-ai', 'elicit']
+      },
+      {
+        id: 'model-deployment',
+        name: 'AI Model Deployment & MLOps',
+        description: 'Platforms for deploying, managing, and monitoring AI models in production environments',
+        parentCategoryId: 'general-ai',
+        tools: ['weights-biases', 'huggingface-hub', 'replicate', 'openai-fine-tuning', 'scale-ai', 'together-ai', 'cohere-ai']
+      },
+      {
+        id: 'ai-safety-ethics',
+        name: 'AI Safety & Ethics',
+        description: 'Tools and frameworks focused on responsible AI development, safety, and ethical considerations',
+        parentCategoryId: 'general-ai',
+        tools: ['anthropic-constitutional-ai', 'weights-biases']
       }
     ]
   },

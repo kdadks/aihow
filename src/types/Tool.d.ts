@@ -41,7 +41,7 @@ export interface Tool {
 export interface PricingTier {
   name: string;
   price: string;
-  billingPeriod: 'monthly' | 'yearly' | 'one-time';
+  billingPeriod: 'monthly' | 'yearly' | 'one-time' | 'pay-per-use';
   features: string[];
   limitations?: string[];
   isPopular?: boolean;
