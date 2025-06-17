@@ -6,7 +6,6 @@ export interface Tool {
   slug: string;
   description: string;
   shortDescription: string;
-  logo: string;
   website: string;
   categoryId: string;
   subcategoryIds: string[];

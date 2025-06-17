@@ -68,7 +68,7 @@ export const ComparisonGrid: React.FC<ComparisonGridProps> = ({ tools, onRemoveT
 
   // Track comparison view
   useEffect(() => {
-    if (tools.length > 1) {
+    if (tools.length> 1) {
       trackComparison();
     }
   }, [tools, trackComparison]);
@@ -101,7 +101,7 @@ export const ComparisonGrid: React.FC<ComparisonGridProps> = ({ tools, onRemoveT
 
   // Filter features based on search term
   const filteredFeatures = useMemo(() => {
-    const features = selectedFeatures.length > 0 ? selectedFeatures : allFeatures;
+    const features = selectedFeatures.length> 0 ? selectedFeatures : allFeatures;
     return features.filter((feature: string) =>
       feature.toLowerCase().includes(searchTerm.toLowerCase()) &&
       !hiddenFeatures.has(feature)
@@ -113,22 +113,22 @@ export const ComparisonGrid: React.FC<ComparisonGridProps> = ({ tools, onRemoveT
     let result = [...tools];
 
     // Apply filters
-    if (filters.features.length > 0) {
+    if (filters.features.length> 0) {
       result = result.filter(tool =>
         tool.features && filters.features.every((feature: string) => tool.features.includes(feature))
       );
     }
-    if (filters.certifications.length > 0) {
+    if (filters.certifications.length> 0) {
       result = result.filter(tool =>
         filters.certifications.every((cert: string) => tool.certifications?.includes(cert))
       );
     }
-    if (filters.supportOptions.length > 0) {
+    if (filters.supportOptions.length> 0) {
       result = result.filter(tool =>
         filters.supportOptions.every((option: SupportOptionKey) => tool.supportOptions?.[option] === true)
       );
     }
-    if (filters.pricing.length > 0) {
+    if (filters.pricing.length> 0) {
       result = result.filter(tool =>
         tool.pricing && tool.pricing.tiers &&
         filters.pricing.some((price: string) =>
@@ -275,8 +275,7 @@ export const ComparisonGrid: React.FC<ComparisonGridProps> = ({ tools, onRemoveT
             variant="outline"
             size="sm"
             onClick={() => setViewMode(viewMode === 'table' ? 'cards' : 'table')}
-            leftIcon={viewMode === 'table' ? <Grid className="h-4 w-4" /> : <List className="h-4 w-4" />}
-          >
+            leftIcon={viewMode === 'table' ? <Grid className="h-4 w-4" /> : <List className="h-4 w-4" />}>
             {viewMode === 'table' ? 'Card View' : 'Table View'}
           </Button>
           
@@ -284,8 +283,7 @@ export const ComparisonGrid: React.FC<ComparisonGridProps> = ({ tools, onRemoveT
             variant="outline"
             size="sm"
             onClick={() => setSaveDialogOpen(true)}
-            leftIcon={<Save className="h-4 w-4" />}
-          >
+            leftIcon={<Save className="h-4 w-4" />}>
             Save
           </Button>
           
@@ -307,8 +305,7 @@ export const ComparisonGrid: React.FC<ComparisonGridProps> = ({ tools, onRemoveT
                   .catch(() => toast.error('Failed to copy link'));
               }
             }}
-            leftIcon={<Share className="h-4 w-4" />}
-          >
+            leftIcon={<Share className="h-4 w-4" />}>
             Share
           </Button>
           
@@ -316,23 +313,20 @@ export const ComparisonGrid: React.FC<ComparisonGridProps> = ({ tools, onRemoveT
             <Button
               variant="outline"
               size="sm"
-              leftIcon={<Download className="h-4 w-4" />}
-            >
+              leftIcon={<Download className="h-4 w-4" />}>
               Export
               <ChevronDown className="h-4 w-4 ml-1" />
             </Button>
             <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg border hidden group-hover:block z-20">
               <button
                 className="w-full px-4 py-2 text-left hover:bg-gray-50 flex items-center"
-                onClick={exportToCSV}
-              >
+                onClick={exportToCSV}>
                 <FileText className="h-4 w-4 mr-2" />
                 Export as CSV
               </button>
               <button
                 className="w-full px-4 py-2 text-left hover:bg-gray-50 flex items-center"
-                onClick={exportToPDF}
-              >
+                onClick={exportToPDF}>
                 <FileText className="h-4 w-4 mr-2" />
                 Export as PDF
               </button>
@@ -361,8 +355,7 @@ export const ComparisonGrid: React.FC<ComparisonGridProps> = ({ tools, onRemoveT
             <select
               className="px-3 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               value={sortField}
-              onChange={(e) => setSortField(e.target.value as SortableField)}
-            >
+              onChange={(e) => setSortField(e.target.value as SortableField)}>
               <option value="">Sort by...</option>
               <option value="name">Name</option>
               <option value="rating">Rating</option>
@@ -372,8 +365,7 @@ export const ComparisonGrid: React.FC<ComparisonGridProps> = ({ tools, onRemoveT
               variant="outline"
               size="sm"
               onClick={() => setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc')}
-              disabled={!sortField}
-            >
+              disabled={!sortField}>
               {sortDirection === 'asc' ? <SortAsc className="h-4 w-4" /> : <SortDesc className="h-4 w-4" />}
             </Button>
           </div>
@@ -383,9 +375,8 @@ export const ComparisonGrid: React.FC<ComparisonGridProps> = ({ tools, onRemoveT
             variant={showAdvancedFilters ? "primary" : "outline"}
             size="sm"
             onClick={() => setShowAdvancedFilters(!showAdvancedFilters)}
-            leftIcon={<Filter className="h-4 w-4" />}
-          >
-            Filters {activeFilterCount > 0 && `(${activeFilterCount})`}
+            leftIcon={<Filter className="h-4 w-4" />}>
+            Filters {activeFilterCount> 0 && `(${activeFilterCount})`}
           </Button>
         </div>
 
@@ -483,7 +474,7 @@ export const ComparisonGrid: React.FC<ComparisonGridProps> = ({ tools, onRemoveT
         )}
 
         {/* Active Filters */}
-        {activeFilterCount > 0 && (
+        {activeFilterCount> 0 && (
           <div className="flex flex-wrap gap-2 items-center">
             <span className="text-sm font-medium text-gray-700">Active filters:</span>
             {filters.features.map(feature => renderFilterChip(
@@ -537,7 +528,7 @@ export const ComparisonGrid: React.FC<ComparisonGridProps> = ({ tools, onRemoveT
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-2">
                           <img 
-                            src={tool.logo} 
+                            src={""} 
                             alt={tool.name}
                             className="h-8 w-8 rounded"
                             onError={(e) => {
@@ -554,8 +545,7 @@ export const ComparisonGrid: React.FC<ComparisonGridProps> = ({ tools, onRemoveT
                             variant="ghost"
                             size="sm"
                             onClick={() => onRemoveTool(tool.id)}
-                            className="hover:bg-red-50 hover:text-red-600"
-                          >
+                            className="hover:bg-red-50 hover:text-red-600">
                             <X className="h-4 w-4" />
                           </Button>
                         )}
@@ -586,8 +576,7 @@ export const ComparisonGrid: React.FC<ComparisonGridProps> = ({ tools, onRemoveT
                           variant="outline"
                           size="sm"
                           onClick={() => window.open(tool.website, '_blank')}
-                          className="text-xs"
-                        >
+                          className="text-xs">
                           Visit Website
                         </Button>
                       </div>
@@ -674,16 +663,14 @@ export const ComparisonGrid: React.FC<ComparisonGridProps> = ({ tools, onRemoveT
                         }>
                           <button
                             onClick={() => toggleFeature(feature)}
-                            className="hover:text-blue-600 focus:outline-none focus:text-blue-600 text-left"
-                          >
+                            className="hover:text-blue-600 focus:outline-none focus:text-blue-600 text-left">
                             {feature}
                           </button>
                         </Tooltip>
                         <div className="flex items-center gap-1">
                           <button
                             onClick={() => toggleFeatureVisibility(feature)}
-                            className="text-gray-400 hover:text-gray-600"
-                          >
+                            className="text-gray-400 hover:text-gray-600">
                             {hiddenFeatures.has(feature) ? 
                               <EyeOff className="h-4 w-4" /> : 
                               <Eye className="h-4 w-4" />
@@ -732,7 +719,7 @@ export const ComparisonGrid: React.FC<ComparisonGridProps> = ({ tools, onRemoveT
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-3">
                   <img 
-                    src={tool.logo} 
+                    src={""} 
                     alt={tool.name}
                     className="h-10 w-10 rounded"
                     onError={(e) => {
@@ -752,8 +739,7 @@ export const ComparisonGrid: React.FC<ComparisonGridProps> = ({ tools, onRemoveT
                     variant="ghost"
                     size="sm"
                     onClick={() => onRemoveTool(tool.id)}
-                    className="hover:bg-red-50 hover:text-red-600"
-                  >
+                    className="hover:bg-red-50 hover:text-red-600">
                     <X className="h-4 w-4" />
                   </Button>
                 )}
@@ -770,7 +756,7 @@ export const ComparisonGrid: React.FC<ComparisonGridProps> = ({ tools, onRemoveT
                         {feature}
                       </Badge>
                     ))}
-                    {tool.features && tool.features.length > 5 && (
+                    {tool.features && tool.features.length> 5 && (
                       <Badge variant="outline" className="text-xs">
                         +{tool.features.length - 5} more
                       </Badge>
@@ -793,8 +779,7 @@ export const ComparisonGrid: React.FC<ComparisonGridProps> = ({ tools, onRemoveT
                   variant="outline"
                   size="sm"
                   onClick={() => window.open(tool.website, '_blank')}
-                  className="w-full"
-                >
+                  className="w-full">
                   Visit Website
                 </Button>
               </div>

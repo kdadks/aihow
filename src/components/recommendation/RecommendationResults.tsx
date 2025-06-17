@@ -130,9 +130,6 @@ export const RecommendationResults: React.FC<RecommendationResultsProps> = ({
               <CardHeader className="flex flex-col md:flex-row md:items-start md:justify-between pb-2">
                 <div className="flex items-start space-x-4">
                   <div className="flex-shrink-0">
-                    <div className="h-16 w-16 rounded-lg overflow-hidden">
-                      <img src={tool.logo} alt={tool.name} className="h-full w-full object-cover" />
-                    </div>
                   </div>
                   <div>
                     <CardTitle className="text-xl">{tool.name}</CardTitle>
@@ -251,7 +248,6 @@ export const RecommendationResults: React.FC<RecommendationResultsProps> = ({
                           {bundle.tools.slice(0, 3).map((tool) => (
                             <div key={tool.id} className="flex items-center gap-3">
                               <div className="h-8 w-8 rounded overflow-hidden flex-shrink-0">
-                                <img src={tool.logo} alt={tool.name} className="h-full w-full object-cover" />
                               </div>
                               <span className="text-sm text-gray-700">{tool.name}</span>
                             </div>

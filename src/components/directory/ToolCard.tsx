@@ -24,15 +24,7 @@ export const ToolCard: React.FC<ToolCardProps> = ({
       <CardHeader>
         <div className="flex flex-col gap-6">
           <div className="flex items-start justify-between">
-            <div className="flex items-center space-x-5">
-              <div className="h-16 w-16 rounded-xl overflow-hidden bg-gradient-to-br from-gray-50 to-white border border-gray-100 p-3 shadow-sm transform group-hover:scale-105 transition-transform duration-300">
-                <img
-                  src={tool.logo}
-                  alt={tool.name}
-                  className="h-full w-full object-contain"
-                  loading="lazy"
-                />
-              </div>
+            <div className="flex items-center">
               <div>
                 <CardTitle className="text-2xl font-semibold text-gray-900 tracking-tight mb-2">
                   {tool.name}

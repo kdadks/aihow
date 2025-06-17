@@ -40,7 +40,7 @@ export const AutocompleteSearch: React.FC<AutocompleteSearchProps> = ({
   // Debounced search function
   useEffect(() => {
     const timer = setTimeout(() => {
-      if (query.trim().length > 0) {
+      if (query.trim().length> 0) {
         setIsLoading(true);
         generateSuggestions(query.trim());
         setIsLoading(false);
@@ -87,7 +87,7 @@ export const AutocompleteSearch: React.FC<AutocompleteSearchProps> = ({
         name: tool.name,
         description: tool.shortDescription,
         url: `/directory/${tool.categoryId}/${tool.subcategoryIds[0]}/${tool.slug}`,
-        logo: tool.logo,
+        logo: "",
         categoryName: category?.name
       });
     });
@@ -133,7 +133,7 @@ export const AutocompleteSearch: React.FC<AutocompleteSearchProps> = ({
     }
 
     setSuggestions(suggestions);
-    setShowSuggestions(suggestions.length > 0);
+    setShowSuggestions(suggestions.length> 0);
     setSelectedIndex(-1);
   };
 
@@ -160,12 +160,12 @@ export const AutocompleteSearch: React.FC<AutocompleteSearchProps> = ({
       case 'ArrowUp':
         e.preventDefault();
         setSelectedIndex(prev => 
-          prev > 0 ? prev - 1 : suggestions.length - 1
+          prev> 0 ? prev - 1 : suggestions.length - 1
         );
         break;
       case 'Enter':
         e.preventDefault();
-        if (selectedIndex >= 0) {
+        if (selectedIndex>= 0) {
           handleSuggestionClick(suggestions[selectedIndex]);
         } else {
           handleSearch();
@@ -229,7 +229,7 @@ export const AutocompleteSearch: React.FC<AutocompleteSearchProps> = ({
           onChange={handleInputChange}
           onKeyDown={handleKeyDown}
           onFocus={() => {
-            if (suggestions.length > 0) {
+            if (suggestions.length> 0) {
               setShowSuggestions(true);
             }
           }}
@@ -241,13 +241,12 @@ export const AutocompleteSearch: React.FC<AutocompleteSearchProps> = ({
       {showSuggestions && (
         <div 
           ref={suggestionsRef}
-          className="absolute top-full left-0 right-0 mt-1 bg-white border border-gray-200 rounded-md shadow-lg z-50 max-h-96 overflow-y-auto"
-        >
+          className="absolute top-full left-0 right-0 mt-1 bg-white border border-gray-200 rounded-md shadow-lg z-50 max-h-96 overflow-y-auto">
           {isLoading ? (
             <div className="px-4 py-3 text-sm text-gray-500 text-center">
               Searching...
             </div>
-          ) : suggestions.length > 0 ? (
+          ) : suggestions.length> 0 ? (
             <>
               {suggestions.map((suggestion, index) => (
                 <button
@@ -256,13 +255,12 @@ export const AutocompleteSearch: React.FC<AutocompleteSearchProps> = ({
                     index === selectedIndex ? 'bg-blue-50' : ''
                   }`}
                   onClick={() => handleSuggestionClick(suggestion)}
-                  onMouseEnter={() => setSelectedIndex(index)}
-                >
+                  onMouseEnter={() => setSelectedIndex(index)}>
                   <div className="flex items-start space-x-3">
                     <div className="flex-shrink-0 mt-0.5">
-                      {suggestion.logo ? (
+                      {"" ? (
                         <img 
-                          src={suggestion.logo} 
+                          src={""} 
                           alt={suggestion.name}
                           className="h-6 w-6 rounded object-cover"
                         />
@@ -294,8 +292,7 @@ export const AutocompleteSearch: React.FC<AutocompleteSearchProps> = ({
               {query.trim() && (
                 <button
                   className="w-full px-4 py-3 text-left hover:bg-gray-50 focus:bg-gray-50 focus:outline-none border-t border-gray-200 text-sm text-blue-600"
-                  onClick={handleSearch}
-                >
+                  onClick={handleSearch}>
                   <div className="flex items-center">
                     <Search className="h-4 w-4 mr-2" />
                     Search for "{query}"

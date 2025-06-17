@@ -38,7 +38,7 @@ export const FeaturedTools: React.FC = () => {
           ))}
         </div>
         
-        {totalPages > 1 && (
+        {totalPages> 1 && (
           <div className="mt-12 flex justify-center">
             <Pagination 
               currentPage={currentPage}
@@ -73,13 +73,6 @@ const FeaturedToolCard: React.FC<FeaturedToolCardProps> = ({ tool }) => {
       <CardHeader>
         <div className="flex items-start justify-between">
           <div className="flex items-center space-x-3">
-            <div className="h-12 w-12 rounded-md overflow-hidden">
-              <img 
-                src={tool.logo} 
-                alt={tool.name} 
-                className="h-full w-full object-cover"
-              />
-            </div>
             <div>
               <CardTitle>{tool.name}</CardTitle>
               <p className="text-sm text-gray-500">{tool.categoryId.replace('-', ' ')}</p>
@@ -122,8 +115,7 @@ const FeaturedToolCard: React.FC<FeaturedToolCardProps> = ({ tool }) => {
               onClick={() => isSelected ? removeTool(tool.id) : addTool(tool)}
               disabled={!isSelected && !isToolSelectable(tool)}
               leftIcon={<Scale className="h-4 w-4" />}
-              className="min-w-[100px] justify-center shadow-sm"
-            >
+              className="min-w-[100px] justify-center shadow-sm">
               {isSelected ? 'Selected' : 'Compare'}
             </Button>
           </div>
@@ -137,14 +129,12 @@ const FeaturedToolCard: React.FC<FeaturedToolCardProps> = ({ tool }) => {
               href={tool.website}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex-1"
-            >
+              className="flex-1">
               <Button
                 size="sm"
                 variant="secondary"
                 rightIcon={<ArrowRight className="h-4 w-4" />}
-                className="w-full"
-              >
+                className="w-full">
                 Visit Site
               </Button>
             </a>

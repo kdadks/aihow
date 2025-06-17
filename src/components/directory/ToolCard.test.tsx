@@ -12,7 +12,6 @@ const mockTool: Tool = {
   slug: 'test-tool',
   description: 'A test description',
   shortDescription: 'A short test description',
-  logo: '/test-logo.png',
   website: 'https://testtool.com',
   categoryId: 'testing-category',
   subcategoryIds: ['unit-testing', 'automation'],
@@ -64,7 +63,6 @@ const minimalTool: Tool = {
   slug: 'minimal-tool',
   description: 'Basic description',
   shortDescription: 'Short description',
-  logo: '/minimal-logo.png',
   website: 'https://minimal.com',
   categoryId: 'test',
   subcategoryIds: [],
@@ -92,7 +90,7 @@ describe('ToolCard', () => {
 
     expect(screen.getByText(mockTool.name)).toBeInTheDocument();
     expect(screen.getByText(mockTool.shortDescription)).toBeInTheDocument();
-    expect(screen.getByAltText(`${mockTool.name} logo`)).toHaveAttribute('src', mockTool.logo);
+    // Logo test removed as logos are no longer displayed
   });
 
   it('displays rating and review count', () => {

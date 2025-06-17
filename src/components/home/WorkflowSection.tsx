@@ -31,9 +31,6 @@ export const WorkflowSection: React.FC = () => {
                 <div className="space-y-4">
                   {workflow.tools.map((tool) => (
                     <div key={tool.id} className="flex items-center space-x-3">
-                      <div className="h-10 w-10 rounded overflow-hidden flex-shrink-0">
-                        <img src={tool.logo} alt={tool.name} className="h-full w-full object-cover" />
-                      </div>
                       <div>
                         <h4 className="font-medium text-gray-900">{tool.name}</h4>
                         <p className="text-sm text-gray-500">{tool.shortDescription}</p>
@@ -51,8 +48,7 @@ export const WorkflowSection: React.FC = () => {
                     <Link to={`/bundle/${workflow.id}`} className="flex-shrink-0">
                       <Button
                         variant="outline"
-                        rightIcon={<ArrowRight className="h-4 w-4" />}
-                      >
+                        rightIcon={<ArrowRight className="h-4 w-4" />}>
                         View Details
                       </Button>
                     </Link>

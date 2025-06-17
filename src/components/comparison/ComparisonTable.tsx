@@ -45,7 +45,7 @@ export const ComparisonTable: React.FC<ComparisonTableProps> = ({
 
   // Filter features based on search and selection
   const filteredFeatures = useMemo(() => {
-    const features = selectedFeatures.length > 0 ? selectedFeatures : allFeatures;
+    const features = selectedFeatures.length> 0 ? selectedFeatures : allFeatures;
     return features.filter(feature => 
       feature.toLowerCase().includes(searchTerm.toLowerCase()) &&
       !hiddenFeatures.has(feature)
@@ -89,7 +89,7 @@ export const ComparisonTable: React.FC<ComparisonTableProps> = ({
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-3">
                         <img 
-                          src={tool.logo} 
+                          src={""} 
                           alt={tool.name}
                           className="h-10 w-10 rounded-lg shadow-sm"
                           onError={(e) => {
@@ -106,8 +106,7 @@ export const ComparisonTable: React.FC<ComparisonTableProps> = ({
                           variant="ghost"
                           size="sm"
                           onClick={() => onRemoveTool(tool.id)}
-                          className="hover:bg-red-50 hover:text-red-600 rounded-full"
-                        >
+                          className="hover:bg-red-50 hover:text-red-600 rounded-full">
                           <X className="h-4 w-4" />
                         </Button>
                       )}
@@ -124,8 +123,7 @@ export const ComparisonTable: React.FC<ComparisonTableProps> = ({
                         size="sm"
                         onClick={() => window.open(tool.website, '_blank')}
                         leftIcon={<ExternalLink className="h-3 w-3" />}
-                        className="text-xs"
-                      >
+                        className="text-xs">
                         Visit
                       </Button>
                     </div>
@@ -141,8 +139,7 @@ export const ComparisonTable: React.FC<ComparisonTableProps> = ({
               <td className="px-6 py-4 font-semibold text-gray-900">
                 <button
                   onClick={() => toggleSection('overview')}
-                  className="flex items-center gap-2 hover:text-blue-600 transition-colors"
-                >
+                  className="flex items-center gap-2 hover:text-blue-600 transition-colors">
                   {expandedSections.has('overview') ? 
                     <ChevronUp className="h-4 w-4" /> : 
                     <ChevronDown className="h-4 w-4" />
@@ -161,7 +158,7 @@ export const ComparisonTable: React.FC<ComparisonTableProps> = ({
                             {feature}
                           </Badge>
                         ))}
-                        {tool.features && tool.features.length > 3 && (
+                        {tool.features && tool.features.length> 3 && (
                           <Badge variant="outline" className="text-xs">
                             +{tool.features.length - 3}
                           </Badge>
@@ -178,8 +175,7 @@ export const ComparisonTable: React.FC<ComparisonTableProps> = ({
               <td className="px-6 py-4 font-semibold text-gray-900">
                 <button
                   onClick={() => toggleSection('pricing')}
-                  className="flex items-center gap-2 hover:text-green-600 transition-colors"
-                >
+                  className="flex items-center gap-2 hover:text-green-600 transition-colors">
                   {expandedSections.has('pricing') ? 
                     <ChevronUp className="h-4 w-4" /> : 
                     <ChevronDown className="h-4 w-4" />
@@ -220,8 +216,7 @@ export const ComparisonTable: React.FC<ComparisonTableProps> = ({
               <td className="px-6 py-4 font-semibold text-gray-900">
                 <button
                   onClick={() => toggleSection('support')}
-                  className="flex items-center gap-2 hover:text-purple-600 transition-colors"
-                >
+                  className="flex items-center gap-2 hover:text-purple-600 transition-colors">
                   {expandedSections.has('support') ? 
                     <ChevronUp className="h-4 w-4" /> : 
                     <ChevronDown className="h-4 w-4" />
@@ -267,8 +262,7 @@ export const ComparisonTable: React.FC<ComparisonTableProps> = ({
                     {onToggleFeatureVisibility && (
                       <button
                         onClick={() => onToggleFeatureVisibility(feature)}
-                        className="text-gray-400 hover:text-gray-600 transition-colors"
-                      >
+                        className="text-gray-400 hover:text-gray-600 transition-colors">
                         {hiddenFeatures.has(feature) ? 
                           <EyeOff className="h-4 w-4" /> : 
                           <Eye className="h-4 w-4" />
@@ -340,10 +334,9 @@ const MobileComparisonView: React.FC<{
                 selectedTool === index 
                   ? 'border-blue-500 bg-blue-50' 
                   : 'border-gray-200 hover:border-gray-300'
-              }`}
-            >
+              }`}>
               <img 
-                src={tool.logo} 
+                src={""} 
                 alt={tool.name}
                 className="h-8 w-8 rounded"
                 onError={(e) => {
@@ -365,8 +358,7 @@ const MobileComparisonView: React.FC<{
                     e.stopPropagation();
                     onRemoveTool(tool.id);
                   }}
-                  className="hover:bg-red-50 hover:text-red-600"
-                >
+                  className="hover:bg-red-50 hover:text-red-600">
                   <X className="h-4 w-4" />
                 </Button>
               )}
@@ -421,8 +413,7 @@ const MobileComparisonView: React.FC<{
           <Button
             onClick={() => window.open(tools[selectedTool].website, '_blank')}
             className="w-full mt-6"
-            leftIcon={<ExternalLink className="h-4 w-4" />}
-          >
+            leftIcon={<ExternalLink className="h-4 w-4" />}>
             Visit {tools[selectedTool].name}
           </Button>
         </div>
