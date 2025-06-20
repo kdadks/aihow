@@ -26,20 +26,8 @@ export const WorkflowSection: React.FC = () => {
                 </div>
                 <p className="mt-2 text-blue-100">{workflow.description}</p>
               </CardHeader>
-              <CardContent className="pt-6">
-                <p className="text-gray-700 font-medium mb-3">Included Tools:</p>
-                <div className="space-y-4">
-                  {workflow.tools.map((tool) => (
-                    <div key={tool.id} className="flex items-center space-x-3">
-                      <div>
-                        <h4 className="font-medium text-gray-900">{tool.name}</h4>
-                        <p className="text-sm text-gray-500">{tool.shortDescription}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-                
-                <div className="mt-6 pt-4 border-t border-gray-100">
+              <CardContent>
+                <div>
                   <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
                     <div className="flex-1">
                       <p className="text-sm text-gray-500">Estimated subscription cost (Subject to usage)</p>

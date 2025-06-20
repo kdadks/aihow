@@ -8,6 +8,7 @@ export type SearchFilters = {
   rating?: number;
   certifications?: string[];
   supportOptions?: SupportOptionKey[];
+  query?: string;
 };
 
 export type SavedComparison = {

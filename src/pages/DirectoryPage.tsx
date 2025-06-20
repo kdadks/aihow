@@ -10,6 +10,7 @@ import { Button } from '../components/ui';
 import { Pagination } from '../components/ui/Pagination';
 import { Scale } from 'lucide-react';
 import { toast } from 'react-hot-toast';
+import { AutocompleteSearch } from '../components/search/AutocompleteSearch';
 
 const ITEMS_PER_PAGE = 12;
 
@@ -24,6 +25,47 @@ const DirectoryPage: React.FC = () => {
   }));
   const [filteredTools, setFilteredTools] = useState<Tool[]>(tools);
   const { selectedTools, addTool, isToolSelectable } = useComparisonStore();
+
+  // Handle search from AutocompleteSearch
+  const handleDirectorySearch = (query: string) => {
+    // Try to match tool, category, or subcategory by name
+    const lowerQuery = query.trim().toLowerCase();
+    const toolMatch = tools.find(t => t.name.toLowerCase() === lowerQuery);
+    if (toolMatch) {
+      navigate(`/tools/${toolMatch.id}`);
+      return;
+    }
+    const categoryMatch = categories.find(c => c.name.toLowerCase() === lowerQuery);
+    if (categoryMatch) {
+      setFilters(prev => ({
+        ...prev,
+        category: categoryMatch.id,
+        subcategory: undefined
+      }));
+      return;
+    }
+    let foundSub: { categoryId: string, subcategoryId: string } | undefined;
+    categories.forEach(c => {
+      c.subcategories?.forEach(s => {
+        if (s.name.toLowerCase() === lowerQuery) {
+          foundSub = { categoryId: c.id, subcategoryId: s.id };
+        }
+      });
+    });
+    if (foundSub) {
+      setFilters(prev => ({
+        ...prev,
+        category: foundSub!.categoryId,
+        subcategory: foundSub!.subcategoryId
+      }));
+      return;
+    }
+    // If no match, just filter by query (partial match)
+    setFilters(prev => ({
+      ...prev,
+      query
+    }));
+  };
 
   // Calculate total pages
   const totalPages = useMemo(() => {
@@ -78,6 +120,15 @@ const DirectoryPage: React.FC = () => {
     // Apply rating filter
     if (filters.rating) {
       result = result.filter(tool => tool.rating >= filters.rating!);
+    }
+
+    // Apply query filter from search bar
+    if (filters.query) {
+      const q = filters.query.toLowerCase();
+      result = result.filter(tool =>
+        tool.name.toLowerCase().includes(q) ||
+        tool.description?.toLowerCase().includes(q)
+      );
     }
 
     // Update filtered results
@@ -143,6 +194,11 @@ const DirectoryPage: React.FC = () => {
         </p>
       </div>
 
+      <AutocompleteSearch
+        className="mb-6 w-full max-w-xl mx-auto"
+        placeholder="Search tools, categories, or subcategories..."
+        onSearch={handleDirectorySearch}
+      />
       <SearchFilters onFilterChange={setFilters} />
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

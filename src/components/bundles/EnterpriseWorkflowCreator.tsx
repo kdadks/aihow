@@ -14,6 +14,8 @@ import {
   Activity
 } from 'lucide-react';
 
+import { VoiceSearch } from '../search/VoiceSearch';
+ 
 // Enterprise workflow interfaces
 interface WorkflowTemplate {
   id: string;
@@ -745,15 +747,23 @@ export const EnterpriseWorkflowCreator: React.FC<EnterpriseWorkflowCreatorProps>
                 <label htmlFor="workflowName" className="block text-sm font-medium text-gray-700 mb-2">
                   Workflow Name *
                 </label>
-                <input
-                  type="text"
-                  id="workflowName"
-                  value={workflow.name}
-                  onChange={(e) => updateWorkflow({ name: e.target.value })}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
-                  placeholder="Enter a descriptive name for your workflow"
-                  disabled={isReadOnly}
-                />
+                <div className="relative">
+                  <input
+                    type="text"
+                    id="workflowName"
+                    value={workflow.name}
+                    onChange={(e) => updateWorkflow({ name: e.target.value })}
+                    className="w-full px-4 py-2 pr-12 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                    placeholder="Enter a descriptive name for your workflow"
+                    disabled={isReadOnly}
+                  />
+                  <div className="absolute inset-y-0 right-2 flex items-center">
+                    <VoiceSearch
+                      onTranscript={(transcript: string) => updateWorkflow({ name: transcript })}
+                      className="!m-0"
+                    />
+                  </div>
+                </div>
               </div>
 
               {/* COMMENTED OUT - Description field */}
@@ -776,15 +786,23 @@ export const EnterpriseWorkflowCreator: React.FC<EnterpriseWorkflowCreatorProps>
                 <label htmlFor="useCase" className="block text-sm font-medium text-gray-700 mb-2">
                   Use Case & Requirements *
                 </label>
-                <textarea
-                  id="useCase"
-                  value={workflow.useCase}
-                  onChange={(e) => handleUseCaseChange(e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
-                  placeholder="Describe what you're trying to accomplish, your requirements, and constraints..."
-                  rows={4}
-                  disabled={isReadOnly}
-                />
+                <div className="relative">
+                  <textarea
+                    id="useCase"
+                    value={workflow.useCase}
+                    onChange={(e) => handleUseCaseChange(e.target.value)}
+                    className="w-full px-4 py-2 pr-12 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                    placeholder="Describe what you're trying to accomplish, your requirements, and constraints..."
+                    rows={4}
+                    disabled={isReadOnly}
+                  />
+                  <div className="absolute inset-y-0 right-2 flex items-center">
+                    <VoiceSearch
+                      onTranscript={(transcript: string) => handleUseCaseChange(transcript)}
+                      className="!m-0"
+                    />
+                  </div>
+                </div>
               </div>
             </CardContent>
           </Card>
@@ -1030,15 +1048,21 @@ export const EnterpriseWorkflowCreator: React.FC<EnterpriseWorkflowCreatorProps>
             {(showToolSelection || workflow.tools.length === 0) && (
               <CardContent className="space-y-4">
                 <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4">
-                  <div className="flex-1">
+                  <div className="flex-1 relative">
                     <input
                       type="text"
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
-                      className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                      className="w-full px-4 py-2 pr-12 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
                       placeholder="Search tools by name, category, or description"
                       disabled={isReadOnly}
                     />
+                    <div className="absolute inset-y-0 right-2 flex items-center">
+                      <VoiceSearch
+                        onTranscript={(transcript: string) => setSearchQuery(transcript)}
+                        className="!m-0"
+                      />
+                    </div>
                   </div>
                   <select
                     value={selectedCategory}
@@ -1128,16 +1152,28 @@ export const EnterpriseWorkflowCreator: React.FC<EnterpriseWorkflowCreatorProps>
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 Compliance Notes
               </label>
-              <textarea
-                value={workflow.metadata.complianceNotes || ''}
-                onChange={(e) => updateWorkflow({
-                  metadata: { ...workflow.metadata, complianceNotes: e.target.value }
-                })}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
-                placeholder="Document compliance considerations and requirements"
-                rows={4}
-                disabled={isReadOnly}
-              />
+              <div className="relative">
+                <textarea
+                  value={workflow.metadata.complianceNotes || ''}
+                  onChange={(e) => updateWorkflow({
+                    metadata: { ...workflow.metadata, complianceNotes: e.target.value }
+                  })}
+                  className="w-full px-3 py-2 pr-12 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                  placeholder="Document compliance considerations and requirements"
+                  rows={4}
+                  disabled={isReadOnly}
+                />
+                <div className="absolute inset-y-0 right-2 flex items-center">
+                  <VoiceSearch
+                    onTranscript={(transcript: string) =>
+                      updateWorkflow({
+                        metadata: { ...workflow.metadata, complianceNotes: transcript }
+                      })
+                    }
+                    className="!m-0"
+                  />
+                </div>
+              </div>
             </div>
 
             <div>

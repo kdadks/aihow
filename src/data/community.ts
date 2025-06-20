@@ -79,8 +79,9 @@ export const blogPosts = [
     title: "Mistral AI vs OpenAI vs Grok vs DeepSeek: The Ultimate LLM Comparison 2025",
     excerpt: "An in-depth comparison of the leading large language models: Mistral AI, OpenAI's GPT-4, Grok, and DeepSeek. Discover their strengths, capabilities, pricing, and which one is best for your specific use case.",
     author: {
-      name: "Dr. Alex Rodriguez",
-      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e"
+      name: "Aarav Sharma",
+      image: "https://randomuser.me/api/portraits/men/31.jpg",
+      credential: "AI Research Analyst"
     },
     date: "June 8, 2025",
     readTime: "15 min read",
@@ -92,8 +93,9 @@ export const blogPosts = [
     title: "AI in Scientific Research: Accelerating Discovery and Innovation",
     excerpt: "Explore how artificial intelligence is revolutionizing scientific research across disciplines. From drug discovery and climate modeling to astronomical observations and materials science, AI is accelerating breakthroughs and opening new frontiers in human knowledge.",
     author: {
-      name: "Dr. Maria Santos",
-      image: "https://images.unsplash.com/photo-1551836022-deb4988cc6c0"
+      name: "Emily Johnson",
+      image: "https://randomuser.me/api/portraits/women/44.jpg",
+      credential: "Science Writer"
     },
     date: "June 7, 2025",
     readTime: "12 min read",
@@ -105,8 +107,9 @@ export const blogPosts = [
     title: "OpenAI's Latest Updates: What's New in GPT-4 and Beyond",
     excerpt: "Stay updated with OpenAI's latest developments, including new GPT-4 features, API improvements, and upcoming releases. Learn how these updates impact developers, businesses, and AI applications.",
     author: {
-      name: "Sarah Kim",
-      image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330"
+      name: "Kabir Singh",
+      image: "https://randomuser.me/api/portraits/men/45.jpg",
+      credential: "AI Developer"
     },
     date: "June 6, 2025",
     readTime: "8 min read",
@@ -118,8 +121,9 @@ export const blogPosts = [
     title: "Mistral AI: The European AI Powerhouse Challenging Big Tech",
     excerpt: "Discover Mistral AI, the French startup making waves in the AI industry. Learn about their open-source approach, competitive models, and how they're positioning themselves against established players like OpenAI and Google.",
     author: {
-      name: "Pierre Dubois",
-      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e"
+      name: "Sophia Lee",
+      image: "https://randomuser.me/api/portraits/women/46.jpg",
+      credential: "Tech Journalist"
     },
     date: "June 5, 2025",
     readTime: "9 min read",
@@ -131,21 +135,23 @@ export const blogPosts = [
     title: "DeepSeek: China's Rising Star in AI Research and Development",
     excerpt: "Explore DeepSeek's innovative approach to AI research and their competitive large language models. Learn about their unique architecture, performance benchmarks, and contribution to the global AI landscape.",
     author: {
-      name: "Dr. Li Wei",
-      image: "https://images.unsplash.com/photo-1568602471122-7832951cc4c5"
+      name: "Rohan Gupta",
+      image: "https://randomuser.me/api/portraits/men/32.jpg",
+      credential: "AI Industry Analyst"
     },
     date: "June 4, 2025",
     readTime: "10 min read",
     category: "Industry News",
-    image: "https://images.unsplash.com/photo-1518709268805-4e9042af2176",
+    image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb",
     slug: "deepseek-china-rising-star-ai-research"
   },
   {
     title: "Grok AI: Elon Musk's Bold Vision for Conversational AI",
     excerpt: "Dive into Grok AI, xAI's flagship language model. Understand its unique features, real-time information access, and how it differentiates itself from other AI assistants in the market.",
     author: {
-      name: "Jessica Chen",
-      image: "https://images.unsplash.com/photo-1580489944761-15a19d654956"
+      name: "Lucas Martin",
+      image: "https://randomuser.me/api/portraits/men/47.jpg",
+      credential: "AI Product Manager"
     },
     date: "June 3, 2025",
     readTime: "7 min read",
@@ -157,8 +163,9 @@ export const blogPosts = [
     title: "AI in Healthcare: Revolutionizing Patient Care and Medical Diagnosis",
     excerpt: "Discover how artificial intelligence is transforming healthcare through advanced diagnostics, personalized treatment plans, and improved patient outcomes. Explore the latest AI tools and technologies revolutionizing the medical field.",
     author: {
-      name: "Dr. Priya Sharma",
-      image: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2"
+      name: "Ananya Iyer",
+      image: "https://randomuser.me/api/portraits/women/48.jpg",
+      credential: "Healthcare AI Specialist"
     },
     date: "June 2, 2025",
     readTime: "10 min read",
@@ -170,8 +177,9 @@ export const blogPosts = [
     title: "AI in Education: Personalized Learning and the Future of Teaching",
     excerpt: "Explore how artificial intelligence is reshaping education through personalized learning experiences, intelligent tutoring systems, and automated assessment tools. Learn about the AI tools transforming classrooms worldwide.",
     author: {
-      name: "Prof. Rajesh Kumar",
-      image: "https://images.unsplash.com/photo-1560250097-0b93528c311a"
+      name: "Emma Garcia",
+      image: "https://randomuser.me/api/portraits/women/49.jpg",
+      credential: "Education Technology Expert"
     },
     date: "June 4, 2025",
     readTime: "9 min read",
@@ -183,8 +191,9 @@ export const blogPosts = [
     title: "Explainable AI and Ethical AI: Building Trust in Artificial Intelligence",
     excerpt: "Explore the critical importance of explainable and ethical AI in building trustworthy AI systems. Learn about transparency, accountability, and responsible AI development practices.",
     author: {
-      name: "Dr. Sahil Kumar",
-      image: "https://images.unsplash.com/photo-1551836022-deb4988cc6c0"
+      name: "Noah Wilson",
+      image: "https://randomuser.me/api/portraits/men/50.jpg",
+      credential: "Ethics in AI Advocate"
     },
     date: "June 2, 2025",
     readTime: "12 min read",
@@ -197,7 +206,8 @@ export const blogPosts = [
     excerpt: "Discover the most powerful AI writing assistants that are revolutionizing content creation. From blog posts to marketing copy, these tools are changing how we write.",
     author: {
       name: "Emma Davis",
-      image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330"
+      image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330",
+      credential: "Content Strategist"
     },
     date: "May 24, 2025",
     readTime: "6 min read",
@@ -210,7 +220,8 @@ export const blogPosts = [
     excerpt: "Explore emerging AI trends that are reshaping how businesses operate. From automated decision-making to predictive analytics, see what's next in AI.",
     author: {
       name: "Marcus Chen",
-      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e"
+      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e",
+      credential: "Business AI Consultant"
     },
     date: "May 22, 2025",
     readTime: "8 min read",

@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { tools } from '../../data/tools';
 import { categories } from '../../data/categories';
 import { Tool, Category } from '../../types';
+import { VoiceSearch } from './VoiceSearch';
 
 interface SearchSuggestion {
   type: 'tool' | 'category' | 'subcategory';
@@ -224,7 +225,7 @@ export const AutocompleteSearch: React.FC<AutocompleteSearchProps> = ({
           ref={inputRef}
           type="text"
           placeholder={placeholder}
-          className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md text-sm bg-white text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+          className="block w-full pl-10 pr-12 py-2 border border-gray-300 rounded-md text-sm bg-white text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
           value={query}
           onChange={handleInputChange}
           onKeyDown={handleKeyDown}
@@ -235,6 +236,12 @@ export const AutocompleteSearch: React.FC<AutocompleteSearchProps> = ({
           }}
           autoComplete="off"
         />
+        <div className="absolute inset-y-0 right-0 flex items-center pr-2">
+          <VoiceSearch
+            onTranscript={(transcript) => setQuery(transcript)}
+            className="!m-0"
+          />
+        </div>
       </form>
 
       {/* Suggestions Dropdown */}
@@ -258,9 +265,9 @@ export const AutocompleteSearch: React.FC<AutocompleteSearchProps> = ({
                   onMouseEnter={() => setSelectedIndex(index)}>
                   <div className="flex items-start space-x-3">
                     <div className="flex-shrink-0 mt-0.5">
-                      {"" ? (
+                      {suggestion.logo ? (
                         <img 
-                          src={""} 
+                          src={suggestion.logo} 
                           alt={suggestion.name}
                           className="h-6 w-6 rounded object-cover"
                         />

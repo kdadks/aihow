@@ -11,19 +11,8 @@ interface SearchFiltersProps {
 }
 
 export const SearchFilters: React.FC<SearchFiltersProps> = ({ onFilterChange }) => {
-  const [searchQuery, setSearchQuery] = useState('');
   const [filters, setFilters] = useState<SearchFiltersType>({});
   const [isFiltersOpen, setIsFiltersOpen] = useState(false);
-
-  const handleSearchSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Handle search logic
-    console.log('Search for:', searchQuery);
-  };
-
-  const handleVoiceTranscript = (transcript: string) => {
-    setSearchQuery(transcript);
-  };
 
   const toggleFilters = () => {
     setIsFiltersOpen(!isFiltersOpen);
@@ -68,7 +57,6 @@ export const SearchFilters: React.FC<SearchFiltersProps> = ({ onFilterChange }) 
 
   const clearFilters = () => {
     setFilters({});
-    setSearchQuery('');
   };
 
   // Update parent component when filters change
@@ -79,41 +67,23 @@ export const SearchFilters: React.FC<SearchFiltersProps> = ({ onFilterChange }) 
   return (
     <div className="bg-white shadow rounded-lg mb-8">
       <div className="p-4">
-        <form onSubmit={handleSearchSubmit}>
-          <EnhancedVoiceSearch
-            onTranscript={handleVoiceTranscript}
-            placeholder="Search for AI tools..."
-            className="mb-4"
-          />
-          <Button
-            type="button"
-            variant="ghost"
-            className="w-full text-gray-400 hover:text-gray-500"
-            onClick={() => setIsFiltersOpen(!isFiltersOpen)}
-          >
-            <Filter className="h-5 w-5 mr-2" />
-            Filters
-          </Button>
-        </form>
+        <Button
+          type="button"
+          variant="ghost"
+          className="w-full text-gray-400 hover:text-gray-500"
+          onClick={() => setIsFiltersOpen(!isFiltersOpen)}
+        >
+          <Filter className="h-5 w-5 mr-2" />
+          Filters
+        </Button>
 
-        {(Object.keys(filters).length > 0 || searchQuery) && (
+        {Object.keys(filters).length > 0 && (
           <div className="mt-3 flex flex-wrap gap-2 items-center">
             <span className="text-sm text-gray-500">Active filters:</span>
-            {searchQuery && (
-              <Badge variant="primary" className="flex items-center">
-                Search: {searchQuery}
-                <button 
-                  className="ml-1 p-1"
-                  onClick={() => setSearchQuery('')}
-                >
-                  <X className="h-3 w-3" />
-                </button>
-              </Badge>
-            )}
             {filters.category && (
               <Badge variant="primary" className="flex items-center capitalize">
                 {filters.category.replace('-', ' ')}
-                <button 
+                <button
                   className="ml-1 p-1"
                   onClick={() => handleCategoryChange(filters.category!)}
                 >

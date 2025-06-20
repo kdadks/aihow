@@ -1448,13 +1448,9 @@ const BlogPostDetailPage: React.FC = () => {
           
           <div className="flex items-center justify-between mb-6">
             <div className="flex items-center space-x-4">
-              <img
-                src={post.author.image}
-                alt={post.author.name}
-                className="w-12 h-12 rounded-full"
-              />
               <div>
                 <p className="font-semibold text-gray-900">{post.author.name}</p>
+                <p className="text-xs text-gray-500">{post.author.credential}</p>
                 <div className="flex items-center space-x-4 text-sm text-gray-500">
                   <div className="flex items-center space-x-1">
                     <Calendar className="w-4 h-4" />

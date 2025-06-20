@@ -8,6 +8,7 @@ interface BlogCardProps {
   author: {
     name: string;
     image: string;
+    credential: string;
   };
   date: string;
   readTime: string;
@@ -54,12 +55,10 @@ export const BlogCard: React.FC<BlogCardProps> = ({
         </p>
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-3">
-            <img
-              src={author.image}
-              alt={author.name}
-              className="w-8 h-8 rounded-full"
-            />
-            <span className="text-sm text-gray-700">{author.name}</span>
+            <div className="flex flex-col">
+              <span className="text-sm text-gray-700 font-medium">{author.name}</span>
+              <span className="text-xs text-gray-500">{author.credential}</span>
+            </div>
           </div>
           <div className="flex items-center space-x-4 text-sm text-gray-500">
             <div className="flex items-center space-x-1">
