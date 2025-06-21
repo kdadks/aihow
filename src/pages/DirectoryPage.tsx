@@ -26,6 +26,24 @@ const DirectoryPage: React.FC = () => {
   const [filteredTools, setFilteredTools] = useState<Tool[]>(tools);
   const { selectedTools, addTool, isToolSelectable } = useComparisonStore();
 
+  // --- SEO/Intro Section ---
+  // Concise intro and subtle headings for better UX alignment
+  const renderIntroSection = () => (
+    <section className="mb-4">
+      <div className="max-w-2xl mx-auto flex flex-col items-center text-center">
+        <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">AI Tools Directory</h1>
+        <p className="text-base text-gray-700 mb-2">
+          Compare top AI tools for 2025 by features, pricing, and reviews. Find the best AI software for your workflow.
+        </p>
+        <div className="flex flex-col md:flex-row flex-wrap gap-2 md:gap-4 mt-2 text-sm text-gray-600 items-center justify-center w-full">
+          <span className="font-semibold border-l-2 pl-2 border-blue-200">Best AI Tools</span>
+          <span className="font-semibold border-l-2 pl-2 border-blue-200">How to Choose</span>
+          <span className="font-semibold border-l-2 pl-2 border-blue-200">Categories</span>
+        </div>
+      </div>
+    </section>
+  );
+
   // Handle search from AutocompleteSearch
   const handleDirectorySearch = (query: string) => {
     // Try to match tool, category, or subcategory by name
@@ -145,6 +163,7 @@ const DirectoryPage: React.FC = () => {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      {renderIntroSection()}
       {/* Comparison Bar */}
       {selectedTools.length > 0 && (
         <div className="fixed bottom-0 left-0 right-0 bg-white border-t shadow-lg z-50">

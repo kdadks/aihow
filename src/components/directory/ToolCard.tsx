@@ -6,6 +6,8 @@ import { Badge } from '../ui/Badge';
 import { Button } from '../ui/Button';
 import { Tool } from '../../types';
 
+import { Helmet } from 'react-helmet';
+
 interface ToolCardProps {
   tool: Tool;
   isSelected?: boolean;

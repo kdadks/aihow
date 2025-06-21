@@ -228,7 +228,37 @@ export const blogPosts = [
     category: "Industry News",
     image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa",
     slug: "future-of-ai-business-trends"
-  }
+  },
+  {
+  title: "Top ChatGPT Alternatives in 2025: Claude, Gemini, Mistral, Grok & More",
+  excerpt: "Explore the best ChatGPT alternatives available in 2025. Compare Claude 3.5 Sonnet, Gemini, Mistral AI, Grok, DeepSeek, Llama 3, and more for features, pricing, and unique strengths. Find the right AI chatbot for your needs.",
+  author: {
+    name: "Priya Sharma",
+    image: "https://randomuser.me/api/portraits/women/68.jpg",
+    credential: "AI Tools Reviewer"
+  },
+  date: "June 21, 2025",
+  readTime: "10 min read",
+  category: "Tools Roundup",
+  image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb",
+  slug: "top-chatgpt-alternatives-2025",
+  // Optionally, add a renderContent field if your blog supports rich content
+  // renderContent: () => (<div>...</div>)
+},
+{
+    title: "Best AI tools for Productivity in 2025",
+    excerpt: "Explore the best Productivity tools available in 2025. Compare Notion AI, Motion, Grammarly, Otter.ai, ClickUp, and more for features, pricing, and unique strengths. Find the right Productivity AI tools for your needs.",
+    author: {
+      name: "Priya Sharma",
+      image: "https://randomuser.me/api/portraits/women/68.jpg",
+      credential: "AI Tools Reviewer"
+    },
+    date: "June 21, 2025",
+    readTime: "10 min read",
+    category: "Tools Roundup",
+    image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb",
+    slug: "best-ai-tools-for-productivity-2025"
+}
 ];
 
 export const forumCategories = [

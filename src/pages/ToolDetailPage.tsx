@@ -74,6 +74,18 @@ const tool = tools.find(t => t.slug === toolSlug);
             <div>
               <h1 className="text-3xl md:text-4xl font-bold mb-2">{tool.name}</h1>
               <p className="text-lg text-blue-100 mb-4">{tool.shortDescription}</p>
+              {/* Contextual Internal Links */}
+              <div className="mt-4 space-x-4">
+                <Link to={`/comparison`} className="text-blue-700 underline font-semibold">
+                  See how {tool.name} compares to other AI tools
+                </Link>
+                <Link to={`/reviews`} className="text-blue-700 underline font-semibold">
+                  Read user reviews of {tool.name}
+                </Link>
+                <Link to={`/blog`} className="text-blue-700 underline font-semibold">
+                  Read our latest articles about {tool.name}
+                </Link>
+              </div>
               <div className="flex flex-wrap items-center gap-3">
                 <div className="flex items-center bg-white bg-opacity-20 rounded-full px-3 py-1">
                   <Star className="h-4 w-4 text-yellow-400 fill-current mr-1" />

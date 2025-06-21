@@ -73,6 +73,34 @@ export const ComparisonPage: React.FC = () => {
       </Helmet>
 
       <div className="container mx-auto px-4 py-8">
+        {/* Contextual Internal Links */}
+        {selectedTools.length > 0 && (
+          <div className="mb-6 space-y-2">
+            <h2 className="text-lg font-semibold text-gray-900">Explore More About Compared Tools:</h2>
+            {selectedTools.map(tool => (
+              <div key={tool.id} className="space-x-3">
+                <a
+                  href={`/tools/${tool.slug}`}
+                  className="text-blue-700 underline font-semibold"
+                >
+                  {tool.name} full feature overview
+                </a>
+                <a
+                  href={`/reviews`}
+                  className="text-blue-700 underline font-semibold"
+                >
+                  Read user reviews of {tool.name}
+                </a>
+                <a
+                  href={`/blog`}
+                  className="text-blue-700 underline font-semibold"
+                >
+                  Articles about {tool.name}
+                </a>
+              </div>
+            ))}
+          </div>
+        )}
         {/* Breadcrumb */}
         <nav className="flex mb-6 text-sm" aria-label="Breadcrumb">
           <ol className="flex items-center space-x-2">

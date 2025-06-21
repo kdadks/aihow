@@ -54,6 +54,18 @@ const BlogPage: React.FC = () => {
         <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-6">
           Stay updated with the latest AI tools, industry news, and expert guides.
         </p>
+        <div className="mb-4">
+          <div className="max-w-2xl mx-auto flex flex-col items-center text-center">
+            <p className="text-base text-gray-700 mb-2">
+              Expert articles, comparisons, and news to help you choose the best AI tools.
+            </p>
+            <div className="flex flex-col md:flex-row flex-wrap gap-2 md:gap-4 mt-2 text-sm text-gray-600 items-center justify-center w-full">
+              <span className="font-semibold border-l-2 pl-2 border-blue-200">Latest News</span>
+              <span className="font-semibold border-l-2 pl-2 border-blue-200">How to Choose</span>
+              <span className="font-semibold border-l-2 pl-2 border-blue-200">Categories</span>
+            </div>
+          </div>
+        </div>
         <a href="/write-article" className="inline-block">
           <button className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors font-medium">
             Write an Article
