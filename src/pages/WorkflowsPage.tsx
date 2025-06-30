@@ -8,6 +8,7 @@ import { GitBranch, MoveRight, X } from 'lucide-react';
 import { EnterpriseWorkflowCreator, type EnterpriseWorkflow } from '../components/bundles/EnterpriseWorkflowCreator';
 import { useWorkflowDraftRestore } from '../hooks/useWorkflowDraftRestore';
 import { DraftRestoreModal } from '../components/bundles/DraftRestoreModal';
+import ProcessSection from '../components/bundles/ProcessSection';
 
 const WorkflowsPage: React.FC = () => {
   const [showBundleCreator, setShowBundleCreator] = useState(false);
@@ -136,6 +137,61 @@ const WorkflowsPage: React.FC = () => {
     setShowBundleCreator(true);
   };
 
+  const processSectionRef = React.useRef<HTMLDivElement>(null);
+
+  const handleScrollToProcess = () => {
+    if (processSectionRef.current) {
+      processSectionRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  // FAQ data for collapsible section
+  const faqItems = [
+    {
+      question: 'What does "AI subscription cost" mean and how is it calculated?',
+      answer: (
+        <>
+          <p className="text-gray-700 mb-2">
+            The <span className="font-medium">AI subscription cost</span> shown for each workflow or bundle is an estimated monthly fee you might pay to use all the included tools and services. This estimate is based on the standard pricing of each tool at typical usage levels, but your actual cost may vary depending on your usage, selected plans, and any discounts or promotions.
+          </p>
+          <ul className="list-disc pl-6 text-gray-700 mb-2">
+            <li>Each tool in the workflow may have its own subscription or pay-as-you-go pricing.</li>
+            <li>The total cost is calculated by adding up the base subscription prices for all tools in the workflow.</li>
+            <li>Some tools may offer free tiers, but advanced features or higher usage may require a paid plan.</li>
+          </ul>
+          <p className="text-gray-700">
+            For the most accurate pricing, please visit the official websites of each tool or contact us for a detailed quote tailored to your needs.
+          </p>
+        </>
+      )
+    },
+    {
+      question: 'How is the total delivery cost calculated?',
+      answer: (
+        <>
+          <p className="text-gray-700 mb-2">
+            The <span className="font-medium">total delivery cost</span> for a workflow solution is made up of three main components:
+          </p>
+          <ul className="list-disc pl-6 text-gray-700 mb-2">
+            <li><span className="font-medium">Ongoing Subscription Cost:</span> The recurring monthly or annual fees for the AI tools and services included in your workflow.</li>
+            <li><span className="font-medium">Build Cost:</span> A one-time fee for the design, configuration, and implementation of your custom workflow solution.</li>
+            <li><span className="font-medium">Support Cost:</span> Optional ongoing fees for maintenance, updates, and technical support after delivery.</li>
+          </ul>
+          <p className="text-gray-700">
+            We provide a detailed breakdown of these costs in your proposal, so you can make an informed decision based on your needs and budget.
+          </p>
+        </>
+      )
+    }
+    // Add more FAQ items here as needed
+  ];
+
+  const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
+
+  const toggleFaq = (idx: number) => {
+    setOpenFaqIndex(openFaqIndex === idx ? null : idx);
+  };
+
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       <div className="text-center mb-12">
@@ -152,13 +208,46 @@ const WorkflowsPage: React.FC = () => {
             <p className="text-gray-700">
               Workflow bundles are carefully selected combinations of complementary AI tools that work together to solve specific problems. Each bundle provides a complete solution with implementation guides to help you get started quickly.
             </p>
+            {/* FAQ Section */}
+            <div className="mt-8">
+              <div className="bg-white border border-blue-100 rounded-2xl shadow-sm divide-y">
+                {faqItems.map((item, idx) => (
+                  <div key={idx}>
+                    <button
+                      className="w-full text-left px-6 py-4 focus:outline-none flex items-center justify-between group"
+                      onClick={() => toggleFaq(idx)}
+                      aria-expanded={openFaqIndex === idx}
+                    >
+                      <span className="text-lg font-semibold text-blue-700 group-hover:underline">{item.question}</span>
+                      <svg
+                        className={`h-5 w-5 ml-2 transition-transform duration-200 ${openFaqIndex === idx ? 'rotate-180' : ''}`}
+                        fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                      </svg>
+                    </button>
+                    {openFaqIndex === idx && (
+                      <div className="px-6 pb-4 animate-fade-in">
+                        {item.answer}
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
-          <div className="flex-shrink-0">
+          <div className="flex-shrink-0 flex gap-3">
             <Button 
-              rightIcon={<MoveRight className="h-4 w-4" />}
+              rightIcon={<MoveRight className="h-4 w-4" />} 
               onClick={handleCreateNewWorkflow}
             >
               Create Custom Workflow
+            </Button>
+            <Button
+              variant="outline"
+              onClick={handleScrollToProcess}
+            >
+              Engagment Process
             </Button>
           </div>
         </div>
@@ -215,8 +304,10 @@ const WorkflowsPage: React.FC = () => {
                     <div className="space-y-4">
                       {workflow.tools.map((tool) => (
                         <div key={tool.id} className="flex items-center space-x-3">
-                          <div className="h-10 w-10 rounded overflow-hidden flex-shrink-0">
-                            <img src={tool.logo} alt={tool.name} className="h-full w-full object-cover" />
+                          <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center flex-shrink-0">
+                            <span className="text-white font-semibold text-sm">
+                              {tool.name.charAt(0).toUpperCase()}
+                            </span>
                           </div>
                           <div>
                             <h4 className="font-medium text-gray-900">{tool.name}</h4>
@@ -253,7 +344,7 @@ const WorkflowsPage: React.FC = () => {
                         <Button
                           size="md"
                           variant="outline"
-                          onClick={() => navigate(`/contact?bundle=${workflow.id}&bundleName=${workflow.name}&inquiryType=implementation`)}
+                          onClick={() => navigate(`/contact#top?bundle=${workflow.id}&bundleName=${workflow.name}&inquiryType=implementation`)}
                           className="min-w-[120px]"
                         >
                           Contact Us
@@ -275,6 +366,11 @@ const WorkflowsPage: React.FC = () => {
                 />
               </div>
             )}
+
+            {/* Process Section */}
+            <div className="mt-16" ref={processSectionRef}>
+              <ProcessSection />
+            </div>
 
             <div className="text-center mt-12">
               <div className="max-w-3xl mx-auto bg-gray-50 p-8 rounded-lg border border-gray-200">

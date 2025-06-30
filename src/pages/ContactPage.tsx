@@ -3,6 +3,7 @@ import { useLocation, useSearchParams } from 'react-router-dom';
 import { Button } from '../components/ui/Button';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/Card';
 import { workflowBundles } from '../data/workflows';
+import ProcessSection from '../components/bundles/ProcessSection';
 
 interface FormData {
   name: string;
@@ -206,6 +207,9 @@ const ContactPage: React.FC = () => {
 
   return (
     <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+      {/* Top anchor for direct navigation */}
+      <div id="top"></div>
+      
       {/* Header Section */}
       <div className="text-center mb-12">
         <h1 className="text-4xl font-bold text-gray-900 mb-4">Contact Us</h1>
@@ -268,7 +272,7 @@ const ContactPage: React.FC = () => {
 
         {/* Contact Form */}
         <div className="lg:col-span-2">
-          <Card>
+          <Card id="contact-form">
             <CardHeader>
               <CardTitle>Send us a Message</CardTitle>
             </CardHeader>
@@ -457,6 +461,11 @@ const ContactPage: React.FC = () => {
             </CardContent>
           </Card>
         </div>
+      </div>
+
+      {/* Process Section */}
+      <div className="mt-16">
+        <ProcessSection showContactButton={false} />
       </div>
 
       {/* FAQ Section */}

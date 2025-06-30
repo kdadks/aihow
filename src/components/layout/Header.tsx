@@ -22,6 +22,9 @@ export const Header: React.FC = () => {
   const mobileMenuRef = useRef<HTMLDivElement>(null);
   const { selectedTools } = useComparisonStore();
 
+  // Utility to scroll to top
+  const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+
   // Handle clicking outside of dropdown
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -105,7 +108,7 @@ export const Header: React.FC = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo - Fixed Left */}
           <div className="flex items-center flex-shrink-0 mr-8">
-            <Link to="/" className="flex items-center h-8">
+            <Link to="/" className="flex items-center h-8" onClick={scrollToTop}>
               <Logo className="h-full" />
               <span className="ml-2.5 text-xl font-bold text-gray-900">How2doAI</span>
             </Link>
@@ -238,12 +241,14 @@ export const Header: React.FC = () => {
               <Link
                 to="/workflows"
                 className="text-gray-700 hover:text-gray-900 text-sm font-medium px-3 py-2 rounded-md hover:bg-gray-50 whitespace-nowrap"
+                onClick={scrollToTop}
               >
                 Workflows
               </Link>
               <Link
                 to="/community"
                 className="text-gray-700 hover:text-gray-900 text-sm font-medium px-3 py-2 rounded-md hover:bg-gray-50 whitespace-nowrap"
+                onClick={scrollToTop}
               >
                 Community
               </Link>
