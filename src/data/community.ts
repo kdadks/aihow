@@ -7,7 +7,7 @@ export const reviews = [
     date: "May 20, 2025",
     verified: true,
     content: "I've tried multiple AI tool directories, but How2doAI stands out with its detailed comparisons and accurate recommendations. The workflow bundles feature saved me hours of research!",
-    photoUrl: "https://images.unsplash.com/photo-1494790108377-be9c29b29330"
+  
   },
   {
     name: "Michael Rodriguez",
@@ -22,15 +22,15 @@ export const reviews = [
     date: "May 15, 2025",
     verified: true,
     content: "The comparison feature is invaluable. Being able to see detailed feature breakdowns and pricing comparisons helped me make an informed decision for my business.",
-    photoUrl: "https://images.unsplash.com/photo-1544005313-94ddf0286df2"
+
   },
   {
-    name: "Rajesh Kumar",
+    name: "Sam Burd",
     rating: 5,
     date: "March 15, 2025",
     verified: true,
     content: "How2doAI has been instrumental in helping my startup find the right AI tools. The curated recommendations saved us months of research and helped us scale our operations efficiently.",
-    photoUrl: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d"
+   
   },
   {
     name: "Priya Sharma",
@@ -38,7 +38,7 @@ export const reviews = [
     date: "March 22, 2025",
     verified: true,
     content: "As a digital marketing professional, finding the right AI tools was challenging until I discovered how2AI. The detailed comparisons and honest reviews are incredibly helpful.",
-    photoUrl: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2"
+   
   },
   {
     name: "Arjun Patel",
@@ -46,15 +46,15 @@ export const reviews = [
     date: "April 8, 2025",
     verified: true,
     content: "Great platform with comprehensive tool listings. The workflow bundles feature is particularly useful for someone like me who needs multiple AI tools working together.",
-    photoUrl: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e"
+   
   },
   {
-    name: "Sneha Agarwal",
+    name: "Jasmin D",
     rating: 5,
     date: "April 15, 2025",
     verified: true,
     content: "The AI tool recommendations are spot-on! I found several tools that perfectly fit my development workflow. The community reviews are genuine and very helpful.",
-    photoUrl: "https://images.unsplash.com/photo-1517841905240-472988babdf9"
+   
   },
   {
     name: "Vikash Singh",
@@ -62,7 +62,7 @@ export const reviews = [
     date: "April 28, 2025",
     verified: true,
     content: "how2AI is my go-to resource for discovering new AI tools. The detailed feature breakdowns and pricing information help me make informed decisions for my business.",
-    photoUrl: "https://images.unsplash.com/photo-1519345182560-3f2917c472ef"
+   
   },
   {
     name: "Kavya Nair",
@@ -70,7 +70,7 @@ export const reviews = [
     date: "May 5, 2025",
     verified: true,
     content: "Excellent curation of AI tools across different categories. The search functionality is powerful and the filters help narrow down exactly what I need.",
-    photoUrl: "https://images.unsplash.com/photo-1580489944761-15a19d654956"
+   
   }
 ];
 

@@ -194,40 +194,40 @@ const WorkflowsPage: React.FC = () => {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      <div className="text-center mb-12">
-        <h1 className="text-3xl font-bold text-gray-900 sm:text-4xl">AI Workflow Bundles</h1>
-        <p className="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">
+      <div className="text-center mb-8 sm:mb-12 px-2">
+        <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 leading-tight">AI Workflow Bundles</h1>
+        <p className="mt-3 sm:mt-4 text-base sm:text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
           Discover pre-configured combinations of AI tools designed to work together to solve specific problems and streamline your workflow.
         </p>
       </div>
 
-      <div className="bg-blue-50 border border-blue-100 rounded-lg p-6 mb-12">
-        <div className="flex flex-col md:flex-row items-center">
-          <div className="flex-1 mb-6 md:mb-0 md:mr-6">
-            <h2 className="text-xl font-bold text-gray-900 mb-2">What are workflow bundles?</h2>
-            <p className="text-gray-700">
+      <div className="bg-blue-50 border border-blue-100 rounded-lg p-4 sm:p-6 mb-12">
+        <div className="flex flex-col lg:flex-row items-start lg:items-center">
+          <div className="flex-1 mb-6 lg:mb-0 lg:mr-6">
+            <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2">What are workflow bundles?</h2>
+            <p className="text-gray-700 text-sm sm:text-base">
               Workflow bundles are carefully selected combinations of complementary AI tools that work together to solve specific problems. Each bundle provides a complete solution with implementation guides to help you get started quickly.
             </p>
             {/* FAQ Section */}
-            <div className="mt-8">
-              <div className="bg-white border border-blue-100 rounded-2xl shadow-sm divide-y">
+            <div className="mt-6 sm:mt-8">
+              <div className="bg-white border border-blue-100 rounded-xl sm:rounded-2xl shadow-sm divide-y">
                 {faqItems.map((item, idx) => (
                   <div key={idx}>
                     <button
-                      className="w-full text-left px-6 py-4 focus:outline-none flex items-center justify-between group"
+                      className="w-full text-left px-4 sm:px-6 py-3 sm:py-4 focus:outline-none flex items-center justify-between group"
                       onClick={() => toggleFaq(idx)}
                       aria-expanded={openFaqIndex === idx}
                     >
-                      <span className="text-lg font-semibold text-blue-700 group-hover:underline">{item.question}</span>
+                      <span className="text-sm sm:text-lg font-semibold text-blue-700 group-hover:underline pr-2">{item.question}</span>
                       <svg
-                        className={`h-5 w-5 ml-2 transition-transform duration-200 ${openFaqIndex === idx ? 'rotate-180' : ''}`}
+                        className={`h-4 w-4 sm:h-5 sm:w-5 ml-2 flex-shrink-0 transition-transform duration-200 ${openFaqIndex === idx ? 'rotate-180' : ''}`}
                         fill="none" viewBox="0 0 24 24" stroke="currentColor"
                       >
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                       </svg>
                     </button>
                     {openFaqIndex === idx && (
-                      <div className="px-6 pb-4 animate-fade-in">
+                      <div className="px-4 sm:px-6 pb-3 sm:pb-4 animate-fade-in">
                         {item.answer}
                       </div>
                     )}
@@ -236,19 +236,25 @@ const WorkflowsPage: React.FC = () => {
               </div>
             </div>
           </div>
-          <div className="flex-shrink-0 flex gap-3">
-            <Button 
-              rightIcon={<MoveRight className="h-4 w-4" />} 
-              onClick={handleCreateNewWorkflow}
-            >
-              Create Custom Workflow
-            </Button>
-            <Button
-              variant="outline"
-              onClick={handleScrollToProcess}
-            >
-              Engagment Process
-            </Button>
+          <div className="flex-shrink-0 w-full lg:w-auto">
+            <div className="flex flex-col sm:flex-row lg:flex-col gap-3">
+              <Button
+                rightIcon={<MoveRight className="h-4 w-4" />}
+                onClick={handleCreateNewWorkflow}
+                size="lg"
+                className="w-full sm:w-auto lg:w-full lg:min-w-[200px] shadow-md hover:shadow-lg transition-shadow"
+              >
+                Create Custom Workflow
+              </Button>
+              <Button
+                variant="outline"
+                onClick={handleScrollToProcess}
+                size="lg"
+                className="w-full sm:w-auto lg:w-full lg:min-w-[200px] border-2 hover:bg-blue-50 transition-colors"
+              >
+                Engagement Process
+              </Button>
+            </div>
           </div>
         </div>
       </div>
@@ -280,64 +286,68 @@ const WorkflowsPage: React.FC = () => {
         ) : (
           <>
             {/* Pagination Info */}
-            <div className="flex justify-between items-center mb-6">
-              <div className="text-sm text-gray-600">
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 sm:mb-6 gap-2">
+              <div className="text-xs sm:text-sm text-gray-600">
                 Showing {startIndex + 1}-{Math.min(endIndex, workflowBundles.length)} of {workflowBundles.length} workflow bundles
               </div>
-              <div className="text-sm text-gray-600">
+              <div className="text-xs sm:text-sm text-gray-600">
                 Page {currentPage} of {totalPages}
               </div>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
               {currentBundles.map((workflow) => (
-                <Card key={workflow.id} className="overflow-hidden flex flex-col h-full">
-                  <CardHeader className="bg-gradient-to-r from-blue-600 to-purple-600 text-white">
-                    <div className="flex items-center space-x-2">
-                      <GitBranch className="h-5 w-5" />
-                      <CardTitle>{workflow.name}</CardTitle>
+                <Card key={workflow.id} className="overflow-hidden flex flex-col h-full shadow-md hover:shadow-lg transition-shadow">
+                  <CardHeader className="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-4 sm:p-6">
+                    <div className="flex items-start space-x-2">
+                      <GitBranch className="h-5 w-5 mt-0.5 flex-shrink-0" />
+                      <div className="min-w-0">
+                        <CardTitle className="text-lg sm:text-xl leading-tight">{workflow.name}</CardTitle>
+                        <p className="mt-2 text-blue-100 text-sm sm:text-base">{workflow.description}</p>
+                      </div>
                     </div>
-                    <p className="mt-2 text-blue-100">{workflow.description}</p>
                   </CardHeader>
-                  <CardContent className="pt-6 flex-1">
-                    <p className="text-gray-700 font-medium mb-3">Included Tools:</p>
-                    <div className="space-y-4">
+                  <CardContent className="pt-4 sm:pt-6 flex-1 p-4 sm:p-6">
+                    <p className="text-gray-700 font-medium mb-3 text-sm sm:text-base">Included Tools:</p>
+                    <div className="space-y-3 sm:space-y-4">
                       {workflow.tools.map((tool) => (
-                        <div key={tool.id} className="flex items-center space-x-3">
-                          <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center flex-shrink-0">
-                            <span className="text-white font-semibold text-sm">
+                        <div key={tool.id} className="flex items-start space-x-3">
+                          <div className="h-8 w-8 sm:h-10 sm:w-10 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center flex-shrink-0">
+                            <span className="text-white font-semibold text-xs sm:text-sm">
                               {tool.name.charAt(0).toUpperCase()}
                             </span>
                           </div>
-                          <div>
-                            <h4 className="font-medium text-gray-900">{tool.name}</h4>
-                            <p className="text-sm text-gray-500">{tool.shortDescription}</p>
+                          <div className="min-w-0 flex-1">
+                            <h4 className="font-medium text-gray-900 text-sm sm:text-base leading-tight">{tool.name}</h4>
+                            <p className="text-xs sm:text-sm text-gray-500 mt-0.5 leading-relaxed">{tool.shortDescription}</p>
                           </div>
                         </div>
                       ))}
                     </div>
                     
-                    <div className="mt-6 pt-4 border-t border-gray-100">
-                      <h4 className="font-medium text-gray-900 mb-3">Implementation Steps:</h4>
-                      <ol className="list-decimal pl-5 space-y-1 text-gray-700">
+                    <div className="mt-4 sm:mt-6 pt-4 border-t border-gray-100">
+                      <h4 className="font-medium text-gray-900 mb-3 text-sm sm:text-base">Implementation Steps:</h4>
+                      <ol className="list-decimal pl-4 sm:pl-5 space-y-1 text-gray-700 text-xs sm:text-sm">
                         {workflow.implementationSteps.map((step, index) => (
-                          <li key={index}>{step}</li>
+                          <li key={index} className="leading-relaxed">{step}</li>
                         ))}
                       </ol>
                     </div>
                   </CardContent>
-                  <CardFooter className="border-t border-gray-100 pt-4">
-                    <div className="w-full flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
-                      <div className="flex-1">
-                        <p className="text-sm text-gray-500">Estimated subscription cost (Subject to usage)</p>
-                        <p className="text-lg font-bold text-gray-900">{workflow.totalCost}</p>
+                  <CardFooter className="border-t border-gray-100 pt-4 p-4 sm:p-6">
+                    <div className="w-full flex flex-col gap-4">
+                      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3">
+                        <div className="flex-1">
+                          <p className="text-xs sm:text-sm text-gray-500">Estimated subscription cost (Subject to usage)</p>
+                          <p className="text-lg sm:text-xl font-bold text-gray-900">{workflow.totalCost}</p>
+                        </div>
                       </div>
-                      <div className="flex gap-3 flex-shrink-0">
+                      <div className="flex flex-col sm:flex-row gap-3">
                         <Button
                           size="md"
                           variant="secondary"
                           onClick={() => handleCustomize(workflow)}
-                          className="min-w-[140px]"
+                          className="w-full sm:flex-1 sm:min-w-[140px]"
                         >
                           Customize Bundle
                         </Button>
@@ -345,7 +355,7 @@ const WorkflowsPage: React.FC = () => {
                           size="md"
                           variant="outline"
                           onClick={() => navigate(`/contact#top?bundle=${workflow.id}&bundleName=${workflow.name}&inquiryType=implementation`)}
-                          className="min-w-[120px]"
+                          className="w-full sm:flex-1 sm:min-w-[120px]"
                         >
                           Contact Us
                         </Button>
@@ -372,13 +382,17 @@ const WorkflowsPage: React.FC = () => {
               <ProcessSection />
             </div>
 
-            <div className="text-center mt-12">
-              <div className="max-w-3xl mx-auto bg-gray-50 p-8 rounded-lg border border-gray-200">
-                <h2 className="text-2xl font-bold text-gray-900 mb-4">Need a custom workflow?</h2>
-                <p className="text-gray-700 mb-6">
+            <div className="text-center mt-8 sm:mt-12">
+              <div className="max-w-3xl mx-auto bg-gray-50 p-4 sm:p-6 lg:p-8 rounded-lg border border-gray-200 shadow-sm">
+                <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3 sm:mb-4">Need a custom workflow?</h2>
+                <p className="text-sm sm:text-base text-gray-700 mb-4 sm:mb-6 leading-relaxed">
                   Don't see a workflow bundle that fits your specific needs? We can help you create a custom workflow with the perfect combination of AI tools for your unique requirements.
                 </p>
-                <Button size="lg" onClick={handleCreateNewWorkflow}>
+                <Button
+                  size="lg"
+                  onClick={handleCreateNewWorkflow}
+                  className="w-full sm:w-auto shadow-md hover:shadow-lg transition-shadow"
+                >
                   Create Custom Workflow
                 </Button>
               </div>

@@ -32,13 +32,6 @@ export const TestimonialSection: React.FC = () => {
               <div className="relative z-10">
                 <p className="text-gray-600 mb-6 italic">"{testimonial.content}"</p>
                 <div className="flex items-center">
-                  <div className="flex-shrink-0 mr-3">
-                    <img
-                      className="h-10 w-10 rounded-full"
-                      src={testimonial.userAvatar}
-                      alt={testimonial.userName}
-                    />
-                  </div>
                   <div>
                     <h4 className="text-sm font-medium text-gray-900">{testimonial.userName}</h4>
                     <div className="mt-1 flex items-center">

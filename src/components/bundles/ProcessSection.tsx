@@ -101,40 +101,40 @@ const ProcessSection: React.FC<ProcessSectionProps> = ({
       </div>
 
       {/* Process Steps */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
         {processSteps.map((step, index) => (
-          <Card key={index} className="relative overflow-hidden">
-            <CardHeader className="bg-gradient-to-br from-blue-50 via-white to-purple-50 border-b border-blue-100">
-              <div className="flex items-center space-x-4">
-                <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-lg flex items-center justify-center font-bold text-lg shadow-md">
+          <Card key={index} className="relative overflow-hidden shadow-md hover:shadow-lg transition-shadow">
+            <CardHeader className="bg-gradient-to-br from-blue-50 via-white to-purple-50 border-b border-blue-100 p-4 sm:p-6">
+              <div className="flex items-start space-x-3 sm:space-x-4">
+                <div className="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-lg flex items-center justify-center font-bold text-base sm:text-lg shadow-md">
                   {step.step}
                 </div>
-                <div className="flex-1">
-                  <CardTitle className="text-xl text-gray-900 mb-1">
+                <div className="flex-1 min-w-0">
+                  <CardTitle className="text-lg sm:text-xl text-gray-900 mb-1 leading-tight">
                     {step.title}
                   </CardTitle>
-                  <div className="flex items-center space-x-2 text-sm text-blue-600">
-                    {step.icon}
+                  <div className="flex items-center space-x-2 text-xs sm:text-sm text-blue-600">
+                    {React.cloneElement(step.icon, { className: "h-3 w-3 sm:h-4 sm:w-4" })}
                     <span className="font-medium">Duration: {step.duration}</span>
                   </div>
                 </div>
               </div>
             </CardHeader>
-            <CardContent className="pt-6">
-              <p className="text-gray-700 mb-4">{step.description}</p>
+            <CardContent className="pt-4 sm:pt-6 p-4 sm:p-6">
+              <p className="text-gray-700 mb-4 text-sm sm:text-base leading-relaxed">{step.description}</p>
               <div className="space-y-2">
-                <h4 className="font-medium text-gray-900 text-sm">Key Activities:</h4>
-                <ul className="space-y-1">
+                <h4 className="font-medium text-gray-900 text-sm sm:text-base">Key Activities:</h4>
+                <ul className="space-y-2">
                   {step.details.map((detail, detailIndex) => (
-                    <li key={detailIndex} className="flex items-start space-x-2 text-sm text-gray-600">
-                      <CheckCircle className="h-4 w-4 text-green-500 mt-0.5 flex-shrink-0" />
-                      <span>{detail}</span>
+                    <li key={detailIndex} className="flex items-start space-x-2 text-xs sm:text-sm text-gray-600">
+                      <CheckCircle className="h-3 w-3 sm:h-4 sm:w-4 text-green-500 mt-0.5 flex-shrink-0" />
+                      <span className="leading-relaxed">{detail}</span>
                     </li>
                   ))}
                 </ul>
               </div>
               {index < processSteps.length - 1 && (
-                <div className="absolute -bottom-4 -right-4 text-blue-300">
+                <div className="absolute -bottom-4 -right-4 text-blue-300 hidden lg:block">
                   <ArrowRight className="h-8 w-8" />
                 </div>
               )}
@@ -144,16 +144,16 @@ const ProcessSection: React.FC<ProcessSectionProps> = ({
       </div>
 
       {/* Benefits Section */}
-      <Card className="bg-gradient-to-br from-blue-50 via-white to-purple-50 border-blue-100">
-        <CardContent className="p-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+      <Card className="bg-gradient-to-br from-blue-50 via-white to-purple-50 border-blue-100 shadow-md">
+        <CardContent className="p-4 sm:p-6 lg:p-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-start lg:items-center">
             <div>
-              <h3 className="text-2xl font-bold mb-4 text-gray-900">Why Choose Our Process?</h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <h3 className="text-xl sm:text-2xl font-bold mb-4 text-gray-900">Why Choose Our Process?</h3>
+              <div className="grid grid-cols-1 gap-3">
                 {benefits.map((benefit, index) => (
                   <div key={index} className="flex items-start space-x-2">
-                    <CheckCircle className="h-5 w-5 text-blue-600 mt-0.5 flex-shrink-0" />
-                    <span className="text-sm text-gray-700">{benefit}</span>
+                    <CheckCircle className="h-4 w-4 sm:h-5 sm:w-5 text-blue-600 mt-0.5 flex-shrink-0" />
+                    <span className="text-sm sm:text-base text-gray-700 leading-relaxed">{benefit}</span>
                   </div>
                 ))}
               </div>
@@ -164,59 +164,48 @@ const ProcessSection: React.FC<ProcessSectionProps> = ({
                 size="lg"
                 onClick={handleContactUs}
                 rightIcon={<ArrowRight className="h-4 w-4" />}
-                className="shadow-lg hover:shadow-xl mb-2"
+                className="shadow-lg hover:shadow-xl mb-3 w-full sm:w-auto"
               >
                 Ready to Get Started?
               </Button>
-              <p className="text-gray-600 mb-6">
+              <p className="text-gray-600 text-sm sm:text-base">
                 Let's discuss how we can help transform your workflow with the right AI tools.
               </p>
-              {showContactButton && false && (
-                <Button
-                  variant="primary"
-                  size="lg"
-                  onClick={handleContactUs}
-                  rightIcon={<ArrowRight className="h-4 w-4" />}
-                  className="shadow-lg hover:shadow-xl"
-                >
-                  Start Your Journey
-                </Button>
-              )}
             </div>
           </div>
         </CardContent>
       </Card>
 
       {/* Timeline Overview */}
-      <Card>
-        <CardHeader>
-          <CardTitle>Typical Implementation Timeline</CardTitle>
+      <Card className="shadow-md">
+        <CardHeader className="p-4 sm:p-6">
+          <CardTitle className="text-lg sm:text-xl">Typical Implementation Timeline</CardTitle>
         </CardHeader>
-        <CardContent>
+        <CardContent className="p-4 sm:p-6">
           <div className="relative">
-            <div className="absolute left-8 top-8 bottom-8 w-0.5 bg-blue-200"></div>
+            <div className="absolute left-6 sm:left-8 top-8 bottom-8 w-0.5 bg-blue-200"></div>
             <div className="space-y-6">
               {processSteps.map((step, index) => (
-                <div key={index} className="relative flex items-center space-x-4">
-                  <div className="flex-shrink-0 w-16 h-16 bg-gradient-to-br from-blue-50 to-blue-100 rounded-full flex items-center justify-center relative z-10">
-                    <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-full flex items-center justify-center text-sm font-semibold shadow-sm">
+                <div key={index} className="relative flex items-start space-x-3 sm:space-x-4">
+                  <div className="flex-shrink-0 w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-blue-50 to-blue-100 rounded-full flex items-center justify-center relative z-10">
+                    <div className="w-6 h-6 sm:w-8 sm:h-8 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-full flex items-center justify-center text-xs sm:text-sm font-semibold shadow-sm">
                       {step.step}
                     </div>
                   </div>
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center justify-between">
-                      <h4 className="text-lg font-medium text-gray-900">{step.title}</h4>
-                      <span className="text-sm text-gray-500 font-medium">{step.duration}</span>
+                  <div className="flex-1 min-w-0 pt-1">
+                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 sm:gap-2">
+                      <h4 className="text-base sm:text-lg font-medium text-gray-900 leading-tight">{step.title}</h4>
+                      <span className="text-xs sm:text-sm text-gray-500 font-medium flex-shrink-0">{step.duration}</span>
                     </div>
-                    <p className="text-gray-600 text-sm mt-1">{step.description}</p>
+                    <p className="text-gray-600 text-xs sm:text-sm mt-1 leading-relaxed">{step.description}</p>
                   </div>
                 </div>
               ))}
             </div>
           </div>
-          <div className="mt-8 p-4 bg-gray-50 rounded-lg">
-            <p className="text-sm text-gray-600">
-              <strong>Total Timeline:</strong> Most workflow bundle implementations are completed within 4-8 weeks, 
+          <div className="mt-6 sm:mt-8 p-3 sm:p-4 bg-gray-50 rounded-lg">
+            <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
+              <strong>Total Timeline:</strong> Most workflow bundle implementations are completed within 4-8 weeks,
               depending on complexity and customization requirements. Enterprise solutions may require additional time for compliance and integration needs.
             </p>
           </div>

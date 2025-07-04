@@ -91,7 +91,7 @@ const PrivacyPolicyPage: React.FC = () => {
               If you have questions about this Privacy Policy, please contact us at:
             </p>
             <div className="mt-4 text-gray-600">
-              <p>Email: support@how2doai.com</p>
+              <p>Email: privacy@how2doai.ai</p>
               <p>Address: Lucknow, Uttar Pradesh, India</p>
             </div>
           </section>

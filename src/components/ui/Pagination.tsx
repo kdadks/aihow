@@ -93,19 +93,19 @@ export const Pagination: React.FC<PaginationProps> = ({
   const canGoNext = currentPage < totalPages;
 
   return (
-    <div className={cn('flex items-center justify-center space-x-1', className)}>
+    <div className={cn('flex items-center justify-center space-x-0.5 sm:space-x-1', className)}>
       <Button
         size="sm"
         variant="ghost"
         onClick={() => canGoPrevious && onPageChange(currentPage - 1)}
         disabled={!canGoPrevious}
         aria-label="Previous page"
-        className="px-2.5"
+        className="px-2 sm:px-2.5"
       >
-        <ChevronLeft className="h-4 w-4" />
+        <ChevronLeft className="h-3 w-3 sm:h-4 sm:w-4" />
       </Button>
       
-      <div className="flex items-center">
+      <div className="flex items-center space-x-0.5 sm:space-x-1">
         {renderPageNumbers()}
       </div>
       
@@ -115,9 +115,9 @@ export const Pagination: React.FC<PaginationProps> = ({
         onClick={() => canGoNext && onPageChange(currentPage + 1)}
         disabled={!canGoNext}
         aria-label="Next page"
-        className="px-2.5"
+        className="px-2 sm:px-2.5"
       >
-        <ChevronRight className="h-4 w-4" />
+        <ChevronRight className="h-3 w-3 sm:h-4 sm:w-4" />
       </Button>
     </div>
   );
@@ -135,7 +135,7 @@ const PageButton: React.FC<PageButtonProps> = ({ page, isActive, onClick }) => {
       size="sm"
       variant={isActive ? "primary" : "ghost"}
       className={cn(
-        "min-w-[2rem] h-8 px-2.5 mx-0.5",
+        "min-w-[1.75rem] sm:min-w-[2rem] h-7 sm:h-8 px-1.5 sm:px-2.5 mx-0.5 text-xs sm:text-sm",
         isActive && "pointer-events-none"
       )}
       onClick={onClick}

@@ -259,6 +259,7 @@ export const Header: React.FC = () => {
                   <Link
                     to="/compare"
                     className="text-blue-600 hover:text-blue-800 text-sm font-medium flex items-center px-3 py-2 rounded-md hover:bg-blue-50 whitespace-nowrap"
+                    onClick={scrollToTop}
                   >
                     <Scale className="h-4 w-4 mr-1.5 flex-shrink-0" />
                     Compare
@@ -479,7 +480,10 @@ export const Header: React.FC = () => {
                 <Link 
                   to="/compare" 
                   className="flex items-center justify-center px-4 py-3 rounded-md text-base font-semibold text-blue-600 bg-blue-50 hover:bg-blue-100 transition-colors"
-                  onClick={() => setIsMenuOpen(false)}
+                  onClick={() => {
+                    setIsMenuOpen(false);
+                    scrollToTop();
+                  }}
                 >
                   <Scale className="h-5 w-5 mr-3" />
                   Compare Selected Tools ({selectedTools.length})

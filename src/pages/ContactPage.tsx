@@ -147,7 +147,7 @@ const ContactPage: React.FC = () => {
   const contactMethods = [
     {
       title: 'Email Support',
-      value: 'support@how2doai.com',
+      value: 'support@how2doai.ai',
       description: 'Get help with technical issues',
       icon: (
         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -167,7 +167,7 @@ const ContactPage: React.FC = () => {
     },
     {
       title: 'Business Inquiries',
-      value: 'support@how2doai.com',
+      value: 'support@how2doai.ai',
       description: 'For partnerships and collaborations',
       icon: (
         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
