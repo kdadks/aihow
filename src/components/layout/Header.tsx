@@ -11,7 +11,8 @@ import { AutocompleteSearch } from '../search/AutocompleteSearch';
 
 export const Header: React.FC = () => {
   const navigate = useNavigate();
-  const { user, isAuthenticated, logout } = useAuth();
+  const { user, signOut } = useAuth();
+  const isAuthenticated = !!user;
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [activeCategoryId, setActiveCategoryId] = useState<string | null>(null);
@@ -298,7 +299,7 @@ export const Header: React.FC = () => {
                   size="sm"
                   onClick={async () => {
                     try {
-                      await logout();
+                      await signOut();
                       navigate('/');
                     } catch (error) {
                       console.error('Logout error:', error);

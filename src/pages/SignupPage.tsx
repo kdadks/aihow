@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../auth/hooks/useAuth';
+import { PasswordInput } from '../components/ui/PasswordInput';
 
 interface PasswordRequirements {
     minLength: boolean;
@@ -25,7 +26,7 @@ export default function SignupPage() {
         hasNumber: false,
         hasSpecial: false
     });
-    const { register } = useAuth();
+    const { signUp } = useAuth();
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -62,8 +63,11 @@ export default function SignupPage() {
         setIsLoading(true);
 
         try {
-            const response = await register(email, password);
-            setSuccessMessage(response.message || 'Please check your email to verify your account, then sign in');
+            const response = await signUp(email, password);
+            if (response.error) {
+                throw new Error(response.error.message);
+            }
+            setSuccessMessage('Please check your email to verify your account, then sign in');
             setError(null);
             setTimeout(() => {
                 navigate('/login');
@@ -134,18 +138,15 @@ export default function SignupPage() {
                                     Password
                                 </label>
                                 <div className="mt-1">
-                                    <input
+                                    <PasswordInput
                                         id="password"
-                                        name="password"
-                                        type="password"
-                                        autoComplete="new-password"
-                                        required
                                         value={password}
                                         onChange={(e) => setPassword(e.target.value)}
+                                        required
+                                        placeholder="Create a password"
+                                        className="appearance-none block w-full px-3 py-2 pr-10 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                         onFocus={() => setPasswordFocused(true)}
                                         onBlur={() => setPasswordFocused(false)}
-                                        className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                                        placeholder="Create a password"
                                     />
                                 </div>
                                 {passwordFocused && (
@@ -177,16 +178,13 @@ export default function SignupPage() {
                                     Confirm password
                                 </label>
                                 <div className="mt-1">
-                                    <input
+                                    <PasswordInput
                                         id="confirm-password"
-                                        name="confirm-password"
-                                        type="password"
-                                        autoComplete="new-password"
-                                        required
                                         value={confirmPassword}
                                         onChange={(e) => setConfirmPassword(e.target.value)}
-                                        className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                        required
                                         placeholder="Confirm your password"
+                                        className="appearance-none block w-full px-3 py-2 pr-10 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                     />
                                 </div>
                                 {password && confirmPassword && password !== confirmPassword && (

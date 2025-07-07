@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '../ui/Dialog';
-import { Button } from '../ui/Button';
+import { Button, PasswordInput } from '../ui';
 import { X, Mail, Lock, AlertCircle, Loader2 } from 'lucide-react';
 import { useAuth } from '../../auth/hooks/useAuth';
 
@@ -23,7 +23,7 @@ export const LoginModal: React.FC<LoginModalProps> = ({
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
-  const { login } = useAuth();
+  const { signIn } = useAuth();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -37,7 +37,10 @@ export const LoginModal: React.FC<LoginModalProps> = ({
     setError(null);
 
     try {
-      await login(email, password);
+      const result = await signIn(email, password);
+      if (result.error) {
+        throw new Error(result.error.message);
+      }
       
       // Reset form
       setEmail('');
@@ -133,18 +136,17 @@ export const LoginModal: React.FC<LoginModalProps> = ({
                 Password
               </label>
               <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none z-10">
                   <Lock className="h-4 w-4 text-gray-400" />
                 </div>
-                <input
+                <PasswordInput
                   id="password"
-                  type="password"
-                  required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                  required
                   placeholder="Enter your password"
                   disabled={isLoading}
+                  className="block w-full pl-10 pr-12 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                 />
               </div>
             </div>

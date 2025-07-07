@@ -22,7 +22,8 @@
     "postbuild": "cp _redirects dist/ 2>/dev/null || :",
     "create-admin": "node scripts/create-admin-user.js",
     "setup-admin": "node scripts/setup-admin-database.js",
-    "reset-admin-password": "node scripts/reset-admin-password.js"
+    "reset-admin-password": "node scripts/reset-admin-password.js",
+    "test-email": "node scripts/test-email-config.js"
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",
@@ -44,6 +45,7 @@
     "jspdf-autotable": "^5.0.2",
     "lucide-react": "^0.344.0",
     "node-fetch": "^3.3.2",
+    "nodemailer": "^6.9.8",
     "postcss": "^8.4.35",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
@@ -67,6 +69,7 @@
     "@testing-library/react": "^14.2.1",
     "@testing-library/user-event": "^14.5.2",
     "@types/express": "^5.0.2",
+    "@types/nodemailer": "^6.4.14",
     "@types/uuid": "^9.0.8",
     "cypress": "^14.4.1",
     "eslint": "^9.9.1",

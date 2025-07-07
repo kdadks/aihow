@@ -1,7 +1,7 @@
 import { FC, useEffect } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { AdminLoginForm } from '../auth/components/AdminLoginForm';
-import { useAdminAuth } from '../auth/hooks/useAdminAuth';
+import { useAuth } from '../../auth/hooks/useAuth';
 import { AdminAuthConfig } from '../auth/types/adminAuth';
 import { ADMIN_API } from '../api';
 
@@ -13,8 +13,9 @@ const defaultConfig: AdminAuthConfig = {
 };
 
 export const AdminLoginPage: FC = () => {
-  const { isAuthenticated, login } = useAdminAuth();
+  const { user, isAdmin, signIn } = useAuth();
   const navigate = useNavigate();
+  const isAuthenticated = user && isAdmin;
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -32,7 +33,10 @@ export const AdminLoginPage: FC = () => {
   const handleLogin = async (email: string, password: string) => {
     try {
       console.log('[AdminLoginPage] Attempting login...');
-      await login(email, password);
+      const result = await signIn(email, password);
+      if (result.error) {
+        throw new Error(result.error.message);
+      }
       console.log('[AdminLoginPage] Login successful');
       // Navigation will be handled by the useEffect above
     } catch (error) {

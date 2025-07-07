@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { Button } from '../../components/ui/Button';
+import { Button, PasswordInput } from '../../components/ui';
 
 interface LoginFormProps {
   onSuccess?: () => void;
@@ -11,7 +11,8 @@ export function LoginForm({ onSuccess }: LoginFormProps) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
-  const { login, loading } = useAuth();
+  const { signIn, isLoading } = useAuth();
+  const loading = isLoading;
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -20,7 +21,10 @@ export function LoginForm({ onSuccess }: LoginFormProps) {
     setError(null);
 
     try {
-      await login(email, password);
+      const result = await signIn(email, password);
+      if (result.error) {
+        throw new Error(result.error.message);
+      }
       
       // Handle redirect after successful login
       const params = new URLSearchParams(location.search);
@@ -68,13 +72,11 @@ export function LoginForm({ onSuccess }: LoginFormProps) {
           <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
             Password
           </label>
-          <input
+          <PasswordInput
             id="password"
-            type="password"
-            required
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            required
             disabled={loading}
           />
         </div>

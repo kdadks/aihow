@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { Button } from '../../components/ui/Button';
+import { Button, PasswordInput } from '../../components/ui';
 import { AuthResponse } from '../types';
 
 interface RegisterFormProps {
@@ -23,7 +23,7 @@ export function RegisterForm({
     submitted: false
   });
 
-  const { register } = useAuth();
+  const { signUp } = useAuth();
   
   console.log('RegisterForm mounted');
 
@@ -112,7 +112,10 @@ export function RegisterForm({
     }
 
     try {
-      const authResponse = await register(email, password, username);
+      const authResponse = await signUp(email, password, { username });
+      if (authResponse.error) {
+        throw new Error(authResponse.error.message);
+      }
       
       if (authResponse.user) {
         // Registration successful
@@ -194,13 +197,12 @@ export function RegisterForm({
           <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
             Password
           </label>
-          <input
+          <PasswordInput
             id="password"
-            type="password"
-            required
             value={formState.password}
             onChange={(e) => updateField('password', e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            required
+            minLength={8}
           />
           <p className="mt-1 text-sm text-gray-500">
             Must be at least 8 characters long
@@ -211,13 +213,12 @@ export function RegisterForm({
           <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700 mb-1">
             Confirm Password
           </label>
-          <input
+          <PasswordInput
             id="confirmPassword"
-            type="password"
-            required
             value={formState.confirmPassword}
             onChange={(e) => updateField('confirmPassword', e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            required
+            minLength={8}
           />
         </div>
 

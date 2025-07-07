@@ -1,6 +1,6 @@
 import { ErrorBoundary } from 'react-error-boundary';
 import ErrorFallback from '../components/errors/ErrorFallback';
-import { AuthProvider } from '../auth/providers/AuthProvider';
+import { AuthProvider as UnifiedAuthProvider } from '../auth/context/UnifiedAuthContext';
 import { AdminProvider } from '../admin/context/AdminContext';
 
 interface ProvidersProps {
@@ -16,11 +16,11 @@ function AppProviders({ children }: ProvidersProps) {
                 window.location.reload();
             }}
         >
-            <AuthProvider>
+            <UnifiedAuthProvider>
                 <AdminProvider>
                     {children}
                 </AdminProvider>
-            </AuthProvider>
+            </UnifiedAuthProvider>
         </ErrorBoundary>
     );
 }

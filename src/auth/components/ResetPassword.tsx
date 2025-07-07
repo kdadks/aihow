@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Button } from '../../components/ui/Button';
+import { Button, PasswordInput } from '../../components/ui';
 import { supabase } from '../../lib/supabase';
 
 export function ResetPassword() {
@@ -72,13 +72,11 @@ export function ResetPassword() {
           <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
             New Password
           </label>
-          <input
+          <PasswordInput
             id="password"
-            type="password"
-            required
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            required
             disabled={loading}
             minLength={8}
           />
@@ -88,13 +86,11 @@ export function ResetPassword() {
           <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700 mb-1">
             Confirm New Password
           </label>
-          <input
+          <PasswordInput
             id="confirmPassword"
-            type="password"
-            required
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            required
             disabled={loading}
             minLength={8}
           />

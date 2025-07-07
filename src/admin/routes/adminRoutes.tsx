@@ -11,9 +11,9 @@ const SettingsPage = lazy(() => import('../pages/SettingsPage'));
 const AuditLog = lazy(() => import('../pages/AuditLog'));
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
-    const { user, loading } = useAuth();
+    const { user, isLoading, isAdmin } = useAuth();
 
-    if (loading) {
+    if (isLoading) {
         return (
             <div className="flex justify-center items-center min-h-screen">
                 <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-600"></div>
@@ -23,6 +23,10 @@ function ProtectedRoute({ children }: { children: React.ReactNode }) {
 
     if (!user) {
         return <Navigate to="/admin/login" />;
+    }
+
+    if (!isAdmin) {
+        return <Navigate to="/unauthorized" />;
     }
 
     return <>{children}</>;

@@ -1,5 +1,6 @@
 import React from 'react';
 import { AdminAuthConfig } from '../types/adminAuth';
+import { PasswordInput } from '../../../components/ui/PasswordInput';
 
 interface AdminLoginFormProps {
   config: AdminAuthConfig;
@@ -93,26 +94,25 @@ export const AdminLoginForm: React.FC<AdminLoginFormProps> = ({ config, onSubmit
           Password
         </label>
         <div className="relative group">
-          <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+          <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none z-10">
             <svg className="h-5 w-5 text-gray-400 group-focus-within:text-blue-500 transition-colors" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
               <path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" />
             </svg>
           </div>
-          <input
+          <PasswordInput
             id="password"
-            type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
             disabled={isLocked}
-            className={`block w-full pl-12 pr-4 py-3 border-2 rounded-lg shadow-sm transition-all duration-200 focus:outline-none focus:ring-0 ${
-              isLocked 
-                ? 'bg-gray-50 border-gray-200 text-gray-500' 
-                : attempts > 0 
-                  ? 'border-amber-300 bg-amber-50/50 focus:border-amber-500' 
+            placeholder="Enter your secure password"
+            className={`block w-full pl-12 pr-12 py-3 border-2 rounded-lg shadow-sm transition-all duration-200 focus:outline-none focus:ring-0 ${
+              isLocked
+                ? 'bg-gray-50 border-gray-200 text-gray-500'
+                : attempts > 0
+                  ? 'border-amber-300 bg-amber-50/50 focus:border-amber-500'
                   : 'border-gray-200 bg-white focus:border-blue-500 focus:bg-blue-50/20'
             } text-base placeholder-gray-400`}
-            placeholder="Enter your secure password"
           />
         </div>
       </div>

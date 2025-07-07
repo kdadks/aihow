@@ -4,6 +4,7 @@ import { Button } from '../components/ui/Button';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/Card';
 import { workflowBundles } from '../data/workflows';
 import ProcessSection from '../components/bundles/ProcessSection';
+import { EmailService } from '../services/emailService';
 
 interface FormData {
   name: string;
@@ -38,6 +39,7 @@ const ContactPage: React.FC = () => {
   const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState<string>('');
   const [referencedBundle, setReferencedBundle] = useState<any>(null);
 
   // Handle URL parameters for bundle reference
@@ -109,6 +111,11 @@ const ContactPage: React.FC = () => {
     if (errors[name]) {
       setErrors(prev => ({ ...prev, [name]: '' }));
     }
+    
+    // Clear submit error when user makes changes
+    if (submitError) {
+      setSubmitError('');
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -119,26 +126,32 @@ const ContactPage: React.FC = () => {
     }
 
     setIsSubmitting(true);
+    setSubmitError('');
     
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      // Send email using the email service
+      const result = await EmailService.sendContactEmail(formData);
       
-      console.log('Form submitted:', formData);
-      setIsSubmitted(true);
-      setFormData({
-        name: '',
-        email: '',
-        company: '',
-        phone: '',
-        subject: '',
-        message: '',
-        inquiryType: 'general',
-        bundleReference: ''
-      });
-      setReferencedBundle(null);
+      if (result.success) {
+        console.log('Email sent successfully:', result);
+        setIsSubmitted(true);
+        setFormData({
+          name: '',
+          email: '',
+          company: '',
+          phone: '',
+          subject: '',
+          message: '',
+          inquiryType: 'general',
+          bundleReference: ''
+        });
+        setReferencedBundle(null);
+      } else {
+        throw new Error(result.error || 'Failed to send email');
+      }
     } catch (error) {
       console.error('Error submitting form:', error);
+      setSubmitError(error instanceof Error ? error.message : 'Failed to send message. Please try again.');
     } finally {
       setIsSubmitting(false);
     }
@@ -167,7 +180,7 @@ const ContactPage: React.FC = () => {
     },
     {
       title: 'Business Inquiries',
-      value: 'support@how2doai.ai',
+      value: 'sales@how2doai.ai',
       description: 'For partnerships and collaborations',
       icon: (
         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -192,8 +205,12 @@ const ContactPage: React.FC = () => {
               <p className="text-gray-600 mb-6">
                 Your message has been successfully submitted. We'll get back to you within 24 hours.
               </p>
-              <Button 
-                onClick={() => setIsSubmitted(false)}
+              <Button
+                onClick={() => {
+                  setIsSubmitted(false);
+                  setSubmitError('');
+                  setErrors({});
+                }}
                 variant="primary"
               >
                 Send Another Message
@@ -218,14 +235,14 @@ const ContactPage: React.FC = () => {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12 items-stretch">
         {/* Contact Methods */}
-        <div className="lg:col-span-1">
-          <h2 className="text-2xl font-semibold text-gray-900 mb-6">Get in Touch</h2>
-          <div className="space-y-6">
+        <div className="lg:col-span-1 h-full flex flex-col self-start">
+          <h2 className="text-2xl font-semibold text-gray-900">Get in Touch</h2>
+          <div className="space-y-6 flex-1 flex flex-col mt-6">
             {contactMethods.map((method, index) => (
-              <Card key={index}>
-                <CardContent className="p-6">
+              <Card key={index} className="h-full flex flex-col">
+                <CardContent className="p-6 flex-1 flex flex-col justify-between">
                   <div className="flex items-start space-x-4">
                     <div className="flex-shrink-0 w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center text-blue-600">
                       {method.icon}
@@ -242,7 +259,7 @@ const ContactPage: React.FC = () => {
           </div>
 
           {/* Office Information */}
-          <Card className="mt-6">
+          <Card className="mt-6 h-full flex flex-col">
             <CardHeader>
               <CardTitle className="flex items-center space-x-2">
                 <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -254,15 +271,17 @@ const ContactPage: React.FC = () => {
             </CardHeader>
             <CardContent>
               <p className="text-gray-600">
-                Lucknow<br />
-                Uttar Pradesh<br />
-                India
+                Lucknow, Uttar Pradesh, India<br />
+                Bangalore , Karnataka, India<br />
+                Dublin, Ireland<br />
+                London, United Kingdom
               </p>
+              
               <div className="mt-4 pt-4 border-t border-gray-200">
                 <h4 className="font-medium text-gray-900 mb-2">Business Hours</h4>
                 <p className="text-sm text-gray-600">
-                  Monday - Friday: 9:00 AM - 6:00 PM IST<br />
-                  Saturday: 10:00 AM - 4:00 PM IST<br />
+                  Monday - Friday: 9:00 AM - 6:00 PM IST, GMT<br />
+                  Saturday: 10:00 AM - 4:00 PM IST, GMT<br />
                   Sunday: Closed
                 </p>
               </div>
@@ -271,13 +290,13 @@ const ContactPage: React.FC = () => {
         </div>
 
         {/* Contact Form */}
-        <div className="lg:col-span-2">
-          <Card id="contact-form">
+        <div className="lg:col-span-2 h-full flex flex-col self-start" id="contact-form">
+          <Card className="h-full flex flex-col">
             <CardHeader>
               <CardTitle>Send us a Message</CardTitle>
             </CardHeader>
-            <CardContent>
-              <form onSubmit={handleSubmit} className="space-y-6">
+            <CardContent className="flex-1 flex flex-col">
+              <form onSubmit={handleSubmit} className="space-y-6 flex-1 flex flex-col justify-between">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
                     <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
@@ -442,6 +461,17 @@ const ContactPage: React.FC = () => {
                     <p id="message-error" className="mt-1 text-sm text-red-600">{errors.message}</p>
                   )}
                 </div>
+
+                {submitError && (
+                  <div className="p-4 bg-red-50 border border-red-200 rounded-md">
+                    <div className="flex items-center space-x-2">
+                      <svg className="w-5 h-5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.268 16.5c-.77.833.192 2.5 1.732 2.5z" />
+                      </svg>
+                      <p className="text-sm text-red-600">{submitError}</p>
+                    </div>
+                  </div>
+                )}
 
                 <div className="flex items-center justify-between pt-4">
                   <p className="text-sm text-gray-500">

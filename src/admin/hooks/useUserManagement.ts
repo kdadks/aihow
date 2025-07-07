@@ -11,11 +11,8 @@ export function useUserManagement() {
     try {
       setLoading(true);
       let query = supabase
-        .from('users')
-        .select(`
-          *,
-          userRole:user_roles(*)
-        `);
+        .from('profiles')
+        .select('*');
 
       if (filters?.role) {
         query = query.eq('user_roles.name', filters.role);
@@ -66,7 +63,7 @@ export function useUserManagement() {
     try {
       setLoading(true);
       const { error } = await supabase
-        .from('users')
+        .from('profiles')
         .update({ metadata })
         .eq('id', userId);
 
@@ -86,7 +83,7 @@ export function useUserManagement() {
         case 'delete':
           await Promise.all(
             operation.userIds.map(id =>
-              supabase.from('users').delete().eq('id', id)
+              supabase.from('profiles').delete().eq('id', id)
             )
           );
           break;

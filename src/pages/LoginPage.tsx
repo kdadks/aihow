@@ -1,13 +1,14 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../auth/hooks/useAuth';
+import { PasswordInput } from '../components/ui/PasswordInput';
 
 export default function LoginPage() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState<string | null>(null);
     const [isLoading, setIsLoading] = useState(false);
-    const { login } = useAuth();
+    const { signIn } = useAuth();
     const navigate = useNavigate();
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -16,8 +17,11 @@ export default function LoginPage() {
         setIsLoading(true);
 
         try {
-            const result = await login(email, password);
-            if (result?.user) {
+            const result = await signIn(email, password);
+            if (result.error) {
+                throw new Error(result.error.message);
+            }
+            if (result.data?.user) {
                 // Small delay to ensure auth state is updated
                 setTimeout(() => {
                     navigate('/dashboard', { replace: true });
@@ -80,16 +84,13 @@ export default function LoginPage() {
                                     Password
                                 </label>
                                 <div className="mt-1">
-                                    <input
+                                    <PasswordInput
                                         id="password"
-                                        name="password"
-                                        type="password"
-                                        autoComplete="current-password"
-                                        required
                                         value={password}
                                         onChange={(e) => setPassword(e.target.value)}
-                                        className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                        required
                                         placeholder="Enter your password"
+                                        className="appearance-none block w-full px-3 py-2 pr-10 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                     />
                                 </div>
                             </div>

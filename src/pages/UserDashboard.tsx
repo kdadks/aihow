@@ -25,7 +25,7 @@ export default function UserDashboard() {
         try {
             const { data: profileData } = await supabase
                 .from('profiles')
-                .select('username, full_name, email')
+                .select('username, full_name')
                 .eq('id', user.id)
                 .single();
 
