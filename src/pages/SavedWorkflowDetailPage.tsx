@@ -17,19 +17,20 @@ import {
   Shield,
   Clock
 } from 'lucide-react';
+import { userDataService, SavedWorkflow } from '../services/userDataService';
 
 const SavedWorkflowDetailPage: React.FC = () => {
   const { workflowId } = useParams<{ workflowId: string }>();
   const navigate = useNavigate();
   const location = useLocation();
-  const [workflow, setWorkflow] = useState<EnterpriseWorkflow | null>(null);
+  const [workflow, setWorkflow] = useState<SavedWorkflow | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     loadWorkflowDetails();
   }, [workflowId]);
 
-  const loadWorkflowDetails = () => {
+  const loadWorkflowDetails = async () => {
     if (!workflowId) {
       navigate('/dashboard/bundles');
       return;
@@ -43,9 +44,9 @@ const SavedWorkflowDetailPage: React.FC = () => {
         return;
       }
 
-      // Load from localStorage
-      const savedWorkflows = JSON.parse(localStorage.getItem('savedWorkflows') || '[]');
-      const savedWorkflow = savedWorkflows.find((w: EnterpriseWorkflow) => w.id === workflowId);
+      // Load from userDataService
+      const savedWorkflows = await userDataService.getSavedWorkflows();
+      const savedWorkflow = savedWorkflows.find((w: SavedWorkflow) => w.id === workflowId);
       
       if (savedWorkflow) {
         setWorkflow(savedWorkflow);
@@ -73,14 +74,18 @@ const SavedWorkflowDetailPage: React.FC = () => {
     navigate(`/contact?${params.toString()}`);
   };
 
-  const handleRemoveFromSaved = () => {
+  const handleRemoveFromSaved = async () => {
     if (!workflow) return;
     
     if (window.confirm('Are you sure you want to remove this workflow from your saved collection?')) {
-      const savedWorkflows = JSON.parse(localStorage.getItem('savedWorkflows') || '[]');
-      const updatedWorkflows = savedWorkflows.filter((w: EnterpriseWorkflow) => w.id !== workflow.id);
-      localStorage.setItem('savedWorkflows', JSON.stringify(updatedWorkflows));
-      navigate('/dashboard/bundles');
+      try {
+        await userDataService.removeWorkflowFromCollection(workflow.id);
+        navigate('/dashboard/bundles');
+      } catch (error) {
+        console.error('Error removing workflow:', error);
+        // Fallback to navigate anyway
+        navigate('/dashboard/bundles');
+      }
     }
   };
 
@@ -162,14 +167,14 @@ const SavedWorkflowDetailPage: React.FC = () => {
         <div className="flex-1">
           <div className="flex items-center space-x-3">
             <h1 className="text-3xl font-bold text-gray-900">{workflow.name}</h1>
-            <Badge className={getStatusColor(workflow.metadata.status)}>
-              {workflow.metadata.status}
+            <Badge className={getStatusColor(workflow.metadata?.status || 'draft')}>
+              {workflow.metadata?.status || 'draft'}
             </Badge>
           </div>
           <div className="flex items-center space-x-4 mt-2 text-sm text-gray-500">
             <div className="flex items-center">
               <Calendar className="h-4 w-4 mr-1" />
-              <span>Modified {formatDate(workflow.metadata.lastModified)}</span>
+              <span>Modified {formatDate(workflow.metadata?.lastModified || new Date())}</span>
             </div>
             <div className="flex items-center">
               <DollarSign className="h-4 w-4 mr-1" />
@@ -177,7 +182,7 @@ const SavedWorkflowDetailPage: React.FC = () => {
             </div>
             <div className="flex items-center">
               <GitBranch className="h-4 w-4 mr-1" />
-              <span>v{workflow.metadata.version}</span>
+              <span>v{workflow.metadata?.version || '1.0'}</span>
             </div>
           </div>
         </div>
@@ -254,7 +259,7 @@ const SavedWorkflowDetailPage: React.FC = () => {
           {/* Metadata & Additional Info */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Collaboration Settings */}
-            {workflow.collaboration && (
+            {(workflow as any).collaboration && (
               <Card>
                 <CardHeader>
                   <CardTitle className="flex items-center space-x-2">
@@ -266,18 +271,18 @@ const SavedWorkflowDetailPage: React.FC = () => {
                   <div className="space-y-2 text-sm">
                     <div className="flex justify-between">
                       <span>Shared:</span>
-                      <span className={workflow.collaboration.isShared ? 'text-green-600' : 'text-gray-500'}>
-                        {workflow.collaboration.isShared ? 'Yes' : 'No'}
+                      <span className={(workflow as any).collaboration?.isShared ? 'text-green-600' : 'text-gray-500'}>
+                        {(workflow as any).collaboration?.isShared ? 'Yes' : 'No'}
                       </span>
                     </div>
                     <div className="flex justify-between">
                       <span>Permissions:</span>
-                      <span className="capitalize">{workflow.collaboration.permissions}</span>
+                      <span className="capitalize">{(workflow as any).collaboration?.permissions || 'view'}</span>
                     </div>
                     <div className="flex justify-between">
                       <span>Comments:</span>
-                      <span className={workflow.collaboration.allowComments ? 'text-green-600' : 'text-gray-500'}>
-                        {workflow.collaboration.allowComments ? 'Enabled' : 'Disabled'}
+                      <span className={(workflow as any).collaboration?.allowComments ? 'text-green-600' : 'text-gray-500'}>
+                        {(workflow as any).collaboration?.allowComments ? 'Enabled' : 'Disabled'}
                       </span>
                     </div>
                   </div>
@@ -286,7 +291,7 @@ const SavedWorkflowDetailPage: React.FC = () => {
             )}
 
             {/* Approval Status */}
-            {workflow.approvalWorkflow && (
+            {(workflow as any).approvalWorkflow && (
               <Card>
                 <CardHeader>
                   <CardTitle className="flex items-center space-x-2">
@@ -299,18 +304,18 @@ const SavedWorkflowDetailPage: React.FC = () => {
                     <div className="flex justify-between">
                       <span>Status:</span>
                       <Badge className={`text-xs ${
-                        workflow.approvalWorkflow.status === 'approved' ? 'bg-green-100 text-green-800' :
-                        workflow.approvalWorkflow.status === 'pending' ? 'bg-yellow-100 text-yellow-800' :
-                        workflow.approvalWorkflow.status === 'rejected' ? 'bg-red-100 text-red-800' :
+                        (workflow as any).approvalWorkflow?.status === 'approved' ? 'bg-green-100 text-green-800' :
+                        (workflow as any).approvalWorkflow?.status === 'pending' ? 'bg-yellow-100 text-yellow-800' :
+                        (workflow as any).approvalWorkflow?.status === 'rejected' ? 'bg-red-100 text-red-800' :
                         'bg-gray-100 text-gray-800'
                       }`}>
-                        {workflow.approvalWorkflow.status}
+                        {(workflow as any).approvalWorkflow?.status || 'draft'}
                       </Badge>
                     </div>
-                    {workflow.approvalWorkflow.approvedAt && (
+                    {(workflow as any).approvalWorkflow?.approvedAt && (
                       <div className="flex justify-between">
                         <span>Approved:</span>
-                        <span>{formatDate(workflow.approvalWorkflow.approvedAt)}</span>
+                        <span>{formatDate((workflow as any).approvalWorkflow?.approvedAt)}</span>
                       </div>
                     )}
                   </div>
@@ -320,14 +325,14 @@ const SavedWorkflowDetailPage: React.FC = () => {
           </div>
 
           {/* Tags */}
-          {workflow.metadata.tags && workflow.metadata.tags.length > 0 && (
+          {workflow.metadata?.tags && workflow.metadata.tags.length > 0 && (
             <Card>
               <CardHeader>
                 <CardTitle>Tags</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="flex flex-wrap gap-2">
-                  {workflow.metadata.tags.map((tag, index) => (
+                  {workflow.metadata.tags?.map((tag: string, index: number) => (
                     <Badge key={index} variant="outline" className="text-xs">
                       {tag}
                     </Badge>
@@ -382,23 +387,23 @@ const SavedWorkflowDetailPage: React.FC = () => {
               </div>
               <div className="flex items-center justify-between">
                 <span className="text-sm font-medium text-gray-700">Version:</span>
-                <span className="text-sm font-semibold text-gray-900">{workflow.metadata.version}</span>
+                <span className="text-sm font-semibold text-gray-900">{workflow.metadata?.version || '1.0'}</span>
               </div>
               <div className="flex items-center justify-between">
                 <span className="text-sm font-medium text-gray-700">Status:</span>
-                <Badge className={`text-xs ${getStatusColor(workflow.metadata.status)}`}>
-                  {workflow.metadata.status}
+                <Badge className={`text-xs ${getStatusColor(workflow.metadata?.status || 'draft')}`}>
+                  {workflow.metadata?.status || 'draft'}
                 </Badge>
               </div>
               <div className="flex items-center justify-between">
                 <span className="text-sm font-medium text-gray-700">Created By:</span>
-                <span className="text-sm font-semibold text-gray-900">{workflow.metadata.createdBy}</span>
+                <span className="text-sm font-semibold text-gray-900">{workflow.metadata?.createdBy || 'Unknown'}</span>
               </div>
             </CardContent>
           </Card>
 
           {/* Version Control */}
-          {workflow.versionControl && (
+          {(workflow as any).versionControl && (
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center space-x-2">
@@ -410,16 +415,16 @@ const SavedWorkflowDetailPage: React.FC = () => {
                 <div className="space-y-2">
                   <div className="flex justify-between items-center text-sm">
                     <span className="font-medium">Current:</span>
-                    <span>v{workflow.versionControl.currentVersion}</span>
+                    <span>v{(workflow as any).versionControl?.currentVersion || '1.0'}</span>
                   </div>
                   <div className="flex justify-between items-center text-sm">
                     <span className="font-medium">Previous Versions:</span>
-                    <span>{workflow.versionControl.previousVersions?.length || 0}</span>
+                    <span>{(workflow as any).versionControl?.previousVersions?.length || 0}</span>
                   </div>
                   <div className="flex justify-between items-center text-sm">
                     <span className="font-medium">Auto-save:</span>
-                    <span className={workflow.versionControl.autoSave ? 'text-green-600' : 'text-gray-500'}>
-                      {workflow.versionControl.autoSave ? 'Enabled' : 'Disabled'}
+                    <span className={(workflow as any).versionControl?.autoSave ? 'text-green-600' : 'text-gray-500'}>
+                      {(workflow as any).versionControl?.autoSave ? 'Enabled' : 'Disabled'}
                     </span>
                   </div>
                 </div>

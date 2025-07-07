@@ -35,18 +35,40 @@ export class EmailService {
         body: JSON.stringify(formData),
       });
 
-      const data = await response.json();
-
       if (!response.ok) {
-        throw new Error(data.error || `HTTP error! status: ${response.status}`);
+        // Try to get error details from response
+        let errorDetails;
+        try {
+          const errorData = await response.json();
+          errorDetails = errorData.error || errorData.details || `HTTP ${response.status}`;
+        } catch {
+          errorDetails = `HTTP ${response.status} - ${response.statusText}`;
+        }
+        throw new Error(`Failed to send email: ${errorDetails}`);
       }
 
+      const data = await response.json();
       return data;
     } catch (error) {
       console.error('Error sending email:', error);
+      
+      // Provide more specific error messages
+      let errorMessage = 'Unknown error occurred';
+      if (error instanceof Error) {
+        if (error.message.includes('Failed to fetch')) {
+          errorMessage = 'Unable to connect to email service. Please check your internet connection.';
+        } else if (error.message.includes('HTTP 500')) {
+          errorMessage = 'Email service is temporarily unavailable. Please try again later.';
+        } else if (error.message.includes('HTTP 400')) {
+          errorMessage = 'Invalid form data. Please check all required fields.';
+        } else {
+          errorMessage = error.message;
+        }
+      }
+      
       return {
         success: false,
-        error: error instanceof Error ? error.message : 'Unknown error occurred'
+        error: errorMessage
       };
     }
   }

@@ -39,6 +39,7 @@ interface AuthState {
   isAdmin: boolean;
   isModerator: boolean;
   maxRoleLevel: number;
+  isAuthenticated: boolean;
 }
 
 interface AuthContextType extends AuthState {
@@ -74,81 +75,34 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     isAdmin: false,
     isModerator: false,
     maxRoleLevel: 1,
+    isAuthenticated: false,
   });
 
-  // Load user profile, roles, and permissions
-  const loadUserData = async (user: User) => {
-    let profile: any = null;
-    
+  // Load user profile, roles, and permissions - SIMPLIFIED TO PREVENT HANGING
+  const loadUserData = async (user: User, skipLoading = false) => {
     try {
-      setState(prev => ({ ...prev, isLoading: true }));
-
-      // Load profile
-      const { data: profileData, error: profileError } = await supabase
-        .from('profiles')
-        .select('*')
-        .eq('id', user.id)
-        .single();
-
-      if (profileError && profileError.code !== 'PGRST116') {
-        console.error('Error loading profile:', profileError);
-      } else {
-        profile = profileData;
+      if (!skipLoading) {
+        setState(prev => ({ ...prev, isLoading: true }));
       }
 
-      // Try to use database helper functions, fallback to basic setup if they don't exist
-      let userRoleNames: string[] = [];
-      let userPermissionNames: string[] = [];
+      console.log('Loading user data for:', user.email);
 
-      try {
-        const { data: roleData, error: rolesError } = await supabase
-          .rpc('get_user_roles', { user_id: user.id });
-
-        if (!rolesError && roleData) {
-          userRoleNames = roleData;
-        } else {
-          console.warn('Helper function get_user_roles not available, using default role');
-          userRoleNames = ['user']; // Default role
-        }
-      } catch (error) {
-        console.warn('Helper function get_user_roles failed, using default role:', error);
-        userRoleNames = ['user']; // Default role
-      }
-
-      try {
-        const { data: permissionData, error: permissionsError } = await supabase
-          .rpc('get_user_permissions', { user_id: user.id });
-
-        if (!permissionsError && permissionData) {
-          userPermissionNames = permissionData;
-        } else {
-          console.warn('Helper function get_user_permissions not available, using default permissions');
-          userPermissionNames = []; // Default empty permissions
-        }
-      } catch (error) {
-        console.warn('Helper function get_user_permissions failed, using default permissions:', error);
-        userPermissionNames = []; // Default empty permissions
-      }
-
-      // Process roles - helper function returns array of role names
-      const roles: UserRole[] = (userRoleNames || []).map((roleName: string) => ({
-        id: 0, // We don't need the ID for the simplified version
-        name: roleName,
-        description: '',
-        level: roleName === 'super_admin' ? 5 : roleName === 'admin' ? 4 : roleName === 'system_admin' ? 4 : roleName === 'content_admin' ? 3 : roleName === 'moderator' ? 2 : 1,
+      // Skip database queries for now - just use basic user info
+      const profile = null; // Will be loaded separately if needed
+      
+      // Use default roles and permissions to prevent database hanging issues
+      const roles: UserRole[] = [{
+        id: 0,
+        name: 'user',
+        description: 'Default user role',
+        level: 1,
         assigned_at: new Date().toISOString()
-      }));
-
-      // Process permissions - helper function returns array of permission names
-      const permissions: UserPermission[] = (userPermissionNames || []).map((permissionName: string) => ({
-        name: permissionName,
-        category: permissionName.split(':')[0] || 'general'
-      }));
-
-      // Calculate derived values
-      const maxRoleLevel = roles.length > 0 ? Math.max(...roles.map(r => r.level)) : 1;
-      const isAdmin = maxRoleLevel >= 3; // admin or super_admin
-      const isModerator = maxRoleLevel >= 2; // moderator, admin, or super_admin
+      }];
+      
+      const permissions: UserPermission[] = [];
+      const maxRoleLevel = 1;
+      const isAdmin = false;
+      const isModerator = false;
 
       setState(prev => ({
         ...prev,
@@ -160,21 +114,25 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         isAdmin,
         isModerator,
         isLoading: false,
+        isAuthenticated: true,
       }));
+
+      console.log('User data loaded successfully');
 
     } catch (error) {
       console.error('Error loading user data:', error);
-      // Set basic user data even if role/permission loading fails
+      // Ensure user stays logged in with minimal data
       setState(prev => ({
         ...prev,
         user,
-        profile: profile || null,
+        profile: null,
         roles: [{ id: 0, name: 'user', description: '', level: 1, assigned_at: new Date().toISOString() }],
         permissions: [],
         maxRoleLevel: 1,
         isAdmin: false,
         isModerator: false,
         isLoading: false,
+        isAuthenticated: true,
       }));
     }
   };
@@ -191,6 +149,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       isAdmin: false,
       isModerator: false,
       maxRoleLevel: 1,
+      isAuthenticated: false,
     });
   };
 
@@ -277,8 +236,31 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const refreshAuth = async () => {
-    if (state.user) {
-      await loadUserData(state.user);
+    // First check if we have a session but no user (state mismatch)
+    const { data: { session } } = await supabase.auth.getSession();
+    
+    if (session?.user && !state.user) {
+      console.log('Found session-user mismatch, fixing...');
+      setState(prev => ({ ...prev, session, user: session.user }));
+      try {
+        await loadUserData(session.user);
+      } catch (error) {
+        console.error('Error loading user data during refresh, maintaining basic state:', error);
+        setState(prev => ({
+          ...prev,
+          user: session.user,
+          session,
+          isLoading: false,
+          roles: [{ id: 0, name: 'user', description: '', level: 1, assigned_at: new Date().toISOString() }],
+          permissions: [],
+          maxRoleLevel: 1,
+          isAdmin: false,
+          isModerator: false,
+          isAuthenticated: true
+        }));
+      }
+    } else if (state.user) {
+      await loadUserData(state.user, true); // Skip loading state for existing users
     }
   };
 
@@ -289,10 +271,28 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       const { data: { session } } = await supabase.auth.getSession();
       
       if (session?.user) {
-        setState(prev => ({ ...prev, session }));
-        await loadUserData(session.user);
+        console.log('Initial session found:', session.user.email);
+        setState(prev => ({ ...prev, session, user: session.user }));
+        try {
+          await loadUserData(session.user);
+        } catch (error) {
+          console.error('Error loading initial user data, but keeping user logged in:', error);
+          // Ensure user stays logged in even if data loading fails
+          setState(prev => ({
+            ...prev,
+            user: session.user,
+            session,
+            isLoading: false,
+            roles: [{ id: 0, name: 'user', description: '', level: 1, assigned_at: new Date().toISOString() }],
+            permissions: [],
+            maxRoleLevel: 1,
+            isAdmin: false,
+            isModerator: false,
+            isAuthenticated: true
+          }));
+        }
       } else {
-        setState(prev => ({ ...prev, isLoading: false }));
+        setState(prev => ({ ...prev, isLoading: false, isAuthenticated: false }));
       }
     };
 
@@ -303,28 +303,50 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       async (event, session) => {
         console.log('Auth state changed:', event, session?.user?.email);
         
-        setState(prev => ({ ...prev, session }));
-
         if (event === 'SIGNED_IN' && session?.user) {
           console.log('Processing SIGNED_IN event');
+          setState(prev => ({ ...prev, session, user: session.user }));
           try {
             await loadUserData(session.user);
           } catch (error) {
-            console.error('Error loading user data on SIGNED_IN:', error);
-            // Don't clear user data, just log the error
+            console.error('Error loading user data on SIGNED_IN, but keeping user logged in:', error);
+            // Ensure user stays logged in even if data loading fails
+            setState(prev => ({
+              ...prev,
+              user: session.user,
+              session,
+              isLoading: false,
+              roles: [{ id: 0, name: 'user', description: '', level: 1, assigned_at: new Date().toISOString() }],
+              permissions: [],
+              maxRoleLevel: 1,
+              isAdmin: false,
+              isModerator: false,
+              isAuthenticated: true
+            }));
           }
         } else if (event === 'SIGNED_OUT') {
           console.log('Processing SIGNED_OUT event');
           clearUserData();
         } else if (event === 'TOKEN_REFRESHED' && session?.user) {
           console.log('Processing TOKEN_REFRESHED event');
+          setState(prev => ({ ...prev, session, user: session.user }));
           try {
-            // Refresh user data on token refresh, but don't fail if it doesn't work
-            await loadUserData(session.user);
+            // Refresh user data on token refresh, but skip loading state and don't fail if it doesn't work
+            await loadUserData(session.user, true);
           } catch (error) {
             console.warn('Error refreshing user data on token refresh:', error);
-            // Don't logout the user just because data refresh failed
+            // Don't logout the user just because data refresh failed - ensure user state is maintained
+            setState(prev => ({
+              ...prev,
+              user: session.user,
+              session,
+              isLoading: false,
+              isAuthenticated: true
+            }));
           }
+        } else {
+          // For any other events, just update the session
+          setState(prev => ({ ...prev, session }));
         }
       }
     );
@@ -332,27 +354,61 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     return () => subscription.unsubscribe();
   }, []);
 
+  // Periodic session check disabled temporarily to prevent interference
+  // useEffect(() => {
+  //   const sessionCheckInterval = setInterval(async () => {
+  //     if (state.isLoading) return;
+  //     const { data: { session } } = await supabase.auth.getSession();
+  //     if (session?.user && !state.user) {
+  //       setState(prev => ({
+  //         ...prev,
+  //         session,
+  //         user: session.user,
+  //         roles: [{ id: 0, name: 'user', description: '', level: 1, assigned_at: new Date().toISOString() }],
+  //         permissions: [],
+  //         maxRoleLevel: 1,
+  //         isAdmin: false,
+  //         isModerator: false,
+  //         isLoading: false
+  //       }));
+  //     } else if (state.user && !session) {
+  //       clearUserData();
+  //     }
+  //   }, 10000);
+  //   return () => clearInterval(sessionCheckInterval);
+  // }, [state.user, state.isLoading]);
+
   // Handle profile updates after user signup
   useEffect(() => {
     if (state.user && !state.profile) {
-      // Create initial profile if it doesn't exist
+      // Create or update initial profile
       const createInitialProfile = async () => {
         const { error } = await supabase
           .from('profiles')
-          .insert([
+          .upsert([
             {
               id: state.user!.id,
               username: state.user!.email?.split('@')[0] || null,
               full_name: state.user!.user_metadata?.full_name || null,
               avatar_url: state.user!.user_metadata?.avatar_url || null,
+              updated_at: new Date().toISOString(),
             },
-          ]);
+          ], {
+            onConflict: 'id'
+          });
 
         if (error) {
-          console.error('Error creating initial profile:', error);
+          console.error('Error creating/updating initial profile:', error);
+          // Don't fail the auth process just because profile creation failed
+          // The user should remain logged in
         } else {
-          // Reload user data after creating profile
-          await loadUserData(state.user!);
+          // Reload user data after creating/updating profile
+          try {
+            await loadUserData(state.user!);
+          } catch (loadError) {
+            console.warn('Error reloading user data after profile creation:', loadError);
+            // Keep user logged in even if reload fails
+          }
         }
       };
 

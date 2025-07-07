@@ -35,63 +35,116 @@ const UserSettingsPage: React.FC = () => {
 
     try {
       setLoading(true);
+      console.log('Loading user settings for:', user.email);
       
-      // Try to get existing settings
-      const { data: existingSettings, error: fetchError } = await supabase
-        .from('user_settings')
-        .select('*')
-        .eq('id', user.id)
-        .single();
-
-      if (fetchError && fetchError.code !== 'PGRST116') {
-        throw fetchError;
-      }
-
-      if (existingSettings) {
-        setSettings(existingSettings);
-      } else {
-        // Create default settings if they don't exist
-        const defaultSettings: UserSettings = {
-          id: user.id,
-          email_notifications: true,
-          marketing_emails: false,
-          profile_visibility: 'public',
-          theme_preference: 'system',
-          language: 'en',
-          timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-          two_factor_enabled: false
-        };
-
-        const { data: createdSettings, error: createError } = await supabase
+      // First try to get settings from database (production)
+      try {
+        const { data: existingSettings, error: fetchError } = await supabase
           .from('user_settings')
-          .insert([defaultSettings])
-          .select()
+          .select('*')
+          .eq('id', user.id)
           .single();
 
-        if (createError) {
-          // If table doesn't exist, just use default settings locally
-          console.warn('Settings table not found, using local defaults');
-          setSettings(defaultSettings);
-        } else {
-          setSettings(createdSettings);
+        if (fetchError) {
+          if (fetchError.code === 'PGRST116') {
+            // No settings found - create default ones
+            console.log('No settings found, creating defaults');
+            await createDefaultSettings();
+            return;
+          } else if (fetchError.code === '42P01') {
+            // Table doesn't exist - fall back to localStorage
+            console.warn('Database table not found, using localStorage fallback');
+            await loadFromLocalStorage();
+            return;
+          } else {
+            throw fetchError;
+          }
         }
+
+        if (existingSettings) {
+          setSettings(existingSettings);
+          // Sync to localStorage as backup
+          localStorage.setItem(`user_settings_${user.id}`, JSON.stringify(existingSettings));
+        }
+      } catch (dbError: any) {
+        console.warn('Database error, falling back to localStorage:', dbError);
+        await loadFromLocalStorage();
       }
     } catch (err: any) {
       console.error('Settings fetch error:', err);
-      // Use default settings if database fetch fails
-      setSettings({
-        id: user.id,
-        email_notifications: true,
-        marketing_emails: false,
-        profile_visibility: 'public',
-        theme_preference: 'system',
-        language: 'en',
-        timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-        two_factor_enabled: false
-      });
+      useDefaultSettings();
     } finally {
       setLoading(false);
     }
+  };
+
+  const loadFromLocalStorage = async () => {
+    const localSettings = localStorage.getItem(`user_settings_${user!.id}`);
+    
+    if (localSettings) {
+      try {
+        const parsedSettings = JSON.parse(localSettings);
+        setSettings(parsedSettings);
+        console.log('Loaded settings from localStorage');
+      } catch (parseError) {
+        console.warn('Error parsing local settings, using defaults');
+        useDefaultSettings();
+      }
+    } else {
+      useDefaultSettings();
+    }
+  };
+
+  const createDefaultSettings = async () => {
+    const defaultSettings: UserSettings = {
+      id: user!.id,
+      email_notifications: true,
+      marketing_emails: false,
+      profile_visibility: 'public',
+      theme_preference: 'system',
+      language: 'en',
+      timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+      two_factor_enabled: false
+    };
+
+    try {
+      // Try to create in database first
+      const { data: createdSettings, error: createError } = await supabase
+        .from('user_settings')
+        .insert([defaultSettings])
+        .select()
+        .single();
+
+      if (createError) {
+        console.warn('Could not create settings in database, using localStorage:', createError);
+        localStorage.setItem(`user_settings_${user!.id}`, JSON.stringify(defaultSettings));
+        setSettings(defaultSettings);
+      } else {
+        setSettings(createdSettings);
+        // Sync to localStorage as backup
+        localStorage.setItem(`user_settings_${user!.id}`, JSON.stringify(createdSettings));
+      }
+    } catch (err) {
+      console.warn('Database unavailable, using localStorage only');
+      localStorage.setItem(`user_settings_${user!.id}`, JSON.stringify(defaultSettings));
+      setSettings(defaultSettings);
+    }
+  };
+
+  const useDefaultSettings = () => {
+    const defaultSettings: UserSettings = {
+      id: user!.id,
+      email_notifications: true,
+      marketing_emails: false,
+      profile_visibility: 'public',
+      theme_preference: 'system',
+      language: 'en',
+      timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+      two_factor_enabled: false
+    };
+    setSettings(defaultSettings);
+    // Save to localStorage for persistence
+    localStorage.setItem(`user_settings_${user!.id}`, JSON.stringify(defaultSettings));
   };
 
   const handleSave = async () => {
@@ -102,22 +155,37 @@ const UserSettingsPage: React.FC = () => {
     setSuccess(false);
 
     try {
-      const { error: updateError } = await supabase
-        .from('user_settings')
-        .update(settings)
-        .eq('id', user.id);
+      // Try to save to database first (production)
+      try {
+        const { error: updateError } = await supabase
+          .from('user_settings')
+          .upsert(settings, {
+            onConflict: 'id'
+          });
 
-      if (updateError) {
-        // If update fails, it might be because the table doesn't exist
-        // In that case, we'll just show success locally
-        console.warn('Settings update failed, but showing success locally:', updateError);
+        if (updateError) {
+          if (updateError.code === '42P01') {
+            // Table doesn't exist - fall back to localStorage
+            console.warn('Database table not found, saving to localStorage');
+            localStorage.setItem(`user_settings_${user.id}`, JSON.stringify(settings));
+          } else {
+            throw updateError;
+          }
+        } else {
+          console.log('Settings saved to database successfully');
+          // Also save to localStorage as backup
+          localStorage.setItem(`user_settings_${user.id}`, JSON.stringify(settings));
+        }
+      } catch (dbError: any) {
+        console.warn('Database save failed, using localStorage fallback:', dbError);
+        localStorage.setItem(`user_settings_${user.id}`, JSON.stringify(settings));
       }
 
       setSuccess(true);
       setTimeout(() => setSuccess(false), 3000);
     } catch (err: any) {
-      setError('Failed to update settings');
-      console.error('Settings update error:', err);
+      setError('Failed to save settings');
+      console.error('Settings save error:', err);
     } finally {
       setSaving(false);
     }

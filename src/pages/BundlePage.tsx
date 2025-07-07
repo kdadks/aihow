@@ -5,6 +5,7 @@ import { workflowBundles } from '../data/workflows';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/Card';
 import { Button } from '../components/ui/Button';
 import { GitBranch, Layers } from 'lucide-react';
+import { userDataService } from '../services/userDataService';
 
 const BundlePage: React.FC = () => {
   const navigate = useNavigate();
@@ -20,27 +21,31 @@ const BundlePage: React.FC = () => {
     }
   }, [location.state]);
 
-  const handleSaveBundle = (bundle: any) => {
+  const handleSaveBundle = async (bundle: any) => {
     try {
       // Check if it's an Enterprise Workflow or a regular bundle
       if (bundle.metadata && bundle.tools) {
         // It's an Enterprise Workflow - save to savedWorkflows
         const workflowToSave = {
-          ...bundle,
           id: bundle.id || `workflow_${Date.now()}`,
+          name: bundle.name,
+          description: bundle.description,
+          useCase: bundle.useCase,
+          totalCost: bundle.totalCost || 0,
+          tools: bundle.tools,
           metadata: {
             ...bundle.metadata,
             lastModified: new Date()
-          }
+          },
+          workflowData: bundle
         };
 
-        const existingWorkflows = JSON.parse(localStorage.getItem('savedWorkflows') || '[]');
-        
         // Check if workflow already exists
+        const existingWorkflows = await userDataService.getSavedWorkflows();
         const workflowExists = existingWorkflows.some((saved: any) => saved.id === workflowToSave.id);
+        
         if (!workflowExists) {
-          const updatedWorkflows = [...existingWorkflows, workflowToSave];
-          localStorage.setItem('savedWorkflows', JSON.stringify(updatedWorkflows));
+          await userDataService.saveWorkflowToCollection(workflowToSave);
           alert(`Workflow "${bundle.name}" has been saved to your collection!`);
         } else {
           alert(`Workflow "${bundle.name}" is already in your saved collection!`);

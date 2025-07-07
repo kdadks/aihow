@@ -11,7 +11,7 @@ import { AutocompleteSearch } from '../search/AutocompleteSearch';
 
 export const Header: React.FC = () => {
   const navigate = useNavigate();
-  const { user, signOut } = useAuth();
+  const { user, signOut, refreshAuth } = useAuth();
   const isAuthenticated = !!user;
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -414,9 +414,16 @@ export const Header: React.FC = () => {
                     variant="ghost"
                     size="sm"
                     className="text-xs text-gray-500 mobile-touch-target"
-                    onClick={() => {
-                      // Note: logout functionality would need to be implemented in useAuth
-                      setIsMenuOpen(false);
+                    onClick={async () => {
+                      try {
+                        await signOut();
+                        setIsMenuOpen(false);
+                        navigate('/');
+                      } catch (error) {
+                        console.error('Logout error:', error);
+                        setIsMenuOpen(false);
+                        navigate('/login');
+                      }
                     }}
                   >
                     Sign out

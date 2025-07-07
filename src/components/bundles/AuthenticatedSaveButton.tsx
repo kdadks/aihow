@@ -4,8 +4,10 @@ import { LoginModal } from '../modals/LoginModal';
 import { draftManager } from '../../utils/workflowDraftManager';
 import { EnterpriseWorkflow } from './EnterpriseWorkflowCreator';
 import { createWorkflow } from '../../database/workflows';
+import { userDataService } from '../../services/userDataService';
 import { Button } from '../ui/Button';
 import { Save, AlertCircle, Clock } from 'lucide-react';
+import { supabase } from '../../lib/supabase';
 
 interface AuthenticatedSaveButtonProps {
   workflow: EnterpriseWorkflow;
@@ -44,27 +46,53 @@ export const AuthenticatedSaveButton: React.FC<AuthenticatedSaveButtonProps> = (
     try {
       setIsSaving(true);
 
-      // Convert EnterpriseWorkflow to database Workflow format
-      const dbWorkflow = {
-        creator_id: user?.id || '',
-        title: workflow.name,
-        description: workflow.description || null,
-        is_public: false, // Default to private
-        tags: workflow.metadata.tags || [],
-        metadata: {
-          ...workflow.metadata,
-          tools: workflow.tools,
-          totalCost: workflow.totalCost,
-          useCase: workflow.useCase,
-          collaboration: workflow.collaboration,
-          approvalWorkflow: workflow.approvalWorkflow,
-          versionControl: workflow.versionControl
-        },
-        version: 1, // Start with version 1
-        status: workflow.metadata.status
+      // Generate a unique ID for the workflow if it doesn't have one
+      const workflowId = workflow.id || `workflow_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+
+      // 1. Save to main workflows table (for admin/backend access)
+      try {
+        const dbWorkflow = {
+          creator_id: user?.id || '',
+          title: workflow.name,
+          description: workflow.description || null,
+          is_public: false, // Default to private
+          tags: workflow.metadata.tags || [],
+          metadata: {
+            ...workflow.metadata,
+            tools: workflow.tools,
+            totalCost: workflow.totalCost,
+            useCase: workflow.useCase,
+            collaboration: workflow.collaboration,
+            approvalWorkflow: workflow.approvalWorkflow,
+            versionControl: workflow.versionControl
+          },
+          version: 1, // Start with version 1
+          status: workflow.metadata.status || 'draft'
+        };
+
+        await createWorkflow(dbWorkflow);
+        console.log('Workflow saved to main workflows table');
+      } catch (workflowError) {
+        console.warn('Failed to save to workflows table, continuing with user table:', workflowError);
+      }
+
+      // 2. Save to saved_workflows table (for user dashboard)
+      const savedWorkflowData = {
+        id: workflowId,
+        name: workflow.name,
+        description: workflow.description || '',
+        useCase: workflow.useCase || '',
+        totalCost: workflow.totalCost || 0,
+        tools: workflow.tools || [],
+        metadata: workflow.metadata || {},
+        workflowData: {
+          ...workflow,
+          id: workflowId
+        }
       };
 
-      const savedWorkflow = await createWorkflow(dbWorkflow);
+      await userDataService.saveWorkflowToCollection(savedWorkflowData);
+      console.log('Workflow saved to user collection');
       
       // Clear draft since it's now saved
       draftManager.clearDraft();
@@ -72,10 +100,10 @@ export const AuthenticatedSaveButton: React.FC<AuthenticatedSaveButtonProps> = (
       // Update workflow with saved ID
       const updatedWorkflow: EnterpriseWorkflow = {
         ...workflow,
-        id: savedWorkflow.id,
+        id: workflowId,
         metadata: {
           ...workflow.metadata,
-          lastModified: new Date(savedWorkflow.updated_at)
+          lastModified: new Date()
         }
       };
 
@@ -92,17 +120,33 @@ export const AuthenticatedSaveButton: React.FC<AuthenticatedSaveButtonProps> = (
   }, [workflow, isAuthenticated, user, onSuccess]);
 
   const handleLoginSuccess = useCallback(async () => {
+    console.log('AuthenticatedSaveButton: Login success callback triggered');
     setShowLoginModal(false);
     
-    // Wait a bit for auth state to update
-    setTimeout(() => {
-      // Check if we still have the draft
-      const savedDraft = draftManager.loadDraft();
-      if (savedDraft) {
-        // Re-trigger save with the draft data
-        handleSave();
+    // Wait for auth state to properly update and then retry save
+    setTimeout(async () => {
+      console.log('AuthenticatedSaveButton: Checking auth state after login');
+      
+      // Force a re-check of auth state
+      const { data: { session } } = await supabase.auth.getSession();
+      console.log('AuthenticatedSaveButton: Session check result:', session?.user?.email || 'No user');
+      
+      if (session?.user) {
+        console.log('AuthenticatedSaveButton: User found, checking for draft');
+        // Check if we still have the draft
+        const savedDraft = draftManager.loadDraft();
+        if (savedDraft) {
+          console.log('AuthenticatedSaveButton: Draft found, re-triggering save');
+          // Re-trigger save with the draft data
+          await handleSave();
+        } else {
+          console.log('AuthenticatedSaveButton: No draft found after login');
+        }
+      } else {
+        console.error('AuthenticatedSaveButton: Login success but no session found');
+        setSaveError('Login successful but session not found. Please try saving again.');
       }
-    }, 100);
+    }, 500); // Increased timeout to ensure state updates
   }, [handleSave]);
 
   const hasDraft = draftManager.hasDraft();

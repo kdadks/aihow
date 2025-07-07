@@ -1,4 +1,4 @@
-import { Navigate } from 'react-router-dom';
+import { Navigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../../auth/hooks/useAuth';
 
 interface ProtectedRouteProps {
@@ -6,11 +6,12 @@ interface ProtectedRouteProps {
     redirectTo?: string;
 }
 
-export function ProtectedRoute({ 
-    children, 
-    redirectTo = '/login' 
+export function ProtectedRoute({
+    children,
+    redirectTo = '/login'
 }: ProtectedRouteProps) {
-    const { user, isLoading } = useAuth();
+    const { user, isLoading, session } = useAuth();
+    const location = useLocation();
 
     // Don't redirect until auth is initialized
     if (isLoading) {
@@ -21,9 +22,10 @@ export function ProtectedRoute({
         );
     }
 
-    // Only redirect after auth is initialized and user is not present
-    if (!user) {
-        return <Navigate to={redirectTo} state={{ from: window.location.pathname }} replace />;
+    // Only redirect after auth is initialized and both user and session are not present
+    // This prevents false redirects during token refresh or temporary auth state issues
+    if (!user || !session) {
+        return <Navigate to={redirectTo} state={{ from: location.pathname }} replace />;
     }
 
     return <>{children}</>;

@@ -8,6 +8,7 @@ import { GitBranch, MoveRight, X } from 'lucide-react';
 import { EnterpriseWorkflowCreator, type EnterpriseWorkflow } from '../components/bundles/EnterpriseWorkflowCreator';
 import { useWorkflowDraftRestore } from '../hooks/useWorkflowDraftRestore';
 import { DraftRestoreModal } from '../components/bundles/DraftRestoreModal';
+import { userDataService } from '../services/userDataService';
 import ProcessSection from '../components/bundles/ProcessSection';
 
 const WorkflowsPage: React.FC = () => {
@@ -38,24 +39,26 @@ const WorkflowsPage: React.FC = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const handleSaveBundle = (bundle: any) => {
+  const handleSaveBundle = async (bundle: any) => {
     try {
       // Check if it's an Enterprise Workflow or a regular bundle
       if (bundle.metadata && bundle.tools) {
         // It's an Enterprise Workflow - save to savedWorkflows
         const workflowToSave = {
-          ...bundle,
           id: bundle.id || `workflow_${Date.now()}`,
+          name: bundle.name,
+          description: bundle.description,
+          useCase: bundle.useCase,
+          totalCost: bundle.totalCost || 0,
+          tools: bundle.tools,
           metadata: {
             ...bundle.metadata,
             lastModified: new Date()
-          }
+          },
+          workflowData: bundle
         };
 
-        const existingWorkflows = JSON.parse(localStorage.getItem('savedWorkflows') || '[]');
-        const updatedWorkflows = [...existingWorkflows, workflowToSave];
-        localStorage.setItem('savedWorkflows', JSON.stringify(updatedWorkflows));
-
+        await userDataService.saveWorkflowToCollection(workflowToSave);
         alert(`Workflow "${bundle.name}" has been saved to your collection!`);
       } else {
         // It's a regular bundle - this shouldn't happen in WorkflowsPage

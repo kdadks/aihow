@@ -1,108 +1,88 @@
 # Email Configuration Setup
 
-This document explains how to configure email functionality for the contact form.
+This document explains how to set up email functionality for the contact form.
 
-## Overview
+## Environment Variables Required
 
-The contact form automatically routes emails to different recipients based on the inquiry type:
+The email service requires the following environment variables:
 
-- **Support Email** (`support@how2doai.ai`): General Inquiry, Technical Support, Feedback, Press/Media
-- **Sales Email** (`sales@how2doai.ai`): Bundle Implementation, Partnership
+- `SMTP_USER`: Your email address (e.g., support@how2doai.ai)
+- `SMTP_PASS`: Your email password or app-specific password
 
-## SMTP Configuration
+## Local Development Setup
 
-The system uses Hostinger's SMTP service with the following settings:
-
-- **SMTP Host**: `smtp.hostinger.com`
-- **Port**: `465` (SSL/TLS)
-- **Security**: SSL/TLS enabled
-
-## Environment Variables
-
-You need to set the following environment variables:
-
-```bash
+1. Create or update your `.env.local` file in the project root:
+```
 SMTP_USER=your-email@hostinger.com
 SMTP_PASS=your-app-password
 ```
 
-### Setting Up Environment Variables
+2. Test the configuration:
+```bash
+npm run test-email
+```
 
-1. **For Development**:
-   - Copy `.env.example` to `.env`
-   - Fill in your actual SMTP credentials
+## Production Setup (Netlify)
 
-2. **For Production (Netlify)**:
-   - Go to your Netlify site dashboard
-   - Navigate to Site settings → Environment variables
-   - Add the following variables:
-     - `SMTP_USER`: Your Hostinger email address
-     - `SMTP_PASS`: Your email password or app-specific password
+### Setting Environment Variables in Netlify
 
-## Email Templates
+1. Go to your Netlify dashboard
+2. Navigate to your site
+3. Go to **Site settings** → **Environment variables**
+4. Add the following variables:
+   - `SMTP_USER`: your-email@hostinger.com
+   - `SMTP_PASS`: your-app-password
 
-The system sends two types of emails:
+### Important Notes
 
-1. **Notification Email** (to support/sales team):
-   - Contains all form details
-   - Formatted in HTML with clear sections
-   - Includes inquiry type and routing information
+- Environment variables in Netlify are separate from your local `.env.local` file
+- After adding environment variables, you need to redeploy your site
+- Use app-specific passwords for Gmail or other email providers that support 2FA
 
-2. **Auto-reply Email** (to user):
-   - Confirms receipt of their message
-   - Provides expected response time
-   - Includes message summary
+## SMTP Configuration
 
-## Testing
+The current configuration uses Hostinger SMTP:
+- Host: smtp.hostinger.com
+- Port: 465
+- Secure: true (SSL/TLS)
 
-To test the email functionality:
+## Testing Email Functionality
 
-1. Ensure environment variables are set correctly
-2. Run the development server: `npm run dev`
-3. Fill out the contact form with different inquiry types
-4. Check that emails are routed to the correct recipients
+After deployment with proper environment variables:
+
+1. Visit your contact form
+2. Fill out and submit a test message
+3. Check both:
+   - The recipient email (support@how2doai.ai or sales@how2doai.ai)
+   - The sender's email for the auto-reply
 
 ## Troubleshooting
 
-### Common Issues
+### 500 Internal Server Error
+- Check that environment variables are set in Netlify
+- Verify SMTP credentials are correct
+- Check Netlify function logs for detailed error messages
 
-1. **Email not sending**:
-   - Check SMTP credentials are correct
-   - Verify environment variables are set
-   - Check Netlify function logs
+### Function Not Found
+- Ensure the function is deployed to `netlify/functions/send-email.js`
+- Check that the build completed successfully
 
-2. **Authentication errors**:
-   - Ensure you're using the correct email and password
-   - For Gmail/Google Workspace, use app-specific passwords
-   - For Hostinger, use the email account credentials
+### Email Not Received
+- Check spam/junk folders
+- Verify recipient email addresses are correct
+- Test with different email providers
 
-3. **Emails going to spam**:
-   - Verify SPF/DKIM records are set up for your domain
-   - Check email content for spam triggers
-   - Consider using a professional email service
+## Email Routing
 
-### Debug Information
+Based on inquiry type, emails are routed as follows:
 
-The Netlify function logs will show:
-- Email sending attempts
-- SMTP connection status
-- Error messages if sending fails
+- **Support Types** (general, support, feedback, press) → support@how2doai.ai
+- **Sales Types** (implementation, partnership) → sales@how2doai.ai
+- **Unknown Types** → support@how2doai.ai (default)
 
 ## Security Considerations
 
-- Never commit actual credentials to version control
-- Use environment variables for all sensitive data
-- Consider using app-specific passwords when available
-- Regularly rotate email passwords
-
-## Email Routing Logic
-
-```typescript
-// Support types go to support@how2doai.ai
-const supportTypes = ['general', 'support', 'feedback', 'press'];
-
-// Sales types go to sales@how2doai.ai
-const salesTypes = ['implementation', 'partnership'];
-```
-
-Any unknown inquiry types default to the support email address.
+- Never commit SMTP credentials to version control
+- Use app-specific passwords when possible
+- Consider using environment-specific email addresses for testing
+- Implement rate limiting to prevent abuse (already included in the function)

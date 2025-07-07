@@ -14,18 +14,7 @@ import {
   CheckCircle2,
   Trash2
 } from 'lucide-react';
-
-interface SavedBundle {
-  id: string;
-  name: string;
-  description: string;
-  totalCost: string | number;
-  savedAt: string;
-  type: 'workflow' | 'bundle';
-  isCustom?: boolean;
-  tools?: any[];
-  bundleData?: any;
-}
+import { userDataService, SavedBundle } from '../services/userDataService';
 
 const SavedBundleDetailPage: React.FC = () => {
   const { bundleId } = useParams<{ bundleId: string }>();
@@ -39,7 +28,7 @@ const SavedBundleDetailPage: React.FC = () => {
     loadBundleDetails();
   }, [bundleId]);
 
-  const loadBundleDetails = () => {
+  const loadBundleDetails = async () => {
     if (!bundleId) {
       navigate('/dashboard/bundles');
       return;
@@ -53,8 +42,8 @@ const SavedBundleDetailPage: React.FC = () => {
         return;
       }
 
-      // Load from localStorage
-      const savedBundles = JSON.parse(localStorage.getItem('savedBundles') || '[]');
+      // Load from userDataService
+      const savedBundles = await userDataService.getSavedBundles();
       const savedBundle = savedBundles.find((b: SavedBundle) => b.id === bundleId);
       
       if (savedBundle) {
@@ -90,14 +79,18 @@ const SavedBundleDetailPage: React.FC = () => {
     navigate(`/contact?${params.toString()}`);
   };
 
-  const handleRemoveFromSaved = () => {
+  const handleRemoveFromSaved = async () => {
     if (!bundle) return;
     
     if (window.confirm('Are you sure you want to remove this bundle from your saved collection?')) {
-      const savedBundles = JSON.parse(localStorage.getItem('savedBundles') || '[]');
-      const updatedBundles = savedBundles.filter((b: SavedBundle) => b.id !== bundle.id);
-      localStorage.setItem('savedBundles', JSON.stringify(updatedBundles));
-      navigate('/dashboard/bundles');
+      try {
+        await userDataService.removeBundleFromCollection(bundle.id);
+        navigate('/dashboard/bundles');
+      } catch (error) {
+        console.error('Error removing bundle:', error);
+        // Fallback to navigate anyway
+        navigate('/dashboard/bundles');
+      }
     }
   };
 

@@ -37,23 +37,39 @@ export const LoginModal: React.FC<LoginModalProps> = ({
     setError(null);
 
     try {
+      console.log('LoginModal: Starting login process for:', email);
       const result = await signIn(email, password);
+      console.log('LoginModal: Sign in result:', result);
+      
       if (result.error) {
+        console.error('LoginModal: Sign in error:', result.error);
         throw new Error(result.error.message);
       }
+      
+      // Check if we have user data
+      if (!result.data?.user && !result.data?.session) {
+        console.warn('LoginModal: No user/session data in result');
+      }
+      
+      console.log('LoginModal: Login successful, calling callbacks');
       
       // Reset form
       setEmail('');
       setPassword('');
       
-      // Call success callback
+      // Call success callback first
       if (onSuccess) {
+        console.log('LoginModal: Calling onSuccess callback');
         onSuccess();
       }
       
-      // Close modal
-      onClose();
+      // Small delay to ensure auth state updates
+      setTimeout(() => {
+        onClose();
+      }, 100);
+      
     } catch (err) {
+      console.error('LoginModal: Login error:', err);
       const errorMessage = err instanceof Error ? err.message : 'Login failed';
       setError(errorMessage);
     } finally {

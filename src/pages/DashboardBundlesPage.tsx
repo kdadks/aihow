@@ -1,37 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../auth/hooks/useAuth';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/Card';
 import { Button } from '../components/ui/Button';
 import { Badge } from '../components/ui/Badge';
 import { workflowBundles } from '../data/workflows';
 import { EnterpriseWorkflow } from '../components/bundles/EnterpriseWorkflowCreator';
-import { 
-  GitBranch, 
-  Calendar, 
-  Eye, 
-  Trash2, 
+import { userDataService, SavedBundle, SavedWorkflow } from '../services/userDataService';
+import {
+  GitBranch,
+  Calendar,
+  Eye,
+  Trash2,
   Plus,
   Bookmark,
   MessageCircle,
   Settings
 } from 'lucide-react';
 
-interface SavedBundle {
-  id: string;
-  name: string;
-  description: string;
-  totalCost: string | number;
-  savedAt: string;
-  type: 'workflow' | 'bundle';
-  isCustom?: boolean;
-  tools?: any[];
-  bundleData?: any; // Full bundle data for reference
-}
-
 const DashboardBundlesPage: React.FC = () => {
   const navigate = useNavigate();
   const [savedBundles, setSavedBundles] = useState<SavedBundle[]>([]);
-  const [savedWorkflows, setSavedWorkflows] = useState<EnterpriseWorkflow[]>([]);
+  const [savedWorkflows, setSavedWorkflows] = useState<SavedWorkflow[]>([]);
   const [activeTab, setActiveTab] = useState<'bundles' | 'workflows'>('bundles');
   const [loading, setLoading] = useState(true);
 
@@ -39,19 +29,21 @@ const DashboardBundlesPage: React.FC = () => {
     loadSavedItems();
   }, []);
 
-  const loadSavedItems = () => {
+
+  const loadSavedItems = async () => {
     setLoading(true);
     try {
-      // Load saved bundles from localStorage
-      const bundlesData = JSON.parse(localStorage.getItem('savedBundles') || '[]');
-      const workflowsData = JSON.parse(localStorage.getItem('savedWorkflows') || '[]');
+      // Load saved bundles and workflows using the new service
+      const [bundlesData, workflowsData] = await Promise.all([
+        userDataService.getSavedBundles(),
+        userDataService.getSavedWorkflows()
+      ]);
       
       // Enhance bundles with full data from workflowBundles
-      const enhancedBundles = bundlesData.map((saved: any) => {
+      const enhancedBundles = bundlesData.map((saved: SavedBundle) => {
         const fullBundle = workflowBundles.find(b => b.id === saved.id);
         return {
           ...saved,
-          type: saved.type || 'bundle',
           bundleData: fullBundle,
           tools: fullBundle?.tools || saved.tools || []
         };
@@ -82,25 +74,37 @@ const DashboardBundlesPage: React.FC = () => {
     }
   };
 
-  const handleViewWorkflowDetails = (workflow: EnterpriseWorkflow) => {
-    navigate(`/dashboard/workflows/${workflow.id}`, { 
-      state: { workflow } 
+  const handleViewWorkflowDetails = (workflow: SavedWorkflow) => {
+    navigate(`/dashboard/workflows/${workflow.id}`, {
+      state: { workflow }
     });
   };
 
-  const handleRemoveBundle = (bundleId: string) => {
+  const handleRemoveBundle = async (bundleId: string) => {
     if (window.confirm('Are you sure you want to remove this bundle from your saved collection?')) {
-      const updatedBundles = savedBundles.filter(b => b.id !== bundleId);
-      setSavedBundles(updatedBundles);
-      localStorage.setItem('savedBundles', JSON.stringify(updatedBundles));
+      try {
+        await userDataService.removeBundleFromCollection(bundleId);
+        await loadSavedItems(); // Reload data from service
+      } catch (error) {
+        console.error('Error removing bundle:', error);
+        // Fallback to local update if service fails
+        const updatedBundles = savedBundles.filter(b => b.id !== bundleId);
+        setSavedBundles(updatedBundles);
+      }
     }
   };
 
-  const handleRemoveWorkflow = (workflowId: string) => {
+  const handleRemoveWorkflow = async (workflowId: string) => {
     if (window.confirm('Are you sure you want to remove this workflow from your saved collection?')) {
-      const updatedWorkflows = savedWorkflows.filter(w => w.id !== workflowId);
-      setSavedWorkflows(updatedWorkflows);
-      localStorage.setItem('savedWorkflows', JSON.stringify(updatedWorkflows));
+      try {
+        await userDataService.removeWorkflowFromCollection(workflowId);
+        await loadSavedItems(); // Reload data from service
+      } catch (error) {
+        console.error('Error removing workflow:', error);
+        // Fallback to local update if service fails
+        const updatedWorkflows = savedWorkflows.filter(w => w.id !== workflowId);
+        setSavedWorkflows(updatedWorkflows);
+      }
     }
   };
 

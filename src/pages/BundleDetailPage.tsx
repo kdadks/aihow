@@ -5,6 +5,7 @@ import { Button } from '../components/ui/Button';
 import { Card, CardContent } from '../components/ui/Card';
 import { ArrowLeft, CheckCircle2, Settings, MessageCircle, Bookmark } from 'lucide-react';
 import { BundleCreator } from '../components/bundles/BundleCreator';
+import { userDataService } from '../services/userDataService';
 
 const BundleDetailPage: React.FC = () => {
   const { bundleId } = useParams();
@@ -23,12 +24,12 @@ const BundleDetailPage: React.FC = () => {
     }
   }, [bundle, navigate]);
 
-  const handleSaveBundle = () => {
+  const handleSaveBundle = async () => {
     if (bundle) {
       try {
-        // Save bundle to localStorage
-        const savedBundles = JSON.parse(localStorage.getItem('savedBundles') || '[]');
-        const bundleExists = savedBundles.some((saved: any) => saved.id === bundle.id);
+        // Check if already saved
+        const existingBundles = await userDataService.getSavedBundles();
+        const bundleExists = existingBundles.some(saved => saved.id === bundle.id);
         
         if (!bundleExists) {
           const bundleToSave = {
@@ -37,14 +38,13 @@ const BundleDetailPage: React.FC = () => {
             description: bundle.description,
             totalCost: bundle.totalCost,
             savedAt: new Date().toISOString(),
-            type: 'bundle',
+            type: 'bundle' as const,
             isCustom: false,
             tools: bundle.tools,
             bundleData: bundle // Store full bundle data for reference
           };
           
-          savedBundles.push(bundleToSave);
-          localStorage.setItem('savedBundles', JSON.stringify(savedBundles));
+          await userDataService.saveBundleToCollection(bundleToSave);
           setBundleSaved(true);
           
           // Show success message

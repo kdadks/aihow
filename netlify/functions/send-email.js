@@ -35,8 +35,20 @@ export default async (req, context) => {
       recipientEmail = 'support@how2doai.ai';
     }
 
+    // Check if SMTP credentials are configured
+    if (!process.env.SMTP_USER || !process.env.SMTP_PASS) {
+      console.error('SMTP credentials not configured');
+      return new Response(JSON.stringify({
+        error: 'Email service not configured properly',
+        details: 'SMTP credentials missing'
+      }), {
+        status: 500,
+        headers: { 'Content-Type': 'application/json' }
+      });
+    }
+
     // Create transporter
-    const transporter = nodemailer.createTransporter({
+    const transporter = nodemailer.createTransport({
       host: 'smtp.hostinger.com',
       port: 465,
       secure: true, // true for 465, false for other ports
