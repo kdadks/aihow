@@ -125,7 +125,7 @@ This email was sent to ${recipientEmail} based on the inquiry type: ${inquiryTyp
       <html>
         <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
           <div style="max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ddd; border-radius: 8px;">
-            <h2 style="color: #2563eb; margin-bottom: 20px;">Thank you for contacting AIhow!</h2>
+            <h2 style="color: #2563eb; margin-bottom: 20px;">Thank you for contacting How2doai!</h2>
             
             <p>Dear ${name},</p>
             
@@ -147,10 +147,9 @@ This email was sent to ${recipientEmail} based on the inquiry type: ${inquiryTyp
             <p>In the meantime, feel free to explore our AI tool directory and recommendations at <a href="https://how2doai.ai" style="color: #2563eb;">how2doai.ai</a>.</p>
             
             <p>Best regards,<br>
-            The AIhow Team</p>
-            
+            The How2doai Team</p>
             <div style="margin-top: 30px; padding: 15px; background-color: #f3f4f6; border-radius: 5px; font-size: 14px; color: #6b7280;">
-              <p style="margin: 0;"><strong>AIhow - AI Tool Discovery Platform</strong></p>
+              <p style="margin: 0;"><strong>How2doai - AI Tool Discovery Platform</strong></p>
               <p style="margin: 5px 0 0 0;">Email: ${recipientEmail} | Website: https://how2doai.ai</p>
             </div>
           </div>
@@ -159,9 +158,9 @@ This email was sent to ${recipientEmail} based on the inquiry type: ${inquiryTyp
     `;
 
     await transporter.sendMail({
-      from: `"AIhow Team" <${process.env.SMTP_USER}>`,
+      from: `"How2doai Team" <${process.env.SMTP_USER}>`,
       to: email,
-      subject: 'Thank you for contacting AIhow - We\'ll be in touch soon!',
+      subject: 'Thank you for contacting How2doai - We\'ll be in touch soon!',
       html: autoReplyContent,
       text: `
 Dear ${name},
@@ -182,10 +181,10 @@ Your Message Summary:
 In the meantime, feel free to explore our AI tool directory and recommendations at https://how2doai.ai.
 
 Best regards,
-The AIhow Team
+The How2doai Team
 
 ---
-AIhow - AI Tool Discovery Platform
+How2doai - AI Tool Discovery Platform
 Email: ${recipientEmail} | Website: https://how2doai.ai
       `
     });
