@@ -78,11 +78,13 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   // Load user profile, roles, and permissions
   const loadUserData = async (user: User) => {
+    let profile: any = null;
+    
     try {
       setState(prev => ({ ...prev, isLoading: true }));
 
       // Load profile
-      const { data: profile, error: profileError } = await supabase
+      const { data: profileData, error: profileError } = await supabase
         .from('profiles')
         .select('*')
         .eq('id', user.id)
@@ -90,22 +92,42 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
       if (profileError && profileError.code !== 'PGRST116') {
         console.error('Error loading profile:', profileError);
+      } else {
+        profile = profileData;
       }
 
-      // Use database helper functions
-      const { data: userRoleNames, error: rolesError } = await supabase
-        .rpc('get_user_roles', { user_id: user.id });
+      // Try to use database helper functions, fallback to basic setup if they don't exist
+      let userRoleNames: string[] = [];
+      let userPermissionNames: string[] = [];
 
-      if (rolesError) {
-        console.error('Error loading user roles:', rolesError);
+      try {
+        const { data: roleData, error: rolesError } = await supabase
+          .rpc('get_user_roles', { user_id: user.id });
+
+        if (!rolesError && roleData) {
+          userRoleNames = roleData;
+        } else {
+          console.warn('Helper function get_user_roles not available, using default role');
+          userRoleNames = ['user']; // Default role
+        }
+      } catch (error) {
+        console.warn('Helper function get_user_roles failed, using default role:', error);
+        userRoleNames = ['user']; // Default role
       }
 
-      // Load permissions using helper function
-      const { data: userPermissionNames, error: permissionsError } = await supabase
-        .rpc('get_user_permissions', { user_id: user.id });
+      try {
+        const { data: permissionData, error: permissionsError } = await supabase
+          .rpc('get_user_permissions', { user_id: user.id });
 
-      if (permissionsError) {
-        console.error('Error loading user permissions:', permissionsError);
+        if (!permissionsError && permissionData) {
+          userPermissionNames = permissionData;
+        } else {
+          console.warn('Helper function get_user_permissions not available, using default permissions');
+          userPermissionNames = []; // Default empty permissions
+        }
+      } catch (error) {
+        console.warn('Helper function get_user_permissions failed, using default permissions:', error);
+        userPermissionNames = []; // Default empty permissions
       }
 
       // Process roles - helper function returns array of role names
@@ -142,7 +164,18 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
     } catch (error) {
       console.error('Error loading user data:', error);
-      setState(prev => ({ ...prev, isLoading: false }));
+      // Set basic user data even if role/permission loading fails
+      setState(prev => ({
+        ...prev,
+        user,
+        profile: profile || null,
+        roles: [{ id: 0, name: 'user', description: '', level: 1, assigned_at: new Date().toISOString() }],
+        permissions: [],
+        maxRoleLevel: 1,
+        isAdmin: false,
+        isModerator: false,
+        isLoading: false,
+      }));
     }
   };
 
@@ -274,14 +307,24 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
         if (event === 'SIGNED_IN' && session?.user) {
           console.log('Processing SIGNED_IN event');
-          await loadUserData(session.user);
+          try {
+            await loadUserData(session.user);
+          } catch (error) {
+            console.error('Error loading user data on SIGNED_IN:', error);
+            // Don't clear user data, just log the error
+          }
         } else if (event === 'SIGNED_OUT') {
           console.log('Processing SIGNED_OUT event');
           clearUserData();
         } else if (event === 'TOKEN_REFRESHED' && session?.user) {
           console.log('Processing TOKEN_REFRESHED event');
-          // Refresh user data on token refresh
-          await loadUserData(session.user);
+          try {
+            // Refresh user data on token refresh, but don't fail if it doesn't work
+            await loadUserData(session.user);
+          } catch (error) {
+            console.warn('Error refreshing user data on token refresh:', error);
+            // Don't logout the user just because data refresh failed
+          }
         }
       }
     );

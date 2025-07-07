@@ -59,12 +59,20 @@ class UserManagementService {
             // Transform users and get roles using helper functions
             const transformedUsers: AdminUser[] = await Promise.all(
                 users.map(async (user: any) => {
-                    // Get user roles using helper function
-                    const { data: userRoles } = await supabase
-                        .rpc('get_user_roles', { user_id: user.id });
+                    // Try to get user roles using helper function, fallback if not available
+                    let primaryRole = 'user';
                     
-                    // For admin purposes, we'll use the first role or default to 'user'
-                    const primaryRole = userRoles?.[0] || 'user';
+                    try {
+                        const { data: userRoles, error } = await supabase
+                            .rpc('get_user_roles', { user_id: user.id });
+                        
+                        if (!error && userRoles && userRoles.length > 0) {
+                            primaryRole = userRoles[0];
+                        }
+                    } catch (error) {
+                        console.warn('Helper function get_user_roles not available for user:', user.id);
+                        // Use default role
+                    }
                     
                     return {
                         id: user.id,
@@ -118,11 +126,20 @@ class UserManagementService {
                 throw new Error('User not found');
             }
 
-            // Get user roles using helper function
-            const { data: userRoles } = await supabase
-                .rpc('get_user_roles', { user_id: user.id });
+            // Try to get user roles using helper function, fallback if not available
+            let primaryRole = 'user';
             
-            const primaryRole = userRoles?.[0] || 'user';
+            try {
+                const { data: userRoles, error } = await supabase
+                    .rpc('get_user_roles', { user_id: user.id });
+                
+                if (!error && userRoles && userRoles.length > 0) {
+                    primaryRole = userRoles[0];
+                }
+            } catch (error) {
+                console.warn('Helper function get_user_roles not available for user:', user.id);
+                // Use default role
+            }
 
             const transformedUser: AdminUser = {
                 id: user.id,
