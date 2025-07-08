@@ -28,7 +28,7 @@ const adminSupabase = createClient(supabaseUrl, supabaseServiceKey, {
   }
 });
 
-const ADMIN_EMAIL = 'testadmin@aihow.org';
+const ADMIN_EMAIL = 'admin@aihow.org';
 const NEW_PASSWORD = 'AdminTest123!'; // New known password
 
 async function resetAdminPassword() {

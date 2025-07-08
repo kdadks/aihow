@@ -163,14 +163,71 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const signUp = async (email: string, password: string, userData?: Partial<UserProfile>) => {
-    const result = await supabase.auth.signUp({
-      email,
-      password,
-      options: {
-        data: userData,
-      },
-    });
-    return result;
+    try {
+      const result = await supabase.auth.signUp({
+        email,
+        password,
+        options: {
+          data: userData,
+        },
+      });
+
+      // If signup succeeded but there was a database error creating the profile,
+      // try to create the profile manually
+      if (result.data?.user && !result.error) {
+        try {
+          // Check if profile was created
+          const { data: profile } = await supabase
+            .from('profiles')
+            .select('id')
+            .eq('id', result.data.user.id)
+            .single();
+
+          // If no profile exists, create one manually
+          if (!profile) {
+            console.log('Profile not found, creating manually...');
+            const { error: profileError } = await supabase
+              .from('profiles')
+              .insert({
+                id: result.data.user.id,
+                username: email,
+                full_name: userData?.full_name || 'User',
+                created_at: new Date().toISOString(),
+                updated_at: new Date().toISOString(),
+              });
+
+            if (profileError) {
+              console.warn('Failed to create profile manually:', profileError);
+              // Don't fail the signup, just log the warning
+            } else {
+              console.log('Profile created manually successfully');
+            }
+          }
+        } catch (profileCheckError) {
+          console.warn('Error checking/creating profile:', profileCheckError);
+          // Don't fail the signup for profile creation errors
+        }
+      }
+
+      return result;
+    } catch (error) {
+      console.error('Signup error:', error);
+      
+      // Provide more helpful error messages
+      if (error instanceof Error) {
+        if (error.message.includes('Database error saving new user')) {
+          return {
+            data: { user: null, session: null },
+            error: {
+              message: 'There was a temporary issue creating your account. Please try again in a moment.',
+              status: 500,
+            } as any,
+          };
+        }
+      }
+      
+      throw error;
+    }
   };
 
   const signOut = async () => {
