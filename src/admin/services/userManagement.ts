@@ -24,7 +24,7 @@ interface DatabaseUser {
     created_at: string;
     last_sign_in_at: string | null;
     is_active: boolean;
-    user_role_assignments: {
+    user_roles: {
         role: DatabaseRole;
     }[];
 }
@@ -203,17 +203,16 @@ class UserManagementService {
         try {
             // First, remove any existing role assignments
             await supabase
-                .from('user_role_assignments')
+                .from('user_roles')
                 .delete()
                 .eq('user_id', userId);
 
             // Then assign the new role
             const { data: assignment, error } = await supabase
-                .from('user_role_assignments')
+                .from('user_roles')
                 .insert({
                     user_id: userId,
-                    role_id: roleId,
-                    assigned_by: (await supabase.auth.getUser()).data.user?.id
+                    role_id: roleId
                 })
                 .select()
                 .single();
@@ -227,11 +226,11 @@ class UserManagementService {
             }
 
             const roleAssignment: RoleAssignment = {
-                id: assignment.id,
+                id: `${assignment.user_id}-${assignment.role_id}`, // Composite ID since user_roles doesn't have a separate ID
                 user_id: assignment.user_id,
                 role_id: assignment.role_id,
-                assigned_by: assignment.assigned_by,
-                assigned_at: assignment.assigned_at
+                assigned_by: (await supabase.auth.getUser()).data.user?.id || '',
+                assigned_at: new Date().toISOString()
             };
 
             return { data: roleAssignment, error: null };
@@ -243,7 +242,7 @@ class UserManagementService {
     async removeRole(userId: string, roleId: string): Promise<AdminResponse<void>> {
         try {
             const { error } = await supabase
-                .from('user_role_assignments')
+                .from('user_roles')
                 .delete()
                 .match({ user_id: userId, role_id: roleId });
 

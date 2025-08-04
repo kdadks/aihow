@@ -2,6 +2,7 @@ import { ErrorBoundary } from 'react-error-boundary';
 import ErrorFallback from '../components/errors/ErrorFallback';
 import { AuthProvider as UnifiedAuthProvider } from '../auth/context/UnifiedAuthContext';
 import { AdminProvider } from '../admin/context/AdminContext';
+import { AdminAuthProvider } from '../admin/auth/context/AdminAuthContext';
 
 interface ProvidersProps {
     children: React.ReactNode;
@@ -17,9 +18,11 @@ function AppProviders({ children }: ProvidersProps) {
             }}
         >
             <UnifiedAuthProvider>
-                <AdminProvider>
-                    {children}
-                </AdminProvider>
+                <AdminAuthProvider>
+                    <AdminProvider>
+                        {children}
+                    </AdminProvider>
+                </AdminAuthProvider>
             </UnifiedAuthProvider>
         </ErrorBoundary>
     );

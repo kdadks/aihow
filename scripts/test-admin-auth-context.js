@@ -42,16 +42,16 @@ async function testRoleFetching() {
       }
     }
 
-    // Check user_role_assignments table
+    // Check user_roles table
     const { data: assignments, error: assignmentError } = await supabase
-      .from('user_role_assignments')
+      .from('user_roles')
       .select('*')
       .limit(1);
     
     if (assignmentError) {
-      console.error('❌ user_role_assignments table error:', assignmentError.message);
+      console.error('❌ user_roles table error:', assignmentError.message);
     } else {
-      console.log('✅ user_role_assignments table accessible');
+      console.log('✅ user_roles table accessible');
       if (assignments && assignments.length > 0) {
         console.log('   Columns:', Object.keys(assignments[0]));
       } else {
@@ -70,7 +70,7 @@ async function testRoleFetching() {
   try {
     // This simulates what happens in AdminAuthContext for any user
     const { data: testAssignments } = await supabase
-      .from('user_role_assignments')
+      .from('user_roles')
       .select('role_id, user_id')
       .limit(5);
 
@@ -126,8 +126,8 @@ async function testRoleFetching() {
 
   console.log('\n🎉 AdminAuthContext role fetching test completed!');
   console.log('\nThe fixed AdminAuthContext should now properly:');
-  console.log('  ✅ Fetch role assignments from user_role_assignments table');
-  console.log('  ✅ Fetch role data from user_roles table');
+  console.log('  ✅ Fetch role assignments from user_roles table');
+  console.log('  ✅ Fetch role data from roles table');
   console.log('  ✅ Handle JSONB permissions structure');
   console.log('  ✅ Validate admin role access');
 }

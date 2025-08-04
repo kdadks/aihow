@@ -81,6 +81,12 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   // Load user profile, roles, and permissions - SIMPLIFIED TO PREVENT HANGING
   const loadUserData = async (user: User, skipLoading = false) => {
     try {
+      // Prevent duplicate loading for the same user
+      if (state.user?.id === user.id && state.isAuthenticated && !skipLoading) {
+        console.log('User data already loaded, skipping duplicate load for:', user.email);
+        return;
+      }
+
       if (!skipLoading) {
         setState(prev => ({ ...prev, isLoading: true }));
       }
@@ -362,6 +368,13 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         
         if (event === 'SIGNED_IN' && session?.user) {
           console.log('Processing SIGNED_IN event');
+          // Check if this is a duplicate event for the same user
+          if (state.user?.id === session.user.id && state.isAuthenticated) {
+            console.log('User already authenticated, skipping duplicate SIGNED_IN processing');
+            setState(prev => ({ ...prev, session })); // Just update session
+            return;
+          }
+          
           setState(prev => ({ ...prev, session, user: session.user }));
           try {
             await loadUserData(session.user);

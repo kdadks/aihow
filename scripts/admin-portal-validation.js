@@ -89,10 +89,10 @@ async function validateAdminPortal() {
     // Test 4: Check User Role Assignments
     console.log('\n4️⃣ Testing User Role Assignments...')
     const { data: assignments, error: assignmentsError } = await supabase
-      .from('user_role_assignments')
+      .from('user_roles')
       .select(`
         *,
-        user_roles(name, description, permissions)
+        roles(name, description, permissions)
       `)
       .eq('user_id', authData.user.id)
 
