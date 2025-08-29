@@ -1,10 +1,10 @@
 # How2doAI Robots.txt
-# Updated for 2025 SEO optimization
+# Updated for 2025 SEO optimization with AI keywords
 
 # Allow all crawlers
 User-agent: *
 
-# High-Priority Pages (Core Content)
+# High-Priority Pages (Core AI Content)
 Allow: /tool-finder
 Allow: /directory
 Allow: /compare
@@ -13,6 +13,18 @@ Allow: /chatgpt-tools
 Allow: /bundle
 Allow: /reviews
 Allow: /blog
+Allow: /ai-tools
+Allow: /agentic-ai
+Allow: /workflow-automation
+Allow: /copilot-alternatives
+
+# AI-Specific Content Pages
+Allow: /directory/AI-Assistant
+Allow: /directory/Automation
+Allow: /directory/Writing
+Allow: /directory/Coding
+Allow: /directory/Data-Analysis
+Allow: /directory/Content-Creation
 
 # Secondary Pages (Supporting Content)
 Allow: /community
@@ -21,8 +33,8 @@ Allow: /testimonials
 Allow: /about
 Allow: /contact
 
-# Temporary Optimization Directives
-Crawl-delay: 2
+# Crawl Optimization
+Crawl-delay: 1
 
 # Prevent Duplicate Content & Non-Essential Pages
 Disallow: /search?*
@@ -39,7 +51,7 @@ Disallow: /*/print
 Clean-param: utm_source&utm_medium&utm_campaign&utm_content&utm_term
 
 # Additional Crawler Directives
-Request-rate: 1/2
+Request-rate: 2/1
 Visit-time: 0600-2300
 
 # XML Sitemaps
@@ -47,6 +59,7 @@ Sitemap: https://how2doai.com/sitemap.xml
 Sitemap: https://how2doai.com/sitemap-tools.xml
 Sitemap: https://how2doai.com/sitemap-reviews.xml
 Sitemap: https://how2doai.com/sitemap-blog.xml
+Sitemap: https://how2doai.com/sitemap-ai-keywords.xml
 
 # Host Preference
 Host: https://how2doai.com

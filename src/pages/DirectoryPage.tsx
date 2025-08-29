@@ -1,5 +1,8 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { SEO } from '../components/ui/SEO';
+import { useSEO } from '../hooks/useSEO';
+import SEOUtils from '../utils/seoUtils';
 import { SearchFilters } from '../components/directory/SearchFilters';
 import { ToolCard } from '../components/directory/ToolCard';
 import { tools } from '../data/tools';
@@ -161,8 +164,46 @@ const DirectoryPage: React.FC = () => {
     navigate('/compare');
   };
 
+  // Generate dynamic SEO based on current filters
+  const generateSEOConfig = () => {
+    const category = filters.category ? categories.find(c => c.id === filters.category) : null;
+    const subcategory = filters.subcategory ?
+      category?.subcategories?.find(s => s.id === filters.subcategory) : null;
+
+    let title = 'AI Tools Directory - Complete Guide to AI Applications';
+    let description = 'Browse our comprehensive directory of AI tools and applications. Find the perfect AI solution for your workflow automation needs.';
+    let keywords = ['AI tools directory', 'AI applications', 'AI software'];
+
+    if (subcategory) {
+      title = `${subcategory.name} AI Tools - Best ${subcategory.name} Applications 2025`;
+      description = subcategory.description || `Discover the best ${subcategory.name} AI tools for your workflow. Compare features, pricing, and reviews.`;
+      keywords = [subcategory.name.toLowerCase(), 'AI tools', 'automation', 'productivity'];
+    } else if (category) {
+      title = `${category.name} AI Tools Directory - ${category.name} Applications & Software`;
+      description = category.description || `Explore ${category.name} AI tools and applications. Find the perfect solution for your ${category.name.toLowerCase()} needs.`;
+      keywords = [category.name.toLowerCase(), 'AI tools', 'AI applications'];
+    }
+
+    return {
+      title: SEOUtils.generateTitle(title, keywords),
+      description: SEOUtils.generateDescription(description, keywords),
+      keywords: SEOUtils.generateKeywords(keywords),
+      canonical: location.pathname,
+      structuredData: SEOUtils.generateBreadcrumbs([
+        { name: 'Home', url: '/' },
+        { name: 'Directory', url: '/directory' },
+        ...(category ? [{ name: category.name, url: `/directory/${category.id}` }] : []),
+        ...(subcategory ? [{ name: subcategory.name, url: `/directory/${category?.id}/${subcategory.id}` }] : [])
+      ])
+    };
+  };
+
+  const seoConfig = generateSEOConfig();
+
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <>
+      <SEO {...seoConfig} />
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       {renderIntroSection()}
       {/* Comparison Bar */}
       {selectedTools.length > 0 && (
@@ -252,6 +293,7 @@ const DirectoryPage: React.FC = () => {
         </div>
       )}
     </div>
+    </>
   );
 };
 
