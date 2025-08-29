@@ -19,7 +19,7 @@
     "netlify-deploy-prod": "netlify deploy --prod",
     "build-preview": "./scripts/build-preview.sh",
     "build:netlify": "vite build",
-    "build:seo": "npm run build && node scripts/generate-sitemaps.js",
+    "build:seo": "vite build && node scripts/generate-sitemaps.js",
     "postbuild": "cp _redirects dist/ 2>/dev/null || : && npm run build:seo",
     "create-admin": "node scripts/create-admin-user.js",
     "setup-admin": "node scripts/setup-admin-database.js",
