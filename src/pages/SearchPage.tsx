@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
 import { Search, Filter, Grid, List, ArrowRight, Star, ExternalLink } from 'lucide-react';
 import { tools } from '../data/tools';
@@ -27,22 +27,37 @@ const SearchPage: React.FC = () => {
   const [sortBy, setSortBy] = useState<'relevance' | 'rating' | 'name'>('relevance');
   const [filterCategory, setFilterCategory] = useState<string>('all');
 
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+
   useEffect(() => {
     if (query.trim()) {
       performSearch(query.trim());
     } else {
       setSearchResults([]);
     }
+
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+        timeoutRef.current = null;
+      }
+    };
   }, [query]);
 
   const performSearch = (searchQuery: string) => {
     setIsLoading(true);
     
+    // Clear any existing timeout
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+
     // Simulate search delay for better UX
-    setTimeout(() => {
+    timeoutRef.current = setTimeout(() => {
       const results = searchTools(searchQuery);
       setSearchResults(results);
       setIsLoading(false);
+      timeoutRef.current = null;
     }, 200);
   };
 

@@ -12,9 +12,9 @@ const WorkflowsPage = lazy(() => import('../pages/WorkflowsPage'));
 const HomePage = lazy(() => import('../pages/HomePage'));
 const CommunityPage = lazy(() => import('../pages/CommunityPage'));
 const ContactPage = lazy(() => import('../pages/ContactPage'));
-const DirectoryPage = lazy(() => import('../pages/DirectoryPage'));
+import DirectoryPage from '../pages/DirectoryPage';
 const ComparisonPage = lazy(() => import('../pages/ComparisonPage'));
-const ToolDetailPage = lazy(() => import('../pages/ToolDetailPage'));
+import ToolDetailPage from '../pages/ToolDetailPage';
 const ReviewsPage = lazy(() => import('../pages/ReviewsPage'));
 const BlogPage = lazy(() => import('../pages/BlogPage'));
 const BundlePage = lazy(() => import('../pages/BundlePage'));
@@ -89,7 +89,7 @@ export const publicRoutes: RouteObject[] = [
         element: <DirectoryPage />
     },
     {
-        path: '/tool/:toolSlug',
+        path: '/tools/:toolSlug',
         element: <ToolDetailPage />
     },
     {

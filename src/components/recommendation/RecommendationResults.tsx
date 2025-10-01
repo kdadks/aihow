@@ -200,7 +200,7 @@ export const RecommendationResults: React.FC<RecommendationResultsProps> = ({
                   >
                     Save
                   </Button>
-                  <Link to={`/tool/${tool.slug}`}>
+                  <Link to={`/tools/${tool.slug}`}>
                     <Button size="sm" rightIcon={<ArrowRight className="h-4 w-4" />}>
                       View Details
                     </Button>

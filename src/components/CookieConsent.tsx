@@ -29,9 +29,35 @@ export const CookieConsent: React.FC = () => {
       // Load saved preferences
       try {
         const savedPreferences = JSON.parse(consent);
-        setPreferences(savedPreferences);
+        // Validate that it's an object with expected properties
+        if (typeof savedPreferences === 'object' && savedPreferences !== null &&
+            typeof savedPreferences.necessary === 'boolean') {
+          setPreferences(savedPreferences);
+        } else {
+          throw new Error('Invalid preferences format');
+        }
       } catch (e) {
-        console.error('Error loading cookie preferences:', e);
+        // Handle legacy format or invalid JSON
+        console.warn('Loading legacy cookie preferences, updating to new format');
+        // If it's "accepted", treat as all accepted
+        if (consent === 'accepted') {
+          setPreferences({
+            necessary: true,
+            analytics: true,
+            marketing: true,
+            preferences: true,
+          });
+        } else {
+          // Reset to defaults if invalid
+          setPreferences({
+            necessary: true,
+            analytics: false,
+            marketing: false,
+            preferences: false,
+          });
+        }
+        // Update localStorage with valid JSON
+        localStorage.setItem('cookieConsent', JSON.stringify(preferences));
       }
     }
   }, []);
