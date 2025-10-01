@@ -5,6 +5,7 @@ import { tools } from '../../data/tools';
 import { categories } from '../../data/categories';
 import { Tool, Category } from '../../types';
 import { VoiceSearch } from './VoiceSearch';
+import { getToolLogo, getLogoFallback } from '../../utils/logoUtils';
 
 interface SearchSuggestion {
   type: 'tool' | 'category' | 'subcategory';
@@ -88,7 +89,7 @@ export const AutocompleteSearch: React.FC<AutocompleteSearchProps> = ({
         name: tool.name,
         description: tool.shortDescription,
         url: `/directory/${tool.categoryId}/${tool.subcategoryIds[0]}/${tool.slug}`,
-        logo: "",
+        logo: getToolLogo(tool.name, tool.website),
         categoryName: category?.name
       });
     });
@@ -266,10 +267,14 @@ export const AutocompleteSearch: React.FC<AutocompleteSearchProps> = ({
                   <div className="flex items-start space-x-3">
                     <div className="flex-shrink-0 mt-0.5">
                       {suggestion.logo ? (
-                        <img 
-                          src={suggestion.logo} 
+                        <img
+                          src={suggestion.logo}
                           alt={suggestion.name}
                           className="h-6 w-6 rounded object-cover"
+                          onError={(e) => {
+                            const target = e.target as HTMLImageElement;
+                            target.src = getLogoFallback(suggestion.name);
+                          }}
                         />
                       ) : (
                         getSuggestionIcon(suggestion.type)

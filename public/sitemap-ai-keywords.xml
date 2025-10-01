@@ -1,59 +1,65 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <!-- AI Keywords Sitemap -->
-  
+  <!-- AI Keywords Sitemap - SEO Landing Pages -->
+
   <url>
-    <loc>https://how2doai.com/chatgpt-alternatives</loc>
-    <lastmod>2025-08-29</lastmod>
+    <loc>https://how2doai.com/ai-tools</loc>
+    <lastmod>2025-10-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://how2doai.com/copilot-tools</loc>
-    <lastmod>2025-08-29</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://how2doai.com/ai-automation</loc>
-    <lastmod>2025-08-29</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://how2doai.com/agentic-ai</loc>
-    <lastmod>2025-08-29</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://how2doai.com/workflow-automation</loc>
-    <lastmod>2025-08-29</lastmod>
+    <lastmod>2025-10-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://how2doai.com/ai-productivity</loc>
-    <lastmod>2025-08-29</lastmod>
+    <loc>https://how2doai.com/chatgpt-alternatives</loc>
+    <lastmod>2025-10-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://how2doai.com/machine-learning-tools</loc>
-    <lastmod>2025-08-29</lastmod>
+    <loc>https://how2doai.com/copilot-alternatives</loc>
+    <lastmod>2025-10-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://how2doai.com/ai-assistants</loc>
-    <lastmod>2025-08-29</lastmod>
+    <loc>https://how2doai.com/agentic-ai</loc>
+    <lastmod>2025-10-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://how2doai.com/ai-platforms</loc>
-    <lastmod>2025-08-29</lastmod>
+    <loc>https://how2doai.com/machine-learning</loc>
+    <lastmod>2025-10-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://how2doai.com/digital-transformation</loc>
+    <lastmod>2025-10-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://how2doai.com/content-automation</loc>
+    <lastmod>2025-10-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://how2doai.com/web-development-ai</loc>
+    <lastmod>2025-10-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://how2doai.com/generative-ai</loc>
+    <lastmod>2025-10-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
   </url>
 </urlset>

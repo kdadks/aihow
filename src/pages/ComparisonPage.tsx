@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 import { toast } from 'react-hot-toast';
 import { useComparisonStore } from '../stores/comparisonStore';
 import { NewComparisonGrid } from '../components/comparison/NewComparisonGrid';

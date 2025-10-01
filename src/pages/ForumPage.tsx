@@ -2,10 +2,32 @@ import React from 'react';
 import { ForumCategory } from '../components/forum/ForumCategory';
 import { Shield } from 'lucide-react';
 import { forumCategories } from '../data/community';
+import { SEOHead } from '../components/SEOHead';
 
 const ForumPage: React.FC = () => {
+  const structuredData = {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: 'AI Tools Community Forum',
+    description: 'Join discussions about AI tools, share experiences, get recommendations, and connect with other AI enthusiasts',
+    url: 'https://how2doai.com/forum',
+    mainEntity: {
+      '@type': 'DiscussionForumPosting',
+      headline: 'AI Tools Community Forum',
+      discussionUrl: 'https://how2doai.com/forum'
+    }
+  };
+
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <>
+      <SEOHead
+        title="AI Tools Community Forum - Discussions, Reviews & Recommendations"
+        description="Join our AI tools community forum. Share experiences, get recommendations, discuss comparisons, and connect with AI enthusiasts and experts."
+        keywords={['AI forum', 'AI tools discussion', 'AI community', 'AI recommendations', 'AI tool reviews', 'ChatGPT forum', 'AI help']}
+        canonicalUrl="https://how2doai.com/forum"
+        structuredData={structuredData}
+      />
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <div className="text-center mb-12">
         <h1 className="text-4xl font-bold text-gray-900 mb-4">
           Community Forum
@@ -65,6 +87,7 @@ const ForumPage: React.FC = () => {
         </p>
       </div>
     </div>
+    </>
   );
 };
 

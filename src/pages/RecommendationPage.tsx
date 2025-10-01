@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { AssessmentForm } from '../components/recommendation/AssessmentForm';
 import { RecommendationResults } from '../components/recommendation/RecommendationResults';
 import { Recommendation } from '../types';
+import { SEOHead } from '../components/SEOHead';
 
 const RecommendationPage: React.FC = () => {
   const [recommendations, setRecommendations] = useState<Recommendation[] | null>(null);
@@ -16,8 +17,30 @@ const RecommendationPage: React.FC = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const structuredData = {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: 'AI Tool Finder',
+    description: 'Personalized AI tool recommendation system based on your workflow needs',
+    url: 'https://how2doai.com/tool-finder',
+    applicationCategory: 'BusinessApplication',
+    offers: {
+      '@type': 'Offer',
+      price: '0',
+      priceCurrency: 'USD'
+    }
+  };
+
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <>
+      <SEOHead
+        title="AI Tool Finder - Get Personalized AI Tool Recommendations"
+        description="Find the perfect AI tools for your workflow. Get personalized recommendations based on your needs, budget, and preferences. Free AI tool finder and matching service."
+        keywords={['AI tool finder', 'AI tool recommendations', 'find AI tools', 'AI tool matcher', 'personalized AI recommendations', 'best AI tools for me']}
+        canonicalUrl="https://how2doai.com/tool-finder"
+        structuredData={structuredData}
+      />
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       {!recommendations ? (
         <>
           <div className="text-center mb-12">
@@ -35,6 +58,7 @@ const RecommendationPage: React.FC = () => {
         />
       )}
     </div>
+    </>
   );
 };
 

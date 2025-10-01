@@ -277,7 +277,7 @@ export const Header: React.FC = () => {
           <div className="hidden md:flex md:items-center md:space-x-4 flex-shrink-0">
             <AutocompleteSearch
               className="w-64"
-              placeholder="Search tools..."
+              placeholder="Search AI tools..."
             />
             
             {isAuthenticated ? (
@@ -441,7 +441,7 @@ export const Header: React.FC = () => {
             {/* Mobile Search */}
             <AutocompleteSearch
               className="w-full"
-              placeholder="Search tools..."
+              placeholder="Search AI tools..."
               onSearch={() => {
                 setIsMenuOpen(false);
               }}

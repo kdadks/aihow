@@ -11,20 +11,30 @@ export const seoConfig = {
 
   keywords: {
     primary: [
-      'AI', 'How2do AI', 'how to AI', 'AI tools', 'AI Apps', 'chatgpt', 'copilot',
-      'workflow automation', 'Agentic AI'
+      'AI', 'artificial intelligence', 'How2do AI', 'how to AI', 'AI tools', 'AI Apps',
+      'chatgpt', 'copilot', 'workflow automation', 'Agentic AI', 'machine learning',
+      'digital transformation', 'content automation', 'web development AI'
     ],
     secondary: [
-      'artificial intelligence', 'AI workflow', 'ChatGPT alternatives',
+      'AI workflow', 'ChatGPT alternatives', 'Copilot alternatives',
       'AI tool comparison', 'productivity AI', 'best AI tools 2025',
       'AI automation', 'AI software', 'machine learning tools',
-      'AI assistants', 'AI platforms', 'workflow optimization'
+      'AI assistants', 'AI platforms', 'workflow optimization',
+      'digital transformation tools', 'content automation tools',
+      'AI for web development', 'ML platforms', 'AI agents',
+      'autonomous AI', 'generative AI', 'AI productivity suite'
     ],
     longTail: [
       'best AI tools for productivity', 'ChatGPT vs Copilot comparison',
       'AI workflow automation tools', 'agentic AI platforms',
       'AI tool recommendations 2025', 'automate workflows with AI',
-      'AI assistants comparison', 'best AI apps for business'
+      'AI assistants comparison', 'best AI apps for business',
+      'machine learning tools for developers', 'digital transformation with AI',
+      'content automation software', 'AI tools for web development',
+      'automated content generation', 'AI-powered workflow management',
+      'enterprise AI solutions', 'AI for digital marketing',
+      'autonomous AI agents', 'generative AI platforms',
+      'AI content creation tools', 'ML automation platforms'
     ]
   },
 
@@ -42,10 +52,17 @@ export const seoConfig = {
         'AI Tools',
         'Workflow Automation',
         'ChatGPT Alternatives',
-        'Copilot',
+        'Copilot Alternatives',
         'Agentic AI',
         'Machine Learning Tools',
-        'AI Productivity'
+        'AI Productivity',
+        'Digital Transformation',
+        'Content Automation',
+        'Web Development AI',
+        'Generative AI',
+        'AI Agents',
+        'ML Platforms',
+        'Enterprise AI Solutions'
       ]
     },
 

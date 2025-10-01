@@ -7,6 +7,8 @@ import { Tool, Category } from '../types';
 import { Button } from '../components/ui/Button';
 import { Card } from '../components/ui/Card';
 import { Badge } from '../components/ui/Badge';
+import { GenerativeAnswer } from '../components/search/GenerativeAnswer';
+import { getToolLogo, getLogoFallback } from '../utils/logoUtils';
 
 interface SearchResult extends Tool {
   matchScore: number;
@@ -145,13 +147,17 @@ const SearchPage: React.FC = () => {
     return `${count} results found`;
   };
 
-  const renderToolCard = (tool: SearchResult) => (
-    <Card key={tool.id} className="p-6 hover:shadow-lg transition-shadow">
+  const renderToolCard = (tool: SearchResult, index: number) => (
+    <Card key={`${tool.id}-${tool.slug}-${index}`} className="p-6 hover:shadow-lg transition-shadow">
       <div className="flex items-start space-x-4">
         <img
-          src={tool.logo}
+          src={getToolLogo(tool.name, tool.website)}
           alt={`${tool.name} logo`}
           className="w-12 h-12 rounded-lg object-cover flex-shrink-0"
+          onError={(e) => {
+            const target = e.target as HTMLImageElement;
+            target.src = getLogoFallback(tool.name);
+          }}
         />
         <div className="flex-1 min-w-0">
           <div className="flex items-start justify-between">
@@ -215,12 +221,16 @@ const SearchPage: React.FC = () => {
     </Card>
   );
 
-  const renderToolListItem = (tool: SearchResult) => (
-    <div key={tool.id} className="flex items-center space-x-4 p-4 border-b border-gray-200 hover:bg-gray-50">
+  const renderToolListItem = (tool: SearchResult, index: number) => (
+    <div key={`${tool.id}-${tool.slug}-${index}`} className="flex items-center space-x-4 p-4 border-b border-gray-200 hover:bg-gray-50">
       <img
-        src={tool.logo}
+        src={getToolLogo(tool.name, tool.website)}
         alt={`${tool.name} logo`}
         className="w-10 h-10 rounded object-cover flex-shrink-0"
+        onError={(e) => {
+          const target = e.target as HTMLImageElement;
+          target.src = getLogoFallback(tool.name);
+        }}
       />
       <div className="flex-1 min-w-0">
         <div className="flex items-center justify-between">
@@ -260,6 +270,14 @@ const SearchPage: React.FC = () => {
             </p>
           )}
         </div>
+
+        {/* Generative Answer */}
+        {query && searchResults.length > 0 && !isLoading && (
+          <GenerativeAnswer
+            query={query}
+            searchResults={getSortedAndFilteredResults()}
+          />
+        )}
 
         {/* Search and Filters */}
         <div className="bg-white rounded-lg shadow-sm p-6 mb-8">
@@ -346,11 +364,11 @@ const SearchPage: React.FC = () => {
           <div>
             {viewMode === 'grid' ? (
               <div className="grid grid-cols-1 gap-6">
-                {getSortedAndFilteredResults().map(renderToolCard)}
+                {getSortedAndFilteredResults().map((tool, index) => renderToolCard(tool, index))}
               </div>
             ) : (
               <div className="bg-white rounded-lg shadow-sm overflow-hidden">
-                {getSortedAndFilteredResults().map(renderToolListItem)}
+                {getSortedAndFilteredResults().map((tool, index) => renderToolListItem(tool, index))}
               </div>
             )}
           </div>

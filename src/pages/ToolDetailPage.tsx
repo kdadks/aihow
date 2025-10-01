@@ -7,6 +7,7 @@ import { ArrowLeft, Star, ExternalLink, ThumbsUp, ThumbsDown, Save, Share, Messa
 import { useComparisonStore } from '../stores/comparisonStore';
 import { Button } from '../components/ui/Button';
 import { Badge } from '../components/ui/Badge';
+import { getToolLogo, getLogoFallback } from '../utils/logoUtils';
 
 const ToolDetailPage: React.FC = () => {
 const { toolSlug } = useParams<{ categoryId: string; subcategoryId: string; toolSlug: string }>();
@@ -69,24 +70,21 @@ const tool = tools.find(t => t.slug === toolSlug);
         <div className="bg-gradient-to-r from-blue-600 to-purple-600 p-8 md:p-12 text-white">
           <div className="flex flex-col md:flex-row items-start md:items-center">
             <div className="bg-white p-4 rounded-lg shadow-md mr-0 md:mr-8 mb-6 md:mb-0 flex-shrink-0">
-              <img src={tool.logo} alt={tool.name} className="h-24 w-24 object-cover rounded-md" />
+              <img
+                src={getToolLogo(tool.name, tool.website)}
+                alt={tool.name}
+                className="h-24 w-24 object-cover rounded-md"
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  target.src = getLogoFallback(tool.name);
+                }}
+              />
             </div>
-            <div>
+            <div className="flex-1">
               <h1 className="text-3xl md:text-4xl font-bold mb-2">{tool.name}</h1>
               <p className="text-lg text-blue-100 mb-4">{tool.shortDescription}</p>
-              {/* Contextual Internal Links */}
-              <div className="mt-4 space-x-4">
-                <Link to={`/comparison`} className="text-blue-700 underline font-semibold">
-                  See how {tool.name} compares to other AI tools
-                </Link>
-                <Link to={`/reviews`} className="text-blue-700 underline font-semibold">
-                  Read user reviews of {tool.name}
-                </Link>
-                <Link to={`/blog`} className="text-blue-700 underline font-semibold">
-                  Read our latest articles about {tool.name}
-                </Link>
-              </div>
-              <div className="flex flex-wrap items-center gap-3">
+
+              <div className="flex flex-wrap items-center gap-3 mb-4">
                 <div className="flex items-center bg-white bg-opacity-20 rounded-full px-3 py-1">
                   <Star className="h-4 w-4 text-yellow-400 fill-current mr-1" />
                   <span className="font-medium">{tool.rating}</span>
@@ -100,6 +98,19 @@ const tool = tools.find(t => t.slug === toolSlug);
                 {tool.trending && (
                   <Badge variant="primary" className="bg-purple-700">Trending</Badge>
                 )}
+              </div>
+
+              {/* Contextual Internal Links */}
+              <div className="flex flex-wrap gap-3 text-sm">
+                <Link to={`/forum/tool-comparisons`} className="text-white hover:text-blue-100 underline">
+                  See how {tool.name} compares to other AI tools
+                </Link>
+                <Link to={`/reviews`} className="text-white hover:text-blue-100 underline">
+                  Read user reviews of {tool.name}
+                </Link>
+                <Link to={`/blog`} className="text-white hover:text-blue-100 underline">
+                  Read our latest articles about {tool.name}
+                </Link>
               </div>
             </div>
           </div>
@@ -329,13 +340,21 @@ const tool = tools.find(t => t.slug === toolSlug);
                     <h3 className="font-bold text-gray-900 mb-4">Similar Tools</h3>
                     <div className="space-y-4">
                       {similarTools.map(similarTool => (
-                        <Link 
-                          key={similarTool.id} 
+                        <Link
+                          key={similarTool.id}
                           to={`/directory/${similarTool.categoryId}/${similarTool.subcategoryIds[0]}/${similarTool.slug}`}
                           className="flex items-center p-3 border border-gray-100 rounded-lg hover:bg-gray-50"
                         >
-                          <div className="h-10 w-10 rounded overflow-hidden mr-3">
-                            <img src={similarTool.logo} alt={similarTool.name} className="h-full w-full object-cover" />
+                          <div className="h-10 w-10 rounded overflow-hidden mr-3 flex-shrink-0">
+                            <img
+                              src={getToolLogo(similarTool.name, similarTool.website)}
+                              alt={similarTool.name}
+                              className="h-full w-full object-cover"
+                              onError={(e) => {
+                                const target = e.target as HTMLImageElement;
+                                target.src = getLogoFallback(similarTool.name);
+                              }}
+                            />
                           </div>
                           <div>
                             <h4 className="font-medium text-gray-900">{similarTool.name}</h4>

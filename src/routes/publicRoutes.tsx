@@ -21,12 +21,15 @@ const BundlePage = lazy(() => import('../pages/BundlePage'));
 const EnhancedBundlePage = lazy(() => import('../pages/EnhancedBundlePage'));
 const TestimonialsPage = lazy(() => import('../pages/TestimonialsPage'));
 const ForumPage = lazy(() => import('../pages/ForumPage'));
+const ForumCategoryPage = lazy(() => import('../pages/ForumCategoryPage'));
+const ForumThreadPage = lazy(() => import('../pages/ForumThreadPage'));
 const RecommendationPage = lazy(() => import('../pages/RecommendationPage'));
 const BundleDetailPage = lazy(() => import('../pages/BundleDetailPage'));
 const SearchPage = lazy(() => import('../pages/SearchPage'));
 const CaseStudyPage = lazy(() => import('../pages/CaseStudyPage'));
 const BlogPostDetailPage = lazy(() => import('../pages/BlogPostDetailPage'));
 const EmailConfirmationPage = lazy(() => import('../pages/EmailConfirmationPage'));
+const KeywordLandingPage = lazy(() => import('../pages/KeywordLandingPage'));
 
 export const publicRoutes: RouteObject[] = [
     {
@@ -130,6 +133,14 @@ export const publicRoutes: RouteObject[] = [
         element: <ForumPage />
     },
     {
+        path: '/forum/:categorySlug',
+        element: <ForumCategoryPage />
+    },
+    {
+        path: '/forum/thread/:threadId',
+        element: <ForumThreadPage />
+    },
+    {
         path: '/search',
         element: <SearchPage />
     },
@@ -140,5 +151,46 @@ export const publicRoutes: RouteObject[] = [
     {
         path: '/confirm-email',
         element: <EmailConfirmationPage />
+    },
+    // SEO Keyword Landing Pages
+    {
+        path: '/ai-tools',
+        element: <KeywordLandingPage />
+    },
+    {
+        path: '/workflow-automation',
+        element: <KeywordLandingPage />
+    },
+    {
+        path: '/chatgpt-alternatives',
+        element: <KeywordLandingPage />
+    },
+    {
+        path: '/copilot-alternatives',
+        element: <KeywordLandingPage />
+    },
+    {
+        path: '/agentic-ai',
+        element: <KeywordLandingPage />
+    },
+    {
+        path: '/machine-learning',
+        element: <KeywordLandingPage />
+    },
+    {
+        path: '/digital-transformation',
+        element: <KeywordLandingPage />
+    },
+    {
+        path: '/content-automation',
+        element: <KeywordLandingPage />
+    },
+    {
+        path: '/web-development-ai',
+        element: <KeywordLandingPage />
+    },
+    {
+        path: '/generative-ai',
+        element: <KeywordLandingPage />
     }
 ];

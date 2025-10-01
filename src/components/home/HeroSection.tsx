@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { ArrowRight, Search, Sparkles, Scale } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Button } from '../ui/Button';
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 
 // For improving Core Web Vitals
 const preloadAssets = () => {

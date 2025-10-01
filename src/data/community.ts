@@ -261,6 +261,419 @@ export const blogPosts = [
 }
 ];
 
+export interface ForumThread {
+  id: string;
+  title: string;
+  author: string;
+  authorAvatar: string;
+  category: string;
+  content: string;
+  views: number;
+  replies: number;
+  likes: number;
+  createdAt: string;
+  lastActivity: string;
+  isPinned?: boolean;
+  isSolved?: boolean;
+  tags: string[];
+  responses?: ForumResponse[];
+}
+
+export interface ForumResponse {
+  id: string;
+  author: string;
+  authorAvatar: string;
+  content: string;
+  likes: number;
+  createdAt: string;
+  isAccepted?: boolean;
+}
+
+export const forumThreads: ForumThread[] = [
+  // AI Tool Recommendations Category
+  {
+    id: "thread-1",
+    title: "Best AI tools for content creation?",
+    author: "James Wilson",
+    authorAvatar: "https://randomuser.me/api/portraits/men/1.jpg",
+    category: "AI Tool Recommendations",
+    content: "I'm looking for AI tools to help with blog writing, social media posts, and email newsletters. What are your top recommendations for 2025? I need something that's cost-effective and produces high-quality content.",
+    views: 342,
+    replies: 12,
+    likes: 28,
+    createdAt: "2025-06-08T10:30:00Z",
+    lastActivity: "10 min ago",
+    isPinned: true,
+    tags: ["content-creation", "writing", "recommendations"],
+    responses: [
+      {
+        id: "response-1-1",
+        author: "Sarah Chen",
+        authorAvatar: "https://randomuser.me/api/portraits/women/2.jpg",
+        content: "I've been using Jasper AI for blog content and it's been fantastic. The template library is huge and the quality is consistently good. For social media, I'd recommend Copy.ai - it's specifically designed for short-form content.",
+        likes: 15,
+        createdAt: "2025-06-08T11:45:00Z",
+        isAccepted: true
+      },
+      {
+        id: "response-1-2",
+        author: "Michael Rodriguez",
+        authorAvatar: "https://randomuser.me/api/portraits/men/3.jpg",
+        content: "Don't sleep on Claude! It's excellent for long-form content and has better context understanding than most alternatives. I use it for blog posts and it maintains consistency across multiple paragraphs really well.",
+        likes: 9,
+        createdAt: "2025-06-08T12:20:00Z"
+      }
+    ]
+  },
+  {
+    id: "thread-2",
+    title: "Looking for an AI video editing tool - recommendations?",
+    author: "Emma Watson",
+    authorAvatar: "https://randomuser.me/api/portraits/women/4.jpg",
+    category: "AI Tool Recommendations",
+    content: "I create YouTube content and spend way too much time editing. Are there any AI tools that can help with cutting, transitions, and maybe even adding subtitles automatically? Budget is around $50/month.",
+    views: 218,
+    replies: 8,
+    likes: 19,
+    createdAt: "2025-06-07T15:20:00Z",
+    lastActivity: "2 hours ago",
+    tags: ["video-editing", "youtube", "automation"],
+    responses: [
+      {
+        id: "response-2-1",
+        author: "David Chen",
+        authorAvatar: "https://randomuser.me/api/portraits/men/5.jpg",
+        content: "Descript is perfect for what you need! It does automatic transcription, lets you edit video by editing text, and has great AI features for removing filler words and adding subtitles. It's within your budget too.",
+        likes: 12,
+        createdAt: "2025-06-07T16:30:00Z",
+        isAccepted: true
+      }
+    ]
+  },
+  {
+    id: "thread-3",
+    title: "AI tools for data analysis and visualization?",
+    author: "Priya Sharma",
+    authorAvatar: "https://randomuser.me/api/portraits/women/6.jpg",
+    category: "AI Tool Recommendations",
+    content: "I'm a data analyst looking to speed up my workflow. I need tools that can help with data cleaning, analysis, and creating compelling visualizations. Preferably something that integrates with Python and has natural language query capabilities.",
+    views: 156,
+    replies: 6,
+    likes: 14,
+    createdAt: "2025-06-06T09:15:00Z",
+    lastActivity: "5 hours ago",
+    tags: ["data-analysis", "visualization", "python"],
+    responses: [
+      {
+        id: "response-3-1",
+        author: "Marcus Lee",
+        authorAvatar: "https://randomuser.me/api/portraits/men/7.jpg",
+        content: "Check out Julius AI - it's specifically designed for data analysis with natural language. You can literally ask it questions about your data and it generates visualizations. Also integrates seamlessly with pandas and matplotlib.",
+        likes: 8,
+        createdAt: "2025-06-06T10:45:00Z"
+      }
+    ]
+  },
+  {
+    id: "thread-4",
+    title: "Best AI assistant for coding? GitHub Copilot vs alternatives",
+    author: "Alex Thompson",
+    authorAvatar: "https://randomuser.me/api/portraits/men/8.jpg",
+    category: "AI Tool Recommendations",
+    content: "I've been using GitHub Copilot but wondering if there are better alternatives. I mainly code in JavaScript and Python. Looking for something with better context awareness and less repetitive suggestions.",
+    views: 402,
+    replies: 18,
+    likes: 35,
+    createdAt: "2025-06-05T13:00:00Z",
+    lastActivity: "1 day ago",
+    tags: ["coding", "development", "copilot"],
+    responses: [
+      {
+        id: "response-4-1",
+        author: "Sophia Martinez",
+        authorAvatar: "https://randomuser.me/api/portraits/women/9.jpg",
+        content: "I switched from Copilot to Cursor AI and haven't looked back. The context awareness is significantly better, and it understands your entire codebase, not just the current file. The AI chat feature is also incredibly useful for debugging.",
+        likes: 22,
+        createdAt: "2025-06-05T14:30:00Z",
+        isAccepted: true
+      }
+    ]
+  },
+  {
+    id: "thread-5",
+    title: "AI tools for creating presentations - PowerPoint alternatives?",
+    author: "Linda Chen",
+    authorAvatar: "https://randomuser.me/api/portraits/women/10.jpg",
+    category: "AI Tool Recommendations",
+    content: "Tired of spending hours on presentation design. Looking for AI tools that can help me create professional presentations quickly. Needs to handle both design and content generation.",
+    views: 289,
+    replies: 11,
+    likes: 21,
+    createdAt: "2025-06-04T11:30:00Z",
+    lastActivity: "2 days ago",
+    tags: ["presentations", "design", "productivity"],
+    responses: [
+      {
+        id: "response-5-1",
+        author: "Robert Kim",
+        authorAvatar: "https://randomuser.me/api/portraits/men/11.jpg",
+        content: "Gamma is exactly what you need! Just describe your presentation topic and it generates the entire deck with professional design. You can also use Tome or Beautiful.ai - all three are fantastic alternatives to traditional PowerPoint.",
+        likes: 16,
+        createdAt: "2025-06-04T13:15:00Z"
+      }
+    ]
+  },
+
+  // Workflow Optimization Category
+  {
+    id: "thread-6",
+    title: "Automating social media with AI",
+    author: "Linda Chen",
+    authorAvatar: "https://randomuser.me/api/portraits/women/10.jpg",
+    category: "Workflow Optimization",
+    content: "What's your workflow for automating social media content creation and posting? I manage 5 different brand accounts and it's becoming overwhelming. Looking for end-to-end solutions or tool combinations that work well together.",
+    views: 387,
+    replies: 15,
+    likes: 42,
+    createdAt: "2025-06-08T08:45:00Z",
+    lastActivity: "1 hour ago",
+    isPinned: true,
+    tags: ["social-media", "automation", "workflow"],
+    responses: [
+      {
+        id: "response-6-1",
+        author: "Jennifer Park",
+        authorAvatar: "https://randomuser.me/api/portraits/women/12.jpg",
+        content: "Here's my workflow: 1) ChatGPT for content ideation, 2) Canva AI for creating visuals, 3) Buffer for scheduling. I batch-create content for a week in just 2 hours every Monday. Game changer!",
+        likes: 28,
+        createdAt: "2025-06-08T09:30:00Z",
+        isAccepted: true
+      }
+    ]
+  },
+  {
+    id: "thread-7",
+    title: "My AI-powered customer support workflow - 90% automation",
+    author: "Thomas Anderson",
+    authorAvatar: "https://randomuser.me/api/portraits/men/13.jpg",
+    category: "Workflow Optimization",
+    content: "Wanted to share how I automated 90% of our customer support using AI. We use Intercom + GPT-4 for initial responses, Zendesk for ticket management, and custom AI agents for common issues. Happy to answer questions!",
+    views: 512,
+    replies: 24,
+    likes: 67,
+    createdAt: "2025-06-07T10:00:00Z",
+    lastActivity: "3 hours ago",
+    tags: ["customer-support", "automation", "case-study"],
+    responses: [
+      {
+        id: "response-7-1",
+        author: "Rachel Green",
+        authorAvatar: "https://randomuser.me/api/portraits/women/14.jpg",
+        content: "This is impressive! How do you handle the handoff to human agents when the AI can't resolve an issue? And what's your customer satisfaction score like?",
+        likes: 15,
+        createdAt: "2025-06-07T11:15:00Z"
+      }
+    ]
+  },
+  {
+    id: "thread-8",
+    title: "Email marketing automation with AI - my complete setup",
+    author: "Kevin Zhang",
+    authorAvatar: "https://randomuser.me/api/portraits/men/15.jpg",
+    category: "Workflow Optimization",
+    content: "I've built an AI workflow that writes, personalizes, and sends email campaigns automatically. Using Claude for content, Make.com for automation, and Mailchimp for delivery. Open rates increased by 45%!",
+    views: 298,
+    replies: 13,
+    likes: 38,
+    createdAt: "2025-06-06T14:20:00Z",
+    lastActivity: "1 day ago",
+    tags: ["email-marketing", "automation", "personalization"],
+    responses: [
+      {
+        id: "response-8-1",
+        author: "Amanda Foster",
+        authorAvatar: "https://randomuser.me/api/portraits/women/16.jpg",
+        content: "Would love more details on the Make.com setup! Are you using webhooks to trigger the workflows? And how are you handling the personalization data?",
+        likes: 11,
+        createdAt: "2025-06-06T15:40:00Z"
+      }
+    ]
+  },
+  {
+    id: "thread-9",
+    title: "AI workflow for content repurposing - one video to 20+ assets",
+    author: "Daniel Brown",
+    authorAvatar: "https://randomuser.me/api/portraits/men/17.jpg",
+    category: "Workflow Optimization",
+    content: "I've automated content repurposing to create 20+ assets from a single video. The workflow: Descript for transcription → Claude for content adaptation → Canva API for visuals → Buffer for distribution. Saves me 15 hours per week!",
+    views: 445,
+    replies: 19,
+    likes: 56,
+    createdAt: "2025-06-05T09:30:00Z",
+    lastActivity: "2 days ago",
+    tags: ["content-repurposing", "video", "automation"],
+    responses: [
+      {
+        id: "response-9-1",
+        author: "Lisa Wong",
+        authorAvatar: "https://randomuser.me/api/portraits/women/18.jpg",
+        content: "This is genius! Do you use any specific Claude prompts for adapting content for different platforms? I struggle with making LinkedIn posts feel native.",
+        likes: 13,
+        createdAt: "2025-06-05T11:00:00Z"
+      }
+    ]
+  },
+  {
+    id: "thread-10",
+    title: "Research workflow using AI - from idea to published article",
+    author: "Dr. Sarah Mitchell",
+    authorAvatar: "https://randomuser.me/api/portraits/women/19.jpg",
+    category: "Workflow Optimization",
+    content: "As an academic researcher, I've integrated AI into my research workflow. Perplexity for literature review → Notion AI for organizing notes → Claude for draft writing → Grammarly for editing. Cut research time by 60%.",
+    views: 234,
+    replies: 9,
+    likes: 29,
+    createdAt: "2025-06-03T13:45:00Z",
+    lastActivity: "3 days ago",
+    tags: ["research", "academic", "writing"],
+    responses: [
+      {
+        id: "response-10-1",
+        author: "Prof. James Liu",
+        authorAvatar: "https://randomuser.me/api/portraits/men/20.jpg",
+        content: "Interesting workflow! Have you found any issues with AI hallucinations when it comes to citations and references? That's my main concern with using AI for academic work.",
+        likes: 8,
+        createdAt: "2025-06-03T15:20:00Z"
+      }
+    ]
+  },
+
+  // Tool Comparisons Category
+  {
+    id: "thread-11",
+    title: "ChatGPT vs Claude - 2025 Comparison",
+    author: "Alex Thompson",
+    authorAvatar: "https://randomuser.me/api/portraits/men/8.jpg",
+    category: "Tool Comparisons",
+    content: "I've been testing both ChatGPT (GPT-4) and Claude 3.5 Sonnet extensively for the past month. Here's my detailed comparison covering coding, writing, reasoning, and pricing. Which one do you prefer and why?",
+    views: 823,
+    replies: 34,
+    likes: 89,
+    createdAt: "2025-06-08T06:00:00Z",
+    lastActivity: "2 hours ago",
+    isPinned: true,
+    tags: ["chatgpt", "claude", "comparison", "llm"],
+    responses: [
+      {
+        id: "response-11-1",
+        author: "Marcus Chen",
+        authorAvatar: "https://randomuser.me/api/portraits/men/21.jpg",
+        content: "Great comparison! I find Claude better for coding tasks - it maintains context better and produces fewer bugs. But ChatGPT has better integrations and plugins. For my use case, I use both: Claude for development, ChatGPT for everything else.",
+        likes: 34,
+        createdAt: "2025-06-08T07:30:00Z",
+        isAccepted: true
+      }
+    ]
+  },
+  {
+    id: "thread-12",
+    title: "Midjourney vs DALL-E 3 vs Stable Diffusion - Which is best for commercial use?",
+    author: "Elena Rodriguez",
+    authorAvatar: "https://randomuser.me/api/portraits/women/22.jpg",
+    category: "Tool Comparisons",
+    content: "I'm starting a design agency and need to choose an AI image generator for commercial work. Comparing Midjourney, DALL-E 3, and Stable Diffusion. What are the licensing differences and which produces the most professional results?",
+    views: 567,
+    replies: 21,
+    likes: 43,
+    createdAt: "2025-06-07T11:20:00Z",
+    lastActivity: "4 hours ago",
+    tags: ["image-generation", "midjourney", "dalle", "licensing"],
+    responses: [
+      {
+        id: "response-12-1",
+        author: "Tom Harrison",
+        authorAvatar: "https://randomuser.me/api/portraits/men/23.jpg",
+        content: "For commercial use, I'd recommend Midjourney. The licensing is straightforward - you own what you create. DALL-E 3 is also good, but Midjourney consistently produces more artistic and professional results. Stable Diffusion requires more technical knowledge but gives you complete control.",
+        likes: 27,
+        createdAt: "2025-06-07T12:45:00Z"
+      }
+    ]
+  },
+  {
+    id: "thread-13",
+    title: "Notion AI vs Mem vs Obsidian - Best AI note-taking app?",
+    author: "Chris Taylor",
+    authorAvatar: "https://randomuser.me/api/portraits/men/24.jpg",
+    category: "Tool Comparisons",
+    content: "Comparing AI-powered note-taking apps. Notion AI is feature-rich but expensive, Mem has great AI search, and Obsidian with plugins is highly customizable. What's your pick for personal knowledge management?",
+    views: 412,
+    replies: 17,
+    likes: 36,
+    createdAt: "2025-06-06T10:15:00Z",
+    lastActivity: "1 day ago",
+    tags: ["note-taking", "notion", "pkm", "productivity"],
+    responses: [
+      {
+        id: "response-13-1",
+        author: "Nina Patel",
+        authorAvatar: "https://randomuser.me/api/portraits/women/25.jpg",
+        content: "I use Obsidian with the Smart Connections plugin. It's free (besides the AI API costs) and gives you complete control over your data. The AI features are comparable to Notion AI but you own everything locally.",
+        likes: 19,
+        createdAt: "2025-06-06T11:40:00Z"
+      }
+    ]
+  },
+  {
+    id: "thread-14",
+    title: "Jasper vs Copy.ai vs Writesonic - Content writing showdown",
+    author: "Maria Santos",
+    authorAvatar: "https://randomuser.me/api/portraits/women/26.jpg",
+    category: "Tool Comparisons",
+    content: "I've tested all three major AI content writing tools for my agency. Here's my comprehensive comparison: quality, templates, pricing, and ease of use. Jasper is pricey but quality is top-notch. Copy.ai is best for social media. Writesonic is the budget option.",
+    views: 698,
+    replies: 28,
+    likes: 71,
+    createdAt: "2025-06-05T08:30:00Z",
+    lastActivity: "2 days ago",
+    tags: ["content-writing", "jasper", "copyai", "comparison"],
+    responses: [
+      {
+        id: "response-14-1",
+        author: "Brian Cooper",
+        authorAvatar: "https://randomuser.me/api/portraits/men/27.jpg",
+        content: "Great breakdown! I'd add that Jasper's brand voice feature is worth the premium if you're writing for multiple clients. It maintains consistency way better than the alternatives.",
+        likes: 24,
+        createdAt: "2025-06-05T10:00:00Z"
+      }
+    ]
+  },
+  {
+    id: "thread-15",
+    title: "GitHub Copilot vs Cursor vs Tabnine - AI coding assistant comparison",
+    author: "Ryan Foster",
+    authorAvatar: "https://randomuser.me/api/portraits/men/28.jpg",
+    category: "Tool Comparisons",
+    content: "Detailed comparison of the three leading AI coding assistants. Tested with React, Python, and Go projects. Cursor has the best context awareness, Copilot has the largest model, and Tabnine is most privacy-focused. Full write-up inside!",
+    views: 891,
+    replies: 41,
+    likes: 112,
+    createdAt: "2025-06-04T07:00:00Z",
+    lastActivity: "3 days ago",
+    tags: ["coding", "ai-assistant", "github-copilot", "cursor"],
+    responses: [
+      {
+        id: "response-15-1",
+        author: "Sophie Anderson",
+        authorAvatar: "https://randomuser.me/api/portraits/women/29.jpg",
+        content: "I switched from Copilot to Cursor last month and the difference is night and day. The ability to reference multiple files and have actual conversations about code structure is incredibly valuable. Worth every penny!",
+        likes: 38,
+        createdAt: "2025-06-04T09:15:00Z",
+        isAccepted: true
+      }
+    ]
+  }
+];
+
 export const forumCategories = [
   {
     title: "AI Tool Recommendations",

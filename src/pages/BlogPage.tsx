@@ -3,6 +3,7 @@ import { BlogCard } from '../components/blog/BlogCard';
 import { Search, Mail } from 'lucide-react';
 import { blogPosts } from '../data/community';
 import { Pagination } from '../components/ui/Pagination';
+import { SEOHead } from '../components/SEOHead';
 
 const CATEGORIES = [
   "All",
@@ -45,8 +46,34 @@ const BlogPage: React.FC = () => {
     setCurrentPage(1);
   }, [selectedCategory, searchQuery]);
 
+  const structuredData = {
+    '@context': 'https://schema.org',
+    '@type': 'Blog',
+    name: 'How2doAI Blog',
+    description: 'Expert articles, tutorials, and news about AI tools and automation',
+    url: 'https://how2doai.com/blog',
+    blogPost: blogPosts.slice(0, 10).map(post => ({
+      '@type': 'BlogPosting',
+      headline: post.title,
+      description: post.excerpt,
+      author: {
+        '@type': 'Person',
+        name: post.author
+      },
+      datePublished: post.date
+    }))
+  };
+
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <>
+      <SEOHead
+        title="AI Tools Blog - Latest News, Tutorials & Expert Guides"
+        description="Stay updated with the latest AI tools, industry news, expert tutorials, and in-depth comparisons. Learn how to choose and use AI tools effectively."
+        keywords={['AI blog', 'AI tools news', 'AI tutorials', 'AI comparisons', 'AI guides', 'AI industry news']}
+        canonicalUrl="https://how2doai.com/blog"
+        structuredData={structuredData}
+      />
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <div className="text-center mb-12">
         <h1 className="text-4xl font-bold text-gray-900 mb-4">
           The AI Tools Blog
@@ -148,6 +175,7 @@ const BlogPage: React.FC = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 
