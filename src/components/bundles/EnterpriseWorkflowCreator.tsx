@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Tool } from '../../types';
-import { tools } from '../../data/tools';
-import { workflowBundles } from '../../data/workflows';
+import { useTools } from '../../services/api/v2/tools';
+import { useBundles } from '../../services/api/v2/bundles';
 import { Button } from '../ui/Button';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/Card';
 import { Badge } from '../ui/Badge';
@@ -179,9 +179,15 @@ export const EnterpriseWorkflowCreator: React.FC<EnterpriseWorkflowCreatorProps>
   const [showAdvancedOptions, setShowAdvancedOptions] = useState(false);
   const [showToolSelection, setShowToolSelection] = useState(false);
   
+  // API hooks
+  const { data: toolsData } = useTools();
+  const { data: bundlesData } = useBundles();
+  const tools = toolsData?.tools || [];
+  const workflowBundles = bundlesData?.bundles || [];
+  
   // AI Recommendation states
-  const [recommendedBundle, setRecommendedBundle] = useState<typeof workflowBundles[0] | null>(null);
-  const [alternativeRecommendations, setAlternativeRecommendations] = useState<typeof workflowBundles>([]);
+  const [recommendedBundle, setRecommendedBundle] = useState<any | null>(null);
+  const [alternativeRecommendations, setAlternativeRecommendations] = useState<any[]>([]);
   const [showRecommendations, setShowRecommendations] = useState(false);
 
   // Initialize workflow from props
@@ -253,7 +259,7 @@ export const EnterpriseWorkflowCreator: React.FC<EnterpriseWorkflowCreatorProps>
   // Calculate total cost with enterprise considerations
   const calculateTotalCost = useCallback((selectedTools: Tool[]): number => {
     const baseCost = selectedTools.reduce((total, tool) => {
-      const price = tool.pricing.startingPrice
+      const price = ('pricing' in tool && tool.pricing?.startingPrice)
         ? parseFloat(tool.pricing.startingPrice.replace(/[^0-9.]/g, ''))
         : 0;
       return total + price;
@@ -564,7 +570,7 @@ export const EnterpriseWorkflowCreator: React.FC<EnterpriseWorkflowCreatorProps>
   };
 
   // Apply recommended bundle to workflow
-  const applyRecommendedBundle = useCallback((bundle: typeof workflowBundles[0]) => {
+  const applyRecommendedBundle = useCallback((bundle: any) => {
     updateWorkflow({
       name: bundle.name,
       description: bundle.description,
@@ -948,7 +954,9 @@ export const EnterpriseWorkflowCreator: React.FC<EnterpriseWorkflowCreatorProps>
                       <div className="flex items-center justify-between mb-2">
                         <h4 className="font-medium text-gray-900">{tool.name}</h4>
                         <div className="flex items-center space-x-2">
-                          <Badge variant="outline">{tool.pricing.startingPrice || 'Free'}</Badge>
+                          <Badge variant="outline">
+                            {'pricing' in tool && tool.pricing?.startingPrice ? tool.pricing.startingPrice : 'Free'}
+                          </Badge>
                           {!isReadOnly && (
                             <Button
                               variant="ghost"
@@ -1096,7 +1104,9 @@ export const EnterpriseWorkflowCreator: React.FC<EnterpriseWorkflowCreatorProps>
                       <CardContent>
                         <p className="text-sm text-gray-500 mb-2">{tool.shortDescription}</p>
                         <div className="flex items-center justify-between">
-                          <Badge variant="outline">{tool.pricing.startingPrice || 'Free'}</Badge>
+                          <Badge variant="outline">
+                            {'pricing' in tool && tool.pricing?.startingPrice ? tool.pricing.startingPrice : 'Free'}
+                          </Badge>
                           <Badge variant="secondary">{tool.categoryId}</Badge>
                         </div>
                       </CardContent>

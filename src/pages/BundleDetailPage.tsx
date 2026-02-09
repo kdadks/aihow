@@ -1,28 +1,29 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate, useSearchParams } from 'react-router-dom';
-import { workflowBundles } from '../data/workflows';
+import { useBundle } from '../services/api/v2/bundles';
 import { Button } from '../components/ui/Button';
 import { Card, CardContent } from '../components/ui/Card';
 import { ArrowLeft, CheckCircle2, Settings, MessageCircle, Bookmark } from 'lucide-react';
 import { BundleCreator } from '../components/bundles/BundleCreator';
 import { userDataService } from '../services/userDataService';
+import { getToolLogo, getLogoFallback } from '../utils/logoUtils';
 
 const BundleDetailPage: React.FC = () => {
-  const { bundleId } = useParams();
+  const { bundleSlug } = useParams();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const [bundle] = useState(workflowBundles.find(b => b.id === bundleId));
+  const { data: bundle, isLoading } = useBundle(bundleSlug || '');
   const [showCustomizer, setShowCustomizer] = useState(false);
   const [bundleSaved, setBundleSaved] = useState(false);
-  
+
   // Check if user came from recommendation
   const isFromRecommendation = searchParams.get('source') === 'recommendation';
 
   useEffect(() => {
-    if (!bundle) {
+    if (!isLoading && !bundle) {
       navigate('/bundle', { replace: true });
     }
-  }, [bundle, navigate]);
+  }, [bundle, isLoading, navigate]);
 
   const handleSaveBundle = async () => {
     if (bundle) {
@@ -30,23 +31,23 @@ const BundleDetailPage: React.FC = () => {
         // Check if already saved
         const existingBundles = await userDataService.getSavedBundles();
         const bundleExists = existingBundles.some(saved => saved.id === bundle.id);
-        
+
         if (!bundleExists) {
           const bundleToSave = {
             id: bundle.id,
             name: bundle.name,
             description: bundle.description,
-            totalCost: bundle.totalCost,
+            totalCost: bundle.total_cost,
             savedAt: new Date().toISOString(),
             type: 'bundle' as const,
             isCustom: false,
             tools: bundle.tools,
             bundleData: bundle // Store full bundle data for reference
           };
-          
+
           await userDataService.saveBundleToCollection(bundleToSave);
           setBundleSaved(true);
-          
+
           // Show success message
           alert(`Bundle "${bundle.name}" has been saved to your collection!\n\nYou can view and manage your saved bundles from the Dashboard.`);
         } else {
@@ -65,21 +66,30 @@ const BundleDetailPage: React.FC = () => {
 
   const handleContactForImplementation = () => {
     if (!bundle) return;
-    
+
     // Navigate to contact page with bundle reference
     const params = new URLSearchParams({
-      bundle: bundle.id,
+      bundle: bundle.slug,
       bundleName: bundle.name,
       inquiryType: 'implementation'
     });
     navigate(`/contact?${params.toString()}`);
   };
 
-  const handleSaveCustomizedBundle = (customBundle: { name: string; tools: any[]; totalCost: number }) => {
+  const handleSaveCustomizedBundle = (customBundle: { name: string; tools: any[]; total_cost?: number }) => {
     // For now, just show success message and close customizer
     alert(`Custom bundle "${customBundle.name}" created successfully!`);
     setShowCustomizer(false);
   };
+
+  if (isLoading) {
+    return (
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 text-center">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto mb-4"></div>
+        <p className="text-gray-600">Loading bundle details...</p>
+      </div>
+    );
+  }
 
   if (!bundle) {
     return null;
@@ -142,7 +152,7 @@ const BundleDetailPage: React.FC = () => {
             <CardContent className="p-6">
               <h2 className="text-xl font-semibold mb-4">Implementation Steps</h2>
               <ol className="space-y-4">
-                {bundle.implementationSteps.map((step, index) => (
+                {bundle.implementation_steps?.map((step, index) => (
                   <li key={index} className="flex items-start">
                     <span className="flex-shrink-0 h-6 w-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mr-3 mt-0.5">
                       {index + 1}
@@ -161,18 +171,19 @@ const BundleDetailPage: React.FC = () => {
                 {bundle.tools.map((tool) => (
                   <div key={tool.id} className="flex items-start border-b border-gray-100 last:border-0 pb-6 last:pb-0">
                     <div className="h-12 w-12 rounded-lg overflow-hidden flex-shrink-0 bg-gray-100">
-                      <img src={tool.logo} alt={tool.name} className="h-full w-full object-cover" />
+                      <img
+                        src={getToolLogo(tool.name, '')}
+                        alt={tool.name}
+                        className="h-full w-full object-cover"
+                        onError={(e) => {
+                          const target = e.target as HTMLImageElement;
+                          target.src = getLogoFallback(tool.name);
+                        }}
+                      />
                     </div>
                     <div className="ml-4 flex-1">
                       <h3 className="font-medium text-gray-900">{tool.name}</h3>
-                      <p className="text-sm text-gray-500 mt-1">{tool.shortDescription}</p>
-                      {tool.features && (
-                        <ul className="mt-2 list-disc list-inside text-sm text-gray-600 space-y-1">
-                          {tool.features.slice(0, 2).map((feature, index) => (
-                            <li key={index}>{feature}</li>
-                          ))}
-                        </ul>
-                      )}
+                      <p className="text-sm text-gray-500 mt-1">{tool.short_description}</p>
                     </div>
                   </div>
                 ))}
@@ -188,7 +199,7 @@ const BundleDetailPage: React.FC = () => {
               <div className="space-y-4">
                 <div>
                   <label className="text-sm font-medium text-gray-600">Estimated subscription cost (Subject to usage)</label>
-                  <p className="text-2xl font-bold text-gray-900">{bundle.totalCost}</p>
+                  <p className="text-2xl font-bold text-gray-900">{bundle.total_cost ?? 'Contact for pricing'}</p>
                 </div>
                 <div className="space-y-3">
                   {isFromRecommendation && !bundleSaved && (

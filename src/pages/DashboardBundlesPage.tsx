@@ -4,7 +4,7 @@ import { useAuth } from '../auth/hooks/useAuth';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/Card';
 import { Button } from '../components/ui/Button';
 import { Badge } from '../components/ui/Badge';
-import { workflowBundles } from '../data/workflows';
+import { useBundles } from '../services/api/v2/bundles';
 import { EnterpriseWorkflow } from '../components/bundles/EnterpriseWorkflowCreator';
 import { userDataService, SavedBundle, SavedWorkflow } from '../services/userDataService';
 import {
@@ -24,6 +24,7 @@ const DashboardBundlesPage: React.FC = () => {
   const [savedWorkflows, setSavedWorkflows] = useState<SavedWorkflow[]>([]);
   const [activeTab, setActiveTab] = useState<'bundles' | 'workflows'>('bundles');
   const [loading, setLoading] = useState(true);
+  const { data: allBundlesData } = useBundles();
 
   useEffect(() => {
     loadSavedItems();
@@ -39,9 +40,9 @@ const DashboardBundlesPage: React.FC = () => {
         userDataService.getSavedWorkflows()
       ]);
       
-      // Enhance bundles with full data from workflowBundles
+      // Enhance bundles with full data from V2 API
       const enhancedBundles = bundlesData.map((saved: SavedBundle) => {
-        const fullBundle = workflowBundles.find(b => b.id === saved.id);
+        const fullBundle = allBundlesData?.bundles?.find(b => b.id === saved.id);
         return {
           ...saved,
           bundleData: fullBundle,

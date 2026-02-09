@@ -1,9 +1,8 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useMemo } from 'react';
 import { Search, ChevronRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import { tools } from '../../data/tools';
-import { categories } from '../../data/categories';
-import { Tool, Category } from '../../types';
+import { useCategories } from '../../services/api/v2/categories';
+import { useSearchTools } from '../../services/api/v2/tools';
 import { VoiceSearch } from './VoiceSearch';
 import { getToolLogo, getLogoFallback } from '../../utils/logoUtils';
 
@@ -30,30 +29,92 @@ export const AutocompleteSearch: React.FC<AutocompleteSearchProps> = ({
 }) => {
   const navigate = useNavigate();
   const [query, setQuery] = useState('');
-  const [suggestions, setSuggestions] = useState<SearchSuggestion[]>([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(-1);
-  const [isLoading, setIsLoading] = useState(false);
-  
+
   const searchRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const suggestionsRef = useRef<HTMLDivElement>(null);
 
-  // Debounced search function
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      if (query.trim().length> 0) {
-        setIsLoading(true);
-        generateSuggestions(query.trim());
-        setIsLoading(false);
-      } else {
-        setSuggestions([]);
-        setShowSuggestions(false);
-      }
-    }, 150);
+  const { data: categories = [] } = useCategories();
+  const { data: toolResults = [], isFetching: isLoading } = useSearchTools(query.trim());
 
-    return () => clearTimeout(timer);
-  }, [query]);
+  // Build suggestions using useMemo to prevent infinite loops
+  const suggestions = useMemo(() => {
+    if (query.trim().length === 0) {
+      return [];
+    }
+
+    const q = query.trim().toLowerCase();
+    const combined: SearchSuggestion[] = [];
+    const maxSuggestions = 8;
+
+    // Tool suggestions from React Query
+    toolResults.slice(0, 5).forEach(tool => {
+      const primarySub = tool.subcategories?.[0];
+      combined.push({
+        type: 'tool',
+        id: tool.id,
+        name: tool.name,
+        description: tool.short_description ?? undefined,
+        url: primarySub
+          ? `/directory/${primarySub.category_slug}/${primarySub.slug}/${tool.slug}`
+          : `/tools/${tool.slug}`,
+        logo: getToolLogo(tool.name, tool.website_url ?? ''),
+        categoryName: primarySub?.category_name,
+      });
+    });
+
+    // Category suggestions (client-side filter from cached data)
+    if (combined.length < maxSuggestions) {
+      categories
+        .filter(cat =>
+          cat.name.toLowerCase().includes(q) ||
+          (cat.description ?? '').toLowerCase().includes(q)
+        )
+        .slice(0, maxSuggestions - combined.length)
+        .forEach(cat => {
+          combined.push({
+            type: 'category',
+            id: cat.id,
+            name: cat.name,
+            description: cat.description ?? undefined,
+            url: `/directory/${cat.slug}`,
+          });
+        });
+    }
+
+    // Subcategory suggestions
+    if (combined.length < maxSuggestions) {
+      for (const cat of categories) {
+        for (const sub of cat.subcategories ?? []) {
+          if (
+            sub.name.toLowerCase().includes(q) ||
+            (sub.description ?? '').toLowerCase().includes(q)
+          ) {
+            combined.push({
+              type: 'subcategory',
+              id: sub.id,
+              name: sub.name,
+              description: sub.description ?? undefined,
+              url: `/directory/${cat.slug}/${sub.slug}`,
+              categoryName: cat.name,
+            });
+            if (combined.length >= maxSuggestions) break;
+          }
+        }
+        if (combined.length >= maxSuggestions) break;
+      }
+    }
+
+    return combined;
+  }, [query, toolResults, categories]);
+
+  // Update showSuggestions when query changes
+  useEffect(() => {
+    setShowSuggestions(query.trim().length > 0 && suggestions.length > 0);
+    setSelectedIndex(-1);
+  }, [query, suggestions.length]);
 
   // Close suggestions when clicking outside
   useEffect(() => {
@@ -67,77 +128,6 @@ export const AutocompleteSearch: React.FC<AutocompleteSearchProps> = ({
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
-
-  const generateSuggestions = (searchQuery: string) => {
-    const query = searchQuery.toLowerCase();
-    const suggestions: SearchSuggestion[] = [];
-    const maxSuggestions = 8;
-
-    // Search tools
-    const toolMatches = tools.filter(tool => 
-      tool.name.toLowerCase().includes(query) ||
-      tool.description.toLowerCase().includes(query) ||
-      tool.shortDescription.toLowerCase().includes(query) ||
-      tool.features.some(feature => feature.toLowerCase().includes(query))
-    ).slice(0, 5);
-
-    toolMatches.forEach(tool => {
-      const category = categories.find(cat => cat.id === tool.categoryId);
-      suggestions.push({
-        type: 'tool',
-        id: tool.id,
-        name: tool.name,
-        description: tool.shortDescription,
-        url: `/directory/${tool.categoryId}/${tool.subcategoryIds[0]}/${tool.slug}`,
-        logo: getToolLogo(tool.name, tool.website),
-        categoryName: category?.name
-      });
-    });
-
-    // Search categories
-    if (suggestions.length < maxSuggestions) {
-      const categoryMatches = categories.filter(cat =>
-        cat.name.toLowerCase().includes(query) ||
-        cat.description.toLowerCase().includes(query)
-      ).slice(0, maxSuggestions - suggestions.length);
-
-      categoryMatches.forEach(category => {
-        suggestions.push({
-          type: 'category',
-          id: category.id,
-          name: category.name,
-          description: category.description,
-          url: `/directory/${category.id}`
-        });
-      });
-    }
-
-    // Search subcategories
-    if (suggestions.length < maxSuggestions) {
-      const subcategoryMatches: SearchSuggestion[] = [];
-      categories.forEach(category => {
-        category.subcategories.forEach(subcategory => {
-          if (subcategory.name.toLowerCase().includes(query) ||
-              subcategory.description.toLowerCase().includes(query)) {
-            subcategoryMatches.push({
-              type: 'subcategory',
-              id: subcategory.id,
-              name: subcategory.name,
-              description: subcategory.description,
-              url: `/directory/${category.id}/${subcategory.id}`,
-              categoryName: category.name
-            });
-          }
-        });
-      });
-
-      suggestions.push(...subcategoryMatches.slice(0, maxSuggestions - suggestions.length));
-    }
-
-    setSuggestions(suggestions);
-    setShowSuggestions(suggestions.length> 0);
-    setSelectedIndex(-1);
-  };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;

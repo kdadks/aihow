@@ -1,33 +1,49 @@
 import React from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
-import { tools } from '../data/tools';
+import { useTool, useTools } from '../services/api/v2/tools';
 import { reviews } from '../data/reviews';
-import { categories } from '../data/categories';
 import { ArrowLeft, Star, ExternalLink, ThumbsUp, ThumbsDown, Save, Share, MessageSquare, Calendar, Scale } from 'lucide-react';
 import { useComparisonStore } from '../stores/comparisonStore';
 import { Button } from '../components/ui/Button';
 import { Badge } from '../components/ui/Badge';
 import { getToolLogo, getLogoFallback } from '../utils/logoUtils';
+import { Tool } from '../types';
 
 const ToolDetailPage: React.FC = () => {
-const { toolSlug } = useParams<{ categoryId: string; subcategoryId: string; toolSlug: string }>();
-const navigate = useNavigate();
-const tool = tools.find(t => t.slug === toolSlug);
-  const { selectedTools, addTool, isToolSelectable } = useComparisonStore();
-  
+  const { toolSlug } = useParams<{ categoryId: string; subcategoryId: string; toolSlug: string }>();
+  const navigate = useNavigate();
+  const { data: tool, isLoading } = useTool(toolSlug || '');
+  const { selectedTools, addTool: addToolToComparison, isToolSelectable } = useComparisonStore();
+
+  // Fetch similar tools (same subcategory)
+  const primarySub = tool?.subcategories?.[0];
+  const { data: { tools: similarToolsList = [] } = {} } = useTools({
+    subcategorySlug: primarySub?.slug,
+    limit: 4
+  });
+
   const isToolSelected = tool ? selectedTools.some(t => t.id === tool.id) : false;
-  
+
   const handleCompare = () => {
     if (!tool) return;
-    
+
     if (isToolSelected) {
       navigate('/compare');
-    } else if (isToolSelectable(tool)) {
-      addTool(tool);
+    } else if (isToolSelectable(tool as unknown as Tool)) {
+      addToolToComparison(tool as unknown as Tool);
       navigate('/compare');
     }
   };
-  
+
+  if (isLoading) {
+    return (
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 text-center">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto mb-4"></div>
+        <p className="text-gray-600">Loading tool details...</p>
+      </div>
+    );
+  }
+
   if (!tool) {
     return (
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 text-center">
@@ -40,21 +56,11 @@ const tool = tools.find(t => t.slug === toolSlug);
     );
   }
 
-  const category = categories.find(c => c.id === tool.categoryId);
-  const subcategories = tool.subcategoryIds.map(
-    subId => category?.subcategories.find(s => s.id === subId)
-  ).filter(Boolean);
-  
+  const subcategories = tool.subcategories ?? [];
   const toolReviews = reviews.filter(r => r.toolId === tool.id);
-  
-  // Find similar tools (same category or subcategory)
-  const similarTools = tools
-    .filter(t => t.id !== tool.id && 
-      (t.categoryId === tool.categoryId || 
-       t.subcategoryIds.some(s => tool.subcategoryIds.includes(s))
-      )
-    )
-    .slice(0, 3);
+
+  // Filter similar tools (exclude current tool)
+  const similarTools = similarToolsList.filter(t => t.id !== tool.id).slice(0, 3);
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -71,7 +77,7 @@ const tool = tools.find(t => t.slug === toolSlug);
           <div className="flex flex-col md:flex-row items-start md:items-center">
             <div className="bg-white p-4 rounded-lg shadow-md mr-0 md:mr-8 mb-6 md:mb-0 flex-shrink-0">
               <img
-                src={getToolLogo(tool.name, tool.website)}
+                src={getToolLogo(tool.name, tool.website_url ?? '')}
                 alt={tool.name}
                 className="h-24 w-24 object-cover rounded-md"
                 onError={(e) => {
@@ -82,17 +88,17 @@ const tool = tools.find(t => t.slug === toolSlug);
             </div>
             <div className="flex-1">
               <h1 className="text-3xl md:text-4xl font-bold mb-2">{tool.name}</h1>
-              <p className="text-lg text-blue-100 mb-4">{tool.shortDescription}</p>
+              <p className="text-lg text-blue-100 mb-4">{tool.short_description}</p>
 
               <div className="flex flex-wrap items-center gap-3 mb-4">
                 <div className="flex items-center bg-white bg-opacity-20 rounded-full px-3 py-1">
                   <Star className="h-4 w-4 text-yellow-400 fill-current mr-1" />
-                  <span className="font-medium">{tool.rating}</span>
-                  <span className="ml-1 text-sm">({tool.reviewCount} reviews)</span>
+                  <span className="font-medium">{tool.rating ?? 0}</span>
+                  <span className="ml-1 text-sm">({tool.review_count ?? 0} reviews)</span>
                 </div>
-                {category && (
+                {primarySub && (
                   <Badge variant="primary" className="capitalize bg-white bg-opacity-20">
-                    {category.name}
+                    {primarySub.category_name}
                   </Badge>
                 )}
                 {tool.trending && (
@@ -133,22 +139,22 @@ const tool = tools.find(t => t.slug === toolSlug);
                   <div>
                     <h3 className="font-medium text-gray-900 mb-2">Pricing</h3>
                     <p className="text-gray-700">
-                      <span className="font-semibold">{tool.pricing.type.charAt(0).toUpperCase() + tool.pricing.type.slice(1)}</span>
-                      {tool.pricing.startingPrice && ` - Starting at ${tool.pricing.startingPrice}`}
-                      {tool.pricing.hasFreeOption && ', free option available'}
+                      <span className="font-semibold">{tool.pricing?.type ? tool.pricing.type.charAt(0).toUpperCase() + tool.pricing.type.slice(1) : 'N/A'}</span>
+                      {tool.pricing?.starting_price && ` - Starting at ${tool.pricing.starting_price}`}
+                      {tool.pricing?.has_free_option && ', free option available'}
                     </p>
                   </div>
                   <div>
                     <h3 className="font-medium text-gray-900 mb-2">Last Verified</h3>
                     <p className="text-gray-700">
-                      {tool.lastVerified ? new Date(tool.lastVerified).toLocaleDateString() : 'Not verified yet'}
+                      {tool.last_verified_at ? new Date(tool.last_verified_at).toLocaleDateString() : 'Not verified yet'}
                     </p>
                   </div>
                   {subcategories.length > 0 && (
                     <div>
                       <h3 className="font-medium text-gray-900 mb-2">Subcategories</h3>
                       <div className="flex flex-wrap gap-2">
-                        {subcategories.map(subcategory => subcategory && (
+                        {subcategories.map(subcategory => (
                           <Badge key={subcategory.id} variant="outline" className="capitalize">
                             {subcategory.name}
                           </Badge>
@@ -289,7 +295,7 @@ const tool = tools.find(t => t.slug === toolSlug);
               <div className="sticky top-24">
                 {/* Action Card */}
                 <div className="bg-white rounded-lg border border-gray-200 shadow-sm p-6 mb-6">
-                  <a href={tool.website} target="_blank" rel="noopener noreferrer" className="block w-full">
+                  <a href={tool.website_url ?? '#'} target="_blank" rel="noopener noreferrer" className="block w-full">
                     <Button fullWidth rightIcon={<ExternalLink className="h-4 w-4" />}>
                       Visit Website
                     </Button>
@@ -307,7 +313,7 @@ const tool = tools.find(t => t.slug === toolSlug);
                       fullWidth
                       leftIcon={<Scale className="h-4 w-4" />}
                       onClick={handleCompare}
-                      disabled={!isToolSelected && !isToolSelectable(tool)}
+                      disabled={!isToolSelected && !isToolSelectable(tool as unknown as Tool)}
                     >
                       {isToolSelected ? 'View Comparison' : 'Compare'}
                     </Button>
@@ -339,34 +345,40 @@ const tool = tools.find(t => t.slug === toolSlug);
                   <div className="bg-white rounded-lg border border-gray-200 shadow-sm p-6">
                     <h3 className="font-bold text-gray-900 mb-4">Similar Tools</h3>
                     <div className="space-y-4">
-                      {similarTools.map(similarTool => (
-                        <Link
-                          key={similarTool.id}
-                          to={`/directory/${similarTool.categoryId}/${similarTool.subcategoryIds[0]}/${similarTool.slug}`}
-                          className="flex items-center p-3 border border-gray-100 rounded-lg hover:bg-gray-50"
-                        >
-                          <div className="h-10 w-10 rounded overflow-hidden mr-3 flex-shrink-0">
-                            <img
-                              src={getToolLogo(similarTool.name, similarTool.website)}
-                              alt={similarTool.name}
-                              className="h-full w-full object-cover"
-                              onError={(e) => {
-                                const target = e.target as HTMLImageElement;
-                                target.src = getLogoFallback(similarTool.name);
-                              }}
-                            />
-                          </div>
-                          <div>
-                            <h4 className="font-medium text-gray-900">{similarTool.name}</h4>
-                            <div className="flex items-center mt-1">
-                              <Star className="h-3 w-3 text-yellow-400 fill-current" />
-                              <span className="text-xs text-gray-500 ml-1">
-                                {similarTool.rating} ({similarTool.reviewCount})
-                              </span>
+                      {similarTools.map(similarTool => {
+                        const simToolPrimarySub = similarTool.subcategories?.[0];
+                        return (
+                          <Link
+                            key={similarTool.id}
+                            to={simToolPrimarySub
+                              ? `/directory/${simToolPrimarySub.category_slug}/${simToolPrimarySub.slug}/${similarTool.slug}`
+                              : `/tools/${similarTool.slug}`
+                            }
+                            className="flex items-center p-3 border border-gray-100 rounded-lg hover:bg-gray-50"
+                          >
+                            <div className="h-10 w-10 rounded overflow-hidden mr-3 flex-shrink-0">
+                              <img
+                                src={getToolLogo(similarTool.name, similarTool.website_url ?? '')}
+                                alt={similarTool.name}
+                                className="h-full w-full object-cover"
+                                onError={(e) => {
+                                  const target = e.target as HTMLImageElement;
+                                  target.src = getLogoFallback(similarTool.name);
+                                }}
+                              />
                             </div>
-                          </div>
-                        </Link>
-                      ))}
+                            <div>
+                              <h4 className="font-medium text-gray-900">{similarTool.name}</h4>
+                              <div className="flex items-center mt-1">
+                                <Star className="h-3 w-3 text-yellow-400 fill-current" />
+                                <span className="text-xs text-gray-500 ml-1">
+                                  {similarTool.rating ?? 0} ({similarTool.review_count ?? 0})
+                                </span>
+                              </div>
+                            </div>
+                          </Link>
+                        );
+                      })}
                     </div>
                   </div>
                 )}

@@ -1,13 +1,24 @@
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft, Clock, User, Calendar, Share2, BookmarkPlus } from 'lucide-react';
-import { blogPosts } from '../data/community';
+import { useBlogPost, useAllBlogPosts } from '../services/api/v2/blog';
 import { Button } from '../components/ui/Button';
 import { Card, CardContent } from '../components/ui/Card';
 
 const BlogPostDetailPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
-  const post = blogPosts.find(p => p.slug === slug);
+  const { data: post, isLoading } = useBlogPost(slug);
+  const { data: blogPosts = [] } = useAllBlogPosts();
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-gray-50 py-12">
+        <div className="max-w-4xl mx-auto px-4">
+          <p className="text-center text-gray-600">Loading...</p>
+        </div>
+      </div>
+    );
+  }
 
   if (!post) {
     return (
@@ -1477,8 +1488,8 @@ const BlogPostDetailPage: React.FC = () => {
           <div className="flex items-center justify-between mb-6">
             <div className="flex items-center space-x-4">
               <div>
-                <p className="font-semibold text-gray-900">{post.author.name}</p>
-                <p className="text-xs text-gray-500">{post.author.credential}</p>
+                <p className="font-semibold text-gray-900">{post.author_name}</p>
+                <p className="text-xs text-gray-500">{post.author_credential}</p>
                 <div className="flex items-center space-x-4 text-sm text-gray-500">
                   <div className="flex items-center space-x-1">
                     <Calendar className="w-4 h-4" />
@@ -1486,7 +1497,7 @@ const BlogPostDetailPage: React.FC = () => {
                   </div>
                   <div className="flex items-center space-x-1">
                     <Clock className="w-4 h-4" />
-                    <span>{post.readTime}</span>
+                    <span>{post.read_time}</span>
                   </div>
                 </div>
               </div>
@@ -1514,7 +1525,7 @@ const BlogPostDetailPage: React.FC = () => {
           </div>
           
           <img
-            src={post.image}
+            src={post.featured_image}
             alt={post.title}
             className="w-full h-64 md:h-80 object-cover rounded-lg"
           />
@@ -1550,9 +1561,9 @@ const BlogPostDetailPage: React.FC = () => {
                     {relatedPost.excerpt.substring(0, 120)}...
                   </p>
                   <div className="flex items-center text-xs text-gray-500">
-                    <span>{relatedPost.author.name}</span>
+                    <span>{relatedPost.author_name}</span>
                     <span className="mx-2">•</span>
-                    <span>{relatedPost.readTime}</span>
+                    <span>{relatedPost.read_time}</span>
                   </div>
                 </CardContent>
               </Card>

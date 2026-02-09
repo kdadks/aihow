@@ -1,12 +1,14 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { MessageCircle, Star, BookOpen, Users, PlusCircle, Edit3 } from 'lucide-react';
-import { forumCategories, reviews, blogPosts } from '../data/community';
+import { forumCategories, reviews } from '../data/community';
+import { useAllBlogPosts } from '../services/api/v2/blog';
 import { useAuth } from '../auth/hooks/useAuth';
 
 const CommunityPage: React.FC = () => {
   const navigate = useNavigate();
   const { isAuthenticated } = useAuth();
+  const { data: blogPosts = [] } = useAllBlogPosts();
 
   const handleGetStarted = () => {
     navigate('/signup');
@@ -84,12 +86,35 @@ const CommunityPage: React.FC = () => {
         <h1 className="text-4xl font-bold text-gray-900 mb-4">
           {isAuthenticated ? 'Welcome back!' : 'How2doAI Community'}
         </h1>
-        <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+        <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-12">
           {isAuthenticated
             ? 'Share your insights, engage with fellow AI enthusiasts, and grow your expertise.'
             : 'Join our vibrant community of AI enthusiasts. Share experiences, learn from others, and stay updated with the latest in AI tools.'
           }
         </p>
+
+        {/* Community Stats */}
+        <div className="bg-gray-50 rounded-2xl p-6 text-center mb-12">
+          <h2 className="text-xl font-bold text-gray-900 mb-6">Our Growing Community</h2>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div>
+              <div className="text-2xl font-bold text-blue-600 mb-1">1,000+</div>
+              <div className="text-sm text-gray-600">Active Members</div>
+            </div>
+            <div>
+              <div className="text-2xl font-bold text-blue-600 mb-1">{forumCategories.reduce((acc, cat) => acc + cat.topicCount, 0)}+</div>
+              <div className="text-sm text-gray-600">Discussion Topics</div>
+            </div>
+            <div>
+              <div className="text-2xl font-bold text-blue-600 mb-1">{reviews.length}+</div>
+              <div className="text-sm text-gray-600">Tool Reviews</div>
+            </div>
+            <div>
+              <div className="text-2xl font-bold text-blue-600 mb-1">{blogPosts.length}+</div>
+              <div className="text-sm text-gray-600">Blog Articles</div>
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* Community Features Grid */}
@@ -173,29 +198,6 @@ const CommunityPage: React.FC = () => {
           </p>
           {renderSectionContent('testimonials')}
         </Link>
-      </div>
-
-      {/* Community Stats */}
-      <div className="bg-gray-50 rounded-2xl p-8 text-center">
-        <h2 className="text-2xl font-bold text-gray-900 mb-8">Our Growing Community</h2>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <div>
-            <div className="text-3xl font-bold text-blue-600 mb-2">1,000+</div>
-            <div className="text-gray-600">Active Members</div>
-          </div>
-          <div>
-            <div className="text-3xl font-bold text-blue-600 mb-2">{forumCategories.reduce((acc, cat) => acc + cat.topicCount, 0)}+</div>
-            <div className="text-gray-600">Discussion Topics</div>
-          </div>
-          <div>
-            <div className="text-3xl font-bold text-blue-600 mb-2">{reviews.length}+</div>
-            <div className="text-gray-600">Tool Reviews</div>
-          </div>
-          <div>
-            <div className="text-3xl font-bold text-blue-600 mb-2">{blogPosts.length}+</div>
-            <div className="text-gray-600">Blog Articles</div>
-          </div>
-        </div>
       </div>
 
       {/* CTA Section - Different content for authenticated vs non-authenticated users */}

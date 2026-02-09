@@ -81,6 +81,29 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   // Load user profile, roles, and permissions - SIMPLIFIED TO PREVENT HANGING
   const loadUserData = async (user: User, skipLoading = false) => {
     try {
+      // Check if user has admin role - if so, skip public auth
+      const { data: roleAssignment } = await supabase
+        .from('user_roles')
+        .select('role_id')
+        .eq('user_id', user.id)
+        .single();
+
+      if (roleAssignment) {
+        const { data: roleData } = await supabase
+          .from('roles')
+          .select('name')
+          .eq('id', roleAssignment.role_id)
+          .single();
+
+        const validAdminRoles = ['admin', 'system_admin', 'content_admin'];
+        if (roleData && validAdminRoles.includes(roleData.name)) {
+          console.log('User has admin role, skipping public auth for:', user.email);
+          // Don't load admin users into public auth context
+          clearUserData();
+          return;
+        }
+      }
+
       // Prevent duplicate loading for the same user
       if (state.user?.id === user.id && state.isAuthenticated && !skipLoading) {
         console.log('User data already loaded, skipping duplicate load for:', user.email);
@@ -301,14 +324,37 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const refreshAuth = async () => {
     // First check if we have a session but no user (state mismatch)
     const { data: { session } } = await supabase.auth.getSession();
-    
+
     if (session?.user && !state.user) {
-      console.log('Found session-user mismatch, fixing...');
+      console.log('[UnifiedAuthContext] Found session-user mismatch, checking role...');
+
+      // Check if user has admin role - if so, don't authenticate in public context
+      const { data: roleAssignment } = await supabase
+        .from('user_roles')
+        .select('role_id')
+        .eq('user_id', session.user.id)
+        .single();
+
+      if (roleAssignment) {
+        const { data: roleData } = await supabase
+          .from('roles')
+          .select('name')
+          .eq('id', roleAssignment.role_id)
+          .single();
+
+        const validAdminRoles = ['admin', 'system_admin', 'content_admin'];
+        if (roleData && validAdminRoles.includes(roleData.name)) {
+          console.log('[UnifiedAuthContext] Session has admin role, not refreshing public auth');
+          return;
+        }
+      }
+
+      console.log('[UnifiedAuthContext] Found session-user mismatch, fixing...');
       setState(prev => ({ ...prev, session, user: session.user }));
       try {
         await loadUserData(session.user);
       } catch (error) {
-        console.error('Error loading user data during refresh, maintaining basic state:', error);
+        console.error('[UnifiedAuthContext] Error loading user data during refresh, maintaining basic state:', error);
         setState(prev => ({
           ...prev,
           user: session.user,
@@ -332,14 +378,37 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     // Get initial session
     const getInitialSession = async () => {
       const { data: { session } } = await supabase.auth.getSession();
-      
+
       if (session?.user) {
-        console.log('Initial session found:', session.user.email);
+        console.log('[UnifiedAuthContext] Initial session found:', session.user.email);
+
+        // Check if user has admin role - if so, don't authenticate in public context
+        const { data: roleAssignment } = await supabase
+          .from('user_roles')
+          .select('role_id')
+          .eq('user_id', session.user.id)
+          .single();
+
+        if (roleAssignment) {
+          const { data: roleData } = await supabase
+            .from('roles')
+            .select('name')
+            .eq('id', roleAssignment.role_id)
+            .single();
+
+          const validAdminRoles = ['admin', 'system_admin', 'content_admin'];
+          if (roleData && validAdminRoles.includes(roleData.name)) {
+            console.log('[UnifiedAuthContext] Initial session has admin role, ignoring for public auth');
+            setState(prev => ({ ...prev, isLoading: false, isAuthenticated: false }));
+            return;
+          }
+        }
+
         setState(prev => ({ ...prev, session, user: session.user }));
         try {
           await loadUserData(session.user);
         } catch (error) {
-          console.error('Error loading initial user data, but keeping user logged in:', error);
+          console.error('[UnifiedAuthContext] Error loading initial user data, but keeping user logged in:', error);
           // Ensure user stays logged in even if data loading fails
           setState(prev => ({
             ...prev,
@@ -364,22 +433,45 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     // Listen for auth changes
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       async (event, session) => {
-        console.log('Auth state changed:', event, session?.user?.email);
-        
+        console.log('[UnifiedAuthContext] Auth state changed:', event, session?.user?.email);
+
         if (event === 'SIGNED_IN' && session?.user) {
-          console.log('Processing SIGNED_IN event');
+          console.log('[UnifiedAuthContext] Processing SIGNED_IN event');
+
+          // Check if user has admin role - if so, don't authenticate in public context
+          const { data: roleAssignment } = await supabase
+            .from('user_roles')
+            .select('role_id')
+            .eq('user_id', session.user.id)
+            .single();
+
+          if (roleAssignment) {
+            const { data: roleData } = await supabase
+              .from('roles')
+              .select('name')
+              .eq('id', roleAssignment.role_id)
+              .single();
+
+            const validAdminRoles = ['admin', 'system_admin', 'content_admin'];
+            if (roleData && validAdminRoles.includes(roleData.name)) {
+              console.log('[UnifiedAuthContext] User has admin role, ignoring SIGNED_IN for public auth');
+              clearUserData();
+              return;
+            }
+          }
+
           // Check if this is a duplicate event for the same user
           if (state.user?.id === session.user.id && state.isAuthenticated) {
-            console.log('User already authenticated, skipping duplicate SIGNED_IN processing');
+            console.log('[UnifiedAuthContext] User already authenticated, skipping duplicate SIGNED_IN processing');
             setState(prev => ({ ...prev, session })); // Just update session
             return;
           }
-          
+
           setState(prev => ({ ...prev, session, user: session.user }));
           try {
             await loadUserData(session.user);
           } catch (error) {
-            console.error('Error loading user data on SIGNED_IN, but keeping user logged in:', error);
+            console.error('[UnifiedAuthContext] Error loading user data on SIGNED_IN, but keeping user logged in:', error);
             // Ensure user stays logged in even if data loading fails
             setState(prev => ({
               ...prev,
@@ -395,16 +487,38 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
             }));
           }
         } else if (event === 'SIGNED_OUT') {
-          console.log('Processing SIGNED_OUT event');
+          console.log('[UnifiedAuthContext] Processing SIGNED_OUT event');
           clearUserData();
         } else if (event === 'TOKEN_REFRESHED' && session?.user) {
-          console.log('Processing TOKEN_REFRESHED event');
+          console.log('[UnifiedAuthContext] Processing TOKEN_REFRESHED event');
+
+          // Check if user has admin role - if so, don't refresh in public context
+          const { data: roleAssignment } = await supabase
+            .from('user_roles')
+            .select('role_id')
+            .eq('user_id', session.user.id)
+            .single();
+
+          if (roleAssignment) {
+            const { data: roleData } = await supabase
+              .from('roles')
+              .select('name')
+              .eq('id', roleAssignment.role_id)
+              .single();
+
+            const validAdminRoles = ['admin', 'system_admin', 'content_admin'];
+            if (roleData && validAdminRoles.includes(roleData.name)) {
+              console.log('[UnifiedAuthContext] Token refresh for admin role, ignoring for public auth');
+              return;
+            }
+          }
+
           setState(prev => ({ ...prev, session, user: session.user }));
           try {
             // Refresh user data on token refresh, but skip loading state and don't fail if it doesn't work
             await loadUserData(session.user, true);
           } catch (error) {
-            console.warn('Error refreshing user data on token refresh:', error);
+            console.warn('[UnifiedAuthContext] Error refreshing user data on token refresh:', error);
             // Don't logout the user just because data refresh failed - ensure user state is maintained
             setState(prev => ({
               ...prev,

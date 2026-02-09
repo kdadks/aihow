@@ -32,21 +32,12 @@ interface DatabaseUser {
 class UserManagementService {
     async getUsers(page = 1, pageSize = 10): Promise<AdminResponse<AdminUser[]>> {
         try {
-            const from = (page - 1) * pageSize;
-            const to = from + pageSize - 1;
-
-            // Query profiles table and get roles separately using helper functions
+            // Use the new database function to get users with real emails from auth.users
             const { data: users, error } = await supabase
-                .from('profiles')
-                .select(`
-                    id,
-                    username,
-                    full_name,
-                    created_at,
-                    updated_at
-                `)
-                .range(from, to)
-                .order('created_at', { ascending: false });
+                .rpc('get_all_users_with_emails', { 
+                    page_number: page, 
+                    page_size: pageSize 
+                });
 
             if (error) {
                 throw error;
@@ -76,7 +67,7 @@ class UserManagementService {
                     
                     return {
                         id: user.id,
-                        email: `${user.username}@example.com`, // Generate email from username
+                        email: user.email, // Use real email from auth.users
                         role: {
                             id: '1', // Simplified for admin view
                             name: primaryRole,
@@ -92,8 +83,8 @@ class UserManagementService {
                             updated_at: user.updated_at
                         },
                         created_at: user.created_at,
-                        last_sign_in_at: user.updated_at, // Use updated_at as fallback
-                        is_active: true // Default to active
+                        last_sign_in_at: user.last_sign_in_at, // Use real last_sign_in_at from auth.users
+                        is_active: user.is_active
                     };
                 })
             );
@@ -106,25 +97,19 @@ class UserManagementService {
 
     async getUserById(id: string): Promise<AdminResponse<AdminUser>> {
         try {
-            const { data: user, error } = await supabase
-                .from('profiles')
-                .select(`
-                    id,
-                    username,
-                    full_name,
-                    created_at,
-                    updated_at
-                `)
-                .eq('id', id)
-                .single();
+            // Use the new database function to get user with real email from auth.users
+            const { data: users, error } = await supabase
+                .rpc('get_user_with_email', { user_id: id });
 
             if (error) {
                 throw error;
             }
 
-            if (!user) {
+            if (!users || users.length === 0) {
                 throw new Error('User not found');
             }
+
+            const user = users[0];
 
             // Try to get user roles using helper function, fallback if not available
             let primaryRole = 'user';
@@ -143,7 +128,7 @@ class UserManagementService {
 
             const transformedUser: AdminUser = {
                 id: user.id,
-                email: `${user.username}@example.com`, // Generate email from username
+                email: user.email, // Use real email from auth.users
                 role: {
                     id: '1',
                     name: primaryRole,
@@ -159,8 +144,8 @@ class UserManagementService {
                     updated_at: user.updated_at
                 },
                 created_at: user.created_at,
-                last_sign_in_at: user.updated_at, // Use updated_at as fallback
-                is_active: true // Default to active
+                last_sign_in_at: user.last_sign_in_at, // Use real last_sign_in_at from auth.users
+                is_active: user.is_active
             };
 
             return { data: transformedUser, error: null };
@@ -172,7 +157,7 @@ class UserManagementService {
     async getRoles(): Promise<AdminResponse<Role[]>> {
         try {
             const { data: roles, error } = await supabase
-                .from('user_roles')
+                .from('roles')
                 .select('*')
                 .order('name');
 

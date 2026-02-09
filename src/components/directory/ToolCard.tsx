@@ -4,12 +4,12 @@ import { Star, ExternalLink, Scale } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from '../ui/Card';
 import { Badge } from '../ui/Badge';
 import { Button } from '../ui/Button';
-import { Tool } from '../../types';
+import { ToolV2 } from '../../types/tool.types';
 
 import { Helmet } from 'react-helmet-async';
 
 interface ToolCardProps {
-  tool: Tool;
+  tool: ToolV2;
   isSelected?: boolean;
   onCompare?: () => void;
   isCompareDisabled?: boolean;
@@ -21,6 +21,11 @@ export const ToolCard: React.FC<ToolCardProps> = ({
   onCompare,
   isCompareDisabled = false
 }) => {
+  const primarySub = tool.subcategories?.[0];
+  const toolUrl = primarySub
+    ? `/directory/${primarySub.category_slug}/${primarySub.slug}/${tool.slug}`
+    : `/tools/${tool.slug}`;
+
   return (
     <Card className="h-full flex flex-col group">
       <CardHeader>
@@ -32,13 +37,15 @@ export const ToolCard: React.FC<ToolCardProps> = ({
                   {tool.name}
                 </CardTitle>
                 <div className="flex items-center flex-wrap gap-3">
-                  <Badge variant="outline" className="capitalize text-xs bg-gradient-to-r from-gray-50 to-white shadow-sm">
-                    {tool.categoryId.replace('-', ' ')}
-                  </Badge>
+                  {primarySub && (
+                    <Badge variant="outline" className="capitalize text-xs bg-gradient-to-r from-gray-50 to-white shadow-sm">
+                      {primarySub.category_name}
+                    </Badge>
+                  )}
                   <div className="flex items-center px-3 py-1 rounded-full bg-yellow-50 border border-yellow-100">
                     <Star className="h-4 w-4 text-yellow-400 fill-current" />
-                    <span className="font-medium ml-1.5 text-yellow-700">{tool.rating}</span>
-                    <span className="text-yellow-600 text-sm ml-1.5">({tool.reviewCount})</span>
+                    <span className="font-medium ml-1.5 text-yellow-700">{tool.rating ?? 0}</span>
+                    <span className="text-yellow-600 text-sm ml-1.5">({tool.review_count ?? 0})</span>
                   </div>
                 </div>
               </div>
@@ -47,11 +54,11 @@ export const ToolCard: React.FC<ToolCardProps> = ({
         </div>
       </CardHeader>
       <CardContent className="flex-1 space-y-6">
-        <p className="text-gray-600 text-base leading-relaxed">{tool.shortDescription}</p>
-        
+        <p className="text-gray-600 text-base leading-relaxed">{tool.short_description}</p>
+
         <div className="space-y-4">
           <div className="flex flex-wrap gap-2">
-            {tool.pricing.hasFreeOption && (
+            {tool.pricing?.has_free_option && (
               <Badge variant="success" className="group-hover:scale-105 transition-transform duration-200 shadow-sm">
                 <span className="mr-1">💎</span> Free Option
               </Badge>
@@ -67,21 +74,21 @@ export const ToolCard: React.FC<ToolCardProps> = ({
               </Badge>
             )}
           </div>
-          
+
           <div className="flex flex-wrap gap-2">
-            {tool.subcategoryIds.map((subcategory) => (
-              <Badge 
-                key={subcategory} 
-                variant="outline" 
+            {(tool.subcategories ?? []).map((subcategory) => (
+              <Badge
+                key={subcategory.id}
+                variant="outline"
                 className="text-xs capitalize bg-gradient-to-r from-gray-50 to-white hover:from-white hover:to-gray-50 transition-colors duration-200"
               >
-                {subcategory.replace('-', ' ')}
+                {subcategory.name}
               </Badge>
             ))}
           </div>
         </div>
-        
-        {tool.features.length > 0 && (
+
+        {tool.features && tool.features.length > 0 && (
           <div className="mt-6 pt-4 border-t border-gray-100">
             <p className="text-sm font-medium text-gray-700 mb-4">Key Features</p>
             <ul className="grid gap-3">
@@ -103,7 +110,7 @@ export const ToolCard: React.FC<ToolCardProps> = ({
             <div>
               <span className="text-sm text-gray-500 block">Starting from</span>
               <p className="font-semibold text-gray-900 text-lg mt-1">
-                {tool.pricing.startingPrice ? tool.pricing.startingPrice : 'Free'}
+                {tool.pricing?.starting_price || 'Free'}
               </p>
             </div>
             {onCompare && (
@@ -120,20 +127,20 @@ export const ToolCard: React.FC<ToolCardProps> = ({
             )}
           </div>
           <div className="flex flex-col sm:flex-row items-stretch gap-3">
-            <Link 
-              to={`/directory/${tool.categoryId}/${tool.subcategoryIds[0]}/${tool.slug}`} 
+            <Link
+              to={toolUrl}
               className="flex-1"
             >
-              <Button 
-                size="lg" 
-                variant="primary" 
+              <Button
+                size="lg"
+                variant="primary"
                 className="w-full shadow-sm hover:shadow-md transition-shadow duration-200"
               >
                 View Details
               </Button>
             </Link>
             <a
-              href={tool.website}
+              href={tool.website_url ?? '#'}
               target="_blank"
               rel="noopener noreferrer"
               className="flex-1"

@@ -1,22 +1,86 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Card, CardHeader, CardContent, CardTitle, CardFooter } from '../components/ui/Card';
 import { Button } from '../components/ui/Button';
-import { Pagination } from '../components/ui/Pagination';
-import { workflowBundles } from '../data/workflows';
-import { GitBranch, MoveRight, X } from 'lucide-react';
+import { useBundles } from '../services/api/v2/bundles';
+import { BundleV2 } from '../types/bundle.types';
+import { GitBranch, MoveRight, X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { EnterpriseWorkflowCreator, type EnterpriseWorkflow } from '../components/bundles/EnterpriseWorkflowCreator';
 import { useWorkflowDraftRestore } from '../hooks/useWorkflowDraftRestore';
 import { DraftRestoreModal } from '../components/bundles/DraftRestoreModal';
 import { userDataService } from '../services/userDataService';
 import ProcessSection from '../components/bundles/ProcessSection';
 
+// Compact bundle card for marquee rows
+interface BundleCardProps {
+  workflow: BundleV2;
+  onCustomize: (w: BundleV2) => void;
+  onContact: (w: BundleV2) => void;
+}
+
+const BundleCard: React.FC<BundleCardProps> = ({ workflow, onCustomize, onContact }) => (
+  <div className="w-80 flex-shrink-0 bg-white rounded-2xl overflow-hidden shadow-md shadow-gray-100/80 border border-gray-100 flex flex-col hover:shadow-xl hover:shadow-violet-100/40 transition-all duration-300">
+    {/* Gradient header */}
+    <div className="bg-gradient-to-r from-violet-600 to-blue-600 p-4 text-white">
+      <div className="flex items-start gap-2">
+        <GitBranch className="h-4 w-4 mt-0.5 flex-shrink-0 opacity-80" />
+        <div className="min-w-0">
+          <h3 className="font-bold text-sm leading-tight">{workflow.name}</h3>
+          <p className="mt-1 text-violet-100 text-xs leading-relaxed line-clamp-2">{workflow.description}</p>
+        </div>
+      </div>
+    </div>
+
+    {/* Tools list (compact) */}
+    <div className="p-4 flex-1">
+      <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-2">Included Tools</p>
+      <div className="space-y-2">
+        {workflow.tools.slice(0, 3).map((tool) => (
+          <div key={tool.id} className="flex items-center gap-2.5">
+            <div className="h-7 w-7 rounded-lg bg-gradient-to-br from-violet-500 to-blue-600 flex items-center justify-center flex-shrink-0">
+              <span className="text-white font-bold text-xs">{tool.name.charAt(0)}</span>
+            </div>
+            <div className="min-w-0">
+              <p className="text-sm font-medium text-gray-800 leading-tight truncate">{tool.name}</p>
+              <p className="text-xs text-gray-400 truncate">{tool.short_description}</p>
+            </div>
+          </div>
+        ))}
+        {workflow.tools.length > 3 && (
+          <p className="text-xs text-violet-600 font-medium pl-9">+{workflow.tools.length - 3} more tools</p>
+        )}
+      </div>
+    </div>
+
+    {/* Footer */}
+    <div className="border-t border-gray-100 p-4">
+      <div className="mb-3">
+        <p className="text-xs text-gray-400">Est. subscription cost</p>
+        <p className="text-base font-bold text-gray-900">{workflow.total_cost ?? 'Contact for pricing'}</p>
+      </div>
+      <div className="flex gap-2">
+        <button
+          onClick={() => onCustomize(workflow)}
+          className="flex-1 text-xs font-semibold px-3 py-2 rounded-xl bg-gradient-to-r from-violet-600 to-blue-600 text-white hover:from-violet-500 hover:to-blue-500 transition-all"
+        >
+          Customize
+        </button>
+        <button
+          onClick={() => onContact(workflow)}
+          className="flex-1 text-xs font-semibold px-3 py-2 rounded-xl border border-gray-200 text-gray-700 hover:border-violet-200 hover:text-violet-700 transition-all"
+        >
+          Contact Us
+        </button>
+      </div>
+    </div>
+  </div>
+);
+
 const WorkflowsPage: React.FC = () => {
   const [showBundleCreator, setShowBundleCreator] = useState(false);
-  const [selectedBundle, setSelectedBundle] = useState<typeof workflowBundles[0] | null>(null);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [selectedBundle, setSelectedBundle] = useState<BundleV2 | null>(null);
   const [restoredWorkflow, setRestoredWorkflow] = useState<EnterpriseWorkflow | null>(null);
-  
+  const { data: { bundles: workflowBundles = [] } = {}, isLoading } = useBundles({ limit: 50 });
+
   // Draft restoration hook
   const {
     showRestorePrompt,
@@ -26,17 +90,38 @@ const WorkflowsPage: React.FC = () => {
     workflowName,
     draftAge
   } = useWorkflowDraftRestore();
-  
-  const itemsPerPage = 10;
-  const totalPages = Math.ceil(workflowBundles.length / itemsPerPage);
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
-  const currentBundles = workflowBundles.slice(startIndex, endIndex);
 
-  const handlePageChange = (page: number) => {
-    setCurrentPage(page);
-    // Scroll to top of the page when page changes
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+  // Drag-to-scroll refs
+  const scrollContainerRef = React.useRef<HTMLDivElement>(null);
+  const dragState = React.useRef({ isDown: false, startX: 0, scrollLeft: 0 });
+
+  const onMouseDown = (e: React.MouseEvent) => {
+    dragState.current.isDown = true;
+    dragState.current.startX = e.pageX - (scrollContainerRef.current?.offsetLeft ?? 0);
+    dragState.current.scrollLeft = scrollContainerRef.current?.scrollLeft ?? 0;
+  };
+  const onMouseLeave = () => { dragState.current.isDown = false; };
+  const onMouseUp = () => { dragState.current.isDown = false; };
+  const onMouseMove = (e: React.MouseEvent) => {
+    if (!dragState.current.isDown || !scrollContainerRef.current) return;
+    e.preventDefault();
+    const x = e.pageX - (scrollContainerRef.current.offsetLeft ?? 0);
+    const walk = (x - dragState.current.startX) * 1.5;
+    scrollContainerRef.current.scrollLeft = dragState.current.scrollLeft - walk;
+  };
+  const onTouchStart = (e: React.TouchEvent) => {
+    dragState.current.isDown = true;
+    dragState.current.startX = e.touches[0].pageX;
+    dragState.current.scrollLeft = scrollContainerRef.current?.scrollLeft ?? 0;
+  };
+  const onTouchMove = (e: React.TouchEvent) => {
+    if (!dragState.current.isDown || !scrollContainerRef.current) return;
+    const walk = (e.touches[0].pageX - dragState.current.startX) * 1.5;
+    scrollContainerRef.current.scrollLeft = dragState.current.scrollLeft - walk;
+  };
+  const onTouchEnd = () => { dragState.current.isDown = false; };
+  const scrollBy = (amount: number) => {
+    scrollContainerRef.current?.scrollBy({ left: amount, behavior: 'smooth' });
   };
 
   const handleSaveBundle = async (bundle: any) => {
@@ -49,7 +134,7 @@ const WorkflowsPage: React.FC = () => {
           name: bundle.name,
           description: bundle.description,
           useCase: bundle.useCase,
-          totalCost: bundle.totalCost || 0,
+          totalCost: bundle.total_cost || 0,
           tools: bundle.tools,
           metadata: {
             ...bundle.metadata,
@@ -101,10 +186,10 @@ const WorkflowsPage: React.FC = () => {
     
     return {
       name: bundle.name,
-      description: bundle.description,
-      useCase: bundle.description, // Use description as use case
+      description: bundle.description || '',
+      useCase: bundle.description || '', // Use description as use case
       tools: bundle.tools,
-      totalCost: parseFloat(bundle.totalCost.replace(/[^0-9.-]+/g, '')) || 0,
+      totalCost: bundle.total_cost ? parseFloat(bundle.total_cost.replace(/[^0-9.-]+/g, '')) : 0,
       metadata: {
         version: '1.0.0',
         lastModified: new Date(),
@@ -146,6 +231,10 @@ const WorkflowsPage: React.FC = () => {
     if (processSectionRef.current) {
       processSectionRef.current.scrollIntoView({ behavior: 'smooth' });
     }
+  };
+
+  const handleScrollToWhyUs = () => {
+    document.getElementById('why-us')?.scrollIntoView({ behavior: 'smooth' });
   };
 
   // FAQ data for collapsible section
@@ -257,6 +346,14 @@ const WorkflowsPage: React.FC = () => {
               >
                 Engagement Process
               </Button>
+              <Button
+                variant="outline"
+                onClick={handleScrollToWhyUs}
+                size="lg"
+                className="w-full sm:w-auto lg:w-full lg:min-w-[200px] border-2 hover:bg-violet-50 hover:border-violet-300 hover:text-violet-700 transition-colors"
+              >
+                Why Us
+              </Button>
             </div>
           </div>
         </div>
@@ -288,97 +385,72 @@ const WorkflowsPage: React.FC = () => {
           </div>
         ) : (
           <>
-            {/* Pagination Info */}
-            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 sm:mb-6 gap-2">
-              <div className="text-xs sm:text-sm text-gray-600">
-                Showing {startIndex + 1}-{Math.min(endIndex, workflowBundles.length)} of {workflowBundles.length} workflow bundles
-              </div>
-              <div className="text-xs sm:text-sm text-gray-600">
-                Page {currentPage} of {totalPages}
+            {/* Scroll controls */}
+            <div className="flex items-center justify-between mb-3">
+              <span className="text-xs text-gray-400 select-none">Drag or swipe to browse bundles</span>
+              <div className="flex gap-2">
+                <button
+                  onClick={() => scrollBy(-340)}
+                  className="p-2 rounded-full bg-gray-100 hover:bg-violet-50 hover:text-violet-600 transition-all"
+                  aria-label="Scroll left"
+                >
+                  <ChevronLeft className="h-4 w-4" />
+                </button>
+                <button
+                  onClick={() => scrollBy(340)}
+                  className="p-2 rounded-full bg-gray-100 hover:bg-violet-50 hover:text-violet-600 transition-all"
+                  aria-label="Scroll right"
+                >
+                  <ChevronRight className="h-4 w-4" />
+                </button>
               </div>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
-              {currentBundles.map((workflow) => (
-                <Card key={workflow.id} className="overflow-hidden flex flex-col h-full shadow-md hover:shadow-lg transition-shadow">
-                  <CardHeader className="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-4 sm:p-6">
-                    <div className="flex items-start space-x-2">
-                      <GitBranch className="h-5 w-5 mt-0.5 flex-shrink-0" />
-                      <div className="min-w-0">
-                        <CardTitle className="text-lg sm:text-xl leading-tight">{workflow.name}</CardTitle>
-                        <p className="mt-2 text-blue-100 text-sm sm:text-base">{workflow.description}</p>
-                      </div>
-                    </div>
-                  </CardHeader>
-                  <CardContent className="pt-4 sm:pt-6 flex-1 p-4 sm:p-6">
-                    <p className="text-gray-700 font-medium mb-3 text-sm sm:text-base">Included Tools:</p>
-                    <div className="space-y-3 sm:space-y-4">
-                      {workflow.tools.map((tool) => (
-                        <div key={tool.id} className="flex items-start space-x-3">
-                          <div className="h-8 w-8 sm:h-10 sm:w-10 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center flex-shrink-0">
-                            <span className="text-white font-semibold text-xs sm:text-sm">
-                              {tool.name.charAt(0).toUpperCase()}
-                            </span>
-                          </div>
-                          <div className="min-w-0 flex-1">
-                            <h4 className="font-medium text-gray-900 text-sm sm:text-base leading-tight">{tool.name}</h4>
-                            <p className="text-xs sm:text-sm text-gray-500 mt-0.5 leading-relaxed">{tool.shortDescription}</p>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                    
-                    <div className="mt-4 sm:mt-6 pt-4 border-t border-gray-100">
-                      <h4 className="font-medium text-gray-900 mb-3 text-sm sm:text-base">Implementation Steps:</h4>
-                      <ol className="list-decimal pl-4 sm:pl-5 space-y-1 text-gray-700 text-xs sm:text-sm">
-                        {workflow.implementationSteps.map((step, index) => (
-                          <li key={index} className="leading-relaxed">{step}</li>
-                        ))}
-                      </ol>
-                    </div>
-                  </CardContent>
-                  <CardFooter className="border-t border-gray-100 pt-4 p-4 sm:p-6">
-                    <div className="w-full flex flex-col gap-4">
-                      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3">
-                        <div className="flex-1">
-                          <p className="text-xs sm:text-sm text-gray-500">Estimated subscription cost (Subject to usage)</p>
-                          <p className="text-lg sm:text-xl font-bold text-gray-900">{workflow.totalCost}</p>
-                        </div>
-                      </div>
-                      <div className="flex flex-col sm:flex-row gap-3">
-                        <Button
-                          size="md"
-                          variant="secondary"
-                          onClick={() => handleCustomize(workflow)}
-                          className="w-full sm:flex-1 sm:min-w-[140px]"
-                        >
-                          Customize Bundle
-                        </Button>
-                        <Button
-                          size="md"
-                          variant="outline"
-                          onClick={() => navigate(`/contact#top?bundle=${workflow.id}&bundleName=${workflow.name}&inquiryType=implementation`)}
-                          className="w-full sm:flex-1 sm:min-w-[120px]"
-                        >
-                          Contact Us
-                        </Button>
-                      </div>
-                    </div>
-                  </CardFooter>
-                </Card>
-              ))}
-            </div>
+            {/* Swipeable 2-row scroll container */}
+            <div className="relative -mx-4 sm:-mx-6 lg:-mx-8">
+              {/* Left fade */}
+              <div className="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
+              {/* Right fade */}
+              <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
 
-            {/* Pagination Controls */}
-            {totalPages > 1 && (
-              <div className="mt-12 flex justify-center">
-                <Pagination
-                  currentPage={currentPage}
-                  totalPages={totalPages}
-                  onPageChange={handlePageChange}
-                />
+              <div
+                ref={scrollContainerRef}
+                className="overflow-x-auto cursor-grab active:cursor-grabbing select-none"
+                style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' } as React.CSSProperties}
+                onMouseDown={onMouseDown}
+                onMouseLeave={onMouseLeave}
+                onMouseUp={onMouseUp}
+                onMouseMove={onMouseMove}
+                onTouchStart={onTouchStart}
+                onTouchMove={onTouchMove}
+                onTouchEnd={onTouchEnd}
+              >
+                <div className="flex flex-col gap-4 w-max px-4 py-2">
+                  {/* Row 1 */}
+                  <div className="flex gap-4">
+                    {workflowBundles.map((workflow) => (
+                      <BundleCard
+                        key={`r1-${workflow.id}`}
+                        workflow={workflow}
+                        onCustomize={handleCustomize}
+                        onContact={(w) => navigate(`/contact#top?bundle=${w.id}&bundleName=${w.name}&inquiryType=implementation`)}
+                      />
+                    ))}
+                  </div>
+                  {/* Row 2 */}
+                  <div className="flex gap-4">
+                    {workflowBundles.map((workflow) => (
+                      <BundleCard
+                        key={`r2-${workflow.id}`}
+                        workflow={workflow}
+                        onCustomize={handleCustomize}
+                        onContact={(w) => navigate(`/contact#top?bundle=${w.id}&bundleName=${w.name}&inquiryType=implementation`)}
+                      />
+                    ))}
+                  </div>
+                </div>
               </div>
-            )}
+            </div>
 
             {/* Process Section */}
             <div className="mt-16" ref={processSectionRef}>

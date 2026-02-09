@@ -3,7 +3,7 @@ import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/Card';
 import { Button } from '../components/ui/Button';
 import { Badge } from '../components/ui/Badge';
-import { workflowBundles } from '../data/workflows';
+import { useBundles } from '../services/api/v2/bundles';
 import { 
   ArrowLeft, 
   Calendar, 
@@ -23,6 +23,7 @@ const SavedBundleDetailPage: React.FC = () => {
   const [bundle, setBundle] = useState<SavedBundle | null>(null);
   const [originalBundle, setOriginalBundle] = useState<any>(null);
   const [loading, setLoading] = useState(true);
+  const { data: bundlesData } = useBundles();
 
   useEffect(() => {
     loadBundleDetails();
@@ -50,8 +51,8 @@ const SavedBundleDetailPage: React.FC = () => {
         setBundle(savedBundle);
         
         // Load original bundle data if it exists
-        if (!savedBundle.isCustom) {
-          const original = workflowBundles.find(b => b.id === bundleId);
+        if (!savedBundle.isCustom && bundlesData?.bundles) {
+          const original = bundlesData.bundles.find(b => b.id === bundleId);
           setOriginalBundle(original);
         }
       } else {

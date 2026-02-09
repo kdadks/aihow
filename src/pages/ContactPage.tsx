@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useLocation, useSearchParams } from 'react-router-dom';
 import { Button } from '../components/ui/Button';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/Card';
-import { workflowBundles } from '../data/workflows';
+import { useBundle } from '../services/api/v2/bundles';
 import ProcessSection from '../components/bundles/ProcessSection';
 import { EmailService } from '../services/emailService';
 
@@ -40,26 +40,25 @@ const ContactPage: React.FC = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [submitError, setSubmitError] = useState<string>('');
-  const [referencedBundle, setReferencedBundle] = useState<any>(null);
+
+  // Get bundle slug from URL
+  const bundleSlug = searchParams.get('bundle') || '';
+  const bundleName = searchParams.get('bundleName');
+  const inquiryType = searchParams.get('inquiryType');
+
+  // Fetch bundle if slug is provided
+  const { data: referencedBundle } = useBundle(bundleSlug);
 
   // Handle URL parameters for bundle reference
   useEffect(() => {
-    const bundleId = searchParams.get('bundle');
-    const bundleName = searchParams.get('bundleName');
-    const inquiryType = searchParams.get('inquiryType');
-
-    if (bundleId) {
-      const bundle = workflowBundles.find(b => b.id === bundleId);
-      if (bundle) {
-        setReferencedBundle(bundle);
-        setFormData(prev => ({
-          ...prev,
-          inquiryType: inquiryType || 'implementation',
-          subject: `Implementation Inquiry for ${bundle.name}`,
-          message: `Hello,\n\nI'm interested in implementing the "${bundle.name}" bundle for my organization.\n\nBundle Details:\n- Name: ${bundle.name}\n- Estimated Cost: ${bundle.totalCost}\n- Tools Included: ${bundle.tools.map(tool => tool.name).join(', ')}\n\nPlease provide more information about:\n- Implementation timeline\n- Support and training options\n- Customization possibilities\n\nThank you!`,
-          bundleReference: bundleId
-        }));
-      }
+    if (referencedBundle) {
+      setFormData(prev => ({
+        ...prev,
+        inquiryType: inquiryType || 'implementation',
+        subject: `Implementation Inquiry for ${referencedBundle.name}`,
+        message: `Hello,\n\nI'm interested in implementing the "${referencedBundle.name}" bundle for my organization.\n\nBundle Details:\n- Name: ${referencedBundle.name}\n- Estimated Cost: ${referencedBundle.total_cost ?? 'Contact for pricing'}\n- Tools Included: ${referencedBundle.tools.map(tool => tool.name).join(', ')}\n\nPlease provide more information about:\n- Implementation timeline\n- Support and training options\n- Customization possibilities\n\nThank you!`,
+        bundleReference: bundleSlug
+      }));
     } else if (bundleName) {
       // If only bundle name is provided (fallback)
       setFormData(prev => ({
@@ -70,7 +69,7 @@ const ContactPage: React.FC = () => {
         bundleReference: bundleName
       }));
     }
-  }, [searchParams]);
+  }, [referencedBundle, bundleName, bundleSlug, inquiryType]);
 
   const validateForm = (): boolean => {
     const newErrors: FormErrors = {};

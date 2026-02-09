@@ -10,19 +10,8 @@
  * @returns URL to the tool's logo
  */
 export const getToolLogo = (toolName: string, website?: string): string => {
-  // If website is provided, try to extract domain for Clearbit
-  if (website) {
-    try {
-      const url = new URL(website);
-      const domain = url.hostname.replace('www.', '');
-      // Use Clearbit's logo API (free, no auth required)
-      return `https://logo.clearbit.com/${domain}`;
-    } catch (e) {
-      // If URL parsing fails, fall through to fallback
-    }
-  }
-
-  // Fallback to UI Avatars with tool name initials
+  // Prefer UI Avatars for consistency and to avoid Clearbit API errors
+  // Clearbit often fails for non-standard domains
   const initials = toolName
     .split(' ')
     .map(word => word[0])
@@ -30,7 +19,8 @@ export const getToolLogo = (toolName: string, website?: string): string => {
     .toUpperCase()
     .slice(0, 2);
 
-  return `https://ui-avatars.com/api/?name=${encodeURIComponent(initials)}&background=3B82F6&color=fff&size=128&bold=true`;
+  // Use a gradient background for better visual appeal
+  return `https://ui-avatars.com/api/?name=${encodeURIComponent(initials)}&background=random&color=fff&size=128&bold=true&rounded=true`;
 };
 
 /**

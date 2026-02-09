@@ -144,6 +144,7 @@ const ProcessSection: React.FC<ProcessSectionProps> = ({
       </div>
 
       {/* Benefits Section */}
+      <div id="why-us">
       <Card className="bg-gradient-to-br from-blue-50 via-white to-purple-50 border-blue-100 shadow-md">
         <CardContent className="p-4 sm:p-6 lg:p-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-start lg:items-center">
@@ -175,6 +176,7 @@ const ProcessSection: React.FC<ProcessSectionProps> = ({
           </div>
         </CardContent>
       </Card>
+      </div>
 
       {/* Timeline Overview */}
       <Card className="shadow-md">

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Tool } from '../../types';
-import { tools } from '../../data/tools';
-import { workflowBundles } from '../../data/workflows';
+import { useTools } from '../../services/api/v2/tools';
+import { useBundles } from '../../services/api/v2/bundles';
 import { Button } from '../ui/Button';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/Card';
 import { Badge } from '../ui/Badge';
@@ -9,7 +9,7 @@ import { Plus, X, Calculator, Save, Wand2 } from 'lucide-react';
 
 interface BundleCreatorProps {
   onSave?: (bundle: { name: string; tools: Tool[]; totalCost: number }) => void;
-  initialBundle?: typeof workflowBundles[0] | null;
+  initialBundle?: any | null;
 }
 
 export const BundleCreator: React.FC<BundleCreatorProps> = ({ onSave, initialBundle }) => {
@@ -17,7 +17,11 @@ export const BundleCreator: React.FC<BundleCreatorProps> = ({ onSave, initialBun
   const [bundleName, setBundleName] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
   const [useCase, setUseCase] = useState('');
-  const [recommendedBundle, setRecommendedBundle] = useState<typeof workflowBundles[0] | null>(initialBundle || null);
+  const [recommendedBundle, setRecommendedBundle] = useState<any | null>(initialBundle || null);
+  const { data: toolsData } = useTools();
+  const { data: bundlesData } = useBundles();
+  const tools = toolsData?.tools || [];
+  const workflowBundles = bundlesData?.bundles || [];
 
   useEffect(() => {
     if (initialBundle) {

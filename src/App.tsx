@@ -11,26 +11,26 @@ function AppRoutes() {
         <>
             <ScrollToTop />
             <Routes>
-                {/* Main Layout wrapping all routes */}
-                <Route path="/" element={<MainLayout />}>
-                    {/* Admin routes */}
-                    {adminRoutes.map((route) => (
-                        <Route
-                            key={route.path}
-                            path={route.path}
-                            element={route.element}
-                        >
-                            {route.children?.map((child) => (
-                                <Route
-                                    key={child.path || 'index'}
-                                    path={child.path}
-                                    element={child.element}
-                                    index={child.index}
-                                />
-                            ))}
-                        </Route>
-                    ))}
+                {/* Admin routes - NO MainLayout wrapper */}
+                {adminRoutes.map((route) => (
+                    <Route
+                        key={route.path}
+                        path={route.path}
+                        element={route.element}
+                    >
+                        {route.children?.map((child) => (
+                            <Route
+                                key={child.path || 'index'}
+                                path={child.path}
+                                element={child.element}
+                                index={child.index}
+                            />
+                        ))}
+                    </Route>
+                ))}
 
+                {/* Main Layout wrapping public and protected routes only */}
+                <Route path="/" element={<MainLayout />}>
                     {/* Protected routes */}
                     {protectedRoutes.map((route) => (
                         <Route

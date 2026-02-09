@@ -1,16 +1,16 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
-import { Search, Filter, Grid, List, ArrowRight, Star, ExternalLink } from 'lucide-react';
-import { tools } from '../data/tools';
-import { categories } from '../data/categories';
-import { Tool, Category } from '../types';
-import { Button } from '../components/ui/Button';
+import { Search, Grid, List, ArrowRight, Star, ExternalLink } from 'lucide-react';
+import { useSearchTools } from '../services/api/v2/tools';
+import { useCategories } from '../services/api/v2/categories';
+import { ToolV2 } from '../types/tool.types';
+
 import { Card } from '../components/ui/Card';
 import { Badge } from '../components/ui/Badge';
 import { GenerativeAnswer } from '../components/search/GenerativeAnswer';
 import { getToolLogo, getLogoFallback } from '../utils/logoUtils';
 
-interface SearchResult extends Tool {
+interface SearchResult extends ToolV2 {
   matchScore: number;
   matchReason: string;
   categoryName?: string;
@@ -20,133 +20,69 @@ interface SearchResult extends Tool {
 const SearchPage: React.FC = () => {
   const [searchParams] = useSearchParams();
   const query = searchParams.get('q') || '';
-  
-  const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
+
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [sortBy, setSortBy] = useState<'relevance' | 'rating' | 'name'>('relevance');
   const [filterCategory, setFilterCategory] = useState<string>('all');
 
-  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const { data: categories = [] } = useCategories();
+  const { data: toolResults = [], isFetching: isLoading } = useSearchTools(query.trim(), 100);
 
-  useEffect(() => {
-    if (query.trim()) {
-      performSearch(query.trim());
-    } else {
-      setSearchResults([]);
+  // Enrich search results with match metadata
+  const searchResults: SearchResult[] = toolResults.map(tool => {
+    const primarySub = tool.subcategories?.[0];
+    const queryLower = query.toLowerCase();
+
+    let matchScore = 50; // Default FTS match
+    let matchReason = 'Match found';
+
+    // Calculate match score based on where the match occurs
+    if (tool.name.toLowerCase() === queryLower) {
+      matchScore = 100;
+      matchReason = 'Exact name match';
+    } else if (tool.name.toLowerCase().includes(queryLower)) {
+      matchScore = 90;
+      matchReason = 'Name contains search term';
+    } else if ((tool.short_description ?? '').toLowerCase().includes(queryLower)) {
+      matchScore = 80;
+      matchReason = 'Description match';
+    } else if ((tool.description ?? '').toLowerCase().includes(queryLower)) {
+      matchScore = 70;
+      matchReason = 'Detailed description match';
+    } else if (tool.features?.some(f => f.toLowerCase().includes(queryLower))) {
+      matchScore = 60;
+      matchReason = 'Feature match';
+    } else if (primarySub?.category_name?.toLowerCase().includes(queryLower)) {
+      matchScore = 50;
+      matchReason = 'Category match';
+    } else if (primarySub?.name?.toLowerCase().includes(queryLower)) {
+      matchScore = 40;
+      matchReason = 'Subcategory match';
     }
 
-    return () => {
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current);
-        timeoutRef.current = null;
-      }
+    return {
+      ...tool,
+      matchScore,
+      matchReason,
+      categoryName: primarySub?.category_name,
+      subcategoryName: primarySub?.name
     };
-  }, [query]);
-
-  const performSearch = (searchQuery: string) => {
-    setIsLoading(true);
-    
-    // Clear any existing timeout
-    if (timeoutRef.current) {
-      clearTimeout(timeoutRef.current);
-    }
-
-    // Simulate search delay for better UX
-    timeoutRef.current = setTimeout(() => {
-      const results = searchTools(searchQuery);
-      setSearchResults(results);
-      setIsLoading(false);
-      timeoutRef.current = null;
-    }, 200);
-  };
-
-  const searchTools = (searchQuery: string): SearchResult[] => {
-    const query = searchQuery.toLowerCase();
-    const results: SearchResult[] = [];
-
-    tools.forEach(tool => {
-      let matchScore = 0;
-      let matchReason = '';
-
-      // Exact name match (highest priority)
-      if (tool.name.toLowerCase() === query) {
-        matchScore = 100;
-        matchReason = 'Exact name match';
-      }
-      // Name contains query
-      else if (tool.name.toLowerCase().includes(query)) {
-        matchScore = 90;
-        matchReason = 'Name contains search term';
-      }
-      // Short description match
-      else if (tool.shortDescription.toLowerCase().includes(query)) {
-        matchScore = 80;
-        matchReason = 'Description match';
-      }
-      // Full description match
-      else if (tool.description.toLowerCase().includes(query)) {
-        matchScore = 70;
-        matchReason = 'Detailed description match';
-      }
-      // Features match
-      else if (tool.features.some(feature => feature.toLowerCase().includes(query))) {
-        matchScore = 60;
-        matchReason = 'Feature match';
-      }
-      // Category match
-      else {
-        const category = categories.find(cat => cat.id === tool.categoryId);
-        if (category?.name.toLowerCase().includes(query) || 
-            category?.description.toLowerCase().includes(query)) {
-          matchScore = 50;
-          matchReason = 'Category match';
-        }
-        // Subcategory match
-        else {
-          const subcategory = category?.subcategories.find(sub => 
-            tool.subcategoryIds.includes(sub.id)
-          );
-          if (subcategory?.name.toLowerCase().includes(query) ||
-              subcategory?.description.toLowerCase().includes(query)) {
-            matchScore = 40;
-            matchReason = 'Subcategory match';
-          }
-        }
-      }
-
-      if (matchScore > 0) {
-        const category = categories.find(cat => cat.id === tool.categoryId);
-        const subcategory = category?.subcategories.find(sub => 
-          tool.subcategoryIds.includes(sub.id)
-        );
-
-        results.push({
-          ...tool,
-          matchScore,
-          matchReason,
-          categoryName: category?.name,
-          subcategoryName: subcategory?.name
-        });
-      }
-    });
-
-    // Sort by match score initially
-    return results.sort((a, b) => b.matchScore - a.matchScore);
-  };
+  });
 
   const getSortedAndFilteredResults = () => {
     let filtered = searchResults;
 
     // Apply category filter
     if (filterCategory !== 'all') {
-      filtered = filtered.filter(tool => tool.categoryId === filterCategory);
+      filtered = filtered.filter(tool =>
+        tool.subcategories?.[0]?.category_slug === filterCategory
+      );
     }
 
     // Apply sorting
     switch (sortBy) {
       case 'rating':
-        return filtered.sort((a, b) => b.rating - a.rating);
+        return filtered.sort((a, b) => (b.rating ?? 0) - (a.rating ?? 0));
       case 'name':
         return filtered.sort((a, b) => a.name.localeCompare(b.name));
       case 'relevance':
@@ -162,116 +98,130 @@ const SearchPage: React.FC = () => {
     return `${count} results found`;
   };
 
-  const renderToolCard = (tool: SearchResult, index: number) => (
-    <Card key={`${tool.id}-${tool.slug}-${index}`} className="p-6 hover:shadow-lg transition-shadow">
-      <div className="flex items-start space-x-4">
+  const renderToolCard = (tool: SearchResult, index: number) => {
+    const primarySub = tool.subcategories?.[0];
+
+    return (
+      <Card key={`${tool.id}-${tool.slug}-${index}`} className="p-6 hover:shadow-lg transition-shadow">
+        <div className="flex items-start space-x-4">
+          <img
+            src={getToolLogo(tool.name, tool.website_url ?? '')}
+            alt={`${tool.name} logo`}
+            className="w-12 h-12 rounded-lg object-cover flex-shrink-0"
+            onError={(e) => {
+              const target = e.target as HTMLImageElement;
+              target.src = getLogoFallback(tool.name);
+            }}
+          />
+          <div className="flex-1 min-w-0">
+            <div className="flex items-start justify-between">
+              <div className="flex-1">
+                <h3 className="text-lg font-semibold text-gray-900 mb-1">
+                  {tool.name}
+                </h3>
+                <p className="text-sm text-gray-600 mb-2">{tool.short_description}</p>
+
+                <div className="flex items-center space-x-4 mb-3">
+                  <div className="flex items-center">
+                    <Star className="h-4 w-4 text-yellow-400 fill-current" />
+                    <span className="ml-1 text-sm text-gray-600">
+                      {tool.rating ?? 0} ({tool.review_count ?? 0} reviews)
+                    </span>
+                  </div>
+                  <Badge variant="secondary" className="text-xs">
+                    {tool.categoryName}
+                  </Badge>
+                  {tool.trending && (
+                    <Badge variant="default" className="text-xs">
+                      Trending
+                    </Badge>
+                  )}
+                </div>
+
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center space-x-4">
+                    <span className="text-sm text-blue-600 font-medium">
+                      {tool.matchReason}
+                    </span>
+                    <span className="text-sm text-gray-500">
+                      {tool.pricing?.type === 'freemium' ? 'Free tier available' :
+                       tool.pricing?.type === 'free' ? 'Free' :
+                       tool.pricing?.starting_price ?? 'Contact for pricing'}
+                    </span>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <a
+                      href={tool.website_url ?? '#'}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center justify-center h-8 px-3 text-sm rounded-md border border-gray-300 bg-transparent text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-all duration-200"
+                    >
+                      <ExternalLink className="h-4 w-4 mr-1" />
+                      Visit
+                    </a>
+                    <Link
+                      to={primarySub
+                        ? `/directory/${primarySub.category_slug}/${primarySub.slug}/${tool.slug}`
+                        : `/tools/${tool.slug}`
+                      }
+                      className="inline-flex items-center justify-center h-8 px-3 text-sm rounded-md bg-blue-600 text-white hover:bg-blue-700 transition-all duration-200"
+                    >
+                      View Details
+                      <ArrowRight className="h-4 w-4 ml-1" />
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </Card>
+    );
+  };
+
+  const renderToolListItem = (tool: SearchResult, index: number) => {
+    const primarySub = tool.subcategories?.[0];
+
+    return (
+      <div key={`${tool.id}-${tool.slug}-${index}`} className="flex items-center space-x-4 p-4 border-b border-gray-200 hover:bg-gray-50">
         <img
-          src={getToolLogo(tool.name, tool.website)}
+          src={getToolLogo(tool.name, tool.website_url ?? '')}
           alt={`${tool.name} logo`}
-          className="w-12 h-12 rounded-lg object-cover flex-shrink-0"
+          className="w-10 h-10 rounded object-cover flex-shrink-0"
           onError={(e) => {
             const target = e.target as HTMLImageElement;
             target.src = getLogoFallback(tool.name);
           }}
         />
         <div className="flex-1 min-w-0">
-          <div className="flex items-start justify-between">
-            <div className="flex-1">
-              <h3 className="text-lg font-semibold text-gray-900 mb-1">
-                {tool.name}
-              </h3>
-              <p className="text-sm text-gray-600 mb-2">{tool.shortDescription}</p>
-              
-              <div className="flex items-center space-x-4 mb-3">
-                <div className="flex items-center">
-                  <Star className="h-4 w-4 text-yellow-400 fill-current" />
-                  <span className="ml-1 text-sm text-gray-600">
-                    {tool.rating} ({tool.reviewCount} reviews)
-                  </span>
-                </div>
-                <Badge variant="secondary" className="text-xs">
-                  {tool.categoryName}
-                </Badge>
-                {tool.trending && (
-                  <Badge variant="default" className="text-xs">
-                    Trending
-                  </Badge>
-                )}
+          <div className="flex items-center justify-between">
+            <div>
+              <h3 className="font-medium text-gray-900">{tool.name}</h3>
+              <p className="text-sm text-gray-600 truncate">{tool.short_description}</p>
+            </div>
+            <div className="flex items-center space-x-4">
+              <div className="flex items-center">
+                <Star className="h-4 w-4 text-yellow-400 fill-current" />
+                <span className="ml-1 text-sm text-gray-600">{tool.rating ?? 0}</span>
               </div>
-
-              <div className="flex items-center justify-between">
-                <div className="flex items-center space-x-4">
-                  <span className="text-sm text-blue-600 font-medium">
-                    {tool.matchReason}
-                  </span>
-                  <span className="text-sm text-gray-500">
-                    {tool.pricing.type === 'freemium' ? 'Free tier available' : 
-                     tool.pricing.type === 'free' ? 'Free' : 
-                     tool.pricing.startingPrice}
-                  </span>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <a
-                    href={tool.website}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center h-8 px-3 text-sm rounded-md border border-gray-300 bg-transparent text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-all duration-200"
-                  >
-                    <ExternalLink className="h-4 w-4 mr-1" />
-                    Visit
-                  </a>
-                  <Link
-                    to={`/directory/${tool.categoryId}/${tool.subcategoryIds[0]}/${tool.slug}`}
-                    className="inline-flex items-center justify-center h-8 px-3 text-sm rounded-md bg-blue-600 text-white hover:bg-blue-700 transition-all duration-200"
-                  >
-                    View Details
-                    <ArrowRight className="h-4 w-4 ml-1" />
-                  </Link>
-                </div>
-              </div>
+              <Badge variant="secondary" className="text-xs">
+                {tool.categoryName}
+              </Badge>
+              <Link
+                to={primarySub
+                  ? `/directory/${primarySub.category_slug}/${primarySub.slug}/${tool.slug}`
+                  : `/tools/${tool.slug}`
+                }
+                className="inline-flex items-center justify-center h-8 px-3 text-sm rounded-md bg-blue-600 text-white hover:bg-blue-700 transition-all duration-200"
+              >
+                View
+              </Link>
             </div>
           </div>
         </div>
       </div>
-    </Card>
-  );
-
-  const renderToolListItem = (tool: SearchResult, index: number) => (
-    <div key={`${tool.id}-${tool.slug}-${index}`} className="flex items-center space-x-4 p-4 border-b border-gray-200 hover:bg-gray-50">
-      <img
-        src={getToolLogo(tool.name, tool.website)}
-        alt={`${tool.name} logo`}
-        className="w-10 h-10 rounded object-cover flex-shrink-0"
-        onError={(e) => {
-          const target = e.target as HTMLImageElement;
-          target.src = getLogoFallback(tool.name);
-        }}
-      />
-      <div className="flex-1 min-w-0">
-        <div className="flex items-center justify-between">
-          <div>
-            <h3 className="font-medium text-gray-900">{tool.name}</h3>
-            <p className="text-sm text-gray-600 truncate">{tool.shortDescription}</p>
-          </div>
-          <div className="flex items-center space-x-4">
-            <div className="flex items-center">
-              <Star className="h-4 w-4 text-yellow-400 fill-current" />
-              <span className="ml-1 text-sm text-gray-600">{tool.rating}</span>
-            </div>
-            <Badge variant="secondary" className="text-xs">
-              {tool.categoryName}
-            </Badge>
-            <Link
-              to={`/directory/${tool.categoryId}/${tool.subcategoryIds[0]}/${tool.slug}`}
-              className="inline-flex items-center justify-center h-8 px-3 text-sm rounded-md bg-blue-600 text-white hover:bg-blue-700 transition-all duration-200"
-            >
-              View
-            </Link>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+    );
+  };
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -317,7 +267,7 @@ const SearchPage: React.FC = () => {
               >
                 <option value="all">All Categories</option>
                 {categories.map(category => (
-                  <option key={category.id} value={category.id}>
+                  <option key={category.id} value={category.slug}>
                     {category.name}
                   </option>
                 ))}

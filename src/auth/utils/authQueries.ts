@@ -8,11 +8,6 @@ export interface UserRoleData {
   assigned_at: string;
 }
 
-export interface UserPermissionData {
-  name: string;
-  category: string;
-}
-
 export interface UserProfileData {
   id: string;
   username?: string;
@@ -62,24 +57,6 @@ export async function getUserRoles(userId: string): Promise<{ data: UserRoleData
   })) || [];
 
   return { data: roles, error: null };
-}
-
-export async function getUserPermissions(userId: string): Promise<{ data: UserPermissionData[]; error: any }> {
-  const { data, error } = await supabase
-    .from('user_permissions')
-    .select('permission_name, permission_category')
-    .eq('user_id', userId);
-
-  if (error) {
-    return { data: [], error };
-  }
-
-  const permissions = data?.map((item: any) => ({
-    name: item.permission_name,
-    category: item.permission_category
-  })) || [];
-
-  return { data: permissions, error: null };
 }
 
 export async function createUserProfile(userId: string, profileData: Partial<UserProfileData>): Promise<{ data: any; error: any }> {

@@ -5,9 +5,9 @@ import { useSEO } from '../hooks/useSEO';
 import SEOUtils from '../utils/seoUtils';
 import { SearchFilters } from '../components/directory/SearchFilters';
 import { ToolCard } from '../components/directory/ToolCard';
-import { tools } from '../data/tools';
-import { categories } from '../data/categories';
-import { SearchFilters as SearchFiltersType, Tool, Category, Subcategory } from '../types';
+import { useTools } from '../services/api/v2/tools';
+import { useCategories } from '../services/api/v2/categories';
+import { SearchFilters as SearchFiltersType, Tool } from '../types';
 import { useComparisonStore } from '../stores/comparisonStore';
 import { Button } from '../components/ui';
 import { Pagination } from '../components/ui/Pagination';
@@ -26,8 +26,14 @@ const DirectoryPage: React.FC = () => {
     category: categoryId,
     subcategory: subcategoryId
   }));
-  const [filteredTools, setFilteredTools] = useState<Tool[]>(tools);
   const { selectedTools, addTool, isToolSelectable } = useComparisonStore();
+
+  const { data: { tools: allTools = [] } = {}, isLoading: toolsLoading } = useTools({
+    categorySlug: filters.category,
+    subcategorySlug: filters.subcategory,
+    limit: 200,
+  });
+  const { data: categories = [] } = useCategories();
 
   // --- SEO/Intro Section ---
   // Concise intro and subtle headings for better UX alignment
@@ -49,35 +55,29 @@ const DirectoryPage: React.FC = () => {
 
   // Handle search from AutocompleteSearch
   const handleDirectorySearch = (query: string) => {
-    // Try to match tool, category, or subcategory by name
     const lowerQuery = query.trim().toLowerCase();
-    const toolMatch = tools.find(t => t.name.toLowerCase() === lowerQuery);
-    if (toolMatch) {
-      navigate(`/tools/${toolMatch.id}`);
-      return;
-    }
     const categoryMatch = categories.find(c => c.name.toLowerCase() === lowerQuery);
     if (categoryMatch) {
       setFilters(prev => ({
         ...prev,
-        category: categoryMatch.id,
+        category: categoryMatch.slug,
         subcategory: undefined
       }));
       return;
     }
-    let foundSub: { categoryId: string, subcategoryId: string } | undefined;
+    let foundSub: { categorySlug: string, subcategorySlug: string } | undefined;
     categories.forEach(c => {
-      c.subcategories?.forEach(s => {
+      (c.subcategories ?? []).forEach(s => {
         if (s.name.toLowerCase() === lowerQuery) {
-          foundSub = { categoryId: c.id, subcategoryId: s.id };
+          foundSub = { categorySlug: c.slug, subcategorySlug: s.slug };
         }
       });
     });
     if (foundSub) {
       setFilters(prev => ({
         ...prev,
-        category: foundSub!.categoryId,
-        subcategory: foundSub!.subcategoryId
+        category: foundSub!.categorySlug,
+        subcategory: foundSub!.subcategorySlug
       }));
       return;
     }
@@ -87,6 +87,49 @@ const DirectoryPage: React.FC = () => {
       query
     }));
   };
+
+  // Update filters when URL params change
+  useEffect(() => {
+    setCurrentPage(1); // Reset pagination when category/subcategory changes
+    setFilters(prev => ({
+      ...prev,
+      category: categoryId,
+      subcategory: subcategoryId
+    }));
+  }, [categoryId, subcategoryId]);
+
+  // Compute filtered tools using useMemo to prevent infinite loops
+  const filteredTools = useMemo(() => {
+    let result = [...allTools];
+
+    // Pricing filter (client-side since it's lightweight)
+    if (filters.pricing && filters.pricing.length > 0) {
+      result = result.filter(tool =>
+        filters.pricing!.includes((tool.pricing as { type?: string })?.type ?? '')
+      );
+    }
+
+    // Rating filter
+    if (filters.rating) {
+      result = result.filter(tool => (tool.rating ?? 0) >= filters.rating!);
+    }
+
+    // Text query filter
+    if (filters.query) {
+      const q = filters.query.toLowerCase();
+      result = result.filter(tool =>
+        tool.name.toLowerCase().includes(q) ||
+        (tool.description ?? '').toLowerCase().includes(q)
+      );
+    }
+
+    return result as unknown as Tool[];
+  }, [filters.pricing, filters.rating, filters.query, allTools]);
+
+  // Reset to page 1 when filters change
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [filters.pricing, filters.rating, filters.query]);
 
   // Calculate total pages
   const totalPages = useMemo(() => {
@@ -109,53 +152,6 @@ const DirectoryPage: React.FC = () => {
     }
   }, [location.state]);
 
-  // Update filters when URL params change
-  useEffect(() => {
-    setCurrentPage(1); // Reset pagination when category/subcategory changes
-    setFilters(prev => ({
-      ...prev,
-      category: categoryId,
-      subcategory: subcategoryId
-    }));
-  }, [categoryId, subcategoryId]);
-
-  useEffect(() => {
-    setCurrentPage(1); // Reset to first page when filters change
-    let result = [...tools];
-
-    // Apply category filter
-    if (filters.category) {
-      result = result.filter(tool => tool.categoryId === filters.category);
-    }
-
-    // Apply subcategory filter
-    if (filters.subcategory) {
-      result = result.filter(tool => tool.subcategoryIds.includes(filters.subcategory!));
-    }
-
-    // Apply pricing filter
-    if (filters.pricing && filters.pricing.length > 0) {
-      result = result.filter(tool => filters.pricing!.includes(tool.pricing.type));
-    }
-
-    // Apply rating filter
-    if (filters.rating) {
-      result = result.filter(tool => tool.rating >= filters.rating!);
-    }
-
-    // Apply query filter from search bar
-    if (filters.query) {
-      const q = filters.query.toLowerCase();
-      result = result.filter(tool =>
-        tool.name.toLowerCase().includes(q) ||
-        tool.description?.toLowerCase().includes(q)
-      );
-    }
-
-    // Update filtered results
-    setFilteredTools(result);
-  }, [filters]);
-
   const handleCompare = () => {
     if (selectedTools.length < 2) {
       toast.error('Select at least 2 tools to compare');
@@ -166,9 +162,9 @@ const DirectoryPage: React.FC = () => {
 
   // Generate dynamic SEO based on current filters
   const generateSEOConfig = () => {
-    const category = filters.category ? categories.find(c => c.id === filters.category) : null;
+    const category = filters.category ? categories.find(c => c.slug === filters.category) : null;
     const subcategory = filters.subcategory ?
-      category?.subcategories?.find(s => s.id === filters.subcategory) : null;
+      category?.subcategories?.find(s => s.slug === filters.subcategory) : null;
 
     let title = 'AI Tools Directory - Complete Guide to AI Applications';
     let description = 'Browse our comprehensive directory of AI tools and applications. Find the perfect AI solution for your workflow automation needs.';
@@ -192,8 +188,8 @@ const DirectoryPage: React.FC = () => {
       structuredData: SEOUtils.generateBreadcrumbs([
         { name: 'Home', url: '/' },
         { name: 'Directory', url: '/directory' },
-        ...(category ? [{ name: category.name, url: `/directory/${category.id}` }] : []),
-        ...(subcategory ? [{ name: subcategory.name, url: `/directory/${category?.id}/${subcategory.id}` }] : [])
+        ...(category ? [{ name: category.name, url: `/directory/${category.slug}` }] : []),
+        ...(subcategory ? [{ name: subcategory.name, url: `/directory/${category?.slug}/${subcategory.slug}` }] : [])
       ])
     };
   };
@@ -236,18 +232,18 @@ const DirectoryPage: React.FC = () => {
       <div className="text-center mb-10">
         <h1 className="text-3xl font-bold text-gray-900 sm:text-4xl">
           {filters.subcategory ? (
-            categories.find((c: Category) => c.id === filters.category)?.subcategories?.find((s: Subcategory) => s.id === filters.subcategory)?.name
+            categories.find((c: Category) => c.slug === filters.category)?.subcategories?.find((s: Subcategory) => s.slug === filters.subcategory)?.name
           ) : filters.category ? (
-            categories.find((c: Category) => c.id === filters.category)?.name
+            categories.find((c: Category) => c.slug === filters.category)?.name
           ) : (
             'AI Tools Directory'
           )}
         </h1>
         <p className="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">
           {filters.subcategory ? (
-            categories.find((c: Category) => c.id === filters.category)?.subcategories?.find((s: Subcategory) => s.id === filters.subcategory)?.description
+            categories.find((c: Category) => c.slug === filters.category)?.subcategories?.find((s: Subcategory) => s.slug === filters.subcategory)?.description
           ) : filters.category ? (
-            categories.find((c: Category) => c.id === filters.category)?.description
+            categories.find((c: Category) => c.slug === filters.category)?.description
           ) : (
             'Browse and filter through our comprehensive collection of AI tools to find the perfect solutions for your needs.'
           )}

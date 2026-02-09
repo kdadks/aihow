@@ -1,7 +1,7 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { BlogCard } from '../components/blog/BlogCard';
 import { Search, Mail } from 'lucide-react';
-import { blogPosts } from '../data/community';
+import { useAllBlogPosts } from '../services/api/v2/blog';
 import { Pagination } from '../components/ui/Pagination';
 import { SEOHead } from '../components/SEOHead';
 
@@ -21,14 +21,16 @@ const BlogPage: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
+  const { data: blogPosts = [], isLoading } = useAllBlogPosts();
 
   const filteredPosts = useMemo(() => {
+    if (isLoading || !blogPosts) return [];
     return blogPosts.filter(post => 
       (selectedCategory === "All" || post.category === selectedCategory) &&
       (post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
        post.excerpt.toLowerCase().includes(searchQuery.toLowerCase()))
     );
-  }, [selectedCategory, searchQuery]);
+  }, [selectedCategory, searchQuery, blogPosts, isLoading]);
 
   // Calculate total pages
   const totalPages = useMemo(() => {
@@ -58,7 +60,7 @@ const BlogPage: React.FC = () => {
       description: post.excerpt,
       author: {
         '@type': 'Person',
-        name: post.author
+        name: post.author_name
       },
       datePublished: post.date
     }))
@@ -74,6 +76,12 @@ const BlogPage: React.FC = () => {
         structuredData={structuredData}
       />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      {isLoading ? (
+        <div className="text-center py-12">
+          <p className="text-gray-600">Loading blog posts...</p>
+        </div>
+      ) : (
+      <>
       <div className="text-center mb-12">
         <h1 className="text-4xl font-bold text-gray-900 mb-4">
           The AI Tools Blog
@@ -174,6 +182,8 @@ const BlogPage: React.FC = () => {
           </form>
         </div>
       </div>
+      </>
+      )}
     </div>
     </>
   );

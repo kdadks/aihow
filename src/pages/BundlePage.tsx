@@ -1,20 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { BundleCreator } from '../components/bundles/BundleCreator';
-import { workflowBundles } from '../data/workflows';
+import { useBundles } from '../services/api/v2/bundles';
+import { BundleV2 } from '../types/bundle.types';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/Card';
 import { Button } from '../components/ui/Button';
 import { GitBranch, Layers } from 'lucide-react';
 import { userDataService } from '../services/userDataService';
+import { getToolLogo, getLogoFallback } from '../utils/logoUtils';
 
 const BundlePage: React.FC = () => {
   const navigate = useNavigate();
   const [activeView, setActiveView] = useState<'create' | 'browse'>('create');
   const location = useLocation();
-  const [selectedBundle, setSelectedBundle] = useState<typeof workflowBundles[0] | null>(null);
+  const [selectedBundle, setSelectedBundle] = useState<BundleV2 | null>(null);
+  const { data: { bundles = [] } = {}, isLoading } = useBundles({ limit: 50 });
 
   useEffect(() => {
-    const state = location.state as { customizeBundle?: typeof workflowBundles[0] };
+    const state = location.state as { customizeBundle?: BundleV2 };
     if (state?.customizeBundle) {
       setSelectedBundle(state.customizeBundle);
       setActiveView('create');
@@ -31,7 +34,7 @@ const BundlePage: React.FC = () => {
           name: bundle.name,
           description: bundle.description,
           useCase: bundle.useCase,
-          totalCost: bundle.totalCost || 0,
+          totalCost: bundle.total_cost || 0,
           tools: bundle.tools,
           metadata: {
             ...bundle.metadata,
@@ -43,7 +46,7 @@ const BundlePage: React.FC = () => {
         // Check if workflow already exists
         const existingWorkflows = await userDataService.getSavedWorkflows();
         const workflowExists = existingWorkflows.some((saved: any) => saved.id === workflowToSave.id);
-        
+
         if (!workflowExists) {
           await userDataService.saveWorkflowToCollection(workflowToSave);
           alert(`Workflow "${bundle.name}" has been saved to your collection!`);
@@ -59,7 +62,7 @@ const BundlePage: React.FC = () => {
     }
   };
 
-  const handleUseBundle = (bundle: typeof workflowBundles[0]) => {
+  const handleUseBundle = (bundle: BundleV2) => {
     setSelectedBundle(bundle);
     setActiveView('create');
   };
@@ -88,9 +91,14 @@ const BundlePage: React.FC = () => {
         <div className="bg-gradient-to-b from-blue-50 to-white rounded-2xl shadow-sm border border-blue-100 overflow-hidden">
           <BundleCreator onSave={handleSaveBundle} initialBundle={selectedBundle} />
         </div>
+      ) : isLoading ? (
+        <div className="flex justify-center items-center py-12">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+          <span className="ml-3 text-gray-600">Loading bundles...</span>
+        </div>
       ) : (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {workflowBundles.map((bundle) => (
+          {bundles.map((bundle) => (
             <Card key={bundle.id} className="overflow-hidden hover:shadow-lg transition-shadow flex flex-col h-full">
               <CardHeader className="bg-gradient-to-r from-blue-600 to-purple-600 text-white">
                 <div className="flex items-center justify-between">
@@ -110,7 +118,7 @@ const BundlePage: React.FC = () => {
                     <Button
                       size="sm"
                       variant="outline"
-                      onClick={() => navigate(`/contact?bundle=${bundle.id}&bundleName=${bundle.name}&inquiryType=implementation`)}
+                      onClick={() => navigate(`/contact?bundle=${bundle.slug}&bundleName=${bundle.name}&inquiryType=implementation`)}
                       className="bg-white/10 hover:bg-white/20 min-w-[100px] border-white/20 text-white"
                     >
                       Contact Us
@@ -128,11 +136,19 @@ const BundlePage: React.FC = () => {
                   {bundle.tools.map((tool) => (
                     <div key={tool.id} className="flex items-center space-x-3">
                       <div className="h-10 w-10 rounded overflow-hidden flex-shrink-0">
-                        <img src={tool.logo} alt={tool.name} className="h-full w-full object-cover" />
+                        <img
+                          src={getToolLogo(tool.name, '')}
+                          alt={tool.name}
+                          className="h-full w-full object-cover"
+                          onError={(e) => {
+                            const target = e.target as HTMLImageElement;
+                            target.src = getLogoFallback(tool.name);
+                          }}
+                        />
                       </div>
                       <div>
                         <h4 className="font-medium text-gray-900">{tool.name}</h4>
-                        <p className="text-sm text-gray-500">{tool.shortDescription}</p>
+                        <p className="text-sm text-gray-500">{tool.short_description}</p>
                       </div>
                     </div>
                   ))}
@@ -142,7 +158,7 @@ const BundlePage: React.FC = () => {
                   <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
                     <div className="flex-1">
                       <p className="text-sm text-gray-500">Estimated subscription cost (Subject to usage)</p>
-                      <p className="text-lg font-bold text-gray-900">{bundle.totalCost}</p>
+                      <p className="text-lg font-bold text-gray-900">{bundle.total_cost ?? 'Contact for pricing'}</p>
                     </div>
                     <div className="flex gap-3 flex-shrink-0">
                       <Button
@@ -156,7 +172,7 @@ const BundlePage: React.FC = () => {
                       <Button
                         size="md"
                         variant="outline"
-                        onClick={() => navigate(`/contact?bundle=${bundle.id}&bundleName=${bundle.name}&inquiryType=implementation`)}
+                        onClick={() => navigate(`/contact?bundle=${bundle.slug}&bundleName=${bundle.name}&inquiryType=implementation`)}
                         className="min-w-[120px]"
                       >
                         Contact Us

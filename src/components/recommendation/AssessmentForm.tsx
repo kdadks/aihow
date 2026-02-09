@@ -3,7 +3,7 @@ import { Button } from '../ui/Button';
 import { assessmentQuestions } from '../../data/questions';
 import { ArrowRight, ArrowLeft, CheckCircle2 } from 'lucide-react';
 import { Question, Recommendation } from '../../types';
-import { tools } from '../../data/tools';
+import { useTools } from '../../services/api/v2/tools';
 
 interface AssessmentFormProps {
   onComplete: (recommendations: Recommendation[]) => void;
@@ -13,6 +13,8 @@ export const AssessmentForm: React.FC<AssessmentFormProps> = ({ onComplete }) =>
   const [currentStep, setCurrentStep] = useState(0);
   const [answers, setAnswers] = useState<Record<string, string | string[]>>({});
   const [loading, setLoading] = useState(false);
+  const { data: toolsData } = useTools();
+  const tools = toolsData?.tools || [];
 
   const totalSteps = assessmentQuestions.filter(q => 
     !q.dependsOn || (q.dependsOn && answers[q.dependsOn.questionId] && 
@@ -85,62 +87,64 @@ export const AssessmentForm: React.FC<AssessmentFormProps> = ({ onComplete }) =>
         .map(tool => {
           let score = 0;
           let reasons = [];
+          
+          // Extract subcategory slugs from tool
+          const subcategorySlugs = tool.subcategories?.map(sc => sc.slug) || [];
 
           // Score based on purpose - Enhanced for all categories including new AI tools
           if (purpose === 'content') {
-            if (tool.categoryId === 'media-creation') {
+            if (subcategorySlugs.some(slug => slug.includes('media') || slug.includes('content'))) {
               score += 40;
               reasons.push('Perfect for media and content creation');
-            } else if (tool.categoryId.includes('document')) {
+            } else if (subcategorySlugs.some(slug => slug.includes('document') || slug.includes('writing'))) {
               score += 25;
               reasons.push('Great for document and written content');
-            } else if (tool.categoryId === 'general-ai' &&
-                      (tool.subcategoryIds.includes('chatbots') || tool.subcategoryIds.includes('specialized-assistants'))) {
+            } else if (subcategorySlugs.includes('chatbots') || subcategorySlugs.includes('specialized-assistants')) {
               score += 35;
               reasons.push('Advanced AI assistant for content creation and writing');
             }
           }
           if (purpose === 'development') {
-            if (tool.categoryId.includes('code')) {
+            if (subcategorySlugs.some(slug => slug.includes('code') || slug.includes('coding'))) {
               score += 30;
               reasons.push('Perfect for software development');
-            } else if (tool.categoryId === 'general-ai' && tool.subcategoryIds.includes('coding-assistants')) {
+            } else if (subcategorySlugs.includes('coding-assistants')) {
               score += 35;
               reasons.push('AI-powered coding assistance for development');
-            } else if (tool.subcategoryIds.includes('model-deployment')) {
+            } else if (subcategorySlugs.includes('model-deployment')) {
               score += 25;
               reasons.push('Great for AI model deployment and MLOps');
             }
           }
           if (purpose === 'productivity') {
-            if (tool.categoryId.includes('workflow')) {
+            if (subcategorySlugs.some(slug => slug.includes('workflow') || slug.includes('automation'))) {
               score += 30;
               reasons.push('Great for productivity and automation');
-            } else if (tool.subcategoryIds.includes('knowledge-management')) {
+            } else if (subcategorySlugs.includes('knowledge-management')) {
               score += 28;
               reasons.push('AI-powered knowledge organization and productivity');
-            } else if (tool.categoryId === 'general-ai' && tool.subcategoryIds.includes('specialized-assistants')) {
+            } else if (subcategorySlugs.includes('specialized-assistants')) {
               score += 25;
               reasons.push('AI assistant for enhanced productivity');
             }
           }
           if (purpose === 'research') {
-            if (tool.subcategoryIds.includes('search-augmentation') || tool.subcategoryIds.includes('research-analysis')) {
+            if (subcategorySlugs.includes('search-augmentation') || subcategorySlugs.includes('research-analysis')) {
               score += 40;
               reasons.push('Specialized for research and academic work');
-            } else if (tool.subcategoryIds.includes('reasoning-math')) {
+            } else if (subcategorySlugs.includes('reasoning-math')) {
               score += 35;
               reasons.push('Advanced reasoning capabilities for complex analysis');
-            } else if (tool.categoryId === 'general-ai' && tool.subcategoryIds.includes('chatbots')) {
+            } else if (subcategorySlugs.includes('chatbots')) {
               score += 20;
               reasons.push('General AI assistance for research tasks');
             }
           }
           if (purpose === 'business') {
-            if (tool.subcategoryIds.includes('specialized-assistants') || tool.subcategoryIds.includes('model-deployment')) {
+            if (subcategorySlugs.includes('specialized-assistants') || subcategorySlugs.includes('model-deployment')) {
               score += 35;
               reasons.push('Enterprise-grade AI for business applications');
-            } else if (tool.categoryId === 'general-ai' && tool.name.toLowerCase().includes('team')) {
+            } else if (tool.name.toLowerCase().includes('team')) {
               score += 30;
               reasons.push('Team collaboration and enterprise features');
             }

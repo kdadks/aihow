@@ -1,7 +1,7 @@
 import { useState, useMemo, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import { categories } from '../data/categories';
+import { useCategories } from '../services/api/v2/categories';
 import { Card } from '../components/ui/Card';
 import { Badge } from '../components/ui/Badge';
 import { Pagination } from '../components/ui/Pagination';
@@ -9,12 +9,13 @@ import { Pagination } from '../components/ui/Pagination';
 const ITEMS_PER_PAGE = 12;
 
 const CategoriesPage = () => {
+  const { data: categories = [] } = useCategories();
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
 
   const filteredCategories = categories.filter(category => {
     const matchesSearch = category.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      category.description.toLowerCase().includes(searchTerm.toLowerCase());
+      (category.description ?? '').toLowerCase().includes(searchTerm.toLowerCase());
 
     return matchesSearch;
   });

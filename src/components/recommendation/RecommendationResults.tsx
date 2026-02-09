@@ -4,9 +4,11 @@ import { Star, ArrowRight, Save, Redo, GitBranch, Package } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from '../ui/Card';
 import { Button } from '../ui/Button';
 import { Badge } from '../ui/Badge';
-import { Recommendation, Tool } from '../../types';
-import { tools } from '../../data/tools';
-import { workflowBundles } from '../../data/workflows';
+import { Recommendation } from '../../types';
+import { useTools } from '../../services/api/v2/tools';
+import { useBundles } from '../../services/api/v2/bundles';
+import type { ToolV2 } from '../../types/tool.types';
+import type { BundleV2 } from '../../types/bundle.types';
 
 interface RecommendationResultsProps {
   recommendations: Recommendation[];
@@ -17,6 +19,10 @@ export const RecommendationResults: React.FC<RecommendationResultsProps> = ({
   recommendations, 
   onReset 
 }) => {
+  const { data: toolsData } = useTools();
+  const { data: bundlesData } = useBundles();
+  const tools = toolsData?.tools || [];
+  const workflowBundles = bundlesData?.bundles || [];
   // Get the full tool data for each recommendation
   const recommendedTools = recommendations.map(rec => {
     const tool = tools.find(t => t.id === rec.toolId);
@@ -24,82 +30,54 @@ export const RecommendationResults: React.FC<RecommendationResultsProps> = ({
       ...rec,
       tool
     };
-  }).filter(rec => rec.tool) as (Recommendation & { tool: Tool })[];
+  }).filter(rec => rec.tool) as (Recommendation & { tool: ToolV2 })[];
 
   // Get relevant workflow bundles based on recommended tools
   const getRelevantBundles = () => {
-    const toolCategories = recommendedTools.map(rec => rec.tool.categoryId);
-    const toolSubcategories = recommendedTools.flatMap(rec => rec.tool.subcategoryIds);
+    // Extract subcategory slugs from tools
+    const toolSubcategories = recommendedTools.flatMap(rec => 
+      rec.tool.subcategories?.map(sc => sc.slug) || []
+    );
     const toolIds = recommendedTools.map(rec => rec.tool.id);
     
-    let relevantBundles = [];
+    let relevantBundles: BundleV2[] = [];
     
     // Check for General AI tools and recommend new AI bundles
-    const hasGeneralAI = toolCategories.includes('general-ai');
     const hasReasoningTools = toolSubcategories.includes('reasoning-math') ||
                              toolIds.some(id => ['o1-preview', 'claude-3-5-sonnet', 'wolfram-alpha'].includes(id));
     const hasResearchTools = toolSubcategories.includes('research-analysis') ||
                             toolIds.some(id => ['elicit', 'consensus-ai', 'mem-ai'].includes(id));
     const hasOpenSourceTools = toolSubcategories.includes('open-source-models') ||
                               toolIds.some(id => ['llama-3-2', 'hugging-chat', 'mistral-ai'].includes(id));
-    const hasCodingTools = toolCategories.includes('code-creation') ||
-                          toolSubcategories.includes('coding-assistants') ||
+    const hasCodingTools = toolSubcategories.includes('coding-assistants') ||
                           toolIds.some(id => ['openai-codex', 'github-copilot', 'cursor-ai'].includes(id));
     
     // Advanced AI Reasoning Suite (ID 53)
     if (hasReasoningTools) {
-      relevantBundles.push(workflowBundles.find(b => b.id === '53'));
+      const bundle = workflowBundles.find(b => b.id === '53');
+      if (bundle) relevantBundles.push(bundle);
     }
     
     // Academic Research Intelligence Platform (ID 54)
     if (hasResearchTools) {
-      relevantBundles.push(workflowBundles.find(b => b.id === '54'));
+      const bundle = workflowBundles.find(b => b.id === '54');
+      if (bundle) relevantBundles.push(bundle);
     }
     
     // Open Source AI Development Suite (ID 56)
     if (hasOpenSourceTools) {
-      relevantBundles.push(workflowBundles.find(b => b.id === '56'));
+      const bundle = workflowBundles.find(b => b.id === '56');
+      if (bundle) relevantBundles.push(bundle);
     }
     
     // AI-Powered Code Generation Suite (ID 59)
     if (hasCodingTools) {
-      relevantBundles.push(workflowBundles.find(b => b.id === '59'));
-    }
-    
-    // Enterprise AI Model Deployment Platform (ID 55) for advanced users
-    if (hasGeneralAI && toolIds.some(id => ['weights-biases', 'huggingface-hub', 'scale-ai'].includes(id))) {
-      relevantBundles.push(workflowBundles.find(b => b.id === '55'));
-    }
-    
-    // Check for media creation tools
-    const hasMediaCreationTools = toolCategories.includes('media-creation');
-    if (hasMediaCreationTools) {
-      const mediaCreationBundles = workflowBundles.filter(bundle =>
-        bundle.id >= '24' && bundle.id <= '34' // Media creation bundles
-      );
-      relevantBundles.push(...mediaCreationBundles.slice(0, 2));
-    }
-    
-    // Check for document creation tools
-    const hasDocumentTools = toolCategories.includes('document-creation');
-    if (hasDocumentTools) {
-      const documentBundles = workflowBundles.filter(bundle =>
-        bundle.id >= '35' && bundle.id <= '40' // Document creation bundles
-      );
-      relevantBundles.push(...documentBundles.slice(0, 2));
-    }
-    
-    // Check for workflow automation tools
-    const hasWorkflowTools = toolCategories.includes('workflow-automation');
-    if (hasWorkflowTools) {
-      const workflowBundlesFiltered = workflowBundles.filter(bundle =>
-        ['1', '3', '5', '6', '7', '8', '9'].includes(bundle.id) // Core workflow bundles
-      );
-      relevantBundles.push(...workflowBundlesFiltered.slice(0, 2));
+      const bundle = workflowBundles.find(b => b.id === '59');
+      if (bundle) relevantBundles.push(bundle);
     }
     
     // Filter out undefined and limit to top 3 most relevant
-    return relevantBundles.filter((bundle): bundle is NonNullable<typeof bundle> => Boolean(bundle)).slice(0, 3);
+    return relevantBundles.slice(0, 3);
   };
 
   const suggestedBundles = getRelevantBundles();
@@ -133,14 +111,13 @@ export const RecommendationResults: React.FC<RecommendationResultsProps> = ({
                   </div>
                   <div>
                     <CardTitle className="text-xl">{tool.name}</CardTitle>
-                    <p className="text-gray-500 capitalize">{tool.categoryId.replace('-', ' ')}</p>
                     <div className="mt-1 flex items-center">
                       <div className="flex items-center">
                         <Star className="h-4 w-4 text-yellow-400 fill-current" />
                         <span className="ml-1 text-gray-700">{tool.rating}</span>
                       </div>
                       <span className="mx-2 text-gray-300">|</span>
-                      <span className="text-gray-500 text-sm">{tool.reviewCount} reviews</span>
+                      <span className="text-gray-500 text-sm">{tool.review_count} reviews</span>
                     </div>
                   </div>
                 </div>
@@ -157,7 +134,7 @@ export const RecommendationResults: React.FC<RecommendationResultsProps> = ({
               </CardHeader>
               
               <CardContent>
-                <p className="text-gray-600 mb-4">{tool.shortDescription}</p>
+                <p className="text-gray-600 mb-4">{tool.short_description}</p>
                 
                 <div className="bg-gray-50 p-4 rounded-md mb-4">
                   <h4 className="font-medium text-gray-900 mb-2">Why it's a good match:</h4>
@@ -188,8 +165,8 @@ export const RecommendationResults: React.FC<RecommendationResultsProps> = ({
                 <div>
                   <span className="font-medium text-gray-900">Pricing: </span>
                   <span className="text-gray-700">
-                    {tool.pricing.startingPrice || 'Free'}
-                    {tool.pricing.hasFreeOption && " (Free option available)"}
+                    {tool.pricing.starting_price || 'Free'}
+                    {tool.pricing.has_free_option && " (Free option available)"}
                   </span>
                 </div>
                 <div className="flex space-x-3">
@@ -263,7 +240,7 @@ export const RecommendationResults: React.FC<RecommendationResultsProps> = ({
                       <div>
                         <h4 className="font-medium text-gray-900 mb-3">Key Benefits</h4>
                         <ul className="space-y-1 text-sm text-gray-600">
-                          {bundle.implementationSteps.slice(0, 3).map((step, index) => (
+                          {bundle.implementation_steps.slice(0, 3).map((step, index) => (
                             <li key={index} className="flex items-start gap-2">
                               <span className="text-purple-500 mt-1">•</span>
                               <span>{step}</span>
@@ -277,7 +254,7 @@ export const RecommendationResults: React.FC<RecommendationResultsProps> = ({
                   <CardFooter className="bg-gray-50 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 p-6">
                     <div className="flex-1">
                       <span className="text-sm text-gray-500">Estimated subscription cost (Subject to usage)</span>
-                      <p className="font-bold text-gray-900">{bundle.totalCost}</p>
+                      <p className="font-bold text-gray-900">{bundle.total_cost}</p>
                     </div>
                     <div className="flex gap-3 flex-shrink-0">
                       <Link to="/workflows">

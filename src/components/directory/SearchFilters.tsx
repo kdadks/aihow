@@ -3,7 +3,7 @@ import { Search, Filter, X } from 'lucide-react';
 import { Button } from '../ui/Button';
 import { Badge } from '../ui/Badge';
 import { EnhancedVoiceSearch } from '../search/EnhancedVoiceSearch';
-import { categories } from '../../data/categories';
+import { useCategories } from '../../services/api/v2/categories';
 import { SearchFilters as SearchFiltersType } from '../../types';
 
 interface SearchFiltersProps {
@@ -11,6 +11,7 @@ interface SearchFiltersProps {
 }
 
 export const SearchFilters: React.FC<SearchFiltersProps> = ({ onFilterChange }) => {
+  const { data: categories = [] } = useCategories();
   const [filters, setFilters] = useState<SearchFiltersType>({});
   const [isFiltersOpen, setIsFiltersOpen] = useState(false);
 
@@ -82,7 +83,7 @@ export const SearchFilters: React.FC<SearchFiltersProps> = ({ onFilterChange }) 
             <span className="text-sm text-gray-500">Active filters:</span>
             {filters.category && (
               <Badge variant="primary" className="flex items-center capitalize">
-                {filters.category.replace('-', ' ')}
+                {categories.find(c => c.slug === filters.category)?.name || filters.category}
                 <button
                   className="ml-1 p-1"
                   onClick={() => handleCategoryChange(filters.category!)}
@@ -93,8 +94,10 @@ export const SearchFilters: React.FC<SearchFiltersProps> = ({ onFilterChange }) 
             )}
             {filters.subcategory && (
               <Badge variant="primary" className="flex items-center capitalize">
-                {filters.subcategory.replace('-', ' ')}
-                <button 
+                {categories
+                  .find(c => c.slug === filters.category)
+                  ?.subcategories?.find(s => s.slug === filters.subcategory)?.name || filters.subcategory}
+                <button
                   className="ml-1 p-1"
                   onClick={() => handleSubcategoryChange(filters.subcategory!)}
                 >
@@ -149,8 +152,8 @@ export const SearchFilters: React.FC<SearchFiltersProps> = ({ onFilterChange }) 
                       name="category"
                       type="checkbox"
                       className="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
-                      checked={filters.category === category.id}
-                      onChange={() => handleCategoryChange(category.id)}
+                      checked={filters.category === category.slug}
+                      onChange={() => handleCategoryChange(category.slug)}
                     />
                     <label htmlFor={`category-${category.id}`} className="ml-2 text-sm text-gray-700 capitalize">
                       {category.name}
@@ -165,16 +168,16 @@ export const SearchFilters: React.FC<SearchFiltersProps> = ({ onFilterChange }) 
               <div className="space-y-2">
                 {filters.category ? (
                   categories
-                    .find(c => c.id === filters.category)
-                    ?.subcategories.map((subcategory) => (
+                    .find(c => c.slug === filters.category)
+                    ?.subcategories?.map((subcategory) => (
                       <div key={subcategory.id} className="flex items-center">
                         <input
                           id={`subcategory-${subcategory.id}`}
                           name="subcategory"
                           type="checkbox"
                           className="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
-                          checked={filters.subcategory === subcategory.id}
-                          onChange={() => handleSubcategoryChange(subcategory.id)}
+                          checked={filters.subcategory === subcategory.slug}
+                          onChange={() => handleSubcategoryChange(subcategory.slug)}
                         />
                         <label htmlFor={`subcategory-${subcategory.id}`} className="ml-2 text-sm text-gray-700 capitalize">
                           {subcategory.name}

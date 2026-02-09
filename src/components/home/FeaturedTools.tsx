@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Star, Scale } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from '../ui/Card';
@@ -6,21 +6,36 @@ import { Badge } from '../ui/Badge';
 import { Button } from '../ui/Button';
 import { Pagination } from '../ui/Pagination';
 import { Tool } from '../../types';
-import { tools } from '../../data/tools';
+import { useFeaturedTools } from '../../services/api/v2/tools';
 import { useComparisonStore } from '../../stores/comparisonStore';
+import type { ToolV2 } from '../../types/tool.types';
 
 export const FeaturedTools: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 9;
-  
-  const featuredTools = useMemo(() => tools.filter(tool => tool.featured), []);
-  const totalPages = Math.ceil(featuredTools.length / itemsPerPage);
-  
-  // Get current page items
-  const currentTools = useMemo(() => {
-    const startIndex = (currentPage - 1) * itemsPerPage;
-    return featuredTools.slice(startIndex, startIndex + itemsPerPage);
-  }, [featuredTools, currentPage, itemsPerPage]);
+
+  const { data: allFeaturedTools = [], isLoading } = useFeaturedTools(50);
+
+  const totalPages = Math.ceil(allFeaturedTools.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const currentTools = allFeaturedTools.slice(startIndex, startIndex + itemsPerPage);
+
+  if (isLoading) {
+    return (
+      <section className="py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-900">Featured AI Tools</h2>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[...Array(9)].map((_, i) => (
+              <div key={i} className="h-64 bg-gray-100 rounded-lg animate-pulse" />
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className="py-16 bg-white">
@@ -62,12 +77,18 @@ export const FeaturedTools: React.FC = () => {
 };
 
 interface FeaturedToolCardProps {
-  tool: Tool;
+  tool: ToolV2;
 }
 
 const FeaturedToolCard: React.FC<FeaturedToolCardProps> = ({ tool }) => {
   const { selectedTools, addTool, removeTool, isToolSelectable } = useComparisonStore();
   const isSelected = selectedTools.some(t => t.id === tool.id);
+
+  const primarySub = tool.subcategories?.[0];
+  const detailUrl = primarySub
+    ? `/directory/${primarySub.category_slug}/${primarySub.slug}/${tool.slug}`
+    : `/tools/${tool.slug}`;
+
   return (
     <Card className="h-full flex flex-col">
       <CardHeader>
@@ -75,7 +96,9 @@ const FeaturedToolCard: React.FC<FeaturedToolCardProps> = ({ tool }) => {
           <div className="flex items-center space-x-3">
             <div>
               <CardTitle>{tool.name}</CardTitle>
-              <p className="text-sm text-gray-500">{tool.categoryId.replace('-', ' ')}</p>
+              <p className="text-sm text-gray-500">
+                {primarySub?.category_name ?? ''}
+              </p>
             </div>
           </div>
           <Badge variant="primary" className="flex items-center">
@@ -85,17 +108,17 @@ const FeaturedToolCard: React.FC<FeaturedToolCardProps> = ({ tool }) => {
         </div>
       </CardHeader>
       <CardContent className="flex-1">
-        <p className="text-gray-600">{tool.shortDescription}</p>
+        <p className="text-gray-600">{tool.short_description}</p>
         <div className="mt-4 flex flex-wrap gap-2">
-          {tool.pricing.hasFreeOption && (
+          {tool.pricing?.has_free_option && (
             <Badge variant="success">Free Option</Badge>
           )}
           {tool.trending && (
             <Badge variant="secondary">Trending</Badge>
           )}
-          {tool.subcategoryIds.slice(0, 1).map((subcategory) => (
-            <Badge key={subcategory} variant="default">
-              {subcategory.replace('-', ' ')}
+          {tool.subcategories?.slice(0, 1).map((sub) => (
+            <Badge key={sub.id} variant="default">
+              {sub.name}
             </Badge>
           ))}
         </div>
@@ -106,27 +129,27 @@ const FeaturedToolCard: React.FC<FeaturedToolCardProps> = ({ tool }) => {
             <div>
               <span className="text-sm text-gray-500">Starting from</span>
               <p className="font-medium text-gray-900">
-                {tool.pricing.startingPrice ? tool.pricing.startingPrice : 'Free'}
+                {tool.pricing?.starting_price ?? 'Free'}
               </p>
             </div>
             <Button
               size="sm"
               variant={isSelected ? "primary" : "secondary"}
-              onClick={() => isSelected ? removeTool(tool.id) : addTool(tool)}
-              disabled={!isSelected && !isToolSelectable(tool)}
+              onClick={() => isSelected ? removeTool(tool.id) : addTool(tool as unknown as Tool)}
+              disabled={!isSelected && !isToolSelectable(tool as unknown as Tool)}
               leftIcon={<Scale className="h-4 w-4" />}
               className="min-w-[100px] justify-center shadow-sm">
               {isSelected ? 'Selected' : 'Compare'}
             </Button>
           </div>
           <div className="flex items-center justify-between gap-3">
-            <Link to={`/directory/${tool.categoryId}/${tool.subcategoryIds[0]}/${tool.slug}`} className="flex-1">
+            <Link to={detailUrl} className="flex-1">
               <Button size="sm" variant="primary" className="w-full">
                 View Details
               </Button>
             </Link>
             <a
-              href={tool.website}
+              href={tool.website_url ?? '#'}
               target="_blank"
               rel="noopener noreferrer"
               className="flex-1">

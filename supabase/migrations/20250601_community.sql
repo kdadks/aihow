@@ -60,15 +60,7 @@ CREATE POLICY "Public can view categories"
     ON forum_categories FOR SELECT
     USING (true);
 
-CREATE POLICY "Only admins can manage categories"
-    ON forum_categories FOR ALL
-    USING (
-        EXISTS (
-            SELECT 1 FROM auth.users
-            WHERE auth.users.id = auth.uid()
-            AND auth.users.role = 'admin'
-        )
-    );
+-- Note: Category management handled via Supabase Dashboard or service role
 
 -- Topics Policies
 CREATE POLICY "Public can view topics"
@@ -84,16 +76,9 @@ CREATE POLICY "Authors can update their topics"
     USING (auth.uid() = author_id)
     WITH CHECK (auth.uid() = author_id);
 
-CREATE POLICY "Only authors and admins can delete topics"
+CREATE POLICY "Only authors can delete topics"
     ON forum_topics FOR DELETE
-    USING (
-        auth.uid() = author_id 
-        OR EXISTS (
-            SELECT 1 FROM auth.users
-            WHERE auth.users.id = auth.uid()
-            AND auth.users.role = 'admin'
-        )
-    );
+    USING (auth.uid() = author_id);
 
 -- Replies Policies
 CREATE POLICY "Public can view replies"
@@ -109,16 +94,9 @@ CREATE POLICY "Authors can update their replies"
     USING (auth.uid() = author_id)
     WITH CHECK (auth.uid() = author_id);
 
-CREATE POLICY "Only authors and admins can delete replies"
+CREATE POLICY "Only authors can delete replies"
     ON forum_replies FOR DELETE
-    USING (
-        auth.uid() = author_id 
-        OR EXISTS (
-            SELECT 1 FROM auth.users
-            WHERE auth.users.id = auth.uid()
-            AND auth.users.role = 'admin'
-        )
-    );
+    USING (auth.uid() = author_id);
 
 -- Triggers for updated_at maintenance
 CREATE OR REPLACE FUNCTION update_updated_at_column()
