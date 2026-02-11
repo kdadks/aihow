@@ -3,6 +3,8 @@ import { analytics } from './analytics';
 import { content } from './content';
 import { config } from './config';
 import { moderation } from './moderation';
+import { referralAnalytics } from './referralAnalytics';
+import { pageAnalytics } from './pageAnalytics';
 
 // Re-export types
 export type {
@@ -37,5 +39,7 @@ export const api = {
   analytics,
   content,
   config,
-  moderation
+  moderation,
+  referralAnalytics,
+  pageAnalytics
 };

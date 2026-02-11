@@ -5,8 +5,16 @@ import { protectedRoutes } from './routes/protectedRoutes';
 import { MainLayout } from './components/layout/MainLayout';
 import { publicRoutes } from './routes/publicRoutes';
 import { ScrollToTop } from './components/ScrollToTop';
+import { usePageAnalytics } from './hooks/usePageAnalytics';
 
 function AppRoutes() {
+    // Enable automatic page visit tracking for analytics
+    // Must be inside Router to use useLocation
+    usePageAnalytics({
+        enabled: true,
+        trackPageTitle: true
+    });
+
     return (
         <>
             <ScrollToTop />

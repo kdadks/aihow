@@ -12,7 +12,7 @@ export function useContentManagement() {
     try {
       setLoading(true);
       let query = supabase
-        .from('content')
+        .from('content_items')
         .select(`
           *,
           versions:content_versions(*)
@@ -36,7 +36,7 @@ export function useContentManagement() {
     try {
       setLoading(true);
       const { data, error } = await supabase
-        .from('content')
+        .from('content_items')
         .insert([{
           ...item,
           createdAt: new Date().toISOString(),
@@ -59,7 +59,7 @@ export function useContentManagement() {
     try {
       setLoading(true);
       const { error } = await supabase
-        .from('content')
+        .from('content_items')
         .update({
           ...updates,
           updatedAt: new Date().toISOString()
@@ -108,7 +108,7 @@ export function useContentManagement() {
       if (versionError) throw versionError;
 
       const { error: publishError } = await supabase
-        .from('content')
+        .from('content_items')
         .update({
           content: version.content,
           published: true,
@@ -129,7 +129,7 @@ export function useContentManagement() {
     try {
       setLoading(true);
       const { data: content, error: contentError } = await supabase
-        .from('content')
+        .from('content_items')
         .select('*, versions:content_versions(*)')
         .eq('id', contentId)
         .single();

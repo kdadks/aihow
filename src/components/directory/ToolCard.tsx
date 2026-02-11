@@ -5,6 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardFooter } from '../ui/Card
 import { Badge } from '../ui/Badge';
 import { Button } from '../ui/Button';
 import { ToolV2 } from '../../types/tool.types';
+import { ReferralLink } from './ReferralLink';
 
 import { Helmet } from 'react-helmet-async';
 
@@ -139,11 +140,12 @@ export const ToolCard: React.FC<ToolCardProps> = ({
                 View Details
               </Button>
             </Link>
-            <a
-              href={tool.website_url ?? '#'}
-              target="_blank"
-              rel="noopener noreferrer"
+            <ReferralLink
+              toolId={tool.id}
+              toolUrl={tool.website_url ?? '#'}
+              referralSource="tool_card"
               className="flex-1"
+              openInNewTab
             >
               <Button
                 size="lg"
@@ -153,7 +155,7 @@ export const ToolCard: React.FC<ToolCardProps> = ({
               >
                 Visit Site
               </Button>
-            </a>
+            </ReferralLink>
           </div>
         </div>
       </CardFooter>
