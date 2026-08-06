@@ -210,7 +210,7 @@ Apply both migrations in order:
 Uses existing Supabase configuration:
 ```env
 VITE_SUPABASE_URL=your_supabase_url
-VITE_SUPABASE_ANON_KEY=your_anon_key
+VITE_SUPABASE_PUBLISHABLE_KEY=your_publishable_key
 ```
 
 ## 🎨 UI Features

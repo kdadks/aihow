@@ -3,7 +3,7 @@ import { DatabaseError } from './types';
 
 // Environment validation
 function validateEnvironment(): void {
-    const required = ['VITE_SUPABASE_URL', 'VITE_SUPABASE_ANON_KEY'];
+    const required = ['VITE_SUPABASE_URL', 'VITE_SUPABASE_PUBLISHABLE_KEY'];
     const missing = required.filter(key => !import.meta.env[key]);
     
     if (missing.length > 0) {
@@ -23,7 +23,7 @@ export function initializeDatabase(): SupabaseClient {
 
         supabaseInstance = createClient(
             import.meta.env.VITE_SUPABASE_URL,
-            import.meta.env.VITE_SUPABASE_ANON_KEY,
+            import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY,
             {
                 auth: {
                     autoRefreshToken: true,

@@ -246,7 +246,7 @@ const toolStats = await referralAnalytics.getToolReferralStats({
 The system uses existing Supabase configuration:
 ```env
 VITE_SUPABASE_URL=your_supabase_url
-VITE_SUPABASE_ANON_KEY=your_anon_key
+VITE_SUPABASE_PUBLISHABLE_KEY=your_publishable_key
 SUPABASE_SERVICE_ROLE_KEY=your_service_role_key
 ```
 

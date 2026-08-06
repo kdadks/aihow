@@ -9,7 +9,7 @@ This guide covers the deployment considerations and configuration requirements f
 ```bash
 # Supabase Configuration
 VITE_SUPABASE_URL=your-project-url
-VITE_SUPABASE_ANON_KEY=your-anon-key
+VITE_SUPABASE_PUBLISHABLE_KEY=your-publishable-key
 VITE_SUPABASE_SERVICE_ROLE_KEY=your-service-role-key
 
 # Auth Configuration

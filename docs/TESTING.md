@@ -87,7 +87,7 @@ The following environment variables are required for E2E tests:
 ```env
 CYPRESS_BASE_URL=http://localhost:5173
 CYPRESS_SUPABASE_URL=your-supabase-url
-CYPRESS_SUPABASE_ANON_KEY=your-anon-key
+CYPRESS_SUPABASE_PUBLISHABLE_KEY=your-publishable-key
 ```
 
 These can be set in `cypress.env.json` for local development.

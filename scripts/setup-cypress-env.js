@@ -7,7 +7,7 @@ const path = require('path');
 const defaultEnv = {
   CYPRESS_BASE_URL: 'http://localhost:5173',
   CYPRESS_SUPABASE_URL: 'http://localhost:54321',
-  CYPRESS_SUPABASE_ANON_KEY: 'your-local-anon-key',
+  CYPRESS_SUPABASE_PUBLISHABLE_KEY: 'your-local-publishable-key',
   // Add more default values as needed
 };
 

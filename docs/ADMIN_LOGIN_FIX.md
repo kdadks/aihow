@@ -59,7 +59,7 @@ Make sure your environment variables are set correctly:
 
 ```
 VITE_SUPABASE_URL=https://your-project-url.supabase.co
-VITE_SUPABASE_ANON_KEY=your-anon-key
+VITE_SUPABASE_PUBLISHABLE_KEY=your-publishable-key
 ```
 
 ### 2. CORS Issues

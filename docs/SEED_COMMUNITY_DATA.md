@@ -103,7 +103,7 @@ Make sure you've applied all three migrations first (Step 1).
 
 ### "Permission denied" error
 
-Ensure your `.env` file has the correct `SUPABASE_SERVICE_ROLE_KEY` (not the anon key).
+Ensure your `.env` file has the correct `SUPABASE_SECRET_KEY` (not the publishable key).
 
 ### Network connectivity issues
 

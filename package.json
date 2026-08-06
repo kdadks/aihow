@@ -20,7 +20,7 @@
     "build-preview": "./scripts/build-preview.sh",
     "build:netlify": "vite build",
     "build:seo": "vite build && node scripts/generate-sitemaps.js",
-    "postbuild": "cp _redirects dist/ 2>/dev/null || : && npm run build:seo",
+    "postbuild": "node -e \"const fs=require('fs');const path=require('path');const src=path.join(process.cwd(),'_redirects');const dst=path.join(process.cwd(),'dist','_redirects');if(fs.existsSync(src))fs.copyFileSync(src,dst)\" && npm run build:seo",
     "create-admin": "node scripts/create-admin-user.js",
     "setup-admin": "node scripts/setup-admin-database.js",
     "reset-admin-password": "node scripts/reset-admin-password.js",
