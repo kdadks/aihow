@@ -69,8 +69,35 @@ export const PageAnalytics: React.FC<PageAnalyticsProps> = ({ className }) => {
     return minutes > 0 ? `${minutes}m ${secs}s` : `${secs}s`;
   };
 
+  // Show migration notice if analytics RPC functions error
+  const isMigrationNeeded = error?.includes('Could not choose the best candidate function') || 
+                           error?.includes('GROUP BY clause');
+
   return (
     <div className={cn('space-y-6', className)}>
+      {/* Migration Notice */}
+      {isMigrationNeeded && (
+        <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+          <h3 className="font-semibold text-blue-900 mb-2">⚙️ Database Maintenance Required</h3>
+          <p className="text-blue-800 text-sm mb-3">
+            Analytics functions need to be updated. Please apply the database migration:
+          </p>
+          <ol className="text-sm text-blue-800 space-y-1 list-decimal list-inside mb-3">
+            <li>Go to <a href="https://app.supabase.com" target="_blank" rel="noopener noreferrer" className="underline font-semibold">Supabase Dashboard</a></li>
+            <li>Navigate to SQL Editor</li>
+            <li>Create new query and paste the migration SQL</li>
+            <li>Click RUN and wait for completion</li>
+            <li>Refresh this page</li>
+          </ol>
+          <button 
+            onClick={handleRefresh}
+            className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm rounded font-medium transition"
+          >
+            Retry Loading Analytics
+          </button>
+        </div>
+      )}
+
       {/* Overall Metrics */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         <MetricWidget

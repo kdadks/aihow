@@ -72,20 +72,36 @@ export const AdminAuthProvider: React.FC<AdminAuthProviderProps> = ({ children }
         // Get profile data with timeout to prevent hanging
         console.log('[AdminAuthContext] Fetching profile data...');
         
-      console.log('[AdminAuthContext] Using RPC function to fetch profile...');
-      // Use RPC function for faster, simpler profile fetch
-      const { data: profileData, error: profileError } = await supabase.rpc('get_admin_profile', {
-        user_id: session.user.id
-      });
+      console.log('[AdminAuthContext] Starting profile and role lookup for user:', session.user.id);
+      
+      let profile: any = null;
+      let userRole = 'admin';
 
-      console.log('[AdminAuthContext] Profile query completed:', { profileData, profileError });
+      // Try RPC function first (if migration is applied), fall back to direct query
+      try {
+        console.log('[AdminAuthContext] Attempting RPC function for profile...');
+        const { data: rpcProfileData, error: rpcError } = await supabase.rpc('get_admin_profile', {
+          user_id: session.user.id
+        });
 
-      if (profileError) {
-        console.warn('[AdminAuthContext] Profile query error:', profileError);
+        if (!rpcError && rpcProfileData?.[0]) {
+          profile = rpcProfileData[0];
+          console.log('[AdminAuthContext] RPC profile fetch successful:', profile);
+        } else if (rpcError) {
+          console.warn('[AdminAuthContext] RPC profile fetch failed, falling back to direct query:', rpcError);
+          // Fall back to direct query
+          const { data: directProfile } = await supabase
+            .from('profiles')
+            .select('id, username, full_name')
+            .eq('id', session.user.id)
+            .single();
+          profile = directProfile;
+        }
+      } catch (err: any) {
+        console.warn('[AdminAuthContext] RPC call failed, using fallback:', err.message);
+        // Use fallback
       }
 
-      let profile = profileData?.[0];
-      
       if (!profile) {
         console.log('[AdminAuthContext] Using fallback profile data from session');
         profile = {
@@ -96,20 +112,42 @@ export const AdminAuthProvider: React.FC<AdminAuthProviderProps> = ({ children }
         };
       }
 
-      console.log('[AdminAuthContext] Profile data:', profile);
+      console.log('[AdminAuthContext] Profile data resolved:', profile);
 
-      console.log('[AdminAuthContext] Using RPC function to fetch role...');
-      // Use RPC function for role lookup
-      const { data: roleData, error: roleError } = await supabase.rpc('get_admin_user_role', {
-        user_id: session.user.id
-      });
+      // Try RPC for role lookup, fall back to direct query
+      try {
+        console.log('[AdminAuthContext] Attempting RPC function for role...');
+        const { data: rpcRoleData, error: rpcError } = await supabase.rpc('get_admin_user_role', {
+          user_id: session.user.id
+        });
 
-      console.log('[AdminAuthContext] Role query completed:', { roleData, roleError });
+        if (!rpcError && rpcRoleData?.[0]) {
+          userRole = rpcRoleData[0].role_name || 'admin';
+          console.log('[AdminAuthContext] RPC role fetch successful:', userRole);
+        } else if (rpcError) {
+          console.warn('[AdminAuthContext] RPC role fetch failed, falling back to direct query:', rpcError);
+          // Fall back to direct query
+          const { data: roleAssignment } = await supabase
+            .from('user_roles')
+            .select('role_id')
+            .eq('user_id', session.user.id)
+            .single();
 
-      let userRole = roleData?.[0]?.role_name || 'admin';
-      const roleAssignment = roleData?.[0];
+          if (roleAssignment?.role_id) {
+            const { data: roleData } = await supabase
+              .from('roles')
+              .select('name')
+              .eq('id', roleAssignment.role_id)
+              .single();
+            userRole = roleData?.name || 'admin';
+          }
+        }
+      } catch (err: any) {
+        console.warn('[AdminAuthContext] Role lookup failed, using fallback admin role:', err.message);
+        userRole = 'admin';
+      }
 
-      console.log('[AdminAuthContext] User role determined:', { userRole, roleAssignment });
+      console.log('[AdminAuthContext] User role determined:', userRole);
 
       // Validate that user has admin privileges
       const validAdminRoles = ['admin', 'system_admin', 'content_admin'];
