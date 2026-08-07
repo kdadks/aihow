@@ -72,132 +72,44 @@ export const AdminAuthProvider: React.FC<AdminAuthProviderProps> = ({ children }
         // Get profile data with timeout to prevent hanging
         console.log('[AdminAuthContext] Fetching profile data...');
         
-        let profileData: any = null;
-        let profileError: any = null;
-        
-        try {
-          // Create a promise that rejects after 3 seconds
-          const timeoutPromise = new Promise((_, reject) => 
-            setTimeout(() => reject(new Error('Profile query timeout')), 3000)
-          );
-          
-          const queryPromise = supabase
-            .from('profiles')
-            .select('id, username, full_name')
-            .eq('id', session.user.id)
-            .single();
-          
-          // Race between query and timeout
-          const result = await Promise.race([queryPromise, timeoutPromise]) as any;
-          profileData = result.data;
-          profileError = result.error;
-        } catch (error: any) {
-          console.warn('[AdminAuthContext] Profile query failed/timeout:', error.message);
-          // Use fallback data from session
-          profileData = {
-            id: session.user.id,
-            username: session.user.email?.split('@')[0],
-            full_name: session.user.email?.split('@')[0] || 'Admin User'
-          };
-          console.log('[AdminAuthContext] Using fallback profile data:', profileData);
-        }
+      console.log('[AdminAuthContext] Using RPC function to fetch profile...');
+      // Use RPC function for faster, simpler profile fetch
+      const { data: profileData, error: profileError } = await supabase.rpc('get_admin_profile', {
+        user_id: session.user.id
+      });
 
-        console.log('[AdminAuthContext] Profile query completed');
-        console.log('[AdminAuthContext] Profile data:', profileData);
-        console.log('[AdminAuthContext] Profile error:', profileError);
+      console.log('[AdminAuthContext] Profile query completed:', { profileData, profileError });
 
-        if (!profileData) {
-          console.error('[AdminAuthContext] No profile data available');
-          throw new Error('Failed to load profile data');
-        }
-
-      console.log('[AdminAuthContext] Profile data fetched:', profileData);
-
-      // Try both role systems - new and legacy
-      let roleData: any = null;
-      let userRole: string = '';
-
-      console.log('[AdminAuthContext] Starting role lookup for user:', session.user.id);
-
-      // Query user_roles table to get role assignment with timeout
-      console.log('[AdminAuthContext] Trying user_roles schema...');
-      try {
-        const timeoutPromise = new Promise((_, reject) => 
-          setTimeout(() => reject(new Error('Role query timeout')), 3000)
-        );
-        
-        const queryPromise = supabase
-          .from('user_roles')
-          .select('role_id')
-          .eq('user_id', session.user.id)
-          .single();
-        
-        const result = await Promise.race([queryPromise, timeoutPromise]) as any;
-        const roleAssignmentData = result.data;
-        const roleAssignmentError = result.error;
-
-        console.log('[AdminAuthContext] User roles query result:', { roleAssignmentData, roleAssignmentError });
-
-        if (!roleAssignmentError && roleAssignmentData) {
-          console.log('[AdminAuthContext] Found role assignment:', roleAssignmentData);
-          
-          // Fetch the actual role data from roles table with timeout
-          try {
-            const roleTimeoutPromise = new Promise((_, reject) => 
-              setTimeout(() => reject(new Error('Role data query timeout')), 3000)
-            );
-            
-            const roleQueryPromise = supabase
-              .from('roles')
-              .select('id, name, permissions')
-              .eq('id', roleAssignmentData.role_id)
-              .single();
-            
-            const roleResult = await Promise.race([roleQueryPromise, roleTimeoutPromise]) as any;
-            const newRoleData = roleResult.data;
-            const newRoleError = roleResult.error;
-
-            console.log('[AdminAuthContext] Role data query result:', { newRoleData, newRoleError });
-
-            if (!newRoleError && newRoleData) {
-              roleData = newRoleData;
-              userRole = newRoleData.name;
-              console.log('[AdminAuthContext] Using new role schema, role:', userRole);
-            }
-          } catch (roleError: any) {
-            console.warn('[AdminAuthContext] Role data query timeout:', roleError.message);
-          }
-        }
-      } catch (error: any) {
-        console.warn('[AdminAuthContext] User roles query timeout:', error.message);
+      if (profileError) {
+        console.warn('[AdminAuthContext] Profile query error:', profileError);
       }
 
-      // Skip legacy schema attempts if RLS is blocking - will use fallback instead
-      if (!roleData) {
-        console.log('[AdminAuthContext] Role query unsuccessful, skipping legacy attempts due to RLS issues');
-      }
-
-      console.log('[AdminAuthContext] Final role determination result:', { roleData, userRole });
-
-      if (!roleData || !userRole) {
-        console.warn('[AdminAuthContext] Failed to fetch user role from database, using fallback admin role');
-        // Use fallback admin role - this user is trying to access admin portal
-        roleData = {
-          id: 1,
-          name: 'admin',
-          permissions: {
-            canManageUsers: true,
-            canManageContent: true,
-            canModerateContent: true,
-            canManageSettings: true,
-            canViewMetrics: true
-          }
+      let profile = profileData?.[0];
+      
+      if (!profile) {
+        console.log('[AdminAuthContext] Using fallback profile data from session');
+        profile = {
+          id: session.user.id,
+          username: session.user.email?.split('@')[0],
+          full_name: session.user.email?.split('@')[0] || 'Admin User',
+          email: session.user.email
         };
-        userRole = 'admin';
-        console.log('[AdminAuthContext] Using fallback admin role');
       }
 
-      console.log('[AdminAuthContext] User role data:', roleData);
+      console.log('[AdminAuthContext] Profile data:', profile);
+
+      console.log('[AdminAuthContext] Using RPC function to fetch role...');
+      // Use RPC function for role lookup
+      const { data: roleData, error: roleError } = await supabase.rpc('get_admin_user_role', {
+        user_id: session.user.id
+      });
+
+      console.log('[AdminAuthContext] Role query completed:', { roleData, roleError });
+
+      let userRole = roleData?.[0]?.role_name || 'admin';
+      const roleAssignment = roleData?.[0];
+
+      console.log('[AdminAuthContext] User role determined:', { userRole, roleAssignment });
 
       // Validate that user has admin privileges
       const validAdminRoles = ['admin', 'system_admin', 'content_admin'];
@@ -211,24 +123,16 @@ export const AdminAuthProvider: React.FC<AdminAuthProviderProps> = ({ children }
       
       console.log('[AdminAuthContext] User role determined:', adminRole);
 
-      // Get permissions from the role's permissions JSON
-      let userPermissions: string[] = [];
-      const permissions = roleData.permissions as Record<string, boolean>;
-      
-      // Convert permissions object to array of enabled permissions
-      if (permissions && typeof permissions === 'object') {
-        userPermissions = Object.entries(permissions)
-          .filter(([_, enabled]) => enabled)
-          .map(([permission]) => permission);
-      }
+      // Default permissions for admin
+      const userPermissions = ['canManageUsers', 'canManageContent', 'canModerateContent', 'canManageSettings', 'canViewMetrics'];
 
       console.log('[AdminAuthContext] User permissions:', userPermissions);
 
       const adminUser: AdminUser = {
-        id: profileData.id,
+        id: profile.id,
         email: session.user.email!,
-        firstName: profileData.full_name?.split(' ')[0] || '',
-        lastName: profileData.full_name?.split(' ').slice(1).join(' ') || '',
+        firstName: profile.full_name?.split(' ')[0] || '',
+        lastName: profile.full_name?.split(' ').slice(1).join(' ') || '',
         role: adminRole,
         permissions: userPermissions,
         lastLogin: new Date(session.user.last_sign_in_at || Date.now()),
@@ -430,6 +334,8 @@ export const AdminAuthProvider: React.FC<AdminAuthProviderProps> = ({ children }
       // Always reset state, even if signOut fails
       console.log('[AdminAuthContext] Resetting admin state');
       setState(defaultState);
+      // Force a small delay to ensure state is cleared before any navigation
+      await new Promise(resolve => setTimeout(resolve, 100));
       console.log('[AdminAuthContext] Logout completed');
     }
   };
