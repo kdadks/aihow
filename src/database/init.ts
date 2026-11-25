@@ -30,7 +30,7 @@ export function initializeDatabase(): SupabaseClient {
                     persistSession: true
                 },
                 db: {
-                    schema: 'public'
+                    schema: 'how2doai'
                 }
             }
         );
@@ -52,7 +52,7 @@ export function getDatabase(): SupabaseClient {
 export async function checkDatabaseConnection(): Promise<boolean> {
     try {
         const db = getDatabase();
-        const { data, error } = await db.from('tool_categories').select('id').limit(1);
+        const { data, error } = await db.from('tool_categories_v2').select('id').limit(1);
         
         if (error) {
             throw error;

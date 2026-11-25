@@ -24,7 +24,7 @@ export const supabase = createClient(
       storageKey: 'auth',
     },
     db: {
-      schema: 'public'
+      schema: 'how2doai'
     }
   }
 );
