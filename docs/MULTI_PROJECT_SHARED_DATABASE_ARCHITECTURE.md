@@ -439,6 +439,22 @@ In the **Supabase Dashboard** -> **Authentication** -> **URL Configuration**:
    - `http://localhost:5173/**` (How2doAI development)
    - `http://localhost:3000/**` (Nirchal development)
 
+### Step 10: Custom HTML Email Templates via Netlify Functions (Zero Resend / Zero Sendgrid)
+Instead of using Supabase's default email template or paying for Resend/SendGrid, you can use the **Supabase Send Email Auth Hook** connected to a Netlify Function (`netlify/functions/auth-email-hook.js`).
+
+1. **How It Works**:
+   - Supabase Auth intercepts signups and password resets and triggers your Netlify Function via HTTP POST.
+   - The function inspects `user_metadata.project_id` to determine whether the request is from **How2doAI** or **Nirchal**.
+   - It renders custom branded HTML (custom logo, colors, fonts, buttons).
+   - It sends the email directly through your existing SMTP server (e.g. Hostinger SMTP / domain mail server) using `nodemailer`.
+
+2. **To Enable in Supabase Dashboard**:
+   - Go to **Authentication** -> **Hooks**.
+   - Find **Send Email (auth hook)**.
+   - Choose **HTTP Webhook**.
+   - Set the Endpoint URL to: `https://your-app-domain.netlify.app/.netlify/functions/auth-email-hook`.
+   - Save changes.
+
 ---
 
 ## 6. Verification & Security Audit Matrix
