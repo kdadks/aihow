@@ -65,7 +65,7 @@ export const Footer: React.FC = () => {
             <h3 className="text-sm font-semibold text-gray-900 tracking-wider uppercase">Community</h3>
             <ul className="mt-4 space-y-2">
               <li>
-                <Link to="/community" className="text-sm text-gray-600 hover:text-gray-900 font-medium text-blue-600" onClick={scrollToTop}>
+                <Link to="/community" className="text-sm hover:text-gray-900 font-medium text-blue-600" onClick={scrollToTop}>
                   Community Hub
                 </Link>
               </li>
@@ -119,7 +119,7 @@ export const Footer: React.FC = () => {
         </div>
         <div className="mt-12 border-t border-gray-200 pt-8">
           <p className="text-sm text-gray-500 text-center">
-            &copy; 2025 kdadks service private ltd. All rights reserved.
+            &copy; {new Date().getFullYear()} kdadks service private ltd. All rights reserved.
           </p>
         </div>
       </div>
