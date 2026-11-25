@@ -181,7 +181,7 @@ export default async (req, context) => {
 
     console.log(`[auth-email-hook] Successfully sent ${email_action_type} email for ${projectId} to: ${email}`);
 
-    return new Response(JSON.stringify({ success: true }), {
+    return new Response(JSON.stringify({}), {
       status: 200,
       headers: { 'Content-Type': 'application/json' }
     });
