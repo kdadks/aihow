@@ -197,7 +197,11 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         email,
         password,
         options: {
-          data: userData,
+          emailRedirectTo: `${window.location.origin}/auth/confirm`,
+          data: {
+            ...userData,
+            project_id: 'how2doai',
+          },
         },
       });
 

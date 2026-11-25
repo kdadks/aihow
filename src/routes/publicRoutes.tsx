@@ -152,6 +152,10 @@ export const publicRoutes: RouteObject[] = [
         path: '/confirm-email',
         element: <EmailConfirmationPage />
     },
+    {
+        path: '/auth/confirm',
+        element: <EmailConfirmationPage />
+    },
     // SEO Keyword Landing Pages
     {
         path: '/ai-tools',

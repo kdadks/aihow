@@ -256,30 +256,188 @@ export const supabase = createClient(
     auth: {
       persistSession: true,
       autoRefreshToken: true,
-      storageKey: 'auth_nirchal', // Prevents session collision with How2doAI
+      detectSessionInUrl: true,
+      storageKey: 'auth_nirchal', // Isolate session storage from How2doAI
     },
     db: {
-      schema: 'public', // Default schema for Nirchal
+      schema: 'public', // Nirchal application tables live in public
     },
   }
 );
 ```
 
-### Step 5: User Signups in Nirchal
-When users register in Nirchal, pass `project_id: 'nirchal'`:
+### Step 5: User Signup & Email Confirmation in Nirchal
+When a user signs up on Nirchal, pass `project_id: 'nirchal'` and dynamic `emailRedirectTo`:
 
 ```typescript
-const { data, error } = await supabase.auth.signUp({
-  email,
-  password,
-  options: {
-    data: {
-      full_name: 'Nirchal User',
-      project_id: 'nirchal', // Permanently binds user to nirchal
+// nirchal-app/src/services/auth.ts
+export async function signUpUser(email: string, password: string, fullName: string) {
+  const { data, error } = await supabase.auth.signUp({
+    email,
+    password,
+    options: {
+      // Directs the confirmation link specifically back to Nirchal
+      emailRedirectTo: `${window.location.origin}/auth/confirm`,
+      data: {
+        full_name: fullName,
+        project_id: 'nirchal', // Permanently binds user to nirchal in shared.user_project_binding
+      },
     },
-  },
-});
+  });
+
+  if (error) throw error;
+  return data;
+}
 ```
+
+### Step 6: Password Reset Request in Nirchal
+When a user requests a password reset on Nirchal, pass dynamic `redirectTo`:
+
+```typescript
+// nirchal-app/src/services/auth.ts
+export async function sendPasswordResetEmail(email: string) {
+  const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
+    // Directs the password reset link specifically back to Nirchal
+    redirectTo: `${window.location.origin}/reset-password`,
+  });
+
+  if (error) throw error;
+  return data;
+}
+```
+
+### Step 7: Nirchal Email Confirmation Page (`/auth/confirm`)
+Create the route handler in Nirchal to verify confirmation tokens:
+
+```typescript
+// nirchal-app/src/pages/AuthConfirmPage.tsx
+import { useEffect, useState } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import { supabase } from '../lib/supabase';
+
+export default function AuthConfirmPage() {
+  const [searchParams] = useSearchParams();
+  const [status, setStatus] = useState<'loading' | 'success' | 'error'>('loading');
+  const [errorMsg, setErrorMsg] = useState('');
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const confirmEmail = async () => {
+      try {
+        const token_hash = searchParams.get('token_hash');
+        const type = searchParams.get('type') as any;
+
+        if (token_hash && type === 'email') {
+          const { error } = await supabase.auth.verifyOtp({ token_hash, type });
+          if (error) throw error;
+        }
+
+        setStatus('success');
+        setTimeout(() => navigate('/dashboard'), 2000);
+      } catch (err: any) {
+        setStatus('error');
+        setErrorMsg(err.message || 'Verification failed');
+      }
+    };
+
+    confirmEmail();
+  }, [searchParams, navigate]);
+
+  return (
+    <div className="flex min-h-screen items-center justify-center p-4">
+      {status === 'loading' && <p>Verifying your email address...</p>}
+      {status === 'success' && <p className="text-green-600">Email confirmed successfully! Redirecting...</p>}
+      {status === 'error' && <p className="text-red-600">{errorMsg}</p>}
+    </div>
+  );
+}
+```
+
+### Step 8: Nirchal Password Reset Page (`/reset-password`)
+Create the reset password page in Nirchal to update the user's password:
+
+```typescript
+// nirchal-app/src/pages/ResetPasswordPage.tsx
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { supabase } from '../lib/supabase';
+
+export default function ResetPasswordPage() {
+  const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // Listen for PASSWORD_RECOVERY event parsed from URL hash
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+      if (event === 'PASSWORD_RECOVERY' || (event === 'SIGNED_IN' && session)) {
+        setError(null);
+      }
+    });
+
+    const timer = setTimeout(async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session && !window.location.hash.includes('access_token')) {
+        setError('Invalid or expired reset link. Please request a new one.');
+      }
+    }, 1500);
+
+    return () => {
+      subscription.unsubscribe();
+      clearTimeout(timer);
+    };
+  }, []);
+
+  const handleReset = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    setError(null);
+
+    try {
+      const { error } = await supabase.auth.updateUser({ password });
+      if (error) throw error;
+
+      navigate('/login', { state: { message: 'Password updated successfully! Please log in.' } });
+    } catch (err: any) {
+      setError(err.message || 'Failed to update password');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="flex min-h-screen items-center justify-center p-4">
+      <form onSubmit={handleReset} className="w-full max-w-md space-y-4 rounded-lg bg-white p-6 shadow">
+        <h2 className="text-xl font-bold">Set New Password</h2>
+        {error && <div className="rounded bg-red-50 p-3 text-red-600 text-sm">{error}</div>}
+        <input
+          type="password"
+          placeholder="New password (min 8 chars)"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+          minLength={8}
+          className="w-full rounded border p-2"
+        />
+        <button type="submit" disabled={loading} className="w-full rounded bg-blue-600 py-2 text-white disabled:opacity-50">
+          {loading ? 'Updating...' : 'Update Password'}
+        </button>
+      </form>
+    </div>
+  );
+}
+```
+
+### Step 9: Supabase URL Allowlist Configuration
+In the **Supabase Dashboard** -> **Authentication** -> **URL Configuration**:
+
+1. **Site URL**: `https://how2doai.com` (Default primary)
+2. **Redirect URLs** (Add all frontend origins for both projects):
+   - `https://how2doai.com/**`
+   - `https://nirchal.com/**`
+   - `http://localhost:5173/**` (How2doAI development)
+   - `http://localhost:3000/**` (Nirchal development)
 
 ---
 

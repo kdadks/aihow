@@ -10,16 +10,34 @@ export function ResetPassword() {
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
 
-  // Check if we have a session when component mounts
+  // Check if we have a session or recovery token when component mounts
   useEffect(() => {
-    const checkSession = async () => {
+    // Check existing session
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      if (session) {
+        setError(null);
+      }
+    });
+
+    // Listen for PASSWORD_RECOVERY or SIGNED_IN event from URL hash
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+      if (event === 'PASSWORD_RECOVERY' || (event === 'SIGNED_IN' && session)) {
+        setError(null);
+      }
+    });
+
+    // Give hash exchange a short grace period before showing error
+    const timer = setTimeout(async () => {
       const { data: { session } } = await supabase.auth.getSession();
-      if (!session) {
+      if (!session && !window.location.hash.includes('access_token')) {
         setError('Invalid or expired reset link. Please request a new one.');
       }
+    }, 1500);
+
+    return () => {
+      subscription.unsubscribe();
+      clearTimeout(timer);
     };
-    
-    checkSession();
   }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
