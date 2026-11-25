@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState, useRef } from 'react';
 import { User, Session } from '@supabase/supabase-js';
 import { supabase } from '../../lib/supabase';
 
@@ -562,9 +562,12 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   //   return () => clearInterval(sessionCheckInterval);
   // }, [state.user, state.isLoading]);
 
+  const profileAttemptRef = useRef<string | null>(null);
+
   // Handle profile updates after user signup
   useEffect(() => {
-    if (state.user && !state.profile) {
+    if (state.user && !state.profile && profileAttemptRef.current !== state.user.id) {
+      profileAttemptRef.current = state.user.id;
       // Create or update initial profile
       const createInitialProfile = async () => {
         const { error } = await supabase

@@ -169,3 +169,20 @@ This preserves user IDs referenced by public rows. Target Auth settings such as 
 - The target Data API previously returned HTTP 406 `PGRST106`: only `public` and `graphql_public` were exposed. Expose `how2doai` and apply the scoped grants above before expecting browser queries to work.
 - Local production builds have passed. A standalone TypeScript check previously hit `TS6310` in the project-reference configuration.
 - Some legacy review screens still query `tools` / `tool_reviews`, while the imported schema contains `tools_v2` / `tool_reviews_v2`. Map those screens before considering every feature fully migrated.
+
+## 10. Multi-Project Shared Database & Tenant Architecture
+
+### Problem & Resolution
+- In a shared Supabase database, `auth.users` is global to the instance. An authenticated JWT from one project could query another project's schema unless strictly isolated.
+- The two projects are **How2doAI** (schema: `how2doai`) and **Nirchal** (schema: `public`). Cross-schema access must be prevented at all cost.
+- To avoid modifying or migrating Nirchal out of `public`, a dedicated `shared` schema was created for tenant registration and strict 1-to-1 user-project binding (`shared.projects`, `shared.user_project_binding`).
+- Migrations:
+  - `supabase/migrations/20261125000000_multi_project_tenant_architecture.sql`: Implements `shared` schema registry, strict 1-to-1 binding where `user_id` is PRIMARY KEY, signup trigger, and security definer helper functions (`shared.is_user_bound_to`, `shared.current_user_project`).
+  - `supabase/migrations/20261125000001_how2doai_project_rls_policies.sql`: Applies airtight RLS policies on `how2doai` tables. Nirchal users and unauthorized callers receive 0 rows.
+  - `supabase/scripts/nirchal_strict_isolation_policies.sql`: Isolation script for Nirchal tables in `public`.
+- Utilities added:
+  - `src/types/multiProject.ts` and `src/lib/multiProject.ts` for project binding verification.
+- Detailed architectural documentation:
+  - `docs/MULTI_PROJECT_SHARED_DATABASE_ARCHITECTURE.md`.
+
+

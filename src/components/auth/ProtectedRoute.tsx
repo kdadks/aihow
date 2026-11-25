@@ -1,5 +1,6 @@
 import { Navigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../../auth/hooks/useAuth';
+import { useAdminAuthContext } from '../../admin/auth/context/AdminAuthContext';
 
 interface ProtectedRouteProps {
     children: React.ReactNode;
@@ -11,7 +12,13 @@ export function ProtectedRoute({
     redirectTo = '/login'
 }: ProtectedRouteProps) {
     const { user, isLoading, session } = useAuth();
+    const { state: adminState } = useAdminAuthContext();
     const location = useLocation();
+
+    // If authenticated as admin, redirect to admin dashboard instead of bouncing back to login
+    if (adminState.isAuthenticated && adminState.admin) {
+        return <Navigate to="/admin/dashboard" replace />;
+    }
 
     // Don't redirect until auth is initialized
     if (isLoading) {

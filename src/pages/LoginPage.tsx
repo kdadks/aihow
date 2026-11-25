@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../auth/hooks/useAuth';
+import { useAdminAuthContext } from '../admin/auth/context/AdminAuthContext';
 import { PasswordInput } from '../components/ui/PasswordInput';
 
 export default function LoginPage() {
@@ -8,8 +9,21 @@ export default function LoginPage() {
     const [password, setPassword] = useState('');
     const [error, setError] = useState<string | null>(null);
     const [isLoading, setIsLoading] = useState(false);
-    const { signIn } = useAuth();
+    const { signIn, isAuthenticated: isUserAuthenticated } = useAuth();
+    const { state: adminState } = useAdminAuthContext();
     const navigate = useNavigate();
+
+    const isAdminAuthenticated = adminState.isAuthenticated && Boolean(adminState.admin);
+
+    useEffect(() => {
+        if (isAdminAuthenticated) {
+            console.log('[LoginPage] Admin authenticated, redirecting to /admin/dashboard');
+            navigate('/admin/dashboard', { replace: true });
+        } else if (isUserAuthenticated) {
+            console.log('[LoginPage] User authenticated, redirecting to /dashboard');
+            navigate('/dashboard', { replace: true });
+        }
+    }, [isAdminAuthenticated, isUserAuthenticated, navigate]);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -21,17 +35,12 @@ export default function LoginPage() {
             if (result.error) {
                 throw new Error(result.error.message);
             }
-            if (result.data?.user) {
-                // Small delay to ensure auth state is updated
-                setTimeout(() => {
-                    navigate('/dashboard', { replace: true });
-                }, 100);
-            } else {
+            if (!result.data?.user) {
                 throw new Error('Login failed - no user data');
             }
+            // Navigation is handled automatically by the useEffect above once auth state resolves
         } catch (err) {
             setError(err instanceof Error ? err.message : 'Failed to login');
-        } finally {
             setIsLoading(false);
         }
     };
